@@ -1,0 +1,9 @@
+node_modules
+coverage
+dist
+/generated/prisma
+.env
+logs
+traces
+swagger.json
+dump.sql

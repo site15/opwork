@@ -1,0 +1,36 @@
+{
+  "name": "opwork",
+  "version": "1.0.0",
+  "description": "Modern question-answering system based on Retrieval-Augmented Generation (RAG) with support for multiple LLM providers and vector databases.",
+  "author": {
+    "name": "EndyKaufman",
+    "email": "admin@site15.ru"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:site15/opwork.git"
+  },
+  "homepage": "https://github.com/site15/opwork",
+  "bugs": {
+    "url": "https://github.com/site15/opwork/issues"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "postinstall": "export PRISMA_ENGINES_MIRROR=https://registry.npmmirror.com/-/binary/prisma && export PRISMA_BINARIES_MIRROR=http://prisma-builds.s3-eu-west-1.amazonaws.com && npm install --force --prefix backend && npm install --force --prefix frontend && npm install --force --prefix prisma-generator-nestjs-dto",
+    "format": "npm run format --prefix backend && npm run format --prefix frontend && npm run format --prefix prisma-generator-nestjs-dto",
+    "format:backend": "npm run format --prefix backend",
+    "format:frontend": "npm run format --prefix frontend",
+    "format:generator": "npm run format --prefix prisma-generator-nestjs-dto",
+    "generate": "npm run generate --prefix backend && npm run generate --prefix frontend && npm run build --prefix frontend",
+    "generate:backend": "npm run generate --prefix backend",
+    "generate:frontend": "npm run generate --prefix frontend && npm run build --prefix frontend",
+    "start:dev": "./start-dev.sh",
+    "stop:dev": "./stop-dev.sh",
+    "start:prod": "./start-prod.sh",
+    "stop:prod": "./stop-prod.sh"
+  }
+}

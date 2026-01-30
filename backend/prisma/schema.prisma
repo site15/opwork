@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider   = "postgresql"
+}
+
+generator backendClient {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  moduleFormat    = "cjs"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+generator frontendClient {
+  provider        = "prisma-client"
+  output          = "../../frontend/src/generated/prisma"
+  moduleFormat    = "cjs"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+generator prismaClassGenerator {
+  prismaClientImportPath          = "../prisma/client"
+  provider                        = "ts-node ../prisma-generator-nestjs-dto/src/cli.ts"
+  output                          = "../src/generated/rest"
+  frontendOutput                  = "../frontend/src/generated"
+  annotateAllDtoProperties        = "true"
+  classValidation                 = "true"
+  createDtoPrefix                 = "Create"
+  definiteAssignmentAssertion     = "true"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  exportRelationModifierClasses   = "true"
+  fileNamingStyle                 = "kebab"
+  flatResourceStructure           = "false"
+  generateControllers             = "true"
+  generateDataProviders           = "false"
+  generateForms                   = "false"
+  generateLists                   = "false"
+  moduleName                      = "metrics"
+  noDependencies                  = "false"
+  outputToNestJsResourceStructure = "false"
+  prettier                        = "true"
+  reExport                        = "false"
+  updateDtoPrefix                 = "Update"
+}
+
+model AuthUser {
+  id               String   @id(map: "PK_AUTH_USER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  anonymousId      String?
+  supabaseUserId   String?
+  supabaseUserData Json?
+  isActive         Boolean?
+
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  AuthApiKey  AuthApiKey[]
+  AuthSession AuthSession[]
+
+  @@unique(name: "uqSupabaseUserId", [supabaseUserId], map: "UQ_AUTH_USER__SUPABASE_USER_ID")
+}
+
+model AuthApiKey {
+  id       String   @id(map: "PK_AUTH_API_KEY") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId   String   @db.Uuid
+  apiKey   String?  @db.VarChar(255)
+  isActive Boolean?
+
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_API_KEY__USER_ID")
+
+  @@unique(name: "uqApiKey", [apiKey], map: "UQ_AUTH_API_KEY__API_KEY")
+  @@index([userId], map: "IDX_AUTH_API_KEY__USER_ID")
+}
+
+model AuthSession {
+  id       String   @id(map: "PK_AUTH_SESSION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId   String   @db.Uuid
+  isActive Boolean?
+
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_SESSION__USER_ID")
+
+  @@index([userId], map: "IDX_AUTH_SESSION__USER_ID")
+}

@@ -1,0 +1,75 @@
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { writeFileSync } from 'fs';
+import Mustache from 'mustache';
+import { AppModule } from './app.module';
+
+import 'dotenv/config';
+import { X_API_KEY_HEADER_NAME } from './guards/auth.guard';
+
+Mustache.escape = function (text) {
+  return text;
+};
+
+async function bootstrap() {
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter({ logger: true }),
+    {
+      cors: {
+        origin: '*',
+        methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+        credentials: true,
+      },
+    },
+  );
+
+  app.setGlobalPrefix('/api');
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+
+  const config = new DocumentBuilder()
+    .setTitle('RAG-system')
+    .setDescription('The RAG-system API description')
+    .setVersion('1.0')
+    // Add the API key security definition
+    .addApiKey(
+      {
+        type: 'apiKey',
+        name: X_API_KEY_HEADER_NAME, // The name of the header or query parameter
+        in: 'header', // The location (header, query, or cookie)
+        description: 'Enter your API key',
+      },
+      'api_key', // A unique name for the security scheme reference
+    )
+    .build();
+
+  Logger.log('Generating Swagger documentation');
+  const document = SwaggerModule.createDocument(app, config);
+  try {
+    writeFileSync('./swagger.json', JSON.stringify(document));
+  } catch (error) {
+    //
+    Logger.error(error, error.stack);
+  }
+  Logger.log('Swagger documentation generated');
+
+  SwaggerModule.setup('swagger', app, document);
+
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
+  Logger.log(`Application is running on port ${process.env.PORT ?? 3000}`);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+bootstrap();

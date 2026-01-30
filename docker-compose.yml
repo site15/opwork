@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    container_name: opwork_postgres
+    environment:
+      POSTGRES_DB: opwork_db
+      POSTGRES_USER: opwork_user
+      POSTGRES_PASSWORD: j4iKD5iZrJSDBIiBb9gYG9MOW46vjgdg
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - opwork_postgres_volume:/var/lib/postgresql/data # Mounts the volume
+    ports:
+      - "24432:5432"
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opwork_user -d opwork_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  opwork_postgres_volume:
