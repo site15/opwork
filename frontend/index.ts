@@ -1,11 +1,10 @@
+import AdminForth, { Filters, logger } from 'adminforth';
 import express from 'express';
-import AdminForth from 'adminforth';
-import usersResource from './resources/adminuser.js';
-import { fileURLToPath } from 'url';
 import path from 'path';
-import { Filters } from 'adminforth';
+import { fileURLToPath } from 'url';
 import { initApi } from './api.js';
-import { logger } from 'adminforth';
+import usersResource from './resources/adminuser.js';
+import { CustomAdminForthDataSource } from './resources/custom.data-source.js';
 
 const ADMIN_BASE_URL = '';
 
@@ -52,10 +51,13 @@ export const admin = new AdminForth({
       },
     },
   },
+  databaseConnectors: {
+    custom: CustomAdminForthDataSource,
+  },
   dataSources: [
     {
-      id: 'maindb',
-      url: `${process.env.DATABASE_URL}`,
+      id: 'custom',
+      url: `custom`,
     },
   ],
   resources: [usersResource],
@@ -86,14 +88,14 @@ if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   admin.express.serve(app);
 
   admin.discoverDatabases().then(async () => {
-    // if ((await admin.resource('adminuser').count()) === 0) {
-    //   await admin.resource('adminuser').create({
-    //     email: 'adminforth',
-    //     password_hash:
-    //       await AdminForth.Utils.generatePasswordHash('adminforth'),
-    //     role: 'superadmin',
-    //   });
-    // }
+    if ((await admin.resource('adminuser').count()) === 0) {
+      await admin.resource('adminuser').create({
+        email: 'adminforth',
+        password_hash:
+          await AdminForth.Utils.generatePasswordHash('adminforth'),
+        role: 'superadmin',
+      });
+    }
   });
 
   admin.express.listen(port, () => {

@@ -17,7 +17,7 @@ generator backendClient {
 
 generator frontendClient {
   provider        = "prisma-client"
-  output          = "../../frontend/src/generated/prisma"
+  output          = "../../frontend/generated/prisma"
   moduleFormat    = "cjs"
   previewFeatures = ["postgresqlExtensions"]
 }

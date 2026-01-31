@@ -16,7 +16,7 @@ async function allowedForSuperAdmin({
 }
 
 export default {
-  dataSource: 'maindb',
+  dataSource: 'custom',
   table: 'adminuser',
   resourceId: 'adminuser',
   label: 'Admin Users',

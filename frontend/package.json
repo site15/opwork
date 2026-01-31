@@ -13,10 +13,7 @@
     "prod": "npm run _env:prod -- tsx index.ts",
     "start": "npm run dev",
     "build": "echo not_implemented",
-    "generate": "echo not_implemented",
-    "makemigration": "npm run _env:dev -- npx --yes prisma migrate dev --create-only",
-    "migrate:local": "npm run _env:dev -- npx --yes prisma migrate deploy",
-    "migrate:prod": "npm run _env:prod -- npx --yes prisma migrate deploy",
+    "generate": "openapi-ts",
     "_env:dev": "dotenvx run -f .env -f .env.local --",
     "_env:prod": "dotenvx run -f .env.prod --"
   },
@@ -29,12 +26,13 @@
     "express": "latest-4"
   },
   "devDependencies": {
-    "typescript": "5.4.5",
-    "tsx": "4.11.2",
+    "@hey-api/openapi-ts": "^0.91.1",
+    "@prisma/client": "latest",
     "@types/express": "latest",
     "@types/node": "latest",
-    "@prisma/client": "latest",
     "prettier": "^3.4.2",
-    "prisma": "^7.0.0"
+    "prisma": "^7.0.0",
+    "tsx": "4.11.2",
+    "typescript": "5.5.3"
   }
 }
