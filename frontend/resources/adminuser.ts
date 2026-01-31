@@ -17,8 +17,8 @@ async function allowedForSuperAdmin({
 
 export default {
   dataSource: 'custom',
-  table: 'adminuser',
-  resourceId: 'adminuser',
+  table: 'auth-user',
+  resourceId: 'auth-user',
   label: 'Admin Users',
   recordLabel: (r) => `👤 ${r.email}`,
   options: {
@@ -38,7 +38,7 @@ export default {
         create: false,
       },
     },
-    {
+    /*{
       name: 'email',
       required: true,
       isUnique: true,
@@ -93,7 +93,7 @@ export default {
       type: AdminForthDataTypes.STRING,
       backendOnly: true,
       showIn: { all: false },
-    },
+    },*/
   ],
   hooks: {
     create: {

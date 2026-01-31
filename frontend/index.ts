@@ -5,13 +5,14 @@ import { fileURLToPath } from 'url';
 import { initApi } from './api.js';
 import usersResource from './resources/adminuser.js';
 import { CustomAdminForthDataSource } from './resources/custom.data-source.js';
+import { client } from './generated/client/client.gen.js';
 
 const ADMIN_BASE_URL = '';
 
 export const admin = new AdminForth({
   baseUrl: ADMIN_BASE_URL,
   auth: {
-    usersResourceId: 'adminuser',
+    usersResourceId: 'auth-user',
     usernameField: 'email',
     passwordHashField: 'password_hash',
     rememberMeDuration: '30d',
@@ -21,7 +22,7 @@ export const admin = new AdminForth({
     loginPromptHTML: async () => {
       const adminforthUserExists =
         (await admin
-          .resource('adminuser')
+          .resource('auth-user')
           .count(Filters.EQ('email', 'adminforth'))) > 0;
       if (adminforthUserExists) {
         return 'Please use <b>adminforth</b> as username and <b>adminforth</b> as password';
@@ -66,7 +67,7 @@ export const admin = new AdminForth({
     {
       label: 'Users',
       icon: 'flowbite:user-solid',
-      resourceId: 'adminuser',
+      resourceId: 'auth-user',
     },
   ],
 });
@@ -74,6 +75,11 @@ export const admin = new AdminForth({
 if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const app = express();
   app.use(express.json());
+
+  client.setConfig({
+    baseUrl: process.env.API_URL,
+    headers: { 'x-api-key': process.env.ADMIN_API_KEY },
+  });
 
   initApi(app, admin);
 
@@ -88,8 +94,8 @@ if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   admin.express.serve(app);
 
   admin.discoverDatabases().then(async () => {
-    if ((await admin.resource('adminuser').count()) === 0) {
-      await admin.resource('adminuser').create({
+    if ((await admin.resource('auth-user').count()) === 0) {
+      await admin.resource('auth-user').create({
         email: 'adminforth',
         password_hash:
           await AdminForth.Utils.generatePasswordHash('adminforth'),
