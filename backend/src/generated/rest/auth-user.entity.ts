@@ -2,6 +2,8 @@ import { Prisma } from '../prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { AuthApiKey } from './auth-api-key.entity';
 import { AuthSession } from './auth-session.entity';
+import { OpWorkProfile } from './op-work-profile.entity';
+import { OpWorkNotification } from './op-work-notification.entity';
 
 export class AuthUser {
   @ApiProperty({
@@ -50,4 +52,16 @@ export class AuthUser {
     required: false,
   })
   AuthSession?: AuthSession[];
+  @ApiProperty({
+    type: () => OpWorkProfile,
+    isArray: true,
+    required: false,
+  })
+  OpWorkProfile?: OpWorkProfile[];
+  @ApiProperty({
+    type: () => OpWorkNotification,
+    isArray: true,
+    required: false,
+  })
+  opWorkNotifications?: OpWorkNotification[];
 }

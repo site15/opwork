@@ -113,7 +113,7 @@ export class AuthApiKeyController {
     return await this.prismaservice.authApiKey.create({
       data: {
         ...args,
-        userId: req.user.id,
+        userId: req.userId,
       },
     });
   }

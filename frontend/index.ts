@@ -86,14 +86,14 @@ if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   admin.express.serve(app);
 
   admin.discoverDatabases().then(async () => {
-    if ((await admin.resource('adminuser').count()) === 0) {
-      await admin.resource('adminuser').create({
-        email: 'adminforth',
-        password_hash:
-          await AdminForth.Utils.generatePasswordHash('adminforth'),
-        role: 'superadmin',
-      });
-    }
+    // if ((await admin.resource('adminuser').count()) === 0) {
+    //   await admin.resource('adminuser').create({
+    //     email: 'adminforth',
+    //     password_hash:
+    //       await AdminForth.Utils.generatePasswordHash('adminforth'),
+    //     role: 'superadmin',
+    //   });
+    // }
   });
 
   admin.express.listen(port, () => {

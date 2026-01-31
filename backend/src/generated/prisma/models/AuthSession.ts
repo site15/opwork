@@ -13,7 +13,8 @@ import type * as Prisma from '../internal/prismaNamespace';
 
 /**
  * Model AuthSession
- *
+ * Пользовательская сессия для отслеживания активных подключений
+ * Используется для управления текущими входами в систему
  */
 export type AuthSessionModel =
   runtime.Types.Result.DefaultSelection<Prisma.$AuthSessionPayload>;
@@ -638,14 +639,38 @@ export type $AuthSessionPayload<
 > = {
   name: 'AuthSession';
   objects: {
+    /**
+     * Владелец данной сессии
+     * Обратная ссылка на учетную запись пользователя
+     */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>;
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
+      /**
+       * Уникальный идентификатор сессии (UUID v4)
+       * Генерируется при каждом новом входе пользователя
+       */
       id: string;
+      /**
+       * Идентификатор пользователя, которому принадлежит сессия
+       * Ссылка на запись пользователя в системе AuthUser
+       */
       userId: string;
+      /**
+       * Статус активности сессии
+       * Активные сессии позволяют пользователю выполнять действия
+       */
       isActive: boolean | null;
+      /**
+       * Временная метка создания сессии
+       * Фиксирует момент входа пользователя в систему
+       */
       createdAt: Date;
+      /**
+       * Временная метка последнего обновления сессии
+       * Используется для отслеживания активности пользователя
+       */
       updatedAt: Date;
     },
     ExtArgs['result']['authSession']

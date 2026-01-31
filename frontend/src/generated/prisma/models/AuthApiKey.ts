@@ -13,7 +13,8 @@ import type * as Prisma from '../internal/prismaNamespace.js';
 
 /**
  * Model AuthApiKey
- *
+ * API-ключ для программного доступа к системе
+ * Предоставляет аутентификацию без использования пользовательских сессий
  */
 export type AuthApiKeyModel =
   runtime.Types.Result.DefaultSelection<Prisma.$AuthApiKeyPayload>;
@@ -660,15 +661,43 @@ export type $AuthApiKeyPayload<
 > = {
   name: 'AuthApiKey';
   objects: {
+    /**
+     * Владелец данного API-ключа
+     * Обратная ссылка на учетную запись пользователя
+     */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>;
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
+      /**
+       * Уникальный идентификатор API-ключа (UUID v4)
+       * Генерируется автоматически при создании
+       */
       id: string;
+      /**
+       * Идентификатор владельца API-ключа
+       * Ссылка на запись пользователя в системе AuthUser
+       */
       userId: string;
+      /**
+       * Значение API-ключа для аутентификации
+       * Хранится в открытом виде для удобства использования
+       */
       apiKey: string | null;
+      /**
+       * Статус активности API-ключа
+       * Неактивные ключи блокируются системой
+       */
       isActive: boolean | null;
+      /**
+       * Временная метка создания ключа
+       * Используется для отслеживания возраста ключа
+       */
       createdAt: Date;
+      /**
+       * Временная метка последнего обновления
+       * Фиксирует изменения статуса или других параметров
+       */
       updatedAt: Date;
     },
     ExtArgs['result']['authApiKey']

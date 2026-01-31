@@ -113,7 +113,7 @@ export class AuthSessionController {
     return await this.prismaservice.authSession.create({
       data: {
         ...args,
-        userId: req.user.id,
+        userId: req.userId,
       },
     });
   }

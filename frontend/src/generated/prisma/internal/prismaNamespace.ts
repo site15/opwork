@@ -415,6 +415,25 @@ export const ModelName = {
   AuthUser: 'AuthUser',
   AuthApiKey: 'AuthApiKey',
   AuthSession: 'AuthSession',
+  OpWorkProfile: 'OpWorkProfile',
+  OpWorkJobSeeker: 'OpWorkJobSeeker',
+  OpWorkExperience: 'OpWorkExperience',
+  OpWorkEducation: 'OpWorkEducation',
+  OpWorkEmployer: 'OpWorkEmployer',
+  OpWorkProject: 'OpWorkProject',
+  OpWorkJob: 'OpWorkJob',
+  OpWorkApplication: 'OpWorkApplication',
+  OpWorkSavedJob: 'OpWorkSavedJob',
+  OpWorkSkill: 'OpWorkSkill',
+  OpWorkJobSeekerSkill: 'OpWorkJobSeekerSkill',
+  OpWorkJobSkill: 'OpWorkJobSkill',
+  OpWorkNotification: 'OpWorkNotification',
+  OpWorkNotificationSettings: 'OpWorkNotificationSettings',
+  OpWorkSearchHistory: 'OpWorkSearchHistory',
+  OpWorkJobView: 'OpWorkJobView',
+  OpWorkSavedSearch: 'OpWorkSavedSearch',
+  OpWorkSkillSynonym: 'OpWorkSkillSynonym',
+  OpWorkJobTag: 'OpWorkJobTag',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -436,7 +455,29 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: 'authUser' | 'authApiKey' | 'authSession';
+    modelProps:
+      | 'authUser'
+      | 'authApiKey'
+      | 'authSession'
+      | 'opWorkProfile'
+      | 'opWorkJobSeeker'
+      | 'opWorkExperience'
+      | 'opWorkEducation'
+      | 'opWorkEmployer'
+      | 'opWorkProject'
+      | 'opWorkJob'
+      | 'opWorkApplication'
+      | 'opWorkSavedJob'
+      | 'opWorkSkill'
+      | 'opWorkJobSeekerSkill'
+      | 'opWorkJobSkill'
+      | 'opWorkNotification'
+      | 'opWorkNotificationSettings'
+      | 'opWorkSearchHistory'
+      | 'opWorkJobView'
+      | 'opWorkSavedSearch'
+      | 'opWorkSkillSynonym'
+      | 'opWorkJobTag';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -668,6 +709,1450 @@ export type TypeMap<
         };
       };
     };
+    OpWorkProfile: {
+      payload: Prisma.$OpWorkProfilePayload<ExtArgs>;
+      fields: Prisma.OpWorkProfileFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkProfileFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkProfileFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkProfileFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkProfileFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkProfileFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkProfileCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkProfileCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkProfileCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkProfileDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        update: {
+          args: Prisma.OpWorkProfileUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkProfileDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkProfileUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkProfileUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkProfileUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProfilePayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkProfileAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkProfile>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkProfileGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkProfileGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkProfileCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkProfileCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJobSeeker: {
+      payload: Prisma.$OpWorkJobSeekerPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobSeekerFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobSeekerFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobSeekerFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobSeekerFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobSeekerFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobSeekerFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobSeekerCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobSeekerCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobSeekerCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobSeekerDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobSeekerUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobSeekerDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobSeekerUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobSeekerUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobSeekerUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobSeekerAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJobSeeker>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobSeekerGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobSeekerGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobSeekerCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobSeekerCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkExperience: {
+      payload: Prisma.$OpWorkExperiencePayload<ExtArgs>;
+      fields: Prisma.OpWorkExperienceFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkExperienceFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkExperienceFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkExperienceFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkExperienceFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkExperienceFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkExperienceCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkExperienceCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkExperienceCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkExperienceDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        update: {
+          args: Prisma.OpWorkExperienceUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkExperienceDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkExperienceUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkExperienceUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkExperienceUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkExperiencePayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkExperienceAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkExperience>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkExperienceGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkExperienceGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkExperienceCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkExperienceCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkEducation: {
+      payload: Prisma.$OpWorkEducationPayload<ExtArgs>;
+      fields: Prisma.OpWorkEducationFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkEducationFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkEducationFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkEducationFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkEducationFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkEducationFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkEducationCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkEducationCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkEducationCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkEducationDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkEducationUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkEducationDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkEducationUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkEducationUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkEducationUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEducationPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkEducationAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkEducation>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkEducationGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkEducationGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkEducationCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkEducationCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkEmployer: {
+      payload: Prisma.$OpWorkEmployerPayload<ExtArgs>;
+      fields: Prisma.OpWorkEmployerFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkEmployerFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkEmployerFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkEmployerFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkEmployerFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkEmployerFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkEmployerCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkEmployerCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkEmployerCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkEmployerDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkEmployerUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkEmployerDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkEmployerUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkEmployerUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkEmployerUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkEmployerPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkEmployerAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkEmployer>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkEmployerGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkEmployerGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkEmployerCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkEmployerCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkProject: {
+      payload: Prisma.$OpWorkProjectPayload<ExtArgs>;
+      fields: Prisma.OpWorkProjectFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkProjectFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkProjectFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkProjectFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkProjectFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkProjectFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkProjectCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkProjectCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkProjectCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkProjectDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkProjectUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkProjectDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkProjectUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkProjectUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkProjectUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkProjectPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkProjectAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkProject>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkProjectGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkProjectGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkProjectCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkProjectCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJob: {
+      payload: Prisma.$OpWorkJobPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJob>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkApplication: {
+      payload: Prisma.$OpWorkApplicationPayload<ExtArgs>;
+      fields: Prisma.OpWorkApplicationFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkApplicationFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkApplicationFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkApplicationFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkApplicationFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkApplicationFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkApplicationCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkApplicationCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkApplicationCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkApplicationDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkApplicationUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkApplicationDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkApplicationUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkApplicationUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkApplicationUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkApplicationPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkApplicationAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkApplication>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkApplicationGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkApplicationGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkApplicationCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkApplicationCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkSavedJob: {
+      payload: Prisma.$OpWorkSavedJobPayload<ExtArgs>;
+      fields: Prisma.OpWorkSavedJobFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkSavedJobFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkSavedJobFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkSavedJobFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkSavedJobFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkSavedJobFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkSavedJobCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkSavedJobCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkSavedJobCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkSavedJobDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkSavedJobUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkSavedJobDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkSavedJobUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkSavedJobUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkSavedJobUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedJobPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkSavedJobAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkSavedJob>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkSavedJobGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkSavedJobGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkSavedJobCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkSavedJobCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkSkill: {
+      payload: Prisma.$OpWorkSkillPayload<ExtArgs>;
+      fields: Prisma.OpWorkSkillFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkSkillFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkSkillFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkSkillFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkSkillFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkSkillFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkSkillCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkSkillCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkSkillCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkSkillDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkSkillUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkSkillDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkSkillUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkSkillUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkSkillUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkSkillAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkSkill>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkSkillGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkSkillGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkSkillCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkSkillCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJobSeekerSkill: {
+      payload: Prisma.$OpWorkJobSeekerSkillPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobSeekerSkillFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobSeekerSkillFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobSeekerSkillFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobSeekerSkillFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobSeekerSkillFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobSeekerSkillFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobSeekerSkillCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobSeekerSkillCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobSeekerSkillCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobSeekerSkillDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobSeekerSkillUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobSeekerSkillDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobSeekerSkillUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobSeekerSkillUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobSeekerSkillUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSeekerSkillPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobSeekerSkillAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJobSeekerSkill>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobSeekerSkillGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobSeekerSkillGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobSeekerSkillCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobSeekerSkillCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJobSkill: {
+      payload: Prisma.$OpWorkJobSkillPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobSkillFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobSkillFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobSkillFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobSkillFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobSkillFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobSkillFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobSkillCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobSkillCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobSkillCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobSkillDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobSkillUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobSkillDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobSkillUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobSkillUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobSkillUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobSkillPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobSkillAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJobSkill>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobSkillGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobSkillGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobSkillCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobSkillCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkNotification: {
+      payload: Prisma.$OpWorkNotificationPayload<ExtArgs>;
+      fields: Prisma.OpWorkNotificationFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkNotificationFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkNotificationFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkNotificationFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkNotificationFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkNotificationFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkNotificationCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkNotificationCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkNotificationCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkNotificationDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkNotificationUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkNotificationDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkNotificationUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkNotificationUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkNotificationUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkNotificationAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkNotification>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkNotificationGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkNotificationGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkNotificationCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkNotificationCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkNotificationSettings: {
+      payload: Prisma.$OpWorkNotificationSettingsPayload<ExtArgs>;
+      fields: Prisma.OpWorkNotificationSettingsFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkNotificationSettingsFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkNotificationSettingsFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkNotificationSettingsFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkNotificationSettingsFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkNotificationSettingsFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkNotificationSettingsCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkNotificationSettingsCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkNotificationSettingsCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkNotificationSettingsDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkNotificationSettingsUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkNotificationSettingsDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkNotificationSettingsUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkNotificationSettingsUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkNotificationSettingsUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkNotificationSettingsPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkNotificationSettingsAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkNotificationSettings>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkNotificationSettingsGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkNotificationSettingsGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkNotificationSettingsCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkNotificationSettingsCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkSearchHistory: {
+      payload: Prisma.$OpWorkSearchHistoryPayload<ExtArgs>;
+      fields: Prisma.OpWorkSearchHistoryFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkSearchHistoryFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkSearchHistoryFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkSearchHistoryFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkSearchHistoryFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkSearchHistoryFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkSearchHistoryCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkSearchHistoryCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkSearchHistoryCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkSearchHistoryDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkSearchHistoryUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkSearchHistoryDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkSearchHistoryUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkSearchHistoryUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkSearchHistoryUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSearchHistoryPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkSearchHistoryAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkSearchHistory>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkSearchHistoryGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkSearchHistoryGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkSearchHistoryCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkSearchHistoryCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJobView: {
+      payload: Prisma.$OpWorkJobViewPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobViewFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobViewFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobViewFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobViewFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobViewFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobViewFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobViewCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobViewCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobViewCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobViewDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobViewUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobViewDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobViewUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobViewUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobViewUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobViewPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobViewAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJobView>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobViewGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobViewGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobViewCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobViewCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkSavedSearch: {
+      payload: Prisma.$OpWorkSavedSearchPayload<ExtArgs>;
+      fields: Prisma.OpWorkSavedSearchFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkSavedSearchFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkSavedSearchFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkSavedSearchFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkSavedSearchFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkSavedSearchFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkSavedSearchCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkSavedSearchCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkSavedSearchCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkSavedSearchDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkSavedSearchUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkSavedSearchDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkSavedSearchUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkSavedSearchUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkSavedSearchUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSavedSearchPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkSavedSearchAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkSavedSearch>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkSavedSearchGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkSavedSearchGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkSavedSearchCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkSavedSearchCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkSkillSynonym: {
+      payload: Prisma.$OpWorkSkillSynonymPayload<ExtArgs>;
+      fields: Prisma.OpWorkSkillSynonymFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkSkillSynonymFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkSkillSynonymFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkSkillSynonymFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkSkillSynonymFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkSkillSynonymFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkSkillSynonymCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkSkillSynonymCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkSkillSynonymCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkSkillSynonymDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkSkillSynonymUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkSkillSynonymDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkSkillSynonymUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkSkillSynonymUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkSkillSynonymUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkSkillSynonymPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkSkillSynonymAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkSkillSynonym>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkSkillSynonymGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkSkillSynonymGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkSkillSynonymCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkSkillSynonymCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    OpWorkJobTag: {
+      payload: Prisma.$OpWorkJobTagPayload<ExtArgs>;
+      fields: Prisma.OpWorkJobTagFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.OpWorkJobTagFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.OpWorkJobTagFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        findFirst: {
+          args: Prisma.OpWorkJobTagFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.OpWorkJobTagFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        findMany: {
+          args: Prisma.OpWorkJobTagFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>[];
+        };
+        create: {
+          args: Prisma.OpWorkJobTagCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        createMany: {
+          args: Prisma.OpWorkJobTagCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.OpWorkJobTagCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>[];
+        };
+        delete: {
+          args: Prisma.OpWorkJobTagDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        update: {
+          args: Prisma.OpWorkJobTagUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        deleteMany: {
+          args: Prisma.OpWorkJobTagDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.OpWorkJobTagUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.OpWorkJobTagUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>[];
+        };
+        upsert: {
+          args: Prisma.OpWorkJobTagUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OpWorkJobTagPayload>;
+        };
+        aggregate: {
+          args: Prisma.OpWorkJobTagAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOpWorkJobTag>;
+        };
+        groupBy: {
+          args: Prisma.OpWorkJobTagGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.OpWorkJobTagGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.OpWorkJobTagCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.OpWorkJobTagCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -742,6 +2227,333 @@ export const AuthSessionScalarFieldEnum = {
 
 export type AuthSessionScalarFieldEnum =
   (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum];
+
+export const OpWorkProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  userType: 'userType',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  isEmailVerified: 'isEmailVerified',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  location: 'location',
+  avatarUrl: 'avatarUrl',
+  coverImage: 'coverImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkProfileScalarFieldEnum =
+  (typeof OpWorkProfileScalarFieldEnum)[keyof typeof OpWorkProfileScalarFieldEnum];
+
+export const OpWorkJobSeekerScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  currentPosition: 'currentPosition',
+  currentCompany: 'currentCompany',
+  summary: 'summary',
+  expectedSalary: 'expectedSalary',
+  salaryCurrency: 'salaryCurrency',
+  isOpenToWork: 'isOpenToWork',
+  isOpenToRemote: 'isOpenToRemote',
+  isOpenToRelocation: 'isOpenToRelocation',
+  preferredLocations: 'preferredLocations',
+  linkedinUrl: 'linkedinUrl',
+  githubUrl: 'githubUrl',
+  portfolioUrl: 'portfolioUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkJobSeekerScalarFieldEnum =
+  (typeof OpWorkJobSeekerScalarFieldEnum)[keyof typeof OpWorkJobSeekerScalarFieldEnum];
+
+export const OpWorkExperienceScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  company: 'company',
+  position: 'position',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  location: 'location',
+  employmentType: 'employmentType',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkExperienceScalarFieldEnum =
+  (typeof OpWorkExperienceScalarFieldEnum)[keyof typeof OpWorkExperienceScalarFieldEnum];
+
+export const OpWorkEducationScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  institution: 'institution',
+  degree: 'degree',
+  fieldOfStudy: 'fieldOfStudy',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  description: 'description',
+  grade: 'grade',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkEducationScalarFieldEnum =
+  (typeof OpWorkEducationScalarFieldEnum)[keyof typeof OpWorkEducationScalarFieldEnum];
+
+export const OpWorkEmployerScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  companyName: 'companyName',
+  industry: 'industry',
+  description: 'description',
+  mission: 'mission',
+  culture: 'culture',
+  foundedYear: 'foundedYear',
+  headquarters: 'headquarters',
+  logoUrl: 'logoUrl',
+  coverImageUrl: 'coverImageUrl',
+  companyEmail: 'companyEmail',
+  companyPhone: 'companyPhone',
+  companyWebsite: 'companyWebsite',
+  linkedinUrl: 'linkedinUrl',
+  twitterUrl: 'twitterUrl',
+  facebookUrl: 'facebookUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkEmployerScalarFieldEnum =
+  (typeof OpWorkEmployerScalarFieldEnum)[keyof typeof OpWorkEmployerScalarFieldEnum];
+
+export const OpWorkProjectScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  type: 'type',
+  githubRepoUrl: 'githubRepoUrl',
+  technologies: 'technologies',
+  architecture: 'architecture',
+  plannedDatesDescription: 'plannedDatesDescription',
+  plannedStartDate: 'plannedStartDate',
+  plannedEndDate: 'plannedEndDate',
+  implementationDescription: 'implementationDescription',
+  actualStartDate: 'actualStartDate',
+  developmentStart: 'developmentStart',
+  testingStart: 'testingStart',
+  launchDescription: 'launchDescription',
+  launchDate: 'launchDate',
+  goLiveDate: 'goLiveDate',
+  completionDescription: 'completionDescription',
+  actualEndDate: 'actualEndDate',
+  completionDate: 'completionDate',
+  maintenanceDescription: 'maintenanceDescription',
+  maintenanceStart: 'maintenanceStart',
+  maintenanceEnd: 'maintenanceEnd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkProjectScalarFieldEnum =
+  (typeof OpWorkProjectScalarFieldEnum)[keyof typeof OpWorkProjectScalarFieldEnum];
+
+export const OpWorkJobScalarFieldEnum = {
+  id: 'id',
+  employerId: 'employerId',
+  profileId: 'profileId',
+  title: 'title',
+  description: 'description',
+  requirements: 'requirements',
+  responsibilities: 'responsibilities',
+  employmentType: 'employmentType',
+  experienceLevel: 'experienceLevel',
+  department: 'department',
+  salaryMin: 'salaryMin',
+  salaryMax: 'salaryMax',
+  salaryCurrency: 'salaryCurrency',
+  location: 'location',
+  isRemote: 'isRemote',
+  status: 'status',
+  viewsCount: 'viewsCount',
+  applicationsCount: 'applicationsCount',
+  savesCount: 'savesCount',
+  publishedAt: 'publishedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkJobScalarFieldEnum =
+  (typeof OpWorkJobScalarFieldEnum)[keyof typeof OpWorkJobScalarFieldEnum];
+
+export const OpWorkApplicationScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  coverLetter: 'coverLetter',
+  resumeUrl: 'resumeUrl',
+  portfolioUrl: 'portfolioUrl',
+  status: 'status',
+  statusNotes: 'statusNotes',
+  appliedAt: 'appliedAt',
+  statusUpdatedAt: 'statusUpdatedAt',
+} as const;
+
+export type OpWorkApplicationScalarFieldEnum =
+  (typeof OpWorkApplicationScalarFieldEnum)[keyof typeof OpWorkApplicationScalarFieldEnum];
+
+export const OpWorkSavedJobScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  savedAt: 'savedAt',
+  notes: 'notes',
+} as const;
+
+export type OpWorkSavedJobScalarFieldEnum =
+  (typeof OpWorkSavedJobScalarFieldEnum)[keyof typeof OpWorkSavedJobScalarFieldEnum];
+
+export const OpWorkSkillScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  category: 'category',
+  icon: 'icon',
+  popularity: 'popularity',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkSkillScalarFieldEnum =
+  (typeof OpWorkSkillScalarFieldEnum)[keyof typeof OpWorkSkillScalarFieldEnum];
+
+export const OpWorkJobSeekerSkillScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  skillId: 'skillId',
+  level: 'level',
+  yearsOfExp: 'yearsOfExp',
+  isPrimary: 'isPrimary',
+  lastUsed: 'lastUsed',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobSeekerSkillScalarFieldEnum =
+  (typeof OpWorkJobSeekerSkillScalarFieldEnum)[keyof typeof OpWorkJobSeekerSkillScalarFieldEnum];
+
+export const OpWorkJobSkillScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  skillId: 'skillId',
+  isRequired: 'isRequired',
+  importance: 'importance',
+  minLevel: 'minLevel',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobSkillScalarFieldEnum =
+  (typeof OpWorkJobSkillScalarFieldEnum)[keyof typeof OpWorkJobSkillScalarFieldEnum];
+
+export const OpWorkNotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  profileId: 'profileId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  data: 'data',
+  isRead: 'isRead',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  readAt: 'readAt',
+} as const;
+
+export type OpWorkNotificationScalarFieldEnum =
+  (typeof OpWorkNotificationScalarFieldEnum)[keyof typeof OpWorkNotificationScalarFieldEnum];
+
+export const OpWorkNotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  emailApplicationUpdates: 'emailApplicationUpdates',
+  emailJobAlerts: 'emailJobAlerts',
+  emailNewsletter: 'emailNewsletter',
+  pushApplicationUpdates: 'pushApplicationUpdates',
+  pushJobAlerts: 'pushJobAlerts',
+  jobAlertFrequency: 'jobAlertFrequency',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkNotificationSettingsScalarFieldEnum =
+  (typeof OpWorkNotificationSettingsScalarFieldEnum)[keyof typeof OpWorkNotificationSettingsScalarFieldEnum];
+
+export const OpWorkSearchHistoryScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  query: 'query',
+  filters: 'filters',
+  resultsCount: 'resultsCount',
+  searchedAt: 'searchedAt',
+} as const;
+
+export type OpWorkSearchHistoryScalarFieldEnum =
+  (typeof OpWorkSearchHistoryScalarFieldEnum)[keyof typeof OpWorkSearchHistoryScalarFieldEnum];
+
+export const OpWorkJobViewScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  viewedAt: 'viewedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+} as const;
+
+export type OpWorkJobViewScalarFieldEnum =
+  (typeof OpWorkJobViewScalarFieldEnum)[keyof typeof OpWorkJobViewScalarFieldEnum];
+
+export const OpWorkSavedSearchScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  name: 'name',
+  query: 'query',
+  filters: 'filters',
+  isActive: 'isActive',
+  frequency: 'frequency',
+  lastSentAt: 'lastSentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkSavedSearchScalarFieldEnum =
+  (typeof OpWorkSavedSearchScalarFieldEnum)[keyof typeof OpWorkSavedSearchScalarFieldEnum];
+
+export const OpWorkSkillSynonymScalarFieldEnum = {
+  id: 'id',
+  skillId: 'skillId',
+  synonym: 'synonym',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkSkillSynonymScalarFieldEnum =
+  (typeof OpWorkSkillSynonymScalarFieldEnum)[keyof typeof OpWorkSkillSynonymScalarFieldEnum];
+
+export const OpWorkJobTagScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobTagScalarFieldEnum =
+  (typeof OpWorkJobTagScalarFieldEnum)[keyof typeof OpWorkJobTagScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',
@@ -842,6 +2654,32 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
 >;
 
 /**
+ * Reference to a field of type 'OpWorkProfileType'
+ */
+export type EnumOpWorkProfileTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProfileType'>;
+
+/**
+ * Reference to a field of type 'OpWorkProfileType[]'
+ */
+export type ListEnumOpWorkProfileTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProfileType[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkUserType'
+ */
+export type EnumOpWorkUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkUserType'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkUserType[]'
+ */
+export type ListEnumOpWorkUserTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkUserType[]'>;
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
@@ -855,6 +2693,164 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'Int[]'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkEmploymentType'
+ */
+export type EnumOpWorkEmploymentTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkEmploymentType'>;
+
+/**
+ * Reference to a field of type 'OpWorkEmploymentType[]'
+ */
+export type ListEnumOpWorkEmploymentTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkEmploymentType[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkEducationDegree'
+ */
+export type EnumOpWorkEducationDegreeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkEducationDegree'>;
+
+/**
+ * Reference to a field of type 'OpWorkEducationDegree[]'
+ */
+export type ListEnumOpWorkEducationDegreeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkEducationDegree[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkGrade'
+ */
+export type EnumOpWorkGradeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkGrade'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkGrade[]'
+ */
+export type ListEnumOpWorkGradeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkGrade[]'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkProjectStatus'
+ */
+export type EnumOpWorkProjectStatusFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProjectStatus'>;
+
+/**
+ * Reference to a field of type 'OpWorkProjectStatus[]'
+ */
+export type ListEnumOpWorkProjectStatusFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProjectStatus[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkProjectType'
+ */
+export type EnumOpWorkProjectTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProjectType'>;
+
+/**
+ * Reference to a field of type 'OpWorkProjectType[]'
+ */
+export type ListEnumOpWorkProjectTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkProjectType[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkExperienceLevel'
+ */
+export type EnumOpWorkExperienceLevelFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkExperienceLevel'>;
+
+/**
+ * Reference to a field of type 'OpWorkExperienceLevel[]'
+ */
+export type ListEnumOpWorkExperienceLevelFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkExperienceLevel[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkJobStatus'
+ */
+export type EnumOpWorkJobStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkJobStatus'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkJobStatus[]'
+ */
+export type ListEnumOpWorkJobStatusFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkJobStatus[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkApplicationStatus'
+ */
+export type EnumOpWorkApplicationStatusFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkApplicationStatus'>;
+
+/**
+ * Reference to a field of type 'OpWorkApplicationStatus[]'
+ */
+export type ListEnumOpWorkApplicationStatusFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkApplicationStatus[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkSkillType'
+ */
+export type EnumOpWorkSkillTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkSkillType'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkSkillType[]'
+ */
+export type ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkSkillType[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkNotificationType'
+ */
+export type EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkNotificationType'>;
+
+/**
+ * Reference to a field of type 'OpWorkNotificationType[]'
+ */
+export type ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkNotificationType[]'>;
+
+/**
+ * Reference to a field of type 'OpWorkFrequency'
+ */
+export type EnumOpWorkFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'OpWorkFrequency'
+>;
+
+/**
+ * Reference to a field of type 'OpWorkFrequency[]'
+ */
+export type ListEnumOpWorkFrequencyFieldRefInput<$PrismaModel> =
+  FieldRefInputType<$PrismaModel, 'OpWorkFrequency[]'>;
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Float'
+>;
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Float[]'
 >;
 
 /**
@@ -963,6 +2959,25 @@ export type GlobalOmitConfig = {
   authUser?: Prisma.AuthUserOmit;
   authApiKey?: Prisma.AuthApiKeyOmit;
   authSession?: Prisma.AuthSessionOmit;
+  opWorkProfile?: Prisma.OpWorkProfileOmit;
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerOmit;
+  opWorkExperience?: Prisma.OpWorkExperienceOmit;
+  opWorkEducation?: Prisma.OpWorkEducationOmit;
+  opWorkEmployer?: Prisma.OpWorkEmployerOmit;
+  opWorkProject?: Prisma.OpWorkProjectOmit;
+  opWorkJob?: Prisma.OpWorkJobOmit;
+  opWorkApplication?: Prisma.OpWorkApplicationOmit;
+  opWorkSavedJob?: Prisma.OpWorkSavedJobOmit;
+  opWorkSkill?: Prisma.OpWorkSkillOmit;
+  opWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillOmit;
+  opWorkJobSkill?: Prisma.OpWorkJobSkillOmit;
+  opWorkNotification?: Prisma.OpWorkNotificationOmit;
+  opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsOmit;
+  opWorkSearchHistory?: Prisma.OpWorkSearchHistoryOmit;
+  opWorkJobView?: Prisma.OpWorkJobViewOmit;
+  opWorkSavedSearch?: Prisma.OpWorkSavedSearchOmit;
+  opWorkSkillSynonym?: Prisma.OpWorkSkillSynonymOmit;
+  opWorkJobTag?: Prisma.OpWorkJobTagOmit;
 };
 
 /* Types for Logging */

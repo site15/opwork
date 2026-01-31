@@ -361,7 +361,11 @@ export const run = ({
       });
     }
 
-    const baseFiles = [connectDto, createDto, updateDto, entity, plainDto];
+    let allFiles: {
+      fileName: string;
+      content: string;
+    }[] = [];
+    /* const dtoFiles = [connectDto, createDto, updateDto, entity, plainDto];
     const filesWithController = generateControllers
       ? [...baseFiles, controller]
       : baseFiles;
@@ -372,36 +376,29 @@ export const run = ({
     const filesWithForm = generateForms
       ? [...filesWithList, form]
       : filesWithList;
-
-    switch (generateFileTypes) {
-      case 'all':
-        return filesWithForm;
-      case 'dto':
-        return generateForms || generateLists || generateControllers
-          ? [
-              connectDto,
-              createDto,
-              updateDto,
-              plainDto,
-              ...(generateControllers ? [controller] : []),
-              ...[dataProvider],
-              ...(generateLists ? [list] : []),
-              ...(generateForms ? [form] : []),
-            ]
-          : [connectDto, createDto, updateDto, plainDto];
-      case 'entity':
-        return generateForms || generateLists || generateControllers
-          ? [
-              entity,
-              ...(generateControllers ? [controller] : []),
-              ...[dataProvider],
-              ...(generateLists ? [list] : []),
-              ...(generateForms ? [form] : []),
-            ]
-          : [entity];
-      default:
-        throw new Error(`Unknown 'generateFileTypes' value.`);
+*/
+    if (generateFileTypes === 'all' || generateFileTypes === 'dto') {
+      allFiles = [
+        connectDto,
+        createDto,
+        updateDto,
+        entity,
+        plainDto,
+        ...allFiles,
+      ];
     }
+    if (generateFileTypes === 'all' || generateFileTypes === 'entity') {
+      allFiles = [entity, ...allFiles];
+    }
+
+    if (generateFileTypes === 'all' || generateControllers) {
+      allFiles = [controller, ...allFiles];
+    }
+
+    if (generateForms || generateLists) {
+      allFiles = [dataProvider, list, form, ...allFiles];
+    }
+    return allFiles;
   });
 
   // Generate additional files

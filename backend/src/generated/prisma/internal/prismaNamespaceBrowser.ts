@@ -57,6 +57,25 @@ export const ModelName = {
   AuthUser: 'AuthUser',
   AuthApiKey: 'AuthApiKey',
   AuthSession: 'AuthSession',
+  OpWorkProfile: 'OpWorkProfile',
+  OpWorkJobSeeker: 'OpWorkJobSeeker',
+  OpWorkExperience: 'OpWorkExperience',
+  OpWorkEducation: 'OpWorkEducation',
+  OpWorkEmployer: 'OpWorkEmployer',
+  OpWorkProject: 'OpWorkProject',
+  OpWorkJob: 'OpWorkJob',
+  OpWorkApplication: 'OpWorkApplication',
+  OpWorkSavedJob: 'OpWorkSavedJob',
+  OpWorkSkill: 'OpWorkSkill',
+  OpWorkJobSeekerSkill: 'OpWorkJobSeekerSkill',
+  OpWorkJobSkill: 'OpWorkJobSkill',
+  OpWorkNotification: 'OpWorkNotification',
+  OpWorkNotificationSettings: 'OpWorkNotificationSettings',
+  OpWorkSearchHistory: 'OpWorkSearchHistory',
+  OpWorkJobView: 'OpWorkJobView',
+  OpWorkSavedSearch: 'OpWorkSavedSearch',
+  OpWorkSkillSynonym: 'OpWorkSkillSynonym',
+  OpWorkJobTag: 'OpWorkJobTag',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -110,6 +129,333 @@ export const AuthSessionScalarFieldEnum = {
 
 export type AuthSessionScalarFieldEnum =
   (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum];
+
+export const OpWorkProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  userType: 'userType',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  isEmailVerified: 'isEmailVerified',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  location: 'location',
+  avatarUrl: 'avatarUrl',
+  coverImage: 'coverImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkProfileScalarFieldEnum =
+  (typeof OpWorkProfileScalarFieldEnum)[keyof typeof OpWorkProfileScalarFieldEnum];
+
+export const OpWorkJobSeekerScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  currentPosition: 'currentPosition',
+  currentCompany: 'currentCompany',
+  summary: 'summary',
+  expectedSalary: 'expectedSalary',
+  salaryCurrency: 'salaryCurrency',
+  isOpenToWork: 'isOpenToWork',
+  isOpenToRemote: 'isOpenToRemote',
+  isOpenToRelocation: 'isOpenToRelocation',
+  preferredLocations: 'preferredLocations',
+  linkedinUrl: 'linkedinUrl',
+  githubUrl: 'githubUrl',
+  portfolioUrl: 'portfolioUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkJobSeekerScalarFieldEnum =
+  (typeof OpWorkJobSeekerScalarFieldEnum)[keyof typeof OpWorkJobSeekerScalarFieldEnum];
+
+export const OpWorkExperienceScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  company: 'company',
+  position: 'position',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  location: 'location',
+  employmentType: 'employmentType',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkExperienceScalarFieldEnum =
+  (typeof OpWorkExperienceScalarFieldEnum)[keyof typeof OpWorkExperienceScalarFieldEnum];
+
+export const OpWorkEducationScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  institution: 'institution',
+  degree: 'degree',
+  fieldOfStudy: 'fieldOfStudy',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  description: 'description',
+  grade: 'grade',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkEducationScalarFieldEnum =
+  (typeof OpWorkEducationScalarFieldEnum)[keyof typeof OpWorkEducationScalarFieldEnum];
+
+export const OpWorkEmployerScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  companyName: 'companyName',
+  industry: 'industry',
+  description: 'description',
+  mission: 'mission',
+  culture: 'culture',
+  foundedYear: 'foundedYear',
+  headquarters: 'headquarters',
+  logoUrl: 'logoUrl',
+  coverImageUrl: 'coverImageUrl',
+  companyEmail: 'companyEmail',
+  companyPhone: 'companyPhone',
+  companyWebsite: 'companyWebsite',
+  linkedinUrl: 'linkedinUrl',
+  twitterUrl: 'twitterUrl',
+  facebookUrl: 'facebookUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkEmployerScalarFieldEnum =
+  (typeof OpWorkEmployerScalarFieldEnum)[keyof typeof OpWorkEmployerScalarFieldEnum];
+
+export const OpWorkProjectScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  type: 'type',
+  githubRepoUrl: 'githubRepoUrl',
+  technologies: 'technologies',
+  architecture: 'architecture',
+  plannedDatesDescription: 'plannedDatesDescription',
+  plannedStartDate: 'plannedStartDate',
+  plannedEndDate: 'plannedEndDate',
+  implementationDescription: 'implementationDescription',
+  actualStartDate: 'actualStartDate',
+  developmentStart: 'developmentStart',
+  testingStart: 'testingStart',
+  launchDescription: 'launchDescription',
+  launchDate: 'launchDate',
+  goLiveDate: 'goLiveDate',
+  completionDescription: 'completionDescription',
+  actualEndDate: 'actualEndDate',
+  completionDate: 'completionDate',
+  maintenanceDescription: 'maintenanceDescription',
+  maintenanceStart: 'maintenanceStart',
+  maintenanceEnd: 'maintenanceEnd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkProjectScalarFieldEnum =
+  (typeof OpWorkProjectScalarFieldEnum)[keyof typeof OpWorkProjectScalarFieldEnum];
+
+export const OpWorkJobScalarFieldEnum = {
+  id: 'id',
+  employerId: 'employerId',
+  profileId: 'profileId',
+  title: 'title',
+  description: 'description',
+  requirements: 'requirements',
+  responsibilities: 'responsibilities',
+  employmentType: 'employmentType',
+  experienceLevel: 'experienceLevel',
+  department: 'department',
+  salaryMin: 'salaryMin',
+  salaryMax: 'salaryMax',
+  salaryCurrency: 'salaryCurrency',
+  location: 'location',
+  isRemote: 'isRemote',
+  status: 'status',
+  viewsCount: 'viewsCount',
+  applicationsCount: 'applicationsCount',
+  savesCount: 'savesCount',
+  publishedAt: 'publishedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkJobScalarFieldEnum =
+  (typeof OpWorkJobScalarFieldEnum)[keyof typeof OpWorkJobScalarFieldEnum];
+
+export const OpWorkApplicationScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  coverLetter: 'coverLetter',
+  resumeUrl: 'resumeUrl',
+  portfolioUrl: 'portfolioUrl',
+  status: 'status',
+  statusNotes: 'statusNotes',
+  appliedAt: 'appliedAt',
+  statusUpdatedAt: 'statusUpdatedAt',
+} as const;
+
+export type OpWorkApplicationScalarFieldEnum =
+  (typeof OpWorkApplicationScalarFieldEnum)[keyof typeof OpWorkApplicationScalarFieldEnum];
+
+export const OpWorkSavedJobScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  savedAt: 'savedAt',
+  notes: 'notes',
+} as const;
+
+export type OpWorkSavedJobScalarFieldEnum =
+  (typeof OpWorkSavedJobScalarFieldEnum)[keyof typeof OpWorkSavedJobScalarFieldEnum];
+
+export const OpWorkSkillScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  category: 'category',
+  icon: 'icon',
+  popularity: 'popularity',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkSkillScalarFieldEnum =
+  (typeof OpWorkSkillScalarFieldEnum)[keyof typeof OpWorkSkillScalarFieldEnum];
+
+export const OpWorkJobSeekerSkillScalarFieldEnum = {
+  id: 'id',
+  jobSeekerId: 'jobSeekerId',
+  skillId: 'skillId',
+  level: 'level',
+  yearsOfExp: 'yearsOfExp',
+  isPrimary: 'isPrimary',
+  lastUsed: 'lastUsed',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobSeekerSkillScalarFieldEnum =
+  (typeof OpWorkJobSeekerSkillScalarFieldEnum)[keyof typeof OpWorkJobSeekerSkillScalarFieldEnum];
+
+export const OpWorkJobSkillScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  skillId: 'skillId',
+  isRequired: 'isRequired',
+  importance: 'importance',
+  minLevel: 'minLevel',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobSkillScalarFieldEnum =
+  (typeof OpWorkJobSkillScalarFieldEnum)[keyof typeof OpWorkJobSkillScalarFieldEnum];
+
+export const OpWorkNotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  profileId: 'profileId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  data: 'data',
+  isRead: 'isRead',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  readAt: 'readAt',
+} as const;
+
+export type OpWorkNotificationScalarFieldEnum =
+  (typeof OpWorkNotificationScalarFieldEnum)[keyof typeof OpWorkNotificationScalarFieldEnum];
+
+export const OpWorkNotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  emailApplicationUpdates: 'emailApplicationUpdates',
+  emailJobAlerts: 'emailJobAlerts',
+  emailNewsletter: 'emailNewsletter',
+  pushApplicationUpdates: 'pushApplicationUpdates',
+  pushJobAlerts: 'pushJobAlerts',
+  jobAlertFrequency: 'jobAlertFrequency',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkNotificationSettingsScalarFieldEnum =
+  (typeof OpWorkNotificationSettingsScalarFieldEnum)[keyof typeof OpWorkNotificationSettingsScalarFieldEnum];
+
+export const OpWorkSearchHistoryScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  query: 'query',
+  filters: 'filters',
+  resultsCount: 'resultsCount',
+  searchedAt: 'searchedAt',
+} as const;
+
+export type OpWorkSearchHistoryScalarFieldEnum =
+  (typeof OpWorkSearchHistoryScalarFieldEnum)[keyof typeof OpWorkSearchHistoryScalarFieldEnum];
+
+export const OpWorkJobViewScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  jobId: 'jobId',
+  viewedAt: 'viewedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+} as const;
+
+export type OpWorkJobViewScalarFieldEnum =
+  (typeof OpWorkJobViewScalarFieldEnum)[keyof typeof OpWorkJobViewScalarFieldEnum];
+
+export const OpWorkSavedSearchScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  name: 'name',
+  query: 'query',
+  filters: 'filters',
+  isActive: 'isActive',
+  frequency: 'frequency',
+  lastSentAt: 'lastSentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type OpWorkSavedSearchScalarFieldEnum =
+  (typeof OpWorkSavedSearchScalarFieldEnum)[keyof typeof OpWorkSavedSearchScalarFieldEnum];
+
+export const OpWorkSkillSynonymScalarFieldEnum = {
+  id: 'id',
+  skillId: 'skillId',
+  synonym: 'synonym',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkSkillSynonymScalarFieldEnum =
+  (typeof OpWorkSkillSynonymScalarFieldEnum)[keyof typeof OpWorkSkillSynonymScalarFieldEnum];
+
+export const OpWorkJobTagScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt',
+} as const;
+
+export type OpWorkJobTagScalarFieldEnum =
+  (typeof OpWorkJobTagScalarFieldEnum)[keyof typeof OpWorkJobTagScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

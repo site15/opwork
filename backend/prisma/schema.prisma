@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 datasource db {
-  provider   = "postgresql"
+  provider = "postgresql"
 }
 
 generator backendClient {
@@ -26,7 +26,7 @@ generator prismaClassGenerator {
   prismaClientImportPath          = "../prisma/client"
   provider                        = "ts-node ../prisma-generator-nestjs-dto/src/cli.ts"
   output                          = "../src/generated/rest"
-  frontendOutput                  = "../frontend/src/generated"
+  // frontendOutput                  = "../frontend/src/generated"
   annotateAllDtoProperties        = "true"
   classValidation                 = "true"
   createDtoPrefix                 = "Create"
@@ -49,46 +49,1405 @@ generator prismaClassGenerator {
   updateDtoPrefix                 = "Update"
 }
 
-model AuthUser {
-  id               String   @id(map: "PK_AUTH_USER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  anonymousId      String?
-  supabaseUserId   String?
-  supabaseUserData Json?
-  isActive         Boolean?
+// ============================================================================
+// ENUMS
+// ============================================================================
 
+/// Тип профиля пользователя в системе поиска работы и рекрутинга
+/// Определяет основную роль пользователя в платформе
+enum OpWorkUserType {
+  /// Соискатель - ищет работу, создает резюме
+  JOB_SEEKER
+  /// Работодатель - размещает вакансии, ищет сотрудников
+  EMPLOYER
+  /// Администратор - имеет расширенные права управления системой
+  ADMIN
+}
+
+/// Статус вакансии в системе рекрутинга
+/// Отражает текущее состояние вакансии от черновика до архива
+enum OpWorkJobStatus {
+  /// Черновик - вакансия создана но не опубликована
+  DRAFT
+  /// Активна - вакансия опубликована и принимает отклики
+  ACTIVE
+  /// Приостановлена - временно не принимает отклики
+  PAUSED
+  /// Закрыта - больше не принимает отклики, но видна в поиске
+  CLOSED
+  /// В архиве - скрыта из поиска, сохранена для истории
+  ARCHIVED
+}
+
+/// Тип занятости предлагаемой в вакансии
+/// Определяет характер трудовых отношений
+enum OpWorkEmploymentType {
+  /// Полная занятость - стандартный рабочий день
+  FULL_TIME
+  /// Частичная занятость - неполный рабочий день
+  PART_TIME
+  /// Контракт - работа по договору на определенный срок
+  CONTRACT
+  /// Стажировка - временная практика для получения опыта
+  INTERNSHIP
+  /// Удаленная работа - полностью удаленный формат
+  REMOTE
+  /// Фриланс - проектная работа на условиях ИП
+  FREELANCE
+}
+
+/// Уровень профессионального опыта кандидата
+/// Используется для фильтрации вакансий и кандидатов
+enum OpWorkExperienceLevel {
+  /// Стажировка - начальный уровень без опыта
+  INTERNSHIP
+  /// Начальный уровень - до 1 года опыта
+  ENTRY_LEVEL
+  /// Младший специалист - 1-2 года опыта
+  JUNIOR
+  /// Средний специалист - 2-5 лет опыта
+  MIDDLE
+  /// Старший специалист - 5-8 лет опыта
+  SENIOR
+  /// Ведущий специалист - 8-12 лет опыта
+  LEAD
+  /// Эксперт - более 12 лет опыта
+  EXPERT
+}
+
+/// Статус отклика на вакансию
+/// Отражает текущую стадию рассмотрения кандидата
+enum OpWorkApplicationStatus {
+  /// Ожидает рассмотрения - новый отклик
+  PENDING
+  /// Рассмотрен - HR просмотрел резюме
+  REVIEWED
+  /// В шортлисте - кандидат прошел предварительный отбор
+  SHORTLISTED
+  /// На интервью - назначен собеседование
+  INTERVIEW
+  /// Получено предложение - сделано оффер
+  OFFER
+  /// Отклонен - кандидат не подошел
+  REJECTED
+  /// Отозван - кандидат сам отозвал отклик
+  WITHDRAWN
+}
+
+/// Тип профиля в системе поиска работы
+/// Определяет основное направление деятельности пользователя
+enum OpWorkProfileType {
+  /// Проект - профиль для публикации проектов и идей
+  PROJECT
+  /// Специалист - профиль профессионала для поиска работы
+  SPECIALIST
+  /// Работодатель - профиль компании или рекрутера
+  EMPLOYER
+}
+
+/// Тип навыка или технологии
+/// Классификация навыков для удобства поиска и фильтрации
+enum OpWorkSkillType {
+  /// Язык программирования - JavaScript, Python, Java и т.д.
+  PROGRAMMING_LANGUAGE
+  /// Фреймворк - React, Angular, Django и т.д.
+  FRAMEWORK
+  /// База данных - PostgreSQL, MongoDB, Redis и т.д.
+  DATABASE
+  /// Инструмент - Git, Docker, Jenkins и т.д.
+  TOOL
+  /// Платформа - AWS, Azure, Google Cloud и т.д.
+  PLATFORM
+  /// Язык (иностранный) - English, German, French и т.д.
+  LANGUAGE
+  /// Мягкий навык - коммуникация, лидерство, управление временем
+  SOFT_SKILL
+}
+
+/// Уровень образования кандидата
+/// Стандартная классификация образовательных степеней
+enum OpWorkEducationDegree {
+  /// Средняя школа - базовое общее образование
+  HIGH_SCHOOL
+  /// Степень младшего специалиста (2 года)
+  ASSOCIATE
+  /// Бакалавриат - первая высшая степень (3-4 года)
+  BACHELOR
+  /// Магистратура - вторая высшая степень (1-2 года)
+  MASTER
+  /// Докторантура - научная степень (3-5 лет)
+  DOCTORATE
+  /// Сертификат - профессиональная сертификация
+  CERTIFICATE
+  /// Диплом - профессиональное образование
+  DIPLOMA
+  /// Послевузовское образование - дополнительные курсы
+  POSTGRADUATE
+}
+
+/// Академическая успеваемость/оценка
+/// Стандартная система оценок с буквенными и числовыми значениями
+enum OpWorkGrade {
+  /// Отлично+ (высший балл)
+  A_PLUS
+  /// Отлично
+  A
+  /// Отлично-
+  A_MINUS
+  /// Хорошо+
+  B_PLUS
+  /// Хорошо
+  B
+  /// Хорошо-
+  B_MINUS
+  /// Удовлетворительно+
+  C_PLUS
+  /// Удовлетворительно
+  C
+  /// Удовлетворительно-
+  C_MINUS
+  /// Посредственно+
+  D_PLUS
+  /// Посредственно
+  D
+  /// Посредственно-
+  D_MINUS
+  /// Неудовлетворительно
+  F
+  /// Зачет
+  PASS
+  /// Незачет
+  FAIL
+  /// Не завершено
+  INCOMPLETE
+  /// Прослушивание (без оценки)
+  AUDIT
+}
+
+/// Тип проекта или бизнес-модели
+/// Классификация проектов по их характеру и направлению
+enum OpWorkProjectType {
+  /// Минимально жизнеспособный продукт - MVP
+  MVP
+  /// Стартап - новый бизнес с высоким потенциалом роста
+  STARTUP
+  /// Продукт - законченное программное решение
+  PRODUCT
+  /// Услуга - оказание профессиональных услуг
+  SERVICE
+  /// Консалтинг - предоставление экспертных знаний
+  CONSULTING
+  /// Агентство - компания предоставляющая услуги третьим лицам
+  AGENCY
+  /// SaaS - программное обеспечение как услуга
+  SAAS
+  /// Электронная коммерция - онлайн торговля
+  ECOMMERCE
+  /// Мобильное приложение - приложение для смартфонов
+  MOBILE_APP
+  /// Веб-приложение - браузерное приложение
+  WEB_APP
+  /// Корпоративное решение - для крупных организаций
+  ENTERPRISE
+  /// Некоммерческая организация - благотворительность, НКО
+  NON_PROFIT
+  /// Образовательный проект - обучение, курсы
+  EDUCATION
+  /// Медицинский проект - здравоохранение, медицина
+  HEALTHCARE
+  /// Финтех - финансовые технологии
+  FINTECH
+  /// Игровой проект - видеоигры, гейминг
+  GAMING
+  /// Искусственный интеллект и машинное обучение
+  AI_ML
+  /// Блокчейн и криптовалюты
+  BLOCKCHAIN
+  /// Интернет вещей - IoT решения
+  IOT
+  /// Маркетинг и реклама
+  MARKETING
+}
+
+/// Статус проекта в жизненном цикле разработки
+/// Отражает текущую фазу развития проекта
+enum OpWorkProjectStatus {
+  /// Идея - концепция на стадии обсуждения
+  IDEA
+  /// Планирование - разработка технического задания
+  PLANNING
+  /// Разработка - активная фаза программирования
+  DEVELOPMENT
+  /// Тестирование - проверка качества и функциональности
+  TESTING
+  /// Готов к запуску - все готово для выхода в продакшен
+  LAUNCH_READY
+  /// Живой - проект находится в активной эксплуатации
+  LIVE
+  /// Поддержка - фаза сопровождения и доработок
+  MAINTENANCE
+  /// Приостановлен - временно остановлено развитие
+  ON_HOLD
+  /// Отменен - проект прекращен
+  CANCELLED
+  /// Завершен - все работы окончены
+  COMPLETED
+  /// В архиве - проект сохранен для истории
+  ARCHIVED
+}
+
+/// Тип уведомления в системе
+/// Классификация уведомлений по их содержанию и назначению
+enum OpWorkNotificationType {
+  /// Получен новый отклик на вакансию
+  APPLICATION_RECEIVED
+  /// Кандидат прошел предварительный отбор
+  APPLICATION_SHORTLISTED
+  /// Назначено интервью
+  INTERVIEW_SCHEDULED
+  /// Получено предложение о работе
+  JOB_OFFER
+  /// Подходящая вакансия по критериям поиска
+  JOB_MATCH
+  /// Обновление статуса вакансии
+  JOB_STATUS_CHANGED
+  /// Новый проект опубликован
+  NEW_PROJECT
+  /// Сообщение от другой стороны
+  MESSAGE_RECEIVED
+  /// Напоминание о действии
+  REMINDER
+  /// Системное уведомление
+  SYSTEM_ALERT
+  /// Уведомление о профиле
+  PROFILE_UPDATE
+  /// Уведомление о сетевых событиях
+  NETWORK_ACTIVITY
+}
+
+/// Частота отправки уведомлений и оповещений
+/// Стандартные интервалы для периодической доставки контента
+enum OpWorkFrequency {
+  /// Ежеминутно - для срочных уведомлений
+  MINUTELY
+  /// Ежечасно - для часто обновляемого контента
+  HOURLY
+  /// Ежедневно - стандартная частота для большинства уведомлений
+  DAILY
+  /// Еженедельно - для менее срочного контента
+  WEEKLY
+  /// Ежемесячно - для редких обновлений
+  MONTHLY
+  /// По требованию - только при наличии новых данных
+  ON_DEMAND
+}
+
+// ============================================================================
+// AUTH MODELS (Система аутентификации и авторизации)
+// ============================================================================
+
+/// Основная сущность пользователя системы аутентификации
+/// Служит центральной точкой для всех связанных данных пользователя
+/// Поддерживает как анонимную, так и внешнюю (Supabase) аутентификацию
+model AuthUser {
+  /// Уникальный идентификатор пользователя (UUID v4)
+  /// Генерируется автоматически при создании записи
+  id String @id(map: "PK_AUTH_USER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Анонимный идентификатор пользователя для гостей
+  /// Используется до привязки к внешней системе аутентификации
+  anonymousId String?
+
+  /// Идентификатор пользователя в системе Supabase
+  /// Уникальный идентификатор из внешней системы аутентификации
+  supabaseUserId String?
+
+  /// Полные данные пользователя, полученные от Supabase
+  /// Хранится в формате JSON для максимальной гибкости
+  supabaseUserData Json?
+
+  /// Статус активности учетной записи пользователя
+  /// Неактивные пользователи не могут выполнять действия в системе
+  isActive Boolean?
+
+  /// Временная метка создания учетной записи
+  /// Автоматически устанавливается при создании записи
   createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// Временная метка последнего обновления данных
+  /// Автоматически обновляется при любом изменении записи
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
-  AuthApiKey  AuthApiKey[]
+  /// === СВЯЗАННЫЕ ДАННЫЕ ===
+
+  /// Список API-ключей доступа, принадлежащих пользователю
+  /// Используются для программного доступа к системе
+  AuthApiKey AuthApiKey[]
+
+  /// Все сессии пользователя (активные и завершенные)
+  /// История входов и активных подключений
   AuthSession AuthSession[]
 
+  /// Профили пользователя в профессиональной сети
+  /// Связь с основной бизнес-системой поиска работы
+  OpWorkProfile       OpWorkProfile[]
+  opWorkNotifications OpWorkNotification[]
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность пользователя по идентификатору Supabase
+  /// Гарантирует отсутствие дубликатов внешних учетных записей
   @@unique(name: "uqSupabaseUserId", [supabaseUserId], map: "UQ_AUTH_USER__SUPABASE_USER_ID")
 }
 
+/// API-ключ для программного доступа к системе
+/// Предоставляет аутентификацию без использования пользовательских сессий
 model AuthApiKey {
-  id       String   @id(map: "PK_AUTH_API_KEY") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  userId   String   @db.Uuid
-  apiKey   String?  @db.VarChar(255)
+  /// Уникальный идентификатор API-ключа (UUID v4)
+  /// Генерируется автоматически при создании
+  id String @id(map: "PK_AUTH_API_KEY") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Идентификатор владельца API-ключа
+  /// Ссылка на запись пользователя в системе AuthUser
+  userId String @db.Uuid
+
+  /// Значение API-ключа для аутентификации
+  /// Хранится в открытом виде для удобства использования
+  apiKey String? @db.VarChar(255)
+
+  /// Статус активности API-ключа
+  /// Неактивные ключи блокируются системой
   isActive Boolean?
 
+  /// Временная метка создания ключа
+  /// Используется для отслеживания возраста ключа
   createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// Временная метка последнего обновления
+  /// Фиксирует изменения статуса или других параметров
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
+  /// === СВЯЗИ ===
+
+  /// Владелец данного API-ключа
+  /// Обратная ссылка на учетную запись пользователя
   AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_API_KEY__USER_ID")
 
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность значения API-ключа
+  /// Гарантирует отсутствие дубликатов ключей
   @@unique(name: "uqApiKey", [apiKey], map: "UQ_AUTH_API_KEY__API_KEY")
+  /// Индекс для быстрого поиска ключей по пользователю
+  /// Оптимизирует запросы по владельцу ключа
   @@index([userId], map: "IDX_AUTH_API_KEY__USER_ID")
 }
 
+/// Пользовательская сессия для отслеживания активных подключений
+/// Используется для управления текущими входами в систему
 model AuthSession {
-  id       String   @id(map: "PK_AUTH_SESSION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  userId   String   @db.Uuid
+  /// Уникальный идентификатор сессии (UUID v4)
+  /// Генерируется при каждом новом входе пользователя
+  id String @id(map: "PK_AUTH_SESSION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Идентификатор пользователя, которому принадлежит сессия
+  /// Ссылка на запись пользователя в системе AuthUser
+  userId String @db.Uuid
+
+  /// Статус активности сессии
+  /// Активные сессии позволяют пользователю выполнять действия
   isActive Boolean?
 
+  /// Временная метка создания сессии
+  /// Фиксирует момент входа пользователя в систему
   createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// Временная метка последнего обновления сессии
+  /// Используется для отслеживания активности пользователя
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
+  /// === СВЯЗИ ===
+
+  /// Владелец данной сессии
+  /// Обратная ссылка на учетную запись пользователя
   AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_SESSION__USER_ID")
 
+  /// === ИНДЕКСЫ ===
+
+  /// Индекс для быстрого поиска сессий пользователя
+  /// Оптимизирует запросы по активным сессиям конкретного пользователя
   @@index([userId], map: "IDX_AUTH_SESSION__USER_ID")
+}
+
+// ============================================================================
+// OPWORK BUSINESS MODELS (Основные бизнес-сущности платформы)
+// ============================================================================
+
+/// Основной профиль пользователя в профессиональной сети
+/// Служит центральной точкой для всех профессиональных данных пользователя
+model OpWorkProfile {
+  /// Уникальный идентификатор профиля (UUID v4)
+  /// Генерируется автоматически при создании
+  id String @id(map: "PK_OPWORK_PROFILE") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Идентификатор владельца профиля
+  /// Ссылка на учетную запись пользователя в системе аутентификации
+  userId String @db.Uuid
+
+  /// Тип профиля в системе
+  /// Определяет основное назначение профиля (проект/специалист/работодатель)
+  type OpWorkProfileType
+
+  /// Тип пользователя в контексте рекрутинга
+  /// Определяет роль пользователя (соискатель/работодатель/админ)
+  userType OpWorkUserType
+
+  /// === ОСНОВНАЯ ИНФОРМАЦИЯ ===
+
+  /// Заголовок профиля (имя, название компании, название проекта)
+  title           String?  @db.VarChar(255)
+  /// Подробное описание профиля
+  description     String?  @db.Text
+  /// Статус активности профиля
+  isActive        Boolean? @default(true)
+  /// Статус верификации email адреса
+  isEmailVerified Boolean? @default(false)
+
+  /// === КОНТАКТНАЯ ИНФОРМАЦИЯ ===
+
+  /// Электронная почта для профессиональных контактов
+  email    String? @db.VarChar(255)
+  /// Номер телефона
+  phone    String? @db.VarChar(50)
+  /// Персональный или корпоративный сайт
+  website  String? @db.VarChar(500)
+  /// Географическое расположение
+  location String? @db.VarChar(255)
+
+  /// === МЕДИА ===
+
+  /// URL аватара пользователя/логотипа компании
+  avatarUrl  String? @db.VarChar(500)
+  /// URL обложки профиля
+  coverImage String? @db.VarChar(500)
+
+  /// === СИСТЕМНЫЕ ДАТЫ ===
+
+  /// Временная метка создания профиля
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Владелец профиля в системе аутентификации
+  AuthUser                   AuthUser                    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROFILE__USER_ID")
+  /// Профиль соискателя (если применимо)
+  opWorkJobSeeker            OpWorkJobSeeker?
+  /// Профиль работодателя (если применимо)
+  opWorkEmployer             OpWorkEmployer?
+  /// Профиль проекта (если применимо)
+  opWorkProject              OpWorkProject?
+  /// Размещенные вакансии
+  opWorkJobs                 OpWorkJob[]
+  /// Отклики на вакансии
+  opWorkApplications         OpWorkApplication[]
+  /// Сохраненные вакансии
+  opWorkSavedJobs            OpWorkSavedJob[]
+  /// Уведомления пользователя
+  opWorkNotifications        OpWorkNotification[]
+  /// Настройки уведомлений
+  opWorkNotificationSettings OpWorkNotificationSettings?
+  /// История поиска
+  opWorkSearchHistories      OpWorkSearchHistory[]
+  /// Просмотры вакансий
+  opWorkJobViews             OpWorkJobView[]
+  /// Сохраненные поисковые запросы
+  opWorkSavedSearches        OpWorkSavedSearch[]
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность комбинации пользователь-тип
+  /// Гарантирует что у пользователя может быть только один профиль каждого типа
+  @@unique(name: "uqOpWorkProfileUserType", [userId, type], map: "UQ_OPWORK_PROFILE__USER_ID_TYPE")
+  /// Индексы для оптимизации запросов
+  @@index([userId], map: "IDX_OPWORK_PROFILE__USER_ID")
+  @@index([type], map: "IDX_OPWORK_PROFILE__TYPE")
+  @@index([userType], map: "IDX_OPWORK_PROFILE__USER_TYPE")
+  @@index([isActive], map: "IDX_OPWORK_PROFILE__IS_ACTIVE")
+}
+
+/// Профессиональный профиль соискателя работы
+/// Содержит подробную информацию о кандидате
+model OpWorkJobSeeker {
+  /// Уникальный идентификатор профиля соискателя (UUID v4)
+  id String @id(map: "PK_OPWORK_JOB_SEEKER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Связанный основной профиль
+  profileId String @db.Uuid
+
+  /// === ПРОФЕССИОНАЛЬНАЯ ИНФОРМАЦИЯ ===
+
+  /// Текущая должность
+  currentPosition String? @db.VarChar(255)
+  /// Текущее место работы
+  currentCompany  String? @db.VarChar(255)
+  /// Профессиональное резюме
+  summary         String? @db.Text
+
+  /// === ЗАРПЛАТНЫЕ ОЖИДАНИЯ ===
+
+  /// Ожидаемый уровень заработной платы
+  expectedSalary Int?
+  /// Валюта зарплаты (по умолчанию USD)
+  salaryCurrency String? @default("USD") @db.VarChar(3)
+
+  /// === НАСТРОЙКИ ПОИСКА РАБОТЫ ===
+
+  /// Готовность к работе (открыт для предложений)
+  isOpenToWork       Boolean? @default(true)
+  /// Открытость к удаленной работе
+  isOpenToRemote     Boolean? @default(false)
+  /// Готовность к переезду
+  isOpenToRelocation Boolean? @default(false)
+  /// Предпочтительные локации для работы
+  preferredLocations String?  @db.Text
+
+  /// === СОЦИАЛЬНЫЕ СЕТИ ===
+
+  /// Профиль LinkedIn
+  linkedinUrl  String? @db.VarChar(500)
+  /// Профиль GitHub
+  githubUrl    String? @db.VarChar(500)
+  /// Портфолио или персональный сайт
+  portfolioUrl String? @db.VarChar(500)
+
+  /// === СИСТЕМНЫЕ ДАТЫ ===
+
+  /// Временная метка создания профиля соискателя
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Связанный основной профиль
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER__PROFILE_ID")
+
+  /// === ДЕТАЛИ ===
+
+  /// Опыт работы соискателя
+  OpWorkExperience     OpWorkExperience[]
+  /// Образование соискателя
+  OpWorkEducation      OpWorkEducation[]
+  /// Навыки соискателя
+  OpWorkJobSeekerSkill OpWorkJobSeekerSkill[]
+  /// Отклики на вакансии
+  opWorkApplications   OpWorkApplication[]
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность профиля соискателя
+  /// Гарантирует что у основного профиля может быть только один профиль соискателя
+  @@unique(name: "uqOpWorkJobSeekerProfile", [profileId], map: "UQ_OPWORK_JOB_SEEKER__PROFILE_ID")
+  /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_JOB_SEEKER__PROFILE_ID")
+  @@index([isOpenToWork], map: "IDX_OPWORK_JOB_SEEKER__IS_OPEN_TO_WORK")
+}
+
+/// Опыт работы соискателя
+/// Хранит историю трудовой деятельности
+model OpWorkExperience {
+  /// Уникальный идентификатор записи опыта (UUID v4)
+  id             String                @id(map: "PK_OPWORK_EXPERIENCE") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор соискателя
+  jobSeekerId    String                @db.Uuid
+  /// Название компании
+  company        String                @db.VarChar(255)
+  /// Должность
+  position       String                @db.VarChar(255)
+  /// Описание обязанностей и достижений
+  description    String?               @db.Text
+  /// Дата начала работы
+  startDate      DateTime              @db.Timestamp(6)
+  /// Дата окончания работы (null если текущее место)
+  endDate        DateTime?             @db.Timestamp(6)
+  /// Признак текущего места работы
+  isCurrent      Boolean?              @default(false)
+  /// Местоположение компании
+  location       String?               @db.VarChar(255)
+  /// Тип занятости
+  employmentType OpWorkEmploymentType?
+  /// Временная метка создания записи
+  createdAt      DateTime              @default(now()) @db.Timestamp(6)
+
+  /// Связь с профилем соискателя
+  OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EXPERIENCE__JOB_SEEKER_ID")
+
+  /// Индексы для оптимизации поиска
+  @@index([jobSeekerId], map: "IDX_OPWORK_EXPERIENCE__JOB_SEEKER_ID")
+  @@index([company], map: "IDX_OPWORK_EXPERIENCE__COMPANY")
+  @@index([startDate], map: "IDX_OPWORK_EXPERIENCE__START_DATE")
+}
+
+/// Образование соискателя
+/// Хранит информацию об образовательном учереждении
+model OpWorkEducation {
+  /// Уникальный идентификатор записи образования (UUID v4)
+  id           String                 @id(map: "PK_OPWORK_EDUCATION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор соискателя
+  jobSeekerId  String                 @db.Uuid
+  /// Название учебного заведения
+  institution  String                 @db.VarChar(255)
+  /// Уровень образования
+  degree       OpWorkEducationDegree?
+  /// Специальность/направление подготовки
+  fieldOfStudy String?                @db.VarChar(255)
+  /// Дата начала обучения
+  startDate    DateTime               @db.Timestamp(6)
+  /// Дата окончания обучения
+  endDate      DateTime?              @db.Timestamp(6)
+  /// Признак текущего обучения
+  isCurrent    Boolean?               @default(false)
+  /// Описание программы обучения или достижений
+  description  String?                @db.Text
+  /// Академическая успеваемость
+  grade        OpWorkGrade?
+  /// Временная метка создания записи
+  createdAt    DateTime               @default(now()) @db.Timestamp(6)
+
+  /// Связь с профилем соискателя
+  OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EDUCATION__JOB_SEEKER_ID")
+
+  /// Индексы для оптимизации поиска
+  @@index([jobSeekerId], map: "IDX_OPWORK_EDUCATION__JOB_SEEKER_ID")
+  @@index([institution], map: "IDX_OPWORK_EDUCATION__INSTITUTION")
+}
+
+/// Профиль компании/работодателя в профессиональной сети
+/// Содержит информацию о работодателе и его вакансиях
+model OpWorkEmployer {
+  /// Уникальный идентификатор профиля работодателя (UUID v4)
+  id String @id(map: "PK_OPWORK_EMPLOYER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Связанный основной профиль
+  profileId String @db.Uuid
+
+  /// === ИНФОРМАЦИЯ О КОМПАНИИ ===
+
+  /// Название компании
+  companyName String  @db.VarChar(255)
+  /// Отрасль деятельности
+  industry    String? @db.VarChar(255)
+  /// Описание компании
+  description String? @db.Text
+  /// Миссия компании
+  mission     String? @db.Text
+  /// Корпоративная культура
+  culture     String? @db.Text
+
+  /// === ДЕТАЛИ КОМПАНИИ ===
+
+  /// Год основания компании
+  foundedYear   Int?    @db.SmallInt
+  /// Главный офис/штаб-квартира
+  headquarters  String? @db.VarChar(255)
+  /// URL логотипа компании
+  logoUrl       String? @db.VarChar(500)
+  /// URL обложки профиля компании
+  coverImageUrl String? @db.VarChar(500)
+
+  /// === КОНТАКТНАЯ ИНФОРМАЦИЯ ===
+
+  /// Корпоративная электронная почта
+  companyEmail   String? @db.VarChar(255)
+  /// Корпоративный телефон
+  companyPhone   String? @db.VarChar(50)
+  /// Официальный сайт компании
+  companyWebsite String? @db.VarChar(500)
+
+  /// === СОЦИАЛЬНЫЕ СЕТИ ===
+
+  /// Профиль компании в LinkedIn
+  linkedinUrl String? @db.VarChar(500)
+  /// Профиль компании в Twitter
+  twitterUrl  String? @db.VarChar(500)
+  /// Профиль компании в Facebook
+  facebookUrl String? @db.VarChar(500)
+
+  /// === СИСТЕМНЫЕ ДАТЫ ===
+
+  /// Временная метка создания профиля работодателя
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Связанный основной профиль
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EMPLOYER__PROFILE_ID")
+
+  /// === ВАКАНСИИ ===
+
+  /// Все вакансии, размещенные этой компанией
+  OpWorkJob OpWorkJob[]
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность профиля работодателя
+  /// Гарантирует что у основного профиля может быть только один профиль работодателя
+  @@unique(name: "uqOpWorkEmployerProfile", [profileId], map: "UQ_OPWORK_EMPLOYER__PROFILE_ID")
+  /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_EMPLOYER__PROFILE_ID")
+  @@index([companyName], map: "IDX_OPWORK_EMPLOYER__COMPANY_NAME")
+  @@index([industry], map: "IDX_OPWORK_EMPLOYER__INDUSTRY")
+}
+
+/// Проект или инициатива пользователя
+/// Может представлять стартап, продукт, исследование или любую другую инициативу
+model OpWorkProject {
+  /// Уникальный идентификатор проекта (UUID v4)
+  id String @id(map: "PK_OPWORK_PROJECT") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Связанный основной профиль
+  profileId String @db.Uuid
+
+  /// === ОСНОВНАЯ ИНФОРМАЦИЯ ===
+
+  /// Название проекта
+  title       String               @db.VarChar(255)
+  /// Подробное описание проекта
+  description String               @db.Text
+  /// Текущий статус проекта в жизненном цикле
+  status      OpWorkProjectStatus?
+  /// Тип проекта/бизнес-модель
+  type        OpWorkProjectType?
+
+  /// === ТЕХНИЧЕСКИЕ ДЕТАЛИ ===
+
+  /// URL репозитория проекта на GitHub
+  githubRepoUrl String? @db.VarChar(512)
+  /// Используемые технологии и стек
+  technologies  String? @db.Text
+  /// Архитектурное описание проекта
+  architecture  String? @db.Text
+
+  /// === ДАТЫ ПРОЕКТА ===
+
+  /// === ПЛАНИРОВАНИЕ ===
+  /// Описание планируемых сроков проекта
+  plannedDatesDescription String?   @db.Text
+  /// Предполагаемая дата начала проекта (по плану)
+  plannedStartDate        DateTime? @db.Timestamp(6)
+  /// Предполагаемая дата завершения проекта (по плану)
+  plannedEndDate          DateTime? @db.Timestamp(6)
+
+  /// === РЕАЛИЗАЦИЯ ===
+  /// Описание этапа реализации проекта
+  implementationDescription String?   @db.Text
+  /// Фактическая дата начала проекта
+  actualStartDate           DateTime? @db.Timestamp(6)
+  /// Дата начала фазы активной разработки
+  developmentStart          DateTime? @db.Timestamp(6)
+  /// Дата начала фазы тестирования
+  testingStart              DateTime? @db.Timestamp(6)
+
+  /// === ЗАПУСК ===
+  /// Описание этапа запуска продукта
+  launchDescription String?   @db.Text
+  /// Планируемая дата запуска продукта
+  launchDate        DateTime? @db.Timestamp(6)
+  /// Фактическая дата выхода продукта в продакшен
+  goLiveDate        DateTime? @db.Timestamp(6)
+
+  /// === ЗАВЕРШЕНИЕ ===
+  /// Описание завершающего этапа проекта
+  completionDescription String?   @db.Text
+  /// Фактическая дата завершения всех работ по проекту
+  actualEndDate         DateTime? @db.Timestamp(6)
+  /// Дата официального завершения проекта (подписание актов и т.д.)
+  completionDate        DateTime? @db.Timestamp(6)
+
+  /// === ПОДДЕРЖКА ===
+  /// Описание этапа поддержки и сопровождения
+  maintenanceDescription String?   @db.Text
+  /// Дата начала фазы поддержки и сопровождения
+  maintenanceStart       DateTime? @db.Timestamp(6)
+  /// Дата окончания фазы поддержки (если планируется)
+  maintenanceEnd         DateTime? @db.Timestamp(6)
+
+  /// === СИСТЕМНЫЕ ДАТЫ ===
+  /// Временная метка создания записи проекта
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Связанный основной профиль
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROJECT__PROFILE_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность профиля проекта
+  /// Гарантирует что у основного профиля может быть только один профиль проекта
+  @@unique(name: "uqOpWorkProjectProfile", [profileId], map: "UQ_OPWORK_PROJECT__PROFILE_ID")
+  /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_PROJECT__PROFILE_ID")
+  @@index([title], map: "IDX_OPWORK_PROJECT__TITLE")
+}
+
+/// Вакансия/должность для поиска сотрудников
+/// Представляет открытую позицию в компании
+model OpWorkJob {
+  /// Уникальный идентификатор вакансии (UUID v4)
+  id         String @id(map: "PK_OPWORK_JOB") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор работодателя
+  employerId String @db.Uuid
+  /// Связанный основной профиль
+  profileId  String @db.Uuid
+
+  /// === ОСНОВНАЯ ИНФОРМАЦИЯ ===
+
+  /// Название должности
+  title            String @db.VarChar(255)
+  /// Подробное описание вакансии
+  description      String @db.Text
+  /// Требования к кандидату
+  requirements     String @db.Text
+  /// Обязанности на должности
+  responsibilities String @db.Text
+
+  /// === ДЕТАЛИ ВАКАНСИИ ===
+
+  /// Тип занятости
+  employmentType  OpWorkEmploymentType
+  /// Требуемый уровень опыта
+  experienceLevel OpWorkExperienceLevel
+  /// Департамент/отдел
+  department      String?               @db.VarChar(255)
+
+  /// === ЗАРПЛАТА ===
+
+  /// Минимальный уровень заработной платы
+  salaryMin      Int?
+  /// Максимальный уровень заработной платы
+  salaryMax      Int?
+  /// Валюта заработной платы (по умолчанию USD)
+  salaryCurrency String? @default("USD") @db.VarChar(3)
+
+  /// === ЛОКАЦИЯ ===
+
+  /// Местоположение работы
+  location String?  @db.VarChar(255)
+  /// Возможность удаленной работы
+  isRemote Boolean? @default(false)
+
+  /// === СТАТУС ===
+
+  /// Текущий статус вакансии
+  status OpWorkJobStatus @default(DRAFT)
+
+  /// === СТАТИСТИКА ===
+
+  /// Количество просмотров вакансии
+  viewsCount        Int @default(0)
+  /// Количество откликов на вакансию
+  applicationsCount Int @default(0)
+  /// Количество добавлений вакансии в избранное
+  savesCount        Int @default(0)
+
+  /// === ДАТЫ ===
+
+  /// Дата публикации вакансии
+  publishedAt DateTime? @db.Timestamp(6)
+  /// Дата истечения вакансии
+  expiresAt   DateTime? @db.Timestamp(6)
+  /// Временная метка создания вакансии
+  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt   DateTime  @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Работодатель, разместивший вакансию
+  OpWorkEmployer    OpWorkEmployer      @relation(fields: [employerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB__EMPLOYER_ID")
+  /// Связанный основной профиль
+  OpWorkProfile     OpWorkProfile       @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB__PROFILE_ID")
+  /// Все отклики на эту вакансию
+  OpWorkApplication OpWorkApplication[]
+  /// Требуемые навыки для вакансии
+  OpWorkJobSkill    OpWorkJobSkill[]
+  /// Сохранения вакансии пользователями
+  OpWorkSavedJob    OpWorkSavedJob[]
+  /// Просмотры вакансии
+  opWorkJobViews    OpWorkJobView[]
+  /// Теги вакансии
+  opWorkJobTags     OpWorkJobTag[]
+
+  /// === ИНДЕКСЫ ===
+
+  @@index([employerId], map: "IDX_OPWORK_JOB__EMPLOYER_ID")
+  @@index([profileId], map: "IDX_OPWORK_JOB__PROFILE_ID")
+  @@index([status], map: "IDX_OPWORK_JOB__STATUS")
+  @@index([employmentType], map: "IDX_OPWORK_JOB__EMPLOYMENT_TYPE")
+  @@index([experienceLevel], map: "IDX_OPWORK_JOB__EXPERIENCE_LEVEL")
+  @@index([location], map: "IDX_OPWORK_JOB__LOCATION")
+  @@index([isRemote], map: "IDX_OPWORK_JOB__IS_REMOTE")
+  @@index([createdAt], map: "IDX_OPWORK_JOB__CREATED_AT")
+}
+
+/// Отклик кандидата на вакансию
+/// Представляет заявку соискателя на конкретную позицию
+model OpWorkApplication {
+  /// Уникальный идентификатор отклика (UUID v4)
+  id          String @id(map: "PK_OPWORK_APPLICATION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор соискателя
+  jobSeekerId String @db.Uuid
+  /// Связанный основной профиль
+  profileId   String @db.Uuid
+  /// Идентификатор вакансии
+  jobId       String @db.Uuid
+
+  /// === ДЕТАЛИ ОТКЛИКА ===
+
+  /// Сопроводительное письмо кандидата
+  coverLetter  String? @db.Text
+  /// URL резюме кандидата
+  resumeUrl    String? @db.VarChar(500)
+  /// URL портфолио или персонального сайта
+  portfolioUrl String? @db.VarChar(500)
+
+  /// === СТАТУС ===
+
+  /// Текущий статус отклика в процессе рассмотрения
+  status      OpWorkApplicationStatus @default(PENDING)
+  /// Заметки по отклику от HR или рекрутера
+  statusNotes String?                 @db.Text
+
+  /// === ДАТЫ ===
+
+  /// Дата подачи отклика
+  appliedAt       DateTime  @default(now()) @db.Timestamp(6)
+  /// Дата последнего обновления статуса
+  statusUpdatedAt DateTime? @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Соискатель, подавший отклик
+  OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__JOB_SEEKER_ID")
+  /// Связанный основной профиль
+  OpWorkProfile   OpWorkProfile   @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__PROFILE_ID")
+  /// Вакансия, на которую подан отклик
+  OpWorkJob       OpWorkJob       @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__JOB_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Один соискатель может откликнуться на вакансию только один раз
+  @@unique(name: "uqOpWorkJobSeekerJob", [jobSeekerId, jobId], map: "UQ_OPWORK_APPLICATION__JOB_SEEKER_ID_JOB_ID")
+  /// Индексы для оптимизации поиска
+  @@index([jobSeekerId], map: "IDX_OPWORK_APPLICATION__JOB_SEEKER_ID")
+  @@index([profileId], map: "IDX_OPWORK_APPLICATION__PROFILE_ID")
+  @@index([jobId], map: "IDX_OPWORK_APPLICATION__JOB_ID")
+  @@index([status], map: "IDX_OPWORK_APPLICATION__STATUS")
+  @@index([appliedAt], map: "IDX_OPWORK_APPLICATION__APPLIED_AT")
+}
+
+/// Сохраненные вакансии пользователя
+/// Позволяет пользователям сохранять интересные вакансии для последующего просмотра
+model OpWorkSavedJob {
+  /// Уникальный идентификатор сохранения (UUID v4)
+  id        String   @id(map: "PK_OPWORK_SAVED_JOB") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор профиля пользователя
+  profileId String   @db.Uuid
+  /// Идентификатор сохраненной вакансии
+  jobId     String   @db.Uuid
+  /// Дата сохранения вакансии
+  savedAt   DateTime @default(now()) @db.Timestamp(6)
+  /// Персональные заметки пользователя о вакансии
+  notes     String?  @db.Text
+
+  /// === СВЯЗИ ===
+
+  /// Профиль пользователя, сохранившего вакансию
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_JOB__PROFILE_ID")
+  /// Сохраненная вакансия
+  OpWorkJob     OpWorkJob     @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_JOB__JOB_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность сохранения (один профиль - одна вакансия)
+  @@unique(name: "uqOpWorkProfileSavedJob", [profileId, jobId], map: "UQ_OPWORK_SAVED_JOB__PROFILE_ID_JOB_ID")
+  /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_SAVED_JOB__PROFILE_ID")
+  @@index([jobId], map: "IDX_OPWORK_SAVED_JOB__JOB_ID")
+}
+
+// ============================================================================
+// SKILLS & TAGS (Навыки и теги)
+// ============================================================================
+
+/// Навык или технология в системе
+/// Централизованный справочник всех возможных навыков и технологий
+model OpWorkSkill {
+  /// Уникальный идентификатор навыка (UUID v4)
+  id          String           @id(map: "PK_OPWORK_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Название навыка или технологии
+  name        String           @db.VarChar(255)
+  /// Подробное описание навыка
+  description String?          @db.Text
+  /// Тип навыка (язык программирования, фреймворк и т.д.)
+  type        OpWorkSkillType?
+  /// Категория навыка для группировки
+  category    String?          @db.VarChar(255)
+  /// URL иконки навыка
+  icon        String?          @db.VarChar(500)
+  /// Популярность навыка (количество использований)
+  popularity  Int              @default(0)
+  /// Временная метка создания записи
+  createdAt   DateTime         @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Все связи навыка с соискателями
+  OpWorkJobSeekerSkill OpWorkJobSeekerSkill[]
+  /// Все связи навыка с вакансиями
+  OpWorkJobSkill       OpWorkJobSkill[]
+  /// Синонимы данного навыка
+  opWorkSkillSynonyms  OpWorkSkillSynonym[]
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность имени навыка
+  @@unique(name: "uqOpWorkSkillName", [name], map: "UQ_OPWORK_SKILL__NAME")
+  /// Индексы для оптимизации поиска
+  @@index([type], map: "IDX_OPWORK_SKILL__TYPE")
+  @@index([category], map: "IDX_OPWORK_SKILL__CATEGORY")
+  @@index([popularity], map: "IDX_OPWORK_SKILL__POPULARITY")
+}
+
+/// Связь навыка с конкретным соискателем
+/// Хранит уровень владения навыком конкретным кандидатом
+model OpWorkJobSeekerSkill {
+  /// Уникальный идентификатор связи (UUID v4)
+  id          String    @id(map: "PK_OPWORK_JOB_SEEKER_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор соискателя
+  jobSeekerId String    @db.Uuid
+  /// Идентификатор навыка
+  skillId     String    @db.Uuid
+  /// Уровень владения навыком (1-5)
+  level       Int       @default(3) @db.SmallInt
+  /// Количество лет опыта с этим навыком
+  yearsOfExp  Int?      @db.SmallInt
+  /// Признак основного/ключевого навыка
+  isPrimary   Boolean?  @default(false)
+  /// Дата последнего использования навыка
+  lastUsed    DateTime? @db.Timestamp(6)
+  /// Временная метка создания записи
+  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Соискатель, владеющий данным навыком
+  OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID")
+  /// Навык
+  OpWorkSkill     OpWorkSkill     @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER_SKILL__SKILL_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность связи (один соискатель - один навык)
+  @@unique(name: "uqOpWorkJobSeekerSkill", [jobSeekerId, skillId], map: "UQ_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID_SKILL_ID")
+  /// Индексы для оптимизации поиска
+  @@index([jobSeekerId], map: "IDX_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID")
+  @@index([skillId], map: "IDX_OPWORK_JOB_SEEKER_SKILL__SKILL_ID")
+  @@index([level], map: "IDX_OPWORK_JOB_SEEKER_SKILL__LEVEL")
+}
+
+/// Требования к навыкам для конкретной вакансии
+/// Определяет какие навыки необходимы для позиции
+model OpWorkJobSkill {
+  /// Уникальный идентификатор требования (UUID v4)
+  id         String   @id(map: "PK_OPWORK_JOB_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор вакансии
+  jobId      String   @db.Uuid
+  /// Идентификатор требуемого навыка
+  skillId    String   @db.Uuid
+  /// Обязательность навыка для данной позиции
+  isRequired Boolean? @default(true)
+  /// Важность навыка (1-5)
+  importance Int      @default(3) @db.SmallInt
+  /// Минимальный требуемый уровень владения
+  minLevel   Int?     @db.SmallInt
+  /// Временная метка создания записи
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Вакансия, для которой указано требование
+  OpWorkJob   OpWorkJob   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__JOB_ID")
+  /// Требуемый навык
+  OpWorkSkill OpWorkSkill @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__SKILL_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность требования (одна вакансия - один навык)
+  @@unique(name: "uqOpWorkJobSkill", [jobId, skillId], map: "UQ_OPWORK_JOB_SKILL__JOB_ID_SKILL_ID")
+  /// Индексы для оптимизации поиска
+  @@index([jobId], map: "IDX_OPWORK_JOB_SKILL__JOB_ID")
+  @@index([skillId], map: "IDX_OPWORK_JOB_SKILL__SKILL_ID")
+  @@index([isRequired], map: "IDX_OPWORK_JOB_SKILL__IS_REQUIRED")
+}
+
+// ============================================================================
+// NOTIFICATIONS & INTERACTIONS (Уведомления и взаимодействия)
+// ============================================================================
+
+/// Уведомление пользователя в системе
+/// Хранит все уведомления, отправленные пользователям
+model OpWorkNotification {
+  /// Уникальный идентификатор уведомления (UUID v4)
+  id        String  @id(map: "PK_OPWORK_NOTIFICATION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор пользователя-получателя
+  userId    String  @db.Uuid
+  /// Идентификатор связанного профиля (если применимо)
+  profileId String? @db.Uuid
+
+  /// === ДЕТАЛИ УВЕДОМЛЕНИЯ ===
+
+  /// Тип уведомления
+  type    OpWorkNotificationType
+  /// Заголовок уведомления
+  title   String                 @db.VarChar(255)
+  /// Текст сообщения уведомления
+  message String                 @db.Text
+  /// Дополнительные данные в формате JSON
+  data    Json?
+
+  /// === СТАТУС ===
+
+  /// Признак прочтения уведомления
+  isRead     Boolean? @default(false)
+  /// Признак архивирования уведомления
+  isArchived Boolean? @default(false)
+
+  /// === ДАТЫ ===
+
+  /// Временная метка создания уведомления
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  /// Временная метка прочтения уведомления
+  readAt    DateTime? @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Пользователь-получатель уведомления
+  AuthUser      AuthUser       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__USER_ID")
+  /// Связанный профиль (если применимо)
+  OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__PROFILE_ID")
+
+  /// === ИНДЕКСЫ ===
+
+  @@index([userId], map: "IDX_OPWORK_NOTIFICATION__USER_ID")
+  @@index([profileId], map: "IDX_OPWORK_NOTIFICATION__PROFILE_ID")
+  @@index([type], map: "IDX_OPWORK_NOTIFICATION__TYPE")
+  @@index([isRead], map: "IDX_OPWORK_NOTIFICATION__IS_READ")
+  @@index([createdAt], map: "IDX_OPWORK_NOTIFICATION__CREATED_AT")
+}
+
+/// Настройки уведомлений для профиля пользователя
+/// Позволяет пользователю настраивать получение уведомлений
+model OpWorkNotificationSettings {
+  /// Уникальный идентификатор настроек (UUID v4)
+  id        String @id(map: "PK_OPWORK_NOTIFICATION_SETTINGS") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор профиля
+  profileId String @db.Uuid
+
+  /// === ТИПЫ УВЕДОМЛЕНИЙ ===
+
+  /// Email-уведомления об обновлениях откликов
+  emailApplicationUpdates Boolean? @default(true)
+  /// Email-уведомления о подходящих вакансиях
+  emailJobAlerts          Boolean? @default(true)
+  /// Email-рассылка новостей
+  emailNewsletter         Boolean? @default(false)
+  /// Push-уведомления об обновлениях откликов
+  pushApplicationUpdates  Boolean? @default(true)
+  /// Push-уведомления о подходящих вакансиях
+  pushJobAlerts           Boolean? @default(true)
+
+  /// === ЧАСТОТА ===
+
+  /// Частота отправки уведомлений о вакансиях
+  jobAlertFrequency OpWorkFrequency? @default(DAILY)
+
+  /// === СИСТЕМНЫЕ ДАТЫ ===
+
+  /// Временная метка последнего обновления настроек
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Профиль, для которого настроены уведомления
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION_SETTINGS__PROFILE_ID")
+
+  /// === ОГРАНИЧЕНИЯ ===
+
+  /// Уникальность настроек (один профиль - одни настройки)
+  @@unique(name: "uqOpWorkNotificationSettingsProfile", [profileId], map: "UQ_OPWORK_NOTIFICATION_SETTINGS__PROFILE_ID")
+}
+
+// ============================================================================
+// SEARCH & ANALYTICS (Поиск и аналитика)
+// ============================================================================
+
+/// История поиска вакансий пользователем
+/// Хранит все поисковые запросы для анализа поведения пользователей
+model OpWorkSearchHistory {
+  /// Уникальный идентификатор записи поиска (UUID v4)
+  id           String   @id(map: "PK_OPWORK_SEARCH_HISTORY") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор профиля пользователя
+  profileId    String   @db.Uuid
+  /// Текст поискового запроса
+  query        String   @db.VarChar(500)
+  /// Фильтры поиска в формате JSON
+  filters      Json?
+  /// Количество найденных результатов
+  resultsCount Int?     @default(0)
+  /// Временная метка выполнения поиска
+  searchedAt   DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Профиль пользователя, выполнившего поиск
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SEARCH_HISTORY__PROFILE_ID")
+
+  /// === ИНДЕКСЫ ===
+
+  @@index([profileId], map: "IDX_OPWORK_SEARCH_HISTORY__PROFILE_ID")
+  @@index([searchedAt], map: "IDX_OPWORK_SEARCH_HISTORY__SEARCHED_AT")
+}
+
+/// Просмотры вакансий пользователями
+/// Отслеживает популярность вакансий и поведение пользователей
+model OpWorkJobView {
+  /// Уникальный идентификатор просмотра (UUID v4)
+  id        String   @id(map: "PK_OPWORK_JOB_VIEW") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор профиля пользователя (если авторизован)
+  profileId String?  @db.Uuid
+  /// Идентификатор просмотренной вакансии
+  jobId     String   @db.Uuid
+  /// Временная метка просмотра
+  viewedAt  DateTime @default(now()) @db.Timestamp(6)
+  /// IP-адрес пользователя
+  ipAddress String?  @db.VarChar(45)
+  /// User-Agent браузера
+  userAgent String?  @db.VarChar(500)
+
+  /// === СВЯЗИ ===
+
+  /// Профиль пользователя (если авторизован)
+  OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_VIEW__PROFILE_ID")
+  /// Просмотренная вакансия
+  OpWorkJob     OpWorkJob      @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_VIEW__JOB_ID")
+
+  /// === ИНДЕКСЫ ===
+
+  @@index([profileId], map: "IDX_OPWORK_JOB_VIEW__PROFILE_ID")
+  @@index([jobId], map: "IDX_OPWORK_JOB_VIEW__JOB_ID")
+  @@index([viewedAt], map: "IDX_OPWORK_JOB_VIEW__VIEWED_AT")
+}
+
+/// Избранные поисковые запросы пользователя
+/// Позволяет пользователям сохранять регулярные поисковые запросы
+model OpWorkSavedSearch {
+  /// Уникальный идентификатор сохраненного поиска (UUID v4)
+  id         String           @id(map: "PK_OPWORK_SAVED_SEARCH") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор профиля пользователя
+  profileId  String           @db.Uuid
+  /// Название сохраненного поиска
+  name       String           @db.VarChar(255)
+  /// Текст поискового запроса
+  query      String           @db.VarChar(500)
+  /// Фильтры поиска в формате JSON
+  filters    Json?
+  /// Статус активности сохраненного поиска
+  isActive   Boolean?         @default(true)
+  /// Частота отправки уведомлений
+  frequency  OpWorkFrequency? @default(DAILY)
+  /// Дата последней отправки уведомления
+  lastSentAt DateTime?        @db.Timestamp(6)
+  /// Временная метка создания
+  createdAt  DateTime         @default(now()) @db.Timestamp(6)
+  /// Временная метка последнего обновления
+  updatedAt  DateTime         @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Профиль пользователя, создавшего сохраненный поиск
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_SEARCH__PROFILE_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность названия для профиля
+  @@unique(name: "uqOpWorkSavedSearchProfileName", [profileId, name], map: "UQ_OPWORK_SAVED_SEARCH__PROFILE_ID_NAME")
+  /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_SAVED_SEARCH__PROFILE_ID")
+  @@index([isActive], map: "IDX_OPWORK_SAVED_SEARCH__IS_ACTIVE")
+}
+
+// ============================================================================
+// ADDITIONAL MODELS (Дополнительные модели)
+// ============================================================================
+
+/// Синонимы навыков для улучшения поиска
+/// Позволяет находить навыки по альтернативным названиям
+model OpWorkSkillSynonym {
+  /// Уникальный идентификатор синонима (UUID v4)
+  id        String   @id(map: "PK_OPWORK_SKILL_SYNONYM") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор основного навыка
+  skillId   String   @db.Uuid
+  /// Альтернативное название навыка
+  synonym   String   @db.VarChar(255)
+  /// Временная метка создания записи
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Основной навык, для которого указан синоним
+  OpWorkSkill OpWorkSkill @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SKILL_SYNONYM__SKILL_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность синонима для навыка
+  @@unique(name: "uqOpWorkSkillSynonym", [skillId, synonym], map: "UQ_OPWORK_SKILL_SYNONYM__SKILL_ID_SYNONYM")
+  /// Индексы для оптимизации поиска
+  @@index([skillId], map: "IDX_OPWORK_SKILL_SYNONYM__SKILL_ID")
+  @@index([synonym], map: "IDX_OPWORK_SKILL_SYNONYM__SYNONYM")
+}
+
+/// Теги для категоризации вакансий
+/// Позволяет добавлять произвольные метки к вакансиям
+model OpWorkJobTag {
+  /// Уникальный идентификатор тега (UUID v4)
+  id        String   @id(map: "PK_OPWORK_JOB_TAG") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Идентификатор вакансии
+  jobId     String   @db.Uuid
+  /// Название тега
+  name      String   @db.VarChar(100)
+  /// Цвет тега в формате HEX (#RRGGBB)
+  color     String?  @db.VarChar(7)
+  /// Временная метка создания тега
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  /// === СВЯЗИ ===
+
+  /// Вакансия, к которой прикреплен тег
+  OpWorkJob OpWorkJob @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_TAG__JOB_ID")
+
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
+  /// Уникальность тега для вакансии
+  @@unique(name: "uqOpWorkJobTag", [jobId, name], map: "UQ_OPWORK_JOB_TAG__JOB_ID_NAME")
+  /// Индексы для оптимизации поиска
+  @@index([jobId], map: "IDX_OPWORK_JOB_TAG__JOB_ID")
+  @@index([name], map: "IDX_OPWORK_JOB_TAG__NAME")
 }

@@ -13,7 +13,9 @@ import type * as Prisma from '../internal/prismaNamespace.js';
 
 /**
  * Model AuthUser
- *
+ * Основная сущность пользователя системы аутентификации
+ * Служит центральной точкой для всех связанных данных пользователя
+ * Поддерживает как анонимную, так и внешнюю (Supabase) аутентификацию
  */
 export type AuthUserModel =
   runtime.Types.Result.DefaultSelection<Prisma.$AuthUserPayload>;
@@ -200,6 +202,8 @@ export type AuthUserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<'AuthUser'> | Date | string;
   AuthApiKey?: Prisma.AuthApiKeyListRelationFilter;
   AuthSession?: Prisma.AuthSessionListRelationFilter;
+  OpWorkProfile?: Prisma.OpWorkProfileListRelationFilter;
+  opWorkNotifications?: Prisma.OpWorkNotificationListRelationFilter;
 };
 
 export type AuthUserOrderByWithRelationInput = {
@@ -212,6 +216,8 @@ export type AuthUserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder;
   AuthApiKey?: Prisma.AuthApiKeyOrderByRelationAggregateInput;
   AuthSession?: Prisma.AuthSessionOrderByRelationAggregateInput;
+  OpWorkProfile?: Prisma.OpWorkProfileOrderByRelationAggregateInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationOrderByRelationAggregateInput;
 };
 
 export type AuthUserWhereUniqueInput = Prisma.AtLeast<
@@ -228,6 +234,8 @@ export type AuthUserWhereUniqueInput = Prisma.AtLeast<
     updatedAt?: Prisma.DateTimeFilter<'AuthUser'> | Date | string;
     AuthApiKey?: Prisma.AuthApiKeyListRelationFilter;
     AuthSession?: Prisma.AuthSessionListRelationFilter;
+    OpWorkProfile?: Prisma.OpWorkProfileListRelationFilter;
+    opWorkNotifications?: Prisma.OpWorkNotificationListRelationFilter;
   },
   'id' | 'uqSupabaseUserId'
 >;
@@ -281,6 +289,8 @@ export type AuthUserCreateInput = {
   updatedAt?: Date | string;
   AuthApiKey?: Prisma.AuthApiKeyCreateNestedManyWithoutAuthUserInput;
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserUncheckedCreateInput = {
@@ -293,6 +303,8 @@ export type AuthUserUncheckedCreateInput = {
   updatedAt?: Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUncheckedCreateNestedManyWithoutAuthUserInput;
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserUpdateInput = {
@@ -308,6 +320,8 @@ export type AuthUserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUpdateManyWithoutAuthUserNestedInput;
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutAuthUserNestedInput;
 };
 
 export type AuthUserUncheckedUpdateInput = {
@@ -323,6 +337,8 @@ export type AuthUserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUncheckedUpdateManyWithoutAuthUserNestedInput;
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutAuthUserNestedInput;
 };
 
 export type AuthUserCreateManyInput = {
@@ -462,6 +478,58 @@ export type AuthUserUpdateOneRequiredWithoutAuthSessionNestedInput = {
   >;
 };
 
+export type AuthUserCreateNestedOneWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkProfileInput
+  >;
+  connectOrCreate?: Prisma.AuthUserCreateOrConnectWithoutOpWorkProfileInput;
+  connect?: Prisma.AuthUserWhereUniqueInput;
+};
+
+export type AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkProfileInput
+  >;
+  connectOrCreate?: Prisma.AuthUserCreateOrConnectWithoutOpWorkProfileInput;
+  upsert?: Prisma.AuthUserUpsertWithoutOpWorkProfileInput;
+  connect?: Prisma.AuthUserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.AuthUserUpdateToOneWithWhereWithoutOpWorkProfileInput,
+      Prisma.AuthUserUpdateWithoutOpWorkProfileInput
+    >,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkProfileInput
+  >;
+};
+
+export type AuthUserCreateNestedOneWithoutOpWorkNotificationsInput = {
+  create?: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkNotificationsInput
+  >;
+  connectOrCreate?: Prisma.AuthUserCreateOrConnectWithoutOpWorkNotificationsInput;
+  connect?: Prisma.AuthUserWhereUniqueInput;
+};
+
+export type AuthUserUpdateOneRequiredWithoutOpWorkNotificationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkNotificationsInput
+  >;
+  connectOrCreate?: Prisma.AuthUserCreateOrConnectWithoutOpWorkNotificationsInput;
+  upsert?: Prisma.AuthUserUpsertWithoutOpWorkNotificationsInput;
+  connect?: Prisma.AuthUserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.AuthUserUpdateToOneWithWhereWithoutOpWorkNotificationsInput,
+      Prisma.AuthUserUpdateWithoutOpWorkNotificationsInput
+    >,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkNotificationsInput
+  >;
+};
+
 export type AuthUserCreateWithoutAuthApiKeyInput = {
   id?: string;
   anonymousId?: string | null;
@@ -471,6 +539,8 @@ export type AuthUserCreateWithoutAuthApiKeyInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserUncheckedCreateWithoutAuthApiKeyInput = {
@@ -482,6 +552,8 @@ export type AuthUserUncheckedCreateWithoutAuthApiKeyInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserCreateOrConnectWithoutAuthApiKeyInput = {
@@ -524,6 +596,8 @@ export type AuthUserUpdateWithoutAuthApiKeyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutAuthUserNestedInput;
 };
 
 export type AuthUserUncheckedUpdateWithoutAuthApiKeyInput = {
@@ -538,6 +612,8 @@ export type AuthUserUncheckedUpdateWithoutAuthApiKeyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutAuthUserNestedInput;
 };
 
 export type AuthUserCreateWithoutAuthSessionInput = {
@@ -549,6 +625,8 @@ export type AuthUserCreateWithoutAuthSessionInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   AuthApiKey?: Prisma.AuthApiKeyCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserUncheckedCreateWithoutAuthSessionInput = {
@@ -560,6 +638,8 @@ export type AuthUserUncheckedCreateWithoutAuthSessionInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUncheckedCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutAuthUserInput;
 };
 
 export type AuthUserCreateOrConnectWithoutAuthSessionInput = {
@@ -602,6 +682,8 @@ export type AuthUserUpdateWithoutAuthSessionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutAuthUserNestedInput;
 };
 
 export type AuthUserUncheckedUpdateWithoutAuthSessionInput = {
@@ -616,6 +698,180 @@ export type AuthUserUncheckedUpdateWithoutAuthSessionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   AuthApiKey?: Prisma.AuthApiKeyUncheckedUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutAuthUserNestedInput;
+};
+
+export type AuthUserCreateWithoutOpWorkProfileInput = {
+  id?: string;
+  anonymousId?: string | null;
+  supabaseUserId?: string | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: boolean | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyCreateNestedManyWithoutAuthUserInput;
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutAuthUserInput;
+};
+
+export type AuthUserUncheckedCreateWithoutOpWorkProfileInput = {
+  id?: string;
+  anonymousId?: string | null;
+  supabaseUserId?: string | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: boolean | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUncheckedCreateNestedManyWithoutAuthUserInput;
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutAuthUserInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutAuthUserInput;
+};
+
+export type AuthUserCreateOrConnectWithoutOpWorkProfileInput = {
+  where: Prisma.AuthUserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkProfileInput
+  >;
+};
+
+export type AuthUserUpsertWithoutOpWorkProfileInput = {
+  update: Prisma.XOR<
+    Prisma.AuthUserUpdateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkProfileInput
+  >;
+  create: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkProfileInput
+  >;
+  where?: Prisma.AuthUserWhereInput;
+};
+
+export type AuthUserUpdateToOneWithWhereWithoutOpWorkProfileInput = {
+  where?: Prisma.AuthUserWhereInput;
+  data: Prisma.XOR<
+    Prisma.AuthUserUpdateWithoutOpWorkProfileInput,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkProfileInput
+  >;
+};
+
+export type AuthUserUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  supabaseUserId?:
+    | Prisma.NullableStringFieldUpdateOperationsInput
+    | string
+    | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUpdateManyWithoutAuthUserNestedInput;
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutAuthUserNestedInput;
+};
+
+export type AuthUserUncheckedUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  supabaseUserId?:
+    | Prisma.NullableStringFieldUpdateOperationsInput
+    | string
+    | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUncheckedUpdateManyWithoutAuthUserNestedInput;
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutAuthUserNestedInput;
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutAuthUserNestedInput;
+};
+
+export type AuthUserCreateWithoutOpWorkNotificationsInput = {
+  id?: string;
+  anonymousId?: string | null;
+  supabaseUserId?: string | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: boolean | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyCreateNestedManyWithoutAuthUserInput;
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedManyWithoutAuthUserInput;
+};
+
+export type AuthUserUncheckedCreateWithoutOpWorkNotificationsInput = {
+  id?: string;
+  anonymousId?: string | null;
+  supabaseUserId?: string | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: boolean | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUncheckedCreateNestedManyWithoutAuthUserInput;
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutAuthUserInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedCreateNestedManyWithoutAuthUserInput;
+};
+
+export type AuthUserCreateOrConnectWithoutOpWorkNotificationsInput = {
+  where: Prisma.AuthUserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkNotificationsInput
+  >;
+};
+
+export type AuthUserUpsertWithoutOpWorkNotificationsInput = {
+  update: Prisma.XOR<
+    Prisma.AuthUserUpdateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkNotificationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.AuthUserCreateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedCreateWithoutOpWorkNotificationsInput
+  >;
+  where?: Prisma.AuthUserWhereInput;
+};
+
+export type AuthUserUpdateToOneWithWhereWithoutOpWorkNotificationsInput = {
+  where?: Prisma.AuthUserWhereInput;
+  data: Prisma.XOR<
+    Prisma.AuthUserUpdateWithoutOpWorkNotificationsInput,
+    Prisma.AuthUserUncheckedUpdateWithoutOpWorkNotificationsInput
+  >;
+};
+
+export type AuthUserUpdateWithoutOpWorkNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  supabaseUserId?:
+    | Prisma.NullableStringFieldUpdateOperationsInput
+    | string
+    | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUpdateManyWithoutAuthUserNestedInput;
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateManyWithoutAuthUserNestedInput;
+};
+
+export type AuthUserUncheckedUpdateWithoutOpWorkNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  supabaseUserId?:
+    | Prisma.NullableStringFieldUpdateOperationsInput
+    | string
+    | null;
+  supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue;
+  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  AuthApiKey?: Prisma.AuthApiKeyUncheckedUpdateManyWithoutAuthUserNestedInput;
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutAuthUserNestedInput;
+  OpWorkProfile?: Prisma.OpWorkProfileUncheckedUpdateManyWithoutAuthUserNestedInput;
 };
 
 /**
@@ -625,6 +881,8 @@ export type AuthUserUncheckedUpdateWithoutAuthSessionInput = {
 export type AuthUserCountOutputType = {
   AuthApiKey: number;
   AuthSession: number;
+  OpWorkProfile: number;
+  opWorkNotifications: number;
 };
 
 export type AuthUserCountOutputTypeSelect<
@@ -633,6 +891,10 @@ export type AuthUserCountOutputTypeSelect<
 > = {
   AuthApiKey?: boolean | AuthUserCountOutputTypeCountAuthApiKeyArgs;
   AuthSession?: boolean | AuthUserCountOutputTypeCountAuthSessionArgs;
+  OpWorkProfile?: boolean | AuthUserCountOutputTypeCountOpWorkProfileArgs;
+  opWorkNotifications?:
+    | boolean
+    | AuthUserCountOutputTypeCountOpWorkNotificationsArgs;
 };
 
 /**
@@ -668,6 +930,26 @@ export type AuthUserCountOutputTypeCountAuthSessionArgs<
   where?: Prisma.AuthSessionWhereInput;
 };
 
+/**
+ * AuthUserCountOutputType without action
+ */
+export type AuthUserCountOutputTypeCountOpWorkProfileArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.OpWorkProfileWhereInput;
+};
+
+/**
+ * AuthUserCountOutputType without action
+ */
+export type AuthUserCountOutputTypeCountOpWorkNotificationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.OpWorkNotificationWhereInput;
+};
+
 export type AuthUserSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
@@ -682,6 +964,10 @@ export type AuthUserSelect<
     updatedAt?: boolean;
     AuthApiKey?: boolean | Prisma.AuthUser$AuthApiKeyArgs<ExtArgs>;
     AuthSession?: boolean | Prisma.AuthUser$AuthSessionArgs<ExtArgs>;
+    OpWorkProfile?: boolean | Prisma.AuthUser$OpWorkProfileArgs<ExtArgs>;
+    opWorkNotifications?:
+      | boolean
+      | Prisma.AuthUser$opWorkNotificationsArgs<ExtArgs>;
     _count?: boolean | Prisma.AuthUserCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['authUser']
@@ -748,6 +1034,10 @@ export type AuthUserInclude<
 > = {
   AuthApiKey?: boolean | Prisma.AuthUser$AuthApiKeyArgs<ExtArgs>;
   AuthSession?: boolean | Prisma.AuthUser$AuthSessionArgs<ExtArgs>;
+  OpWorkProfile?: boolean | Prisma.AuthUser$OpWorkProfileArgs<ExtArgs>;
+  opWorkNotifications?:
+    | boolean
+    | Prisma.AuthUser$opWorkNotificationsArgs<ExtArgs>;
   _count?: boolean | Prisma.AuthUserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type AuthUserIncludeCreateManyAndReturn<
@@ -765,17 +1055,59 @@ export type $AuthUserPayload<
 > = {
   name: 'AuthUser';
   objects: {
+    /**
+     * Список API-ключей доступа, принадлежащих пользователю
+     * Используются для программного доступа к системе
+     */
     AuthApiKey: Prisma.$AuthApiKeyPayload<ExtArgs>[];
+    /**
+     * Все сессии пользователя (активные и завершенные)
+     * История входов и активных подключений
+     */
     AuthSession: Prisma.$AuthSessionPayload<ExtArgs>[];
+    /**
+     * Профили пользователя в профессиональной сети
+     * Связь с основной бизнес-системой поиска работы
+     */
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>[];
+    opWorkNotifications: Prisma.$OpWorkNotificationPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
+      /**
+       * Уникальный идентификатор пользователя (UUID v4)
+       * Генерируется автоматически при создании записи
+       */
       id: string;
+      /**
+       * Анонимный идентификатор пользователя для гостей
+       * Используется до привязки к внешней системе аутентификации
+       */
       anonymousId: string | null;
+      /**
+       * Идентификатор пользователя в системе Supabase
+       * Уникальный идентификатор из внешней системы аутентификации
+       */
       supabaseUserId: string | null;
+      /**
+       * Полные данные пользователя, полученные от Supabase
+       * Хранится в формате JSON для максимальной гибкости
+       */
       supabaseUserData: runtime.JsonValue | null;
+      /**
+       * Статус активности учетной записи пользователя
+       * Неактивные пользователи не могут выполнять действия в системе
+       */
       isActive: boolean | null;
+      /**
+       * Временная метка создания учетной записи
+       * Автоматически устанавливается при создании записи
+       */
       createdAt: Date;
+      /**
+       * Временная метка последнего обновления данных
+       * Автоматически обновляется при любом изменении записи
+       */
       updatedAt: Date;
     },
     ExtArgs['result']['authUser']
@@ -1349,6 +1681,30 @@ export interface Prisma__AuthUserClient<
       >
     | Null
   >;
+  OpWorkProfile<T extends Prisma.AuthUser$OpWorkProfileArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.AuthUser$OpWorkProfileArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$OpWorkProfilePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  opWorkNotifications<
+    T extends Prisma.AuthUser$opWorkNotificationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.AuthUser$opWorkNotificationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$OpWorkNotificationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1910,6 +2266,68 @@ export type AuthUser$AuthSessionArgs<
   distinct?:
     | Prisma.AuthSessionScalarFieldEnum
     | Prisma.AuthSessionScalarFieldEnum[];
+};
+
+/**
+ * AuthUser.OpWorkProfile
+ */
+export type AuthUser$OpWorkProfileArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the OpWorkProfile
+   */
+  select?: Prisma.OpWorkProfileSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the OpWorkProfile
+   */
+  omit?: Prisma.OpWorkProfileOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkProfileInclude<ExtArgs> | null;
+  where?: Prisma.OpWorkProfileWhereInput;
+  orderBy?:
+    | Prisma.OpWorkProfileOrderByWithRelationInput
+    | Prisma.OpWorkProfileOrderByWithRelationInput[];
+  cursor?: Prisma.OpWorkProfileWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.OpWorkProfileScalarFieldEnum
+    | Prisma.OpWorkProfileScalarFieldEnum[];
+};
+
+/**
+ * AuthUser.opWorkNotifications
+ */
+export type AuthUser$opWorkNotificationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the OpWorkNotification
+   */
+  select?: Prisma.OpWorkNotificationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the OpWorkNotification
+   */
+  omit?: Prisma.OpWorkNotificationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkNotificationInclude<ExtArgs> | null;
+  where?: Prisma.OpWorkNotificationWhereInput;
+  orderBy?:
+    | Prisma.OpWorkNotificationOrderByWithRelationInput
+    | Prisma.OpWorkNotificationOrderByWithRelationInput[];
+  cursor?: Prisma.OpWorkNotificationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.OpWorkNotificationScalarFieldEnum
+    | Prisma.OpWorkNotificationScalarFieldEnum[];
 };
 
 /**

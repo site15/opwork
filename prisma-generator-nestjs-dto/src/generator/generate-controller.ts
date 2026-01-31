@@ -27,8 +27,14 @@ export const generateController = ({
   // Determine base path for controller
   const kebabModelName = kebab(modelName).toLowerCase();
   const kebabModelNameArray = kebabModelName.split('-');
-  const apiTagName = kebabModelNameArray[0];
-  const basePath = `${apiTagName}/${kebabModelNameArray.slice(1).join('-')}`;
+  const apiTagName =
+    kebabModelNameArray[0].length > 3
+      ? kebabModelNameArray[0]
+      : kebabModelNameArray.slice(0, 2).join('-');
+  const basePath = `${apiTagName}/${(kebabModelNameArray[0].length > 3
+    ? kebabModelNameArray.slice(1)
+    : kebabModelNameArray.slice(2)
+  ).join('-')}`;
 
   // Convert PascalCase model name to camelCase for Prisma calls
   const prismaModelName =
@@ -36,6 +42,8 @@ export const generateController = ({
 
   // Check if model has deletedAt field for soft delete support
   const hasDeletedAt = fields.some((f) => f.name === 'deletedAt');
+  // Check if model has updatedAt field for automatic timestamp updates
+  const hasUpdatedAt = fields.some((f) => f.name === 'updatedAt');
 
   return `import {
   Body,
@@ -57,7 +65,7 @@ import {
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
 ${
-  fields.find((f) => f.name === 'userId')
+  fields.find((f) => f.name === 'userId' || f.name === 'profileId')
     ? `import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';`
     : ''
 }import {
@@ -68,7 +76,7 @@ ${
   PrismaService,
 } from '../../services/prisma.service';
 ${
-  fields.find((f) => f.name === 'userId')
+  fields.find((f) => f.name === 'userId' || f.name === 'profileId')
     ? `import { AppRequest } from '../../types/request';`
     : ''
 }import { StatusResponse } from '../../types/status-response';
@@ -153,7 +161,7 @@ export class ${controllerName} {
   @Post()
   @ApiCreatedResponse({ type: ${plainDtoClassName} })
   async createOne(${
-    fields.find((f) => f.name === 'userId')
+    fields.find((f) => f.name === 'userId' || f.name === 'profileId')
       ? `
     @CurrentAppRequest() req: AppRequest,`
       : ''
@@ -163,7 +171,8 @@ export class ${controllerName} {
     return await this.${serviceName.toLowerCase()}.${prismaModelName}.create({
       data: { 
         ...args,
-        ${fields.find((f) => f.name === 'userId') ? `userId: req.user.id` : ''}
+        ${fields.find((f) => f.name === 'userId') ? `userId: req.userId,` : ''}
+        ${fields.find((f) => f.name === 'profileId') ? `profileId: req.currentProfileId,` : ''}
       },
     });
   }
@@ -177,7 +186,7 @@ export class ${controllerName} {
     return await this.${serviceName.toLowerCase()}.${prismaModelName}.update({
       data: {
         ...args,
-        updatedAt: new Date(),
+        ${hasUpdatedAt ? 'updatedAt: new Date(),' : ''}
         ${hasDeletedAt ? 'deletedAt: null,' : ''}
       },
       where: {
