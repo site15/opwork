@@ -20,7 +20,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "postinstall": "export PRISMA_ENGINES_MIRROR=https://registry.npmmirror.com/-/binary/prisma && export PRISMA_BINARIES_MIRROR=http://prisma-builds.s3-eu-west-1.amazonaws.com && npm install --force --prefix backend && cd frontend && pnpm install && cd .. && npm install --force --prefix prisma-generator-nestjs-dto",    "format": "npm run format --prefix backend && npm run format --prefix frontend && npm run format --prefix prisma-generator-nestjs-dto",
+    "postinstall": "export PRISMA_ENGINES_MIRROR=https://registry.npmmirror.com/-/binary/prisma && export PRISMA_BINARIES_MIRROR=http://prisma-builds.s3-eu-west-1.amazonaws.com && npm install --force --prefix backend && cd frontend && pnpm install && cd .. && npm install --force --prefix prisma-generator-nestjs-dto",
+    "format": "npm run format --prefix backend && npm run format --prefix frontend && npm run format --prefix prisma-generator-nestjs-dto",
     "format:backend": "npm run format --prefix backend",
     "format:frontend": "npm run format --prefix frontend",
     "format:generator": "npm run format --prefix prisma-generator-nestjs-dto",
