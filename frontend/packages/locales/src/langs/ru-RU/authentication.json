@@ -61,5 +61,7 @@
     "center": "По центру",
     "alignLeft": "Слева",
     "alignRight": "Справа"
-  }
+  },
+  "apiKey": "API Ключ",
+  "apiKeyTip": "Пожалуйста, введите API Ключ"
 }

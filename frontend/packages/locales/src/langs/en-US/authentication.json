@@ -61,5 +61,7 @@
     "center": "Align Center",
     "alignLeft": "Align Left",
     "alignRight": "Align Right"
-  }
+  },
+  "apiKey": "API Key",
+  "apiKeyTip": "Please enter API Key"
 }

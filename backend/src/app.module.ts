@@ -4,12 +4,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ApiSecurity } from '@nestjs/swagger';
 import { join } from 'path';
+import { AuthController } from './controllers/auth.controller';
 import { CONTROLLERS } from './generated/rest/controllers';
 import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaService } from './services/prisma.service';
 
-const controllers = [...CONTROLLERS];
+const controllers = [...CONTROLLERS, AuthController];
 for (const controller of controllers) {
   ApiSecurity('api_key')(controller);
 }

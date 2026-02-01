@@ -1,4 +1,4 @@
-import type { Recordable, UserInfo } from '@vben/types';
+import type { AuthUser } from '#/generated/client';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -10,8 +10,8 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { defineStore } from 'pinia';
 
 import { notification } from '#/adapter/naive';
-import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
 import { $t } from '#/locales';
+import { authService } from '#/services/AuthService';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
@@ -20,67 +20,53 @@ export const useAuthStore = defineStore('auth', () => {
 
   const loginLoading = ref(false);
 
-  /**
-   * 异步处理登录操作
-   * Asynchronously handle the login process
-   * @param params 登录表单数据
-   */
   async function authLogin(
-    params: Recordable<any>,
+    params: { apiKey: string },
     onSuccess?: () => Promise<void> | void,
   ) {
     // 异步处理用户登录操作并获取 accessToken
-    let userInfo: null | UserInfo = null;
+    let authUser: AuthUser | null = null;
     try {
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
+      authUser = await authService.login(params);
 
-      // 如果成功获取到 accessToken
-      if (accessToken) {
-        // 将 accessToken 存储到 accessStore 中
-        accessStore.setAccessToken(accessToken);
+      userStore.setUserInfo({
+        avatar: '',
+        realName: '',
+        userId: authUser?.id,
+        username: '',
+      });
+      accessStore.setAccessToken(params.apiKey);
 
-        // 获取用户信息并存储到 accessStore 中
-        const [fetchUserInfoResult, accessCodes] = await Promise.all([
-          fetchUserInfo(),
-          getAccessCodesApi(),
-        ]);
+      onSuccess
+        ? await onSuccess?.()
+        : await router.push(preferences.app.defaultHomePath);
 
-        userInfo = fetchUserInfoResult;
-
-        userStore.setUserInfo(userInfo);
-        accessStore.setAccessCodes(accessCodes);
-
-        if (accessStore.loginExpired) {
-          accessStore.setLoginExpired(false);
-        } else {
-          onSuccess
-            ? await onSuccess?.()
-            : await router.push(
-                userInfo.homePath || preferences.app.defaultHomePath,
-              );
-        }
-
-        if (userInfo?.realName) {
-          notification.success({
-            content: $t('authentication.loginSuccess'),
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
-            duration: 3000,
-          });
-        }
+      if (authUser?.id) {
+        notification.success({
+          content: $t('authentication.loginSuccess'),
+          description: `${$t('authentication.loginSuccessDesc')}:${authUser?.id}`,
+          duration: 3000,
+        });
       }
+    } catch (error) {
+      notification.error({
+        content: error instanceof Error ? error.message : '',
+        description: $t('authentication.loginFailedDesc'),
+        duration: 3000,
+      });
     } finally {
       loginLoading.value = false;
     }
 
     return {
-      userInfo,
+      authUser,
     };
   }
 
   async function logout(redirect: boolean = true) {
     try {
-      await logoutApi();
+      await authService.logout();
     } catch {
       // 不做任何处理
     }
@@ -99,10 +85,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    let userInfo: null | UserInfo = null;
-    userInfo = await getUserInfoApi();
-    userStore.setUserInfo(userInfo);
-    return userInfo;
+    let authUser: AuthUser | null = null;
+    authUser = await authService.getProfile();
+    userStore.setUserInfo({
+      avatar: '',
+      realName: '',
+      userId: authUser?.id,
+      username: '',
+    });
+    return authUser;
   }
 
   function $reset() {

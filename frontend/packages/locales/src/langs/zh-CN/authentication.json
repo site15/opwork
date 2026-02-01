@@ -61,5 +61,7 @@
     "center": "居中",
     "alignLeft": "居左",
     "alignRight": "居右"
-  }
+  },
+  "apiKey": "API Key",
+  "apiKeyTip": "请输入 API Key"
 }
