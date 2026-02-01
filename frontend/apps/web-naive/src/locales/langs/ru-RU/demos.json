@@ -1,0 +1,15 @@
+{
+  "title": "Демонстрации",
+  "naive": "Naive UI",
+  "table": "Таблица",
+  "form": "Форма",
+  "vben": {
+    "title": "Проект",
+    "about": "О проекте",
+    "document": "Документация",
+    "antdv": "Версия Ant Design Vue",
+    "naive-ui": "Версия Naive UI",
+    "element-plus": "Версия Element Plus",
+    "tdesign": "Версия TDesign Vue"
+  }
+}

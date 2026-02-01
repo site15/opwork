@@ -10,7 +10,7 @@
     },
     {
       "name": "opwork-frontend",
-      "script": "cd frontend && npm run dev",
+      "script": "cd frontend && npm run dev:naive",
       "watch": false,
       "env": {
         "NODE_ENV": "development"

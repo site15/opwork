@@ -2,5 +2,5 @@ import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
   input: '../backend/swagger.json',
-  output: 'generated/client',
+  output: 'apps/web-naive/src/generated/client',
 });

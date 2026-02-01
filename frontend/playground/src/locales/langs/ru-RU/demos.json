@@ -1,0 +1,72 @@
+{
+  "title": "Демонстрации",
+  "access": {
+    "frontendPermissions": "Права доступа фронтенда",
+    "backendPermissions": "Права доступа бэкенда",
+    "pageAccess": "Доступ к странице",
+    "buttonControl": "Управление кнопками",
+    "menuVisible403": "Меню видимо (403)",
+    "superVisible": "Super видимый",
+    "adminVisible": "Admin видимый",
+    "userVisible": "User видимый"
+  },
+  "nested": {
+    "title": "Вложенные меню",
+    "menu1": "Меню 1",
+    "menu2": "Меню 2",
+    "menu2_1": "Меню 2-1",
+    "menu3": "Меню 3",
+    "menu3_1": "Меню 3-1",
+    "menu3_2": "Меню 3-2",
+    "menu3_2_1": "Меню 3-2-1"
+  },
+  "outside": {
+    "title": "Внешние страницы",
+    "embedded": "Встроенные",
+    "externalLink": "Внешние ссылки"
+  },
+  "badge": {
+    "title": "Значки меню",
+    "dot": "Точечные значки",
+    "text": "Текстовые значки",
+    "color": "Цвет значков"
+  },
+  "activeIcon": {
+    "title": "Активные иконки меню",
+    "children": "Дочерние активные иконки"
+  },
+  "fallback": {
+    "title": "Страница по умолчанию"
+  },
+  "features": {
+    "title": "Функции",
+    "hideChildrenInMenu": "Скрыть подменю",
+    "loginExpired": "Срок действия входа истек",
+    "icons": "Иконки",
+    "watermark": "Водяной знак",
+    "tabs": "Вкладки",
+    "tabDetail": "Детали вкладки",
+    "fullScreen": "Полноэкранный режим",
+    "clipboard": "Буфер обмена",
+    "menuWithQuery": "Меню с параметрами",
+    "openInNewWindow": "Открыть в новом окне",
+    "fileDownload": "Загрузка файлов",
+    "requestParamsSerializer": "Сериализация параметров"
+  },
+  "breadcrumb": {
+    "navigation": "Навигационная цепочка",
+    "lateral": "Режим уровня",
+    "level": "Иерархический режим",
+    "levelDetail": "Детали иерархического режима",
+    "lateralDetail": "Детали режима уровня"
+  },
+  "vben": {
+    "title": "Проект",
+    "about": "О проекте",
+    "document": "Документация",
+    "antdv": "Версия Ant Design Vue",
+    "naive-ui": "Версия Naive UI",
+    "element-plus": "Версия Element Plus",
+    "tdesign": "Версия TDesign Vue"
+  }
+}
