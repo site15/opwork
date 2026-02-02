@@ -68,6 +68,7 @@
     "@changesets/cli": "catalog:",
     "@hey-api/openapi-ts": "catalog:",
     "@playwright/test": "catalog:",
+    "@prisma/client": "catalog:",
     "@types/node": "catalog:",
     "@vben/commitlint-config": "workspace:*",
     "@vben/eslint-config": "workspace:*",
