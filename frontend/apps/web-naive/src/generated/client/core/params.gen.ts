@@ -4,17 +4,6 @@ type Slot = 'body' | 'headers' | 'path' | 'query';
 
 export type Field =
   | {
-      /**
-       * Field name. This is the name we want the user to see and use.
-       */
-      key: string;
-      /**
-       * Field mapped name. This is the name we want to use in the request.
-       * If `in` is omitted, `map` aliases `key` to the transport layer.
-       */
-      map: Slot;
-    }
-  | {
       in: Exclude<Slot, 'body'>;
       /**
        * Field name. This is the name we want the user to see and use.
@@ -33,6 +22,17 @@ export type Field =
        */
       key?: string;
       map?: string;
+    }
+  | {
+      /**
+       * Field name. This is the name we want the user to see and use.
+       */
+      key: string;
+      /**
+       * Field mapped name. This is the name we want to use in the request.
+       * If `in` is omitted, `map` aliases `key` to the transport layer.
+       */
+      map: Slot;
     };
 
 export interface Fields {
@@ -96,16 +96,13 @@ interface Params {
 
 const stripEmptySlots = (params: Params) => {
   for (const [slot, value] of Object.entries(params)) {
-    if (value && typeof value === 'object' && Object.keys(value).length === 0) {
+    if (value && typeof value === 'object' && !Object.keys(value).length) {
       delete params[slot as Slot];
     }
   }
 };
 
-export const buildClientParams = (
-  args: ReadonlyArray<unknown>,
-  fields: FieldsConfig,
-) => {
+export const buildClientParams = (args: ReadonlyArray<unknown>, fields: FieldsConfig) => {
   const params: Params = {
     body: {},
     headers: {},
@@ -148,15 +145,11 @@ export const buildClientParams = (
             params[field.map] = value;
           }
         } else {
-          const extra = extraPrefixes.find(([prefix]) =>
-            key.startsWith(prefix),
-          );
+          const extra = extraPrefixes.find(([prefix]) => key.startsWith(prefix));
 
           if (extra) {
             const [prefix, slot] = extra;
-            (params[slot] as Record<string, unknown>)[
-              key.slice(prefix.length)
-            ] = value;
+            (params[slot] as Record<string, unknown>)[key.slice(prefix.length)] = value;
           } else if ('allowExtra' in config && config.allowExtra) {
             for (const [slot, allowed] of Object.entries(config.allowExtra)) {
               if (allowed) {
