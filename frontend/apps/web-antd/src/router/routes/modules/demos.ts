@@ -39,7 +39,8 @@ const routes: RouteRecordRaw[] = [
         },
         name: 'AuthUser',
         path: '/crud/auth-user',
-        component: () => import('#/generated/resource/AuthUser.vue'),
+        component: () =>
+          import('#/generated/resource/AuthUser/AuthUserList.vue'),
       },
     ],
   },
