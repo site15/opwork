@@ -17,3 +17,4 @@ public
 .npmrc
 *-lock.yaml
 apps/web-antd/src/generated
+apps/web-antd/scripts

@@ -1,0 +1,30 @@
+{
+  "formRules": {
+    "previewWarning": "Preview Warning",
+    "sizeLimit": "Size Limit",
+    "required": "Required",
+    "selectRequired": "Select Required"
+  },
+  "crop": {
+    "title": "Title",
+    "titleTip": "Title Tip",
+    "confirm": "Confirm",
+    "errorTip": "Error Tip"
+  },
+  "placeholder": {
+    "upload": "Upload"
+  },
+  "actionTitle": {
+    "delete": "Delete",
+    "create": "Create"
+  },
+  "actionMessage": {
+    "deleteConfirm": "Delete Confirm",
+    "deleting": "Deleting",
+    "deleteSuccess": "Delete Success"
+  },
+  "widgets": {
+    "document": "Document",
+    "qa": "Qa"
+  }
+}

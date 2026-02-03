@@ -23,27 +23,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-  {
-    meta: {
-      icon: 'ic:baseline-apps',
-      keepAlive: true,
-      order: 1001,
-      title: $t('crud.title'),
-    },
-    name: 'Crud',
-    path: '/crud',
-    children: [
-      {
-        meta: {
-          title: $t('demos.table.AuthUser'),
-        },
-        name: 'AuthUser',
-        path: '/crud/auth-user',
-        component: () =>
-          import('#/generated/resource/AuthUser/AuthUserList.vue'),
-      },
-    ],
-  },
 ];
 
 export default routes;

@@ -76,7 +76,7 @@ export function useAuthUserFilterFormSchema(): VbenFormSchema[] {
     {
       component: 'RangePicker',
       fieldName: Prisma.AuthUserScalarFieldEnum.createdAt,
-      label: $t('resource.AuthUser.createdAt'),
+      label: $t('common.createdAt'),
     },
   ];
 }
@@ -88,7 +88,7 @@ export function useAuthUserColumns<T = AuthUser>(
   return [
     {
       field: Prisma.AuthUserScalarFieldEnum.id,
-      title: $t('resource.AuthUser.id'),
+      title: $t('common.id'),
       width: 200,
     },
     {
@@ -120,14 +120,14 @@ export function useAuthUserColumns<T = AuthUser>(
       cellRender: {
         attrs: {
           nameField: 'id',
-          nameTitle: $t('resource.AuthUser.id'),
+          nameTitle: $t('common.id'),
           onClick: onActionClick,
         },
         name: 'CellOperation',
       },
       field: 'operation',
       fixed: 'right',
-      title: $t('resource.AuthUser.operation'),
+      title: $t('common.operation'),
       width: 130,
     },
   ];

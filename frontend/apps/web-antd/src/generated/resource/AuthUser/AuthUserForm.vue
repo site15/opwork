@@ -10,7 +10,7 @@ import { useVbenForm } from '#/adapter/form';
 import { authUserControllerCreateOne, authUserControllerUpdateOne } from '#/generated/client';
 import type { AuthUser } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
-import { useAuthUserFormSchema } from '../AuthUserData';
+import { useAuthUserFormSchema } from './AuthUserData';
 
 
 const emits = defineEmits(['success']);
@@ -78,8 +78,8 @@ const [Drawer, drawerApi] = useVbenDrawer({
 
 const getDrawerTitle = computed(() => {
   return formData.value?.id
-    ? $t('common.edit', $t('resource.AuthUser.name'))
-    : $t('common.create', $t('resource.AuthUser.name'));
+    ? $t('common.edit', $t('resource.name.AuthUser'))
+    : $t('common.create', $t('resource.name.AuthUser'));
 });
 
 </script>

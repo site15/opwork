@@ -14,7 +14,7 @@ import { authUserControllerDeleteOne, authUserControllerFindMany, authUserContro
 import type { AuthUser } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { useAuthUserColumns, useAuthUserFilterFormSchema } from './AuthUserData';
-import AuthUserForm from './modules/AuthUserForm.vue';
+import AuthUserForm from './AuthUserForm.vue';
 
 const [FormDrawer, formDrawerApi] = useVbenDrawer({
   connectedComponent: AuthUserForm,
@@ -137,11 +137,11 @@ function onCreate() {
 <template>
   <Page auto-content-height>
     <FormDrawer @success="onRefresh" />
-    <Grid :table-title="$t('resource.AuthUser.list')">
+    <Grid :table-title="$t('resource.name.AuthUser')">
       <template #toolbar-tools>
         <Button type="primary" @click="onCreate">
           <Plus class="size-5" />
-          {{ $t('ui.actionTitle.create', [$t('resource.AuthUser.name')]) }}
+          {{ $t('ui.actionTitle.create', [$t('resource.name.AuthUser')]) }}
         </Button>
       </template>
     </Grid>

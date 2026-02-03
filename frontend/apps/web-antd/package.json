@@ -20,7 +20,9 @@
     "build:analyze": "pnpm vite build --mode analyze",
     "dev": "pnpm vite --mode development",
     "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+    "typecheck": "vue-tsc --noEmit --skipLibCheck",
+    "i18n:extract": "node scripts/i18n-extract.cjs",
+    "i18n:check": "vue-i18n-extract report --vueFiles \"src/**/*.{vue,ts,js}\" --languageFiles \"src/locales/langs/**/**/*.json\""
   },
   "imports": {
     "#/*": "./src/*"
@@ -48,6 +50,7 @@
     "vue-router": "catalog:"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "catalog:"
+    "@hey-api/openapi-ts": "catalog:",
+    "vue-i18n-extract": "catalog:"
   }
 }

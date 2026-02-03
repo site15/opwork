@@ -1,0 +1,11 @@
+{
+  "AuthUser": {
+    "anonymousId": "Anonymous Id",
+    "supabaseUserId": "Supabase User Id",
+    "supabaseUserData": "Supabase User Data",
+    "isActive": "Is Active"
+  },
+  "name": {
+    "AuthUser": "Auth User"
+  }
+}
