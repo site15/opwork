@@ -11,18 +11,19 @@ export function useAuthUserFormSchema(): VbenFormSchema[] {
       component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
       label: $t('resource.AuthUser.anonymousId'),
-      rules: 'required',
+      rules: 'required', labelWidth: 200
     },
     {
       component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
       label: $t('resource.AuthUser.supabaseUserId'),
-      rules: 'required',
+      rules: 'required', labelWidth: 200
     },
     {
       component: 'Textarea',
       fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
       label: $t('resource.AuthUser.supabaseUserData'),
+      labelWidth: 200
     },
     {
       component: 'RadioGroup',
@@ -36,7 +37,7 @@ export function useAuthUserFormSchema(): VbenFormSchema[] {
       },
       defaultValue: false,
       fieldName: Prisma.AuthUserScalarFieldEnum.isActive,
-      label: $t('resource.AuthUser.isActive'),
+      label: $t('resource.AuthUser.isActive'), labelWidth: 200
     }
   ];
 }
@@ -45,38 +46,8 @@ export function useAuthUserFilterFormSchema(): VbenFormSchema[] {
   return [
     {
       component: 'Input',
-      fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
-      label: $t('resource.AuthUser.anonymousId'),
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
-      label: $t('resource.AuthUser.supabaseUserId'),
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
-      label: $t('resource.AuthUser.supabaseUserData'),
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        allowClear: true,
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.AuthUserScalarFieldEnum.isActive,
-      label: $t('resource.AuthUser.isActive'),
-    },
-    {
-      component: 'RangePicker',
-      fieldName: Prisma.AuthUserScalarFieldEnum.createdAt,
-      label: $t('common.createdAt'),
+      fieldName: 'searchText',
+      label: $t('common.searchText'),
     },
   ];
 }
@@ -89,22 +60,22 @@ export function useAuthUserColumns<T = AuthUser>(
     {
       field: Prisma.AuthUserScalarFieldEnum.id,
       title: $t('common.id'),
-      width: 200,
+      sortable: true
     },
     {
       field: Prisma.AuthUserScalarFieldEnum.anonymousId,
       title: $t('resource.AuthUser.anonymousId'),
-      width: 200,
+      sortable: true
     },
     {
       field: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
       title: $t('resource.AuthUser.supabaseUserId'),
-      width: 200,
+      sortable: true
     },
     {
       field: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
       title: $t('resource.AuthUser.supabaseUserData'),
-      width: 200,
+      sortable: true
     },
     {
       cellRender: {
@@ -113,7 +84,13 @@ export function useAuthUserColumns<T = AuthUser>(
       },
       title: $t('resource.AuthUser.isActive'),
       field: Prisma.AuthUserScalarFieldEnum.isActive,
-      width: 100,
+      sortable: true
+    },
+    {
+      field: Prisma.AuthUserScalarFieldEnum.createdAt,
+      title: $t('common.createdAt'),
+      formatter: 'formatDateTime',
+      sortable: true
     },
     {
       align: 'center',

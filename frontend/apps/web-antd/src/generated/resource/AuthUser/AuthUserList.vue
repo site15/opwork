@@ -23,9 +23,8 @@ const [FormDrawer, formDrawerApi] = useVbenDrawer({
 
 const [Grid, gridApi] = useVbenVxeGrid({
   formOptions: {
-    fieldMappingTime: [['createAt', ['startTime', 'endTime']]],
     schema: useAuthUserFilterFormSchema(),
-    submitOnChange: true,
+    submitOnChange: true, showCollapseButton: false
   },
   gridOptions: {
     columns: useAuthUserColumns(onActionClick, onIsActiveChange),
@@ -33,11 +32,18 @@ const [Grid, gridApi] = useVbenVxeGrid({
     keepSource: true,
     proxyConfig: {
       ajax: {
-        query: async (options: any) => {
-          console.log(options)
+        query: async (options: {
+          page: { total: number, pageSize: number, currentPage: number },
+          sort?: {
+            field: string,
+            order: 'desc' | 'asc'
+          }
+        }, formValues: { searchText: string }) => {
+          console.log(options, formValues)
           return await authUserControllerFindMany({
             query: {
-              curPage: options.page.currentPage, perPage: options.pageSize
+              curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
             },
           }).then(async (result) => ({
             items: (result.data?.items || []).map((item) => ({
@@ -48,11 +54,15 @@ const [Grid, gridApi] = useVbenVxeGrid({
           }));
         },
       },
+      sort: true
+    },
+    sortConfig: {
+      defaultSort: { field: 'createdAt', order: 'desc' },
+      remote: true,
     },
     rowConfig: {
       keyField: 'id',
     },
-
     toolbarConfig: {
       custom: true,
       export: false,

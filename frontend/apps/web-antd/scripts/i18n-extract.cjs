@@ -34,8 +34,8 @@ let output = '';
 try {
   output = execSync(
     `vue-i18n-extract report ` +
-      `--vueFiles "${SRC_GLOB}" ` +
-      `--languageFiles "${LOCALES_DIR}/**/*.json"`,
+    `--vueFiles "${SRC_GLOB}" ` +
+    `--languageFiles "${LOCALES_DIR}/**/*.json"`,
     { encoding: 'utf8' },
   );
 } catch (error) {
@@ -68,14 +68,12 @@ for (const key of missingKeys) {
     const langDir = path.join(LOCALES_DIR, lang);
     const filePath = path.join(langDir, `${namespace}.json`);
 
-    if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, '{}\n');
-    }
-
-    const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const json = !fs.existsSync(filePath)?{}:JSON.parse(fs.readFileSync(filePath, 'utf8'));
     if (newKey) {
       setDeep(json, newKey, humanize(key));
-      fs.writeFileSync(filePath, `${JSON.stringify(json, null, 2)}\n`);
+      if (Object.keys(json).length > 0) {
+        fs.writeFileSync(filePath, `${JSON.stringify(json, null, 2)}\n`);
+      }
     }
   }
 }

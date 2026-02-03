@@ -8,5 +8,6 @@
   "id": "Id",
   "operation": "Operation",
   "create": "Create",
-  "loadingMenu": "Loading Menu"
+  "loadingMenu": "Loading Menu",
+  "searchText": "Search Text"
 }
