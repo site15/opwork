@@ -16,4 +16,4 @@ CODEOWNERS
 public
 .npmrc
 *-lock.yaml
-apps/web-naive/src/generated
+apps/web-antd/src/generated

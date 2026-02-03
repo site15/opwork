@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -32,9 +31,9 @@ import { AuthUser } from './auth-user.entity';
 import { CreateAuthUserDto } from './create-auth-user.dto';
 import { UpdateAuthUserDto } from './update-auth-user.dto';
 
-export class FindManyAuthUserArgs extends FindManyArgs { }
+export class FindManyAuthUserArgs extends FindManyArgs {}
 
-export class FindManyAuthUserResponseMeta extends FindManyResponseMeta { }
+export class FindManyAuthUserResponseMeta extends FindManyResponseMeta {}
 
 export class FindManyAuthUserResponse {
   @ApiProperty({ type: () => [AuthUser] })
@@ -47,7 +46,7 @@ export class FindManyAuthUserResponse {
 @ApiTags('auth')
 @Controller('auth/user')
 export class AuthUserController {
-  constructor(private readonly prismaservice: PrismaService) { }
+  constructor(private readonly prismaservice: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthUserResponse })
@@ -63,8 +62,8 @@ export class AuthUserController {
           ...all,
           ...(key in PrismaSdk.Prisma.AuthUserScalarFieldEnum
             ? {
-              [key]: value === 'desc' ? 'desc' : 'asc',
-            }
+                [key]: value === 'desc' ? 'desc' : 'asc',
+              }
             : {}),
         }),
         {},
@@ -73,10 +72,10 @@ export class AuthUserController {
     const authUserWhereInput: Prisma.AuthUserWhereInput = {
       ...(searchText
         ? {
-          OR: [
-            ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-          ],
-        }
+            OR: [
+              ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+            ],
+          }
         : {}),
     };
 
