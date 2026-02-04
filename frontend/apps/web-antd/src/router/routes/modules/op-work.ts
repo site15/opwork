@@ -5,20 +5,20 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     meta: {
-      icon: 'ic:baseline-apps',
+      icon: 'ic:baseline-work',
       keepAlive: true,
       order: 1001,
-      title: $t('page.resource.title'),
+      title: $t('page.resource.op-work'),
     },
-    name: 'Resources',
-    path: '/resource',
+    name: 'OpWork',
+    path: '/op-work',
     children: [
       {
         meta: {
-          title: $t('page.resource.AuthUser'),
+          title: $t('page.resource.OpWorkProfile'),
         },
-        name: 'AuthUser',
-        path: '/resource/auth-user',
+        name: 'OpWorkProfile',
+        path: '/op-work/profile',
         component: () =>
           import('#/generated/resource/AuthUser/AuthUserList.vue'),
       },

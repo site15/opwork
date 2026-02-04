@@ -39,7 +39,7 @@ const serializeUrlSearchParamsPair = (data: URLSearchParams, key: string, value:
 };
 
 export const formDataBodySerializer = {
-  bodySerializer: <T extends Array<Record<string, any>> | Record<string, any>>(
+  bodySerializer: <T extends Record<string, any> | Array<Record<string, any>>>(
     body: T,
   ): FormData => {
     const data = new FormData();
@@ -65,7 +65,7 @@ export const jsonBodySerializer = {
 };
 
 export const urlSearchParamsBodySerializer = {
-  bodySerializer: <T extends Array<Record<string, any>> | Record<string, any>>(body: T): string => {
+  bodySerializer: <T extends Record<string, any> | Array<Record<string, any>>>(body: T): string => {
     const data = new URLSearchParams();
 
     Object.entries(body).forEach(([key, value]) => {

@@ -4,17 +4,6 @@ type Slot = 'body' | 'headers' | 'path' | 'query';
 
 export type Field =
   | {
-      /**
-       * Field name. This is the name we want the user to see and use.
-       */
-      key: string;
-      /**
-       * Field mapped name. This is the name we want to use in the request.
-       * If `in` is omitted, `map` aliases `key` to the transport layer.
-       */
-      map: Slot;
-    }
-  | {
       in: Exclude<Slot, 'body'>;
       /**
        * Field name. This is the name we want the user to see and use.
@@ -33,6 +22,17 @@ export type Field =
        */
       key?: string;
       map?: string;
+    }
+  | {
+      /**
+       * Field name. This is the name we want the user to see and use.
+       */
+      key: string;
+      /**
+       * Field mapped name. This is the name we want to use in the request.
+       * If `in` is omitted, `map` aliases `key` to the transport layer.
+       */
+      map: Slot;
     };
 
 export interface Fields {
@@ -96,7 +96,7 @@ interface Params {
 
 const stripEmptySlots = (params: Params) => {
   for (const [slot, value] of Object.entries(params)) {
-    if (value && typeof value === 'object' && Object.keys(value).length === 0) {
+    if (value && typeof value === 'object' && !Object.keys(value).length) {
       delete params[slot as Slot];
     }
   }

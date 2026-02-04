@@ -4,10 +4,10 @@
   "disabled": "Disabled",
   "delete": "Delete",
   "edit": "Edit",
-  "createdAt": "Created At",
+  "searchText": "Search Text",
   "id": "Id",
+  "createdAt": "Created At",
   "operation": "Operation",
   "create": "Create",
-  "loadingMenu": "Loading Menu",
-  "searchText": "Search Text"
+  "loadingMenu": "Loading Menu"
 }

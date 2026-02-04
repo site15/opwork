@@ -156,7 +156,7 @@ export const createSseClient = <TData = unknown>({
             if (done) break;
             buffer += value;
             // Normalize line endings: CRLF -> LF, then CR -> LF
-            buffer = buffer.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
+            buffer = buffer.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
             const chunks = buffer.split('\n\n');
             buffer = chunks.pop() ?? '';
@@ -184,7 +184,7 @@ export const createSseClient = <TData = unknown>({
               let data: unknown;
               let parsedJson = false;
 
-              if (dataLines.length > 0) {
+              if (dataLines.length) {
                 const rawData = dataLines.join('\n');
                 try {
                   data = JSON.parse(rawData);
@@ -211,7 +211,7 @@ export const createSseClient = <TData = unknown>({
                 retry: retryDelay,
               });
 
-              if (dataLines.length > 0) {
+              if (dataLines.length) {
                 yield data as any;
               }
             }
@@ -231,7 +231,7 @@ export const createSseClient = <TData = unknown>({
         }
 
         // exponential backoff: double retry each attempt, cap at 30s
-        const backoff = Math.min(retryDelay * 2 ** (attempt - 1), sseMaxRetryDelay ?? 30_000);
+        const backoff = Math.min(retryDelay * 2 ** (attempt - 1), sseMaxRetryDelay ?? 30000);
         await sleep(backoff);
       }
     }

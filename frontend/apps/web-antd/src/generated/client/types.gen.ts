@@ -5,390 +5,390 @@ export type ClientOptions = {
 };
 
 export type AuthApiKey = {
-    apiKey: null | string;
-    AuthUser?: AuthUser;
-    createdAt: string;
     id: string;
-    isActive: boolean | null;
-    updatedAt: string;
     userId: string;
+    apiKey: string | null;
+    isActive: boolean | null;
+    createdAt: string;
+    updatedAt: string;
+    AuthUser?: AuthUser;
 };
 
 export type AuthSession = {
-    AuthUser?: AuthUser;
-    createdAt: string;
     id: string;
-    isActive: boolean | null;
-    updatedAt: string;
     userId: string;
+    isActive: boolean | null;
+    createdAt: string;
+    updatedAt: string;
+    AuthUser?: AuthUser;
 };
 
-export type OpWorkProfileType = 'EMPLOYER' | 'PROJECT' | 'SPECIALIST';
+export type OpWorkProfileType = 'PROJECT' | 'SPECIALIST' | 'EMPLOYER';
 
-export type OpWorkUserType = 'ADMIN' | 'EMPLOYER' | 'JOB_SEEKER';
+export type OpWorkUserType = 'JOB_SEEKER' | 'EMPLOYER' | 'ADMIN';
 
-export type OpWorkEmploymentType = 'CONTRACT' | 'FREELANCE' | 'FULL_TIME' | 'INTERNSHIP' | 'PART_TIME' | 'REMOTE';
+export type OpWorkEmploymentType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERNSHIP' | 'REMOTE' | 'FREELANCE';
 
 export type OpWorkExperience = {
-    company: string;
-    createdAt: string;
-    description: null | string;
-    employmentType: null | OpWorkEmploymentType;
-    endDate: null | string;
     id: string;
-    isCurrent: boolean | null;
     jobSeekerId: string;
-    location: null | string;
-    OpWorkJobSeeker?: OpWorkJobSeeker;
+    company: string;
     position: string;
+    description: string | null;
     startDate: string;
+    endDate: string | null;
+    isCurrent: boolean | null;
+    location: string | null;
+    employmentType: OpWorkEmploymentType | null;
+    createdAt: string;
+    OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
-export type OpWorkEducationDegree = 'ASSOCIATE' | 'BACHELOR' | 'CERTIFICATE' | 'DIPLOMA' | 'DOCTORATE' | 'HIGH_SCHOOL' | 'MASTER' | 'POSTGRADUATE';
+export type OpWorkEducationDegree = 'HIGH_SCHOOL' | 'ASSOCIATE' | 'BACHELOR' | 'MASTER' | 'DOCTORATE' | 'CERTIFICATE' | 'DIPLOMA' | 'POSTGRADUATE';
 
-export type OpWorkGrade = 'A' | 'A_MINUS' | 'A_PLUS' | 'AUDIT' | 'B' | 'B_MINUS' | 'B_PLUS' | 'C' | 'C_MINUS' | 'C_PLUS' | 'D' | 'D_MINUS' | 'D_PLUS' | 'F' | 'FAIL' | 'INCOMPLETE' | 'PASS';
+export type OpWorkGrade = 'A_PLUS' | 'A' | 'A_MINUS' | 'B_PLUS' | 'B' | 'B_MINUS' | 'C_PLUS' | 'C' | 'C_MINUS' | 'D_PLUS' | 'D' | 'D_MINUS' | 'F' | 'PASS' | 'FAIL' | 'INCOMPLETE' | 'AUDIT';
 
 export type OpWorkEducation = {
-    createdAt: string;
-    degree: null | OpWorkEducationDegree;
-    description: null | string;
-    endDate: null | string;
-    fieldOfStudy: null | string;
-    grade: null | OpWorkGrade;
     id: string;
-    institution: string;
-    isCurrent: boolean | null;
     jobSeekerId: string;
-    OpWorkJobSeeker?: OpWorkJobSeeker;
+    institution: string;
+    degree: OpWorkEducationDegree | null;
+    fieldOfStudy: string | null;
     startDate: string;
+    endDate: string | null;
+    isCurrent: boolean | null;
+    description: string | null;
+    grade: OpWorkGrade | null;
+    createdAt: string;
+    OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
-export type OpWorkSkillType = 'DATABASE' | 'FRAMEWORK' | 'LANGUAGE' | 'PLATFORM' | 'PROGRAMMING_LANGUAGE' | 'SOFT_SKILL' | 'TOOL';
+export type OpWorkSkillType = 'PROGRAMMING_LANGUAGE' | 'FRAMEWORK' | 'DATABASE' | 'TOOL' | 'PLATFORM' | 'LANGUAGE' | 'SOFT_SKILL';
 
-export type OpWorkExperienceLevel = 'ENTRY_LEVEL' | 'EXPERT' | 'INTERNSHIP' | 'JUNIOR' | 'LEAD' | 'MIDDLE' | 'SENIOR';
+export type OpWorkExperienceLevel = 'INTERNSHIP' | 'ENTRY_LEVEL' | 'JUNIOR' | 'MIDDLE' | 'SENIOR' | 'LEAD' | 'EXPERT';
 
-export type OpWorkJobStatus = 'ACTIVE' | 'ARCHIVED' | 'CLOSED' | 'DRAFT' | 'PAUSED';
+export type OpWorkJobStatus = 'DRAFT' | 'ACTIVE' | 'PAUSED' | 'CLOSED' | 'ARCHIVED';
 
 export type OpWorkEmployer = {
-    companyEmail: null | string;
-    companyName: string;
-    companyPhone: null | string;
-    companyWebsite: null | string;
-    coverImageUrl: null | string;
-    createdAt: string;
-    culture: null | string;
-    description: null | string;
-    facebookUrl: null | string;
-    foundedYear: null | number;
-    headquarters: null | string;
     id: string;
-    industry: null | string;
-    linkedinUrl: null | string;
-    logoUrl: null | string;
-    mission: null | string;
-    OpWorkJob?: Array<OpWorkJob>;
-    OpWorkProfile?: OpWorkProfile;
     profileId: string;
-    twitterUrl: null | string;
+    companyName: string;
+    industry: string | null;
+    description: string | null;
+    mission: string | null;
+    culture: string | null;
+    foundedYear: number | null;
+    headquarters: string | null;
+    logoUrl: string | null;
+    coverImageUrl: string | null;
+    companyEmail: string | null;
+    companyPhone: string | null;
+    companyWebsite: string | null;
+    linkedinUrl: string | null;
+    twitterUrl: string | null;
+    facebookUrl: string | null;
+    createdAt: string;
     updatedAt: string;
+    OpWorkProfile?: OpWorkProfile;
+    OpWorkJob?: Array<OpWorkJob>;
 };
 
-export type OpWorkApplicationStatus = 'INTERVIEW' | 'OFFER' | 'PENDING' | 'REJECTED' | 'REVIEWED' | 'SHORTLISTED' | 'WITHDRAWN';
+export type OpWorkApplicationStatus = 'PENDING' | 'REVIEWED' | 'SHORTLISTED' | 'INTERVIEW' | 'OFFER' | 'REJECTED' | 'WITHDRAWN';
 
 export type OpWorkApplication = {
-    appliedAt: string;
-    coverLetter: null | string;
     id: string;
-    jobId: string;
     jobSeekerId: string;
-    OpWorkJob?: OpWorkJob;
+    profileId: string;
+    jobId: string;
+    coverLetter: string | null;
+    resumeUrl: string | null;
+    portfolioUrl: string | null;
+    status: OpWorkApplicationStatus;
+    statusNotes: string | null;
+    appliedAt: string;
+    statusUpdatedAt: string | null;
     OpWorkJobSeeker?: OpWorkJobSeeker;
     OpWorkProfile?: OpWorkProfile;
-    portfolioUrl: null | string;
-    profileId: string;
-    resumeUrl: null | string;
-    status: OpWorkApplicationStatus;
-    statusNotes: null | string;
-    statusUpdatedAt: null | string;
+    OpWorkJob?: OpWorkJob;
 };
 
 export type OpWorkSavedJob = {
     id: string;
-    jobId: string;
-    notes: null | string;
-    OpWorkJob?: OpWorkJob;
-    OpWorkProfile?: OpWorkProfile;
     profileId: string;
+    jobId: string;
     savedAt: string;
+    notes: string | null;
+    OpWorkProfile?: OpWorkProfile;
+    OpWorkJob?: OpWorkJob;
 };
 
 export type OpWorkJobView = {
     id: string;
-    ipAddress: null | string;
+    profileId: string | null;
     jobId: string;
-    OpWorkJob?: OpWorkJob;
-    OpWorkProfile?: null | OpWorkProfile;
-    profileId: null | string;
-    userAgent: null | string;
     viewedAt: string;
+    ipAddress: string | null;
+    userAgent: string | null;
+    OpWorkProfile?: OpWorkProfile | null;
+    OpWorkJob?: OpWorkJob;
 };
 
 export type OpWorkJobTag = {
-    color: null | string;
-    createdAt: string;
     id: string;
     jobId: string;
     name: string;
+    color: string | null;
+    createdAt: string;
     OpWorkJob?: OpWorkJob;
 };
 
 export type OpWorkJob = {
-    applicationsCount: number;
-    createdAt: string;
-    department: null | string;
-    description: string;
-    employerId: string;
-    employmentType: OpWorkEmploymentType;
-    experienceLevel: OpWorkExperienceLevel;
-    expiresAt: null | string;
     id: string;
-    isRemote: boolean | null;
-    location: null | string;
-    OpWorkApplication?: Array<OpWorkApplication>;
-    OpWorkEmployer?: OpWorkEmployer;
-    OpWorkJobSkill?: Array<OpWorkJobSkill>;
-    opWorkJobTags?: Array<OpWorkJobTag>;
-    opWorkJobViews?: Array<OpWorkJobView>;
-    OpWorkProfile?: OpWorkProfile;
-    OpWorkSavedJob?: Array<OpWorkSavedJob>;
+    employerId: string;
     profileId: string;
-    publishedAt: null | string;
+    title: string;
+    description: string;
     requirements: string;
     responsibilities: string;
-    salaryCurrency: null | string;
-    salaryMax: null | number;
-    salaryMin: null | number;
-    savesCount: number;
+    employmentType: OpWorkEmploymentType;
+    experienceLevel: OpWorkExperienceLevel;
+    department: string | null;
+    salaryMin: number | null;
+    salaryMax: number | null;
+    salaryCurrency: string | null;
+    location: string | null;
+    isRemote: boolean | null;
     status: OpWorkJobStatus;
-    title: string;
-    updatedAt: string;
     viewsCount: number;
+    applicationsCount: number;
+    savesCount: number;
+    publishedAt: string | null;
+    expiresAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    OpWorkEmployer?: OpWorkEmployer;
+    OpWorkProfile?: OpWorkProfile;
+    OpWorkApplication?: Array<OpWorkApplication>;
+    OpWorkJobSkill?: Array<OpWorkJobSkill>;
+    OpWorkSavedJob?: Array<OpWorkSavedJob>;
+    opWorkJobViews?: Array<OpWorkJobView>;
+    opWorkJobTags?: Array<OpWorkJobTag>;
 };
 
 export type OpWorkJobSkill = {
-    createdAt: string;
     id: string;
-    importance: number;
-    isRequired: boolean | null;
     jobId: string;
-    minLevel: null | number;
+    skillId: string;
+    isRequired: boolean | null;
+    importance: number;
+    minLevel: number | null;
+    createdAt: string;
     OpWorkJob?: OpWorkJob;
     OpWorkSkill?: OpWorkSkill;
-    skillId: string;
 };
 
 export type OpWorkSkillSynonym = {
-    createdAt: string;
     id: string;
-    OpWorkSkill?: OpWorkSkill;
     skillId: string;
     synonym: string;
+    createdAt: string;
+    OpWorkSkill?: OpWorkSkill;
 };
 
 export type OpWorkSkill = {
-    category: null | string;
-    createdAt: string;
-    description: null | string;
-    icon: null | string;
     id: string;
     name: string;
+    description: string | null;
+    type: OpWorkSkillType | null;
+    category: string | null;
+    icon: string | null;
+    popularity: number;
+    createdAt: string;
     OpWorkJobSeekerSkill?: Array<OpWorkJobSeekerSkill>;
     OpWorkJobSkill?: Array<OpWorkJobSkill>;
     opWorkSkillSynonyms?: Array<OpWorkSkillSynonym>;
-    popularity: number;
-    type: null | OpWorkSkillType;
 };
 
 export type OpWorkJobSeekerSkill = {
-    createdAt: string;
     id: string;
-    isPrimary: boolean | null;
     jobSeekerId: string;
-    lastUsed: null | string;
+    skillId: string;
     level: number;
+    yearsOfExp: number | null;
+    isPrimary: boolean | null;
+    lastUsed: string | null;
+    createdAt: string;
     OpWorkJobSeeker?: OpWorkJobSeeker;
     OpWorkSkill?: OpWorkSkill;
-    skillId: string;
-    yearsOfExp: null | number;
 };
 
 export type OpWorkJobSeeker = {
-    createdAt: string;
-    currentCompany: null | string;
-    currentPosition: null | string;
-    expectedSalary: null | number;
-    githubUrl: null | string;
     id: string;
-    isOpenToRelocation: boolean | null;
-    isOpenToRemote: boolean | null;
-    isOpenToWork: boolean | null;
-    linkedinUrl: null | string;
-    opWorkApplications?: Array<OpWorkApplication>;
-    OpWorkEducation?: Array<OpWorkEducation>;
-    OpWorkExperience?: Array<OpWorkExperience>;
-    OpWorkJobSeekerSkill?: Array<OpWorkJobSeekerSkill>;
-    OpWorkProfile?: OpWorkProfile;
-    portfolioUrl: null | string;
-    preferredLocations: null | string;
     profileId: string;
-    salaryCurrency: null | string;
-    summary: null | string;
+    currentPosition: string | null;
+    currentCompany: string | null;
+    summary: string | null;
+    expectedSalary: number | null;
+    salaryCurrency: string | null;
+    isOpenToWork: boolean | null;
+    isOpenToRemote: boolean | null;
+    isOpenToRelocation: boolean | null;
+    preferredLocations: string | null;
+    linkedinUrl: string | null;
+    githubUrl: string | null;
+    portfolioUrl: string | null;
+    createdAt: string;
     updatedAt: string;
+    OpWorkProfile?: OpWorkProfile;
+    OpWorkExperience?: Array<OpWorkExperience>;
+    OpWorkEducation?: Array<OpWorkEducation>;
+    OpWorkJobSeekerSkill?: Array<OpWorkJobSeekerSkill>;
+    opWorkApplications?: Array<OpWorkApplication>;
 };
 
-export type OpWorkProjectStatus = 'ARCHIVED' | 'CANCELLED' | 'COMPLETED' | 'DEVELOPMENT' | 'IDEA' | 'LAUNCH_READY' | 'LIVE' | 'MAINTENANCE' | 'ON_HOLD' | 'PLANNING' | 'TESTING';
+export type OpWorkProjectStatus = 'IDEA' | 'PLANNING' | 'DEVELOPMENT' | 'TESTING' | 'LAUNCH_READY' | 'LIVE' | 'MAINTENANCE' | 'ON_HOLD' | 'CANCELLED' | 'COMPLETED' | 'ARCHIVED';
 
-export type OpWorkProjectType = 'AGENCY' | 'AI_ML' | 'BLOCKCHAIN' | 'CONSULTING' | 'ECOMMERCE' | 'EDUCATION' | 'ENTERPRISE' | 'FINTECH' | 'GAMING' | 'HEALTHCARE' | 'IOT' | 'MARKETING' | 'MOBILE_APP' | 'MVP' | 'NON_PROFIT' | 'PRODUCT' | 'SAAS' | 'SERVICE' | 'STARTUP' | 'WEB_APP';
+export type OpWorkProjectType = 'MVP' | 'STARTUP' | 'PRODUCT' | 'SERVICE' | 'CONSULTING' | 'AGENCY' | 'SAAS' | 'ECOMMERCE' | 'MOBILE_APP' | 'WEB_APP' | 'ENTERPRISE' | 'NON_PROFIT' | 'EDUCATION' | 'HEALTHCARE' | 'FINTECH' | 'GAMING' | 'AI_ML' | 'BLOCKCHAIN' | 'IOT' | 'MARKETING';
 
 export type OpWorkProject = {
-    actualEndDate: null | string;
-    actualStartDate: null | string;
-    architecture: null | string;
-    completionDate: null | string;
-    completionDescription: null | string;
-    createdAt: string;
-    description: string;
-    developmentStart: null | string;
-    githubRepoUrl: null | string;
-    goLiveDate: null | string;
     id: string;
-    implementationDescription: null | string;
-    launchDate: null | string;
-    launchDescription: null | string;
-    maintenanceDescription: null | string;
-    maintenanceEnd: null | string;
-    maintenanceStart: null | string;
-    OpWorkProfile?: OpWorkProfile;
-    plannedDatesDescription: null | string;
-    plannedEndDate: null | string;
-    plannedStartDate: null | string;
     profileId: string;
-    status: null | OpWorkProjectStatus;
-    technologies: null | string;
-    testingStart: null | string;
     title: string;
-    type: null | OpWorkProjectType;
+    description: string;
+    status: OpWorkProjectStatus | null;
+    type: OpWorkProjectType | null;
+    githubRepoUrl: string | null;
+    technologies: string | null;
+    architecture: string | null;
+    plannedDatesDescription: string | null;
+    plannedStartDate: string | null;
+    plannedEndDate: string | null;
+    implementationDescription: string | null;
+    actualStartDate: string | null;
+    developmentStart: string | null;
+    testingStart: string | null;
+    launchDescription: string | null;
+    launchDate: string | null;
+    goLiveDate: string | null;
+    completionDescription: string | null;
+    actualEndDate: string | null;
+    completionDate: string | null;
+    maintenanceDescription: string | null;
+    maintenanceStart: string | null;
+    maintenanceEnd: string | null;
+    createdAt: string;
     updatedAt: string;
+    OpWorkProfile?: OpWorkProfile;
 };
 
-export type OpWorkNotificationType = 'APPLICATION_RECEIVED' | 'APPLICATION_SHORTLISTED' | 'INTERVIEW_SCHEDULED' | 'JOB_MATCH' | 'JOB_OFFER' | 'JOB_STATUS_CHANGED' | 'MESSAGE_RECEIVED' | 'NETWORK_ACTIVITY' | 'NEW_PROJECT' | 'PROFILE_UPDATE' | 'REMINDER' | 'SYSTEM_ALERT';
+export type OpWorkNotificationType = 'APPLICATION_RECEIVED' | 'APPLICATION_SHORTLISTED' | 'INTERVIEW_SCHEDULED' | 'JOB_OFFER' | 'JOB_MATCH' | 'JOB_STATUS_CHANGED' | 'NEW_PROJECT' | 'MESSAGE_RECEIVED' | 'REMINDER' | 'SYSTEM_ALERT' | 'PROFILE_UPDATE' | 'NETWORK_ACTIVITY';
 
 export type OpWorkNotification = {
-    AuthUser?: AuthUser;
-    createdAt: string;
-    data: null | {
-        [key: string]: unknown;
-    };
     id: string;
-    isArchived: boolean | null;
-    isRead: boolean | null;
-    message: string;
-    OpWorkProfile?: null | OpWorkProfile;
-    profileId: null | string;
-    readAt: null | string;
-    title: string;
-    type: OpWorkNotificationType;
     userId: string;
+    profileId: string | null;
+    type: OpWorkNotificationType;
+    title: string;
+    message: string;
+    data: {
+        [key: string]: unknown;
+    } | null;
+    isRead: boolean | null;
+    isArchived: boolean | null;
+    createdAt: string;
+    readAt: string | null;
+    AuthUser?: AuthUser;
+    OpWorkProfile?: OpWorkProfile | null;
 };
 
-export type OpWorkFrequency = 'DAILY' | 'HOURLY' | 'MINUTELY' | 'MONTHLY' | 'ON_DEMAND' | 'WEEKLY';
+export type OpWorkFrequency = 'MINUTELY' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'ON_DEMAND';
 
 export type OpWorkNotificationSettings = {
+    id: string;
+    profileId: string;
     emailApplicationUpdates: boolean | null;
     emailJobAlerts: boolean | null;
     emailNewsletter: boolean | null;
-    id: string;
-    jobAlertFrequency: null | OpWorkFrequency;
-    OpWorkProfile?: OpWorkProfile;
-    profileId: string;
     pushApplicationUpdates: boolean | null;
     pushJobAlerts: boolean | null;
+    jobAlertFrequency: OpWorkFrequency | null;
     updatedAt: string;
+    OpWorkProfile?: OpWorkProfile;
 };
 
 export type OpWorkSearchHistory = {
-    filters: null | {
-        [key: string]: unknown;
-    };
     id: string;
-    OpWorkProfile?: OpWorkProfile;
     profileId: string;
     query: string;
-    resultsCount: null | number;
+    filters: {
+        [key: string]: unknown;
+    } | null;
+    resultsCount: number | null;
     searchedAt: string;
+    OpWorkProfile?: OpWorkProfile;
 };
 
 export type OpWorkSavedSearch = {
-    createdAt: string;
-    filters: null | {
-        [key: string]: unknown;
-    };
-    frequency: null | OpWorkFrequency;
     id: string;
-    isActive: boolean | null;
-    lastSentAt: null | string;
-    name: string;
-    OpWorkProfile?: OpWorkProfile;
     profileId: string;
+    name: string;
     query: string;
+    filters: {
+        [key: string]: unknown;
+    } | null;
+    isActive: boolean | null;
+    frequency: OpWorkFrequency | null;
+    lastSentAt: string | null;
+    createdAt: string;
     updatedAt: string;
+    OpWorkProfile?: OpWorkProfile;
 };
 
 export type OpWorkProfile = {
-    AuthUser?: AuthUser;
-    avatarUrl: null | string;
-    coverImage: null | string;
-    createdAt: string;
-    description: null | string;
-    email: null | string;
     id: string;
+    userId: string;
+    type: OpWorkProfileType;
+    userType: OpWorkUserType;
+    title: string | null;
+    description: string | null;
     isActive: boolean | null;
     isEmailVerified: boolean | null;
-    location: null | string;
-    opWorkApplications?: Array<OpWorkApplication>;
-    opWorkEmployer?: null | OpWorkEmployer;
-    opWorkJobs?: Array<OpWorkJob>;
-    opWorkJobSeeker?: null | OpWorkJobSeeker;
-    opWorkJobViews?: Array<OpWorkJobView>;
-    opWorkNotifications?: Array<OpWorkNotification>;
-    opWorkNotificationSettings?: null | OpWorkNotificationSettings;
-    opWorkProject?: null | OpWorkProject;
-    opWorkSavedJobs?: Array<OpWorkSavedJob>;
-    opWorkSavedSearches?: Array<OpWorkSavedSearch>;
-    opWorkSearchHistories?: Array<OpWorkSearchHistory>;
-    phone: null | string;
-    title: null | string;
-    type: OpWorkProfileType;
+    email: string | null;
+    phone: string | null;
+    website: string | null;
+    location: string | null;
+    avatarUrl: string | null;
+    coverImage: string | null;
+    createdAt: string;
     updatedAt: string;
-    userId: string;
-    userType: OpWorkUserType;
-    website: null | string;
+    AuthUser?: AuthUser;
+    opWorkJobSeeker?: OpWorkJobSeeker | null;
+    opWorkEmployer?: OpWorkEmployer | null;
+    opWorkProject?: OpWorkProject | null;
+    opWorkJobs?: Array<OpWorkJob>;
+    opWorkApplications?: Array<OpWorkApplication>;
+    opWorkSavedJobs?: Array<OpWorkSavedJob>;
+    opWorkNotifications?: Array<OpWorkNotification>;
+    opWorkNotificationSettings?: OpWorkNotificationSettings | null;
+    opWorkSearchHistories?: Array<OpWorkSearchHistory>;
+    opWorkJobViews?: Array<OpWorkJobView>;
+    opWorkSavedSearches?: Array<OpWorkSavedSearch>;
 };
 
 export type AuthUser = {
-    anonymousId: null | string;
+    id: string;
+    anonymousId: string | null;
+    supabaseUserId: string | null;
+    supabaseUserData: {
+        [key: string]: unknown;
+    } | null;
+    isActive: boolean | null;
+    createdAt: string;
+    updatedAt: string;
     AuthApiKey?: Array<AuthApiKey>;
     AuthSession?: Array<AuthSession>;
-    createdAt: string;
-    id: string;
-    isActive: boolean | null;
-    opWorkNotifications?: Array<OpWorkNotification>;
     OpWorkProfile?: Array<OpWorkProfile>;
-    supabaseUserData: null | {
-        [key: string]: unknown;
-    };
-    supabaseUserId: null | string;
-    updatedAt: string;
+    opWorkNotifications?: Array<OpWorkNotification>;
 };
 
 export type FindManyAuthUserResponseMeta = {
@@ -403,33 +403,33 @@ export type FindManyAuthUserResponse = {
 };
 
 export type CreateAuthUserDto = {
-    anonymousId?: null | string;
-    isActive?: boolean | null;
-    supabaseUserData?: null | {
+    anonymousId?: string | null;
+    supabaseUserId?: string | null;
+    supabaseUserData?: {
         [key: string]: unknown;
-    };
-    supabaseUserId?: null | string;
+    } | null;
+    isActive?: boolean | null;
 };
 
 export type AuthUserDto = {
-    anonymousId: null | string;
-    createdAt: string;
     id: string;
-    isActive: boolean | null;
-    supabaseUserData: null | {
+    anonymousId: string | null;
+    supabaseUserId: string | null;
+    supabaseUserData: {
         [key: string]: unknown;
-    };
-    supabaseUserId: null | string;
+    } | null;
+    isActive: boolean | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateAuthUserDto = {
-    anonymousId?: null | string;
-    isActive?: boolean | null;
-    supabaseUserData?: null | {
+    anonymousId?: string | null;
+    supabaseUserId?: string | null;
+    supabaseUserData?: {
         [key: string]: unknown;
-    };
-    supabaseUserId?: null | string;
+    } | null;
+    isActive?: boolean | null;
 };
 
 export type StatusResponse = {
@@ -448,20 +448,20 @@ export type FindManyAuthApiKeyResponse = {
 };
 
 export type CreateAuthApiKeyDto = {
-    apiKey?: null | string;
+    apiKey?: string | null;
     isActive?: boolean | null;
 };
 
 export type AuthApiKeyDto = {
-    apiKey: null | string;
-    createdAt: string;
     id: string;
+    apiKey: string | null;
     isActive: boolean | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateAuthApiKeyDto = {
-    apiKey?: null | string;
+    apiKey?: string | null;
     isActive?: boolean | null;
 };
 
@@ -481,9 +481,9 @@ export type CreateAuthSessionDto = {
 };
 
 export type AuthSessionDto = {
-    createdAt: string;
     id: string;
     isActive: boolean | null;
+    createdAt: string;
     updatedAt: string;
 };
 
@@ -503,51 +503,51 @@ export type FindManyOpWorkProfileResponse = {
 };
 
 export type CreateOpWorkProfileDto = {
-    avatarUrl?: null | string;
-    coverImage?: null | string;
-    description?: null | string;
-    email?: null | string;
-    isActive?: boolean | null;
-    isEmailVerified?: boolean | null;
-    location?: null | string;
-    phone?: null | string;
-    title?: null | string;
     type: OpWorkProfileType;
     userType: OpWorkUserType;
-    website?: null | string;
+    title?: string | null;
+    description?: string | null;
+    isActive?: boolean | null;
+    isEmailVerified?: boolean | null;
+    email?: string | null;
+    phone?: string | null;
+    website?: string | null;
+    location?: string | null;
+    avatarUrl?: string | null;
+    coverImage?: string | null;
 };
 
 export type OpWorkProfileDto = {
-    avatarUrl: null | string;
-    coverImage: null | string;
-    createdAt: string;
-    description: null | string;
-    email: null | string;
     id: string;
+    type: OpWorkProfileType;
+    userType: OpWorkUserType;
+    title: string | null;
+    description: string | null;
     isActive: boolean | null;
     isEmailVerified: boolean | null;
-    location: null | string;
-    phone: null | string;
-    title: null | string;
-    type: OpWorkProfileType;
+    email: string | null;
+    phone: string | null;
+    website: string | null;
+    location: string | null;
+    avatarUrl: string | null;
+    coverImage: string | null;
+    createdAt: string;
     updatedAt: string;
-    userType: OpWorkUserType;
-    website: null | string;
 };
 
 export type UpdateOpWorkProfileDto = {
-    avatarUrl?: null | string;
-    coverImage?: null | string;
-    description?: null | string;
-    email?: null | string;
-    isActive?: boolean | null;
-    isEmailVerified?: boolean | null;
-    location?: null | string;
-    phone?: null | string;
-    title?: null | string;
     type?: OpWorkProfileType;
     userType?: OpWorkUserType;
-    website?: null | string;
+    title?: string | null;
+    description?: string | null;
+    isActive?: boolean | null;
+    isEmailVerified?: boolean | null;
+    email?: string | null;
+    phone?: string | null;
+    website?: string | null;
+    location?: string | null;
+    avatarUrl?: string | null;
+    coverImage?: string | null;
 };
 
 export type FindManyOpWorkJobSeekerResponseMeta = {
@@ -562,51 +562,51 @@ export type FindManyOpWorkJobSeekerResponse = {
 };
 
 export type CreateOpWorkJobSeekerDto = {
-    currentCompany?: null | string;
-    currentPosition?: null | string;
-    expectedSalary?: null | number;
-    githubUrl?: null | string;
-    isOpenToRelocation?: boolean | null;
-    isOpenToRemote?: boolean | null;
+    currentPosition?: string | null;
+    currentCompany?: string | null;
+    summary?: string | null;
+    expectedSalary?: number | null;
+    salaryCurrency?: string | null;
     isOpenToWork?: boolean | null;
-    linkedinUrl?: null | string;
-    portfolioUrl?: null | string;
-    preferredLocations?: null | string;
-    salaryCurrency?: null | string;
-    summary?: null | string;
+    isOpenToRemote?: boolean | null;
+    isOpenToRelocation?: boolean | null;
+    preferredLocations?: string | null;
+    linkedinUrl?: string | null;
+    githubUrl?: string | null;
+    portfolioUrl?: string | null;
 };
 
 export type OpWorkJobSeekerDto = {
-    createdAt: string;
-    currentCompany: null | string;
-    currentPosition: null | string;
-    expectedSalary: null | number;
-    githubUrl: null | string;
     id: string;
-    isOpenToRelocation: boolean | null;
-    isOpenToRemote: boolean | null;
+    currentPosition: string | null;
+    currentCompany: string | null;
+    summary: string | null;
+    expectedSalary: number | null;
+    salaryCurrency: string | null;
     isOpenToWork: boolean | null;
-    linkedinUrl: null | string;
-    portfolioUrl: null | string;
-    preferredLocations: null | string;
-    salaryCurrency: null | string;
-    summary: null | string;
+    isOpenToRemote: boolean | null;
+    isOpenToRelocation: boolean | null;
+    preferredLocations: string | null;
+    linkedinUrl: string | null;
+    githubUrl: string | null;
+    portfolioUrl: string | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateOpWorkJobSeekerDto = {
-    currentCompany?: null | string;
-    currentPosition?: null | string;
-    expectedSalary?: null | number;
-    githubUrl?: null | string;
-    isOpenToRelocation?: boolean | null;
-    isOpenToRemote?: boolean | null;
+    currentPosition?: string | null;
+    currentCompany?: string | null;
+    summary?: string | null;
+    expectedSalary?: number | null;
+    salaryCurrency?: string | null;
     isOpenToWork?: boolean | null;
-    linkedinUrl?: null | string;
-    portfolioUrl?: null | string;
-    preferredLocations?: null | string;
-    salaryCurrency?: null | string;
-    summary?: null | string;
+    isOpenToRemote?: boolean | null;
+    isOpenToRelocation?: boolean | null;
+    preferredLocations?: string | null;
+    linkedinUrl?: string | null;
+    githubUrl?: string | null;
+    portfolioUrl?: string | null;
 };
 
 export type FindManyOpWorkExperienceResponseMeta = {
@@ -622,37 +622,37 @@ export type FindManyOpWorkExperienceResponse = {
 
 export type CreateOpWorkExperienceDto = {
     company: string;
-    description?: null | string;
-    employmentType?: null | OpWorkEmploymentType;
-    endDate?: null | string;
-    isCurrent?: boolean | null;
-    location?: null | string;
     position: string;
+    description?: string | null;
     startDate: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    location?: string | null;
+    employmentType?: OpWorkEmploymentType | null;
 };
 
 export type OpWorkExperienceDto = {
-    company: string;
-    createdAt: string;
-    description: null | string;
-    employmentType: null | OpWorkEmploymentType;
-    endDate: null | string;
     id: string;
-    isCurrent: boolean | null;
-    location: null | string;
+    company: string;
     position: string;
+    description: string | null;
     startDate: string;
+    endDate: string | null;
+    isCurrent: boolean | null;
+    location: string | null;
+    employmentType: OpWorkEmploymentType | null;
+    createdAt: string;
 };
 
 export type UpdateOpWorkExperienceDto = {
     company?: string;
-    description?: null | string;
-    employmentType?: null | OpWorkEmploymentType;
-    endDate?: null | string;
-    isCurrent?: boolean | null;
-    location?: null | string;
     position?: string;
+    description?: string | null;
     startDate?: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    location?: string | null;
+    employmentType?: OpWorkEmploymentType | null;
 };
 
 export type FindManyOpWorkEducationResponseMeta = {
@@ -667,38 +667,38 @@ export type FindManyOpWorkEducationResponse = {
 };
 
 export type CreateOpWorkEducationDto = {
-    degree?: null | OpWorkEducationDegree;
-    description?: null | string;
-    endDate?: null | string;
-    fieldOfStudy?: null | string;
-    grade?: null | OpWorkGrade;
     institution: string;
-    isCurrent?: boolean | null;
+    degree?: OpWorkEducationDegree | null;
+    fieldOfStudy?: string | null;
     startDate: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    description?: string | null;
+    grade?: OpWorkGrade | null;
 };
 
 export type OpWorkEducationDto = {
-    createdAt: string;
-    degree: null | OpWorkEducationDegree;
-    description: null | string;
-    endDate: null | string;
-    fieldOfStudy: null | string;
-    grade: null | OpWorkGrade;
     id: string;
     institution: string;
-    isCurrent: boolean | null;
+    degree: OpWorkEducationDegree | null;
+    fieldOfStudy: string | null;
     startDate: string;
+    endDate: string | null;
+    isCurrent: boolean | null;
+    description: string | null;
+    grade: OpWorkGrade | null;
+    createdAt: string;
 };
 
 export type UpdateOpWorkEducationDto = {
-    degree?: null | OpWorkEducationDegree;
-    description?: null | string;
-    endDate?: null | string;
-    fieldOfStudy?: null | string;
-    grade?: null | OpWorkGrade;
     institution?: string;
-    isCurrent?: boolean | null;
+    degree?: OpWorkEducationDegree | null;
+    fieldOfStudy?: string | null;
     startDate?: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    description?: string | null;
+    grade?: OpWorkGrade | null;
 };
 
 export type FindManyOpWorkEmployerResponseMeta = {
@@ -713,60 +713,60 @@ export type FindManyOpWorkEmployerResponse = {
 };
 
 export type CreateOpWorkEmployerDto = {
-    companyEmail?: null | string;
     companyName: string;
-    companyPhone?: null | string;
-    companyWebsite?: null | string;
-    coverImageUrl?: null | string;
-    culture?: null | string;
-    description?: null | string;
-    facebookUrl?: null | string;
-    foundedYear?: null | number;
-    headquarters?: null | string;
-    industry?: null | string;
-    linkedinUrl?: null | string;
-    logoUrl?: null | string;
-    mission?: null | string;
-    twitterUrl?: null | string;
+    industry?: string | null;
+    description?: string | null;
+    mission?: string | null;
+    culture?: string | null;
+    foundedYear?: number | null;
+    headquarters?: string | null;
+    logoUrl?: string | null;
+    coverImageUrl?: string | null;
+    companyEmail?: string | null;
+    companyPhone?: string | null;
+    companyWebsite?: string | null;
+    linkedinUrl?: string | null;
+    twitterUrl?: string | null;
+    facebookUrl?: string | null;
 };
 
 export type OpWorkEmployerDto = {
-    companyEmail: null | string;
-    companyName: string;
-    companyPhone: null | string;
-    companyWebsite: null | string;
-    coverImageUrl: null | string;
-    createdAt: string;
-    culture: null | string;
-    description: null | string;
-    facebookUrl: null | string;
-    foundedYear: null | number;
-    headquarters: null | string;
     id: string;
-    industry: null | string;
-    linkedinUrl: null | string;
-    logoUrl: null | string;
-    mission: null | string;
-    twitterUrl: null | string;
+    companyName: string;
+    industry: string | null;
+    description: string | null;
+    mission: string | null;
+    culture: string | null;
+    foundedYear: number | null;
+    headquarters: string | null;
+    logoUrl: string | null;
+    coverImageUrl: string | null;
+    companyEmail: string | null;
+    companyPhone: string | null;
+    companyWebsite: string | null;
+    linkedinUrl: string | null;
+    twitterUrl: string | null;
+    facebookUrl: string | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateOpWorkEmployerDto = {
-    companyEmail?: null | string;
     companyName?: string;
-    companyPhone?: null | string;
-    companyWebsite?: null | string;
-    coverImageUrl?: null | string;
-    culture?: null | string;
-    description?: null | string;
-    facebookUrl?: null | string;
-    foundedYear?: null | number;
-    headquarters?: null | string;
-    industry?: null | string;
-    linkedinUrl?: null | string;
-    logoUrl?: null | string;
-    mission?: null | string;
-    twitterUrl?: null | string;
+    industry?: string | null;
+    description?: string | null;
+    mission?: string | null;
+    culture?: string | null;
+    foundedYear?: number | null;
+    headquarters?: string | null;
+    logoUrl?: string | null;
+    coverImageUrl?: string | null;
+    companyEmail?: string | null;
+    companyPhone?: string | null;
+    companyWebsite?: string | null;
+    linkedinUrl?: string | null;
+    twitterUrl?: string | null;
+    facebookUrl?: string | null;
 };
 
 export type FindManyOpWorkProjectResponseMeta = {
@@ -781,84 +781,84 @@ export type FindManyOpWorkProjectResponse = {
 };
 
 export type CreateOpWorkProjectDto = {
-    actualEndDate?: null | string;
-    actualStartDate?: null | string;
-    architecture?: null | string;
-    completionDate?: null | string;
-    completionDescription?: null | string;
-    description: string;
-    developmentStart?: null | string;
-    githubRepoUrl?: null | string;
-    goLiveDate?: null | string;
-    implementationDescription?: null | string;
-    launchDate?: null | string;
-    launchDescription?: null | string;
-    maintenanceDescription?: null | string;
-    maintenanceEnd?: null | string;
-    maintenanceStart?: null | string;
-    plannedDatesDescription?: null | string;
-    plannedEndDate?: null | string;
-    plannedStartDate?: null | string;
-    status?: null | OpWorkProjectStatus;
-    technologies?: null | string;
-    testingStart?: null | string;
     title: string;
-    type?: null | OpWorkProjectType;
+    description: string;
+    status?: OpWorkProjectStatus | null;
+    type?: OpWorkProjectType | null;
+    githubRepoUrl?: string | null;
+    technologies?: string | null;
+    architecture?: string | null;
+    plannedDatesDescription?: string | null;
+    plannedStartDate?: string | null;
+    plannedEndDate?: string | null;
+    implementationDescription?: string | null;
+    actualStartDate?: string | null;
+    developmentStart?: string | null;
+    testingStart?: string | null;
+    launchDescription?: string | null;
+    launchDate?: string | null;
+    goLiveDate?: string | null;
+    completionDescription?: string | null;
+    actualEndDate?: string | null;
+    completionDate?: string | null;
+    maintenanceDescription?: string | null;
+    maintenanceStart?: string | null;
+    maintenanceEnd?: string | null;
 };
 
 export type OpWorkProjectDto = {
-    actualEndDate: null | string;
-    actualStartDate: null | string;
-    architecture: null | string;
-    completionDate: null | string;
-    completionDescription: null | string;
-    createdAt: string;
-    description: string;
-    developmentStart: null | string;
-    githubRepoUrl: null | string;
-    goLiveDate: null | string;
     id: string;
-    implementationDescription: null | string;
-    launchDate: null | string;
-    launchDescription: null | string;
-    maintenanceDescription: null | string;
-    maintenanceEnd: null | string;
-    maintenanceStart: null | string;
-    plannedDatesDescription: null | string;
-    plannedEndDate: null | string;
-    plannedStartDate: null | string;
-    status: null | OpWorkProjectStatus;
-    technologies: null | string;
-    testingStart: null | string;
     title: string;
-    type: null | OpWorkProjectType;
+    description: string;
+    status: OpWorkProjectStatus | null;
+    type: OpWorkProjectType | null;
+    githubRepoUrl: string | null;
+    technologies: string | null;
+    architecture: string | null;
+    plannedDatesDescription: string | null;
+    plannedStartDate: string | null;
+    plannedEndDate: string | null;
+    implementationDescription: string | null;
+    actualStartDate: string | null;
+    developmentStart: string | null;
+    testingStart: string | null;
+    launchDescription: string | null;
+    launchDate: string | null;
+    goLiveDate: string | null;
+    completionDescription: string | null;
+    actualEndDate: string | null;
+    completionDate: string | null;
+    maintenanceDescription: string | null;
+    maintenanceStart: string | null;
+    maintenanceEnd: string | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateOpWorkProjectDto = {
-    actualEndDate?: null | string;
-    actualStartDate?: null | string;
-    architecture?: null | string;
-    completionDate?: null | string;
-    completionDescription?: null | string;
-    description?: string;
-    developmentStart?: null | string;
-    githubRepoUrl?: null | string;
-    goLiveDate?: null | string;
-    implementationDescription?: null | string;
-    launchDate?: null | string;
-    launchDescription?: null | string;
-    maintenanceDescription?: null | string;
-    maintenanceEnd?: null | string;
-    maintenanceStart?: null | string;
-    plannedDatesDescription?: null | string;
-    plannedEndDate?: null | string;
-    plannedStartDate?: null | string;
-    status?: null | OpWorkProjectStatus;
-    technologies?: null | string;
-    testingStart?: null | string;
     title?: string;
-    type?: null | OpWorkProjectType;
+    description?: string;
+    status?: OpWorkProjectStatus | null;
+    type?: OpWorkProjectType | null;
+    githubRepoUrl?: string | null;
+    technologies?: string | null;
+    architecture?: string | null;
+    plannedDatesDescription?: string | null;
+    plannedStartDate?: string | null;
+    plannedEndDate?: string | null;
+    implementationDescription?: string | null;
+    actualStartDate?: string | null;
+    developmentStart?: string | null;
+    testingStart?: string | null;
+    launchDescription?: string | null;
+    launchDate?: string | null;
+    goLiveDate?: string | null;
+    completionDescription?: string | null;
+    actualEndDate?: string | null;
+    completionDate?: string | null;
+    maintenanceDescription?: string | null;
+    maintenanceStart?: string | null;
+    maintenanceEnd?: string | null;
 };
 
 export type FindManyOpWorkJobResponseMeta = {
@@ -873,61 +873,61 @@ export type FindManyOpWorkJobResponse = {
 };
 
 export type CreateOpWorkJobDto = {
-    department?: null | string;
+    title: string;
     description: string;
-    employmentType: OpWorkEmploymentType;
-    experienceLevel: OpWorkExperienceLevel;
-    expiresAt?: null | string;
-    isRemote?: boolean | null;
-    location?: null | string;
-    publishedAt?: null | string;
     requirements: string;
     responsibilities: string;
-    salaryCurrency?: null | string;
-    salaryMax?: null | number;
-    salaryMin?: null | number;
-    title: string;
+    employmentType: OpWorkEmploymentType;
+    experienceLevel: OpWorkExperienceLevel;
+    department?: string | null;
+    salaryMin?: number | null;
+    salaryMax?: number | null;
+    salaryCurrency?: string | null;
+    location?: string | null;
+    isRemote?: boolean | null;
+    publishedAt?: string | null;
+    expiresAt?: string | null;
 };
 
 export type OpWorkJobDto = {
-    applicationsCount: number;
-    createdAt: string;
-    department: null | string;
-    description: string;
-    employmentType: OpWorkEmploymentType;
-    experienceLevel: OpWorkExperienceLevel;
-    expiresAt: null | string;
     id: string;
-    isRemote: boolean | null;
-    location: null | string;
-    publishedAt: null | string;
+    title: string;
+    description: string;
     requirements: string;
     responsibilities: string;
-    salaryCurrency: null | string;
-    salaryMax: null | number;
-    salaryMin: null | number;
-    savesCount: number;
+    employmentType: OpWorkEmploymentType;
+    experienceLevel: OpWorkExperienceLevel;
+    department: string | null;
+    salaryMin: number | null;
+    salaryMax: number | null;
+    salaryCurrency: string | null;
+    location: string | null;
+    isRemote: boolean | null;
     status: OpWorkJobStatus;
-    title: string;
-    updatedAt: string;
     viewsCount: number;
+    applicationsCount: number;
+    savesCount: number;
+    publishedAt: string | null;
+    expiresAt: string | null;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type UpdateOpWorkJobDto = {
-    department?: null | string;
+    title?: string;
     description?: string;
-    employmentType?: OpWorkEmploymentType;
-    experienceLevel?: OpWorkExperienceLevel;
-    expiresAt?: null | string;
-    isRemote?: boolean | null;
-    location?: null | string;
-    publishedAt?: null | string;
     requirements?: string;
     responsibilities?: string;
-    salaryCurrency?: null | string;
-    salaryMax?: null | number;
-    salaryMin?: null | number;
-    title?: string;
+    employmentType?: OpWorkEmploymentType;
+    experienceLevel?: OpWorkExperienceLevel;
+    department?: string | null;
+    salaryMin?: number | null;
+    salaryMax?: number | null;
+    salaryCurrency?: string | null;
+    location?: string | null;
+    isRemote?: boolean | null;
+    publishedAt?: string | null;
+    expiresAt?: string | null;
 };
 
 export type FindManyOpWorkApplicationResponseMeta = {
@@ -942,30 +942,30 @@ export type FindManyOpWorkApplicationResponse = {
 };
 
 export type CreateOpWorkApplicationDto = {
-    coverLetter?: null | string;
-    portfolioUrl?: null | string;
-    resumeUrl?: null | string;
-    statusNotes?: null | string;
-    statusUpdatedAt?: null | string;
+    coverLetter?: string | null;
+    resumeUrl?: string | null;
+    portfolioUrl?: string | null;
+    statusNotes?: string | null;
+    statusUpdatedAt?: string | null;
 };
 
 export type OpWorkApplicationDto = {
-    appliedAt: string;
-    coverLetter: null | string;
     id: string;
-    portfolioUrl: null | string;
-    resumeUrl: null | string;
+    coverLetter: string | null;
+    resumeUrl: string | null;
+    portfolioUrl: string | null;
     status: OpWorkApplicationStatus;
-    statusNotes: null | string;
-    statusUpdatedAt: null | string;
+    statusNotes: string | null;
+    appliedAt: string;
+    statusUpdatedAt: string | null;
 };
 
 export type UpdateOpWorkApplicationDto = {
-    coverLetter?: null | string;
-    portfolioUrl?: null | string;
-    resumeUrl?: null | string;
-    statusNotes?: null | string;
-    statusUpdatedAt?: null | string;
+    coverLetter?: string | null;
+    resumeUrl?: string | null;
+    portfolioUrl?: string | null;
+    statusNotes?: string | null;
+    statusUpdatedAt?: string | null;
 };
 
 export type FindManyOpWorkSavedJobResponseMeta = {
@@ -980,17 +980,17 @@ export type FindManyOpWorkSavedJobResponse = {
 };
 
 export type CreateOpWorkSavedJobDto = {
-    notes?: null | string;
+    notes?: string | null;
 };
 
 export type OpWorkSavedJobDto = {
     id: string;
-    notes: null | string;
     savedAt: string;
+    notes: string | null;
 };
 
 export type UpdateOpWorkSavedJobDto = {
-    notes?: null | string;
+    notes?: string | null;
 };
 
 export type FindManyOpWorkSkillResponseMeta = {
@@ -1005,30 +1005,30 @@ export type FindManyOpWorkSkillResponse = {
 };
 
 export type CreateOpWorkSkillDto = {
-    category?: null | string;
-    description?: null | string;
-    icon?: null | string;
     name: string;
-    type?: null | OpWorkSkillType;
+    description?: string | null;
+    type?: OpWorkSkillType | null;
+    category?: string | null;
+    icon?: string | null;
 };
 
 export type OpWorkSkillDto = {
-    category: null | string;
-    createdAt: string;
-    description: null | string;
-    icon: null | string;
     id: string;
     name: string;
+    description: string | null;
+    type: OpWorkSkillType | null;
+    category: string | null;
+    icon: string | null;
     popularity: number;
-    type: null | OpWorkSkillType;
+    createdAt: string;
 };
 
 export type UpdateOpWorkSkillDto = {
-    category?: null | string;
-    description?: null | string;
-    icon?: null | string;
     name?: string;
-    type?: null | OpWorkSkillType;
+    description?: string | null;
+    type?: OpWorkSkillType | null;
+    category?: string | null;
+    icon?: string | null;
 };
 
 export type FindManyOpWorkJobSeekerSkillResponseMeta = {
@@ -1043,24 +1043,24 @@ export type FindManyOpWorkJobSeekerSkillResponse = {
 };
 
 export type CreateOpWorkJobSeekerSkillDto = {
+    yearsOfExp?: number | null;
     isPrimary?: boolean | null;
-    lastUsed?: null | string;
-    yearsOfExp?: null | number;
+    lastUsed?: string | null;
 };
 
 export type OpWorkJobSeekerSkillDto = {
-    createdAt: string;
     id: string;
-    isPrimary: boolean | null;
-    lastUsed: null | string;
     level: number;
-    yearsOfExp: null | number;
+    yearsOfExp: number | null;
+    isPrimary: boolean | null;
+    lastUsed: string | null;
+    createdAt: string;
 };
 
 export type UpdateOpWorkJobSeekerSkillDto = {
+    yearsOfExp?: number | null;
     isPrimary?: boolean | null;
-    lastUsed?: null | string;
-    yearsOfExp?: null | number;
+    lastUsed?: string | null;
 };
 
 export type FindManyOpWorkJobSkillResponseMeta = {
@@ -1076,20 +1076,20 @@ export type FindManyOpWorkJobSkillResponse = {
 
 export type CreateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
-    minLevel?: null | number;
+    minLevel?: number | null;
 };
 
 export type OpWorkJobSkillDto = {
-    createdAt: string;
     id: string;
-    importance: number;
     isRequired: boolean | null;
-    minLevel: null | number;
+    importance: number;
+    minLevel: number | null;
+    createdAt: string;
 };
 
 export type UpdateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
-    minLevel?: null | number;
+    minLevel?: number | null;
 };
 
 export type FindManyOpWorkNotificationResponseMeta = {
@@ -1104,41 +1104,41 @@ export type FindManyOpWorkNotificationResponse = {
 };
 
 export type CreateOpWorkNotificationDto = {
-    data?: null | {
-        [key: string]: unknown;
-    };
-    isArchived?: boolean | null;
-    isRead?: boolean | null;
-    message: string;
-    readAt?: null | string;
-    title: string;
     type: OpWorkNotificationType;
+    title: string;
+    message: string;
+    data?: {
+        [key: string]: unknown;
+    } | null;
+    isRead?: boolean | null;
+    isArchived?: boolean | null;
+    readAt?: string | null;
 };
 
 export type OpWorkNotificationDto = {
-    createdAt: string;
-    data: null | {
-        [key: string]: unknown;
-    };
     id: string;
-    isArchived: boolean | null;
-    isRead: boolean | null;
-    message: string;
-    readAt: null | string;
-    title: string;
     type: OpWorkNotificationType;
+    title: string;
+    message: string;
+    data: {
+        [key: string]: unknown;
+    } | null;
+    isRead: boolean | null;
+    isArchived: boolean | null;
+    createdAt: string;
+    readAt: string | null;
 };
 
 export type UpdateOpWorkNotificationDto = {
-    data?: null | {
-        [key: string]: unknown;
-    };
-    isArchived?: boolean | null;
-    isRead?: boolean | null;
-    message?: string;
-    readAt?: null | string;
-    title?: string;
     type?: OpWorkNotificationType;
+    title?: string;
+    message?: string;
+    data?: {
+        [key: string]: unknown;
+    } | null;
+    isRead?: boolean | null;
+    isArchived?: boolean | null;
+    readAt?: string | null;
 };
 
 export type FindManyOpWorkNotificationSettingsResponseMeta = {
@@ -1156,19 +1156,19 @@ export type CreateOpWorkNotificationSettingsDto = {
     emailApplicationUpdates?: boolean | null;
     emailJobAlerts?: boolean | null;
     emailNewsletter?: boolean | null;
-    jobAlertFrequency?: null | OpWorkFrequency;
     pushApplicationUpdates?: boolean | null;
     pushJobAlerts?: boolean | null;
+    jobAlertFrequency?: OpWorkFrequency | null;
 };
 
 export type OpWorkNotificationSettingsDto = {
+    id: string;
     emailApplicationUpdates: boolean | null;
     emailJobAlerts: boolean | null;
     emailNewsletter: boolean | null;
-    id: string;
-    jobAlertFrequency: null | OpWorkFrequency;
     pushApplicationUpdates: boolean | null;
     pushJobAlerts: boolean | null;
+    jobAlertFrequency: OpWorkFrequency | null;
     updatedAt: string;
 };
 
@@ -1176,9 +1176,9 @@ export type UpdateOpWorkNotificationSettingsDto = {
     emailApplicationUpdates?: boolean | null;
     emailJobAlerts?: boolean | null;
     emailNewsletter?: boolean | null;
-    jobAlertFrequency?: null | OpWorkFrequency;
     pushApplicationUpdates?: boolean | null;
     pushJobAlerts?: boolean | null;
+    jobAlertFrequency?: OpWorkFrequency | null;
 };
 
 export type FindManyOpWorkSearchHistoryResponseMeta = {
@@ -1193,29 +1193,29 @@ export type FindManyOpWorkSearchHistoryResponse = {
 };
 
 export type CreateOpWorkSearchHistoryDto = {
-    filters?: null | {
-        [key: string]: unknown;
-    };
     query: string;
-    resultsCount?: null | number;
+    filters?: {
+        [key: string]: unknown;
+    } | null;
+    resultsCount?: number | null;
 };
 
 export type OpWorkSearchHistoryDto = {
-    filters: null | {
-        [key: string]: unknown;
-    };
     id: string;
     query: string;
-    resultsCount: null | number;
+    filters: {
+        [key: string]: unknown;
+    } | null;
+    resultsCount: number | null;
     searchedAt: string;
 };
 
 export type UpdateOpWorkSearchHistoryDto = {
-    filters?: null | {
-        [key: string]: unknown;
-    };
     query?: string;
-    resultsCount?: null | number;
+    filters?: {
+        [key: string]: unknown;
+    } | null;
+    resultsCount?: number | null;
 };
 
 export type FindManyOpWorkJobViewResponseMeta = {
@@ -1230,20 +1230,20 @@ export type FindManyOpWorkJobViewResponse = {
 };
 
 export type CreateOpWorkJobViewDto = {
-    ipAddress?: null | string;
-    userAgent?: null | string;
+    ipAddress?: string | null;
+    userAgent?: string | null;
 };
 
 export type OpWorkJobViewDto = {
     id: string;
-    ipAddress: null | string;
-    userAgent: null | string;
     viewedAt: string;
+    ipAddress: string | null;
+    userAgent: string | null;
 };
 
 export type UpdateOpWorkJobViewDto = {
-    ipAddress?: null | string;
-    userAgent?: null | string;
+    ipAddress?: string | null;
+    userAgent?: string | null;
 };
 
 export type FindManyOpWorkSavedSearchResponseMeta = {
@@ -1258,39 +1258,39 @@ export type FindManyOpWorkSavedSearchResponse = {
 };
 
 export type CreateOpWorkSavedSearchDto = {
-    filters?: null | {
-        [key: string]: unknown;
-    };
-    frequency?: null | OpWorkFrequency;
-    isActive?: boolean | null;
-    lastSentAt?: null | string;
     name: string;
     query: string;
+    filters?: {
+        [key: string]: unknown;
+    } | null;
+    isActive?: boolean | null;
+    frequency?: OpWorkFrequency | null;
+    lastSentAt?: string | null;
 };
 
 export type OpWorkSavedSearchDto = {
-    createdAt: string;
-    filters: null | {
-        [key: string]: unknown;
-    };
-    frequency: null | OpWorkFrequency;
     id: string;
-    isActive: boolean | null;
-    lastSentAt: null | string;
     name: string;
     query: string;
+    filters: {
+        [key: string]: unknown;
+    } | null;
+    isActive: boolean | null;
+    frequency: OpWorkFrequency | null;
+    lastSentAt: string | null;
+    createdAt: string;
     updatedAt: string;
 };
 
 export type UpdateOpWorkSavedSearchDto = {
-    filters?: null | {
-        [key: string]: unknown;
-    };
-    frequency?: null | OpWorkFrequency;
-    isActive?: boolean | null;
-    lastSentAt?: null | string;
     name?: string;
     query?: string;
+    filters?: {
+        [key: string]: unknown;
+    } | null;
+    isActive?: boolean | null;
+    frequency?: OpWorkFrequency | null;
+    lastSentAt?: string | null;
 };
 
 export type FindManyOpWorkSkillSynonymResponseMeta = {
@@ -1309,9 +1309,9 @@ export type CreateOpWorkSkillSynonymDto = {
 };
 
 export type OpWorkSkillSynonymDto = {
-    createdAt: string;
     id: string;
     synonym: string;
+    createdAt: string;
 };
 
 export type UpdateOpWorkSkillSynonymDto = {
@@ -1330,20 +1330,20 @@ export type FindManyOpWorkJobTagResponse = {
 };
 
 export type CreateOpWorkJobTagDto = {
-    color?: null | string;
     name: string;
+    color?: string | null;
 };
 
 export type OpWorkJobTagDto = {
-    color: null | string;
-    createdAt: string;
     id: string;
     name: string;
+    color: string | null;
+    createdAt: string;
 };
 
 export type UpdateOpWorkJobTagDto = {
-    color?: null | string;
     name?: string;
+    color?: string | null;
 };
 
 export type AuthUserControllerFindManyData = {

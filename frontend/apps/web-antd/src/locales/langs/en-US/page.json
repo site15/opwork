@@ -7,13 +7,15 @@
     "forgetPassword": "Forget Password",
     "profile": "Profile"
   },
+  "resource": {
+    "AuthUser": "Users",
+    "auth": "Authentication and Authorization",
+    "op-work": "Employment Agency",
+    "OpWorkProfile": "Profile"
+  },
   "dashboard": {
     "title": "Dashboard",
     "analytics": "Analytics",
     "workspace": "Workspace"
-  },
-  "resource": {
-    "title": "Resources",
-    "AuthUser": "Users"
   }
 }

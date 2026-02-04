@@ -6,7 +6,6 @@
     "isActive": "Is Active"
   },
   "name": {
-    "AuthUser": "Auth User"
-  },
-  "title": "Title"
+    "AuthUser": "User"
+  }
 }

@@ -48,7 +48,7 @@ console.log(output);
  * 3. parse missing keys
  */
 const missingKeys = Array.from(
-  output.matchAll(/│\s*'([^']+)'\s*│/g),
+  output.split('Unused Keys')[0].matchAll(/│\s*'([^']+)'\s*│/g),
   (m) => m[1],
 ).filter((key) => !key.includes('${'));
 

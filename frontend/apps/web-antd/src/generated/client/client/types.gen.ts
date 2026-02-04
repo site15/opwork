@@ -11,7 +11,7 @@ import type { Middleware } from './utils.gen';
 export type ResponseStyle = 'data' | 'fields';
 
 export interface Config<T extends ClientOptions = ClientOptions>
-  extends CoreConfig, Omit<RequestInit, 'body' | 'headers' | 'method'> {
+  extends Omit<RequestInit, 'body' | 'headers' | 'method'>, CoreConfig {
   /**
    * Base URL for all requests made by this client.
    */
@@ -115,10 +115,7 @@ export type RequestResult<
   : Promise<
       TResponseStyle extends 'data'
         ? (TData extends Record<string, unknown> ? TData[keyof TData] : TData) | undefined
-        : {
-            request: Request;
-            response: Response;
-          } & (
+        : (
             | {
                 data: TData extends Record<string, unknown> ? TData[keyof TData] : TData;
                 error: undefined;
@@ -127,7 +124,10 @@ export type RequestResult<
                 data: undefined;
                 error: TError extends Record<string, unknown> ? TError[keyof TError] : TError;
               }
-          )
+          ) & {
+            request: Request;
+            response: Response;
+          }
     >;
 
 export interface ClientOptions {
@@ -172,7 +172,7 @@ type BuildUrlFn = <
     url: string;
   },
 >(
-  options: Options<TData> & TData,
+  options: TData & Options<TData>,
 ) => string;
 
 export type Client = CoreClient<RequestFn, Config, MethodFn, BuildUrlFn, SseFn> & {
@@ -206,8 +206,8 @@ export type Options<
   ThrowOnError extends boolean = boolean,
   TResponse = unknown,
   TResponseStyle extends ResponseStyle = 'fields',
-> = ([TData] extends [never] ? unknown : Omit<TData, 'url'>) &
-  OmitKeys<
+> = OmitKeys<
   RequestOptions<TResponse, TResponseStyle, ThrowOnError>,
   'body' | 'path' | 'query' | 'url'
->;
+> &
+  ([TData] extends [never] ? unknown : Omit<TData, 'url'>);

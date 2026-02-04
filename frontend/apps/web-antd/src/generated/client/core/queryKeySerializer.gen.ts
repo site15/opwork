@@ -4,11 +4,11 @@
  * JSON-friendly union that mirrors what Pinia Colada can hash.
  */
 export type JsonValue =
+  | null
+  | string
+  | number
   | boolean
   | JsonValue[]
-  | null
-  | number
-  | string
   | { [key: string]: JsonValue };
 
 /**
@@ -57,7 +57,7 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> => {
  * Turns URLSearchParams into a sorted JSON object for deterministic keys.
  */
 const serializeSearchParams = (params: URLSearchParams): JsonValue => {
-  const entries = [...params.entries()].sort(([a], [b]) => a.localeCompare(b));
+  const entries = Array.from(params.entries()).sort(([a], [b]) => a.localeCompare(b));
   const result: Record<string, JsonValue> = {};
 
   for (const [key, value] of entries) {
