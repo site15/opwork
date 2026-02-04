@@ -1,25 +1,25 @@
-import path from 'node:path';
-import { camel, pascal, kebab, snake } from 'case';
 import { DMMF } from '@prisma/generator-helper';
+import { camel, kebab, pascal, snake } from 'case';
+import path from 'node:path';
 import { WritableDeep } from 'type-fest';
 import { logger } from '../utils';
-import { makeHelpers } from './template-helpers';
+import { DTO_IGNORE_MODEL } from './annotations';
 import { computeModelParams } from './compute-model-params';
 import { computeTypeParams } from './compute-type-params';
-import { generateConnectDto } from './generate-connect-dto';
-import { generateCreateDto } from './generate-create-dto';
-import { generateUpdateDto } from './generate-update-dto';
-import { generateEntity } from './generate-entity';
-import { generatePlainDto } from './generate-plain-dto';
-import { generateEnums } from './generate-enums';
-import { generateController } from './generate-controller';
-import { generateDataProvider } from './generate-data-provider';
-import { generateList } from './generate-list';
-import { generateForm } from './generate-form';
-import { generateResourcesIndex } from './generate-resources';
-import { DTO_IGNORE_MODEL } from './annotations';
 import { isAnnotatedWith } from './field-classifiers';
-import { NamingStyle, Model, WriteableFileSpecs } from './types';
+import { generateConnectDto } from './generate-connect-dto';
+import { generateController } from './generate-controller';
+import { generateCreateDto } from './generate-create-dto';
+import { generateDataProvider } from './generate-data-provider';
+import { generateEntity } from './generate-entity';
+import { generateEnums } from './generate-enums';
+import { generateForm } from './generate-form';
+import { generateList } from './generate-list';
+import { generatePlainDto } from './generate-plain-dto';
+import { generateResourcesIndex } from './generate-resources';
+import { generateUpdateDto } from './generate-update-dto';
+import { makeHelpers } from './template-helpers';
+import { Model, NamingStyle, WriteableFileSpecs } from './types';
 
 interface RunParam {
   output: string;
@@ -106,17 +106,35 @@ export const run = ({
 
   const filteredTypes: Model[] = dmmf.datamodel.types
     .filter((model) => !isAnnotatedWith(model, DTO_IGNORE_MODEL))
-    .map((model) => ({
-      ...model,
-      output: {
-        dto: outputToNestJsResourceStructure
-          ? flatResourceStructure
-            ? path.join(output, transformFileNameCase(model.name))
-            : path.join(output, transformFileNameCase(model.name), 'dto')
-          : output,
-        entity: '',
-      },
-    }));
+    .map((model) => {
+      // Determine base path for controller
+      const kebabModelName = kebab(model.name).toLowerCase();
+      const kebabModelNameArray = kebabModelName.split('-');
+      const customNamespace =
+        kebabModelNameArray[0].length > 3
+          ? kebabModelNameArray[0]
+          : kebabModelNameArray.slice(0, 2).join('-');
+      const customName = (
+        kebabModelNameArray[0].length > 3
+          ? kebabModelNameArray.slice(1)
+          : kebabModelNameArray.slice(2)
+      ).join('-');
+      return {
+        ...model,
+        custom: {
+          namespace: customNamespace,
+          name: customName,
+        },
+        output: {
+          dto: outputToNestJsResourceStructure
+            ? flatResourceStructure
+              ? path.join(output, transformFileNameCase(model.name))
+              : path.join(output, transformFileNameCase(model.name), 'dto')
+            : output,
+          entity: '',
+        },
+      };
+    });
 
   if (generateFileTypes === 'entity' && filteredTypes.length) {
     throw new Error(
@@ -128,25 +146,44 @@ export const run = ({
     .filter((model) => !isAnnotatedWith(model, DTO_IGNORE_MODEL))
     // adds `output` information for each model, so we can compute relative import paths
     // this assumes that NestJS resource modules (more specifically their folders on disk) are named as `transformFileNameCase(model.name)`
-    .map((model) => ({
-      ...model,
-      type: 'model',
-      output: {
-        dto: outputToNestJsResourceStructure
-          ? flatResourceStructure
-            ? path.join(output, transformFileNameCase(model.name))
-            : path.join(output, transformFileNameCase(model.name), 'dto')
-          : output,
-        entity: outputToNestJsResourceStructure
-          ? flatResourceStructure
-            ? path.join(output, transformFileNameCase(model.name))
-            : path.join(output, transformFileNameCase(model.name), 'entities')
-          : output,
-        frontend: frontendOutput
-          ? path.join(frontendOutput, 'resource')
-          : undefined,
-      },
-    }));
+    .map((model) => {
+      // Determine base path for controller
+      const kebabModelName = kebab(model.name).toLowerCase();
+      const kebabModelNameArray = kebabModelName.split('-');
+      const customNamespace =
+        kebabModelNameArray[0].length > 3
+          ? kebabModelNameArray[0]
+          : kebabModelNameArray.slice(0, 2).join('-');
+      const customName = (
+        kebabModelNameArray[0].length > 3
+          ? kebabModelNameArray.slice(1)
+          : kebabModelNameArray.slice(2)
+      ).join('-');
+
+      return {
+        ...model,
+        type: 'model',
+        custom: {
+          namespace: customNamespace,
+          name: customName,
+        },
+        output: {
+          dto: outputToNestJsResourceStructure
+            ? flatResourceStructure
+              ? path.join(output, transformFileNameCase(model.name))
+              : path.join(output, transformFileNameCase(model.name), 'dto')
+            : output,
+          entity: outputToNestJsResourceStructure
+            ? flatResourceStructure
+              ? path.join(output, transformFileNameCase(model.name))
+              : path.join(output, transformFileNameCase(model.name), 'entities')
+            : output,
+          frontend: frontendOutput
+            ? path.join(frontendOutput, 'resource')
+            : undefined,
+        },
+      };
+    });
 
   const enumFiles: WriteableFileSpecs[] = [];
   if (noDependencies) {
@@ -303,6 +340,7 @@ export const run = ({
       fileName: model.output.frontend
         ? path.join(
             model.output.frontend,
+            model.name,
             templateHelpers.dataProviderFilename(model.name, true),
           )
         : path.join(
@@ -320,6 +358,7 @@ export const run = ({
       fileName: model.output.frontend
         ? path.join(
             model.output.frontend,
+            model.name,
             templateHelpers.listFilename(model.name, true),
           )
         : path.join(
@@ -337,6 +376,7 @@ export const run = ({
       fileName: model.output.frontend
         ? path.join(
             model.output.frontend,
+            model.name,
             templateHelpers.formFilename(model.name, true),
           )
         : path.join(
@@ -406,15 +446,23 @@ export const run = ({
 
   // Generate resources.ts file if Forms and Lists were generated
   if (generateForms && generateLists && frontendOutput) {
-    const resourcesFile = {
-      fileName: path.join(frontendOutput, 'resource', 'resources.ts'),
-      content: generateResourcesIndex({
-        models: filteredModels.map((m) => m),
-        templateHelpers,
-        frontendOutput,
-      }),
-    };
-    additionalFiles.push(resourcesFile);
+    const namespaces = new Set(filteredModels.map((m) => m.custom.namespace));
+    for (const namespace of namespaces) {
+      const resourcesFile = {
+        fileName: path.join(
+          frontendOutput,
+          `../router/routes/modules/${namespace}.ts`,
+        ),
+        content: generateResourcesIndex({
+          models: filteredModels
+            .filter((m) => m.custom.namespace === namespace)
+            .map((m) => m),
+          templateHelpers,
+          frontendOutput,
+        }),
+      };
+      additionalFiles.push(resourcesFile);
+    }
   }
 
   // Generate controllers.ts file if controllers were generated

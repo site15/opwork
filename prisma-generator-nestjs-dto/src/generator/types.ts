@@ -2,6 +2,10 @@ import { DMMF } from '@prisma/generator-helper';
 import { WritableDeep } from 'type-fest';
 
 export interface Model extends WritableDeep<DMMF.Model> {
+  custom: {
+    namespace: string;
+    name: string;
+  };
   output: {
     dto: string;
     entity: string;

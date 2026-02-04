@@ -182,13 +182,13 @@ export const makeHelpers = ({
     fileName(name, undefined, '.controller', withExtension);
 
   const dataProviderFilename = (name: string, withExtension = false) =>
-    `${entityName(name)}DataProvider${when(withExtension, '.ts')}`;
+    `${entityName(name)}Data${when(withExtension, '.ts')}`;
 
   const listFilename = (name: string, withExtension = false) =>
-    `${entityName(name)}List${when(withExtension, '.tsx')}`;
+    `${entityName(name)}List${when(withExtension, '.vue')}`;
 
   const formFilename = (name: string, withExtension = false) =>
-    `${entityName(name)}Form${when(withExtension, '.tsx')}`;
+    `${entityName(name)}Form${when(withExtension, '.vue')}`;
 
   const fieldType = (
     field: ParsedField,
