@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkNotificationSettingsDto } from './op-work-notification-settings.dto';
 import { OpWorkNotificationSettings } from './op-work-notification-settings.entity';
@@ -71,16 +69,16 @@ export class OpWorkNotificationSettingsController {
         {},
       );
 
-    const opWorkNotificationSettingsWhereInput: Prisma.OpWorkNotificationSettingsWhereInput =
-      {
-        ...(searchText
-          ? {
-              OR: [
-                ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-              ],
-            }
-          : {}),
-      };
+    const opWorkNotificationSettingsWhereInput: Prisma.OpWorkNotificationSettingsWhereInput = {
+      ...(searchText
+        ? {
+            OR: [
+              ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+            ],
+          }
+        : {}),
+      
+    };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
       return {
@@ -110,11 +108,11 @@ export class OpWorkNotificationSettingsController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkNotificationSettingsDto,
-  ) {
+  ) {    
     return await this.prismaservice.opWorkNotificationSettings.create({
-      data: {
+      data: { 
         ...args,
-
+        
         profileId: req.currentProfileId,
       },
     });
@@ -130,9 +128,11 @@ export class OpWorkNotificationSettingsController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -151,12 +151,11 @@ export class OpWorkNotificationSettingsController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkNotificationSettingsDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkNotificationSettings.findFirstOrThrow(
-      {
-        where: {
-          id,
-        },
+    return await this.prismaservice.opWorkNotificationSettings.findFirstOrThrow({
+      where: {
+        id,
+        
       },
-    );
+    });
   }
 }

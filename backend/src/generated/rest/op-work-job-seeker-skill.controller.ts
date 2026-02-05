@@ -69,16 +69,16 @@ export class OpWorkJobSeekerSkillController {
         {},
       );
 
-    const opWorkJobSeekerSkillWhereInput: Prisma.OpWorkJobSeekerSkillWhereInput =
-      {
-        ...(searchText
-          ? {
-              OR: [
-                ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-              ],
-            }
-          : {}),
-      };
+    const opWorkJobSeekerSkillWhereInput: Prisma.OpWorkJobSeekerSkillWhereInput = {
+      ...(searchText
+        ? {
+            OR: [
+              ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+            ],
+          }
+        : {}),
+      
+    };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
       return {
@@ -105,16 +105,11 @@ export class OpWorkJobSeekerSkillController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkJobSeekerSkillDto })
-  async createOne(@Body() args: CreateOpWorkJobSeekerSkillDto) {
+  async createOne(
+    @Body() args: CreateOpWorkJobSeekerSkillDto,
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkJobSeekerSkill.create({
-      data: {
-        ...args,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -126,9 +121,12 @@ export class OpWorkJobSeekerSkillController {
     return await this.prismaservice.opWorkJobSeekerSkill.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -150,6 +148,7 @@ export class OpWorkJobSeekerSkillController {
     return await this.prismaservice.opWorkJobSeekerSkill.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

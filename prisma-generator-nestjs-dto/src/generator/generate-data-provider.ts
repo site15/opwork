@@ -19,179 +19,236 @@ export const generateDataProvider = ({
   // Convert to camelCase for SDK method names
   const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
 
-  return `/* eslint-disable @typescript-eslint/no-explicit-any */
-  import {
-  CreateResult,
-  DataProvider,
-  DeleteManyResult,
-  DeleteResult,
-  GetListResult,
-  GetManyReferenceResult,
-  GetManyResult,
-  GetOneResult,
-  UpdateManyResult,
-  UpdateResult,
-} from "react-admin";
-import { ${createDtoClassName} } from "../client";
-import {
-  ${camelModelName}ControllerCreateOne,
-  ${camelModelName}ControllerDeleteOne,
-  ${camelModelName}ControllerFindMany,
-  ${camelModelName}ControllerFindOne,
-  ${camelModelName}ControllerUpdateOne,
-} from "../client/sdk.gen";
+  // Get fields for different form types
+  const allFields = model.fields.filter(
+    (field) => field.kind === 'scalar' && field.name !== 'deletedAt',
+  );
+  const editableFields = allFields.filter(
+    (field) =>
+      !field.isId &&
+      field.name !== 'createdAt' &&
+      field.name !== 'updatedAt' &&
+      field.name !== 'deletedAt',
+  );
+  const readOnlyFields = allFields.filter(
+    (field) =>
+      field.isId ||
+      field.name === 'createdAt' ||
+      field.name === 'updatedAt' ||
+      field.name === 'deletedAt',
+  );
 
-export const ${dataProviderName}: DataProvider<any> = {
-  getList: async (_, params) => {
-    const { page, perPage } = params.pagination || {};
-    const result = await ${camelModelName}ControllerFindMany({
-      query: {
-        curPage: page,
-        perPage,
-        sort: params.sort
-          ? \`\${params.sort?.field}:\${params.sort?.order.toLowerCase()}\`
-          : undefined,
+  const getInputComponent = (field: (typeof allFields)[0]): string => {
+    /*
+    switch (field.type) {
+      case 'Json':
+        return 'JsonViewerField';
+      case 'String':
+        return 'TextInput';
+      case 'Int':
+      case 'Float':
+      case 'Decimal':
+        return 'NumberInput';
+      case 'Boolean':
+        return 'BooleanInput';
+      case 'DateTime':
+        return 'DateTimeInput';
+      default:
+        return 'TextInput';
+    }*/
+
+    const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
+    const required = field.isRequired;
+    const readonly = readOnlyFields.find((f) => f.name === field.name);
+    let component = 'Input';
+    if (multiline) {
+      component = 'Textarea';
+    }
+    if (field.type === 'Boolean') {
+      return `    {
+      component: 'RadioGroup',
+      componentProps: {
+        buttonStyle: 'solid',
+        options: [
+          { label: $t('common.enabled'), value: true },
+          { label: $t('common.disabled'), value: false },
+        ],
+        optionType: 'button',
       },
-      signal: params.signal,
-    });
+      defaultValue: false,
+      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      label: $t('resource.${entityClassName}.${field.name}'),
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+      labelWidth: 200
+    },`;
+    }
+    return `    {
+      component: '${component}',
+      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      label: $t('resource.${entityClassName}.${field.name}'),
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+      labelWidth: 200
+    },`;
+  };
 
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
+  const getColumnComponent = (field: (typeof allFields)[0]): string => {
+    /*
+    switch (field.type) {
+      case 'Json':
+        return 'JsonViewerField';
+      case 'String':
+        return 'TextInput';
+      case 'Int':
+      case 'Float':
+      case 'Decimal':
+        return 'NumberInput';
+      case 'Boolean':
+        return 'BooleanInput';
+      case 'DateTime':
+        return 'DateTimeInput';
+      default:
+        return 'TextInput';
+    }*/
+
+    const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
+    const required = field.isRequired;
+    const readonly = readOnlyFields.find((f) => f.name === field.name);
+    if (field.name === 'id') {
+      return `    {
+      field: Prisma.${entityClassName}ScalarFieldEnum.id,
+      title: $t('common.id'),
+      sortable: true
+    },`;
+    }
+    if (field.name === 'createdAt') {
+      return `    {
+      field: Prisma.${entityClassName}ScalarFieldEnum.createdAt,
+      title: $t('common.createdAt'),
+      formatter: 'formatDateTime',
+      sortable: true
+    },`;
+    }
+    if (field.name === 'updatedAt') {
+      return `    {
+      field: Prisma.${entityClassName}ScalarFieldEnum.updatedAt,
+      title: $t('common.updatedAt'),
+      formatter: 'formatDateTime',
+      sortable: true
+    },`;
+    }
+    if (field.type === 'DateTime') {
+      return `    {
+      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      title: $t('resource.${entityClassName}.${field.name}'),
+      formatter: 'formatDateTime',
+      sortable: true
+    },`;
+    }
+    if (field.type === 'Boolean') {
+      return `    {
+      cellRender: {
+        name:'CellTag',
+      },
+      title: $t('resource.${entityClassName}.${field.name}'),
+      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      sortable: true
+    },`;
     }
 
-    return {
-      data: result.data?.items || [],
-      total: result.data?.meta.totalResults || 0,
-    } as GetListResult<any>;
-  },
+    return `    {
+      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      title: $t('resource.${entityClassName}.${field.name}'),
+      sortable: true
+    },`;
+  };
 
-  getOne: async (_, params) => {
-    const result = await ${camelModelName}ControllerFindOne({
-      path: { id: String(params.id) },
-      signal: params.signal,
-    });
+  // Generate input fields for create form (only editable fields)
+  const createFormFields = editableFields
+    .map((field) => {
+      return getInputComponent(field);
+    })
+    .join('\n');
 
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
-    }
+  // Generate input fields for edit form (editable + read-only)
+  const editFormFields = [
+    ...readOnlyFields.map((field) => {
+      return getInputComponent(field);
+    }),
+    ...editableFields.map((field) => {
+      return getInputComponent(field);
+    }),
+  ].join('\n');
 
-    return { data: result.data } as GetOneResult<any>;
-  },
+  const showFormFields = [
+    ...allFields.map((field) => {
+      return getInputComponent(field);
+    }),
+  ].join('\n');
 
-  getMany: async (_, params) => {
-    const promises = params.ids.map((id) =>
-      ${camelModelName}ControllerFindOne({
-        path: { id: String(id) },
-        signal: params.signal,
-      }),
-    );
-    const results = await Promise.all(promises);
+  const showGridFields = [
+    ...allFields.map((field) => {
+      return getColumnComponent(field);
+    }),
+  ].join('\n');
 
-    if ((results||[]).some((result) => result?.error)) {
-      throw Object.assign(new Error(), results.find((result) => result?.error));
-    }
+  return `import type { VbenFormSchema } from '#/adapter/form';
+import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
+import type { ${entityClassName} } from '#/generated/client';
+import { Prisma } from '#/generated/prisma/browser';
 
-    return { data: results.map((result) => result.data) } as GetManyResult<any>;
-  },
+import { $t } from '#/locales';
 
-  getManyReference: async (_, params) => {
-    const { page, perPage } = params.pagination;
-    const query = {
-      curPage: page,
-      perPage,
-      sort: params.sort
-        ? \`\${params.sort?.field}:\${params.sort?.order.toLowerCase()}\`
-        : undefined,
-      [params.target]: params.id,
-      ...params.filter,
-    };
+export function use${entityClassName}FormSchema(): VbenFormSchema[] {
+  return [
+    ${editFormFields}
+  ];
+}
 
-    const result = await ${camelModelName}ControllerFindMany({
-      query,
-      signal: params.signal,
-    });
+export function use${entityClassName}CreateFormSchema(): VbenFormSchema[] {
+  return [
+    ${createFormFields}
+  ];
+}
 
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
-    }
+export function use${entityClassName}ViewFormSchema(): VbenFormSchema[] {
+  return [
+    ${showFormFields}
+  ];
+}
 
-    return {
-      data: result.data?.items || [],
-      total: result.data?.meta.totalResults || 0,
-    } as GetManyReferenceResult<any>;
-  },
+export function use${entityClassName}FilterFormSchema(): VbenFormSchema[] {
+  return [
+    {
+      component: 'Input',
+      fieldName: 'searchText',
+      label: $t('common.searchText'),
+    },
+  ];
+}
 
-  create: async (_, params) => {
-    const result = await ${camelModelName}ControllerCreateOne({
-      body: params.data as ${createDtoClassName},
-    });
-
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
-    }
-
-    return { data: result.data } as CreateResult<any>;
-  },
-
-  update: async (_, params) => {
-    const result = await ${camelModelName}ControllerUpdateOne({
-      path: { id: params.id },
-      body: params.data,
-    });
-
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
-    }
-
-    return { data: result.data } as UpdateResult<any>;
-  },
-
-  updateMany: async (_, params) => {
-    const promises = params.ids.map((id) =>
-      ${camelModelName}ControllerUpdateOne({
-        path: { id: String(id) },
-        body: params.data,
-      }),
-    );
-    const results = await Promise.all(promises);
-    
-    if ((results||[]).some((result) => result?.error)) {
-      throw Object.assign(new Error(), results.find((result) => result.error));
-    }
-
-    return {
-      data: results.map((result) => result.data),
-    } as UpdateManyResult<any>;
-  },
-
-  delete: async (_: any, params) => {
-    const result = await ${camelModelName}ControllerDeleteOne({
-      path: { id: String(params.id) },
-    });
-
-    if (result?.error) {
-      throw Object.assign(new Error(), result.error);
-    }
-
-    return { data: result.data } as DeleteResult<any>;
-  },
-
-  deleteMany: async (_, params) => {
-    const promises = params.ids.map((id) =>
-      ${camelModelName}ControllerDeleteOne({
-        path: { id: String(id) },
-      }),
-    );
-    const results = await Promise.all(promises);
-    
-    if ((results||[]).some((result) => result?.error)) {
-      throw Object.assign(new Error(), results.find((result) => result.error));
-    }
-
-    return {
-      data: results.map((result) => result.data),
-    } as DeleteManyResult<any>;
-  },
-};
+export function use${entityClassName}Columns<T = ${entityClassName}>(
+  onActionClick: OnActionClickFn<T>,
+): VxeTableGridOptions['columns'] {
+  return [
+    ${showGridFields}
+    {
+      align: 'center',
+      cellRender: {
+        attrs: {
+          nameField: 'id',
+          nameTitle: $t('common.id'),
+          onClick: onActionClick,
+        },
+        name: 'CellOperation',
+      },
+      field: 'operation',
+      fixed: 'right',
+      title: $t('common.operation'),
+      width: 130,
+    },
+  ];
+}
 `;
 };

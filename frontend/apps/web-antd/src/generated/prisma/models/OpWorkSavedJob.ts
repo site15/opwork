@@ -152,7 +152,7 @@ export type OpWorkSavedJobGroupByOutputType = {
   id: string
   profileId: string
   jobId: string
-  savedAt: Date
+  savedAt: Date | null
   notes: string | null
   _count: OpWorkSavedJobCountAggregateOutputType | null
   _min: OpWorkSavedJobMinAggregateOutputType | null
@@ -181,7 +181,7 @@ export type OpWorkSavedJobWhereInput = {
   id?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
   profileId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
   jobId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
-  savedAt?: Prisma.DateTimeFilter<"OpWorkSavedJob"> | Date | string
+  savedAt?: Prisma.DateTimeNullableFilter<"OpWorkSavedJob"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"OpWorkSavedJob"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
@@ -191,7 +191,7 @@ export type OpWorkSavedJobOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
-  savedAt?: Prisma.SortOrder
+  savedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
   OpWorkJob?: Prisma.OpWorkJobOrderByWithRelationInput
@@ -205,7 +205,7 @@ export type OpWorkSavedJobWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OpWorkSavedJobWhereInput | Prisma.OpWorkSavedJobWhereInput[]
   profileId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
   jobId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
-  savedAt?: Prisma.DateTimeFilter<"OpWorkSavedJob"> | Date | string
+  savedAt?: Prisma.DateTimeNullableFilter<"OpWorkSavedJob"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"OpWorkSavedJob"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
@@ -215,7 +215,7 @@ export type OpWorkSavedJobOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
-  savedAt?: Prisma.SortOrder
+  savedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpWorkSavedJobCountOrderByAggregateInput
   _max?: Prisma.OpWorkSavedJobMaxOrderByAggregateInput
@@ -229,13 +229,13 @@ export type OpWorkSavedJobScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"OpWorkSavedJob"> | string
   profileId?: Prisma.UuidWithAggregatesFilter<"OpWorkSavedJob"> | string
   jobId?: Prisma.UuidWithAggregatesFilter<"OpWorkSavedJob"> | string
-  savedAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkSavedJob"> | Date | string
+  savedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkSavedJob"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"OpWorkSavedJob"> | string | null
 }
 
 export type OpWorkSavedJobCreateInput = {
   id?: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSavedJobsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkSavedJobInput
@@ -245,13 +245,13 @@ export type OpWorkSavedJobUncheckedCreateInput = {
   id?: string
   profileId: string
   jobId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
 export type OpWorkSavedJobUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkSavedJobsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkSavedJobNestedInput
@@ -261,7 +261,7 @@ export type OpWorkSavedJobUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -269,13 +269,13 @@ export type OpWorkSavedJobCreateManyInput = {
   id?: string
   profileId: string
   jobId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
 export type OpWorkSavedJobUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -283,7 +283,7 @@ export type OpWorkSavedJobUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -412,7 +412,7 @@ export type OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkJobNestedInput = {
 
 export type OpWorkSavedJobCreateWithoutOpWorkProfileInput = {
   id?: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkSavedJobInput
 }
@@ -420,7 +420,7 @@ export type OpWorkSavedJobCreateWithoutOpWorkProfileInput = {
 export type OpWorkSavedJobUncheckedCreateWithoutOpWorkProfileInput = {
   id?: string
   jobId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
@@ -457,13 +457,13 @@ export type OpWorkSavedJobScalarWhereInput = {
   id?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
   profileId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
   jobId?: Prisma.UuidFilter<"OpWorkSavedJob"> | string
-  savedAt?: Prisma.DateTimeFilter<"OpWorkSavedJob"> | Date | string
+  savedAt?: Prisma.DateTimeNullableFilter<"OpWorkSavedJob"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"OpWorkSavedJob"> | string | null
 }
 
 export type OpWorkSavedJobCreateWithoutOpWorkJobInput = {
   id?: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSavedJobsInput
 }
@@ -471,7 +471,7 @@ export type OpWorkSavedJobCreateWithoutOpWorkJobInput = {
 export type OpWorkSavedJobUncheckedCreateWithoutOpWorkJobInput = {
   id?: string
   profileId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
@@ -504,13 +504,13 @@ export type OpWorkSavedJobUpdateManyWithWhereWithoutOpWorkJobInput = {
 export type OpWorkSavedJobCreateManyOpWorkProfileInput = {
   id?: string
   jobId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
 export type OpWorkSavedJobUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkSavedJobNestedInput
 }
@@ -518,27 +518,27 @@ export type OpWorkSavedJobUpdateWithoutOpWorkProfileInput = {
 export type OpWorkSavedJobUncheckedUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkSavedJobCreateManyOpWorkJobInput = {
   id?: string
   profileId: string
-  savedAt?: Date | string
+  savedAt?: Date | string | null
   notes?: string | null
 }
 
 export type OpWorkSavedJobUpdateWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkSavedJobsNestedInput
 }
@@ -546,14 +546,14 @@ export type OpWorkSavedJobUpdateWithoutOpWorkJobInput = {
 export type OpWorkSavedJobUncheckedUpdateWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
-  savedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  savedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -639,7 +639,7 @@ export type $OpWorkSavedJobPayload<ExtArgs extends runtime.Types.Extensions.Inte
     /**
      * Дата сохранения вакансии
      */
-    savedAt: Date
+    savedAt: Date | null
     /**
      * Персональные заметки пользователя о вакансии
      */

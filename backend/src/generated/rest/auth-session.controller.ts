@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { AuthSessionDto } from './auth-session.dto';
 import { AuthSession } from './auth-session.entity';
@@ -79,6 +77,7 @@ export class AuthSessionController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,11 +108,12 @@ export class AuthSessionController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateAuthSessionDto,
-  ) {
+  ) {    
     return await this.prismaservice.authSession.create({
-      data: {
+      data: { 
         ...args,
         userId: req.userId,
+        
       },
     });
   }
@@ -128,9 +128,11 @@ export class AuthSessionController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -152,6 +154,7 @@ export class AuthSessionController {
     return await this.prismaservice.authSession.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

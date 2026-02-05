@@ -68,7 +68,7 @@ for (const key of missingKeys) {
     const langDir = path.join(LOCALES_DIR, lang);
     const filePath = path.join(langDir, `${namespace}.json`);
 
-    const json = !fs.existsSync(filePath)?{}:JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const json = !fs.existsSync(filePath) ? {} : JSON.parse(fs.readFileSync(filePath, 'utf8'));
     if (newKey) {
       setDeep(json, newKey, humanize(key));
       if (Object.keys(json).length > 0) {
@@ -101,7 +101,15 @@ function setDeep(obj, key, value) {
 }
 
 function humanize(key) {
-  const last = key.split('.').at(-1);
+  let last = key.split('.').at(-1);
+
+  if (last.startsWith('OpWork')) {
+    last = last.replace('OpWork', '');
+  }
+
+  if (last.startsWith('Auth')) {
+    last = last.replace('Auth', '');
+  }
 
   return (
     last
@@ -112,5 +120,5 @@ function humanize(key) {
       .replaceAll(/[_-]+/g, ' ')
       // capitalize first letter
       .replace(/^./, (c) => c.toUpperCase())
-  );
+  )
 }

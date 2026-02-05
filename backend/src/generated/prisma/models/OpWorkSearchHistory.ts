@@ -188,7 +188,7 @@ export type OpWorkSearchHistoryGroupByOutputType = {
   query: string
   filters: runtime.JsonValue | null
   resultsCount: number | null
-  searchedAt: Date
+  searchedAt: Date | null
   _count: OpWorkSearchHistoryCountAggregateOutputType | null
   _avg: OpWorkSearchHistoryAvgAggregateOutputType | null
   _sum: OpWorkSearchHistorySumAggregateOutputType | null
@@ -220,7 +220,7 @@ export type OpWorkSearchHistoryWhereInput = {
   query?: Prisma.StringFilter<"OpWorkSearchHistory"> | string
   filters?: Prisma.JsonNullableFilter<"OpWorkSearchHistory">
   resultsCount?: Prisma.IntNullableFilter<"OpWorkSearchHistory"> | number | null
-  searchedAt?: Prisma.DateTimeFilter<"OpWorkSearchHistory"> | Date | string
+  searchedAt?: Prisma.DateTimeNullableFilter<"OpWorkSearchHistory"> | Date | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
 }
 
@@ -230,7 +230,7 @@ export type OpWorkSearchHistoryOrderByWithRelationInput = {
   query?: Prisma.SortOrder
   filters?: Prisma.SortOrderInput | Prisma.SortOrder
   resultsCount?: Prisma.SortOrderInput | Prisma.SortOrder
-  searchedAt?: Prisma.SortOrder
+  searchedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
 }
 
@@ -243,7 +243,7 @@ export type OpWorkSearchHistoryWhereUniqueInput = Prisma.AtLeast<{
   query?: Prisma.StringFilter<"OpWorkSearchHistory"> | string
   filters?: Prisma.JsonNullableFilter<"OpWorkSearchHistory">
   resultsCount?: Prisma.IntNullableFilter<"OpWorkSearchHistory"> | number | null
-  searchedAt?: Prisma.DateTimeFilter<"OpWorkSearchHistory"> | Date | string
+  searchedAt?: Prisma.DateTimeNullableFilter<"OpWorkSearchHistory"> | Date | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
 }, "id">
 
@@ -253,7 +253,7 @@ export type OpWorkSearchHistoryOrderByWithAggregationInput = {
   query?: Prisma.SortOrder
   filters?: Prisma.SortOrderInput | Prisma.SortOrder
   resultsCount?: Prisma.SortOrderInput | Prisma.SortOrder
-  searchedAt?: Prisma.SortOrder
+  searchedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpWorkSearchHistoryCountOrderByAggregateInput
   _avg?: Prisma.OpWorkSearchHistoryAvgOrderByAggregateInput
   _max?: Prisma.OpWorkSearchHistoryMaxOrderByAggregateInput
@@ -270,7 +270,7 @@ export type OpWorkSearchHistoryScalarWhereWithAggregatesInput = {
   query?: Prisma.StringWithAggregatesFilter<"OpWorkSearchHistory"> | string
   filters?: Prisma.JsonNullableWithAggregatesFilter<"OpWorkSearchHistory">
   resultsCount?: Prisma.IntNullableWithAggregatesFilter<"OpWorkSearchHistory"> | number | null
-  searchedAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkSearchHistory"> | Date | string
+  searchedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkSearchHistory"> | Date | string | null
 }
 
 export type OpWorkSearchHistoryCreateInput = {
@@ -278,7 +278,7 @@ export type OpWorkSearchHistoryCreateInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSearchHistoriesInput
 }
 
@@ -288,7 +288,7 @@ export type OpWorkSearchHistoryUncheckedCreateInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
 }
 
 export type OpWorkSearchHistoryUpdateInput = {
@@ -296,7 +296,7 @@ export type OpWorkSearchHistoryUpdateInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkSearchHistoriesNestedInput
 }
 
@@ -306,7 +306,7 @@ export type OpWorkSearchHistoryUncheckedUpdateInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpWorkSearchHistoryCreateManyInput = {
@@ -315,7 +315,7 @@ export type OpWorkSearchHistoryCreateManyInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
 }
 
 export type OpWorkSearchHistoryUpdateManyMutationInput = {
@@ -323,7 +323,7 @@ export type OpWorkSearchHistoryUpdateManyMutationInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpWorkSearchHistoryUncheckedUpdateManyInput = {
@@ -332,7 +332,7 @@ export type OpWorkSearchHistoryUncheckedUpdateManyInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpWorkSearchHistoryListRelationFilter = {
@@ -425,7 +425,7 @@ export type OpWorkSearchHistoryCreateWithoutOpWorkProfileInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
 }
 
 export type OpWorkSearchHistoryUncheckedCreateWithoutOpWorkProfileInput = {
@@ -433,7 +433,7 @@ export type OpWorkSearchHistoryUncheckedCreateWithoutOpWorkProfileInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
 }
 
 export type OpWorkSearchHistoryCreateOrConnectWithoutOpWorkProfileInput = {
@@ -471,7 +471,7 @@ export type OpWorkSearchHistoryScalarWhereInput = {
   query?: Prisma.StringFilter<"OpWorkSearchHistory"> | string
   filters?: Prisma.JsonNullableFilter<"OpWorkSearchHistory">
   resultsCount?: Prisma.IntNullableFilter<"OpWorkSearchHistory"> | number | null
-  searchedAt?: Prisma.DateTimeFilter<"OpWorkSearchHistory"> | Date | string
+  searchedAt?: Prisma.DateTimeNullableFilter<"OpWorkSearchHistory"> | Date | string | null
 }
 
 export type OpWorkSearchHistoryCreateManyOpWorkProfileInput = {
@@ -479,7 +479,7 @@ export type OpWorkSearchHistoryCreateManyOpWorkProfileInput = {
   query: string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: number | null
-  searchedAt?: Date | string
+  searchedAt?: Date | string | null
 }
 
 export type OpWorkSearchHistoryUpdateWithoutOpWorkProfileInput = {
@@ -487,7 +487,7 @@ export type OpWorkSearchHistoryUpdateWithoutOpWorkProfileInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpWorkSearchHistoryUncheckedUpdateWithoutOpWorkProfileInput = {
@@ -495,7 +495,7 @@ export type OpWorkSearchHistoryUncheckedUpdateWithoutOpWorkProfileInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpWorkSearchHistoryUncheckedUpdateManyWithoutOpWorkProfileInput = {
@@ -503,7 +503,7 @@ export type OpWorkSearchHistoryUncheckedUpdateManyWithoutOpWorkProfileInput = {
   query?: Prisma.StringFieldUpdateOperationsInput | string
   filters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   resultsCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  searchedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  searchedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -590,7 +590,7 @@ export type $OpWorkSearchHistoryPayload<ExtArgs extends runtime.Types.Extensions
     /**
      * Временная метка выполнения поиска
      */
-    searchedAt: Date
+    searchedAt: Date | null
   }, ExtArgs["result"]["opWorkSearchHistory"]>
   composites: {}
 }

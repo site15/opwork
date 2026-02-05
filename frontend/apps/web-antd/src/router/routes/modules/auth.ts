@@ -22,6 +22,24 @@ const routes: RouteRecordRaw[] = [
         component: () =>
           import('#/generated/resource/AuthUser/AuthUserList.vue'),
       },
+      {
+        meta: {
+          title: $t('page.resource.AuthApiKey'),
+        },
+        name: 'AuthApiKey',
+        path: '/auth/api-key',
+        component: () =>
+          import('#/generated/resource/AuthApiKey/AuthApiKeyList.vue'),
+      },
+      {
+        meta: {
+          title: $t('page.resource.AuthSession'),
+        },
+        name: 'AuthSession',
+        path: '/auth/session',
+        component: () =>
+          import('#/generated/resource/AuthSession/AuthSessionList.vue'),
+      },
     ],
   },
 ];

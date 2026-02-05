@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkSearchHistoryDto } from './op-work-search-history.dto';
 import { OpWorkSearchHistory } from './op-work-search-history.entity';
@@ -71,16 +69,16 @@ export class OpWorkSearchHistoryController {
         {},
       );
 
-    const opWorkSearchHistoryWhereInput: Prisma.OpWorkSearchHistoryWhereInput =
-      {
-        ...(searchText
-          ? {
-              OR: [
-                ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-              ],
-            }
-          : {}),
-      };
+    const opWorkSearchHistoryWhereInput: Prisma.OpWorkSearchHistoryWhereInput = {
+      ...(searchText
+        ? {
+            OR: [
+              ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+            ],
+          }
+        : {}),
+      
+    };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
       return {
@@ -110,11 +108,11 @@ export class OpWorkSearchHistoryController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkSearchHistoryDto,
-  ) {
+  ) {    
     return await this.prismaservice.opWorkSearchHistory.create({
-      data: {
+      data: { 
         ...args,
-
+        
         profileId: req.currentProfileId,
       },
     });
@@ -129,9 +127,12 @@ export class OpWorkSearchHistoryController {
     return await this.prismaservice.opWorkSearchHistory.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -153,6 +154,7 @@ export class OpWorkSearchHistoryController {
     return await this.prismaservice.opWorkSearchHistory.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

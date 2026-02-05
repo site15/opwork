@@ -58,6 +58,7 @@ async function bootstrap() {
   Logger.log('Generating Swagger documentation');
   const document = SwaggerModule.createDocument(app, config);
   try {
+    Logger.log('Writing Swagger documentation to file');
     writeFileSync('./swagger.json', JSON.stringify(document));
   } catch (error) {
     //

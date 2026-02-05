@@ -7,22 +7,52 @@ import { $t } from '#/locales';
 
 export function useAuthUserFormSchema(): VbenFormSchema[] {
   return [
+        {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.id,
+      label: $t('resource.AuthUser.id'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.createdAt,
+      label: $t('resource.AuthUser.createdAt'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.updatedAt,
+      label: $t('resource.AuthUser.updatedAt'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
     {
       component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
       label: $t('resource.AuthUser.anonymousId'),
-      rules: 'required', labelWidth: 200
+      
+      
+      labelWidth: 200
     },
     {
       component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
       label: $t('resource.AuthUser.supabaseUserId'),
-      rules: 'required', labelWidth: 200
+      
+      
+      labelWidth: 200
     },
     {
-      component: 'Textarea',
+      component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
       label: $t('resource.AuthUser.supabaseUserData'),
+      
+      
       labelWidth: 200
     },
     {
@@ -37,8 +67,127 @@ export function useAuthUserFormSchema(): VbenFormSchema[] {
       },
       defaultValue: false,
       fieldName: Prisma.AuthUserScalarFieldEnum.isActive,
-      label: $t('resource.AuthUser.isActive'), labelWidth: 200
-    }
+      label: $t('resource.AuthUser.isActive'),
+      
+      
+      labelWidth: 200
+    },
+  ];
+}
+
+export function useAuthUserCreateFormSchema(): VbenFormSchema[] {
+  return [
+        {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
+      label: $t('resource.AuthUser.anonymousId'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
+      label: $t('resource.AuthUser.supabaseUserId'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
+      label: $t('resource.AuthUser.supabaseUserData'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'RadioGroup',
+      componentProps: {
+        buttonStyle: 'solid',
+        options: [
+          { label: $t('common.enabled'), value: true },
+          { label: $t('common.disabled'), value: false },
+        ],
+        optionType: 'button',
+      },
+      defaultValue: false,
+      fieldName: Prisma.AuthUserScalarFieldEnum.isActive,
+      label: $t('resource.AuthUser.isActive'),
+      
+      
+      labelWidth: 200
+    },
+  ];
+}
+
+export function useAuthUserViewFormSchema(): VbenFormSchema[] {
+  return [
+        {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.id,
+      label: $t('resource.AuthUser.id'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
+      label: $t('resource.AuthUser.anonymousId'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
+      label: $t('resource.AuthUser.supabaseUserId'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
+      label: $t('resource.AuthUser.supabaseUserData'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'RadioGroup',
+      componentProps: {
+        buttonStyle: 'solid',
+        options: [
+          { label: $t('common.enabled'), value: true },
+          { label: $t('common.disabled'), value: false },
+        ],
+        optionType: 'button',
+      },
+      defaultValue: false,
+      fieldName: Prisma.AuthUserScalarFieldEnum.isActive,
+      label: $t('resource.AuthUser.isActive'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.createdAt,
+      label: $t('resource.AuthUser.createdAt'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.updatedAt,
+      label: $t('resource.AuthUser.updatedAt'),
+      rules: 'required',
+      disabled: true,
+      labelWidth: 200
+    },
   ];
 }
 
@@ -54,10 +203,9 @@ export function useAuthUserFilterFormSchema(): VbenFormSchema[] {
 
 export function useAuthUserColumns<T = AuthUser>(
   onActionClick: OnActionClickFn<T>,
-  onIsActiveChange?: (newValue: boolean, row: T) => PromiseLike<boolean | undefined>,
 ): VxeTableGridOptions['columns'] {
   return [
-    {
+        {
       field: Prisma.AuthUserScalarFieldEnum.id,
       title: $t('common.id'),
       sortable: true
@@ -79,8 +227,7 @@ export function useAuthUserColumns<T = AuthUser>(
     },
     {
       cellRender: {
-        attrs: { beforeChange: onIsActiveChange },
-        name: onIsActiveChange ? 'CellSwitch' : 'CellTag',
+        name:'CellTag',
       },
       title: $t('resource.AuthUser.isActive'),
       field: Prisma.AuthUserScalarFieldEnum.isActive,
@@ -89,6 +236,12 @@ export function useAuthUserColumns<T = AuthUser>(
     {
       field: Prisma.AuthUserScalarFieldEnum.createdAt,
       title: $t('common.createdAt'),
+      formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      field: Prisma.AuthUserScalarFieldEnum.updatedAt,
+      title: $t('common.updatedAt'),
       formatter: 'formatDateTime',
       sortable: true
     },

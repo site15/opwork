@@ -77,6 +77,7 @@ export class OpWorkExperienceController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,16 +105,11 @@ export class OpWorkExperienceController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkExperienceDto })
-  async createOne(@Body() args: CreateOpWorkExperienceDto) {
+  async createOne(
+    @Body() args: CreateOpWorkExperienceDto,
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkExperience.create({
-      data: {
-        ...args,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -125,9 +121,12 @@ export class OpWorkExperienceController {
     return await this.prismaservice.opWorkExperience.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -149,6 +148,7 @@ export class OpWorkExperienceController {
     return await this.prismaservice.opWorkExperience.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

@@ -4,8 +4,6 @@ import { ModelParams } from './types';
 export const generateForm = ({
   controller,
   templateHelpers,
-  create,
-  update,
 }: ModelParams & { templateHelpers: TemplateHelpers }): string => {
   const { model } = controller;
   const { entityName } = templateHelpers;
@@ -35,9 +33,8 @@ export const generateForm = ({
       field.name === 'deletedAt',
   );
 
-  // Map Prisma types to React Admin input components
   const getInputComponent = (field: (typeof allFields)[0]): string => {
-    switch (field.type) {
+    /*switch (field.type) {
       case 'Json':
         return 'JsonViewerField';
       case 'String':
@@ -52,109 +49,133 @@ export const generateForm = ({
         return 'DateTimeInput';
       default:
         return 'TextInput';
+    }*/
+    if (field.type === 'Json') {
+      return `        ${field.name}: values.${field.name} ? JSON.parse(values.${field.name} as any) : null,`;
     }
+    return `        ${field.name}: values.${field.name},`;
   };
 
   // Generate input fields for create form (only editable fields)
   const createFormFields = editableFields
-    .filter((field) => create.fields.find((f) => f.name === field.name))
+    .filter((field) => !field.name.endsWith('Id'))
     .map((field) => {
-      const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-      const component = getInputComponent(field);
-      return `      <${component} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}${multiline} />`;
+      return getInputComponent(field);
     })
     .join('\n');
 
   // Generate input fields for edit form (editable + read-only)
   const editFormFields = [
-    ...readOnlyFields
-      .filter((field) => update.fields.find((f) => f.name === field.name))
-      .map((field) => {
-        const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-        const component = getInputComponent(field);
-        return `      <${component}
-        source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}
-        readOnly={true}${multiline}
-      />`;
-      }),
     ...editableFields
-      .filter((field) => update.fields.find((f) => f.name === field.name))
+      .filter((field) => !field.name.endsWith('Id'))
       .map((field) => {
-        const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-        const component = getInputComponent(field);
-        return `      <${component} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}${multiline} />`;
+        return getInputComponent(field);
       }),
   ].join('\n');
 
   const showFormFields = [
     ...allFields.map((field) => {
-      const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-      const component = getInputComponent(field);
-      return `      <${component}
-        source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}
-        readOnly={true}${multiline}
-      />`;
+      return getInputComponent(field);
     }),
   ].join('\n');
 
-  return `import {
-  BooleanInput,
-  Create,
-  DateTimeInput,
-  Edit,
-  NumberInput,
-  SimpleForm,
-  TextInput,
-} from "react-admin";
+  const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
+  return `<script lang="ts" setup>
+import { computed, nextTick, ref } from 'vue';
 
-import ReactJson from 'react-json-view';
-import { useRecordContext, Labeled } from 'react-admin';
+import { useVbenDrawer } from '@vben/common-ui';
 
-import { Prisma } from "../prisma/browser";
+import { useVbenForm } from '#/adapter/form';
+import { ${camelModelName}ControllerCreateOne, ${camelModelName}ControllerUpdateOne } from '#/generated/client';
+import type { ${entityClassName} } from '#/generated/prisma/browser';
+import { $t } from '#/locales';
+import { use${entityClassName}FormSchema } from './${entityClassName}Data';
 
-const JsonViewerField = ({ source, label }) => {
-    const record = useRecordContext();
-    const value = record?.[source];
+const emits = defineEmits(['success']);
 
-    if (!value) return null;
+const formData = ref<${entityClassName}>({} as ${entityClassName});
 
-    return (
-        <Labeled label={label}>
-            <div style={{ marginTop: '8px', marginBottom: '16px' }}>
-                <ReactJson 
-                    src={value} 
-                    collapsed={1}
-                    theme="monokai"
-                    displayDataTypes={false}
-                    name={false}
-                />
-            </div>
-        </Labeled>
-    );
-};
+const [Form, formApi] = useVbenForm({
+  schema: use${entityClassName}FormSchema(),
+  showDefaultActions: false,
+});
 
-export const ${editFormName} = () => (
-  <Edit>
-    <SimpleForm>
+const id = ref();
+const [Drawer, drawerApi] = useVbenDrawer({
+  async onConfirm() {
+    const { valid } = await formApi.validate();
+    if (!valid) return;
+    const values = await formApi.getValues();
+    drawerApi.lock();
+    (id.value ? ${camelModelName}ControllerUpdateOne({
+      path: { id: id.value },
+      body: {
 ${editFormFields}
-    </SimpleForm>
-  </Edit>
-);
-
-export const ${showFormName} = () => (
-  <Edit>
-    <SimpleForm>
-${showFormFields}
-    </SimpleForm>
-  </Edit>
-);
-
-export const ${createFormName} = () => (
-  <Create>
-    <SimpleForm>
+      }
+    }) : ${camelModelName}ControllerCreateOne({
+      body: {
 ${createFormFields}
-    </SimpleForm>
-  </Create>
-);
+      }
+    }))
+      .then(() => {
+        emits('success');
+        drawerApi.close();
+      })
+      .catch(() => {
+        drawerApi.unlock();
+      });
+  },
+
+  async onOpenChange(isOpen) {
+    if (isOpen) {
+      const data = drawerApi.getData<${entityClassName}>();
+      formApi.resetForm();
+
+      if (data) {
+        formData.value = data;
+        id.value = data.id;
+      } else {
+        id.value = undefined;
+      }
+
+      // Wait for Vue to flush DOM updates (form fields mounted)
+      await nextTick();
+      if (data) {
+        formApi.setValues(data);
+      }
+    }
+  },
+});
+
+const getDrawerTitle = computed(() => {
+  return formData.value?.id
+    ? $t('common.edit', $t('resource.name.${entityClassName}'))
+    : $t('common.create', $t('resource.name.${entityClassName}'));
+});
+
+</script>
+<template>
+  <Drawer :title="getDrawerTitle">
+    <Form>
+    </Form>
+  </Drawer>
+</template>
+<style lang="css" scoped>
+:deep(.ant-tree-title) {
+  .tree-actions {
+    display: none;
+    margin-left: 20px;
+  }
+}
+
+:deep(.ant-tree-title:hover) {
+  .tree-actions {
+    display: flex;
+    flex: auto;
+    justify-content: flex-end;
+    margin-left: 20px;
+  }
+}
+</style>
 `;
 };

@@ -1,30 +1,30 @@
 {
   "formRules": {
-    "previewWarning": "Preview Warning",
-    "sizeLimit": "Size Limit",
-    "required": "Required",
-    "selectRequired": "Select Required"
+    "previewWarning": "Предварительный просмотр",
+    "sizeLimit": "Ограничение размера",
+    "required": "Обязательно",
+    "selectRequired": "Выбор обязателен"
   },
   "crop": {
-    "title": "Title",
-    "titleTip": "Title Tip",
-    "confirm": "Confirm",
-    "errorTip": "Error Tip"
+    "title": "Заголовок",
+    "titleTip": "Совет по заголовку",
+    "confirm": "Подтвердить",
+    "errorTip": "Ошибка"
   },
   "placeholder": {
-    "upload": "Upload"
+    "upload": "Загрузить"
   },
   "actionTitle": {
-    "delete": "Delete",
-    "create": "Create"
+    "delete": "Удалить",
+    "create": "Создать"
   },
   "actionMessage": {
-    "deleteConfirm": "Delete Confirm",
-    "deleting": "Deleting",
-    "deleteSuccess": "Delete Success"
+    "deleteConfirm": "Подтверждение удаления",
+    "deleting": "Удаляется...",
+    "deleteSuccess": "Удалён успешно"
   },
   "widgets": {
-    "document": "Document",
-    "qa": "Qa"
+    "document": "Документ",
+    "qa": "Вопрос-ответ"
   }
 }

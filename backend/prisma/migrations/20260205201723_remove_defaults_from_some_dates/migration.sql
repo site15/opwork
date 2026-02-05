@@ -1,0 +1,11 @@
+-- AlterTable
+ALTER TABLE "OpWorkJobView" ALTER COLUMN "viewedAt" DROP NOT NULL,
+ALTER COLUMN "viewedAt" DROP DEFAULT;
+
+-- AlterTable
+ALTER TABLE "OpWorkSavedJob" ALTER COLUMN "savedAt" DROP NOT NULL,
+ALTER COLUMN "savedAt" DROP DEFAULT;
+
+-- AlterTable
+ALTER TABLE "OpWorkSearchHistory" ALTER COLUMN "searchedAt" DROP NOT NULL,
+ALTER COLUMN "searchedAt" DROP DEFAULT;

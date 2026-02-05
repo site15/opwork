@@ -27,7 +27,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
     submitOnChange: true, showCollapseButton: false
   },
   gridOptions: {
-    columns: useAuthUserColumns(onActionClick, onIsActiveChange),
+    columns: useAuthUserColumns(onActionClick),
     height: 'auto',
     keepSource: true,
     proxyConfig: {
@@ -43,12 +43,18 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await authUserControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : '[object Object]:desc'
             },
           }).then(async (result) => ({
             items: (result.data?.items || []).map((item) => ({
-              ...item, supabaseUserData: JSON.stringify(
-                item.supabaseUserData)
+              ...item,
+        id: item.id,
+        anonymousId: item.anonymousId,
+        supabaseUserId: item.supabaseUserId,
+        supabaseUserData: JSON.stringify(item.supabaseUserData),
+        isActive: item.isActive,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
             })),
             total: result.data?.meta.totalResults || 0,
           }));
@@ -57,7 +63,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: 'createdAt', order: 'desc' },
+      defaultSort: { field: '[object Object]', order: 'desc' },
       remote: true,
     },
     rowConfig: {
@@ -83,33 +89,6 @@ function onActionClick(e: OnActionClickParams<AuthUser>) {
       onEdit(e.row);
       break;
     }
-  }
-}
-
-
-/**
- * 状态开关即将改变
- * @param newValue 期望改变的状态值
- * @param row 行数据
- * @returns 返回false则中止改变，返回其他值（undefined、true）则允许改变
- */
-async function onIsActiveChange(
-  newValue: boolean,
-  row: AuthUser,
-) {
-  try {
-    await authUserControllerUpdateOne({
-      path: { id: row.id },
-      body: {
-        anonymousId: row.anonymousId,
-        supabaseUserId: row.supabaseUserId,
-        supabaseUserData: row.supabaseUserData ? JSON.parse(row.supabaseUserData as any) : null,
-        isActive: newValue
-      },
-    });
-    return true;
-  } catch {
-    return false;
   }
 }
 

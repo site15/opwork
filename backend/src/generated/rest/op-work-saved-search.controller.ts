@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkSavedSearchDto } from './op-work-saved-search.dto';
 import { OpWorkSavedSearch } from './op-work-saved-search.entity';
@@ -79,6 +77,7 @@ export class OpWorkSavedSearchController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,11 +108,11 @@ export class OpWorkSavedSearchController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkSavedSearchDto,
-  ) {
+  ) {    
     return await this.prismaservice.opWorkSavedSearch.create({
-      data: {
+      data: { 
         ...args,
-
+        
         profileId: req.currentProfileId,
       },
     });
@@ -129,9 +128,11 @@ export class OpWorkSavedSearchController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -153,6 +154,7 @@ export class OpWorkSavedSearchController {
     return await this.prismaservice.opWorkSavedSearch.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

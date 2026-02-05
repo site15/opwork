@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { AuthApiKeyDto } from './auth-api-key.dto';
 import { AuthApiKey } from './auth-api-key.entity';
@@ -79,6 +77,7 @@ export class AuthApiKeyController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,11 +108,12 @@ export class AuthApiKeyController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateAuthApiKeyDto,
-  ) {
+  ) {    
     return await this.prismaservice.authApiKey.create({
-      data: {
+      data: { 
         ...args,
         userId: req.userId,
+        
       },
     });
   }
@@ -128,9 +128,11 @@ export class AuthApiKeyController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -152,6 +154,7 @@ export class AuthApiKeyController {
     return await this.prismaservice.authApiKey.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

@@ -116,7 +116,7 @@ export type OpWorkSavedJob = {
     id: string;
     profileId: string;
     jobId: string;
-    savedAt: string;
+    savedAt: string | null;
     notes: string | null;
     OpWorkProfile?: OpWorkProfile;
     OpWorkJob?: OpWorkJob;
@@ -126,7 +126,7 @@ export type OpWorkJobView = {
     id: string;
     profileId: string | null;
     jobId: string;
-    viewedAt: string;
+    viewedAt: string | null;
     ipAddress: string | null;
     userAgent: string | null;
     OpWorkProfile?: OpWorkProfile | null;
@@ -324,7 +324,7 @@ export type OpWorkSearchHistory = {
         [key: string]: unknown;
     } | null;
     resultsCount: number | null;
-    searchedAt: string;
+    searchedAt: string | null;
     OpWorkProfile?: OpWorkProfile;
 };
 
@@ -980,16 +980,18 @@ export type FindManyOpWorkSavedJobResponse = {
 };
 
 export type CreateOpWorkSavedJobDto = {
+    savedAt?: string | null;
     notes?: string | null;
 };
 
 export type OpWorkSavedJobDto = {
     id: string;
-    savedAt: string;
+    savedAt: string | null;
     notes: string | null;
 };
 
 export type UpdateOpWorkSavedJobDto = {
+    savedAt?: string | null;
     notes?: string | null;
 };
 
@@ -1198,6 +1200,7 @@ export type CreateOpWorkSearchHistoryDto = {
         [key: string]: unknown;
     } | null;
     resultsCount?: number | null;
+    searchedAt?: string | null;
 };
 
 export type OpWorkSearchHistoryDto = {
@@ -1207,7 +1210,7 @@ export type OpWorkSearchHistoryDto = {
         [key: string]: unknown;
     } | null;
     resultsCount: number | null;
-    searchedAt: string;
+    searchedAt: string | null;
 };
 
 export type UpdateOpWorkSearchHistoryDto = {
@@ -1216,6 +1219,7 @@ export type UpdateOpWorkSearchHistoryDto = {
         [key: string]: unknown;
     } | null;
     resultsCount?: number | null;
+    searchedAt?: string | null;
 };
 
 export type FindManyOpWorkJobViewResponseMeta = {
@@ -1230,18 +1234,20 @@ export type FindManyOpWorkJobViewResponse = {
 };
 
 export type CreateOpWorkJobViewDto = {
+    viewedAt?: string | null;
     ipAddress?: string | null;
     userAgent?: string | null;
 };
 
 export type OpWorkJobViewDto = {
     id: string;
-    viewedAt: string;
+    viewedAt: string | null;
     ipAddress: string | null;
     userAgent: string | null;
 };
 
 export type UpdateOpWorkJobViewDto = {
+    viewedAt?: string | null;
     ipAddress?: string | null;
     userAgent?: string | null;
 };

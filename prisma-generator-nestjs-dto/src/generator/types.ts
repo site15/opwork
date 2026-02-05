@@ -66,7 +66,7 @@ export interface ImportStatementParams {
 }
 
 export interface DtoParams {
-  model: WritableDeep<DMMF.Model>;
+  model: Model;
   fields: ParsedField[];
   // should include all Enums, ExtraModels, ConnectDTOs and CreateDTOs for related models
   imports: ImportStatementParams[];

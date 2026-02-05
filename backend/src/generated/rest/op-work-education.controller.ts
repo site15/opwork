@@ -31,9 +31,9 @@ import { OpWorkEducation } from './op-work-education.entity';
 import { CreateOpWorkEducationDto } from './create-op-work-education.dto';
 import { UpdateOpWorkEducationDto } from './update-op-work-education.dto';
 
-export class FindManyOpWorkEducationArgs extends FindManyArgs {}
+export class FindManyOpWorkEducationArgs extends FindManyArgs { }
 
-export class FindManyOpWorkEducationResponseMeta extends FindManyResponseMeta {}
+export class FindManyOpWorkEducationResponseMeta extends FindManyResponseMeta { }
 
 export class FindManyOpWorkEducationResponse {
   @ApiProperty({ type: () => [OpWorkEducation] })
@@ -46,7 +46,7 @@ export class FindManyOpWorkEducationResponse {
 @ApiTags('op-work')
 @Controller('op-work/education')
 export class OpWorkEducationController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaservice: PrismaService) { }
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkEducationResponse })
@@ -62,8 +62,8 @@ export class OpWorkEducationController {
           ...all,
           ...(key in PrismaSdk.Prisma.OpWorkEducationScalarFieldEnum
             ? {
-                [key]: value === 'desc' ? 'desc' : 'asc',
-              }
+              [key]: value === 'desc' ? 'desc' : 'asc',
+            }
             : {}),
         }),
         {},
@@ -72,11 +72,12 @@ export class OpWorkEducationController {
     const opWorkEducationWhereInput: Prisma.OpWorkEducationWhereInput = {
       ...(searchText
         ? {
-            OR: [
-              ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-            ],
-          }
+          OR: [
+            ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+          ],
+        }
         : {}),
+
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,16 +105,11 @@ export class OpWorkEducationController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkEducationDto })
-  async createOne(@Body() args: CreateOpWorkEducationDto) {
+  async createOne(
+    @Body() args: CreateOpWorkEducationDto,
+  ) {
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkEducation.create({
-      data: {
-        ...args,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -125,9 +121,12 @@ export class OpWorkEducationController {
     return await this.prismaservice.opWorkEducation.update({
       data: {
         ...args,
+
+
       },
       where: {
         id,
+
       },
     });
   }
@@ -149,6 +148,7 @@ export class OpWorkEducationController {
     return await this.prismaservice.opWorkEducation.findFirstOrThrow({
       where: {
         id,
+
       },
     });
   }

@@ -77,6 +77,7 @@ export class OpWorkSkillSynonymController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,15 +105,11 @@ export class OpWorkSkillSynonymController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkSkillSynonymDto })
-  async createOne(@Body() args: CreateOpWorkSkillSynonymDto) {
+  async createOne(
+    @Body() args: CreateOpWorkSkillSynonymDto,
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkSkillSynonym.create({
-      data: {
-        ...args,
-      },
-    });*/
   }
 
   @Put(':id')
@@ -124,9 +121,12 @@ export class OpWorkSkillSynonymController {
     return await this.prismaservice.opWorkSkillSynonym.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -148,6 +148,7 @@ export class OpWorkSkillSynonymController {
     return await this.prismaservice.opWorkSkillSynonym.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

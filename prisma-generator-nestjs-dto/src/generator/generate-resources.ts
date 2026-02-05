@@ -1,9 +1,9 @@
-import { DMMF } from '@prisma/generator-helper';
-import { WritableDeep } from 'type-fest';
+import { pascal } from 'case';
 import { TemplateHelpers } from './template-helpers';
+import { Model } from './types';
 
 interface GenerateResourcesParams {
-  models: WritableDeep<DMMF.Model>[];
+  models: Model[];
   templateHelpers: TemplateHelpers;
   frontendOutput?: string;
 }
@@ -58,9 +58,11 @@ export const generateResourcesIndex = ({
     })
     .join('\n');
 
+  let namespace = '';
   // Generate the resources object entries
   const resourceEntries = filteredModels
     .map((model) => {
+      namespace = model.custom.namespace;
       const modelName = model.name;
       const entityClassName = entityName(modelName);
       const dataProviderName = `${entityClassName}DataProvider`;
@@ -75,37 +77,38 @@ export const generateResourcesIndex = ({
         .trim()
         .replace(/\s+/g, ' ');
 
-      return `  ${entityClassName}: {
-    dataProvider: ${dataProviderName},
-    label: "${label}",
-    list: ${listName},
-    create: ${createFormName},
-    edit: ${editFormName},
-    show: ${showFormName},
-  },`;
+      return `{
+        meta: {
+          title: $t('page.resource.${entityClassName}'),
+        },
+        name: '${entityClassName}',
+        path: '/${model.custom.namespace}/${model.custom.name}',
+        component: () =>
+          import('#/generated/resource/${entityClassName}/${entityClassName}List.vue'),
+      },`;
     })
-    .join('\n');
+    .join('\n      ');
 
-  return `/* eslint-disable @typescript-eslint/no-explicit-any */
-import { DataProvider } from "react-admin";
-${dataProviderImports}
-${formImports}
-${listImports}
+  return `import type { RouteRecordRaw } from 'vue-router';
 
-export const resources: Partial<
-  Record<
-    string,
-    {
-      dataProvider: DataProvider<any>;
-      label: string;
-      list: any;
-      create: any;
-      edit: any;
-      show: any;
-    }
-  >
-> = {
-${resourceEntries}
-};
+import { $t } from '#/locales';
+
+const routes: RouteRecordRaw[] = [
+  {
+    meta: {
+      icon: '${namespace === 'auth' ? 'ic:baseline-key' : 'ic:baseline-work'}',
+      keepAlive: true,
+      order: 1001,
+      title: $t('page.resource.${namespace}'),
+    },
+    name: '${pascal(namespace)}',
+    path: '/${namespace}',
+    children: [
+      ${resourceEntries}
+    ],
+  },
+];
+
+export default routes;
 `;
 };

@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkNotificationDto } from './op-work-notification.dto';
 import { OpWorkNotification } from './op-work-notification.entity';
@@ -79,6 +77,7 @@ export class OpWorkNotificationController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,9 +108,9 @@ export class OpWorkNotificationController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkNotificationDto,
-  ) {
+  ) {    
     return await this.prismaservice.opWorkNotification.create({
-      data: {
+      data: { 
         ...args,
         userId: req.userId,
         profileId: req.currentProfileId,
@@ -128,9 +127,12 @@ export class OpWorkNotificationController {
     return await this.prismaservice.opWorkNotification.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -152,6 +154,7 @@ export class OpWorkNotificationController {
     return await this.prismaservice.opWorkNotification.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

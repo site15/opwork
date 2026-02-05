@@ -9,5 +9,6 @@
   "createdAt": "Created At",
   "operation": "Operation",
   "create": "Create",
-  "loadingMenu": "Loading Menu"
+  "loadingMenu": "Loading Menu",
+  "updatedAt": "Updated At"
 }

@@ -77,6 +77,7 @@ export class AuthUserController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,10 +105,14 @@ export class AuthUserController {
 
   @Post()
   @ApiCreatedResponse({ type: AuthUserDto })
-  async createOne(@Body() args: CreateAuthUserDto) {
+  async createOne(
+    @Body() args: CreateAuthUserDto,
+  ) {    
     return await this.prismaservice.authUser.create({
-      data: {
+      data: { 
         ...args,
+        
+        
       },
     });
   }
@@ -122,9 +127,11 @@ export class AuthUserController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -146,6 +153,7 @@ export class AuthUserController {
     return await this.prismaservice.authUser.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

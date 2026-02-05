@@ -77,6 +77,7 @@ export class OpWorkJobTagController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,16 +105,11 @@ export class OpWorkJobTagController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkJobTagDto })
-  async createOne(@Body() args: CreateOpWorkJobTagDto) {
+  async createOne(
+    @Body() args: CreateOpWorkJobTagDto,
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkJobTag.create({
-      data: {
-        ...args,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -125,9 +121,12 @@ export class OpWorkJobTagController {
     return await this.prismaservice.opWorkJobTag.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -149,6 +148,7 @@ export class OpWorkJobTagController {
     return await this.prismaservice.opWorkJobTag.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

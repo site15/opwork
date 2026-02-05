@@ -1,21 +1,41 @@
 {
   "auth": {
     "login": "Войти",
-    "register": "Зарегистрироваться",
+    "register": "Регистрация",
     "codeLogin": "Вход по коду",
     "qrcodeLogin": "Вход по QR-коду",
-    "forgetPassword": "Забыли пароль",
+    "forgetPassword": "Забыли пароль?",
     "profile": "Профиль"
   },
   "dashboard": {
     "title": "Панель управления",
     "analytics": "Аналитика",
-    "workspace": "Рабочее место"
+    "workspace": "Рабочая область"
   },
   "resource": {
     "AuthUser": "Пользователи",
     "auth": "Аутентификация и авторизация",
     "op-work": "Биржа труда",
-    "OpWorkProfile": "Профиль"
+    "OpWorkProfile": "Профиль",
+    "AuthApiKey": "API ключ",
+    "AuthSession": "Сессия",
+    "OpWorkJobSeeker": "Соискатель",
+    "OpWorkExperience": "Опыт работы",
+    "OpWorkEducation": "Образование",
+    "OpWorkEmployer": "Работодатель",
+    "OpWorkProject": "Проект",
+    "OpWorkJob": "Работа",
+    "OpWorkApplication": "Заявка",
+    "OpWorkSavedJob": "Сохранённая работа",
+    "OpWorkSkill": "Навыки",
+    "OpWorkJobSeekerSkill": "Навыки соискателя",
+    "OpWorkJobSkill": "Требования вакансии",
+    "OpWorkNotification": "Уведомления",
+    "OpWorkNotificationSettings": "Настройки уведомлений",
+    "OpWorkSearchHistory": "История поиска",
+    "OpWorkJobView": "Просмотр вакансий",
+    "OpWorkSavedSearch": "Сохранённый поиск",
+    "OpWorkSkillSynonym": "Синонимы навыков",
+    "OpWorkJobTag": "Метка вакансии"
   }
 }

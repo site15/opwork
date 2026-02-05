@@ -13,17 +13,10 @@ export const generateList = ({
   const entityClassName = entityName(modelName);
   const listName = `${entityClassName}List`;
 
-  // Map Prisma types to React Admin input components
-  const getColumnComponent = (field: (typeof model.fields)[0]): string => {
-    switch (field.type) {
-      case 'Int':
-      case 'Float':
-      case 'Decimal':
-        return 'NumberCol';
-      default:
-        return 'Col';
-    }
-  };
+  // Get fields for different form types
+  const allFields = model.fields.filter(
+    (field) => field.kind === 'scalar' && field.name !== 'deletedAt',
+  );
 
   // Get all scalar fields for the table columns
   const scalarFields = model.fields.filter(
@@ -33,61 +26,170 @@ export const generateList = ({
       field.name !== 'deletedAt',
   );
 
-  return `import { DataTable, DeleteButton, EditButton, List, BooleanField, DateField } from "react-admin";
-import { Prisma } from "../prisma/browser";
+  const defaultSortColumn =
+    model.fields.find((field) => field.name === 'createdAt') || model.fields[0];
 
-import ReactJson from 'react-json-view';
-import { useRecordContext } from 'react-admin';
-
-const JsonViewerField = ({ source }) => {
-    const record = useRecordContext();
-    if (!record || !record[source]) return null;
-    return (
-        <ReactJson 
-            src={record[source]} 
-            collapsed={true} 
-            theme="monokai"
-            displayDataTypes={false}
-        />
-    );
-};
-
-export const ${listName} = () => (
-  <List>
-    <DataTable>
-${scalarFields
-  .map((field) => {
-    const columnType = getColumnComponent(field);
-    const multiline =
-      field.nativeType?.[0] === 'Text'
-        ? `sx={{
-                    display: 'inline-block',
-                    maxWidth: '200px',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                }} `
-        : '';
-    switch (field.type) {
+  const getInputComponent = (field: (typeof allFields)[0]): string => {
+    /*switch (field.type) {
       case 'Json':
-        return `      <DataTable.${columnType} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}><JsonViewerField source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}} /></DataTable.${columnType}>`;
+        return 'JsonViewerField';
+      case 'String':
+        return 'TextInput';
       case 'Int':
       case 'Float':
       case 'Decimal':
-        return `      <DataTable.${columnType} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}} />`;
+        return 'NumberInput';
       case 'Boolean':
-        return `      <DataTable.${columnType} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}><BooleanField source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}} /></DataTable.${columnType}>`;
+        return 'BooleanInput';
       case 'DateTime':
-        return `      <DataTable.${columnType} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}}><DateField source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}} showTime /></DataTable.${columnType}>`;
+        return 'DateTimeInput';
       default:
-        return `      <DataTable.${columnType} source={Prisma.${entityClassName}ScalarFieldEnum.${field.name}} ${multiline}/>`;
+        return 'TextInput';
+    }*/
+    if (field.type === 'Json') {
+      return `        ${field.name}: JSON.stringify(item.${field.name}),`;
     }
-  })
-  .join('\n')}
-      <EditButton />
-      <DeleteButton />
-    </DataTable>
-  </List>
-);
+    return `        ${field.name}: item.${field.name},`;
+  };
+
+  const showFormFields = [
+    ...allFields.map((field) => {
+      return getInputComponent(field);
+    }),
+  ].join('\n');
+
+  const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
+  return `<script lang="ts" setup>
+
+import type {
+  OnActionClickParams
+} from '#/adapter/vxe-table';
+
+import { Page, useVbenDrawer } from '@vben/common-ui';
+import { Plus } from '@vben/icons';
+
+import { Button, message } from 'ant-design-vue';
+
+import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { ${camelModelName}ControllerDeleteOne, ${camelModelName}ControllerFindMany, ${camelModelName}ControllerUpdateOne } from '#/generated/client';
+import type { ${entityClassName} } from '#/generated/prisma/browser';
+import { $t } from '#/locales';
+import { use${entityClassName}Columns, use${entityClassName}FilterFormSchema } from './${entityClassName}Data';
+import ${entityClassName}Form from './${entityClassName}Form.vue';
+
+const [FormDrawer, formDrawerApi] = useVbenDrawer({
+  connectedComponent: ${entityClassName}Form,
+  destroyOnClose: true,
+});
+
+const [Grid, gridApi] = useVbenVxeGrid({
+  formOptions: {
+    schema: use${entityClassName}FilterFormSchema(),
+    submitOnChange: true, showCollapseButton: false
+  },
+  gridOptions: {
+    columns: use${entityClassName}Columns(onActionClick),
+    height: 'auto',
+    keepSource: true,
+    proxyConfig: {
+      ajax: {
+        query: async (options: {
+          page: { total: number, pageSize: number, currentPage: number },
+          sort?: {
+            field: string,
+            order: 'desc' | 'asc'
+          }
+        }, formValues: { searchText: string }) => {
+          console.log(options, formValues)
+          return await ${camelModelName}ControllerFindMany({
+            query: {
+              curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
+              sort: (options.sort?.field && options.sort?.order) ? \`\${options.sort.field}:\${options.sort.order}\` : '${defaultSortColumn}:desc'
+            },
+          }).then(async (result) => ({
+            items: (result.data?.items || []).map((item) => ({
+              ...item,
+${showFormFields}
+            })),
+            total: result.data?.meta.totalResults || 0,
+          }));
+        },
+      },
+      sort: true
+    },
+    sortConfig: {
+      defaultSort: { field: '${defaultSortColumn}', order: 'desc' },
+      remote: true,
+    },
+    rowConfig: {
+      keyField: 'id',
+    },
+    toolbarConfig: {
+      custom: true,
+      export: false,
+      refresh: true,
+      search: true,
+      zoom: true,
+    },
+  },
+});
+
+function onActionClick(e: OnActionClickParams<${entityClassName}>) {
+  switch (e.code) {
+    case 'delete': {
+      onDelete(e.row);
+      break;
+    }
+    case 'edit': {
+      onEdit(e.row);
+      break;
+    }
+  }
+}
+
+function onEdit(row: ${entityClassName}) {
+  formDrawerApi.setData(row).open();
+}
+
+function onDelete(row: ${entityClassName}) {
+  const hideLoading = message.loading({
+    content: $t('ui.actionMessage.deleting', [row.id]),
+    duration: 0,
+    key: 'action_process_msg',
+  });
+  ${camelModelName}ControllerDeleteOne({ path: { id: row.id } })
+    .then(() => {
+      message.success({
+        content: $t('ui.actionMessage.deleteSuccess', [row.id]),
+        key: 'action_process_msg',
+      });
+      onRefresh();
+    })
+    .catch(() => {
+      hideLoading();
+    });
+}
+
+function onRefresh() {
+  gridApi.query();
+}
+
+function onCreate() {
+  formDrawerApi.setData({}).open();
+}
+</script>
+<template>
+  <Page auto-content-height>
+    <FormDrawer @success="onRefresh" />
+    <Grid :table-title="$t('resource.name.${entityClassName}')">
+      <template #toolbar-tools>
+        <Button type="primary" @click="onCreate">
+          <Plus class="size-5" />
+          {{ $t('ui.actionTitle.create', [$t('resource.name.${entityClassName}')]) }}
+        </Button>
+      </template>
+    </Grid>
+  </Page>
+</template>
 `;
 };

@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkJobViewDto } from './op-work-job-view.dto';
 import { OpWorkJobView } from './op-work-job-view.entity';
@@ -79,6 +77,7 @@ export class OpWorkJobViewController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,18 +108,9 @@ export class OpWorkJobViewController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkJobViewDto,
-  ) {
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkJobView.create({
-      data: {
-        ...args,
-
-        profileId: req.currentProfileId,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -132,9 +122,12 @@ export class OpWorkJobViewController {
     return await this.prismaservice.opWorkJobView.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -156,6 +149,7 @@ export class OpWorkJobViewController {
     return await this.prismaservice.opWorkJobView.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

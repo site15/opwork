@@ -77,6 +77,7 @@ export class OpWorkJobSkillController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,16 +105,11 @@ export class OpWorkJobSkillController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkJobSkillDto })
-  async createOne(@Body() args: CreateOpWorkJobSkillDto) {
+  async createOne(
+    @Body() args: CreateOpWorkJobSkillDto,
+  ) {    
     // DO_NOT_CHANGE_WHEN_GENERATING_CODE
     throw new Error('Method not implemented.');
-    /*
-    return await this.prismaservice.opWorkJobSkill.create({
-      data: {
-        ...args,
-      },
-    });
-    */
   }
 
   @Put(':id')
@@ -125,9 +121,12 @@ export class OpWorkJobSkillController {
     return await this.prismaservice.opWorkJobSkill.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -149,6 +148,7 @@ export class OpWorkJobSkillController {
     return await this.prismaservice.opWorkJobSkill.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

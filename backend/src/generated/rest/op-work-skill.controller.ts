@@ -77,6 +77,7 @@ export class OpWorkSkillController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -104,10 +105,14 @@ export class OpWorkSkillController {
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkSkillDto })
-  async createOne(@Body() args: CreateOpWorkSkillDto) {
+  async createOne(
+    @Body() args: CreateOpWorkSkillDto,
+  ) {    
     return await this.prismaservice.opWorkSkill.create({
-      data: {
+      data: { 
         ...args,
+        
+        
       },
     });
   }
@@ -121,9 +126,12 @@ export class OpWorkSkillController {
     return await this.prismaservice.opWorkSkill.update({
       data: {
         ...args,
+        
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -145,6 +153,7 @@ export class OpWorkSkillController {
     return await this.prismaservice.opWorkSkill.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

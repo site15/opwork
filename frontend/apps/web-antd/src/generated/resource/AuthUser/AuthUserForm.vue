@@ -1,17 +1,13 @@
 <script lang="ts" setup>
-
-
 import { computed, nextTick, ref } from 'vue';
 
 import { useVbenDrawer } from '@vben/common-ui';
-
 
 import { useVbenForm } from '#/adapter/form';
 import { authUserControllerCreateOne, authUserControllerUpdateOne } from '#/generated/client';
 import type { AuthUser } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { useAuthUserFormSchema } from './AuthUserData';
-
 
 const emits = defineEmits(['success']);
 
@@ -32,17 +28,13 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? authUserControllerUpdateOne({
       path: { id: id.value },
       body: {
-        anonymousId: values.anonymousId,
-        supabaseUserId: values.supabaseUserId,
         supabaseUserData: values.supabaseUserData ? JSON.parse(values.supabaseUserData as any) : null,
-        isActive: values.isActive
+        isActive: values.isActive,
       }
     }) : authUserControllerCreateOne({
       body: {
-        anonymousId: values.anonymousId,
-        supabaseUserId: values.supabaseUserId,
         supabaseUserData: values.supabaseUserData ? JSON.parse(values.supabaseUserData as any) : null,
-        isActive: values.isActivevalues
+        isActive: values.isActive,
       }
     }))
       .then(() => {
@@ -74,7 +66,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     }
   },
 });
-
 
 const getDrawerTitle = computed(() => {
   return formData.value?.id

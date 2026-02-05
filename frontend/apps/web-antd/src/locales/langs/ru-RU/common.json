@@ -1,13 +1,14 @@
 {
-  "cancel": "Cancel",
-  "enabled": "Enabled",
-  "disabled": "Disabled",
-  "delete": "Delete",
-  "edit": "Edit",
-  "searchText": "Search Text",
-  "id": "Id",
-  "createdAt": "Created At",
-  "operation": "Operation",
-  "create": "Create",
-  "loadingMenu": "Loading Menu"
+  "cancel": "Отмена",
+  "enabled": "Включено",
+  "disabled": "Выключено",
+  "delete": "Удалить",
+  "edit": "Редактировать",
+  "searchText": "Искать текст",
+  "id": "Идентификатор",
+  "createdAt": "Создано",
+  "operation": "Операция",
+  "create": "Создать",
+  "loadingMenu": "Загрузка меню",
+  "updatedAt": "Обновлено"
 }

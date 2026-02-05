@@ -57,12 +57,13 @@ export function useVbenDrawer<
           ...attrs,
           ...slots,
         });
-        return () =>
-          h(
+        return () => {
+          return h(
             isDrawerReady.value ? connectedComponent : 'div',
             { ...props, ...attrs },
             slots,
           );
+        };
       },
       // eslint-disable-next-line vue/one-component-per-file
       {

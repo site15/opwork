@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkProjectDto } from './op-work-project.dto';
 import { OpWorkProject } from './op-work-project.entity';
@@ -79,6 +77,7 @@ export class OpWorkProjectController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -109,11 +108,11 @@ export class OpWorkProjectController {
   async createOne(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkProjectDto,
-  ) {
+  ) {    
     return await this.prismaservice.opWorkProject.create({
-      data: {
+      data: { 
         ...args,
-
+        
         profileId: req.currentProfileId,
       },
     });
@@ -129,9 +128,11 @@ export class OpWorkProjectController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
       },
       where: {
         id,
+        
       },
     });
   }
@@ -153,6 +154,7 @@ export class OpWorkProjectController {
     return await this.prismaservice.opWorkProject.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }
