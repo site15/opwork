@@ -55,6 +55,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         emailNewsletter: item.emailNewsletter,
         pushApplicationUpdates: item.pushApplicationUpdates,
         pushJobAlerts: item.pushJobAlerts,
+        jobAlertFrequency: item.jobAlertFrequency,
         updatedAt: item.updatedAt,
             })),
             total: result.data?.meta.totalResults || 0,

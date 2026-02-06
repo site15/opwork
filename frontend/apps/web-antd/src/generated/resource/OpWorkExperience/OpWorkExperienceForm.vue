@@ -35,6 +35,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         endDate: values.endDate,
         isCurrent: values.isCurrent,
         location: values.location,
+        employmentType: values.employmentType,
       }
     }) : opWorkExperienceControllerCreateOne({
       body: {
@@ -45,6 +46,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         endDate: values.endDate,
         isCurrent: values.isCurrent,
         location: values.location,
+        employmentType: values.employmentType,
       }
     }))
       .then(() => {

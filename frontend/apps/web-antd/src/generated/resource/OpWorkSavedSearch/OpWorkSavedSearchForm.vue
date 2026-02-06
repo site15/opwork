@@ -32,6 +32,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         isActive: values.isActive,
+        frequency: values.frequency,
         lastSentAt: values.lastSentAt,
       }
     }) : opWorkSavedSearchControllerCreateOne({
@@ -40,6 +41,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         isActive: values.isActive,
+        frequency: values.frequency,
         lastSentAt: values.lastSentAt,
       }
     }))

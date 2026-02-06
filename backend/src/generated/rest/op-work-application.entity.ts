@@ -51,8 +51,9 @@ statusNotes!: string  | null;
 @ApiProperty({
   type: 'string',
   format: 'date-time',
+  nullable: true,
 })
-appliedAt!: Date ;
+appliedAt!: Date  | null;
 @ApiProperty({
   type: 'string',
   format: 'date-time',

@@ -105,7 +105,7 @@ export type OpWorkApplication = {
     portfolioUrl: string | null;
     status: OpWorkApplicationStatus;
     statusNotes: string | null;
-    appliedAt: string;
+    appliedAt: string | null;
     statusUpdatedAt: string | null;
     OpWorkJobSeeker?: OpWorkJobSeeker;
     OpWorkProfile?: OpWorkProfile;
@@ -885,6 +885,10 @@ export type CreateOpWorkJobDto = {
     salaryCurrency?: string | null;
     location?: string | null;
     isRemote?: boolean | null;
+    status: OpWorkJobStatus;
+    viewsCount: number;
+    applicationsCount: number;
+    savesCount: number;
     publishedAt?: string | null;
     expiresAt?: string | null;
 };
@@ -926,6 +930,10 @@ export type UpdateOpWorkJobDto = {
     salaryCurrency?: string | null;
     location?: string | null;
     isRemote?: boolean | null;
+    status?: OpWorkJobStatus;
+    viewsCount?: number;
+    applicationsCount?: number;
+    savesCount?: number;
     publishedAt?: string | null;
     expiresAt?: string | null;
 };
@@ -945,7 +953,9 @@ export type CreateOpWorkApplicationDto = {
     coverLetter?: string | null;
     resumeUrl?: string | null;
     portfolioUrl?: string | null;
+    status: OpWorkApplicationStatus;
     statusNotes?: string | null;
+    appliedAt?: string | null;
     statusUpdatedAt?: string | null;
 };
 
@@ -956,7 +966,7 @@ export type OpWorkApplicationDto = {
     portfolioUrl: string | null;
     status: OpWorkApplicationStatus;
     statusNotes: string | null;
-    appliedAt: string;
+    appliedAt: string | null;
     statusUpdatedAt: string | null;
 };
 
@@ -964,7 +974,9 @@ export type UpdateOpWorkApplicationDto = {
     coverLetter?: string | null;
     resumeUrl?: string | null;
     portfolioUrl?: string | null;
+    status?: OpWorkApplicationStatus;
     statusNotes?: string | null;
+    appliedAt?: string | null;
     statusUpdatedAt?: string | null;
 };
 
@@ -1012,6 +1024,7 @@ export type CreateOpWorkSkillDto = {
     type?: OpWorkSkillType | null;
     category?: string | null;
     icon?: string | null;
+    popularity: number;
 };
 
 export type OpWorkSkillDto = {
@@ -1031,6 +1044,7 @@ export type UpdateOpWorkSkillDto = {
     type?: OpWorkSkillType | null;
     category?: string | null;
     icon?: string | null;
+    popularity?: number;
 };
 
 export type FindManyOpWorkJobSeekerSkillResponseMeta = {
@@ -1045,6 +1059,7 @@ export type FindManyOpWorkJobSeekerSkillResponse = {
 };
 
 export type CreateOpWorkJobSeekerSkillDto = {
+    level: number;
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
@@ -1060,6 +1075,7 @@ export type OpWorkJobSeekerSkillDto = {
 };
 
 export type UpdateOpWorkJobSeekerSkillDto = {
+    level?: number;
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
@@ -1078,6 +1094,7 @@ export type FindManyOpWorkJobSkillResponse = {
 
 export type CreateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
+    importance: number;
     minLevel?: number | null;
 };
 
@@ -1091,6 +1108,7 @@ export type OpWorkJobSkillDto = {
 
 export type UpdateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
+    importance?: number;
     minLevel?: number | null;
 };
 

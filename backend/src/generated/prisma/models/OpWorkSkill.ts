@@ -314,7 +314,7 @@ export type OpWorkSkillCreateInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
@@ -328,7 +328,7 @@ export type OpWorkSkillUncheckedCreateInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -370,7 +370,7 @@ export type OpWorkSkillCreateManyInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
 }
 
@@ -495,7 +495,7 @@ export type OpWorkSkillCreateWithoutOpWorkJobSeekerSkillInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
@@ -508,7 +508,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkJobSeekerSkillInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -563,7 +563,7 @@ export type OpWorkSkillCreateWithoutOpWorkJobSkillInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
@@ -576,7 +576,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkJobSkillInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -631,7 +631,7 @@ export type OpWorkSkillCreateWithoutOpWorkSkillSynonymsInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
@@ -644,7 +644,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkSkillSynonymsInput = {
   type?: $Enums.OpWorkSkillType | null
   category?: string | null
   icon?: string | null
-  popularity?: number
+  popularity: number
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput

@@ -16,7 +16,7 @@ export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkNotification.createdAt'),
       rules: 'required',
@@ -36,6 +36,33 @@ export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
       label: $t('resource.OpWorkNotification.profileId'),
       
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'APPLICATION_RECEIVED', value: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED'), },
+          { label: 'APPLICATION_SHORTLISTED', value: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED'), },
+          { label: 'INTERVIEW_SCHEDULED', value: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED'), },
+          { label: 'JOB_OFFER', value: $t('resource.OpWorkNotificationType.JOB_OFFER'), },
+          { label: 'JOB_MATCH', value: $t('resource.OpWorkNotificationType.JOB_MATCH'), },
+          { label: 'JOB_STATUS_CHANGED', value: $t('resource.OpWorkNotificationType.JOB_STATUS_CHANGED'), },
+          { label: 'NEW_PROJECT', value: $t('resource.OpWorkNotificationType.NEW_PROJECT'), },
+          { label: 'MESSAGE_RECEIVED', value: $t('resource.OpWorkNotificationType.MESSAGE_RECEIVED'), },
+          { label: 'REMINDER', value: $t('resource.OpWorkNotificationType.REMINDER'), },
+          { label: 'SYSTEM_ALERT', value: $t('resource.OpWorkNotificationType.SYSTEM_ALERT'), },
+          { label: 'PROFILE_UPDATE', value: $t('resource.OpWorkNotificationType.PROFILE_UPDATE'), },
+          { label: 'NETWORK_ACTIVITY', value: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.type,
+      label: $t('resource.OpWorkNotification.type'),
+      rules: 'required',
       
       labelWidth: 200
     },
@@ -98,7 +125,7 @@ export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
       label: $t('resource.OpWorkNotification.readAt'),
       
@@ -127,6 +154,33 @@ export function useOpWorkNotificationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'APPLICATION_RECEIVED', value: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED'), },
+          { label: 'APPLICATION_SHORTLISTED', value: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED'), },
+          { label: 'INTERVIEW_SCHEDULED', value: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED'), },
+          { label: 'JOB_OFFER', value: $t('resource.OpWorkNotificationType.JOB_OFFER'), },
+          { label: 'JOB_MATCH', value: $t('resource.OpWorkNotificationType.JOB_MATCH'), },
+          { label: 'JOB_STATUS_CHANGED', value: $t('resource.OpWorkNotificationType.JOB_STATUS_CHANGED'), },
+          { label: 'NEW_PROJECT', value: $t('resource.OpWorkNotificationType.NEW_PROJECT'), },
+          { label: 'MESSAGE_RECEIVED', value: $t('resource.OpWorkNotificationType.MESSAGE_RECEIVED'), },
+          { label: 'REMINDER', value: $t('resource.OpWorkNotificationType.REMINDER'), },
+          { label: 'SYSTEM_ALERT', value: $t('resource.OpWorkNotificationType.SYSTEM_ALERT'), },
+          { label: 'PROFILE_UPDATE', value: $t('resource.OpWorkNotificationType.PROFILE_UPDATE'), },
+          { label: 'NETWORK_ACTIVITY', value: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.type,
+      label: $t('resource.OpWorkNotification.type'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.title,
       label: $t('resource.OpWorkNotification.title'),
@@ -185,7 +239,7 @@ export function useOpWorkNotificationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
       label: $t('resource.OpWorkNotification.readAt'),
       
@@ -222,6 +276,33 @@ export function useOpWorkNotificationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'APPLICATION_RECEIVED', value: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED'), },
+          { label: 'APPLICATION_SHORTLISTED', value: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED'), },
+          { label: 'INTERVIEW_SCHEDULED', value: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED'), },
+          { label: 'JOB_OFFER', value: $t('resource.OpWorkNotificationType.JOB_OFFER'), },
+          { label: 'JOB_MATCH', value: $t('resource.OpWorkNotificationType.JOB_MATCH'), },
+          { label: 'JOB_STATUS_CHANGED', value: $t('resource.OpWorkNotificationType.JOB_STATUS_CHANGED'), },
+          { label: 'NEW_PROJECT', value: $t('resource.OpWorkNotificationType.NEW_PROJECT'), },
+          { label: 'MESSAGE_RECEIVED', value: $t('resource.OpWorkNotificationType.MESSAGE_RECEIVED'), },
+          { label: 'REMINDER', value: $t('resource.OpWorkNotificationType.REMINDER'), },
+          { label: 'SYSTEM_ALERT', value: $t('resource.OpWorkNotificationType.SYSTEM_ALERT'), },
+          { label: 'PROFILE_UPDATE', value: $t('resource.OpWorkNotificationType.PROFILE_UPDATE'), },
+          { label: 'NETWORK_ACTIVITY', value: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.type,
+      label: $t('resource.OpWorkNotification.type'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.title,
       label: $t('resource.OpWorkNotification.title'),
@@ -280,7 +361,7 @@ export function useOpWorkNotificationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkNotification.createdAt'),
       rules: 'required',
@@ -288,7 +369,7 @@ export function useOpWorkNotificationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
       label: $t('resource.OpWorkNotification.readAt'),
       
@@ -325,6 +406,28 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
     {
       field: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
       title: $t('resource.OpWorkNotification.profileId'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'APPLICATION_RECEIVED', value: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED'), },
+          { label: 'APPLICATION_SHORTLISTED', value: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED'), },
+          { label: 'INTERVIEW_SCHEDULED', value: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED'), },
+          { label: 'JOB_OFFER', value: $t('resource.OpWorkNotificationType.JOB_OFFER'), },
+          { label: 'JOB_MATCH', value: $t('resource.OpWorkNotificationType.JOB_MATCH'), },
+          { label: 'JOB_STATUS_CHANGED', value: $t('resource.OpWorkNotificationType.JOB_STATUS_CHANGED'), },
+          { label: 'NEW_PROJECT', value: $t('resource.OpWorkNotificationType.NEW_PROJECT'), },
+          { label: 'MESSAGE_RECEIVED', value: $t('resource.OpWorkNotificationType.MESSAGE_RECEIVED'), },
+          { label: 'REMINDER', value: $t('resource.OpWorkNotificationType.REMINDER'), },
+          { label: 'SYSTEM_ALERT', value: $t('resource.OpWorkNotificationType.SYSTEM_ALERT'), },
+          { label: 'PROFILE_UPDATE', value: $t('resource.OpWorkNotificationType.PROFILE_UPDATE'), },
+          { label: 'NETWORK_ACTIVITY', value: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY'), },
+        ],
+      },
+      title: $t('resource.OpWorkNotification.type'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.type,
       sortable: true
     },
     {

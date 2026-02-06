@@ -9,7 +9,6 @@ import {IsBoolean,IsEnum,IsOptional} from 'class-validator'
 export class CreateOpWorkNotificationSettingsDto {
   @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -18,7 +17,6 @@ export class CreateOpWorkNotificationSettingsDto {
 emailApplicationUpdates?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -27,7 +25,6 @@ emailApplicationUpdates?: boolean  | null;
 emailJobAlerts?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })
@@ -36,7 +33,6 @@ emailJobAlerts?: boolean  | null;
 emailNewsletter?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -45,7 +41,6 @@ emailNewsletter?: boolean  | null;
 pushApplicationUpdates?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -55,7 +50,6 @@ pushJobAlerts?: boolean  | null;
 @ApiProperty({
   enum: OpWorkFrequency,
   enumName: 'OpWorkFrequency',
-  default: 'DAILY',
   required: false,
   nullable: true,
 })

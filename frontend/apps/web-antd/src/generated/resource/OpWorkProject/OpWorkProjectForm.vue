@@ -30,6 +30,8 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         title: values.title,
         description: values.description,
+        status: values.status,
+        type: values.type,
         githubRepoUrl: values.githubRepoUrl,
         technologies: values.technologies,
         architecture: values.architecture,
@@ -54,6 +56,8 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         title: values.title,
         description: values.description,
+        status: values.status,
+        type: values.type,
         githubRepoUrl: values.githubRepoUrl,
         technologies: values.technologies,
         architecture: values.architecture,

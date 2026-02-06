@@ -52,6 +52,8 @@ const [Grid, gridApi] = useVbenVxeGrid({
         profileId: item.profileId,
         title: item.title,
         description: item.description,
+        status: item.status,
+        type: item.type,
         githubRepoUrl: item.githubRepoUrl,
         technologies: item.technologies,
         architecture: item.architecture,

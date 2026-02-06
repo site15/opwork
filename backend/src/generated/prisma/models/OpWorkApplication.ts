@@ -194,7 +194,7 @@ export type OpWorkApplicationGroupByOutputType = {
   portfolioUrl: string | null
   status: $Enums.OpWorkApplicationStatus
   statusNotes: string | null
-  appliedAt: Date
+  appliedAt: Date | null
   statusUpdatedAt: Date | null
   _count: OpWorkApplicationCountAggregateOutputType | null
   _min: OpWorkApplicationMinAggregateOutputType | null
@@ -229,7 +229,7 @@ export type OpWorkApplicationWhereInput = {
   portfolioUrl?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFilter<"OpWorkApplication"> | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
-  appliedAt?: Prisma.DateTimeFilter<"OpWorkApplication"> | Date | string
+  appliedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
   statusUpdatedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
   OpWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput>
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
@@ -246,7 +246,7 @@ export type OpWorkApplicationOrderByWithRelationInput = {
   portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   statusNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  appliedAt?: Prisma.SortOrder
+  appliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   statusUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerOrderByWithRelationInput
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
@@ -267,7 +267,7 @@ export type OpWorkApplicationWhereUniqueInput = Prisma.AtLeast<{
   portfolioUrl?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFilter<"OpWorkApplication"> | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
-  appliedAt?: Prisma.DateTimeFilter<"OpWorkApplication"> | Date | string
+  appliedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
   statusUpdatedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
   OpWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput>
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
@@ -284,7 +284,7 @@ export type OpWorkApplicationOrderByWithAggregationInput = {
   portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   statusNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  appliedAt?: Prisma.SortOrder
+  appliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   statusUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpWorkApplicationCountOrderByAggregateInput
   _max?: Prisma.OpWorkApplicationMaxOrderByAggregateInput
@@ -304,7 +304,7 @@ export type OpWorkApplicationScalarWhereWithAggregatesInput = {
   portfolioUrl?: Prisma.StringNullableWithAggregatesFilter<"OpWorkApplication"> | string | null
   status?: Prisma.EnumOpWorkApplicationStatusWithAggregatesFilter<"OpWorkApplication"> | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.StringNullableWithAggregatesFilter<"OpWorkApplication"> | string | null
-  appliedAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkApplication"> | Date | string
+  appliedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkApplication"> | Date | string | null
   statusUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkApplication"> | Date | string | null
 }
 
@@ -313,9 +313,9 @@ export type OpWorkApplicationCreateInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
   OpWorkJobSeeker: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkApplicationsInput
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkApplicationsInput
@@ -330,9 +330,9 @@ export type OpWorkApplicationUncheckedCreateInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -343,7 +343,7 @@ export type OpWorkApplicationUpdateInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
@@ -360,7 +360,7 @@ export type OpWorkApplicationUncheckedUpdateInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -372,9 +372,9 @@ export type OpWorkApplicationCreateManyInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -385,7 +385,7 @@ export type OpWorkApplicationUpdateManyMutationInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -399,7 +399,7 @@ export type OpWorkApplicationUncheckedUpdateManyInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -595,9 +595,9 @@ export type OpWorkApplicationCreateWithoutOpWorkProfileInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
   OpWorkJobSeeker: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkApplicationsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkApplicationInput
@@ -610,9 +610,9 @@ export type OpWorkApplicationUncheckedCreateWithoutOpWorkProfileInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -655,7 +655,7 @@ export type OpWorkApplicationScalarWhereInput = {
   portfolioUrl?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFilter<"OpWorkApplication"> | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.StringNullableFilter<"OpWorkApplication"> | string | null
-  appliedAt?: Prisma.DateTimeFilter<"OpWorkApplication"> | Date | string
+  appliedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
   statusUpdatedAt?: Prisma.DateTimeNullableFilter<"OpWorkApplication"> | Date | string | null
 }
 
@@ -664,9 +664,9 @@ export type OpWorkApplicationCreateWithoutOpWorkJobSeekerInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkApplicationsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkApplicationInput
@@ -679,9 +679,9 @@ export type OpWorkApplicationUncheckedCreateWithoutOpWorkJobSeekerInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -716,9 +716,9 @@ export type OpWorkApplicationCreateWithoutOpWorkJobInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
   OpWorkJobSeeker: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkApplicationsInput
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkApplicationsInput
@@ -731,9 +731,9 @@ export type OpWorkApplicationUncheckedCreateWithoutOpWorkJobInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -770,9 +770,9 @@ export type OpWorkApplicationCreateManyOpWorkProfileInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -783,7 +783,7 @@ export type OpWorkApplicationUpdateWithoutOpWorkProfileInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkApplicationNestedInput
@@ -798,7 +798,7 @@ export type OpWorkApplicationUncheckedUpdateWithoutOpWorkProfileInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -811,7 +811,7 @@ export type OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -822,9 +822,9 @@ export type OpWorkApplicationCreateManyOpWorkJobSeekerInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -835,7 +835,7 @@ export type OpWorkApplicationUpdateWithoutOpWorkJobSeekerInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkApplicationNestedInput
@@ -850,7 +850,7 @@ export type OpWorkApplicationUncheckedUpdateWithoutOpWorkJobSeekerInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -863,7 +863,7 @@ export type OpWorkApplicationUncheckedUpdateManyWithoutOpWorkJobSeekerInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -874,9 +874,9 @@ export type OpWorkApplicationCreateManyOpWorkJobInput = {
   coverLetter?: string | null
   resumeUrl?: string | null
   portfolioUrl?: string | null
-  status?: $Enums.OpWorkApplicationStatus
+  status: $Enums.OpWorkApplicationStatus
   statusNotes?: string | null
-  appliedAt?: Date | string
+  appliedAt?: Date | string | null
   statusUpdatedAt?: Date | string | null
 }
 
@@ -887,7 +887,7 @@ export type OpWorkApplicationUpdateWithoutOpWorkJobInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkApplicationsNestedInput
@@ -902,7 +902,7 @@ export type OpWorkApplicationUncheckedUpdateWithoutOpWorkJobInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -915,7 +915,7 @@ export type OpWorkApplicationUncheckedUpdateManyWithoutOpWorkJobInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumOpWorkApplicationStatusFieldUpdateOperationsInput | $Enums.OpWorkApplicationStatus
   statusNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   statusUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -1059,7 +1059,7 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     /**
      * Дата подачи отклика
      */
-    appliedAt: Date
+    appliedAt: Date | null
     /**
      * Дата последнего обновления статуса
      */

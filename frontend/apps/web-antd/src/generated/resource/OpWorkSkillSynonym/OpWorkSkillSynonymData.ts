@@ -16,7 +16,7 @@ export function useOpWorkSkillSynonymFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSkillSynonym.createdAt'),
       rules: 'required',
@@ -90,7 +90,7 @@ export function useOpWorkSkillSynonymViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSkillSynonym.createdAt'),
       rules: 'required',

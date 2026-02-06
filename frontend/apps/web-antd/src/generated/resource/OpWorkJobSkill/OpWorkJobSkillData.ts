@@ -16,7 +16,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobSkill.createdAt'),
       rules: 'required',
@@ -189,7 +189,7 @@ export function useOpWorkJobSkillViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobSkill.createdAt'),
       rules: 'required',

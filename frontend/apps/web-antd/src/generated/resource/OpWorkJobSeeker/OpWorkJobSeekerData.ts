@@ -16,7 +16,7 @@ export function useOpWorkJobSeekerFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobSeeker.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useOpWorkJobSeekerFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkJobSeeker.updatedAt'),
       rules: 'required',
@@ -443,7 +443,7 @@ export function useOpWorkJobSeekerViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobSeeker.createdAt'),
       rules: 'required',
@@ -451,7 +451,7 @@ export function useOpWorkJobSeekerViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkJobSeeker.updatedAt'),
       rules: 'required',

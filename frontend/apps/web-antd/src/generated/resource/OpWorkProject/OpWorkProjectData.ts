@@ -16,7 +16,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkProject.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkProject.updatedAt'),
       rules: 'required',
@@ -52,6 +52,67 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.description,
       label: $t('resource.OpWorkProject.description'),
       rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'IDEA', value: $t('resource.OpWorkProjectStatus.IDEA'), },
+          { label: 'PLANNING', value: $t('resource.OpWorkProjectStatus.PLANNING'), },
+          { label: 'DEVELOPMENT', value: $t('resource.OpWorkProjectStatus.DEVELOPMENT'), },
+          { label: 'TESTING', value: $t('resource.OpWorkProjectStatus.TESTING'), },
+          { label: 'LAUNCH_READY', value: $t('resource.OpWorkProjectStatus.LAUNCH_READY'), },
+          { label: 'LIVE', value: $t('resource.OpWorkProjectStatus.LIVE'), },
+          { label: 'MAINTENANCE', value: $t('resource.OpWorkProjectStatus.MAINTENANCE'), },
+          { label: 'ON_HOLD', value: $t('resource.OpWorkProjectStatus.ON_HOLD'), },
+          { label: 'CANCELLED', value: $t('resource.OpWorkProjectStatus.CANCELLED'), },
+          { label: 'COMPLETED', value: $t('resource.OpWorkProjectStatus.COMPLETED'), },
+          { label: 'ARCHIVED', value: $t('resource.OpWorkProjectStatus.ARCHIVED'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.status,
+      label: $t('resource.OpWorkProject.status'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MVP', value: $t('resource.OpWorkProjectType.MVP'), },
+          { label: 'STARTUP', value: $t('resource.OpWorkProjectType.STARTUP'), },
+          { label: 'PRODUCT', value: $t('resource.OpWorkProjectType.PRODUCT'), },
+          { label: 'SERVICE', value: $t('resource.OpWorkProjectType.SERVICE'), },
+          { label: 'CONSULTING', value: $t('resource.OpWorkProjectType.CONSULTING'), },
+          { label: 'AGENCY', value: $t('resource.OpWorkProjectType.AGENCY'), },
+          { label: 'SAAS', value: $t('resource.OpWorkProjectType.SAAS'), },
+          { label: 'ECOMMERCE', value: $t('resource.OpWorkProjectType.ECOMMERCE'), },
+          { label: 'MOBILE_APP', value: $t('resource.OpWorkProjectType.MOBILE_APP'), },
+          { label: 'WEB_APP', value: $t('resource.OpWorkProjectType.WEB_APP'), },
+          { label: 'ENTERPRISE', value: $t('resource.OpWorkProjectType.ENTERPRISE'), },
+          { label: 'NON_PROFIT', value: $t('resource.OpWorkProjectType.NON_PROFIT'), },
+          { label: 'EDUCATION', value: $t('resource.OpWorkProjectType.EDUCATION'), },
+          { label: 'HEALTHCARE', value: $t('resource.OpWorkProjectType.HEALTHCARE'), },
+          { label: 'FINTECH', value: $t('resource.OpWorkProjectType.FINTECH'), },
+          { label: 'GAMING', value: $t('resource.OpWorkProjectType.GAMING'), },
+          { label: 'AI_ML', value: $t('resource.OpWorkProjectType.AI_ML'), },
+          { label: 'BLOCKCHAIN', value: $t('resource.OpWorkProjectType.BLOCKCHAIN'), },
+          { label: 'IOT', value: $t('resource.OpWorkProjectType.IOT'), },
+          { label: 'MARKETING', value: $t('resource.OpWorkProjectType.MARKETING'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.type,
+      label: $t('resource.OpWorkProject.type'),
+      
       
       labelWidth: 200
     },
@@ -88,7 +149,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedStartDate,
       label: $t('resource.OpWorkProject.plannedStartDate'),
       
@@ -96,7 +157,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedEndDate,
       label: $t('resource.OpWorkProject.plannedEndDate'),
       
@@ -112,7 +173,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualStartDate,
       label: $t('resource.OpWorkProject.actualStartDate'),
       
@@ -120,7 +181,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.developmentStart,
       label: $t('resource.OpWorkProject.developmentStart'),
       
@@ -128,7 +189,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.testingStart,
       label: $t('resource.OpWorkProject.testingStart'),
       
@@ -144,7 +205,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.launchDate,
       label: $t('resource.OpWorkProject.launchDate'),
       
@@ -152,7 +213,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.goLiveDate,
       label: $t('resource.OpWorkProject.goLiveDate'),
       
@@ -168,7 +229,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualEndDate,
       label: $t('resource.OpWorkProject.actualEndDate'),
       
@@ -176,7 +237,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.completionDate,
       label: $t('resource.OpWorkProject.completionDate'),
       
@@ -192,7 +253,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceStart,
       label: $t('resource.OpWorkProject.maintenanceStart'),
       
@@ -200,7 +261,7 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       label: $t('resource.OpWorkProject.maintenanceEnd'),
       
@@ -237,6 +298,67 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'IDEA', value: $t('resource.OpWorkProjectStatus.IDEA'), },
+          { label: 'PLANNING', value: $t('resource.OpWorkProjectStatus.PLANNING'), },
+          { label: 'DEVELOPMENT', value: $t('resource.OpWorkProjectStatus.DEVELOPMENT'), },
+          { label: 'TESTING', value: $t('resource.OpWorkProjectStatus.TESTING'), },
+          { label: 'LAUNCH_READY', value: $t('resource.OpWorkProjectStatus.LAUNCH_READY'), },
+          { label: 'LIVE', value: $t('resource.OpWorkProjectStatus.LIVE'), },
+          { label: 'MAINTENANCE', value: $t('resource.OpWorkProjectStatus.MAINTENANCE'), },
+          { label: 'ON_HOLD', value: $t('resource.OpWorkProjectStatus.ON_HOLD'), },
+          { label: 'CANCELLED', value: $t('resource.OpWorkProjectStatus.CANCELLED'), },
+          { label: 'COMPLETED', value: $t('resource.OpWorkProjectStatus.COMPLETED'), },
+          { label: 'ARCHIVED', value: $t('resource.OpWorkProjectStatus.ARCHIVED'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.status,
+      label: $t('resource.OpWorkProject.status'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MVP', value: $t('resource.OpWorkProjectType.MVP'), },
+          { label: 'STARTUP', value: $t('resource.OpWorkProjectType.STARTUP'), },
+          { label: 'PRODUCT', value: $t('resource.OpWorkProjectType.PRODUCT'), },
+          { label: 'SERVICE', value: $t('resource.OpWorkProjectType.SERVICE'), },
+          { label: 'CONSULTING', value: $t('resource.OpWorkProjectType.CONSULTING'), },
+          { label: 'AGENCY', value: $t('resource.OpWorkProjectType.AGENCY'), },
+          { label: 'SAAS', value: $t('resource.OpWorkProjectType.SAAS'), },
+          { label: 'ECOMMERCE', value: $t('resource.OpWorkProjectType.ECOMMERCE'), },
+          { label: 'MOBILE_APP', value: $t('resource.OpWorkProjectType.MOBILE_APP'), },
+          { label: 'WEB_APP', value: $t('resource.OpWorkProjectType.WEB_APP'), },
+          { label: 'ENTERPRISE', value: $t('resource.OpWorkProjectType.ENTERPRISE'), },
+          { label: 'NON_PROFIT', value: $t('resource.OpWorkProjectType.NON_PROFIT'), },
+          { label: 'EDUCATION', value: $t('resource.OpWorkProjectType.EDUCATION'), },
+          { label: 'HEALTHCARE', value: $t('resource.OpWorkProjectType.HEALTHCARE'), },
+          { label: 'FINTECH', value: $t('resource.OpWorkProjectType.FINTECH'), },
+          { label: 'GAMING', value: $t('resource.OpWorkProjectType.GAMING'), },
+          { label: 'AI_ML', value: $t('resource.OpWorkProjectType.AI_ML'), },
+          { label: 'BLOCKCHAIN', value: $t('resource.OpWorkProjectType.BLOCKCHAIN'), },
+          { label: 'IOT', value: $t('resource.OpWorkProjectType.IOT'), },
+          { label: 'MARKETING', value: $t('resource.OpWorkProjectType.MARKETING'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.type,
+      label: $t('resource.OpWorkProject.type'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.githubRepoUrl,
       label: $t('resource.OpWorkProject.githubRepoUrl'),
@@ -269,7 +391,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedStartDate,
       label: $t('resource.OpWorkProject.plannedStartDate'),
       
@@ -277,7 +399,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedEndDate,
       label: $t('resource.OpWorkProject.plannedEndDate'),
       
@@ -293,7 +415,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualStartDate,
       label: $t('resource.OpWorkProject.actualStartDate'),
       
@@ -301,7 +423,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.developmentStart,
       label: $t('resource.OpWorkProject.developmentStart'),
       
@@ -309,7 +431,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.testingStart,
       label: $t('resource.OpWorkProject.testingStart'),
       
@@ -325,7 +447,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.launchDate,
       label: $t('resource.OpWorkProject.launchDate'),
       
@@ -333,7 +455,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.goLiveDate,
       label: $t('resource.OpWorkProject.goLiveDate'),
       
@@ -349,7 +471,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualEndDate,
       label: $t('resource.OpWorkProject.actualEndDate'),
       
@@ -357,7 +479,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.completionDate,
       label: $t('resource.OpWorkProject.completionDate'),
       
@@ -373,7 +495,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceStart,
       label: $t('resource.OpWorkProject.maintenanceStart'),
       
@@ -381,7 +503,7 @@ export function useOpWorkProjectCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       label: $t('resource.OpWorkProject.maintenanceEnd'),
       
@@ -426,6 +548,67 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'IDEA', value: $t('resource.OpWorkProjectStatus.IDEA'), },
+          { label: 'PLANNING', value: $t('resource.OpWorkProjectStatus.PLANNING'), },
+          { label: 'DEVELOPMENT', value: $t('resource.OpWorkProjectStatus.DEVELOPMENT'), },
+          { label: 'TESTING', value: $t('resource.OpWorkProjectStatus.TESTING'), },
+          { label: 'LAUNCH_READY', value: $t('resource.OpWorkProjectStatus.LAUNCH_READY'), },
+          { label: 'LIVE', value: $t('resource.OpWorkProjectStatus.LIVE'), },
+          { label: 'MAINTENANCE', value: $t('resource.OpWorkProjectStatus.MAINTENANCE'), },
+          { label: 'ON_HOLD', value: $t('resource.OpWorkProjectStatus.ON_HOLD'), },
+          { label: 'CANCELLED', value: $t('resource.OpWorkProjectStatus.CANCELLED'), },
+          { label: 'COMPLETED', value: $t('resource.OpWorkProjectStatus.COMPLETED'), },
+          { label: 'ARCHIVED', value: $t('resource.OpWorkProjectStatus.ARCHIVED'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.status,
+      label: $t('resource.OpWorkProject.status'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MVP', value: $t('resource.OpWorkProjectType.MVP'), },
+          { label: 'STARTUP', value: $t('resource.OpWorkProjectType.STARTUP'), },
+          { label: 'PRODUCT', value: $t('resource.OpWorkProjectType.PRODUCT'), },
+          { label: 'SERVICE', value: $t('resource.OpWorkProjectType.SERVICE'), },
+          { label: 'CONSULTING', value: $t('resource.OpWorkProjectType.CONSULTING'), },
+          { label: 'AGENCY', value: $t('resource.OpWorkProjectType.AGENCY'), },
+          { label: 'SAAS', value: $t('resource.OpWorkProjectType.SAAS'), },
+          { label: 'ECOMMERCE', value: $t('resource.OpWorkProjectType.ECOMMERCE'), },
+          { label: 'MOBILE_APP', value: $t('resource.OpWorkProjectType.MOBILE_APP'), },
+          { label: 'WEB_APP', value: $t('resource.OpWorkProjectType.WEB_APP'), },
+          { label: 'ENTERPRISE', value: $t('resource.OpWorkProjectType.ENTERPRISE'), },
+          { label: 'NON_PROFIT', value: $t('resource.OpWorkProjectType.NON_PROFIT'), },
+          { label: 'EDUCATION', value: $t('resource.OpWorkProjectType.EDUCATION'), },
+          { label: 'HEALTHCARE', value: $t('resource.OpWorkProjectType.HEALTHCARE'), },
+          { label: 'FINTECH', value: $t('resource.OpWorkProjectType.FINTECH'), },
+          { label: 'GAMING', value: $t('resource.OpWorkProjectType.GAMING'), },
+          { label: 'AI_ML', value: $t('resource.OpWorkProjectType.AI_ML'), },
+          { label: 'BLOCKCHAIN', value: $t('resource.OpWorkProjectType.BLOCKCHAIN'), },
+          { label: 'IOT', value: $t('resource.OpWorkProjectType.IOT'), },
+          { label: 'MARKETING', value: $t('resource.OpWorkProjectType.MARKETING'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.type,
+      label: $t('resource.OpWorkProject.type'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.githubRepoUrl,
       label: $t('resource.OpWorkProject.githubRepoUrl'),
@@ -458,7 +641,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedStartDate,
       label: $t('resource.OpWorkProject.plannedStartDate'),
       
@@ -466,7 +649,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedEndDate,
       label: $t('resource.OpWorkProject.plannedEndDate'),
       
@@ -482,7 +665,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualStartDate,
       label: $t('resource.OpWorkProject.actualStartDate'),
       
@@ -490,7 +673,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.developmentStart,
       label: $t('resource.OpWorkProject.developmentStart'),
       
@@ -498,7 +681,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.testingStart,
       label: $t('resource.OpWorkProject.testingStart'),
       
@@ -514,7 +697,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.launchDate,
       label: $t('resource.OpWorkProject.launchDate'),
       
@@ -522,7 +705,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.goLiveDate,
       label: $t('resource.OpWorkProject.goLiveDate'),
       
@@ -538,7 +721,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.actualEndDate,
       label: $t('resource.OpWorkProject.actualEndDate'),
       
@@ -546,7 +729,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.completionDate,
       label: $t('resource.OpWorkProject.completionDate'),
       
@@ -562,7 +745,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceStart,
       label: $t('resource.OpWorkProject.maintenanceStart'),
       
@@ -570,7 +753,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       label: $t('resource.OpWorkProject.maintenanceEnd'),
       
@@ -578,7 +761,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkProject.createdAt'),
       rules: 'required',
@@ -586,7 +769,7 @@ export function useOpWorkProjectViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkProject.updatedAt'),
       rules: 'required',
@@ -628,6 +811,57 @@ export function useOpWorkProjectColumns<T = OpWorkProject>(
     {
       field: Prisma.OpWorkProjectScalarFieldEnum.description,
       title: $t('resource.OpWorkProject.description'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'IDEA', value: $t('resource.OpWorkProjectStatus.IDEA'), },
+          { label: 'PLANNING', value: $t('resource.OpWorkProjectStatus.PLANNING'), },
+          { label: 'DEVELOPMENT', value: $t('resource.OpWorkProjectStatus.DEVELOPMENT'), },
+          { label: 'TESTING', value: $t('resource.OpWorkProjectStatus.TESTING'), },
+          { label: 'LAUNCH_READY', value: $t('resource.OpWorkProjectStatus.LAUNCH_READY'), },
+          { label: 'LIVE', value: $t('resource.OpWorkProjectStatus.LIVE'), },
+          { label: 'MAINTENANCE', value: $t('resource.OpWorkProjectStatus.MAINTENANCE'), },
+          { label: 'ON_HOLD', value: $t('resource.OpWorkProjectStatus.ON_HOLD'), },
+          { label: 'CANCELLED', value: $t('resource.OpWorkProjectStatus.CANCELLED'), },
+          { label: 'COMPLETED', value: $t('resource.OpWorkProjectStatus.COMPLETED'), },
+          { label: 'ARCHIVED', value: $t('resource.OpWorkProjectStatus.ARCHIVED'), },
+        ],
+      },
+      title: $t('resource.OpWorkProject.status'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.status,
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'MVP', value: $t('resource.OpWorkProjectType.MVP'), },
+          { label: 'STARTUP', value: $t('resource.OpWorkProjectType.STARTUP'), },
+          { label: 'PRODUCT', value: $t('resource.OpWorkProjectType.PRODUCT'), },
+          { label: 'SERVICE', value: $t('resource.OpWorkProjectType.SERVICE'), },
+          { label: 'CONSULTING', value: $t('resource.OpWorkProjectType.CONSULTING'), },
+          { label: 'AGENCY', value: $t('resource.OpWorkProjectType.AGENCY'), },
+          { label: 'SAAS', value: $t('resource.OpWorkProjectType.SAAS'), },
+          { label: 'ECOMMERCE', value: $t('resource.OpWorkProjectType.ECOMMERCE'), },
+          { label: 'MOBILE_APP', value: $t('resource.OpWorkProjectType.MOBILE_APP'), },
+          { label: 'WEB_APP', value: $t('resource.OpWorkProjectType.WEB_APP'), },
+          { label: 'ENTERPRISE', value: $t('resource.OpWorkProjectType.ENTERPRISE'), },
+          { label: 'NON_PROFIT', value: $t('resource.OpWorkProjectType.NON_PROFIT'), },
+          { label: 'EDUCATION', value: $t('resource.OpWorkProjectType.EDUCATION'), },
+          { label: 'HEALTHCARE', value: $t('resource.OpWorkProjectType.HEALTHCARE'), },
+          { label: 'FINTECH', value: $t('resource.OpWorkProjectType.FINTECH'), },
+          { label: 'GAMING', value: $t('resource.OpWorkProjectType.GAMING'), },
+          { label: 'AI_ML', value: $t('resource.OpWorkProjectType.AI_ML'), },
+          { label: 'BLOCKCHAIN', value: $t('resource.OpWorkProjectType.BLOCKCHAIN'), },
+          { label: 'IOT', value: $t('resource.OpWorkProjectType.IOT'), },
+          { label: 'MARKETING', value: $t('resource.OpWorkProjectType.MARKETING'), },
+        ],
+      },
+      title: $t('resource.OpWorkProject.type'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.type,
       sortable: true
     },
     {

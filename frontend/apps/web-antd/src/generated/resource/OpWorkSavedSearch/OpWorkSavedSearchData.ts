@@ -16,7 +16,7 @@ export function useOpWorkSavedSearchFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSavedSearch.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useOpWorkSavedSearchFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkSavedSearch.updatedAt'),
       rules: 'required',
@@ -81,7 +81,28 @@ export function useOpWorkSavedSearchFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.frequency,
+      label: $t('resource.OpWorkSavedSearch.frequency'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       label: $t('resource.OpWorkSavedSearch.lastSentAt'),
       
@@ -143,7 +164,28 @@ export function useOpWorkSavedSearchCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.frequency,
+      label: $t('resource.OpWorkSavedSearch.frequency'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       label: $t('resource.OpWorkSavedSearch.lastSentAt'),
       
@@ -213,7 +255,28 @@ export function useOpWorkSavedSearchViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.frequency,
+      label: $t('resource.OpWorkSavedSearch.frequency'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       label: $t('resource.OpWorkSavedSearch.lastSentAt'),
       
@@ -221,7 +284,7 @@ export function useOpWorkSavedSearchViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSavedSearch.createdAt'),
       rules: 'required',
@@ -229,7 +292,7 @@ export function useOpWorkSavedSearchViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkSavedSearch.updatedAt'),
       rules: 'required',
@@ -284,6 +347,22 @@ export function useOpWorkSavedSearchColumns<T = OpWorkSavedSearch>(
       },
       title: $t('resource.OpWorkSavedSearch.isActive'),
       field: Prisma.OpWorkSavedSearchScalarFieldEnum.isActive,
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+      },
+      title: $t('resource.OpWorkSavedSearch.frequency'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.frequency,
       sortable: true
     },
     {

@@ -16,7 +16,7 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkEmployer.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkEmployer.updatedAt'),
       rules: 'required',
@@ -434,7 +434,7 @@ export function useOpWorkEmployerViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkEmployer.createdAt'),
       rules: 'required',
@@ -442,7 +442,7 @@ export function useOpWorkEmployerViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkEmployer.updatedAt'),
       rules: 'required',

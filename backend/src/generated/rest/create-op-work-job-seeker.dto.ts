@@ -41,7 +41,6 @@ summary?: string  | null;
 expectedSalary?: number  | null;
 @ApiProperty({
   type: 'string',
-  default: 'USD',
   required: false,
   nullable: true,
 })
@@ -50,7 +49,6 @@ expectedSalary?: number  | null;
 salaryCurrency?: string  | null;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -59,7 +57,6 @@ salaryCurrency?: string  | null;
 isOpenToWork?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })
@@ -68,7 +65,6 @@ isOpenToWork?: boolean  | null;
 isOpenToRemote?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })

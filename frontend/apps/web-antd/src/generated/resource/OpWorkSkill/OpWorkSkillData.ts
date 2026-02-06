@@ -16,7 +16,7 @@ export function useOpWorkSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSkillScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSkill.createdAt'),
       rules: 'required',
@@ -35,6 +35,28 @@ export function useOpWorkSkillFormSchema(): VbenFormSchema[] {
       component: 'Textarea',
       fieldName: Prisma.OpWorkSkillScalarFieldEnum.description,
       label: $t('resource.OpWorkSkill.description'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROGRAMMING_LANGUAGE', value: $t('resource.OpWorkSkillType.PROGRAMMING_LANGUAGE'), },
+          { label: 'FRAMEWORK', value: $t('resource.OpWorkSkillType.FRAMEWORK'), },
+          { label: 'DATABASE', value: $t('resource.OpWorkSkillType.DATABASE'), },
+          { label: 'TOOL', value: $t('resource.OpWorkSkillType.TOOL'), },
+          { label: 'PLATFORM', value: $t('resource.OpWorkSkillType.PLATFORM'), },
+          { label: 'LANGUAGE', value: $t('resource.OpWorkSkillType.LANGUAGE'), },
+          { label: 'SOFT_SKILL', value: $t('resource.OpWorkSkillType.SOFT_SKILL'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSkillScalarFieldEnum.type,
+      label: $t('resource.OpWorkSkill.type'),
       
       
       labelWidth: 200
@@ -80,6 +102,28 @@ export function useOpWorkSkillCreateFormSchema(): VbenFormSchema[] {
       component: 'Textarea',
       fieldName: Prisma.OpWorkSkillScalarFieldEnum.description,
       label: $t('resource.OpWorkSkill.description'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROGRAMMING_LANGUAGE', value: $t('resource.OpWorkSkillType.PROGRAMMING_LANGUAGE'), },
+          { label: 'FRAMEWORK', value: $t('resource.OpWorkSkillType.FRAMEWORK'), },
+          { label: 'DATABASE', value: $t('resource.OpWorkSkillType.DATABASE'), },
+          { label: 'TOOL', value: $t('resource.OpWorkSkillType.TOOL'), },
+          { label: 'PLATFORM', value: $t('resource.OpWorkSkillType.PLATFORM'), },
+          { label: 'LANGUAGE', value: $t('resource.OpWorkSkillType.LANGUAGE'), },
+          { label: 'SOFT_SKILL', value: $t('resource.OpWorkSkillType.SOFT_SKILL'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSkillScalarFieldEnum.type,
+      label: $t('resource.OpWorkSkill.type'),
       
       
       labelWidth: 200
@@ -138,6 +182,28 @@ export function useOpWorkSkillViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROGRAMMING_LANGUAGE', value: $t('resource.OpWorkSkillType.PROGRAMMING_LANGUAGE'), },
+          { label: 'FRAMEWORK', value: $t('resource.OpWorkSkillType.FRAMEWORK'), },
+          { label: 'DATABASE', value: $t('resource.OpWorkSkillType.DATABASE'), },
+          { label: 'TOOL', value: $t('resource.OpWorkSkillType.TOOL'), },
+          { label: 'PLATFORM', value: $t('resource.OpWorkSkillType.PLATFORM'), },
+          { label: 'LANGUAGE', value: $t('resource.OpWorkSkillType.LANGUAGE'), },
+          { label: 'SOFT_SKILL', value: $t('resource.OpWorkSkillType.SOFT_SKILL'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkSkillScalarFieldEnum.type,
+      label: $t('resource.OpWorkSkill.type'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkSkillScalarFieldEnum.category,
       label: $t('resource.OpWorkSkill.category'),
@@ -162,7 +228,7 @@ export function useOpWorkSkillViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSkillScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkSkill.createdAt'),
       rules: 'required',
@@ -199,6 +265,23 @@ export function useOpWorkSkillColumns<T = OpWorkSkill>(
     {
       field: Prisma.OpWorkSkillScalarFieldEnum.description,
       title: $t('resource.OpWorkSkill.description'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'PROGRAMMING_LANGUAGE', value: $t('resource.OpWorkSkillType.PROGRAMMING_LANGUAGE'), },
+          { label: 'FRAMEWORK', value: $t('resource.OpWorkSkillType.FRAMEWORK'), },
+          { label: 'DATABASE', value: $t('resource.OpWorkSkillType.DATABASE'), },
+          { label: 'TOOL', value: $t('resource.OpWorkSkillType.TOOL'), },
+          { label: 'PLATFORM', value: $t('resource.OpWorkSkillType.PLATFORM'), },
+          { label: 'LANGUAGE', value: $t('resource.OpWorkSkillType.LANGUAGE'), },
+          { label: 'SOFT_SKILL', value: $t('resource.OpWorkSkillType.SOFT_SKILL'), },
+        ],
+      },
+      title: $t('resource.OpWorkSkill.type'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.type,
       sortable: true
     },
     {

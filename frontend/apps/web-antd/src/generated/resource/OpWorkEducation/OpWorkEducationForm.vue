@@ -29,20 +29,24 @@ const [Drawer, drawerApi] = useVbenDrawer({
       path: { id: id.value },
       body: {
         institution: values.institution,
+        degree: values.degree,
         fieldOfStudy: values.fieldOfStudy,
         startDate: values.startDate,
         endDate: values.endDate,
         isCurrent: values.isCurrent,
         description: values.description,
+        grade: values.grade,
       }
     }) : opWorkEducationControllerCreateOne({
       body: {
         institution: values.institution,
+        degree: values.degree,
         fieldOfStudy: values.fieldOfStudy,
         startDate: values.startDate,
         endDate: values.endDate,
         isCurrent: values.isCurrent,
         description: values.description,
+        grade: values.grade,
       }
     }))
       .then(() => {

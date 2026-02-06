@@ -28,6 +28,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkNotificationControllerUpdateOne({
       path: { id: id.value },
       body: {
+        type: values.type,
         title: values.title,
         message: values.message,
         data: values.data ? JSON.parse(values.data as any) : null,
@@ -37,6 +38,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkNotificationControllerCreateOne({
       body: {
+        type: values.type,
         title: values.title,
         message: values.message,
         data: values.data ? JSON.parse(values.data as any) : null,

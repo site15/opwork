@@ -32,7 +32,7 @@ export function useOpWorkJobViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       label: $t('resource.OpWorkJobView.viewedAt'),
       
@@ -77,7 +77,7 @@ export function useOpWorkJobViewCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       label: $t('resource.OpWorkJobView.viewedAt'),
       
@@ -130,7 +130,7 @@ export function useOpWorkJobViewViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       label: $t('resource.OpWorkJobView.viewedAt'),
       

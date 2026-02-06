@@ -509,9 +509,9 @@ model OpWorkProfile {
   /// Подробное описание профиля
   description     String?  @db.Text
   /// Статус активности профиля
-  isActive        Boolean? @default(true)
+  isActive        Boolean?
   /// Статус верификации email адреса
-  isEmailVerified Boolean? @default(false)
+  isEmailVerified Boolean?
 
   /// === КОНТАКТНАЯ ИНФОРМАЦИЯ ===
 
@@ -600,16 +600,16 @@ model OpWorkJobSeeker {
   /// Ожидаемый уровень заработной платы
   expectedSalary Int?
   /// Валюта зарплаты (по умолчанию USD)
-  salaryCurrency String? @default("USD") @db.VarChar(3)
+  salaryCurrency String? @db.VarChar(3)
 
   /// === НАСТРОЙКИ ПОИСКА РАБОТЫ ===
 
   /// Готовность к работе (открыт для предложений)
-  isOpenToWork       Boolean? @default(true)
+  isOpenToWork       Boolean?
   /// Открытость к удаленной работе
-  isOpenToRemote     Boolean? @default(false)
+  isOpenToRemote     Boolean?
   /// Готовность к переезду
-  isOpenToRelocation Boolean? @default(false)
+  isOpenToRelocation Boolean?
   /// Предпочтительные локации для работы
   preferredLocations String?  @db.Text
 
@@ -673,7 +673,7 @@ model OpWorkExperience {
   /// Дата окончания работы (null если текущее место)
   endDate        DateTime?             @db.Timestamp(6)
   /// Признак текущего места работы
-  isCurrent      Boolean?              @default(false)
+  isCurrent      Boolean?
   /// Местоположение компании
   location       String?               @db.VarChar(255)
   /// Тип занятости
@@ -708,7 +708,7 @@ model OpWorkEducation {
   /// Дата окончания обучения
   endDate      DateTime?              @db.Timestamp(6)
   /// Признак текущего обучения
-  isCurrent    Boolean?               @default(false)
+  isCurrent    Boolean?
   /// Описание программы обучения или достижений
   description  String?                @db.Text
   /// Академическая успеваемость
@@ -934,28 +934,28 @@ model OpWorkJob {
   /// Максимальный уровень заработной платы
   salaryMax      Int?
   /// Валюта заработной платы (по умолчанию USD)
-  salaryCurrency String? @default("USD") @db.VarChar(3)
+  salaryCurrency String? @db.VarChar(3)
 
   /// === ЛОКАЦИЯ ===
 
   /// Местоположение работы
   location String?  @db.VarChar(255)
   /// Возможность удаленной работы
-  isRemote Boolean? @default(false)
+  isRemote Boolean?
 
   /// === СТАТУС ===
 
   /// Текущий статус вакансии
-  status OpWorkJobStatus @default(DRAFT)
+  status OpWorkJobStatus
 
   /// === СТАТИСТИКА ===
 
   /// Количество просмотров вакансии
-  viewsCount        Int @default(0)
+  viewsCount        Int
   /// Количество откликов на вакансию
-  applicationsCount Int @default(0)
+  applicationsCount Int
   /// Количество добавлений вакансии в избранное
-  savesCount        Int @default(0)
+  savesCount        Int
 
   /// === ДАТЫ ===
 
@@ -1021,14 +1021,14 @@ model OpWorkApplication {
   /// === СТАТУС ===
 
   /// Текущий статус отклика в процессе рассмотрения
-  status      OpWorkApplicationStatus @default(PENDING)
+  status      OpWorkApplicationStatus
   /// Заметки по отклику от HR или рекрутера
   statusNotes String?                 @db.Text
 
   /// === ДАТЫ ===
 
   /// Дата подачи отклика
-  appliedAt       DateTime  @default(now()) @db.Timestamp(6)
+  appliedAt       DateTime? @db.Timestamp(6)
   /// Дата последнего обновления статуса
   statusUpdatedAt DateTime? @db.Timestamp(6)
 
@@ -1103,7 +1103,7 @@ model OpWorkSkill {
   /// URL иконки навыка
   icon        String?          @db.VarChar(500)
   /// Популярность навыка (количество использований)
-  popularity  Int              @default(0)
+  popularity  Int
   /// Временная метка создания записи
   createdAt   DateTime         @default(now()) @db.Timestamp(6)
 
@@ -1136,11 +1136,11 @@ model OpWorkJobSeekerSkill {
   /// Идентификатор навыка
   skillId     String    @db.Uuid
   /// Уровень владения навыком (1-5)
-  level       Int       @default(3) @db.SmallInt
+  level       Int       @db.SmallInt
   /// Количество лет опыта с этим навыком
   yearsOfExp  Int?      @db.SmallInt
   /// Признак основного/ключевого навыка
-  isPrimary   Boolean?  @default(false)
+  isPrimary   Boolean?
   /// Дата последнего использования навыка
   lastUsed    DateTime? @db.Timestamp(6)
   /// Временная метка создания записи
@@ -1173,9 +1173,9 @@ model OpWorkJobSkill {
   /// Идентификатор требуемого навыка
   skillId    String   @db.Uuid
   /// Обязательность навыка для данной позиции
-  isRequired Boolean? @default(true)
+  isRequired Boolean?
   /// Важность навыка (1-5)
-  importance Int      @default(3) @db.SmallInt
+  importance Int      @db.SmallInt
   /// Минимальный требуемый уровень владения
   minLevel   Int?     @db.SmallInt
   /// Временная метка создания записи
@@ -1226,9 +1226,9 @@ model OpWorkNotification {
   /// === СТАТУС ===
 
   /// Признак прочтения уведомления
-  isRead     Boolean? @default(false)
+  isRead     Boolean?
   /// Признак архивирования уведомления
-  isArchived Boolean? @default(false)
+  isArchived Boolean?
 
   /// === ДАТЫ ===
 
@@ -1264,20 +1264,20 @@ model OpWorkNotificationSettings {
   /// === ТИПЫ УВЕДОМЛЕНИЙ ===
 
   /// Email-уведомления об обновлениях откликов
-  emailApplicationUpdates Boolean? @default(true)
+  emailApplicationUpdates Boolean?
   /// Email-уведомления о подходящих вакансиях
-  emailJobAlerts          Boolean? @default(true)
+  emailJobAlerts          Boolean?
   /// Email-рассылка новостей
-  emailNewsletter         Boolean? @default(false)
+  emailNewsletter         Boolean?
   /// Push-уведомления об обновлениях откликов
-  pushApplicationUpdates  Boolean? @default(true)
+  pushApplicationUpdates  Boolean?
   /// Push-уведомления о подходящих вакансиях
-  pushJobAlerts           Boolean? @default(true)
+  pushJobAlerts           Boolean?
 
   /// === ЧАСТОТА ===
 
   /// Частота отправки уведомлений о вакансиях
-  jobAlertFrequency OpWorkFrequency? @default(DAILY)
+  jobAlertFrequency OpWorkFrequency?
 
   /// === СИСТЕМНЫЕ ДАТЫ ===
 
@@ -1311,7 +1311,7 @@ model OpWorkSearchHistory {
   /// Фильтры поиска в формате JSON
   filters      Json?
   /// Количество найденных результатов
-  resultsCount Int?      @default(0)
+  resultsCount Int?
   /// Временная метка выполнения поиска
   searchedAt   DateTime? @db.Timestamp(6)
 
@@ -1370,9 +1370,9 @@ model OpWorkSavedSearch {
   /// Фильтры поиска в формате JSON
   filters    Json?
   /// Статус активности сохраненного поиска
-  isActive   Boolean?         @default(true)
+  isActive   Boolean?
   /// Частота отправки уведомлений
-  frequency  OpWorkFrequency? @default(DAILY)
+  frequency  OpWorkFrequency?
   /// Дата последней отправки уведомления
   lastSentAt DateTime?        @db.Timestamp(6)
   /// Временная метка создания

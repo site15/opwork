@@ -16,7 +16,9 @@ export const generateForm = ({
 
   // Get fields for different form types
   const allFields = model.fields.filter(
-    (field) => field.kind === 'scalar' && field.name !== 'deletedAt',
+    (field) =>
+      (field.kind === 'scalar' || field.kind === 'enum') &&
+      field.name !== 'deletedAt',
   );
   const editableFields = allFields.filter(
     (field) =>

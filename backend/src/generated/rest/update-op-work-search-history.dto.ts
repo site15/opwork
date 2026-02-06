@@ -24,7 +24,6 @@ filters?: Prisma.InputJsonValue  | Prisma.NullableJsonNullValueInput;
 @ApiProperty({
   type: 'integer',
   format: 'int32',
-  default: 0,
   required: false,
   nullable: true,
 })

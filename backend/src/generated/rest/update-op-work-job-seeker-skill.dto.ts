@@ -10,6 +10,14 @@ export class UpdateOpWorkJobSeekerSkillDto {
   type: 'integer',
   format: 'int32',
   required: false,
+})
+@IsOptional()
+@IsInt()
+level?: number ;
+@ApiProperty({
+  type: 'integer',
+  format: 'int32',
+  required: false,
   nullable: true,
 })
 @IsOptional()
@@ -17,7 +25,6 @@ export class UpdateOpWorkJobSeekerSkillDto {
 yearsOfExp?: number  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })

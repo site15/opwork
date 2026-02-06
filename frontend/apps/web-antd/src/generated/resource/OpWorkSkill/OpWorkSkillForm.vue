@@ -30,6 +30,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         name: values.name,
         description: values.description,
+        type: values.type,
         category: values.category,
         icon: values.icon,
         popularity: values.popularity,
@@ -38,6 +39,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         name: values.name,
         description: values.description,
+        type: values.type,
         category: values.category,
         icon: values.icon,
         popularity: values.popularity,

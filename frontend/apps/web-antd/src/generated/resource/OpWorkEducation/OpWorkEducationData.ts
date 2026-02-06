@@ -16,7 +16,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkEducation.createdAt'),
       rules: 'required',
@@ -40,6 +40,29 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'HIGH_SCHOOL', value: $t('resource.OpWorkEducationDegree.HIGH_SCHOOL'), },
+          { label: 'ASSOCIATE', value: $t('resource.OpWorkEducationDegree.ASSOCIATE'), },
+          { label: 'BACHELOR', value: $t('resource.OpWorkEducationDegree.BACHELOR'), },
+          { label: 'MASTER', value: $t('resource.OpWorkEducationDegree.MASTER'), },
+          { label: 'DOCTORATE', value: $t('resource.OpWorkEducationDegree.DOCTORATE'), },
+          { label: 'CERTIFICATE', value: $t('resource.OpWorkEducationDegree.CERTIFICATE'), },
+          { label: 'DIPLOMA', value: $t('resource.OpWorkEducationDegree.DIPLOMA'), },
+          { label: 'POSTGRADUATE', value: $t('resource.OpWorkEducationDegree.POSTGRADUATE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.degree,
+      label: $t('resource.OpWorkEducation.degree'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       label: $t('resource.OpWorkEducation.fieldOfStudy'),
@@ -48,7 +71,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       label: $t('resource.OpWorkEducation.startDate'),
       rules: 'required',
@@ -56,7 +79,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       label: $t('resource.OpWorkEducation.endDate'),
       
@@ -84,6 +107,38 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.description,
       label: $t('resource.OpWorkEducation.description'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'A_PLUS', value: $t('resource.OpWorkGrade.A_PLUS'), },
+          { label: 'A', value: $t('resource.OpWorkGrade.A'), },
+          { label: 'A_MINUS', value: $t('resource.OpWorkGrade.A_MINUS'), },
+          { label: 'B_PLUS', value: $t('resource.OpWorkGrade.B_PLUS'), },
+          { label: 'B', value: $t('resource.OpWorkGrade.B'), },
+          { label: 'B_MINUS', value: $t('resource.OpWorkGrade.B_MINUS'), },
+          { label: 'C_PLUS', value: $t('resource.OpWorkGrade.C_PLUS'), },
+          { label: 'C', value: $t('resource.OpWorkGrade.C'), },
+          { label: 'C_MINUS', value: $t('resource.OpWorkGrade.C_MINUS'), },
+          { label: 'D_PLUS', value: $t('resource.OpWorkGrade.D_PLUS'), },
+          { label: 'D', value: $t('resource.OpWorkGrade.D'), },
+          { label: 'D_MINUS', value: $t('resource.OpWorkGrade.D_MINUS'), },
+          { label: 'F', value: $t('resource.OpWorkGrade.F'), },
+          { label: 'PASS', value: $t('resource.OpWorkGrade.PASS'), },
+          { label: 'FAIL', value: $t('resource.OpWorkGrade.FAIL'), },
+          { label: 'INCOMPLETE', value: $t('resource.OpWorkGrade.INCOMPLETE'), },
+          { label: 'AUDIT', value: $t('resource.OpWorkGrade.AUDIT'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.grade,
+      label: $t('resource.OpWorkEducation.grade'),
       
       
       labelWidth: 200
@@ -110,6 +165,29 @@ export function useOpWorkEducationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'HIGH_SCHOOL', value: $t('resource.OpWorkEducationDegree.HIGH_SCHOOL'), },
+          { label: 'ASSOCIATE', value: $t('resource.OpWorkEducationDegree.ASSOCIATE'), },
+          { label: 'BACHELOR', value: $t('resource.OpWorkEducationDegree.BACHELOR'), },
+          { label: 'MASTER', value: $t('resource.OpWorkEducationDegree.MASTER'), },
+          { label: 'DOCTORATE', value: $t('resource.OpWorkEducationDegree.DOCTORATE'), },
+          { label: 'CERTIFICATE', value: $t('resource.OpWorkEducationDegree.CERTIFICATE'), },
+          { label: 'DIPLOMA', value: $t('resource.OpWorkEducationDegree.DIPLOMA'), },
+          { label: 'POSTGRADUATE', value: $t('resource.OpWorkEducationDegree.POSTGRADUATE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.degree,
+      label: $t('resource.OpWorkEducation.degree'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       label: $t('resource.OpWorkEducation.fieldOfStudy'),
@@ -118,7 +196,7 @@ export function useOpWorkEducationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       label: $t('resource.OpWorkEducation.startDate'),
       rules: 'required',
@@ -126,7 +204,7 @@ export function useOpWorkEducationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       label: $t('resource.OpWorkEducation.endDate'),
       
@@ -154,6 +232,38 @@ export function useOpWorkEducationCreateFormSchema(): VbenFormSchema[] {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.description,
       label: $t('resource.OpWorkEducation.description'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'A_PLUS', value: $t('resource.OpWorkGrade.A_PLUS'), },
+          { label: 'A', value: $t('resource.OpWorkGrade.A'), },
+          { label: 'A_MINUS', value: $t('resource.OpWorkGrade.A_MINUS'), },
+          { label: 'B_PLUS', value: $t('resource.OpWorkGrade.B_PLUS'), },
+          { label: 'B', value: $t('resource.OpWorkGrade.B'), },
+          { label: 'B_MINUS', value: $t('resource.OpWorkGrade.B_MINUS'), },
+          { label: 'C_PLUS', value: $t('resource.OpWorkGrade.C_PLUS'), },
+          { label: 'C', value: $t('resource.OpWorkGrade.C'), },
+          { label: 'C_MINUS', value: $t('resource.OpWorkGrade.C_MINUS'), },
+          { label: 'D_PLUS', value: $t('resource.OpWorkGrade.D_PLUS'), },
+          { label: 'D', value: $t('resource.OpWorkGrade.D'), },
+          { label: 'D_MINUS', value: $t('resource.OpWorkGrade.D_MINUS'), },
+          { label: 'F', value: $t('resource.OpWorkGrade.F'), },
+          { label: 'PASS', value: $t('resource.OpWorkGrade.PASS'), },
+          { label: 'FAIL', value: $t('resource.OpWorkGrade.FAIL'), },
+          { label: 'INCOMPLETE', value: $t('resource.OpWorkGrade.INCOMPLETE'), },
+          { label: 'AUDIT', value: $t('resource.OpWorkGrade.AUDIT'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.grade,
+      label: $t('resource.OpWorkEducation.grade'),
       
       
       labelWidth: 200
@@ -188,6 +298,29 @@ export function useOpWorkEducationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'HIGH_SCHOOL', value: $t('resource.OpWorkEducationDegree.HIGH_SCHOOL'), },
+          { label: 'ASSOCIATE', value: $t('resource.OpWorkEducationDegree.ASSOCIATE'), },
+          { label: 'BACHELOR', value: $t('resource.OpWorkEducationDegree.BACHELOR'), },
+          { label: 'MASTER', value: $t('resource.OpWorkEducationDegree.MASTER'), },
+          { label: 'DOCTORATE', value: $t('resource.OpWorkEducationDegree.DOCTORATE'), },
+          { label: 'CERTIFICATE', value: $t('resource.OpWorkEducationDegree.CERTIFICATE'), },
+          { label: 'DIPLOMA', value: $t('resource.OpWorkEducationDegree.DIPLOMA'), },
+          { label: 'POSTGRADUATE', value: $t('resource.OpWorkEducationDegree.POSTGRADUATE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.degree,
+      label: $t('resource.OpWorkEducation.degree'),
+      
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       label: $t('resource.OpWorkEducation.fieldOfStudy'),
@@ -196,7 +329,7 @@ export function useOpWorkEducationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       label: $t('resource.OpWorkEducation.startDate'),
       rules: 'required',
@@ -204,7 +337,7 @@ export function useOpWorkEducationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       label: $t('resource.OpWorkEducation.endDate'),
       
@@ -237,7 +370,39 @@ export function useOpWorkEducationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'A_PLUS', value: $t('resource.OpWorkGrade.A_PLUS'), },
+          { label: 'A', value: $t('resource.OpWorkGrade.A'), },
+          { label: 'A_MINUS', value: $t('resource.OpWorkGrade.A_MINUS'), },
+          { label: 'B_PLUS', value: $t('resource.OpWorkGrade.B_PLUS'), },
+          { label: 'B', value: $t('resource.OpWorkGrade.B'), },
+          { label: 'B_MINUS', value: $t('resource.OpWorkGrade.B_MINUS'), },
+          { label: 'C_PLUS', value: $t('resource.OpWorkGrade.C_PLUS'), },
+          { label: 'C', value: $t('resource.OpWorkGrade.C'), },
+          { label: 'C_MINUS', value: $t('resource.OpWorkGrade.C_MINUS'), },
+          { label: 'D_PLUS', value: $t('resource.OpWorkGrade.D_PLUS'), },
+          { label: 'D', value: $t('resource.OpWorkGrade.D'), },
+          { label: 'D_MINUS', value: $t('resource.OpWorkGrade.D_MINUS'), },
+          { label: 'F', value: $t('resource.OpWorkGrade.F'), },
+          { label: 'PASS', value: $t('resource.OpWorkGrade.PASS'), },
+          { label: 'FAIL', value: $t('resource.OpWorkGrade.FAIL'), },
+          { label: 'INCOMPLETE', value: $t('resource.OpWorkGrade.INCOMPLETE'), },
+          { label: 'AUDIT', value: $t('resource.OpWorkGrade.AUDIT'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.grade,
+      label: $t('resource.OpWorkEducation.grade'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkEducation.createdAt'),
       rules: 'required',
@@ -277,6 +442,24 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       sortable: true
     },
     {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'HIGH_SCHOOL', value: $t('resource.OpWorkEducationDegree.HIGH_SCHOOL'), },
+          { label: 'ASSOCIATE', value: $t('resource.OpWorkEducationDegree.ASSOCIATE'), },
+          { label: 'BACHELOR', value: $t('resource.OpWorkEducationDegree.BACHELOR'), },
+          { label: 'MASTER', value: $t('resource.OpWorkEducationDegree.MASTER'), },
+          { label: 'DOCTORATE', value: $t('resource.OpWorkEducationDegree.DOCTORATE'), },
+          { label: 'CERTIFICATE', value: $t('resource.OpWorkEducationDegree.CERTIFICATE'), },
+          { label: 'DIPLOMA', value: $t('resource.OpWorkEducationDegree.DIPLOMA'), },
+          { label: 'POSTGRADUATE', value: $t('resource.OpWorkEducationDegree.POSTGRADUATE'), },
+        ],
+      },
+      title: $t('resource.OpWorkEducation.degree'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.degree,
+      sortable: true
+    },
+    {
       field: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       title: $t('resource.OpWorkEducation.fieldOfStudy'),
       sortable: true
@@ -304,6 +487,33 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
     {
       field: Prisma.OpWorkEducationScalarFieldEnum.description,
       title: $t('resource.OpWorkEducation.description'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'A_PLUS', value: $t('resource.OpWorkGrade.A_PLUS'), },
+          { label: 'A', value: $t('resource.OpWorkGrade.A'), },
+          { label: 'A_MINUS', value: $t('resource.OpWorkGrade.A_MINUS'), },
+          { label: 'B_PLUS', value: $t('resource.OpWorkGrade.B_PLUS'), },
+          { label: 'B', value: $t('resource.OpWorkGrade.B'), },
+          { label: 'B_MINUS', value: $t('resource.OpWorkGrade.B_MINUS'), },
+          { label: 'C_PLUS', value: $t('resource.OpWorkGrade.C_PLUS'), },
+          { label: 'C', value: $t('resource.OpWorkGrade.C'), },
+          { label: 'C_MINUS', value: $t('resource.OpWorkGrade.C_MINUS'), },
+          { label: 'D_PLUS', value: $t('resource.OpWorkGrade.D_PLUS'), },
+          { label: 'D', value: $t('resource.OpWorkGrade.D'), },
+          { label: 'D_MINUS', value: $t('resource.OpWorkGrade.D_MINUS'), },
+          { label: 'F', value: $t('resource.OpWorkGrade.F'), },
+          { label: 'PASS', value: $t('resource.OpWorkGrade.PASS'), },
+          { label: 'FAIL', value: $t('resource.OpWorkGrade.FAIL'), },
+          { label: 'INCOMPLETE', value: $t('resource.OpWorkGrade.INCOMPLETE'), },
+          { label: 'AUDIT', value: $t('resource.OpWorkGrade.AUDIT'), },
+        ],
+      },
+      title: $t('resource.OpWorkEducation.grade'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.grade,
       sortable: true
     },
     {

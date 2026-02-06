@@ -300,7 +300,7 @@ export type OpWorkJobSkillScalarWhereWithAggregatesInput = {
 export type OpWorkJobSkillCreateInput = {
   id?: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobSkillInput
@@ -312,7 +312,7 @@ export type OpWorkJobSkillUncheckedCreateInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }
@@ -342,7 +342,7 @@ export type OpWorkJobSkillCreateManyInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }
@@ -507,7 +507,7 @@ export type OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput = {
 export type OpWorkJobSkillCreateWithoutOpWorkJobInput = {
   id?: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
   OpWorkSkill: Prisma.OpWorkSkillCreateNestedOneWithoutOpWorkJobSkillInput
@@ -517,7 +517,7 @@ export type OpWorkJobSkillUncheckedCreateWithoutOpWorkJobInput = {
   id?: string
   skillId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }
@@ -564,7 +564,7 @@ export type OpWorkJobSkillScalarWhereInput = {
 export type OpWorkJobSkillCreateWithoutOpWorkSkillInput = {
   id?: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobSkillInput
@@ -574,7 +574,7 @@ export type OpWorkJobSkillUncheckedCreateWithoutOpWorkSkillInput = {
   id?: string
   jobId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }
@@ -609,7 +609,7 @@ export type OpWorkJobSkillCreateManyOpWorkJobInput = {
   id?: string
   skillId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }
@@ -645,7 +645,7 @@ export type OpWorkJobSkillCreateManyOpWorkSkillInput = {
   id?: string
   jobId: string
   isRequired?: boolean | null
-  importance?: number
+  importance: number
   minLevel?: number | null
   createdAt?: Date | string
 }

@@ -311,7 +311,7 @@ export type OpWorkJobSeekerSkillScalarWhereWithAggregatesInput = {
 
 export type OpWorkJobSeekerSkillCreateInput = {
   id?: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -324,7 +324,7 @@ export type OpWorkJobSeekerSkillUncheckedCreateInput = {
   id?: string
   jobSeekerId: string
   skillId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -357,7 +357,7 @@ export type OpWorkJobSeekerSkillCreateManyInput = {
   id?: string
   jobSeekerId: string
   skillId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -528,7 +528,7 @@ export type OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
 
 export type OpWorkJobSeekerSkillCreateWithoutOpWorkJobSeekerInput = {
   id?: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -539,7 +539,7 @@ export type OpWorkJobSeekerSkillCreateWithoutOpWorkJobSeekerInput = {
 export type OpWorkJobSeekerSkillUncheckedCreateWithoutOpWorkJobSeekerInput = {
   id?: string
   skillId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -588,7 +588,7 @@ export type OpWorkJobSeekerSkillScalarWhereInput = {
 
 export type OpWorkJobSeekerSkillCreateWithoutOpWorkSkillInput = {
   id?: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -599,7 +599,7 @@ export type OpWorkJobSeekerSkillCreateWithoutOpWorkSkillInput = {
 export type OpWorkJobSeekerSkillUncheckedCreateWithoutOpWorkSkillInput = {
   id?: string
   jobSeekerId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -635,7 +635,7 @@ export type OpWorkJobSeekerSkillUpdateManyWithWhereWithoutOpWorkSkillInput = {
 export type OpWorkJobSeekerSkillCreateManyOpWorkJobSeekerInput = {
   id?: string
   skillId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null
@@ -675,7 +675,7 @@ export type OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkJobSeekerInput =
 export type OpWorkJobSeekerSkillCreateManyOpWorkSkillInput = {
   id?: string
   jobSeekerId: string
-  level?: number
+  level: number
   yearsOfExp?: number | null
   isPrimary?: boolean | null
   lastUsed?: Date | string | null

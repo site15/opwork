@@ -16,7 +16,7 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkProfile.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkProfile.updatedAt'),
       rules: 'required',
@@ -35,6 +35,42 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       component: 'Input',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.userId,
       label: $t('resource.OpWorkProfile.userId'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROJECT', value: $t('resource.OpWorkProfileType.PROJECT'), },
+          { label: 'SPECIALIST', value: $t('resource.OpWorkProfileType.SPECIALIST'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkProfileType.EMPLOYER'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.type,
+      label: $t('resource.OpWorkProfile.type'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'JOB_SEEKER', value: $t('resource.OpWorkUserType.JOB_SEEKER'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkUserType.EMPLOYER'), },
+          { label: 'ADMIN', value: $t('resource.OpWorkUserType.ADMIN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.userType,
+      label: $t('resource.OpWorkProfile.userType'),
       rules: 'required',
       
       labelWidth: 200
@@ -146,6 +182,42 @@ export function useOpWorkProfileCreateFormSchema(): VbenFormSchema[] {
       component: 'Input',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.userId,
       label: $t('resource.OpWorkProfile.userId'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROJECT', value: $t('resource.OpWorkProfileType.PROJECT'), },
+          { label: 'SPECIALIST', value: $t('resource.OpWorkProfileType.SPECIALIST'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkProfileType.EMPLOYER'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.type,
+      label: $t('resource.OpWorkProfile.type'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'JOB_SEEKER', value: $t('resource.OpWorkUserType.JOB_SEEKER'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkUserType.EMPLOYER'), },
+          { label: 'ADMIN', value: $t('resource.OpWorkUserType.ADMIN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.userType,
+      label: $t('resource.OpWorkProfile.userType'),
       rules: 'required',
       
       labelWidth: 200
@@ -270,6 +342,42 @@ export function useOpWorkProfileViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PROJECT', value: $t('resource.OpWorkProfileType.PROJECT'), },
+          { label: 'SPECIALIST', value: $t('resource.OpWorkProfileType.SPECIALIST'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkProfileType.EMPLOYER'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.type,
+      label: $t('resource.OpWorkProfile.type'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'JOB_SEEKER', value: $t('resource.OpWorkUserType.JOB_SEEKER'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkUserType.EMPLOYER'), },
+          { label: 'ADMIN', value: $t('resource.OpWorkUserType.ADMIN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.userType,
+      label: $t('resource.OpWorkProfile.userType'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Input',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.title,
       label: $t('resource.OpWorkProfile.title'),
@@ -368,7 +476,7 @@ export function useOpWorkProfileViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkProfile.createdAt'),
       rules: 'required',
@@ -376,7 +484,7 @@ export function useOpWorkProfileViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkProfile.updatedAt'),
       rules: 'required',
@@ -408,6 +516,32 @@ export function useOpWorkProfileColumns<T = OpWorkProfile>(
     {
       field: Prisma.OpWorkProfileScalarFieldEnum.userId,
       title: $t('resource.OpWorkProfile.userId'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'PROJECT', value: $t('resource.OpWorkProfileType.PROJECT'), },
+          { label: 'SPECIALIST', value: $t('resource.OpWorkProfileType.SPECIALIST'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkProfileType.EMPLOYER'), },
+        ],
+      },
+      title: $t('resource.OpWorkProfile.type'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.type,
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'JOB_SEEKER', value: $t('resource.OpWorkUserType.JOB_SEEKER'), },
+          { label: 'EMPLOYER', value: $t('resource.OpWorkUserType.EMPLOYER'), },
+          { label: 'ADMIN', value: $t('resource.OpWorkUserType.ADMIN'), },
+        ],
+      },
+      title: $t('resource.OpWorkProfile.userType'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.userType,
       sortable: true
     },
     {

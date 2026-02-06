@@ -28,7 +28,6 @@ query!: string ;
 filters?: Prisma.InputJsonValue  | Prisma.NullableJsonNullValueInput;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -38,7 +37,6 @@ isActive?: boolean  | null;
 @ApiProperty({
   enum: OpWorkFrequency,
   enumName: 'OpWorkFrequency',
-  default: 'DAILY',
   required: false,
   nullable: true,
 })

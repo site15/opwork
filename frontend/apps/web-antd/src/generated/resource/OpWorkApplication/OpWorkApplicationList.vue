@@ -55,6 +55,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         coverLetter: item.coverLetter,
         resumeUrl: item.resumeUrl,
         portfolioUrl: item.portfolioUrl,
+        status: item.status,
         statusNotes: item.statusNotes,
         appliedAt: item.appliedAt,
         statusUpdatedAt: item.statusUpdatedAt,

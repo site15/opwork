@@ -16,7 +16,7 @@ export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthApiKeyScalarFieldEnum.createdAt,
       label: $t('resource.AuthApiKey.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthApiKeyScalarFieldEnum.updatedAt,
       label: $t('resource.AuthApiKey.updatedAt'),
       rules: 'required',
@@ -149,7 +149,7 @@ export function useAuthApiKeyViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthApiKeyScalarFieldEnum.createdAt,
       label: $t('resource.AuthApiKey.createdAt'),
       rules: 'required',
@@ -157,7 +157,7 @@ export function useAuthApiKeyViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthApiKeyScalarFieldEnum.updatedAt,
       label: $t('resource.AuthApiKey.updatedAt'),
       rules: 'required',

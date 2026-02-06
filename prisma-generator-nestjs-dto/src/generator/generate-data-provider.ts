@@ -2,11 +2,16 @@
 import { kebab } from 'case';
 import { TemplateHelpers } from './template-helpers';
 import { ModelParams } from './types';
+import { WritableDeep } from 'type-fest';
+import { DMMF } from '@prisma/generator-helper';
 
 export const generateDataProvider = ({
   controller,
   templateHelpers,
-}: ModelParams & { templateHelpers: TemplateHelpers }): string => {
+  enumModels,
+}: ModelParams & { templateHelpers: TemplateHelpers } & {
+  enumModels: WritableDeep<DMMF.DatamodelEnum>[];
+}): string => {
   const { model } = controller;
   const { entityName, createDtoName } = templateHelpers;
 
@@ -21,8 +26,15 @@ export const generateDataProvider = ({
 
   // Get fields for different form types
   const allFields = model.fields.filter(
-    (field) => field.kind === 'scalar' && field.name !== 'deletedAt',
+    (field) =>
+      (field.kind === 'scalar' || field.kind === 'enum') &&
+      field.name !== 'deletedAt',
   );
+
+  if (model.name === 'OpWorkNotificationSettings') {
+    console.dir(model, { depth: 20 });
+  }
+  //jobAlertFrequency
   const editableFields = allFields.filter(
     (field) =>
       !field.isId &&
@@ -64,6 +76,50 @@ export const generateDataProvider = ({
     if (multiline) {
       component = 'Textarea';
     }
+
+    if (field.kind === 'enum') {
+      const enumModel = enumModels.find((model) => model.name === field.type);
+      if (enumModel) {
+        return `    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+          ${enumModel.values.map((value) => `          { label: '${value.name}', value: $t('resource.${field.type}.${value.name}'), },`).join('\n')}
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      label: $t('resource.${entityClassName}.${field.name}'),
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+      labelWidth: 200
+    },`;
+      }
+    }
+
+    if (field.type === 'DateTime') {
+      if (field.name.endsWith('Time')) {
+        return `    {
+      component: 'TimePicker',
+      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      label: $t('resource.${entityClassName}.${field.name}'),
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+      labelWidth: 200
+    },`;
+      }
+      return `    {
+      component: 'DateTime',
+      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      label: $t('resource.${entityClassName}.${field.name}'),
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+      labelWidth: 200
+    },`;
+    }
+
     if (field.type === 'Boolean') {
       return `    {
       component: 'RadioGroup',
@@ -115,6 +171,24 @@ export const generateDataProvider = ({
     const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
     const required = field.isRequired;
     const readonly = readOnlyFields.find((f) => f.name === field.name);
+
+    if (field.kind === 'enum') {
+      const enumModel = enumModels.find((model) => model.name === field.type);
+      if (enumModel) {
+        return `    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+          ${enumModel.values.map((value) => `          { label: '${value.name}', value: $t('resource.${field.type}.${value.name}'), },`).join('\n')}
+        ],
+      },
+      title: $t('resource.${entityClassName}.${field.name}'),
+      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      sortable: true
+    },`;
+      }
+    }
+
     if (field.name === 'id') {
       return `    {
       field: Prisma.${entityClassName}ScalarFieldEnum.id,

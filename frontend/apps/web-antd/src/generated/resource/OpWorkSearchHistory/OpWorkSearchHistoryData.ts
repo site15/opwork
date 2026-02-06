@@ -48,7 +48,7 @@ export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
       label: $t('resource.OpWorkSearchHistory.searchedAt'),
       
@@ -93,7 +93,7 @@ export function useOpWorkSearchHistoryCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
       label: $t('resource.OpWorkSearchHistory.searchedAt'),
       
@@ -146,7 +146,7 @@ export function useOpWorkSearchHistoryViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
       label: $t('resource.OpWorkSearchHistory.searchedAt'),
       

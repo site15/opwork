@@ -350,6 +350,7 @@ export const run = ({
       content: generateDataProvider({
         ...modelParams,
         templateHelpers,
+        enumModels: dmmf.datamodel.enums,
       }),
     };
 

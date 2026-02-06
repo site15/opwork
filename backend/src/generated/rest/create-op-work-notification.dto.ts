@@ -35,7 +35,6 @@ message!: string ;
 data?: Prisma.InputJsonValue  | Prisma.NullableJsonNullValueInput;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })
@@ -44,7 +43,6 @@ data?: Prisma.InputJsonValue  | Prisma.NullableJsonNullValueInput;
 isRead?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })

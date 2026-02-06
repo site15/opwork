@@ -57,6 +57,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         endDate: item.endDate,
         isCurrent: item.isCurrent,
         location: item.location,
+        employmentType: item.employmentType,
         createdAt: item.createdAt,
             })),
             total: result.data?.meta.totalResults || 0,

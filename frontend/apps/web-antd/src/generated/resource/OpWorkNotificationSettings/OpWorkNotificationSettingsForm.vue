@@ -33,6 +33,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         emailNewsletter: values.emailNewsletter,
         pushApplicationUpdates: values.pushApplicationUpdates,
         pushJobAlerts: values.pushJobAlerts,
+        jobAlertFrequency: values.jobAlertFrequency,
       }
     }) : opWorkNotificationSettingsControllerCreateOne({
       body: {
@@ -41,6 +42,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         emailNewsletter: values.emailNewsletter,
         pushApplicationUpdates: values.pushApplicationUpdates,
         pushJobAlerts: values.pushJobAlerts,
+        jobAlertFrequency: values.jobAlertFrequency,
       }
     }))
       .then(() => {

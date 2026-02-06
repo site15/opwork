@@ -16,7 +16,7 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobTagScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobTag.createdAt'),
       rules: 'required',
@@ -114,7 +114,7 @@ export function useOpWorkJobTagViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkJobTagScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkJobTag.createdAt'),
       rules: 'required',

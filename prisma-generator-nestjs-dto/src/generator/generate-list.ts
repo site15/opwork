@@ -15,13 +15,15 @@ export const generateList = ({
 
   // Get fields for different form types
   const allFields = model.fields.filter(
-    (field) => field.kind === 'scalar' && field.name !== 'deletedAt',
+    (field) =>
+      (field.kind === 'scalar' || field.kind === 'enum') &&
+      field.name !== 'deletedAt',
   );
 
   // Get all scalar fields for the table columns
   const scalarFields = model.fields.filter(
     (field) =>
-      field.kind === 'scalar' &&
+      (field.kind === 'scalar' || field.kind === 'enum') &&
       field.name !== 'updatedAt' &&
       field.name !== 'deletedAt',
   );

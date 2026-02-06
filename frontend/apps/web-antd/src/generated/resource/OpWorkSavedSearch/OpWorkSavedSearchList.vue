@@ -54,6 +54,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         query: item.query,
         filters: JSON.stringify(item.filters),
         isActive: item.isActive,
+        frequency: item.frequency,
         lastSentAt: item.lastSentAt,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,

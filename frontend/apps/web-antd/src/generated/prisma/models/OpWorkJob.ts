@@ -529,10 +529,10 @@ export type OpWorkJobCreateInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -562,10 +562,10 @@ export type OpWorkJobUncheckedCreateInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -655,10 +655,10 @@ export type OpWorkJobCreateManyInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1012,10 +1012,10 @@ export type OpWorkJobCreateWithoutOpWorkProfileInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1043,10 +1043,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkProfileInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1127,10 +1127,10 @@ export type OpWorkJobCreateWithoutOpWorkEmployerInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1158,10 +1158,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkEmployerInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1213,10 +1213,10 @@ export type OpWorkJobCreateWithoutOpWorkApplicationInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1245,10 +1245,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkApplicationInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1349,10 +1349,10 @@ export type OpWorkJobCreateWithoutOpWorkSavedJobInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1381,10 +1381,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkSavedJobInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1485,10 +1485,10 @@ export type OpWorkJobCreateWithoutOpWorkJobSkillInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1517,10 +1517,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkJobSkillInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1621,10 +1621,10 @@ export type OpWorkJobCreateWithoutOpWorkJobViewsInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1653,10 +1653,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkJobViewsInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1757,10 +1757,10 @@ export type OpWorkJobCreateWithoutOpWorkJobTagsInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1789,10 +1789,10 @@ export type OpWorkJobUncheckedCreateWithoutOpWorkJobTagsInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -1894,10 +1894,10 @@ export type OpWorkJobCreateManyOpWorkProfileInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -2004,10 +2004,10 @@ export type OpWorkJobCreateManyOpWorkEmployerInput = {
   salaryCurrency?: string | null
   location?: string | null
   isRemote?: boolean | null
-  status?: $Enums.OpWorkJobStatus
-  viewsCount?: number
-  applicationsCount?: number
-  savesCount?: number
+  status: $Enums.OpWorkJobStatus
+  viewsCount: number
+  applicationsCount: number
+  savesCount: number
   publishedAt?: Date | string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string

@@ -1,5 +1,5 @@
 
-import {OpWorkEmploymentType,OpWorkExperienceLevel} from '../prisma/client'
+import {OpWorkEmploymentType,OpWorkExperienceLevel,OpWorkJobStatus} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
 import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString} from 'class-validator'
 
@@ -73,7 +73,6 @@ salaryMin?: number  | null;
 salaryMax?: number  | null;
 @ApiProperty({
   type: 'string',
-  default: 'USD',
   required: false,
   nullable: true,
 })
@@ -90,13 +89,40 @@ salaryCurrency?: string  | null;
 location?: string  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })
 @IsOptional()
 @IsBoolean()
 isRemote?: boolean  | null;
+@ApiProperty({
+  enum: OpWorkJobStatus,
+  enumName: 'OpWorkJobStatus',
+})
+@IsNotEmpty()
+@IsEnum(OpWorkJobStatus)
+status!: OpWorkJobStatus ;
+@ApiProperty({
+  type: 'integer',
+  format: 'int32',
+})
+@IsNotEmpty()
+@IsInt()
+viewsCount!: number ;
+@ApiProperty({
+  type: 'integer',
+  format: 'int32',
+})
+@IsNotEmpty()
+@IsInt()
+applicationsCount!: number ;
+@ApiProperty({
+  type: 'integer',
+  format: 'int32',
+})
+@IsNotEmpty()
+@IsInt()
+savesCount!: number ;
 @ApiProperty({
   type: 'string',
   format: 'date-time',

@@ -51,6 +51,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         id: item.id,
         userId: item.userId,
         profileId: item.profileId,
+        type: item.type,
         title: item.title,
         message: item.message,
         data: JSON.stringify(item.data),

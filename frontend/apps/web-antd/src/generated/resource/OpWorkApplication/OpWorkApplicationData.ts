@@ -64,6 +64,28 @@ export function useOpWorkApplicationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PENDING', value: $t('resource.OpWorkApplicationStatus.PENDING'), },
+          { label: 'REVIEWED', value: $t('resource.OpWorkApplicationStatus.REVIEWED'), },
+          { label: 'SHORTLISTED', value: $t('resource.OpWorkApplicationStatus.SHORTLISTED'), },
+          { label: 'INTERVIEW', value: $t('resource.OpWorkApplicationStatus.INTERVIEW'), },
+          { label: 'OFFER', value: $t('resource.OpWorkApplicationStatus.OFFER'), },
+          { label: 'REJECTED', value: $t('resource.OpWorkApplicationStatus.REJECTED'), },
+          { label: 'WITHDRAWN', value: $t('resource.OpWorkApplicationStatus.WITHDRAWN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
+      label: $t('resource.OpWorkApplication.status'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Textarea',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
       label: $t('resource.OpWorkApplication.statusNotes'),
@@ -72,15 +94,15 @@ export function useOpWorkApplicationFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.appliedAt,
       label: $t('resource.OpWorkApplication.appliedAt'),
-      rules: 'required',
+      
       
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusUpdatedAt,
       label: $t('resource.OpWorkApplication.statusUpdatedAt'),
       
@@ -141,6 +163,28 @@ export function useOpWorkApplicationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PENDING', value: $t('resource.OpWorkApplicationStatus.PENDING'), },
+          { label: 'REVIEWED', value: $t('resource.OpWorkApplicationStatus.REVIEWED'), },
+          { label: 'SHORTLISTED', value: $t('resource.OpWorkApplicationStatus.SHORTLISTED'), },
+          { label: 'INTERVIEW', value: $t('resource.OpWorkApplicationStatus.INTERVIEW'), },
+          { label: 'OFFER', value: $t('resource.OpWorkApplicationStatus.OFFER'), },
+          { label: 'REJECTED', value: $t('resource.OpWorkApplicationStatus.REJECTED'), },
+          { label: 'WITHDRAWN', value: $t('resource.OpWorkApplicationStatus.WITHDRAWN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
+      label: $t('resource.OpWorkApplication.status'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Textarea',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
       label: $t('resource.OpWorkApplication.statusNotes'),
@@ -149,15 +193,15 @@ export function useOpWorkApplicationCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.appliedAt,
       label: $t('resource.OpWorkApplication.appliedAt'),
-      rules: 'required',
+      
       
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusUpdatedAt,
       label: $t('resource.OpWorkApplication.statusUpdatedAt'),
       
@@ -226,6 +270,28 @@ export function useOpWorkApplicationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'PENDING', value: $t('resource.OpWorkApplicationStatus.PENDING'), },
+          { label: 'REVIEWED', value: $t('resource.OpWorkApplicationStatus.REVIEWED'), },
+          { label: 'SHORTLISTED', value: $t('resource.OpWorkApplicationStatus.SHORTLISTED'), },
+          { label: 'INTERVIEW', value: $t('resource.OpWorkApplicationStatus.INTERVIEW'), },
+          { label: 'OFFER', value: $t('resource.OpWorkApplicationStatus.OFFER'), },
+          { label: 'REJECTED', value: $t('resource.OpWorkApplicationStatus.REJECTED'), },
+          { label: 'WITHDRAWN', value: $t('resource.OpWorkApplicationStatus.WITHDRAWN'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
+      label: $t('resource.OpWorkApplication.status'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
       component: 'Textarea',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
       label: $t('resource.OpWorkApplication.statusNotes'),
@@ -234,15 +300,15 @@ export function useOpWorkApplicationViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.appliedAt,
       label: $t('resource.OpWorkApplication.appliedAt'),
-      rules: 'required',
+      
       
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusUpdatedAt,
       label: $t('resource.OpWorkApplication.statusUpdatedAt'),
       
@@ -299,6 +365,23 @@ export function useOpWorkApplicationColumns<T = OpWorkApplication>(
     {
       field: Prisma.OpWorkApplicationScalarFieldEnum.portfolioUrl,
       title: $t('resource.OpWorkApplication.portfolioUrl'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'PENDING', value: $t('resource.OpWorkApplicationStatus.PENDING'), },
+          { label: 'REVIEWED', value: $t('resource.OpWorkApplicationStatus.REVIEWED'), },
+          { label: 'SHORTLISTED', value: $t('resource.OpWorkApplicationStatus.SHORTLISTED'), },
+          { label: 'INTERVIEW', value: $t('resource.OpWorkApplicationStatus.INTERVIEW'), },
+          { label: 'OFFER', value: $t('resource.OpWorkApplicationStatus.OFFER'), },
+          { label: 'REJECTED', value: $t('resource.OpWorkApplicationStatus.REJECTED'), },
+          { label: 'WITHDRAWN', value: $t('resource.OpWorkApplicationStatus.WITHDRAWN'), },
+        ],
+      },
+      title: $t('resource.OpWorkApplication.status'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.status,
       sortable: true
     },
     {

@@ -1,7 +1,7 @@
 
 import {OpWorkSkillType} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
-import {IsEnum,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {IsEnum,IsInt,IsNotEmpty,IsOptional,IsString} from 'class-validator'
 
 
 
@@ -46,4 +46,11 @@ category?: string  | null;
 @IsOptional()
 @IsString()
 icon?: string  | null;
+@ApiProperty({
+  type: 'integer',
+  format: 'int32',
+})
+@IsNotEmpty()
+@IsInt()
+popularity!: number ;
 }

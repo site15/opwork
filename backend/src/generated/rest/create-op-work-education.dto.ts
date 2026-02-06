@@ -48,7 +48,6 @@ startDate!: Date ;
 endDate?: Date  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })

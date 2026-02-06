@@ -50,6 +50,8 @@ const [Grid, gridApi] = useVbenVxeGrid({
               ...item,
         id: item.id,
         userId: item.userId,
+        type: item.type,
+        userType: item.userType,
         title: item.title,
         description: item.description,
         isActive: item.isActive,

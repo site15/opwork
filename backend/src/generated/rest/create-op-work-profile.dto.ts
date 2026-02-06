@@ -39,7 +39,6 @@ title?: string  | null;
 description?: string  | null;
 @ApiProperty({
   type: 'boolean',
-  default: true,
   required: false,
   nullable: true,
 })
@@ -48,7 +47,6 @@ description?: string  | null;
 isActive?: boolean  | null;
 @ApiProperty({
   type: 'boolean',
-  default: false,
   required: false,
   nullable: true,
 })

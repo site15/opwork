@@ -16,7 +16,7 @@ export function useAuthSessionFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthSessionScalarFieldEnum.createdAt,
       label: $t('resource.AuthSession.createdAt'),
       rules: 'required',
@@ -24,7 +24,7 @@ export function useAuthSessionFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthSessionScalarFieldEnum.updatedAt,
       label: $t('resource.AuthSession.updatedAt'),
       rules: 'required',
@@ -125,7 +125,7 @@ export function useAuthSessionViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthSessionScalarFieldEnum.createdAt,
       label: $t('resource.AuthSession.createdAt'),
       rules: 'required',
@@ -133,7 +133,7 @@ export function useAuthSessionViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.AuthSessionScalarFieldEnum.updatedAt,
       label: $t('resource.AuthSession.updatedAt'),
       rules: 'required',

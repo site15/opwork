@@ -16,7 +16,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkExperience.createdAt'),
       rules: 'required',
@@ -56,7 +56,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       label: $t('resource.OpWorkExperience.startDate'),
       rules: 'required',
@@ -64,7 +64,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       label: $t('resource.OpWorkExperience.endDate'),
       
@@ -92,6 +92,27 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       component: 'Input',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.location,
       label: $t('resource.OpWorkExperience.location'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'FULL_TIME', value: $t('resource.OpWorkEmploymentType.FULL_TIME'), },
+          { label: 'PART_TIME', value: $t('resource.OpWorkEmploymentType.PART_TIME'), },
+          { label: 'CONTRACT', value: $t('resource.OpWorkEmploymentType.CONTRACT'), },
+          { label: 'INTERNSHIP', value: $t('resource.OpWorkEmploymentType.INTERNSHIP'), },
+          { label: 'REMOTE', value: $t('resource.OpWorkEmploymentType.REMOTE'), },
+          { label: 'FREELANCE', value: $t('resource.OpWorkEmploymentType.FREELANCE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
+      label: $t('resource.OpWorkExperience.employmentType'),
       
       
       labelWidth: 200
@@ -134,7 +155,7 @@ export function useOpWorkExperienceCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       label: $t('resource.OpWorkExperience.startDate'),
       rules: 'required',
@@ -142,7 +163,7 @@ export function useOpWorkExperienceCreateFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       label: $t('resource.OpWorkExperience.endDate'),
       
@@ -170,6 +191,27 @@ export function useOpWorkExperienceCreateFormSchema(): VbenFormSchema[] {
       component: 'Input',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.location,
       label: $t('resource.OpWorkExperience.location'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'FULL_TIME', value: $t('resource.OpWorkEmploymentType.FULL_TIME'), },
+          { label: 'PART_TIME', value: $t('resource.OpWorkEmploymentType.PART_TIME'), },
+          { label: 'CONTRACT', value: $t('resource.OpWorkEmploymentType.CONTRACT'), },
+          { label: 'INTERNSHIP', value: $t('resource.OpWorkEmploymentType.INTERNSHIP'), },
+          { label: 'REMOTE', value: $t('resource.OpWorkEmploymentType.REMOTE'), },
+          { label: 'FREELANCE', value: $t('resource.OpWorkEmploymentType.FREELANCE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
+      label: $t('resource.OpWorkExperience.employmentType'),
       
       
       labelWidth: 200
@@ -220,7 +262,7 @@ export function useOpWorkExperienceViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       label: $t('resource.OpWorkExperience.startDate'),
       rules: 'required',
@@ -228,7 +270,7 @@ export function useOpWorkExperienceViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       label: $t('resource.OpWorkExperience.endDate'),
       
@@ -261,7 +303,28 @@ export function useOpWorkExperienceViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'FULL_TIME', value: $t('resource.OpWorkEmploymentType.FULL_TIME'), },
+          { label: 'PART_TIME', value: $t('resource.OpWorkEmploymentType.PART_TIME'), },
+          { label: 'CONTRACT', value: $t('resource.OpWorkEmploymentType.CONTRACT'), },
+          { label: 'INTERNSHIP', value: $t('resource.OpWorkEmploymentType.INTERNSHIP'), },
+          { label: 'REMOTE', value: $t('resource.OpWorkEmploymentType.REMOTE'), },
+          { label: 'FREELANCE', value: $t('resource.OpWorkEmploymentType.FREELANCE'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
+      label: $t('resource.OpWorkExperience.employmentType'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.createdAt,
       label: $t('resource.OpWorkExperience.createdAt'),
       rules: 'required',
@@ -333,6 +396,22 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
     {
       field: Prisma.OpWorkExperienceScalarFieldEnum.location,
       title: $t('resource.OpWorkExperience.location'),
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'FULL_TIME', value: $t('resource.OpWorkEmploymentType.FULL_TIME'), },
+          { label: 'PART_TIME', value: $t('resource.OpWorkEmploymentType.PART_TIME'), },
+          { label: 'CONTRACT', value: $t('resource.OpWorkEmploymentType.CONTRACT'), },
+          { label: 'INTERNSHIP', value: $t('resource.OpWorkEmploymentType.INTERNSHIP'), },
+          { label: 'REMOTE', value: $t('resource.OpWorkEmploymentType.REMOTE'), },
+          { label: 'FREELANCE', value: $t('resource.OpWorkEmploymentType.FREELANCE'), },
+        ],
+      },
+      title: $t('resource.OpWorkExperience.employmentType'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
       sortable: true
     },
     {

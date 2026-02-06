@@ -16,7 +16,7 @@ export function useOpWorkNotificationSettingsFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkNotificationSettings.updatedAt'),
       rules: 'required',
@@ -116,6 +116,27 @@ export function useOpWorkNotificationSettingsFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
+      label: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
+      
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -210,6 +231,27 @@ export function useOpWorkNotificationSettingsCreateFormSchema(): VbenFormSchema[
       defaultValue: false,
       fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.pushJobAlerts,
       label: $t('resource.OpWorkNotificationSettings.pushJobAlerts'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
+      label: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
       
       
       labelWidth: 200
@@ -321,7 +363,28 @@ export function useOpWorkNotificationSettingsViewFormSchema(): VbenFormSchema[] 
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
+      label: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'DateTime',
       fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.updatedAt,
       label: $t('resource.OpWorkNotificationSettings.updatedAt'),
       rules: 'required',
@@ -393,6 +456,22 @@ export function useOpWorkNotificationSettingsColumns<T = OpWorkNotificationSetti
       },
       title: $t('resource.OpWorkNotificationSettings.pushJobAlerts'),
       field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.pushJobAlerts,
+      sortable: true
+    },
+    {
+      cellRender: {
+        name:'CellEnum',
+        options: [
+                    { label: 'MINUTELY', value: $t('resource.OpWorkFrequency.MINUTELY'), },
+          { label: 'HOURLY', value: $t('resource.OpWorkFrequency.HOURLY'), },
+          { label: 'DAILY', value: $t('resource.OpWorkFrequency.DAILY'), },
+          { label: 'WEEKLY', value: $t('resource.OpWorkFrequency.WEEKLY'), },
+          { label: 'MONTHLY', value: $t('resource.OpWorkFrequency.MONTHLY'), },
+          { label: 'ON_DEMAND', value: $t('resource.OpWorkFrequency.ON_DEMAND'), },
+        ],
+      },
+      title: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
+      field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
       sortable: true
     },
     {

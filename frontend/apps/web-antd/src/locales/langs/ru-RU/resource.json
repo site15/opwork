@@ -57,7 +57,8 @@
     "portfolioUrl": "URL портфолио",
     "statusNotes": "Примечания статуса",
     "appliedAt": "Дата подачи заявки",
-    "statusUpdatedAt": "Дата обновления статуса"
+    "statusUpdatedAt": "Дата обновления статуса",
+    "status": "Status"
   },
   "OpWorkEducation": {
     "id": "ID",
@@ -68,7 +69,9 @@
     "startDate": "Начало учёбы",
     "endDate": "Окончание учёбы",
     "isCurrent": "Продолжается обучение",
-    "description": "Описание"
+    "description": "Описание",
+    "degree": "Degree",
+    "grade": "Grade"
   },
   "OpWorkEmployer": {
     "id": "ID",
@@ -101,7 +104,8 @@
     "startDate": "Начало работы",
     "endDate": "Завершение работы",
     "isCurrent": "Сейчас работает",
-    "location": "Местоположение"
+    "location": "Местоположение",
+    "employmentType": "Employment Type"
   },
   "OpWorkJob": {
     "id": "ID",
@@ -123,7 +127,10 @@
     "applicationsCount": "Количество заявок",
     "savesCount": "Количество сохранённых",
     "publishedAt": "Дата публикации",
-    "expiresAt": "Срок окончания публикации"
+    "expiresAt": "Срок окончания публикации",
+    "employmentType": "Employment Type",
+    "experienceLevel": "Experience Level",
+    "status": "Status"
   },
   "OpWorkJobSeeker": {
     "id": "ID",
@@ -187,7 +194,8 @@
     "data": "Дополнительные данные",
     "isRead": "Прочитано",
     "isArchived": "Архивировано",
-    "readAt": "Время прочтения"
+    "readAt": "Время прочтения",
+    "type": "Type"
   },
   "OpWorkNotificationSettings": {
     "id": "ID",
@@ -197,7 +205,8 @@
     "emailJobAlerts": "Получать оповещения о новых вакансиях по e-mail",
     "emailNewsletter": "Получать рассылку по e-mail",
     "pushApplicationUpdates": "Получать push-уведомления о заявках",
-    "pushJobAlerts": "Получать push-уведомления о новых вакансиях"
+    "pushJobAlerts": "Получать push-уведомления о новых вакансиях",
+    "jobAlertFrequency": "Job Alert Frequency"
   },
   "OpWorkProfile": {
     "id": "ID",
@@ -213,7 +222,9 @@
     "website": "Веб-сайт",
     "location": "Расположение",
     "avatarUrl": "Фото аватара",
-    "coverImage": "Фоновое изображение"
+    "coverImage": "Фоновое изображение",
+    "type": "Type",
+    "userType": "User Type"
   },
   "OpWorkProject": {
     "id": "ID",
@@ -240,7 +251,9 @@
     "completionDate": "Дата завершения",
     "maintenanceDescription": "Описание поддержки",
     "maintenanceStart": "Начало поддержки",
-    "maintenanceEnd": "Окончание поддержки"
+    "maintenanceEnd": "Окончание поддержки",
+    "status": "Status",
+    "type": "Type"
   },
   "OpWorkSavedJob": {
     "id": "ID",
@@ -258,7 +271,8 @@
     "query": "Запрос поиска",
     "filters": "Фильтры поиска",
     "isActive": "Активен",
-    "lastSentAt": "Последняя отправка результатов"
+    "lastSentAt": "Последняя отправка результатов",
+    "frequency": "Frequency"
   },
   "OpWorkSearchHistory": {
     "id": "ID",
@@ -275,12 +289,151 @@
     "description": "Описание навыка",
     "category": "Категория",
     "icon": "Иконка",
-    "popularity": "Популярность"
+    "popularity": "Популярность",
+    "type": "Type"
   },
   "OpWorkSkillSynonym": {
     "id": "ID",
     "createdAt": "Создано",
     "skillId": "ID навыка",
     "synonym": "Синоним"
+  },
+  "OpWorkApplicationStatus": {
+    "PENDING": "PENDING",
+    "REVIEWED": "REVIEWED",
+    "SHORTLISTED": "SHORTLISTED",
+    "INTERVIEW": "INTERVIEW",
+    "OFFER": "OFFER",
+    "REJECTED": "REJECTED",
+    "WITHDRAWN": "WITHDRAWN"
+  },
+  "OpWorkEducationDegree": {
+    "HIGH_SCHOOL": "HIGH SCHOOL",
+    "ASSOCIATE": "ASSOCIATE",
+    "BACHELOR": "BACHELOR",
+    "MASTER": "MASTER",
+    "DOCTORATE": "DOCTORATE",
+    "CERTIFICATE": "CERTIFICATE",
+    "DIPLOMA": "DIPLOMA",
+    "POSTGRADUATE": "POSTGRADUATE"
+  },
+  "OpWorkGrade": {
+    "A_PLUS": "A PLUS",
+    "A": "A",
+    "A_MINUS": "A MINUS",
+    "B_PLUS": "B PLUS",
+    "B": "B",
+    "B_MINUS": "B MINUS",
+    "C_PLUS": "C PLUS",
+    "C": "C",
+    "C_MINUS": "C MINUS",
+    "D_PLUS": "D PLUS",
+    "D": "D",
+    "D_MINUS": "D MINUS",
+    "F": "F",
+    "PASS": "PASS",
+    "FAIL": "FAIL",
+    "INCOMPLETE": "INCOMPLETE",
+    "AUDIT": "AUDIT"
+  },
+  "OpWorkEmploymentType": {
+    "FULL_TIME": "FULL TIME",
+    "PART_TIME": "PART TIME",
+    "CONTRACT": "CONTRACT",
+    "INTERNSHIP": "INTERNSHIP",
+    "REMOTE": "REMOTE",
+    "FREELANCE": "FREELANCE"
+  },
+  "OpWorkExperienceLevel": {
+    "INTERNSHIP": "INTERNSHIP",
+    "ENTRY_LEVEL": "ENTRY LEVEL",
+    "JUNIOR": "JUNIOR",
+    "MIDDLE": "MIDDLE",
+    "SENIOR": "SENIOR",
+    "LEAD": "LEAD",
+    "EXPERT": "EXPERT"
+  },
+  "OpWorkJobStatus": {
+    "DRAFT": "DRAFT",
+    "ACTIVE": "ACTIVE",
+    "PAUSED": "PAUSED",
+    "CLOSED": "CLOSED",
+    "ARCHIVED": "ARCHIVED"
+  },
+  "OpWorkNotificationType": {
+    "APPLICATION_RECEIVED": "APPLICATION RECEIVED",
+    "APPLICATION_SHORTLISTED": "APPLICATION SHORTLISTED",
+    "INTERVIEW_SCHEDULED": "INTERVIEW SCHEDULED",
+    "JOB_OFFER": "JOB OFFER",
+    "JOB_MATCH": "JOB MATCH",
+    "JOB_STATUS_CHANGED": "JOB STATUS CHANGED",
+    "NEW_PROJECT": "NEW PROJECT",
+    "MESSAGE_RECEIVED": "MESSAGE RECEIVED",
+    "REMINDER": "REMINDER",
+    "SYSTEM_ALERT": "SYSTEM ALERT",
+    "PROFILE_UPDATE": "PROFILE UPDATE",
+    "NETWORK_ACTIVITY": "NETWORK ACTIVITY"
+  },
+  "OpWorkFrequency": {
+    "MINUTELY": "MINUTELY",
+    "HOURLY": "HOURLY",
+    "DAILY": "DAILY",
+    "WEEKLY": "WEEKLY",
+    "MONTHLY": "MONTHLY",
+    "ON_DEMAND": "ON DEMAND"
+  },
+  "OpWorkProfileType": {
+    "PROJECT": "PROJECT",
+    "SPECIALIST": "SPECIALIST",
+    "EMPLOYER": "EMPLOYER"
+  },
+  "OpWorkUserType": {
+    "JOB_SEEKER": "JOB SEEKER",
+    "EMPLOYER": "EMPLOYER",
+    "ADMIN": "ADMIN"
+  },
+  "OpWorkProjectStatus": {
+    "IDEA": "IDEA",
+    "PLANNING": "PLANNING",
+    "DEVELOPMENT": "DEVELOPMENT",
+    "TESTING": "TESTING",
+    "LAUNCH_READY": "LAUNCH READY",
+    "LIVE": "LIVE",
+    "MAINTENANCE": "MAINTENANCE",
+    "ON_HOLD": "ON HOLD",
+    "CANCELLED": "CANCELLED",
+    "COMPLETED": "COMPLETED",
+    "ARCHIVED": "ARCHIVED"
+  },
+  "OpWorkProjectType": {
+    "MVP": "MVP",
+    "STARTUP": "STARTUP",
+    "PRODUCT": "PRODUCT",
+    "SERVICE": "SERVICE",
+    "CONSULTING": "CONSULTING",
+    "AGENCY": "AGENCY",
+    "SAAS": "SAAS",
+    "ECOMMERCE": "ECOMMERCE",
+    "MOBILE_APP": "MOBILE APP",
+    "WEB_APP": "WEB APP",
+    "ENTERPRISE": "ENTERPRISE",
+    "NON_PROFIT": "NON PROFIT",
+    "EDUCATION": "EDUCATION",
+    "HEALTHCARE": "HEALTHCARE",
+    "FINTECH": "FINTECH",
+    "GAMING": "GAMING",
+    "AI_ML": "AI ML",
+    "BLOCKCHAIN": "BLOCKCHAIN",
+    "IOT": "IOT",
+    "MARKETING": "MARKETING"
+  },
+  "OpWorkSkillType": {
+    "PROGRAMMING_LANGUAGE": "PROGRAMMING LANGUAGE",
+    "FRAMEWORK": "FRAMEWORK",
+    "DATABASE": "DATABASE",
+    "TOOL": "TOOL",
+    "PLATFORM": "PLATFORM",
+    "LANGUAGE": "LANGUAGE",
+    "SOFT_SKILL": "SOFT SKILL"
   }
 }

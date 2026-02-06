@@ -69,6 +69,26 @@ setupVbenVxeTable({
       },
     });
 
+    // Enum renderer - displays label instead of raw value
+    vxeUI.renderer.add('CellEnum', {
+      renderTableDefault(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const value = row[column.field];
+
+        // If we have enum options with labels, find and display the label
+        if (props?.options && Array.isArray(props.options)) {
+          const option = props.options.find((opt) => opt.value === value);
+          if (option?.label) {
+            return h('span', option.label);
+          }
+        }
+
+        // Fallback to raw value if no label found
+        return h('span', value ?? '');
+      },
+    });
+
     // 表格配置项可以用 cellRender: { name: 'CellLink' },
     vxeUI.renderer.add('CellLink', {
       renderTableDefault(renderOpts) {
@@ -287,6 +307,22 @@ setupVbenVxeTable({
 export const useVbenVxeGrid = <T extends Record<string, any>>(
   ...rest: Parameters<typeof useGrid<T, ComponentType>>
 ) => useGrid<T, ComponentType>(...rest);
+
+// Helper function to create enum columns with label rendering
+export const createEnumColumn = <T = any>(
+  field: keyof T,
+  title: string,
+  options: { label: string; value: any }[],
+  overrides: Partial<VxeColumnPropTypes.ColumnInfo> = {},
+) => ({
+  field: field as string,
+  title,
+  cellRender: {
+    name: 'CellEnum',
+    props: { options },
+  },
+  ...overrides,
+});
 
 export type OnActionClickParams<T = Recordable<any>> = {
   code: string;
