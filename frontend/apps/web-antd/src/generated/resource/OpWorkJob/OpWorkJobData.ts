@@ -874,7 +874,7 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }

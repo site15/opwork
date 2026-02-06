@@ -214,7 +214,7 @@ export function useOpWorkSearchHistoryColumns<T = OpWorkSearchHistory>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }

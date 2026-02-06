@@ -535,7 +535,7 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }

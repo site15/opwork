@@ -486,7 +486,7 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }

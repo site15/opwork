@@ -320,7 +320,7 @@ export function use${entityClassName}Columns<T = ${entityClassName}>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }

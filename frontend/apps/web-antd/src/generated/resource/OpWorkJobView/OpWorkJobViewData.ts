@@ -214,7 +214,7 @@ export function useOpWorkJobViewColumns<T = OpWorkJobView>(
       field: 'operation',
       fixed: 'right',
       title: $t('common.operation'),
-      width: 130,
+      width: 200,
     },
   ];
 }
