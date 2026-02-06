@@ -86,7 +86,7 @@ export const generateDataProvider = ({
         allowClear: true,
         filterOption: true,
         options: [
-          ${enumModel.values.map((value) => `          { label: '${value.name}', value: $t('resource.${field.type}.${value.name}'), },`).join('\n')}
+          ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
         ],
         showSearch: true,
       },
@@ -179,7 +179,7 @@ export const generateDataProvider = ({
       cellRender: {
         name:'CellEnum',
         options: [
-          ${enumModel.values.map((value) => `          { label: '${value.name}', value: $t('resource.${field.type}.${value.name}'), },`).join('\n')}
+${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
         ],
       },
       title: $t('resource.${entityClassName}.${field.name}'),
