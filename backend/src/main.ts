@@ -10,6 +10,7 @@ import Mustache from 'mustache';
 import { AppModule } from './app.module';
 
 import 'dotenv/config';
+import { AppExceptionsFilter } from './filters/app.filter';
 import { X_API_KEY_HEADER_NAME } from './guards/auth.guard';
 
 Mustache.escape = function (text) {

@@ -9,14 +9,6 @@ export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.id,
-      label: $t('resource.OpWorkSearchHistory.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.profileId,
       label: $t('resource.OpWorkSearchHistory.profileId'),
       rules: 'required',
@@ -40,7 +32,7 @@ export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'InputNumber',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.resultsCount,
       label: $t('resource.OpWorkSearchHistory.resultsCount'),
       
@@ -48,105 +40,7 @@ export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
-      label: $t('resource.OpWorkSearchHistory.searchedAt'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSearchHistoryCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSearchHistory.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.query,
-      label: $t('resource.OpWorkSearchHistory.query'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.filters,
-      label: $t('resource.OpWorkSearchHistory.filters'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.resultsCount,
-      label: $t('resource.OpWorkSearchHistory.resultsCount'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
-      label: $t('resource.OpWorkSearchHistory.searchedAt'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSearchHistoryViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.id,
-      label: $t('resource.OpWorkSearchHistory.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSearchHistory.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.query,
-      label: $t('resource.OpWorkSearchHistory.query'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.filters,
-      label: $t('resource.OpWorkSearchHistory.filters'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.resultsCount,
-      label: $t('resource.OpWorkSearchHistory.resultsCount'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.searchedAt,
       label: $t('resource.OpWorkSearchHistory.searchedAt'),
       

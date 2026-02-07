@@ -7,7 +7,8 @@ import type {
 import { Page, useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
-import { Button, message } from 'ant-design-vue';
+import dayjs from 'dayjs';
+import { Button, message, notification } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { opWorkExperienceControllerDeleteOne, opWorkExperienceControllerFindMany, opWorkExperienceControllerUpdateOne } from '#/generated/client';
@@ -43,31 +44,44 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkExperienceControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : '[object Object]:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
             },
-          }).then(async (result) => ({
-            items: (result.data?.items || []).map((item) => ({
-              ...item,
-        id: item.id,
+          }).then(async (result) => {
+            if (result?.error) {
+              throw new Error((result.error as any)?.message || 'Unknown error')
+            }
+            return {
+              items: (result.data?.items || []).map((item) => ({
+                ...item,
+          id: item.id,
         jobSeekerId: item.jobSeekerId,
         company: item.company,
         position: item.position,
         description: item.description,
-        startDate: item.startDate,
-        endDate: item.endDate,
+        startDate: dayjs(item.startDate),
+        endDate: dayjs(item.endDate),
         isCurrent: item.isCurrent,
         location: item.location,
         employmentType: item.employmentType,
-        createdAt: item.createdAt,
-            })),
-            total: result.data?.meta.totalResults || 0,
-          }));
+        createdAt: dayjs(item.createdAt),
+              })),
+              total: result.data?.meta.totalResults || 0,
+            }
+          })
+            .catch((err) => {
+              hideLoading();
+              notification.error({
+                message: $t('actions.common.findManyFailed'),
+                description: err instanceof Error ? err.message : '',
+                duration: 3000,
+              });
+            });
         },
       },
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: '[object Object]', order: 'desc' },
+      defaultSort: { field: 'createdAt', order: 'desc' },
       remote: true,
     },
     rowConfig: {
@@ -107,15 +121,23 @@ function onDelete(row: OpWorkExperience) {
     key: 'action_process_msg',
   });
   opWorkExperienceControllerDeleteOne({ path: { id: row.id } })
-    .then(() => {
+    .then((data) => {
+      if (data.error) {
+        throw new Error((data.error as any)?.message || 'Unknown error')
+      }
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',
       });
       onRefresh();
     })
-    .catch(() => {
+    .catch((err) => {
       hideLoading();
+      notification.error({
+        message: $t('actions.common.deleteFailed'),
+        description: err instanceof Error ? err.message : '',
+        duration: 3000,
+      });
     });
 }
 

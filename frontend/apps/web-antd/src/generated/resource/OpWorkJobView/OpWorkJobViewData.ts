@@ -9,14 +9,6 @@ export function useOpWorkJobViewFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobView.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
       label: $t('resource.OpWorkJobView.profileId'),
       
@@ -32,105 +24,7 @@ export function useOpWorkJobViewFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
-      label: $t('resource.OpWorkJobView.viewedAt'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.ipAddress,
-      label: $t('resource.OpWorkJobView.ipAddress'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.userAgent,
-      label: $t('resource.OpWorkJobView.userAgent'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobViewCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkJobView.profileId'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobView.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
-      label: $t('resource.OpWorkJobView.viewedAt'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.ipAddress,
-      label: $t('resource.OpWorkJobView.ipAddress'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.userAgent,
-      label: $t('resource.OpWorkJobView.userAgent'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobViewViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobView.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkJobView.profileId'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobView.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       label: $t('resource.OpWorkJobView.viewedAt'),
       

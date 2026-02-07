@@ -1,8 +1,8 @@
 {
   "AuthUser": {
     "anonymousId": "Анонимный ID",
-    "supabaseUserId": "ID пользователя Supabase",
-    "supabaseUserData": "Данные пользователя Supabase",
+    "supabaseUserId": "Пользователь Supabase",
+    "supabaseUserData": "Данные Supabase",
     "isActive": "Активен",
     "id": "ID",
     "createdAt": "Создано",

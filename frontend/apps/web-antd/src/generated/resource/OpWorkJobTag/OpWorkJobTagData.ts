@@ -9,22 +9,6 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobTag.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobTag.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobTagScalarFieldEnum.jobId,
       label: $t('resource.OpWorkJobTag.jobId'),
       rules: 'required',
@@ -45,80 +29,6 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJobTag.color'),
       
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobTagCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobTag.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.name,
-      label: $t('resource.OpWorkJobTag.name'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.color,
-      label: $t('resource.OpWorkJobTag.color'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobTagViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobTag.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobTag.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.name,
-      label: $t('resource.OpWorkJobTag.name'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.color,
-      label: $t('resource.OpWorkJobTag.color'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobTag.createdAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

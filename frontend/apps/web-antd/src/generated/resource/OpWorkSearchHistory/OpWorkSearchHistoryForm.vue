@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref } from 'vue';
+import { notification } from 'ant-design-vue';
 
 import { useVbenDrawer } from '@vben/common-ui';
 
@@ -28,6 +29,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkSearchHistoryControllerUpdateOne({
       path: { id: id.value },
       body: {
+        profileId: values.profileId,
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         resultsCount: values.resultsCount,
@@ -35,18 +37,27 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkSearchHistoryControllerCreateOne({
       body: {
+        profileId: values.profileId,
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         resultsCount: values.resultsCount,
         searchedAt: values.searchedAt,
       }
     }))
-      .then(() => {
+      .then((data) => {
+        if (data.error) {
+          throw new Error((data.error as any)?.message || 'Unknown error')
+        }
         emits('success');
         drawerApi.close();
       })
-      .catch(() => {
+      .catch((err) => {
         drawerApi.unlock();
+        notification.error({
+          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
+          description: err instanceof Error ? err.message : '',
+          duration: 3000,
+        });
       });
   },
 

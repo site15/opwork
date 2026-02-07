@@ -9,22 +9,6 @@ export function useOpWorkSkillSynonymFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.id,
-      label: $t('resource.OpWorkSkillSynonym.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkSkillSynonym.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
       label: $t('resource.OpWorkSkillSynonym.skillId'),
       rules: 'required',
@@ -37,64 +21,6 @@ export function useOpWorkSkillSynonymFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkSkillSynonym.synonym'),
       rules: 'required',
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSkillSynonymCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkSkillSynonym.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
-      label: $t('resource.OpWorkSkillSynonym.synonym'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSkillSynonymViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.id,
-      label: $t('resource.OpWorkSkillSynonym.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkSkillSynonym.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
-      label: $t('resource.OpWorkSkillSynonym.synonym'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkSkillSynonym.createdAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

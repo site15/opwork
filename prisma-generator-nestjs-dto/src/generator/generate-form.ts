@@ -10,9 +10,6 @@ export const generateForm = ({
 
   const modelName = model.name;
   const entityClassName = entityName(modelName);
-  const editFormName = `${entityClassName}EditForm`;
-  const showFormName = `${entityClassName}ShowForm`;
-  const createFormName = `${entityClassName}CreateForm`;
 
   // Get fields for different form types
   const allFields = model.fields.filter(
@@ -23,16 +20,10 @@ export const generateForm = ({
   const editableFields = allFields.filter(
     (field) =>
       !field.isId &&
+      field.name !== 'userId' &&
       field.name !== 'createdAt' &&
       field.name !== 'updatedAt' &&
       field.name !== 'deletedAt',
-  );
-  const readOnlyFields = allFields.filter(
-    (field) =>
-      field.isId ||
-      field.name === 'createdAt' ||
-      field.name === 'updatedAt' ||
-      field.name === 'deletedAt',
   );
 
   const getInputComponent = (field: (typeof allFields)[0]): string => {
@@ -59,24 +50,15 @@ export const generateForm = ({
   };
 
   // Generate input fields for create form (only editable fields)
-  const createFormFields = editableFields
-    .filter((field) => !field.name.endsWith('Id'))
+  const createMethodFields = editableFields
     .map((field) => {
       return getInputComponent(field);
     })
     .join('\n');
 
   // Generate input fields for edit form (editable + read-only)
-  const editFormFields = [
-    ...editableFields
-      .filter((field) => !field.name.endsWith('Id'))
-      .map((field) => {
-        return getInputComponent(field);
-      }),
-  ].join('\n');
-
-  const showFormFields = [
-    ...allFields.map((field) => {
+  const editMethodFields = [
+    ...editableFields.map((field) => {
       return getInputComponent(field);
     }),
   ].join('\n');
@@ -84,6 +66,7 @@ export const generateForm = ({
   const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
   return `<script lang="ts" setup>
 import { computed, nextTick, ref } from 'vue';
+import { notification } from 'ant-design-vue';
 
 import { useVbenDrawer } from '@vben/common-ui';
 
@@ -112,19 +95,27 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? ${camelModelName}ControllerUpdateOne({
       path: { id: id.value },
       body: {
-${editFormFields}
+${editMethodFields}
       }
     }) : ${camelModelName}ControllerCreateOne({
       body: {
-${createFormFields}
+${createMethodFields}
       }
     }))
-      .then(() => {
+      .then((data) => {
+        if (data.error) {
+          throw new Error((data.error as any)?.message || 'Unknown error')
+        }
         emits('success');
         drawerApi.close();
       })
-      .catch(() => {
+      .catch((err) => {
         drawerApi.unlock();
+        notification.error({
+          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
+          description: err instanceof Error ? err.message : '',
+          duration: 3000,
+        });
       });
   },
 

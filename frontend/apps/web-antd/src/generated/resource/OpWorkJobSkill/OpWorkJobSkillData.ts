@@ -9,22 +9,6 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobSkill.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobSkill.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
       label: $t('resource.OpWorkJobSkill.jobId'),
       rules: 'required',
@@ -57,7 +41,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
       label: $t('resource.OpWorkJobSkill.importance'),
       rules: 'required',
@@ -65,135 +49,11 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
       label: $t('resource.OpWorkJobSkill.minLevel'),
       
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobSkillCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobSkill.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.isRequired,
-      label: $t('resource.OpWorkJobSkill.isRequired'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
-      label: $t('resource.OpWorkJobSkill.importance'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
-      label: $t('resource.OpWorkJobSkill.minLevel'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobSkillViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobSkill.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobSkill.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.isRequired,
-      label: $t('resource.OpWorkJobSkill.isRequired'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
-      label: $t('resource.OpWorkJobSkill.importance'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
-      label: $t('resource.OpWorkJobSkill.minLevel'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobSkill.createdAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

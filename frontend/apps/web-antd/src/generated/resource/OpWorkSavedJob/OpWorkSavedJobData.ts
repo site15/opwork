@@ -9,14 +9,6 @@ export function useOpWorkSavedJobFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.id,
-      label: $t('resource.OpWorkSavedJob.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
       label: $t('resource.OpWorkSavedJob.profileId'),
       rules: 'required',
@@ -32,89 +24,7 @@ export function useOpWorkSavedJobFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
-      label: $t('resource.OpWorkSavedJob.savedAt'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.notes,
-      label: $t('resource.OpWorkSavedJob.notes'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSavedJobCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSavedJob.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkSavedJob.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
-      label: $t('resource.OpWorkSavedJob.savedAt'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.notes,
-      label: $t('resource.OpWorkSavedJob.notes'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkSavedJobViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.id,
-      label: $t('resource.OpWorkSavedJob.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSavedJob.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkSavedJob.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
       label: $t('resource.OpWorkSavedJob.savedAt'),
       

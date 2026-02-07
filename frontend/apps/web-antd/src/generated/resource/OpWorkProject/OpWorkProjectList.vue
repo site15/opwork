@@ -7,7 +7,8 @@ import type {
 import { Page, useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
-import { Button, message } from 'ant-design-vue';
+import dayjs from 'dayjs';
+import { Button, message, notification } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { opWorkProjectControllerDeleteOne, opWorkProjectControllerFindMany, opWorkProjectControllerUpdateOne } from '#/generated/client';
@@ -43,12 +44,16 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkProjectControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : '[object Object]:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
             },
-          }).then(async (result) => ({
-            items: (result.data?.items || []).map((item) => ({
-              ...item,
-        id: item.id,
+          }).then(async (result) => {
+            if (result?.error) {
+              throw new Error((result.error as any)?.message || 'Unknown error')
+            }
+            return {
+              items: (result.data?.items || []).map((item) => ({
+                ...item,
+          id: item.id,
         profileId: item.profileId,
         title: item.title,
         description: item.description,
@@ -58,32 +63,41 @@ const [Grid, gridApi] = useVbenVxeGrid({
         technologies: item.technologies,
         architecture: item.architecture,
         plannedDatesDescription: item.plannedDatesDescription,
-        plannedStartDate: item.plannedStartDate,
-        plannedEndDate: item.plannedEndDate,
+        plannedStartDate: dayjs(item.plannedStartDate),
+        plannedEndDate: dayjs(item.plannedEndDate),
         implementationDescription: item.implementationDescription,
-        actualStartDate: item.actualStartDate,
-        developmentStart: item.developmentStart,
-        testingStart: item.testingStart,
+        actualStartDate: dayjs(item.actualStartDate),
+        developmentStart: dayjs(item.developmentStart),
+        testingStart: dayjs(item.testingStart),
         launchDescription: item.launchDescription,
-        launchDate: item.launchDate,
-        goLiveDate: item.goLiveDate,
+        launchDate: dayjs(item.launchDate),
+        goLiveDate: dayjs(item.goLiveDate),
         completionDescription: item.completionDescription,
-        actualEndDate: item.actualEndDate,
-        completionDate: item.completionDate,
+        actualEndDate: dayjs(item.actualEndDate),
+        completionDate: dayjs(item.completionDate),
         maintenanceDescription: item.maintenanceDescription,
-        maintenanceStart: item.maintenanceStart,
-        maintenanceEnd: item.maintenanceEnd,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-            })),
-            total: result.data?.meta.totalResults || 0,
-          }));
+        maintenanceStart: dayjs(item.maintenanceStart),
+        maintenanceEnd: dayjs(item.maintenanceEnd),
+        createdAt: dayjs(item.createdAt),
+        updatedAt: dayjs(item.updatedAt),
+              })),
+              total: result.data?.meta.totalResults || 0,
+            }
+          })
+            .catch((err) => {
+              hideLoading();
+              notification.error({
+                message: $t('actions.common.findManyFailed'),
+                description: err instanceof Error ? err.message : '',
+                duration: 3000,
+              });
+            });
         },
       },
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: '[object Object]', order: 'desc' },
+      defaultSort: { field: 'createdAt', order: 'desc' },
       remote: true,
     },
     rowConfig: {
@@ -123,15 +137,23 @@ function onDelete(row: OpWorkProject) {
     key: 'action_process_msg',
   });
   opWorkProjectControllerDeleteOne({ path: { id: row.id } })
-    .then(() => {
+    .then((data) => {
+      if (data.error) {
+        throw new Error((data.error as any)?.message || 'Unknown error')
+      }
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',
       });
       onRefresh();
     })
-    .catch(() => {
+    .catch((err) => {
       hideLoading();
+      notification.error({
+        message: $t('actions.common.deleteFailed'),
+        description: err instanceof Error ? err.message : '',
+        duration: 3000,
+      });
     });
 }
 

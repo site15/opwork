@@ -9,22 +9,6 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobSeekerSkill.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobSeekerSkill.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
       label: $t('resource.OpWorkJobSeekerSkill.jobSeekerId'),
       rules: 'required',
@@ -40,7 +24,7 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
       label: $t('resource.OpWorkJobSeekerSkill.level'),
       rules: 'required',
@@ -48,7 +32,7 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'Input',
+      component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
       label: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
       
@@ -73,151 +57,11 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
       label: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
       
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobSeekerSkillCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkJobSeekerSkill.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSeekerSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
-      label: $t('resource.OpWorkJobSeekerSkill.level'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
-      label: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.isPrimary,
-      label: $t('resource.OpWorkJobSeekerSkill.isPrimary'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
-      label: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkJobSeekerSkillViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.id,
-      label: $t('resource.OpWorkJobSeekerSkill.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkJobSeekerSkill.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSeekerSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
-      label: $t('resource.OpWorkJobSeekerSkill.level'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
-      label: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.isPrimary,
-      label: $t('resource.OpWorkJobSeekerSkill.isPrimary'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
-      label: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkJobSeekerSkill.createdAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

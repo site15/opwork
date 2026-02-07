@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { DMMF } from '@prisma/generator-helper';
 import { kebab } from 'case';
+import { WritableDeep } from 'type-fest';
 import { TemplateHelpers } from './template-helpers';
 import { ModelParams } from './types';
-import { WritableDeep } from 'type-fest';
-import { DMMF } from '@prisma/generator-helper';
 
 export const generateDataProvider = ({
   controller,
@@ -38,16 +38,10 @@ export const generateDataProvider = ({
   const editableFields = allFields.filter(
     (field) =>
       !field.isId &&
+      field.name !== 'userId' &&
       field.name !== 'createdAt' &&
       field.name !== 'updatedAt' &&
       field.name !== 'deletedAt',
-  );
-  const readOnlyFields = allFields.filter(
-    (field) =>
-      field.isId ||
-      field.name === 'createdAt' ||
-      field.name === 'updatedAt' ||
-      field.name === 'deletedAt',
   );
 
   const getInputComponent = (field: (typeof allFields)[0]): string => {
@@ -71,10 +65,18 @@ export const generateDataProvider = ({
 
     const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
     const required = field.isRequired;
-    const readonly = readOnlyFields.find((f) => f.name === field.name);
+    const readonly = !editableFields.find((f) => f.name === field.name);
     let component = 'Input';
     if (multiline) {
       component = 'Textarea';
+    }
+
+    if (
+      field.type === 'Int' ||
+      field.type === 'Float' ||
+      field.type === 'Decimal'
+    ) {
+      component = 'InputNumber';
     }
 
     if (field.kind === 'enum') {
@@ -94,30 +96,32 @@ export const generateDataProvider = ({
       label: $t('resource.${entityClassName}.${field.name}'),
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200
+      labelWidth: 200${
+        readonly
+          ? `,
+      componentProps: (values) => {
+        return {
+          disabled: !!values.id,
+        };
+      },
+      dependencies: {
+        show: (values) => {
+          return !!values.id;
+        },
+        triggerFields: ['id'],
+      },`
+          : ''
+      }
     },`;
       }
     }
 
     if (field.type === 'DateTime') {
       if (field.name.endsWith('Time')) {
-        return `    {
-      component: 'TimePicker',
-      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      label: $t('resource.${entityClassName}.${field.name}'),
-      ${required ? `rules: 'required',` : ''}
-      ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200
-    },`;
+        component = 'TimePicker';
+      } else {
+        component = 'DatePicker';
       }
-      return `    {
-      component: 'DateTime',
-      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      label: $t('resource.${entityClassName}.${field.name}'),
-      ${required ? `rules: 'required',` : ''}
-      ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200
-    },`;
     }
 
     if (field.type === 'Boolean') {
@@ -136,7 +140,22 @@ export const generateDataProvider = ({
       label: $t('resource.${entityClassName}.${field.name}'),
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200
+      labelWidth: 200${
+        readonly
+          ? `,
+      componentProps: (values) => {
+        return {
+          disabled: !!values.id,
+        };
+      },
+      dependencies: {
+        show: (values) => {
+          return !!values.id;
+        },
+        triggerFields: ['id'],
+      },`
+          : ''
+      }
     },`;
     }
     return `    {
@@ -145,7 +164,22 @@ export const generateDataProvider = ({
       label: $t('resource.${entityClassName}.${field.name}'),
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200
+      labelWidth: 200${
+        readonly
+          ? `,
+      componentProps: (values) => {
+        return {
+          disabled: !!values.id,
+        };
+      },
+      dependencies: {
+        show: (values) => {
+          return !!values.id;
+        },
+        triggerFields: ['id'],
+      },`
+          : ''
+      }
     },`;
   };
 
@@ -170,7 +204,7 @@ export const generateDataProvider = ({
 
     const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
     const required = field.isRequired;
-    const readonly = readOnlyFields.find((f) => f.name === field.name);
+    const readonly = !editableFields.find((f) => f.name === field.name);
 
     if (field.kind === 'enum') {
       const enumModel = enumModels.find((model) => model.name === field.type);
@@ -238,30 +272,14 @@ ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t
     },`;
   };
 
-  // Generate input fields for create form (only editable fields)
-  const createFormFields = editableFields
-    .map((field) => {
-      return getInputComponent(field);
-    })
-    .join('\n');
-
   // Generate input fields for edit form (editable + read-only)
-  const editFormFields = [
-    ...readOnlyFields.map((field) => {
-      return getInputComponent(field);
-    }),
+  const formFields = [
     ...editableFields.map((field) => {
       return getInputComponent(field);
     }),
   ].join('\n');
 
-  const showFormFields = [
-    ...allFields.map((field) => {
-      return getInputComponent(field);
-    }),
-  ].join('\n');
-
-  const showGridFields = [
+  const gridFields = [
     ...allFields.map((field) => {
       return getColumnComponent(field);
     }),
@@ -276,19 +294,7 @@ import { $t } from '#/locales';
 
 export function use${entityClassName}FormSchema(): VbenFormSchema[] {
   return [
-    ${editFormFields}
-  ];
-}
-
-export function use${entityClassName}CreateFormSchema(): VbenFormSchema[] {
-  return [
-    ${createFormFields}
-  ];
-}
-
-export function use${entityClassName}ViewFormSchema(): VbenFormSchema[] {
-  return [
-    ${showFormFields}
+    ${formFields}
   ];
 }
 
@@ -306,7 +312,7 @@ export function use${entityClassName}Columns<T = ${entityClassName}>(
   onActionClick: OnActionClickFn<T>,
 ): VxeTableGridOptions['columns'] {
   return [
-    ${showGridFields}
+    ${gridFields}
     {
       align: 'center',
       cellRender: {

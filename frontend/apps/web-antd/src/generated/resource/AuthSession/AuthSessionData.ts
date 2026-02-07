@@ -8,38 +8,6 @@ import { $t } from '#/locales';
 export function useAuthSessionFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.id,
-      label: $t('resource.AuthSession.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.createdAt,
-      label: $t('resource.AuthSession.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.updatedAt,
-      label: $t('resource.AuthSession.updatedAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.userId,
-      label: $t('resource.AuthSession.userId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'RadioGroup',
       componentProps: {
         buttonStyle: 'solid',
@@ -54,90 +22,6 @@ export function useAuthSessionFormSchema(): VbenFormSchema[] {
       label: $t('resource.AuthSession.isActive'),
       
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useAuthSessionCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.userId,
-      label: $t('resource.AuthSession.userId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.AuthSessionScalarFieldEnum.isActive,
-      label: $t('resource.AuthSession.isActive'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useAuthSessionViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.id,
-      label: $t('resource.AuthSession.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.userId,
-      label: $t('resource.AuthSession.userId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.AuthSessionScalarFieldEnum.isActive,
-      label: $t('resource.AuthSession.isActive'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.createdAt,
-      label: $t('resource.AuthSession.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.AuthSessionScalarFieldEnum.updatedAt,
-      label: $t('resource.AuthSession.updatedAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

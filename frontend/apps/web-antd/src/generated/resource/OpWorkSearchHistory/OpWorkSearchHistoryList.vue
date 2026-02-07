@@ -7,7 +7,8 @@ import type {
 import { Page, useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
-import { Button, message } from 'ant-design-vue';
+import dayjs from 'dayjs';
+import { Button, message, notification } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { opWorkSearchHistoryControllerDeleteOne, opWorkSearchHistoryControllerFindMany, opWorkSearchHistoryControllerUpdateOne } from '#/generated/client';
@@ -43,26 +44,39 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkSearchHistoryControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : '[object Object]:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'id:desc'
             },
-          }).then(async (result) => ({
-            items: (result.data?.items || []).map((item) => ({
-              ...item,
-        id: item.id,
+          }).then(async (result) => {
+            if (result?.error) {
+              throw new Error((result.error as any)?.message || 'Unknown error')
+            }
+            return {
+              items: (result.data?.items || []).map((item) => ({
+                ...item,
+          id: item.id,
         profileId: item.profileId,
         query: item.query,
         filters: JSON.stringify(item.filters),
         resultsCount: item.resultsCount,
-        searchedAt: item.searchedAt,
-            })),
-            total: result.data?.meta.totalResults || 0,
-          }));
+        searchedAt: dayjs(item.searchedAt),
+              })),
+              total: result.data?.meta.totalResults || 0,
+            }
+          })
+            .catch((err) => {
+              hideLoading();
+              notification.error({
+                message: $t('actions.common.findManyFailed'),
+                description: err instanceof Error ? err.message : '',
+                duration: 3000,
+              });
+            });
         },
       },
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: '[object Object]', order: 'desc' },
+      defaultSort: { field: 'id', order: 'desc' },
       remote: true,
     },
     rowConfig: {
@@ -102,15 +116,23 @@ function onDelete(row: OpWorkSearchHistory) {
     key: 'action_process_msg',
   });
   opWorkSearchHistoryControllerDeleteOne({ path: { id: row.id } })
-    .then(() => {
+    .then((data) => {
+      if (data.error) {
+        throw new Error((data.error as any)?.message || 'Unknown error')
+      }
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',
       });
       onRefresh();
     })
-    .catch(() => {
+    .catch((err) => {
       hideLoading();
+      notification.error({
+        message: $t('actions.common.deleteFailed'),
+        description: err instanceof Error ? err.message : '',
+        duration: 3000,
+      });
     });
 }
 

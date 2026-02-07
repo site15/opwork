@@ -334,7 +334,6 @@ export const run = ({
         templateHelpers,
       }),
     };
-
     // generate model.data-provider.ts
     const dataProvider = {
       fileName: model.output.frontend

@@ -9,22 +9,6 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.id,
-      label: $t('resource.OpWorkExperience.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkExperience.createdAt'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
       label: $t('resource.OpWorkExperience.jobSeekerId'),
       rules: 'required',
@@ -56,7 +40,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       label: $t('resource.OpWorkExperience.startDate'),
       rules: 'required',
@@ -64,7 +48,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       labelWidth: 200
     },
     {
-      component: 'DateTime',
+      component: 'DatePicker',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       label: $t('resource.OpWorkExperience.endDate'),
       
@@ -115,220 +99,6 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.employmentType'),
       
       
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkExperienceCreateFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkExperience.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.company,
-      label: $t('resource.OpWorkExperience.company'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.position,
-      label: $t('resource.OpWorkExperience.position'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.description,
-      label: $t('resource.OpWorkExperience.description'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
-      label: $t('resource.OpWorkExperience.startDate'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
-      label: $t('resource.OpWorkExperience.endDate'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.isCurrent,
-      label: $t('resource.OpWorkExperience.isCurrent'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.location,
-      label: $t('resource.OpWorkExperience.location'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Select',
-      componentProps: {
-        allowClear: true,
-        filterOption: true,
-        options: [
-                    { value: 'FULL_TIME', label: $t('resource.OpWorkEmploymentType.FULL_TIME').split(' - ')[0], },
-          { value: 'PART_TIME', label: $t('resource.OpWorkEmploymentType.PART_TIME').split(' - ')[0], },
-          { value: 'CONTRACT', label: $t('resource.OpWorkEmploymentType.CONTRACT').split(' - ')[0], },
-          { value: 'INTERNSHIP', label: $t('resource.OpWorkEmploymentType.INTERNSHIP').split(' - ')[0], },
-          { value: 'REMOTE', label: $t('resource.OpWorkEmploymentType.REMOTE').split(' - ')[0], },
-          { value: 'FREELANCE', label: $t('resource.OpWorkEmploymentType.FREELANCE').split(' - ')[0], },
-        ],
-        showSearch: true,
-      },
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
-      label: $t('resource.OpWorkExperience.employmentType'),
-      
-      
-      labelWidth: 200
-    },
-  ];
-}
-
-export function useOpWorkExperienceViewFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.id,
-      label: $t('resource.OpWorkExperience.id'),
-      rules: 'required',
-      disabled: true,
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkExperience.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.company,
-      label: $t('resource.OpWorkExperience.company'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.position,
-      label: $t('resource.OpWorkExperience.position'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.description,
-      label: $t('resource.OpWorkExperience.description'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
-      label: $t('resource.OpWorkExperience.startDate'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
-      label: $t('resource.OpWorkExperience.endDate'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.isCurrent,
-      label: $t('resource.OpWorkExperience.isCurrent'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.location,
-      label: $t('resource.OpWorkExperience.location'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Select',
-      componentProps: {
-        allowClear: true,
-        filterOption: true,
-        options: [
-                    { value: 'FULL_TIME', label: $t('resource.OpWorkEmploymentType.FULL_TIME').split(' - ')[0], },
-          { value: 'PART_TIME', label: $t('resource.OpWorkEmploymentType.PART_TIME').split(' - ')[0], },
-          { value: 'CONTRACT', label: $t('resource.OpWorkEmploymentType.CONTRACT').split(' - ')[0], },
-          { value: 'INTERNSHIP', label: $t('resource.OpWorkEmploymentType.INTERNSHIP').split(' - ')[0], },
-          { value: 'REMOTE', label: $t('resource.OpWorkEmploymentType.REMOTE').split(' - ')[0], },
-          { value: 'FREELANCE', label: $t('resource.OpWorkEmploymentType.FREELANCE').split(' - ')[0], },
-        ],
-        showSearch: true,
-      },
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
-      label: $t('resource.OpWorkExperience.employmentType'),
-      
-      
-      labelWidth: 200
-    },
-    {
-      component: 'DateTime',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.createdAt,
-      label: $t('resource.OpWorkExperience.createdAt'),
-      rules: 'required',
-      disabled: true,
       labelWidth: 200
     },
   ];

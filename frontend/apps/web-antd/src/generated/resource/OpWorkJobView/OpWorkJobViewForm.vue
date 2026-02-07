@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref } from 'vue';
+import { notification } from 'ant-design-vue';
 
 import { useVbenDrawer } from '@vben/common-ui';
 
@@ -28,23 +29,35 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkJobViewControllerUpdateOne({
       path: { id: id.value },
       body: {
+        profileId: values.profileId,
+        jobId: values.jobId,
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,
       }
     }) : opWorkJobViewControllerCreateOne({
       body: {
+        profileId: values.profileId,
+        jobId: values.jobId,
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,
       }
     }))
-      .then(() => {
+      .then((data) => {
+        if (data.error) {
+          throw new Error((data.error as any)?.message || 'Unknown error')
+        }
         emits('success');
         drawerApi.close();
       })
-      .catch(() => {
+      .catch((err) => {
         drawerApi.unlock();
+        notification.error({
+          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
+          description: err instanceof Error ? err.message : '',
+          duration: 3000,
+        });
       });
   },
 

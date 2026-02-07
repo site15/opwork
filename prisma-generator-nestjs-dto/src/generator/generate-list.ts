@@ -51,6 +51,10 @@ export const generateList = ({
     if (field.type === 'Json') {
       return `        ${field.name}: JSON.stringify(item.${field.name}),`;
     }
+
+    if (field.type === 'DateTime') {
+      return `        ${field.name}: dayjs(item.${field.name}),`;
+    }
     return `        ${field.name}: item.${field.name},`;
   };
 
@@ -70,7 +74,8 @@ import type {
 import { Page, useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
-import { Button, message } from 'ant-design-vue';
+import dayjs from 'dayjs';
+import { Button, message, notification } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { ${camelModelName}ControllerDeleteOne, ${camelModelName}ControllerFindMany, ${camelModelName}ControllerUpdateOne } from '#/generated/client';
@@ -106,21 +111,34 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await ${camelModelName}ControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? \`\${options.sort.field}:\${options.sort.order}\` : '${defaultSortColumn}:desc'
+              sort: (options.sort?.field && options.sort?.order) ? \`\${options.sort.field}:\${options.sort.order}\` : '${defaultSortColumn.name}:desc'
             },
-          }).then(async (result) => ({
-            items: (result.data?.items || []).map((item) => ({
-              ...item,
-${showFormFields}
-            })),
-            total: result.data?.meta.totalResults || 0,
-          }));
+          }).then(async (result) => {
+            if (result?.error) {
+              throw new Error((result.error as any)?.message || 'Unknown error')
+            }
+            return {
+              items: (result.data?.items || []).map((item) => ({
+                ...item,
+  ${showFormFields}
+              })),
+              total: result.data?.meta.totalResults || 0,
+            }
+          })
+            .catch((err) => {
+              hideLoading();
+              notification.error({
+                message: $t('actions.common.findManyFailed'),
+                description: err instanceof Error ? err.message : '',
+                duration: 3000,
+              });
+            });
         },
       },
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: '${defaultSortColumn}', order: 'desc' },
+      defaultSort: { field: '${defaultSortColumn.name}', order: 'desc' },
       remote: true,
     },
     rowConfig: {
@@ -160,15 +178,23 @@ function onDelete(row: ${entityClassName}) {
     key: 'action_process_msg',
   });
   ${camelModelName}ControllerDeleteOne({ path: { id: row.id } })
-    .then(() => {
+    .then((data) => {
+      if (data.error) {
+        throw new Error((data.error as any)?.message || 'Unknown error')
+      }
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',
       });
       onRefresh();
     })
-    .catch(() => {
+    .catch((err) => {
       hideLoading();
+      notification.error({
+        message: $t('actions.common.deleteFailed'),
+        description: err instanceof Error ? err.message : '',
+        duration: 3000,
+      });
     });
 }
 
