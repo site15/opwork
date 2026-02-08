@@ -23,16 +23,22 @@ export class AuthGuard implements CanActivate {
 
     if (req.headers[X_API_KEY_HEADER_NAME]) {
       const apiKey = await this.prismaService.authApiKey.findFirst({
-        select: { AuthUser: true },
+        select: { AuthUser: true, isActive: true },
         where: { apiKey: req.headers[X_API_KEY_HEADER_NAME] },
       });
+      if (apiKey && !apiKey.isActive) {
+        throw new BadRequestException({
+          code: 'API_KEY_NOT_ACTIVE',
+          message: 'API key is not active',
+        });
+      }
       if (apiKey && apiKey.AuthUser) {
         req.userId = apiKey.AuthUser.id;
         req.user = apiKey.AuthUser;
       } else {
         throw new BadRequestException({
           code: 'INVALID_API_KEY',
-          error: 'Invalid API key',
+          message: 'Invalid API key',
         });
       }
     }
@@ -48,7 +54,7 @@ export class AuthGuard implements CanActivate {
     if (!req.userId) {
       throw new UnauthorizedException({
         code: 'UNAUTHORIZED',
-        error: 'Unauthorized',
+        message: 'Unauthorized',
       });
     }
 
@@ -59,7 +65,7 @@ export class AuthGuard implements CanActivate {
       });
       throw new UnauthorizedException({
         code: 'FORBIDDEN_IP',
-        error: 'Forbidden: IP address not allowed',
+        message: 'Forbidden: IP address not allowed',
       });
     }
 

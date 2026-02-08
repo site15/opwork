@@ -46,7 +46,7 @@ export class FindManyOpWorkNotificationResponse {
 @ApiTags('op-work')
 @Controller('op-work/notification')
 export class OpWorkNotificationController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkNotificationResponse })
@@ -80,7 +80,7 @@ export class OpWorkNotificationController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkNotification.findMany({
           where: opWorkNotificationWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkNotificationController {
   async createOne(
     @Body() args: CreateOpWorkNotificationDto,
   ) {    
-    return await this.prismaservice.opWorkNotification.create({
+    return await this.prismaService.opWorkNotification.create({
       data: { 
         ...args,
         AuthUser:{connect:{id:args.AuthUser?.connect.id}},
@@ -123,15 +123,15 @@ export class OpWorkNotificationController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkNotificationDto,
   ) {
-    return await this.prismaservice.opWorkNotification.update({
+    return await this.prismaService.opWorkNotification.update({
       data: {
         ...args,
         
         
-        AuthUser: { connect: { id: args.AuthUser?.connect.id } },
-        OpWorkProfile: args.OpWorkProfile?.connect
+        ...(!args.AuthUser?{AuthUser:undefined}:{AuthUser: { connect: { id: args.AuthUser?.connect.id } }}),
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: args.OpWorkProfile?.connect
           ? { connect: { id: args.OpWorkProfile?.connect.id } }
-          : { disconnect: true }
+          : { disconnect: true }})
       },
       where: {
         id,
@@ -143,7 +143,7 @@ export class OpWorkNotificationController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkNotification.delete({
+    await this.prismaService.opWorkNotification.delete({
       where: {
         id,
       },
@@ -154,7 +154,7 @@ export class OpWorkNotificationController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkNotificationDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkNotification.findFirstOrThrow({
+    return await this.prismaService.opWorkNotification.findFirstOrThrow({
       where: {
         id,
         

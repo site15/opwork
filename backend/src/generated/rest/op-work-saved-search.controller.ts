@@ -46,7 +46,7 @@ export class FindManyOpWorkSavedSearchResponse {
 @ApiTags('op-work')
 @Controller('op-work/saved-search')
 export class OpWorkSavedSearchController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSavedSearchResponse })
@@ -80,7 +80,7 @@ export class OpWorkSavedSearchController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSavedSearch.findMany({
           where: opWorkSavedSearchWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkSavedSearchController {
   async createOne(
     @Body() args: CreateOpWorkSavedSearchDto,
   ) {    
-    return await this.prismaservice.opWorkSavedSearch.create({
+    return await this.prismaService.opWorkSavedSearch.create({
       data: { 
         ...args,
         OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkSavedSearchController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkSavedSearchDto,
   ) {
-    return await this.prismaservice.opWorkSavedSearch.update({
+    return await this.prismaService.opWorkSavedSearch.update({
       data: {
         ...args,
         updatedAt: new Date(),
         
-        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkSavedSearchController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkSavedSearch.delete({
+    await this.prismaService.opWorkSavedSearch.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkSavedSearchController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkSavedSearchDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkSavedSearch.findFirstOrThrow({
+    return await this.prismaService.opWorkSavedSearch.findFirstOrThrow({
       where: {
         id,
         

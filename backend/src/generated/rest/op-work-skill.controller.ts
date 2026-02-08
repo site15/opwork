@@ -46,7 +46,7 @@ export class FindManyOpWorkSkillResponse {
 @ApiTags('op-work')
 @Controller('op-work/skill')
 export class OpWorkSkillController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSkillResponse })
@@ -80,7 +80,7 @@ export class OpWorkSkillController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSkill.findMany({
           where: opWorkSkillWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkSkillController {
   async createOne(
     @Body() args: CreateOpWorkSkillDto,
   ) {    
-    return await this.prismaservice.opWorkSkill.create({
+    return await this.prismaService.opWorkSkill.create({
       data: { 
         ...args,
         
@@ -122,7 +122,7 @@ export class OpWorkSkillController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkSkillDto,
   ) {
-    return await this.prismaservice.opWorkSkill.update({
+    return await this.prismaService.opWorkSkill.update({
       data: {
         ...args,
         
@@ -139,7 +139,7 @@ export class OpWorkSkillController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkSkill.delete({
+    await this.prismaService.opWorkSkill.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkSkillController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkSkillDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkSkill.findFirstOrThrow({
+    return await this.prismaService.opWorkSkill.findFirstOrThrow({
       where: {
         id,
         

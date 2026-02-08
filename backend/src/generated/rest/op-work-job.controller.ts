@@ -46,7 +46,7 @@ export class FindManyOpWorkJobResponse {
 @ApiTags('op-work')
 @Controller('op-work/job')
 export class OpWorkJobController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkJobResponse })
@@ -80,7 +80,7 @@ export class OpWorkJobController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkJob.findMany({
           where: opWorkJobWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkJobController {
   async createOne(
     @Body() args: CreateOpWorkJobDto,
   ) {    
-    return await this.prismaservice.opWorkJob.create({
+    return await this.prismaService.opWorkJob.create({
       data: { 
         ...args,
         OpWorkEmployer:{connect:{id:args.OpWorkEmployer?.connect.id}},
@@ -123,13 +123,13 @@ export class OpWorkJobController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkJobDto,
   ) {
-    return await this.prismaservice.opWorkJob.update({
+    return await this.prismaService.opWorkJob.update({
       data: {
         ...args,
         updatedAt: new Date(),
         
-        OpWorkEmployer: { connect: { id: args.OpWorkEmployer?.connect.id } },
-        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
+        ...(!args.OpWorkEmployer?{OpWorkEmployer:undefined}:{OpWorkEmployer: { connect: { id: args.OpWorkEmployer?.connect.id } }}),
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }})
       },
       where: {
         id,
@@ -141,7 +141,7 @@ export class OpWorkJobController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkJob.delete({
+    await this.prismaService.opWorkJob.delete({
       where: {
         id,
       },
@@ -152,7 +152,7 @@ export class OpWorkJobController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkJobDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkJob.findFirstOrThrow({
+    return await this.prismaService.opWorkJob.findFirstOrThrow({
       where: {
         id,
         

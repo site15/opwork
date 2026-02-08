@@ -46,7 +46,7 @@ export class FindManyAuthUserResponse {
 @ApiTags('auth')
 @Controller('auth/user')
 export class AuthUserController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthUserResponse })
@@ -80,7 +80,7 @@ export class AuthUserController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authUser.findMany({
           where: authUserWhereInput,
@@ -108,7 +108,7 @@ export class AuthUserController {
   async createOne(
     @Body() args: CreateAuthUserDto,
   ) {    
-    return await this.prismaservice.authUser.create({
+    return await this.prismaService.authUser.create({
       data: { 
         ...args,
         
@@ -122,7 +122,7 @@ export class AuthUserController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateAuthUserDto,
   ) {
-    return await this.prismaservice.authUser.update({
+    return await this.prismaService.authUser.update({
       data: {
         ...args,
         updatedAt: new Date(),
@@ -139,7 +139,7 @@ export class AuthUserController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.authUser.delete({
+    await this.prismaService.authUser.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class AuthUserController {
   @Get(':id')
   @ApiOkResponse({ type: AuthUserDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.authUser.findFirstOrThrow({
+    return await this.prismaService.authUser.findFirstOrThrow({
       where: {
         id,
         

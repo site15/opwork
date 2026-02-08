@@ -46,7 +46,7 @@ export class FindManyAuthApiKeyResponse {
 @ApiTags('auth')
 @Controller('auth/api-key')
 export class AuthApiKeyController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthApiKeyResponse })
@@ -80,7 +80,7 @@ export class AuthApiKeyController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authApiKey.findMany({
           where: authApiKeyWhereInput,
@@ -108,7 +108,7 @@ export class AuthApiKeyController {
   async createOne(
     @Body() args: CreateAuthApiKeyDto,
   ) {    
-    return await this.prismaservice.authApiKey.create({
+    return await this.prismaService.authApiKey.create({
       data: { 
         ...args,
         AuthUser:{connect:{id:args.AuthUser?.connect.id}}
@@ -122,12 +122,12 @@ export class AuthApiKeyController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateAuthApiKeyDto,
   ) {
-    return await this.prismaservice.authApiKey.update({
+    return await this.prismaService.authApiKey.update({
       data: {
         ...args,
         updatedAt: new Date(),
         
-        AuthUser: { connect: { id: args.AuthUser?.connect.id } }
+        ...(!args.AuthUser?{AuthUser:undefined}:{AuthUser: { connect: { id: args.AuthUser?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class AuthApiKeyController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.authApiKey.delete({
+    await this.prismaService.authApiKey.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class AuthApiKeyController {
   @Get(':id')
   @ApiOkResponse({ type: AuthApiKeyDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.authApiKey.findFirstOrThrow({
+    return await this.prismaService.authApiKey.findFirstOrThrow({
       where: {
         id,
         

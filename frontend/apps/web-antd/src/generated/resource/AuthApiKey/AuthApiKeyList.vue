@@ -60,7 +60,6 @@ const [Grid, gridApi] = useVbenVxeGrid({
             }
           })
             .catch((err) => {
-              hideLoading();
               notification.error({
                 message: $t('actions.common.findManyFailed'),
                 description: err instanceof Error ? err.message : '',

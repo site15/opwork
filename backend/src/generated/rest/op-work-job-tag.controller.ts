@@ -46,7 +46,7 @@ export class FindManyOpWorkJobTagResponse {
 @ApiTags('op-work')
 @Controller('op-work/job-tag')
 export class OpWorkJobTagController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkJobTagResponse })
@@ -80,7 +80,7 @@ export class OpWorkJobTagController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkJobTag.findMany({
           where: opWorkJobTagWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkJobTagController {
   async createOne(
     @Body() args: CreateOpWorkJobTagDto,
   ) {    
-    return await this.prismaservice.opWorkJobTag.create({
+    return await this.prismaService.opWorkJobTag.create({
       data: { 
         ...args,
         OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkJobTagController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkJobTagDto,
   ) {
-    return await this.prismaservice.opWorkJobTag.update({
+    return await this.prismaService.opWorkJobTag.update({
       data: {
         ...args,
         
         
-        OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }
+        ...(!args.OpWorkJob?{OpWorkJob:undefined}:{OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkJobTagController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkJobTag.delete({
+    await this.prismaService.opWorkJobTag.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkJobTagController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkJobTagDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkJobTag.findFirstOrThrow({
+    return await this.prismaService.opWorkJobTag.findFirstOrThrow({
       where: {
         id,
         

@@ -46,7 +46,7 @@ export class FindManyOpWorkExperienceResponse {
 @ApiTags('op-work')
 @Controller('op-work/experience')
 export class OpWorkExperienceController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkExperienceResponse })
@@ -80,7 +80,7 @@ export class OpWorkExperienceController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkExperience.findMany({
           where: opWorkExperienceWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkExperienceController {
   async createOne(
     @Body() args: CreateOpWorkExperienceDto,
   ) {    
-    return await this.prismaservice.opWorkExperience.create({
+    return await this.prismaService.opWorkExperience.create({
       data: { 
         ...args,
         OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkExperienceController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkExperienceDto,
   ) {
-    return await this.prismaservice.opWorkExperience.update({
+    return await this.prismaService.opWorkExperience.update({
       data: {
         ...args,
         
         
-        OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }
+        ...(!args.OpWorkJobSeeker?{OpWorkJobSeeker:undefined}:{OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkExperienceController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkExperience.delete({
+    await this.prismaService.opWorkExperience.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkExperienceController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkExperienceDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkExperience.findFirstOrThrow({
+    return await this.prismaService.opWorkExperience.findFirstOrThrow({
       where: {
         id,
         

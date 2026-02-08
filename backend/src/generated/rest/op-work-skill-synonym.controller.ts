@@ -46,7 +46,7 @@ export class FindManyOpWorkSkillSynonymResponse {
 @ApiTags('op-work')
 @Controller('op-work/skill-synonym')
 export class OpWorkSkillSynonymController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSkillSynonymResponse })
@@ -80,7 +80,7 @@ export class OpWorkSkillSynonymController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSkillSynonym.findMany({
           where: opWorkSkillSynonymWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkSkillSynonymController {
   async createOne(
     @Body() args: CreateOpWorkSkillSynonymDto,
   ) {    
-    return await this.prismaservice.opWorkSkillSynonym.create({
+    return await this.prismaService.opWorkSkillSynonym.create({
       data: { 
         ...args,
         OpWorkSkill:{connect:{id:args.OpWorkSkill?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkSkillSynonymController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkSkillSynonymDto,
   ) {
-    return await this.prismaservice.opWorkSkillSynonym.update({
+    return await this.prismaService.opWorkSkillSynonym.update({
       data: {
         ...args,
         
         
-        OpWorkSkill: { connect: { id: args.OpWorkSkill?.connect.id } }
+        ...(!args.OpWorkSkill?{OpWorkSkill:undefined}:{OpWorkSkill: { connect: { id: args.OpWorkSkill?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkSkillSynonymController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkSkillSynonym.delete({
+    await this.prismaService.opWorkSkillSynonym.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkSkillSynonymController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkSkillSynonymDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkSkillSynonym.findFirstOrThrow({
+    return await this.prismaService.opWorkSkillSynonym.findFirstOrThrow({
       where: {
         id,
         

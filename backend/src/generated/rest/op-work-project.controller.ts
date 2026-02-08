@@ -46,7 +46,7 @@ export class FindManyOpWorkProjectResponse {
 @ApiTags('op-work')
 @Controller('op-work/project')
 export class OpWorkProjectController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkProjectResponse })
@@ -80,7 +80,7 @@ export class OpWorkProjectController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkProject.findMany({
           where: opWorkProjectWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkProjectController {
   async createOne(
     @Body() args: CreateOpWorkProjectDto,
   ) {    
-    return await this.prismaservice.opWorkProject.create({
+    return await this.prismaService.opWorkProject.create({
       data: { 
         ...args,
         OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkProjectController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkProjectDto,
   ) {
-    return await this.prismaservice.opWorkProject.update({
+    return await this.prismaService.opWorkProject.update({
       data: {
         ...args,
         updatedAt: new Date(),
         
-        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkProjectController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkProject.delete({
+    await this.prismaService.opWorkProject.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkProjectController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkProjectDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkProject.findFirstOrThrow({
+    return await this.prismaService.opWorkProject.findFirstOrThrow({
       where: {
         id,
         

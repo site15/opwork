@@ -24,6 +24,7 @@ export const generateController = ({
 
   const controllerName = `${entityClassName}Controller`;
   const serviceName = 'PrismaService';
+  const camelServiceName = 'prismaService';
   const findManyArgsName = `FindMany${entityClassName}Args`;
   const findManyResponseName = `FindMany${entityClassName}Response`;
   const findManyResponseMetaName = `FindMany${entityClassName}ResponseMeta`;
@@ -99,7 +100,7 @@ export class ${findManyResponseName} {
 @ApiTags('${apiTagName}')
 @Controller('${basePath}')
 export class ${controllerName} {
-  constructor(private readonly ${serviceName.toLowerCase()}: ${serviceName}) {}
+  constructor(private readonly ${camelServiceName}: ${serviceName}) {}
 
   @Get()
   @ApiOkResponse({ type: ${findManyResponseName} })
@@ -133,7 +134,7 @@ export class ${controllerName} {
       ${hasDeletedAt ? 'deletedAt: null,' : ''}
     };
 
-    const result = await this.${serviceName.toLowerCase()}.$transaction(async (prisma) => {
+    const result = await this.${camelServiceName}.$transaction(async (prisma) => {
       return {
         items: await prisma.${prismaModelName}.findMany({
           where: ${prismaModelName}WhereInput,
@@ -161,7 +162,7 @@ export class ${controllerName} {
   async createOne(
     @Body() args: ${createDtoClassName},
   ) {    
-    return await this.${serviceName.toLowerCase()}.${prismaModelName}.create({
+    return await this.${camelServiceName}.${prismaModelName}.create({
       data: { 
         ...args,
         ${modelParams.create.fields
@@ -181,7 +182,7 @@ export class ${controllerName} {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: ${updateDtoClassName},
   ) {
-    return await this.${serviceName.toLowerCase()}.${prismaModelName}.update({
+    return await this.${camelServiceName}.${prismaModelName}.update({
       data: {
         ...args,
         ${hasUpdatedAt ? 'updatedAt: new Date(),' : ''}
@@ -190,10 +191,10 @@ export class ${controllerName} {
           .filter((f) => f.relationName)
           .map((f) =>
             f.disconnectRelation
-              ? `${f.name}: args.${f.name}?.connect
+              ? `...(!args.${f.name}?{${f.name}:undefined}:{${f.name}: args.${f.name}?.connect
           ? { connect: { id: args.${f.name}?.connect.${f.relationToFields?.[0]} } }
-          : { disconnect: true }`
-              : `${f.name}: { connect: { id: args.${f.name}?.connect.${f.relationToFields?.[0]} } }`,
+          : { disconnect: true }})`
+              : `...(!args.${f.name}?{${f.name}:undefined}:{${f.name}: { connect: { id: args.${f.name}?.connect.${f.relationToFields?.[0]} } }})`,
           ).join(`,
         `)}
       },
@@ -209,7 +210,7 @@ export class ${controllerName} {
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
     ${
       hasDeletedAt
-        ? `await this.${serviceName.toLowerCase()}.${prismaModelName}.update({
+        ? `await this.${camelServiceName}.${prismaModelName}.update({
       where: {
         id,
         deletedAt: null,
@@ -218,7 +219,7 @@ export class ${controllerName} {
         deletedAt: new Date(),
       },
     });`
-        : `await this.${serviceName.toLowerCase()}.${prismaModelName}.delete({
+        : `await this.${camelServiceName}.${prismaModelName}.delete({
       where: {
         id,
       },
@@ -230,7 +231,7 @@ export class ${controllerName} {
   @Get(':id')
   @ApiOkResponse({ type: ${plainDtoClassName} })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.${serviceName.toLowerCase()}.${prismaModelName}.findFirstOrThrow({
+    return await this.${camelServiceName}.${prismaModelName}.findFirstOrThrow({
       where: {
         id,
         ${hasDeletedAt ? 'deletedAt: null,' : ''}

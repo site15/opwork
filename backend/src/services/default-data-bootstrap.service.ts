@@ -7,17 +7,25 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
 
   async onApplicationBootstrap() {
     const adminApiKey = process.env.ADMIN_API_KEY;
-    if (
-      !(await this.prismaService.authApiKey.findFirst({
-        where: { apiKey: adminApiKey },
-      }))
-    ) {
+    const apiKey = await this.prismaService.authApiKey.findFirst({
+      where: { apiKey: adminApiKey },
+    });
+    if (!apiKey) {
       await this.prismaService.authApiKey.create({
         data: {
           apiKey: adminApiKey,
+          isActive: true,
           AuthUser: {
             create: { isActive: true },
           },
+        },
+      });
+    }
+    if (!apiKey?.isActive && apiKey?.id) {
+      await this.prismaService.authApiKey.update({
+        where: { id: apiKey.id },
+        data: {
+          isActive: true,
         },
       });
     }

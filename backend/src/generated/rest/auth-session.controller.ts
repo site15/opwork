@@ -46,7 +46,7 @@ export class FindManyAuthSessionResponse {
 @ApiTags('auth')
 @Controller('auth/session')
 export class AuthSessionController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthSessionResponse })
@@ -80,7 +80,7 @@ export class AuthSessionController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authSession.findMany({
           where: authSessionWhereInput,
@@ -108,7 +108,7 @@ export class AuthSessionController {
   async createOne(
     @Body() args: CreateAuthSessionDto,
   ) {    
-    return await this.prismaservice.authSession.create({
+    return await this.prismaService.authSession.create({
       data: { 
         ...args,
         AuthUser:{connect:{id:args.AuthUser?.connect.id}}
@@ -122,12 +122,12 @@ export class AuthSessionController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateAuthSessionDto,
   ) {
-    return await this.prismaservice.authSession.update({
+    return await this.prismaService.authSession.update({
       data: {
         ...args,
         updatedAt: new Date(),
         
-        AuthUser: { connect: { id: args.AuthUser?.connect.id } }
+        ...(!args.AuthUser?{AuthUser:undefined}:{AuthUser: { connect: { id: args.AuthUser?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class AuthSessionController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.authSession.delete({
+    await this.prismaService.authSession.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class AuthSessionController {
   @Get(':id')
   @ApiOkResponse({ type: AuthSessionDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.authSession.findFirstOrThrow({
+    return await this.prismaService.authSession.findFirstOrThrow({
       where: {
         id,
         

@@ -46,7 +46,7 @@ export class FindManyOpWorkSearchHistoryResponse {
 @ApiTags('op-work')
 @Controller('op-work/search-history')
 export class OpWorkSearchHistoryController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSearchHistoryResponse })
@@ -80,7 +80,7 @@ export class OpWorkSearchHistoryController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSearchHistory.findMany({
           where: opWorkSearchHistoryWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkSearchHistoryController {
   async createOne(
     @Body() args: CreateOpWorkSearchHistoryDto,
   ) {    
-    return await this.prismaservice.opWorkSearchHistory.create({
+    return await this.prismaService.opWorkSearchHistory.create({
       data: { 
         ...args,
         OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkSearchHistoryController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkSearchHistoryDto,
   ) {
-    return await this.prismaservice.opWorkSearchHistory.update({
+    return await this.prismaService.opWorkSearchHistory.update({
       data: {
         ...args,
         
         
-        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkSearchHistoryController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkSearchHistory.delete({
+    await this.prismaService.opWorkSearchHistory.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkSearchHistoryController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkSearchHistoryDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkSearchHistory.findFirstOrThrow({
+    return await this.prismaService.opWorkSearchHistory.findFirstOrThrow({
       where: {
         id,
         

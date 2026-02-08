@@ -46,7 +46,7 @@ export class FindManyOpWorkEducationResponse {
 @ApiTags('op-work')
 @Controller('op-work/education')
 export class OpWorkEducationController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkEducationResponse })
@@ -80,7 +80,7 @@ export class OpWorkEducationController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkEducation.findMany({
           where: opWorkEducationWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkEducationController {
   async createOne(
     @Body() args: CreateOpWorkEducationDto,
   ) {    
-    return await this.prismaservice.opWorkEducation.create({
+    return await this.prismaService.opWorkEducation.create({
       data: { 
         ...args,
         OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}}
@@ -122,12 +122,12 @@ export class OpWorkEducationController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkEducationDto,
   ) {
-    return await this.prismaservice.opWorkEducation.update({
+    return await this.prismaService.opWorkEducation.update({
       data: {
         ...args,
         
         
-        OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }
+        ...(!args.OpWorkJobSeeker?{OpWorkJobSeeker:undefined}:{OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }})
       },
       where: {
         id,
@@ -139,7 +139,7 @@ export class OpWorkEducationController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkEducation.delete({
+    await this.prismaService.opWorkEducation.delete({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export class OpWorkEducationController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkEducationDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkEducation.findFirstOrThrow({
+    return await this.prismaService.opWorkEducation.findFirstOrThrow({
       where: {
         id,
         

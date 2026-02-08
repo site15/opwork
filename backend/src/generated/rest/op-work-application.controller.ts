@@ -46,7 +46,7 @@ export class FindManyOpWorkApplicationResponse {
 @ApiTags('op-work')
 @Controller('op-work/application')
 export class OpWorkApplicationController {
-  constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkApplicationResponse })
@@ -80,7 +80,7 @@ export class OpWorkApplicationController {
       
     };
 
-    const result = await this.prismaservice.$transaction(async (prisma) => {
+    const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkApplication.findMany({
           where: opWorkApplicationWhereInput,
@@ -108,7 +108,7 @@ export class OpWorkApplicationController {
   async createOne(
     @Body() args: CreateOpWorkApplicationDto,
   ) {    
-    return await this.prismaservice.opWorkApplication.create({
+    return await this.prismaService.opWorkApplication.create({
       data: { 
         ...args,
         OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}},
@@ -124,14 +124,14 @@ export class OpWorkApplicationController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: UpdateOpWorkApplicationDto,
   ) {
-    return await this.prismaservice.opWorkApplication.update({
+    return await this.prismaService.opWorkApplication.update({
       data: {
         ...args,
         
         
-        OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } },
-        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } },
-        OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }
+        ...(!args.OpWorkJobSeeker?{OpWorkJobSeeker:undefined}:{OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }}),
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }}),
+        ...(!args.OpWorkJob?{OpWorkJob:undefined}:{OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }})
       },
       where: {
         id,
@@ -143,7 +143,7 @@ export class OpWorkApplicationController {
   @Delete(':id')
   @ApiOkResponse({ type: StatusResponse })
   async deleteOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    await this.prismaservice.opWorkApplication.delete({
+    await this.prismaService.opWorkApplication.delete({
       where: {
         id,
       },
@@ -154,7 +154,7 @@ export class OpWorkApplicationController {
   @Get(':id')
   @ApiOkResponse({ type: OpWorkApplicationDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prismaservice.opWorkApplication.findFirstOrThrow({
+    return await this.prismaService.opWorkApplication.findFirstOrThrow({
       where: {
         id,
         
