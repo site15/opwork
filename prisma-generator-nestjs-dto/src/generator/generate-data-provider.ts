@@ -27,12 +27,15 @@ export const generateDataProvider = ({
   // Convert to camelCase for SDK method names
   const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
 
-  if (model.name === 'OpWorkNotificationSettings') {
-    //  console.dir(model, { depth: 20 });
+  if (model.name === 'AuthApiKey') {
+    console.dir(update.fields, { depth: 20 });
   }
   //jobAlertFrequency
   const editableFields = update.fields.filter(
-    (field) => field.kind === 'scalar' || field.kind === 'enum',
+    (field) =>
+      field.kind === 'scalar' ||
+      field.kind === 'enum' ||
+      (field.kind === 'object' && field.relationName),
   );
 
   const getInputComponent = (field: (typeof editableFields)[0]): string => {
@@ -53,6 +56,13 @@ export const generateDataProvider = ({
       default:
         return 'TextInput';
     }*/
+
+    const fieldName = field.relationName
+      ? `Prisma.${entityClassName}ScalarFieldEnum.${field.relationFromFields?.[0]}`
+      : `Prisma.${entityClassName}ScalarFieldEnum.${field.name}`;
+    const label = field.relationName
+      ? `$t('resource.name.${field.name}')`
+      : `$t('resource.${entityClassName}.${field.name}')`;
 
     const multiline =
       field.dmmfField?.nativeType?.[0] === 'Text' ? ' multiline' : '';
@@ -84,8 +94,8 @@ export const generateDataProvider = ({
         ],
         showSearch: true,
       },
-      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      label: $t('resource.${entityClassName}.${field.name}'),
+      fieldName: ${fieldName},
+      label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
       labelWidth: 200${
@@ -128,8 +138,8 @@ export const generateDataProvider = ({
         optionType: 'button',
       },
       defaultValue: false,
-      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      label: $t('resource.${entityClassName}.${field.name}'),
+      fieldName: ${fieldName},
+      label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
       labelWidth: 200${
@@ -152,8 +162,8 @@ export const generateDataProvider = ({
     }
     return `    {
       component: '${component}',
-      fieldName: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      label: $t('resource.${entityClassName}.${field.name}'),
+      fieldName: ${fieldName},
+      label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
       labelWidth: 200${
@@ -194,6 +204,13 @@ export const generateDataProvider = ({
         return 'TextInput';
     }*/
 
+    const fieldName = field.relationName
+      ? `Prisma.${entityClassName}ScalarFieldEnum.${field.relationFromFields?.[0]}`
+      : `Prisma.${entityClassName}ScalarFieldEnum.${field.name}`;
+    const label = field.relationName
+      ? `$t('resource.name.${field.name}')`
+      : `$t('resource.${entityClassName}.${field.name}')`;
+
     const multiline =
       field.dmmfField?.nativeType?.[0] === 'Text' ? ' multiline' : '';
     const required = field.dmmfField?.isRequired;
@@ -209,8 +226,8 @@ export const generateDataProvider = ({
 ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
         ],
       },
-      title: $t('resource.${entityClassName}.${field.name}'),
-      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      title: ${label},
+      field: ${fieldName},
       sortable: true
     },`;
       }
@@ -241,8 +258,8 @@ ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t
     }
     if (field.type === 'DateTime') {
       return `    {
-      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      title: $t('resource.${entityClassName}.${field.name}'),
+      title: ${label},
+      field: ${fieldName},
       formatter: 'formatDateTime',
       sortable: true
     },`;
@@ -252,15 +269,15 @@ ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t
       cellRender: {
         name:'CellTag',
       },
-      title: $t('resource.${entityClassName}.${field.name}'),
-      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
+      title: ${label},
+      field: ${fieldName},
       sortable: true
     },`;
     }
 
     return `    {
-      field: Prisma.${entityClassName}ScalarFieldEnum.${field.name},
-      title: $t('resource.${entityClassName}.${field.name}'),
+      title: ${label},
+      field: ${fieldName},
       sortable: true
     },`;
   };

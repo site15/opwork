@@ -23,6 +23,14 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.jobId,
+      label: $t('resource.name.OpWorkJob'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -41,13 +49,18 @@ export function useOpWorkJobTagColumns<T = OpWorkJobTag>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobTagScalarFieldEnum.name,
       title: $t('resource.OpWorkJobTag.name'),
+      field: Prisma.OpWorkJobTagScalarFieldEnum.name,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobTagScalarFieldEnum.color,
       title: $t('resource.OpWorkJobTag.color'),
+      field: Prisma.OpWorkJobTagScalarFieldEnum.color,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJob'),
+      field: Prisma.OpWorkJobTagScalarFieldEnum.jobId,
       sortable: true
     },
     {

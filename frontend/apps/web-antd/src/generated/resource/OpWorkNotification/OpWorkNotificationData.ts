@@ -100,6 +100,22 @@ export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.userId,
+      label: $t('resource.name.AuthUser'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -140,18 +156,18 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.title,
       title: $t('resource.OpWorkNotification.title'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.title,
       sortable: true
     },
     {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.message,
       title: $t('resource.OpWorkNotification.message'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.message,
       sortable: true
     },
     {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.data,
       title: $t('resource.OpWorkNotification.data'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.data,
       sortable: true
     },
     {
@@ -171,9 +187,19 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
       title: $t('resource.OpWorkNotification.readAt'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
       formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      title: $t('resource.name.AuthUser'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.userId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
       sortable: true
     },
     {

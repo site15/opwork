@@ -236,6 +236,14 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkProjectScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -254,13 +262,13 @@ export function useOpWorkProjectColumns<T = OpWorkProject>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkProjectScalarFieldEnum.title,
       title: $t('resource.OpWorkProject.title'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.title,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.description,
       title: $t('resource.OpWorkProject.description'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.description,
       sortable: true
     },
     {
@@ -315,109 +323,114 @@ export function useOpWorkProjectColumns<T = OpWorkProject>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.githubRepoUrl,
       title: $t('resource.OpWorkProject.githubRepoUrl'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.githubRepoUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.technologies,
       title: $t('resource.OpWorkProject.technologies'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.technologies,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.architecture,
       title: $t('resource.OpWorkProject.architecture'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.architecture,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.plannedDatesDescription,
       title: $t('resource.OpWorkProject.plannedDatesDescription'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.plannedDatesDescription,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.plannedStartDate,
       title: $t('resource.OpWorkProject.plannedStartDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.plannedStartDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.plannedEndDate,
       title: $t('resource.OpWorkProject.plannedEndDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.plannedEndDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.implementationDescription,
       title: $t('resource.OpWorkProject.implementationDescription'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.implementationDescription,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.actualStartDate,
       title: $t('resource.OpWorkProject.actualStartDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.actualStartDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.developmentStart,
       title: $t('resource.OpWorkProject.developmentStart'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.developmentStart,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.testingStart,
       title: $t('resource.OpWorkProject.testingStart'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.testingStart,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.launchDescription,
       title: $t('resource.OpWorkProject.launchDescription'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.launchDescription,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.launchDate,
       title: $t('resource.OpWorkProject.launchDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.launchDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.goLiveDate,
       title: $t('resource.OpWorkProject.goLiveDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.goLiveDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.completionDescription,
       title: $t('resource.OpWorkProject.completionDescription'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.completionDescription,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.actualEndDate,
       title: $t('resource.OpWorkProject.actualEndDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.actualEndDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.completionDate,
       title: $t('resource.OpWorkProject.completionDate'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.completionDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceDescription,
       title: $t('resource.OpWorkProject.maintenanceDescription'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceDescription,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceStart,
       title: $t('resource.OpWorkProject.maintenanceStart'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceStart,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       title: $t('resource.OpWorkProject.maintenanceEnd'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkProjectScalarFieldEnum.profileId,
       sortable: true
     },
     {

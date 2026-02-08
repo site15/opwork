@@ -119,6 +119,14 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkEducationScalarFieldEnum.jobSeekerId,
+      label: $t('resource.name.OpWorkJobSeeker'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -137,8 +145,8 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkEducationScalarFieldEnum.institution,
       title: $t('resource.OpWorkEducation.institution'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.institution,
       sortable: true
     },
     {
@@ -160,19 +168,19 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       title: $t('resource.OpWorkEducation.fieldOfStudy'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       title: $t('resource.OpWorkEducation.startDate'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       title: $t('resource.OpWorkEducation.endDate'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       formatter: 'formatDateTime',
       sortable: true
     },
@@ -185,8 +193,8 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkEducationScalarFieldEnum.description,
       title: $t('resource.OpWorkEducation.description'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.description,
       sortable: true
     },
     {
@@ -214,6 +222,11 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       },
       title: $t('resource.OpWorkEducation.grade'),
       field: Prisma.OpWorkEducationScalarFieldEnum.grade,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJobSeeker'),
+      field: Prisma.OpWorkEducationScalarFieldEnum.jobSeekerId,
       sortable: true
     },
     {

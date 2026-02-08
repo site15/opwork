@@ -32,6 +32,14 @@ export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthApiKeyScalarFieldEnum.userId,
+      label: $t('resource.name.AuthUser'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -50,8 +58,8 @@ export function useAuthApiKeyColumns<T = AuthApiKey>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.AuthApiKeyScalarFieldEnum.apiKey,
       title: $t('resource.AuthApiKey.apiKey'),
+      field: Prisma.AuthApiKeyScalarFieldEnum.apiKey,
       sortable: true
     },
     {
@@ -60,6 +68,11 @@ export function useAuthApiKeyColumns<T = AuthApiKey>(
       },
       title: $t('resource.AuthApiKey.isActive'),
       field: Prisma.AuthApiKeyScalarFieldEnum.isActive,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.AuthUser'),
+      field: Prisma.AuthApiKeyScalarFieldEnum.userId,
       sortable: true
     },
     {

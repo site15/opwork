@@ -15,6 +15,14 @@ export function useOpWorkSkillSynonymFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
+      label: $t('resource.name.OpWorkSkill'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -33,8 +41,13 @@ export function useOpWorkSkillSynonymColumns<T = OpWorkSkillSynonym>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
       title: $t('resource.OpWorkSkillSynonym.synonym'),
+      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkSkill'),
+      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
       sortable: true
     },
     {

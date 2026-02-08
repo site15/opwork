@@ -130,6 +130,14 @@ export function useOpWorkJobSeekerFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -148,28 +156,28 @@ export function useOpWorkJobSeekerColumns<T = OpWorkJobSeeker>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition,
       title: $t('resource.OpWorkJobSeeker.currentPosition'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentCompany,
       title: $t('resource.OpWorkJobSeeker.currentCompany'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentCompany,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.summary,
       title: $t('resource.OpWorkJobSeeker.summary'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.summary,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.expectedSalary,
       title: $t('resource.OpWorkJobSeeker.expectedSalary'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.expectedSalary,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.salaryCurrency,
       title: $t('resource.OpWorkJobSeeker.salaryCurrency'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.salaryCurrency,
       sortable: true
     },
     {
@@ -197,23 +205,28 @@ export function useOpWorkJobSeekerColumns<T = OpWorkJobSeeker>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.preferredLocations,
       title: $t('resource.OpWorkJobSeeker.preferredLocations'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.preferredLocations,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.linkedinUrl,
       title: $t('resource.OpWorkJobSeeker.linkedinUrl'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.linkedinUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.githubUrl,
       title: $t('resource.OpWorkJobSeeker.githubUrl'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.githubUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.portfolioUrl,
       title: $t('resource.OpWorkJobSeeker.portfolioUrl'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.portfolioUrl,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkJobSeekerScalarFieldEnum.profileId,
       sortable: true
     },
     {

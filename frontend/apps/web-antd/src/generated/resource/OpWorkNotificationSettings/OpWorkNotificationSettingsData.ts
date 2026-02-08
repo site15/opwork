@@ -113,6 +113,14 @@ export function useOpWorkNotificationSettingsFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -184,6 +192,11 @@ export function useOpWorkNotificationSettingsColumns<T = OpWorkNotificationSetti
       },
       title: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
       field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.profileId,
       sortable: true
     },
     {

@@ -141,6 +141,14 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkProfileScalarFieldEnum.userId,
+      label: $t('resource.name.AuthUser'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -185,13 +193,13 @@ export function useOpWorkProfileColumns<T = OpWorkProfile>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.title,
       title: $t('resource.OpWorkProfile.title'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.title,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.description,
       title: $t('resource.OpWorkProfile.description'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.description,
       sortable: true
     },
     {
@@ -211,33 +219,38 @@ export function useOpWorkProfileColumns<T = OpWorkProfile>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.email,
       title: $t('resource.OpWorkProfile.email'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.email,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.phone,
       title: $t('resource.OpWorkProfile.phone'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.phone,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.website,
       title: $t('resource.OpWorkProfile.website'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.website,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.location,
       title: $t('resource.OpWorkProfile.location'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.location,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.avatarUrl,
       title: $t('resource.OpWorkProfile.avatarUrl'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.avatarUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkProfileScalarFieldEnum.coverImage,
       title: $t('resource.OpWorkProfile.coverImage'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.coverImage,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.AuthUser'),
+      field: Prisma.OpWorkProfileScalarFieldEnum.userId,
       sortable: true
     },
     {

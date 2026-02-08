@@ -24,6 +24,14 @@ export function useAuthSessionFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.AuthSessionScalarFieldEnum.userId,
+      label: $t('resource.name.AuthUser'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -47,6 +55,11 @@ export function useAuthSessionColumns<T = AuthSession>(
       },
       title: $t('resource.AuthSession.isActive'),
       field: Prisma.AuthSessionScalarFieldEnum.isActive,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.AuthUser'),
+      field: Prisma.AuthSessionScalarFieldEnum.userId,
       sortable: true
     },
     {

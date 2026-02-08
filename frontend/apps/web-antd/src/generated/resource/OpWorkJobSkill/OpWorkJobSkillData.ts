@@ -40,6 +40,22 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
+      label: $t('resource.name.OpWorkJob'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
+      label: $t('resource.name.OpWorkSkill'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -66,13 +82,23 @@ export function useOpWorkJobSkillColumns<T = OpWorkJobSkill>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
       title: $t('resource.OpWorkJobSkill.importance'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
       title: $t('resource.OpWorkJobSkill.minLevel'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJob'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkSkill'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
       sortable: true
     },
     {

@@ -77,6 +77,30 @@ export function useOpWorkApplicationFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.jobSeekerId,
+      label: $t('resource.name.OpWorkJobSeeker'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.jobId,
+      label: $t('resource.name.OpWorkJob'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -95,18 +119,18 @@ export function useOpWorkApplicationColumns<T = OpWorkApplication>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.coverLetter,
       title: $t('resource.OpWorkApplication.coverLetter'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.coverLetter,
       sortable: true
     },
     {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.resumeUrl,
       title: $t('resource.OpWorkApplication.resumeUrl'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.resumeUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.portfolioUrl,
       title: $t('resource.OpWorkApplication.portfolioUrl'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.portfolioUrl,
       sortable: true
     },
     {
@@ -127,20 +151,35 @@ export function useOpWorkApplicationColumns<T = OpWorkApplication>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
       title: $t('resource.OpWorkApplication.statusNotes'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
       sortable: true
     },
     {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.appliedAt,
       title: $t('resource.OpWorkApplication.appliedAt'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.appliedAt,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.statusUpdatedAt,
       title: $t('resource.OpWorkApplication.statusUpdatedAt'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.statusUpdatedAt,
       formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJobSeeker'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.jobSeekerId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.profileId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJob'),
+      field: Prisma.OpWorkApplicationScalarFieldEnum.jobId,
       sortable: true
     },
     {

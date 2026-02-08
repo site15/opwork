@@ -199,6 +199,22 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobScalarFieldEnum.employerId,
+      label: $t('resource.name.OpWorkEmployer'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -217,23 +233,23 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobScalarFieldEnum.title,
       title: $t('resource.OpWorkJob.title'),
+      field: Prisma.OpWorkJobScalarFieldEnum.title,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.description,
       title: $t('resource.OpWorkJob.description'),
+      field: Prisma.OpWorkJobScalarFieldEnum.description,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.requirements,
       title: $t('resource.OpWorkJob.requirements'),
+      field: Prisma.OpWorkJobScalarFieldEnum.requirements,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.responsibilities,
       title: $t('resource.OpWorkJob.responsibilities'),
+      field: Prisma.OpWorkJobScalarFieldEnum.responsibilities,
       sortable: true
     },
     {
@@ -270,28 +286,28 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.department,
       title: $t('resource.OpWorkJob.department'),
+      field: Prisma.OpWorkJobScalarFieldEnum.department,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.salaryMin,
       title: $t('resource.OpWorkJob.salaryMin'),
+      field: Prisma.OpWorkJobScalarFieldEnum.salaryMin,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.salaryMax,
       title: $t('resource.OpWorkJob.salaryMax'),
+      field: Prisma.OpWorkJobScalarFieldEnum.salaryMax,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.salaryCurrency,
       title: $t('resource.OpWorkJob.salaryCurrency'),
+      field: Prisma.OpWorkJobScalarFieldEnum.salaryCurrency,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.location,
       title: $t('resource.OpWorkJob.location'),
+      field: Prisma.OpWorkJobScalarFieldEnum.location,
       sortable: true
     },
     {
@@ -318,30 +334,40 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.viewsCount,
       title: $t('resource.OpWorkJob.viewsCount'),
+      field: Prisma.OpWorkJobScalarFieldEnum.viewsCount,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.applicationsCount,
       title: $t('resource.OpWorkJob.applicationsCount'),
+      field: Prisma.OpWorkJobScalarFieldEnum.applicationsCount,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.savesCount,
       title: $t('resource.OpWorkJob.savesCount'),
+      field: Prisma.OpWorkJobScalarFieldEnum.savesCount,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.publishedAt,
       title: $t('resource.OpWorkJob.publishedAt'),
+      field: Prisma.OpWorkJobScalarFieldEnum.publishedAt,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobScalarFieldEnum.expiresAt,
       title: $t('resource.OpWorkJob.expiresAt'),
+      field: Prisma.OpWorkJobScalarFieldEnum.expiresAt,
       formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkEmployer'),
+      field: Prisma.OpWorkJobScalarFieldEnum.employerId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkJobScalarFieldEnum.profileId,
       sortable: true
     },
     {

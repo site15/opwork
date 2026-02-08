@@ -66,18 +66,18 @@ export function useAuthUserColumns<T = AuthUser>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.AuthUserScalarFieldEnum.anonymousId,
       title: $t('resource.AuthUser.anonymousId'),
+      field: Prisma.AuthUserScalarFieldEnum.anonymousId,
       sortable: true
     },
     {
-      field: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
       title: $t('resource.AuthUser.supabaseUserId'),
+      field: Prisma.AuthUserScalarFieldEnum.supabaseUserId,
       sortable: true
     },
     {
-      field: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
       title: $t('resource.AuthUser.supabaseUserData'),
+      field: Prisma.AuthUserScalarFieldEnum.supabaseUserData,
       sortable: true
     },
     {

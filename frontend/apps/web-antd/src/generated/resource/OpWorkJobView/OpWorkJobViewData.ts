@@ -31,6 +31,22 @@ export function useOpWorkJobViewFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkJobViewScalarFieldEnum.jobId,
+      label: $t('resource.name.OpWorkJob'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -49,19 +65,29 @@ export function useOpWorkJobViewColumns<T = OpWorkJobView>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       title: $t('resource.OpWorkJobView.viewedAt'),
+      field: Prisma.OpWorkJobViewScalarFieldEnum.viewedAt,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobViewScalarFieldEnum.ipAddress,
       title: $t('resource.OpWorkJobView.ipAddress'),
+      field: Prisma.OpWorkJobViewScalarFieldEnum.ipAddress,
       sortable: true
     },
     {
-      field: Prisma.OpWorkJobViewScalarFieldEnum.userAgent,
       title: $t('resource.OpWorkJobView.userAgent'),
+      field: Prisma.OpWorkJobViewScalarFieldEnum.userAgent,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJob'),
+      field: Prisma.OpWorkJobViewScalarFieldEnum.jobId,
       sortable: true
     },
     {

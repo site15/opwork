@@ -77,6 +77,14 @@ export function useOpWorkSavedSearchFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -95,18 +103,18 @@ export function useOpWorkSavedSearchColumns<T = OpWorkSavedSearch>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.name,
       title: $t('resource.OpWorkSavedSearch.name'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.name,
       sortable: true
     },
     {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.query,
       title: $t('resource.OpWorkSavedSearch.query'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.query,
       sortable: true
     },
     {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.filters,
       title: $t('resource.OpWorkSavedSearch.filters'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.filters,
       sortable: true
     },
     {
@@ -134,9 +142,14 @@ export function useOpWorkSavedSearchColumns<T = OpWorkSavedSearch>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       title: $t('resource.OpWorkSavedSearch.lastSentAt'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       formatter: 'formatDateTime',
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkSavedSearchScalarFieldEnum.profileId,
       sortable: true
     },
     {

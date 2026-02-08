@@ -93,6 +93,14 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
+      label: $t('resource.name.OpWorkJobSeeker'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -111,29 +119,29 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.company,
       title: $t('resource.OpWorkExperience.company'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.company,
       sortable: true
     },
     {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.position,
       title: $t('resource.OpWorkExperience.position'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.position,
       sortable: true
     },
     {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.description,
       title: $t('resource.OpWorkExperience.description'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.description,
       sortable: true
     },
     {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       title: $t('resource.OpWorkExperience.startDate'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       title: $t('resource.OpWorkExperience.endDate'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       formatter: 'formatDateTime',
       sortable: true
     },
@@ -146,8 +154,8 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.location,
       title: $t('resource.OpWorkExperience.location'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.location,
       sortable: true
     },
     {
@@ -164,6 +172,11 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
       },
       title: $t('resource.OpWorkExperience.employmentType'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJobSeeker'),
+      field: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
       sortable: true
     },
     {

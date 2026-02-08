@@ -23,6 +23,22 @@ export function useOpWorkSavedJobFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
+      label: $t('resource.name.OpWorkJob'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -41,14 +57,24 @@ export function useOpWorkSavedJobColumns<T = OpWorkSavedJob>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
       title: $t('resource.OpWorkSavedJob.savedAt'),
+      field: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
       formatter: 'formatDateTime',
       sortable: true
     },
     {
-      field: Prisma.OpWorkSavedJobScalarFieldEnum.notes,
       title: $t('resource.OpWorkSavedJob.notes'),
+      field: Prisma.OpWorkSavedJobScalarFieldEnum.notes,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkJob'),
+      field: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
       sortable: true
     },
     {

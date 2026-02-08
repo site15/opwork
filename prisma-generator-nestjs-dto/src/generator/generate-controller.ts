@@ -50,7 +50,7 @@ export const generateController = ({
   // Check if model has updatedAt field for automatic timestamp updates
   const hasUpdatedAt = fields.some((f) => f.name === 'updatedAt');
   if (prismaModelName === 'opWorkSearchHistory') {
-    console.dir(fields, { depth: 20 });
+    //   console.dir(fields, { depth: 20 });
   }
   return `import {
   Body,

@@ -127,6 +127,14 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
+    {
+      component: 'Input',
+      fieldName: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      labelWidth: 200
+    },
   ];
 }
 
@@ -145,78 +153,83 @@ export function useOpWorkEmployerColumns<T = OpWorkEmployer>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.companyName,
       title: $t('resource.OpWorkEmployer.companyName'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.companyName,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.industry,
       title: $t('resource.OpWorkEmployer.industry'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.industry,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.description,
       title: $t('resource.OpWorkEmployer.description'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.description,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.mission,
       title: $t('resource.OpWorkEmployer.mission'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.mission,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.culture,
       title: $t('resource.OpWorkEmployer.culture'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.culture,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.foundedYear,
       title: $t('resource.OpWorkEmployer.foundedYear'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.foundedYear,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.headquarters,
       title: $t('resource.OpWorkEmployer.headquarters'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.headquarters,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.logoUrl,
       title: $t('resource.OpWorkEmployer.logoUrl'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.logoUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.coverImageUrl,
       title: $t('resource.OpWorkEmployer.coverImageUrl'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.coverImageUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.companyEmail,
       title: $t('resource.OpWorkEmployer.companyEmail'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.companyEmail,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.companyPhone,
       title: $t('resource.OpWorkEmployer.companyPhone'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.companyPhone,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.companyWebsite,
       title: $t('resource.OpWorkEmployer.companyWebsite'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.companyWebsite,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.linkedinUrl,
       title: $t('resource.OpWorkEmployer.linkedinUrl'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.linkedinUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.twitterUrl,
       title: $t('resource.OpWorkEmployer.twitterUrl'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.twitterUrl,
       sortable: true
     },
     {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.facebookUrl,
       title: $t('resource.OpWorkEmployer.facebookUrl'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.facebookUrl,
+      sortable: true
+    },
+    {
+      title: $t('resource.name.OpWorkProfile'),
+      field: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
       sortable: true
     },
     {

@@ -87,13 +87,13 @@ export function useOpWorkSkillColumns<T = OpWorkSkill>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSkillScalarFieldEnum.name,
       title: $t('resource.OpWorkSkill.name'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.name,
       sortable: true
     },
     {
-      field: Prisma.OpWorkSkillScalarFieldEnum.description,
       title: $t('resource.OpWorkSkill.description'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.description,
       sortable: true
     },
     {
@@ -114,18 +114,18 @@ export function useOpWorkSkillColumns<T = OpWorkSkill>(
       sortable: true
     },
     {
-      field: Prisma.OpWorkSkillScalarFieldEnum.category,
       title: $t('resource.OpWorkSkill.category'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.category,
       sortable: true
     },
     {
-      field: Prisma.OpWorkSkillScalarFieldEnum.icon,
       title: $t('resource.OpWorkSkill.icon'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.icon,
       sortable: true
     },
     {
-      field: Prisma.OpWorkSkillScalarFieldEnum.popularity,
       title: $t('resource.OpWorkSkill.popularity'),
+      field: Prisma.OpWorkSkillScalarFieldEnum.popularity,
       sortable: true
     },
     {
