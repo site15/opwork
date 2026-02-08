@@ -74,6 +74,13 @@ export class OpWorkJobController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { title: { contains: searchText, mode: 'insensitive' } },
+{ description: { contains: searchText, mode: 'insensitive' } },
+{ requirements: { contains: searchText, mode: 'insensitive' } },
+{ responsibilities: { contains: searchText, mode: 'insensitive' } },
+{ department: { contains: searchText, mode: 'insensitive' } },
+{ salaryCurrency: { contains: searchText, mode: 'insensitive' } },
+{ location: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +90,10 @@ export class OpWorkJobController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkJob.findMany({
+          include:{
+OpWorkEmployer: true,
+OpWorkProfile: true
+          },
           where: opWorkJobWhereInput,
           take,
           skip,

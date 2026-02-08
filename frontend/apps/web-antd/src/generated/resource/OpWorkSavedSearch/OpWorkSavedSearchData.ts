@@ -146,6 +146,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'MINUTELY', label: $t('resource.OpWorkFrequency.MINUTELY').split(' - ')[0], },
           { value: 'HOURLY', label: $t('resource.OpWorkFrequency.HOURLY').split(' - ')[0], },
@@ -154,6 +155,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'MONTHLY', label: $t('resource.OpWorkFrequency.MONTHLY').split(' - ')[0], },
           { value: 'ON_DEMAND', label: $t('resource.OpWorkFrequency.ON_DEMAND').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkSavedSearch.frequency'),
         field: Prisma.OpWorkSavedSearchScalarFieldEnum.frequency ,
@@ -168,6 +170,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkSavedSearchScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

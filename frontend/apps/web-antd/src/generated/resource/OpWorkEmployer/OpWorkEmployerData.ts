@@ -257,6 +257,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkEmployerScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

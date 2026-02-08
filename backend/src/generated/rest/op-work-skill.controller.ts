@@ -74,6 +74,10 @@ export class OpWorkSkillController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { name: { contains: searchText, mode: 'insensitive' } },
+{ description: { contains: searchText, mode: 'insensitive' } },
+{ category: { contains: searchText, mode: 'insensitive' } },
+{ icon: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +87,7 @@ export class OpWorkSkillController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSkill.findMany({
+          
           where: opWorkSkillWhereInput,
           take,
           skip,

@@ -74,6 +74,7 @@ export class OpWorkJobSeekerSkillController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              
             ],
           }
         : {}),
@@ -83,6 +84,10 @@ export class OpWorkJobSeekerSkillController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkJobSeekerSkill.findMany({
+          include:{
+OpWorkJobSeeker: true,
+OpWorkSkill: true
+          },
           where: opWorkJobSeekerSkillWhereInput,
           take,
           skip,

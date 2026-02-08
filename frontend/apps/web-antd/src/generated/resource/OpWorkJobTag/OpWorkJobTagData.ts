@@ -75,6 +75,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkJob'),
         field: Prisma.OpWorkJobTagScalarFieldEnum.jobId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJob?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

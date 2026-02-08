@@ -87,6 +87,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.AuthUser'),
         field: Prisma.AuthApiKeyScalarFieldEnum.userId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.AuthUser?.email || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

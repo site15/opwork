@@ -74,6 +74,7 @@ export class OpWorkSkillSynonymController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { synonym: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +84,9 @@ export class OpWorkSkillSynonymController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSkillSynonym.findMany({
+          include:{
+OpWorkSkill: true
+          },
           where: opWorkSkillSynonymWhereInput,
           take,
           skip,

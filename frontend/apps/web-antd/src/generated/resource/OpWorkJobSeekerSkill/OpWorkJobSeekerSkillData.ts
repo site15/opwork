@@ -135,11 +135,27 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkJobSeeker'),
         field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJobSeeker?.currentPosition || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkSkill'),
         field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkSkill?.name || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

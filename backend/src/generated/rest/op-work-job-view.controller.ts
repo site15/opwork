@@ -74,6 +74,8 @@ export class OpWorkJobViewController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { ipAddress: { contains: searchText, mode: 'insensitive' } },
+{ userAgent: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +85,10 @@ export class OpWorkJobViewController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkJobView.findMany({
+          include:{
+OpWorkProfile: true,
+OpWorkJob: true
+          },
           where: opWorkJobViewWhereInput,
           take,
           skip,

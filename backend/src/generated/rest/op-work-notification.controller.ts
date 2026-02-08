@@ -74,6 +74,8 @@ export class OpWorkNotificationController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { title: { contains: searchText, mode: 'insensitive' } },
+{ message: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +85,10 @@ export class OpWorkNotificationController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkNotification.findMany({
+          include:{
+AuthUser: true,
+OpWorkProfile: true
+          },
           where: opWorkNotificationWhereInput,
           take,
           skip,

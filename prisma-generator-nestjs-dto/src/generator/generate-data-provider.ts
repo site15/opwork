@@ -81,10 +81,10 @@ export const generateDataProvider = ({
 
     if (field.relationName) {
       if (model.name === 'OpWorkJobTag') {
-        console.dir(
-          { f: modelModels.find((model) => model.name === field.name)?.fields },
-          { depth: 20 },
-        );
+        //   console.dir(
+        //     { f: modelModels.find((model) => model.name === field.name)?.fields },
+        //     { depth: 20 },
+        //   );
       }
       const camelFieldName =
         field.name.charAt(0).toLowerCase() + field.name.slice(1);
@@ -289,9 +289,11 @@ export const generateDataProvider = ({
         return `    {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
               ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
             ],
+          }
       },
         title: ${label},
         field: ${fieldName},
@@ -299,7 +301,36 @@ export const generateDataProvider = ({
       }, `;
       }
     }
-
+    if (field.relationName) {
+      const labelField =
+        modelModels
+          .find((model) => model.name === field.name)
+          ?.fields.find(
+            (f) =>
+              !f.isId &&
+              !f.relationName &&
+              f.type === 'String' &&
+              f.nativeType?.[0] !== 'Uuid',
+          )?.name ||
+        modelModels
+          .find((model) => model.name === field.name)
+          ?.fields.find(
+            (f) => !f.isId && !f.relationName && f.nativeType?.[0] === 'Text',
+          )?.name;
+      return `    {
+        title: $t('resource.name.${field.name}'),
+        field: Prisma.${entityClassName}ScalarFieldEnum.${field.relationFromFields?.[0]} ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.${field.name}?.${labelField} || row[column.field] || '';
+            }
+          }
+        },
+        sortable: true
+      }, `;
+    }
     if (field.name === 'id') {
       return `    {
         field: Prisma.${entityClassName}ScalarFieldEnum.id,

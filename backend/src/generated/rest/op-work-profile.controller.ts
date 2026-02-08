@@ -74,6 +74,14 @@ export class OpWorkProfileController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { title: { contains: searchText, mode: 'insensitive' } },
+{ description: { contains: searchText, mode: 'insensitive' } },
+{ email: { contains: searchText, mode: 'insensitive' } },
+{ phone: { contains: searchText, mode: 'insensitive' } },
+{ website: { contains: searchText, mode: 'insensitive' } },
+{ location: { contains: searchText, mode: 'insensitive' } },
+{ avatarUrl: { contains: searchText, mode: 'insensitive' } },
+{ coverImage: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +91,9 @@ export class OpWorkProfileController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkProfile.findMany({
+          include:{
+AuthUser: true
+          },
           where: opWorkProfileWhereInput,
           take,
           skip,

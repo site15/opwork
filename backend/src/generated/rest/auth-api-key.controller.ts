@@ -74,6 +74,7 @@ export class AuthApiKeyController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { apiKey: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +84,9 @@ export class AuthApiKeyController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authApiKey.findMany({
+          include:{
+AuthUser: true
+          },
           where: authApiKeyWhereInput,
           take,
           skip,

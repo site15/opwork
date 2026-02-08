@@ -296,6 +296,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'FULL_TIME', label: $t('resource.OpWorkEmploymentType.FULL_TIME').split(' - ')[0], },
           { value: 'PART_TIME', label: $t('resource.OpWorkEmploymentType.PART_TIME').split(' - ')[0], },
@@ -304,6 +305,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'REMOTE', label: $t('resource.OpWorkEmploymentType.REMOTE').split(' - ')[0], },
           { value: 'FREELANCE', label: $t('resource.OpWorkEmploymentType.FREELANCE').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkJob.employmentType'),
         field: Prisma.OpWorkJobScalarFieldEnum.employmentType ,
@@ -312,6 +314,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'INTERNSHIP', label: $t('resource.OpWorkExperienceLevel.INTERNSHIP').split(' - ')[0], },
           { value: 'ENTRY_LEVEL', label: $t('resource.OpWorkExperienceLevel.ENTRY_LEVEL').split(' - ')[0], },
@@ -321,6 +324,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'LEAD', label: $t('resource.OpWorkExperienceLevel.LEAD').split(' - ')[0], },
           { value: 'EXPERT', label: $t('resource.OpWorkExperienceLevel.EXPERT').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkJob.experienceLevel'),
         field: Prisma.OpWorkJobScalarFieldEnum.experienceLevel ,
@@ -362,6 +366,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'DRAFT', label: $t('resource.OpWorkJobStatus.DRAFT').split(' - ')[0], },
           { value: 'ACTIVE', label: $t('resource.OpWorkJobStatus.ACTIVE').split(' - ')[0], },
@@ -369,6 +374,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'CLOSED', label: $t('resource.OpWorkJobStatus.CLOSED').split(' - ')[0], },
           { value: 'ARCHIVED', label: $t('resource.OpWorkJobStatus.ARCHIVED').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkJob.status'),
         field: Prisma.OpWorkJobScalarFieldEnum.status ,
@@ -404,11 +410,27 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkEmployer'),
         field: Prisma.OpWorkJobScalarFieldEnum.employerId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkEmployer?.companyName || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkJobScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

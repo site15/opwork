@@ -74,6 +74,7 @@ export class AuthSessionController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              
             ],
           }
         : {}),
@@ -83,6 +84,9 @@ export class AuthSessionController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authSession.findMany({
+          include:{
+AuthUser: true
+          },
           where: authSessionWhereInput,
           take,
           skip,

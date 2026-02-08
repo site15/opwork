@@ -166,6 +166,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'APPLICATION_RECEIVED', label: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED').split(' - ')[0], },
           { value: 'APPLICATION_SHORTLISTED', label: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED').split(' - ')[0], },
@@ -180,6 +181,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'PROFILE_UPDATE', label: $t('resource.OpWorkNotificationType.PROFILE_UPDATE').split(' - ')[0], },
           { value: 'NETWORK_ACTIVITY', label: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkNotification.type'),
         field: Prisma.OpWorkNotificationScalarFieldEnum.type ,
@@ -225,11 +227,27 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.AuthUser'),
         field: Prisma.OpWorkNotificationScalarFieldEnum.userId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.AuthUser?.email || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkNotificationScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

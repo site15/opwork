@@ -106,6 +106,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'PROGRAMMING_LANGUAGE', label: $t('resource.OpWorkSkillType.PROGRAMMING_LANGUAGE').split(' - ')[0], },
           { value: 'FRAMEWORK', label: $t('resource.OpWorkSkillType.FRAMEWORK').split(' - ')[0], },
@@ -115,6 +116,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'LANGUAGE', label: $t('resource.OpWorkSkillType.LANGUAGE').split(' - ')[0], },
           { value: 'SOFT_SKILL', label: $t('resource.OpWorkSkillType.SOFT_SKILL').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkSkill.type'),
         field: Prisma.OpWorkSkillScalarFieldEnum.type ,

@@ -40,7 +40,6 @@ const [Grid, gridApi] = useVbenVxeGrid({
             order: 'desc' | 'asc'
           }
         }, formValues: { searchText: string }) => {
-          console.log(options, formValues)
           return await authSessionControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,

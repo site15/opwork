@@ -74,6 +74,9 @@ export class OpWorkEducationController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { institution: { contains: searchText, mode: 'insensitive' } },
+{ fieldOfStudy: { contains: searchText, mode: 'insensitive' } },
+{ description: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +86,9 @@ export class OpWorkEducationController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkEducation.findMany({
+          include:{
+OpWorkJobSeeker: true
+          },
           where: opWorkEducationWhereInput,
           take,
           skip,

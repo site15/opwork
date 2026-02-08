@@ -193,11 +193,13 @@ import type { VbenFormSchema } from '#/adapter/form';
         {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'PROJECT', label: $t('resource.OpWorkProfileType.PROJECT').split(' - ')[0], },
           { value: 'SPECIALIST', label: $t('resource.OpWorkProfileType.SPECIALIST').split(' - ')[0], },
           { value: 'EMPLOYER', label: $t('resource.OpWorkProfileType.EMPLOYER').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkProfile.type'),
         field: Prisma.OpWorkProfileScalarFieldEnum.type ,
@@ -206,11 +208,13 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'JOB_SEEKER', label: $t('resource.OpWorkUserType.JOB_SEEKER').split(' - ')[0], },
           { value: 'EMPLOYER', label: $t('resource.OpWorkUserType.EMPLOYER').split(' - ')[0], },
           { value: 'ADMIN', label: $t('resource.OpWorkUserType.ADMIN').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkProfile.userType'),
         field: Prisma.OpWorkProfileScalarFieldEnum.userType ,
@@ -275,6 +279,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.AuthUser'),
         field: Prisma.OpWorkProfileScalarFieldEnum.userId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.AuthUser?.email || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

@@ -1,6 +1,8 @@
 import { kebab } from 'case';
 import { TemplateHelpers } from './template-helpers';
 import { ControllerParams, ModelParams } from './types';
+import { DMMF } from '@prisma/generator-helper';
+import { create } from 'domain';
 
 export const generateController = ({
   model,
@@ -9,10 +11,13 @@ export const generateController = ({
   apiExtraModels,
   templateHelpers,
   modelParams,
+  datamodel,
 }: ControllerParams & {
   templateHelpers: TemplateHelpers;
   modelParams: ModelParams;
+  datamodel: DMMF.Datamodel;
 }): string => {
+  const modelModels = datamodel.models;
   const { entityName, createDtoName, updateDtoName, plainDtoName } =
     templateHelpers;
 
@@ -52,6 +57,54 @@ export const generateController = ({
   if (prismaModelName === 'opWorkSearchHistory') {
     //   console.dir(fields, { depth: 20 });
   }
+  const includes = modelParams.create.fields
+    .filter((f) => f.relationName)
+    .map((f) => `${f.name}: true`);
+  //
+  console.log([
+    ...new Set([
+      ...(modelParams.create.fields
+        ?.filter(
+          (f) =>
+            !f.isId &&
+            !f.relationName &&
+            f.type === 'String' &&
+            f.dmmfField?.nativeType?.[0] !== 'Uuid',
+        )
+        ?.map((f) => f.name) || []),
+      ...(modelParams.create.fields
+        ?.filter(
+          (f) =>
+            !f.isId &&
+            !f.relationName &&
+            f.dmmfField?.nativeType?.[0] === 'Text',
+        )
+        ?.map((f) => f.name) || []),
+    ]),
+  ]);
+  const searchTexts = [
+    ...new Set([
+      ...(modelParams.create.fields
+        ?.filter(
+          (f) =>
+            !f.isId &&
+            !f.relationName &&
+            f.type === 'String' &&
+            f.dmmfField?.nativeType?.[0] !== 'Uuid',
+        )
+        ?.map((f) => f.name) || []),
+      ...(modelParams.create.fields
+        ?.filter(
+          (f) =>
+            !f.isId &&
+            !f.relationName &&
+            f.dmmfField?.nativeType?.[0] === 'Text',
+        )
+        ?.map((f) => f.name) || []),
+    ]),
+  ]
+    .map((s) => `{ ${s}: { contains: searchText, mode: 'insensitive' } }`)
+    .join(',\n');
   return `import {
   Body,
   Controller,
@@ -128,6 +181,7 @@ export class ${controllerName} {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              ${searchTexts}
             ],
           }
         : {}),
@@ -137,6 +191,13 @@ export class ${controllerName} {
     const result = await this.${camelServiceName}.$transaction(async (prisma) => {
       return {
         items: await prisma.${prismaModelName}.findMany({
+          ${
+            includes.length
+              ? `include:{
+${includes.join(',\n')}
+          },`
+              : ''
+          }
           where: ${prismaModelName}WhereInput,
           take,
           skip,

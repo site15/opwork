@@ -172,6 +172,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'HIGH_SCHOOL', label: $t('resource.OpWorkEducationDegree.HIGH_SCHOOL').split(' - ')[0], },
           { value: 'ASSOCIATE', label: $t('resource.OpWorkEducationDegree.ASSOCIATE').split(' - ')[0], },
@@ -182,6 +183,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'DIPLOMA', label: $t('resource.OpWorkEducationDegree.DIPLOMA').split(' - ')[0], },
           { value: 'POSTGRADUATE', label: $t('resource.OpWorkEducationDegree.POSTGRADUATE').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkEducation.degree'),
         field: Prisma.OpWorkEducationScalarFieldEnum.degree ,
@@ -220,6 +222,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'A_PLUS', label: $t('resource.OpWorkGrade.A_PLUS').split(' - ')[0], },
           { value: 'A', label: $t('resource.OpWorkGrade.A').split(' - ')[0], },
@@ -239,6 +242,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'INCOMPLETE', label: $t('resource.OpWorkGrade.INCOMPLETE').split(' - ')[0], },
           { value: 'AUDIT', label: $t('resource.OpWorkGrade.AUDIT').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkEducation.grade'),
         field: Prisma.OpWorkEducationScalarFieldEnum.grade ,
@@ -247,6 +251,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkJobSeeker'),
         field: Prisma.OpWorkEducationScalarFieldEnum.jobSeekerId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJobSeeker?.currentPosition || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

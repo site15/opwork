@@ -74,6 +74,9 @@ export class AuthUserController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { email: { contains: searchText, mode: 'insensitive' } },
+{ anonymousId: { contains: searchText, mode: 'insensitive' } },
+{ supabaseUserId: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +86,7 @@ export class AuthUserController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.authUser.findMany({
+          
           where: authUserWhereInput,
           take,
           skip,

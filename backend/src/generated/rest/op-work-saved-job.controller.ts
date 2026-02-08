@@ -74,6 +74,7 @@ export class OpWorkSavedJobController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { notes: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +84,10 @@ export class OpWorkSavedJobController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSavedJob.findMany({
+          include:{
+OpWorkProfile: true,
+OpWorkJob: true
+          },
           where: opWorkSavedJobWhereInput,
           take,
           skip,

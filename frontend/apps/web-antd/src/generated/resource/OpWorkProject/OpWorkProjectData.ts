@@ -309,6 +309,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'IDEA', label: $t('resource.OpWorkProjectStatus.IDEA').split(' - ')[0], },
           { value: 'PLANNING', label: $t('resource.OpWorkProjectStatus.PLANNING').split(' - ')[0], },
@@ -322,6 +323,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'COMPLETED', label: $t('resource.OpWorkProjectStatus.COMPLETED').split(' - ')[0], },
           { value: 'ARCHIVED', label: $t('resource.OpWorkProjectStatus.ARCHIVED').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkProject.status'),
         field: Prisma.OpWorkProjectScalarFieldEnum.status ,
@@ -330,6 +332,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'MVP', label: $t('resource.OpWorkProjectType.MVP').split(' - ')[0], },
           { value: 'STARTUP', label: $t('resource.OpWorkProjectType.STARTUP').split(' - ')[0], },
@@ -352,6 +355,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'IOT', label: $t('resource.OpWorkProjectType.IOT').split(' - ')[0], },
           { value: 'MARKETING', label: $t('resource.OpWorkProjectType.MARKETING').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkProject.type'),
         field: Prisma.OpWorkProjectScalarFieldEnum.type ,
@@ -466,6 +470,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkProjectScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

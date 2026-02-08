@@ -177,6 +177,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'PENDING', label: $t('resource.OpWorkApplicationStatus.PENDING').split(' - ')[0], },
           { value: 'REVIEWED', label: $t('resource.OpWorkApplicationStatus.REVIEWED').split(' - ')[0], },
@@ -186,6 +187,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'REJECTED', label: $t('resource.OpWorkApplicationStatus.REJECTED').split(' - ')[0], },
           { value: 'WITHDRAWN', label: $t('resource.OpWorkApplicationStatus.WITHDRAWN').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkApplication.status'),
         field: Prisma.OpWorkApplicationScalarFieldEnum.status ,
@@ -211,16 +213,40 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkJobSeeker'),
         field: Prisma.OpWorkApplicationScalarFieldEnum.jobSeekerId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJobSeeker?.currentPosition || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkProfile'),
         field: Prisma.OpWorkApplicationScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkJob'),
         field: Prisma.OpWorkApplicationScalarFieldEnum.jobId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJob?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

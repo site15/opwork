@@ -181,6 +181,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         cellRender: {
           name: 'CellEnum',
+          props:{
             options: [
                         { value: 'FULL_TIME', label: $t('resource.OpWorkEmploymentType.FULL_TIME').split(' - ')[0], },
           { value: 'PART_TIME', label: $t('resource.OpWorkEmploymentType.PART_TIME').split(' - ')[0], },
@@ -189,6 +190,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           { value: 'REMOTE', label: $t('resource.OpWorkEmploymentType.REMOTE').split(' - ')[0], },
           { value: 'FREELANCE', label: $t('resource.OpWorkEmploymentType.FREELANCE').split(' - ')[0], },
             ],
+          }
       },
         title: $t('resource.OpWorkExperience.employmentType'),
         field: Prisma.OpWorkExperienceScalarFieldEnum.employmentType ,
@@ -197,6 +199,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkJobSeeker'),
         field: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkJobSeeker?.currentPosition || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

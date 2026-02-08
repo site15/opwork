@@ -342,6 +342,7 @@ export const run = ({
         ...modelParams.controller,
         templateHelpers,
         modelParams,
+        datamodel: dmmf.datamodel,
       }),
     };
     // generate model.data-provider.ts

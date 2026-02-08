@@ -74,6 +74,7 @@ export class OpWorkSearchHistoryController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { query: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +84,9 @@ export class OpWorkSearchHistoryController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSearchHistory.findMany({
+          include:{
+OpWorkProfile: true
+          },
           where: opWorkSearchHistoryWhereInput,
           take,
           skip,

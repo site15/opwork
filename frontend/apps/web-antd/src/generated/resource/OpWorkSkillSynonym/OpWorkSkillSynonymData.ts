@@ -61,6 +61,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.name.OpWorkSkill'),
         field: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkSkill?.name || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

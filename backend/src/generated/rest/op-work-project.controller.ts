@@ -74,6 +74,16 @@ export class OpWorkProjectController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
+              { title: { contains: searchText, mode: 'insensitive' } },
+{ description: { contains: searchText, mode: 'insensitive' } },
+{ githubRepoUrl: { contains: searchText, mode: 'insensitive' } },
+{ technologies: { contains: searchText, mode: 'insensitive' } },
+{ architecture: { contains: searchText, mode: 'insensitive' } },
+{ plannedDatesDescription: { contains: searchText, mode: 'insensitive' } },
+{ implementationDescription: { contains: searchText, mode: 'insensitive' } },
+{ launchDescription: { contains: searchText, mode: 'insensitive' } },
+{ completionDescription: { contains: searchText, mode: 'insensitive' } },
+{ maintenanceDescription: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),
@@ -83,6 +93,9 @@ export class OpWorkProjectController {
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkProject.findMany({
+          include:{
+OpWorkProfile: true
+          },
           where: opWorkProjectWhereInput,
           take,
           skip,
