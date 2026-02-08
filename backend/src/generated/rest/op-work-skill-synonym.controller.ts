@@ -108,8 +108,14 @@ export class OpWorkSkillSynonymController {
   async createOne(
     @Body() args: CreateOpWorkSkillSynonymDto,
   ) {    
-    // DO_NOT_CHANGE_WHEN_GENERATING_CODE
-    throw new Error('Method not implemented.');
+    return await this.prismaservice.opWorkSkillSynonym.create({
+      data: { 
+        ...args,
+        
+        
+        OpWorkSkill:{connect:{id:args.OpWorkSkill?.connect.id}}
+      },
+    });
   }
 
   @Put(':id')
@@ -123,6 +129,9 @@ export class OpWorkSkillSynonymController {
         ...args,
         
         
+        
+        
+        OpWorkSkill: { connect: { id: args.OpWorkSkill?.connect.id } }
       },
       where: {
         id,

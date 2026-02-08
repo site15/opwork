@@ -2307,10 +2307,14 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     /**
      * Работодатель, разместивший вакансию
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkEmployer: Prisma.$OpWorkEmployerPayload<ExtArgs>
     /**
      * Связанный основной профиль
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
     /**

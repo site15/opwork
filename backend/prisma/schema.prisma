@@ -47,6 +47,7 @@ generator prismaClassGenerator {
   prettier                        = "false"
   reExport                        = "false"
   updateDtoPrefix                 = "Update"
+  
 }
 
 // ============================================================================
@@ -431,6 +432,8 @@ model AuthApiKey {
 
   /// Владелец данного API-ключа
   /// Обратная ссылка на учетную запись пользователя
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_API_KEY__USER_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -470,6 +473,8 @@ model AuthSession {
 
   /// Владелец данной сессии
   /// Обратная ссылка на учетную запись пользователя
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   AuthUser AuthUser @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_AUTH_SESSION__USER_ID")
 
   /// === ИНДЕКСЫ ===
@@ -541,6 +546,8 @@ model OpWorkProfile {
   /// === СВЯЗИ ===
 
   /// Владелец профиля в системе аутентификации
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   AuthUser                   AuthUser                    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROFILE__USER_ID")
   /// Профиль соискателя (если применимо)
   opWorkJobSeeker            OpWorkJobSeeker?
@@ -632,6 +639,8 @@ model OpWorkJobSeeker {
   /// === СВЯЗИ ===
 
   /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER__PROFILE_ID")
 
   /// === ДЕТАЛИ ===
@@ -682,6 +691,8 @@ model OpWorkExperience {
   createdAt      DateTime              @default(now()) @db.Timestamp(6)
 
   /// Связь с профилем соискателя
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EXPERIENCE__JOB_SEEKER_ID")
 
   /// Индексы для оптимизации поиска
@@ -717,6 +728,8 @@ model OpWorkEducation {
   createdAt    DateTime               @default(now()) @db.Timestamp(6)
 
   /// Связь с профилем соискателя
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EDUCATION__JOB_SEEKER_ID")
 
   /// Индексы для оптимизации поиска
@@ -785,6 +798,8 @@ model OpWorkEmployer {
   /// === СВЯЗИ ===
 
   /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EMPLOYER__PROFILE_ID")
 
   /// === ВАКАНСИИ ===
@@ -885,6 +900,8 @@ model OpWorkProject {
   /// === СВЯЗИ ===
 
   /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROJECT__PROFILE_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -971,8 +988,12 @@ model OpWorkJob {
   /// === СВЯЗИ ===
 
   /// Работодатель, разместивший вакансию
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkEmployer    OpWorkEmployer      @relation(fields: [employerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB__EMPLOYER_ID")
   /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile     OpWorkProfile       @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB__PROFILE_ID")
   /// Все отклики на эту вакансию
   OpWorkApplication OpWorkApplication[]
@@ -1035,10 +1056,16 @@ model OpWorkApplication {
   /// === СВЯЗИ ===
 
   /// Соискатель, подавший отклик
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__JOB_SEEKER_ID")
   /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile   OpWorkProfile   @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__PROFILE_ID")
   /// Вакансия, на которую подан отклик
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJob       OpWorkJob       @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_APPLICATION__JOB_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1070,8 +1097,12 @@ model OpWorkSavedJob {
   /// === СВЯЗИ ===
 
   /// Профиль пользователя, сохранившего вакансию
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_JOB__PROFILE_ID")
   /// Сохраненная вакансия
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJob     OpWorkJob     @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_JOB__JOB_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1149,8 +1180,12 @@ model OpWorkJobSeekerSkill {
   /// === СВЯЗИ ===
 
   /// Соискатель, владеющий данным навыком
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJobSeeker OpWorkJobSeeker @relation(fields: [jobSeekerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID")
   /// Навык
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkSkill     OpWorkSkill     @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER_SKILL__SKILL_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1184,8 +1219,12 @@ model OpWorkJobSkill {
   /// === СВЯЗИ ===
 
   /// Вакансия, для которой указано требование
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJob   OpWorkJob   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__JOB_ID")
   /// Требуемый навык
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkSkill OpWorkSkill @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__SKILL_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1240,8 +1279,13 @@ model OpWorkNotification {
   /// === СВЯЗИ ===
 
   /// Пользователь-получатель уведомления
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   AuthUser      AuthUser       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__USER_ID")
   /// Связанный профиль (если применимо)
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  /// @DtoRelationCanDisconnectOnUpdate
   OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__PROFILE_ID")
 
   /// === ИНДЕКСЫ ===
@@ -1287,6 +1331,8 @@ model OpWorkNotificationSettings {
   /// === СВЯЗИ ===
 
   /// Профиль, для которого настроены уведомления
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION_SETTINGS__PROFILE_ID")
 
   /// === ОГРАНИЧЕНИЯ ===
@@ -1318,6 +1364,8 @@ model OpWorkSearchHistory {
   /// === СВЯЗИ ===
 
   /// Профиль пользователя, выполнившего поиск
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SEARCH_HISTORY__PROFILE_ID")
 
   /// === ИНДЕКСЫ ===
@@ -1345,8 +1393,13 @@ model OpWorkJobView {
   /// === СВЯЗИ ===
 
   /// Профиль пользователя (если авторизован)
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  /// @DtoRelationCanDisconnectOnUpdate
   OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_VIEW__PROFILE_ID")
   /// Просмотренная вакансия
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJob     OpWorkJob      @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_VIEW__JOB_ID")
 
   /// === ИНДЕКСЫ ===
@@ -1383,6 +1436,8 @@ model OpWorkSavedSearch {
   /// === СВЯЗИ ===
 
   /// Профиль пользователя, создавшего сохраненный поиск
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_SEARCH__PROFILE_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1413,6 +1468,8 @@ model OpWorkSkillSynonym {
   /// === СВЯЗИ ===
 
   /// Основной навык, для которого указан синоним
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkSkill OpWorkSkill @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SKILL_SYNONYM__SKILL_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
@@ -1441,6 +1498,8 @@ model OpWorkJobTag {
   /// === СВЯЗИ ===
 
   /// Вакансия, к которой прикреплен тег
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
   OpWorkJob OpWorkJob @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_TAG__JOB_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===

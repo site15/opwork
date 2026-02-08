@@ -269,7 +269,16 @@ export const run = ({
         templateHelpers,
       }),
     };
-
+    if (model.name === 'OpWorkProfile') {
+      // console.dir(
+      //   {
+      //     ...modelParams.create,
+      //     exportRelationModifierClasses,
+      //     templateHelpers,
+      //   },
+      //   { depth: 20 },
+      // );
+    }
     // generate create-model.dto.ts
     const createDto = {
       fileName: path.join(
@@ -332,6 +341,7 @@ export const run = ({
       content: generateController({
         ...modelParams.controller,
         templateHelpers,
+        modelParams,
       }),
     };
     // generate model.data-provider.ts

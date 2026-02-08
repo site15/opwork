@@ -783,10 +783,14 @@ export type $OpWorkJobSeekerSkillPayload<ExtArgs extends runtime.Types.Extension
   objects: {
     /**
      * Соискатель, владеющий данным навыком
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJobSeeker: Prisma.$OpWorkJobSeekerPayload<ExtArgs>
     /**
      * Навык
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkSkill: Prisma.$OpWorkSkillPayload<ExtArgs>
   }

@@ -1,6 +1,6 @@
 import { kebab } from 'case';
 import { TemplateHelpers } from './template-helpers';
-import { ControllerParams } from './types';
+import { ControllerParams, ModelParams } from './types';
 
 export const generateController = ({
   model,
@@ -8,7 +8,11 @@ export const generateController = ({
   imports,
   apiExtraModels,
   templateHelpers,
-}: ControllerParams & { templateHelpers: TemplateHelpers }): string => {
+  modelParams,
+}: ControllerParams & {
+  templateHelpers: TemplateHelpers;
+  modelParams: ModelParams;
+}): string => {
   const { entityName, createDtoName, updateDtoName, plainDtoName } =
     templateHelpers;
 
@@ -44,7 +48,9 @@ export const generateController = ({
   const hasDeletedAt = fields.some((f) => f.name === 'deletedAt');
   // Check if model has updatedAt field for automatic timestamp updates
   const hasUpdatedAt = fields.some((f) => f.name === 'updatedAt');
-
+  if (prismaModelName === 'opWorkSearchHistory') {
+    console.dir(fields, { depth: 20 });
+  }
   return `import {
   Body,
   Controller,
@@ -160,19 +166,19 @@ export class ${controllerName} {
 
   @Post()
   @ApiCreatedResponse({ type: ${plainDtoClassName} })
-  async createOne(${
-    fields.find((f) => f.name === 'userId' || f.name === 'profileId')
-      ? `
-    @CurrentAppRequest() req: AppRequest,`
-      : ''
-  }
+  async createOne(
     @Body() args: ${createDtoClassName},
   ) {    
     return await this.${serviceName.toLowerCase()}.${prismaModelName}.create({
       data: { 
         ...args,
-        ${fields.find((f) => f.name === 'userId') ? `userId: req.userId,` : ''}
-        ${fields.find((f) => f.name === 'profileId') ? `profileId: req.currentProfileId,` : ''}
+        ${modelParams.create.fields
+          .filter((f) => f.relationName)
+          .map(
+            (f) =>
+              `${f.name}:{connect:{id:args.${f.name}?.connect.${f.relationToFields?.[0]}}}`,
+          ).join(`,
+        `)}
       },
     });
   }
@@ -188,6 +194,16 @@ export class ${controllerName} {
         ...args,
         ${hasUpdatedAt ? 'updatedAt: new Date(),' : ''}
         ${hasDeletedAt ? 'deletedAt: null,' : ''}
+        ${modelParams.update.fields
+          .filter((f) => f.relationName)
+          .map((f) =>
+            f.disconnectRelation
+              ? `${f.name}: args.${f.name}?.connect
+          ? { connect: { id: args.${f.name}?.connect.${f.relationToFields?.[0]} } }
+          : { disconnect: true }`
+              : `${f.name}: { connect: { id: args.${f.name}?.connect.${f.relationToFields?.[0]} } }`,
+          ).join(`,
+        `)}
       },
       where: {
         id,

@@ -1,10 +1,20 @@
 
-import {ApiProperty} from '@nestjs/swagger'
-import {IsInt,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class UpdateOpWorkEmployerOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,UpdateOpWorkEmployerOpWorkProfileRelationInputDto)
 export class UpdateOpWorkEmployerDto {
   @ApiProperty({
   type: 'string',
@@ -126,4 +136,12 @@ twitterUrl?: string  | null;
 @IsOptional()
 @IsString()
 facebookUrl?: string  | null;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkEmployerOpWorkProfileRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkEmployerOpWorkProfileRelationInputDto)
+OpWorkProfile?: UpdateOpWorkEmployerOpWorkProfileRelationInputDto ;
 }

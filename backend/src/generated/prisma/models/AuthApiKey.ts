@@ -526,6 +526,8 @@ export type $AuthApiKeyPayload<ExtArgs extends runtime.Types.Extensions.Internal
     /**
      * Владелец данного API-ключа
      * Обратная ссылка на учетную запись пользователя
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>
   }

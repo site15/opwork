@@ -4,7 +4,9 @@ import { ModelParams } from './types';
 export const generateForm = ({
   controller,
   templateHelpers,
-}: ModelParams & { templateHelpers: TemplateHelpers }): string => {
+}: ModelParams & {
+  templateHelpers: TemplateHelpers;
+}): string => {
   const { model } = controller;
   const { entityName } = templateHelpers;
 

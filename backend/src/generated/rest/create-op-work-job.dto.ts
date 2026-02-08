@@ -1,11 +1,31 @@
 
 import {OpWorkEmploymentType,OpWorkExperienceLevel,OpWorkJobStatus} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkEmployerDto} from './connect-op-work-employer.dto'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class CreateOpWorkJobOpWorkEmployerRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkEmployerDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkEmployerDto)
+connect!: ConnectOpWorkEmployerDto ;
+  }
+export class CreateOpWorkJobOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkEmployerDto,CreateOpWorkJobOpWorkEmployerRelationInputDto,ConnectOpWorkProfileDto,CreateOpWorkJobOpWorkProfileRelationInputDto)
 export class CreateOpWorkJobDto {
   @ApiProperty({
   type: 'string',
@@ -141,4 +161,18 @@ publishedAt?: Date  | null;
 @IsOptional()
 @IsDateString()
 expiresAt?: Date  | null;
+@ApiProperty({
+  type: CreateOpWorkJobOpWorkEmployerRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkJobOpWorkEmployerRelationInputDto)
+OpWorkEmployer!: CreateOpWorkJobOpWorkEmployerRelationInputDto ;
+@ApiProperty({
+  type: CreateOpWorkJobOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkJobOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkJobOpWorkProfileRelationInputDto ;
 }

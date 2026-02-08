@@ -698,6 +698,8 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     /**
      * Связь с профилем соискателя
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJobSeeker: Prisma.$OpWorkJobSeekerPayload<ExtArgs>
   }

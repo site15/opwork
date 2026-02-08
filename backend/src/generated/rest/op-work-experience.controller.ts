@@ -108,8 +108,14 @@ export class OpWorkExperienceController {
   async createOne(
     @Body() args: CreateOpWorkExperienceDto,
   ) {    
-    // DO_NOT_CHANGE_WHEN_GENERATING_CODE
-    throw new Error('Method not implemented.');
+    return await this.prismaservice.opWorkExperience.create({
+      data: { 
+        ...args,
+        
+        
+        OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}}
+      },
+    });
   }
 
   @Put(':id')
@@ -123,6 +129,9 @@ export class OpWorkExperienceController {
         ...args,
         
         
+        
+        
+        OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }
       },
       where: {
         id,

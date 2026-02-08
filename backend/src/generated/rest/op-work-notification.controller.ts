@@ -106,14 +106,15 @@ export class OpWorkNotificationController {
   @Post()
   @ApiCreatedResponse({ type: OpWorkNotificationDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkNotificationDto,
   ) {    
     return await this.prismaservice.opWorkNotification.create({
       data: { 
         ...args,
-        userId: req.userId,
-        profileId: req.currentProfileId,
+        
+        
+        AuthUser:{connect:{id:args.AuthUser?.connect.id}},
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
     });
   }
@@ -129,6 +130,12 @@ export class OpWorkNotificationController {
         ...args,
         
         
+        
+        
+        AuthUser: { connect: { id: args.AuthUser?.connect.id } },
+        OpWorkProfile: args.OpWorkProfile?.connect
+          ? { connect: { id: args.OpWorkProfile?.connect.id } }
+          : { disconnect: true }
       },
       where: {
         id,

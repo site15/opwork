@@ -106,14 +106,14 @@ export class AuthApiKeyController {
   @Post()
   @ApiCreatedResponse({ type: AuthApiKeyDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateAuthApiKeyDto,
   ) {    
     return await this.prismaservice.authApiKey.create({
       data: { 
         ...args,
-        userId: req.userId,
         
+        
+        AuthUser:{connect:{id:args.AuthUser?.connect.id}}
       },
     });
   }
@@ -129,6 +129,9 @@ export class AuthApiKeyController {
         ...args,
         updatedAt: new Date(),
         
+        
+        
+        AuthUser: { connect: { id: args.AuthUser?.connect.id } }
       },
       where: {
         id,

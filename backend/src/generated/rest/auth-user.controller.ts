@@ -113,6 +113,7 @@ export class AuthUserController {
         ...args,
         
         
+        
       },
     });
   }
@@ -127,6 +128,9 @@ export class AuthUserController {
       data: {
         ...args,
         updatedAt: new Date(),
+        
+        
+        
         
       },
       where: {

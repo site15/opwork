@@ -1,15 +1,22 @@
+import type { DMMF } from '@prisma/generator-helper';
 import path from 'node:path';
 import slash from 'slash';
+import { WritableDeep } from 'type-fest';
+import {
+  DTO_CAST_TYPE,
+  DTO_OVERRIDE_API_PROPERTY_TYPE,
+  DTO_OVERRIDE_TYPE,
+} from './annotations';
+import { parseApiProperty } from './api-decorator';
+import { parseClassValidators } from './class-validator';
 import {
   isAnnotatedWith,
   isId,
   isRelation,
   isUnique,
 } from './field-classifiers';
-import { scalarToTS } from './template-helpers';
-import type { DMMF } from '@prisma/generator-helper';
-import { WritableDeep } from 'type-fest';
 import type { TemplateHelpers } from './template-helpers';
+import { scalarToTS } from './template-helpers';
 import type {
   IApiProperty,
   IClassValidator,
@@ -18,13 +25,6 @@ import type {
   Model,
   ParsedField,
 } from './types';
-import { parseApiProperty } from './api-decorator';
-import { parseClassValidators } from './class-validator';
-import {
-  DTO_OVERRIDE_API_PROPERTY_TYPE,
-  DTO_CAST_TYPE,
-  DTO_OVERRIDE_TYPE,
-} from './annotations';
 
 export const uniq = <T = any>(input: T[]): T[] => Array.from(new Set(input));
 export const concatIntoArray = <T = any>(source: T[], target: T[]) =>
@@ -265,9 +265,14 @@ export const generateRelationInput = ({
   const generatedClasses: string[] = [];
   const classValidators: IClassValidator[] = [];
 
+  //  canCreateAnnotation: DtoRelationCanCreateOnUpdate,
+  //  canConnectAnnotation: DtoRelationCanConnectOnUpdate,
+  //  canUpdateAnnotation: DtoRelationCanUpdateOnUpdate,
+  //  canDisconnectAnnotation: DtoRelationCanDisconnectOnUpdate,
+
   const createRelation = isAnnotatedWith(field, canCreateAnnotation);
   const connectRelation = isAnnotatedWith(field, canConnectAnnotation);
-  const updatetRelation = canUpdateAnnotation
+  const updateRelation = canUpdateAnnotation
     ? isAnnotatedWith(field, canUpdateAnnotation)
     : undefined;
   const disconnectRelation = canDisconnectAnnotation
@@ -280,10 +285,19 @@ export const generateRelationInput = ({
     [
       createRelation,
       connectRelation,
-      updatetRelation,
+      updateRelation,
       disconnectRelation,
     ].filter((v) => v).length === 1;
-
+  // console.dir(
+  //   {
+  //     field,
+  //     createRelation,
+  //     connectRelation,
+  //     updateRelation,
+  //     disconnectRelation,
+  //   },
+  //   { depth: 20 },
+  // );
   const rawCastType = [DTO_OVERRIDE_TYPE, DTO_CAST_TYPE].reduce(
     (cast: string | false, annotation) => {
       if (cast) return cast;
@@ -524,7 +538,7 @@ export const generateRelationInput = ({
     }
   }
 
-  if (updatetRelation) {
+  if (updateRelation) {
     if (field.isList) {
       throw new Error(
         `model ${model.name} { ${field.name} ${field.type}[] } - ${canUpdateAnnotation?.source} cannot be applied to "-to-many" relations!`,
@@ -586,6 +600,8 @@ export const generateRelationInput = ({
   }
 
   if (!relationInputClassProps.length) {
+    // console.dir(model.name);
+    // console.dir(field, { depth: 20 });
     throw new Error(
       `Can not find relation input props for '${model.name}.${field.name}'`,
     );
@@ -620,6 +636,10 @@ export const generateRelationInput = ({
         isUnique: field.isUnique,
         isReadOnly: field.isReadOnly,
         documentation: field.documentation,
+        connectRelation: false,
+        updateRelation: false,
+        disconnectRelation: false,
+        createRelation: false,
       })),
       'plain',
       true,
@@ -634,6 +654,10 @@ export const generateRelationInput = ({
     generatedClasses,
     apiExtraModels,
     classValidators,
+    createRelation,
+    connectRelation,
+    updateRelation,
+    disconnectRelation,
   };
 };
 

@@ -1,10 +1,30 @@
 
-import {ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsDateString,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
+import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
 
+export class CreateOpWorkJobViewOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
+export class CreateOpWorkJobViewOpWorkJobRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkJobDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkJobDto)
+connect!: ConnectOpWorkJobDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkJobViewOpWorkProfileRelationInputDto,ConnectOpWorkJobDto,CreateOpWorkJobViewOpWorkJobRelationInputDto)
 export class CreateOpWorkJobViewDto {
   @ApiProperty({
   type: 'string',
@@ -31,4 +51,19 @@ ipAddress?: string  | null;
 @IsOptional()
 @IsString()
 userAgent?: string  | null;
+@ApiProperty({
+  required: false,
+  type: CreateOpWorkJobViewOpWorkProfileRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => CreateOpWorkJobViewOpWorkProfileRelationInputDto)
+OpWorkProfile?: CreateOpWorkJobViewOpWorkProfileRelationInputDto ;
+@ApiProperty({
+  type: CreateOpWorkJobViewOpWorkJobRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkJobViewOpWorkJobRelationInputDto)
+OpWorkJob!: CreateOpWorkJobViewOpWorkJobRelationInputDto ;
 }

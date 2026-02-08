@@ -493,6 +493,8 @@ export type $AuthSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     /**
      * Владелец данной сессии
      * Обратная ссылка на учетную запись пользователя
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>
   }

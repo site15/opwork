@@ -744,10 +744,14 @@ export type $OpWorkJobSkillPayload<ExtArgs extends runtime.Types.Extensions.Inte
   objects: {
     /**
      * Вакансия, для которой указано требование
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>
     /**
      * Требуемый навык
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkSkill: Prisma.$OpWorkSkillPayload<ExtArgs>
   }

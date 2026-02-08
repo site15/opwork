@@ -842,10 +842,15 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     /**
      * Пользователь-получатель уведомления
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>
     /**
      * Связанный профиль (если применимо)
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
+     * @DtoRelationCanDisconnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
   }

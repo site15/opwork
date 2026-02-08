@@ -657,6 +657,8 @@ export type $OpWorkSavedSearchPayload<ExtArgs extends runtime.Types.Extensions.I
   objects: {
     /**
      * Профиль пользователя, создавшего сохраненный поиск
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
   }

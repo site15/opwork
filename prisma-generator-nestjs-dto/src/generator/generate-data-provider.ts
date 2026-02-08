@@ -9,7 +9,9 @@ export const generateDataProvider = ({
   controller,
   templateHelpers,
   enumModels,
-}: ModelParams & { templateHelpers: TemplateHelpers } & {
+}: ModelParams & {
+  templateHelpers: TemplateHelpers;
+} & {
   enumModels: WritableDeep<DMMF.DatamodelEnum>[];
 }): string => {
   const { model } = controller;
@@ -32,7 +34,7 @@ export const generateDataProvider = ({
   );
 
   if (model.name === 'OpWorkNotificationSettings') {
-    console.dir(model, { depth: 20 });
+    //  console.dir(model, { depth: 20 });
   }
   //jobAlertFrequency
   const editableFields = allFields.filter(

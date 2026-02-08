@@ -17,16 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';
-import {
+import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';
-import { StatusResponse } from '../../types/status-response';
+import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkApplicationDto } from './op-work-application.dto';
 import { OpWorkApplication } from './op-work-application.entity';
@@ -79,6 +77,7 @@ export class OpWorkApplicationController {
             ],
           }
         : {}),
+      
     };
 
     const result = await this.prismaservice.$transaction(async (prisma) => {
@@ -107,20 +106,18 @@ export class OpWorkApplicationController {
   @Post()
   @ApiCreatedResponse({ type: OpWorkApplicationDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkApplicationDto,
-  ) {
-    // DO_NOT_CHANGE_WHEN_GENERATING_CODE 
-    throw new Error('Method not implemented.');
-    /*
+  ) {    
     return await this.prismaservice.opWorkApplication.create({
-      data: {
+      data: { 
         ...args,
-
-        profileId: req.currentProfileId,
+        
+        
+        OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}},
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}},
+        OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}}
       },
     });
-    */
   }
 
   @Put(':id')
@@ -132,9 +129,17 @@ export class OpWorkApplicationController {
     return await this.prismaservice.opWorkApplication.update({
       data: {
         ...args,
+        
+        
+        
+        
+        OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } },
+        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } },
+        OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }
       },
       where: {
         id,
+        
       },
     });
   }
@@ -156,6 +161,7 @@ export class OpWorkApplicationController {
     return await this.prismaservice.opWorkApplication.findFirstOrThrow({
       where: {
         id,
+        
       },
     });
   }

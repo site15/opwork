@@ -106,14 +106,14 @@ export class OpWorkProjectController {
   @Post()
   @ApiCreatedResponse({ type: OpWorkProjectDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkProjectDto,
   ) {    
     return await this.prismaservice.opWorkProject.create({
       data: { 
         ...args,
         
-        profileId: req.currentProfileId,
+        
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
     });
   }
@@ -129,6 +129,9 @@ export class OpWorkProjectController {
         ...args,
         updatedAt: new Date(),
         
+        
+        
+        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
       },
       where: {
         id,

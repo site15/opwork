@@ -465,6 +465,8 @@ export type $OpWorkSkillSynonymPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     /**
      * Основной навык, для которого указан синоним
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkSkill: Prisma.$OpWorkSkillPayload<ExtArgs>
   }

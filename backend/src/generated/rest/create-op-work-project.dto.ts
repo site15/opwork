@@ -1,11 +1,21 @@
 
 import {OpWorkProjectStatus,OpWorkProjectType} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class CreateOpWorkProjectOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkProjectOpWorkProfileRelationInputDto)
 export class CreateOpWorkProjectDto {
   @ApiProperty({
   type: 'string',
@@ -200,4 +210,11 @@ maintenanceStart?: Date  | null;
 @IsOptional()
 @IsDateString()
 maintenanceEnd?: Date  | null;
+@ApiProperty({
+  type: CreateOpWorkProjectOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkProjectOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkProjectOpWorkProfileRelationInputDto ;
 }

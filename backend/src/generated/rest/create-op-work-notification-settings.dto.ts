@@ -1,11 +1,21 @@
 
 import {OpWorkFrequency} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsEnum,IsOptional} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsBoolean,IsEnum,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class CreateOpWorkNotificationSettingsOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkNotificationSettingsOpWorkProfileRelationInputDto)
 export class CreateOpWorkNotificationSettingsDto {
   @ApiProperty({
   type: 'boolean',
@@ -56,4 +66,11 @@ pushJobAlerts?: boolean  | null;
 @IsOptional()
 @IsEnum(OpWorkFrequency)
 jobAlertFrequency?: OpWorkFrequency  | null;
+@ApiProperty({
+  type: CreateOpWorkNotificationSettingsOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkNotificationSettingsOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkNotificationSettingsOpWorkProfileRelationInputDto ;
 }

@@ -1,11 +1,21 @@
 
 import {OpWorkEducationDegree,OpWorkGrade} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 
+export class UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkJobSeekerDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkJobSeekerDto)
+connect!: ConnectOpWorkJobSeekerDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkJobSeekerDto,UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto)
 export class UpdateOpWorkEducationDto {
   @ApiProperty({
   type: 'string',
@@ -73,4 +83,12 @@ description?: string  | null;
 @IsOptional()
 @IsEnum(OpWorkGrade)
 grade?: OpWorkGrade  | null;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto)
+OpWorkJobSeeker?: UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto ;
 }

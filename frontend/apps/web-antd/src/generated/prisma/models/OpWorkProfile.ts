@@ -2717,6 +2717,8 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     /**
      * Владелец профиля в системе аутентификации
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     AuthUser: Prisma.$AuthUserPayload<ExtArgs>
     /**

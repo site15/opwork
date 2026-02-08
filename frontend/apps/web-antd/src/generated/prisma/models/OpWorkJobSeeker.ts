@@ -1411,6 +1411,8 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     /**
      * Связанный основной профиль
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
     /**

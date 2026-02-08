@@ -1,11 +1,39 @@
 
 import {OpWorkNotificationType,Prisma} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectAuthUserDto} from './connect-auth-user.dto'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class UpdateOpWorkNotificationAuthUserRelationInputDto {
+    @ApiProperty({
+  type: ConnectAuthUserDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectAuthUserDto)
+connect!: ConnectAuthUserDto ;
+  }
+export class UpdateOpWorkNotificationOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  required: false,
+  type: ConnectOpWorkProfileDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect?: ConnectOpWorkProfileDto ;
+@ApiProperty({
+  required: false,
+  type: 'boolean',
+})
+@IsOptional()
+@IsBoolean()
+disconnect?: boolean ;
+  }
 
-
-
+@ApiExtraModels(ConnectAuthUserDto,UpdateOpWorkNotificationAuthUserRelationInputDto,ConnectOpWorkProfileDto,UpdateOpWorkNotificationOpWorkProfileRelationInputDto)
 export class UpdateOpWorkNotificationDto {
   @ApiProperty({
   enum: OpWorkNotificationType,
@@ -61,4 +89,20 @@ isArchived?: boolean  | null;
 @IsOptional()
 @IsDateString()
 readAt?: Date  | null;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkNotificationAuthUserRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkNotificationAuthUserRelationInputDto)
+AuthUser?: UpdateOpWorkNotificationAuthUserRelationInputDto ;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkNotificationOpWorkProfileRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkNotificationOpWorkProfileRelationInputDto)
+OpWorkProfile?: UpdateOpWorkNotificationOpWorkProfileRelationInputDto ;
 }

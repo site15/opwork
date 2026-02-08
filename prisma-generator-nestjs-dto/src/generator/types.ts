@@ -40,6 +40,11 @@ export interface ParsedField {
   relationFromFields?: string[];
   relationToFields?: string[];
   pureType?: boolean;
+  ///
+  createRelation?: boolean;
+  connectRelation?: boolean;
+  updateRelation?: boolean;
+  disconnectRelation?: boolean;
 }
 
 export interface ExtraModel {

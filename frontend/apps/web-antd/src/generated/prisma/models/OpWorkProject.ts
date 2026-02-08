@@ -1110,6 +1110,8 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     /**
      * Связанный основной профиль
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
   }

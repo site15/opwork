@@ -105,6 +105,10 @@ export const computeUpdateDtoParams = ({
         canUpdateAnnotation: DTO_RELATION_CAN_UPDATE_ON_UPDATE,
         canDisconnectAnnotation: DTO_RELATION_CAN_DISCONNECT_ON_UPDATE,
       });
+      overrides.createRelation = relationInputType.createRelation;
+      overrides.connectRelation = relationInputType.connectRelation;
+      overrides.updateRelation = relationInputType.updateRelation;
+      overrides.disconnectRelation = relationInputType.disconnectRelation;
 
       overrides.type = relationInputType.type;
       overrides.pureType = true;

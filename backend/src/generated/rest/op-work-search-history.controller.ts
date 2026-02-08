@@ -106,14 +106,14 @@ export class OpWorkSearchHistoryController {
   @Post()
   @ApiCreatedResponse({ type: OpWorkSearchHistoryDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkSearchHistoryDto,
   ) {    
     return await this.prismaservice.opWorkSearchHistory.create({
       data: { 
         ...args,
         
-        profileId: req.currentProfileId,
+        
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
     });
   }
@@ -129,6 +129,9 @@ export class OpWorkSearchHistoryController {
         ...args,
         
         
+        
+        
+        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
       },
       where: {
         id,

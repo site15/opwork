@@ -1,30 +1,22 @@
-import { kebab, pascal } from 'case';
 import { TemplateHelpers } from './template-helpers';
 import { ModelParams } from './types';
 
 export const generateList = ({
   controller,
   templateHelpers,
-}: ModelParams & { templateHelpers: TemplateHelpers }): string => {
+}: ModelParams & {
+  templateHelpers: TemplateHelpers;
+}): string => {
   const { model } = controller;
   const { entityName } = templateHelpers;
 
   const modelName = model.name;
   const entityClassName = entityName(modelName);
-  const listName = `${entityClassName}List`;
 
   // Get fields for different form types
   const allFields = model.fields.filter(
     (field) =>
       (field.kind === 'scalar' || field.kind === 'enum') &&
-      field.name !== 'deletedAt',
-  );
-
-  // Get all scalar fields for the table columns
-  const scalarFields = model.fields.filter(
-    (field) =>
-      (field.kind === 'scalar' || field.kind === 'enum') &&
-      field.name !== 'updatedAt' &&
       field.name !== 'deletedAt',
   );
 

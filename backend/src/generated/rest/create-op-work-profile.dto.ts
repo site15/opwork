@@ -1,11 +1,21 @@
 
 import {OpWorkProfileType,OpWorkUserType} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsEnum,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsBoolean,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectAuthUserDto} from './connect-auth-user.dto'
 
+export class CreateOpWorkProfileAuthUserRelationInputDto {
+    @ApiProperty({
+  type: ConnectAuthUserDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectAuthUserDto)
+connect!: ConnectAuthUserDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectAuthUserDto,CreateOpWorkProfileAuthUserRelationInputDto)
 export class CreateOpWorkProfileDto {
   @ApiProperty({
   enum: OpWorkProfileType,
@@ -101,4 +111,11 @@ avatarUrl?: string  | null;
 @IsOptional()
 @IsString()
 coverImage?: string  | null;
+@ApiProperty({
+  type: CreateOpWorkProfileAuthUserRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkProfileAuthUserRelationInputDto)
+AuthUser!: CreateOpWorkProfileAuthUserRelationInputDto ;
 }

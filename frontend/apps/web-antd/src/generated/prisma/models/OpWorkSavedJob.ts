@@ -616,10 +616,14 @@ export type $OpWorkSavedJobPayload<ExtArgs extends runtime.Types.Extensions.Inte
   objects: {
     /**
      * Профиль пользователя, сохранившего вакансию
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
     /**
      * Сохраненная вакансия
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>
   }

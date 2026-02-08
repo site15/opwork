@@ -108,8 +108,14 @@ export class OpWorkJobTagController {
   async createOne(
     @Body() args: CreateOpWorkJobTagDto,
   ) {    
-    // DO_NOT_CHANGE_WHEN_GENERATING_CODE
-    throw new Error('Method not implemented.');
+    return await this.prismaservice.opWorkJobTag.create({
+      data: { 
+        ...args,
+        
+        
+        OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}}
+      },
+    });
   }
 
   @Put(':id')
@@ -123,6 +129,9 @@ export class OpWorkJobTagController {
         ...args,
         
         
+        
+        
+        OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }
       },
       where: {
         id,

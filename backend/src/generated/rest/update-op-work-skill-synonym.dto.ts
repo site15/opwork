@@ -1,10 +1,20 @@
 
-import {ApiProperty} from '@nestjs/swagger'
-import {IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkSkillDto} from './connect-op-work-skill.dto'
 
+export class UpdateOpWorkSkillSynonymOpWorkSkillRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkSkillDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkSkillDto)
+connect!: ConnectOpWorkSkillDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkSkillDto,UpdateOpWorkSkillSynonymOpWorkSkillRelationInputDto)
 export class UpdateOpWorkSkillSynonymDto {
   @ApiProperty({
   type: 'string',
@@ -13,4 +23,12 @@ export class UpdateOpWorkSkillSynonymDto {
 @IsOptional()
 @IsString()
 synonym?: string ;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkSkillSynonymOpWorkSkillRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkSkillSynonymOpWorkSkillRelationInputDto)
+OpWorkSkill?: UpdateOpWorkSkillSynonymOpWorkSkillRelationInputDto ;
 }

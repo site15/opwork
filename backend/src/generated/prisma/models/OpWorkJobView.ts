@@ -649,10 +649,15 @@ export type $OpWorkJobViewPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     /**
      * Профиль пользователя (если авторизован)
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
+     * @DtoRelationCanDisconnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
     /**
      * Просмотренная вакансия
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>
   }

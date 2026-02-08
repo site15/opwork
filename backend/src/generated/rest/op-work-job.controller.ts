@@ -106,11 +106,17 @@ export class OpWorkJobController {
   @Post()
   @ApiCreatedResponse({ type: OpWorkJobDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateOpWorkJobDto,
   ) {    
-    // DO_NOT_CHANGE_WHEN_GENERATING_CODE
-    throw new Error('Method not implemented.');
+    return await this.prismaservice.opWorkJob.create({
+      data: { 
+        ...args,
+        
+        
+        OpWorkEmployer:{connect:{id:args.OpWorkEmployer?.connect.id}},
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
+      },
+    });
   }
 
   @Put(':id')
@@ -124,6 +130,10 @@ export class OpWorkJobController {
         ...args,
         updatedAt: new Date(),
         
+        
+        
+        OpWorkEmployer: { connect: { id: args.OpWorkEmployer?.connect.id } },
+        OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }
       },
       where: {
         id,

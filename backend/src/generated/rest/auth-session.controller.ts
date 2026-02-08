@@ -106,14 +106,14 @@ export class AuthSessionController {
   @Post()
   @ApiCreatedResponse({ type: AuthSessionDto })
   async createOne(
-    @CurrentAppRequest() req: AppRequest,
     @Body() args: CreateAuthSessionDto,
   ) {    
     return await this.prismaservice.authSession.create({
       data: { 
         ...args,
-        userId: req.userId,
         
+        
+        AuthUser:{connect:{id:args.AuthUser?.connect.id}}
       },
     });
   }
@@ -129,6 +129,9 @@ export class AuthSessionController {
         ...args,
         updatedAt: new Date(),
         
+        
+        
+        AuthUser: { connect: { id: args.AuthUser?.connect.id } }
       },
       where: {
         id,

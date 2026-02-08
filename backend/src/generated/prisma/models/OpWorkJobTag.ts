@@ -498,6 +498,8 @@ export type $OpWorkJobTagPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     /**
      * Вакансия, к которой прикреплен тег
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>
   }

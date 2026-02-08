@@ -1,11 +1,21 @@
 
 import {Prisma} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsInt,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsDateString,IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class CreateOpWorkSearchHistoryOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkSearchHistoryOpWorkProfileRelationInputDto)
 export class CreateOpWorkSearchHistoryDto {
   @ApiProperty({
   type: 'string',
@@ -38,4 +48,11 @@ resultsCount?: number  | null;
 @IsOptional()
 @IsDateString()
 searchedAt?: Date  | null;
+@ApiProperty({
+  type: CreateOpWorkSearchHistoryOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkSearchHistoryOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkSearchHistoryOpWorkProfileRelationInputDto ;
 }

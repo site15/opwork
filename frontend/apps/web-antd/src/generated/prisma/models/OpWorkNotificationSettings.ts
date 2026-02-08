@@ -566,6 +566,8 @@ export type $OpWorkNotificationSettingsPayload<ExtArgs extends runtime.Types.Ext
   objects: {
     /**
      * Профиль, для которого настроены уведомления
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
   }

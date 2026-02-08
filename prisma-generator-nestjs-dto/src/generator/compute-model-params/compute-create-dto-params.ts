@@ -98,6 +98,10 @@ export const computeCreateDtoParams = ({
         canCreateAnnotation: DTO_RELATION_CAN_CREATE_ON_CREATE,
         canConnectAnnotation: DTO_RELATION_CAN_CONNECT_ON_CREATE,
       });
+      overrides.createRelation = relationInputType.createRelation;
+      overrides.connectRelation = relationInputType.connectRelation;
+      overrides.updateRelation = relationInputType.updateRelation;
+      overrides.disconnectRelation = relationInputType.disconnectRelation;
 
       const isDtoRelationRequired = isAnnotatedWith(
         field,
