@@ -53,8 +53,8 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          savedAt: dayjs(item.savedAt),
-        notes: item.notes,
+          savedAt:item.savedAt?dayjs(item.savedAt):undefined,
+        notes: item.notes||undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }

@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DMMF } from '@prisma/generator-helper';
 import { kebab } from 'case';
-import { WritableDeep } from 'type-fest';
 import { TemplateHelpers } from './template-helpers';
 import { ModelParams } from './types';
 
 export const generateDataProvider = ({
   controller,
   templateHelpers,
-  enumModels,
+  datamodel,
   update,
 }: ModelParams & {
   templateHelpers: TemplateHelpers;
 } & {
-  enumModels: WritableDeep<DMMF.DatamodelEnum>[];
+  datamodel: DMMF.Datamodel;
 }): string => {
+  const enumModels = datamodel.enums;
+  const modelModels = datamodel.models;
   const { model } = controller;
   const { entityName, createDtoName } = templateHelpers;
 
@@ -27,9 +28,6 @@ export const generateDataProvider = ({
   // Convert to camelCase for SDK method names
   const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
 
-  if (model.name === 'AuthApiKey') {
-    console.dir(update.fields, { depth: 20 });
-  }
   //jobAlertFrequency
   const editableFields = update.fields.filter(
     (field) =>
@@ -81,23 +79,51 @@ export const generateDataProvider = ({
       component = 'InputNumber';
     }
 
-    if (field.kind === 'enum') {
-      const enumModel = enumModels.find((model) => model.name === field.type);
-      if (enumModel) {
-        return `    {
-      component: 'Select',
-      componentProps: {
-        allowClear: true,
-        filterOption: true,
-        options: [
-          ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
-        ],
-        showSearch: true,
-      },
+    if (field.relationName) {
+      if (model.name === 'OpWorkJobTag') {
+        console.dir(
+          { f: modelModels.find((model) => model.name === field.name)?.fields },
+          { depth: 20 },
+        );
+      }
+      const camelFieldName =
+        field.name.charAt(0).toLowerCase() + field.name.slice(1);
+      const idField =
+        modelModels
+          .find((model) => model.name === field.name)
+          ?.fields.find((f) => f.isId)?.name || 'id';
+      const labelField =
+        modelModels
+          .find((model) => model.name === field.name)
+          ?.fields.find(
+            (f) =>
+              !f.isId &&
+              !f.relationName &&
+              f.type === 'String' &&
+              f.nativeType?.[0] !== 'Uuid',
+          )?.name ||
+        modelModels
+          .find((model) => model.name === field.name)
+          ?.fields.find(
+            (f) => !f.isId && !f.relationName && f.nativeType?.[0] === 'Text',
+          )?.name;
+      return `
+    {
+      component: 'ApiSelect',
+      ...getComponentProps<${field.name}>({
+        findMany: (searchText?: string) => ${camelFieldName}ControllerFindMany({
+          query: {
+            perPage: 100,
+            ...(searchText ? { searchText } : {})
+          }
+        }),
+        getLabel: (item) => item.${labelField} || item.${idField},
+      }),
       fieldName: ${fieldName},
       label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
+      controlClass: 'w-full',
       labelWidth: 200${
         readonly
           ? `,
@@ -111,10 +137,49 @@ export const generateDataProvider = ({
           return !!values.id;
         },
         triggerFields: ['id'],
-      },`
+      },
+      controlClass: 'w-full'
+`
           : ''
       }
-    },`;
+    }, `;
+    }
+
+    if (field.kind === 'enum') {
+      const enumModel = enumModels.find((model) => model.name === field.type);
+      if (enumModel) {
+        return `    {
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
+              ],
+                showSearch: true,
+      },
+        fieldName: ${fieldName},
+        label: ${label},
+      ${required ? `rules: 'required',` : ''}
+      ${readonly ? `disabled: true,` : ''}
+        controlClass: 'w-full',
+        labelWidth: 200${
+          readonly
+            ? `,
+      componentProps: (values) => {
+        return {
+          disabled: !!values.id,
+        };
+      },
+      dependencies: {
+        show: (values) => {
+          return !!values.id;
+        },
+        triggerFields: ['id'],
+      },`
+            : ''
+        }
+      }, `;
       }
     }
 
@@ -128,23 +193,24 @@ export const generateDataProvider = ({
 
     if (field.type === 'Boolean') {
       return `    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
+        component: 'RadioGroup',
+          componentProps: {
+          buttonStyle: 'solid',
+            options: [
+              { label: $t('common.yes'), value: true },
+              { label: $t('common.no'), value: false },
+            ],
+              optionType: 'button',
       },
-      defaultValue: false,
-      fieldName: ${fieldName},
-      label: ${label},
+        defaultValue: false,
+          fieldName: ${fieldName},
+        label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200${
-        readonly
-          ? `,
+        controlClass: 'w-full',
+        labelWidth: 200${
+          readonly
+            ? `,
       componentProps: (values) => {
         return {
           disabled: !!values.id,
@@ -156,19 +222,20 @@ export const generateDataProvider = ({
         },
         triggerFields: ['id'],
       },`
-          : ''
-      }
-    },`;
+            : ''
+        }
+      }, `;
     }
     return `    {
-      component: '${component}',
-      fieldName: ${fieldName},
-      label: ${label},
+        component: '${component}',
+          fieldName: ${fieldName},
+        label: ${label},
       ${required ? `rules: 'required',` : ''}
       ${readonly ? `disabled: true,` : ''}
-      labelWidth: 200${
-        readonly
-          ? `,
+        controlClass: 'w-full',
+        labelWidth: 200${
+          readonly
+            ? `,
       componentProps: (values) => {
         return {
           disabled: !!values.id,
@@ -180,9 +247,9 @@ export const generateDataProvider = ({
         },
         triggerFields: ['id'],
       },`
-          : ''
-      }
-    },`;
+            : ''
+        }
+      }, `;
   };
 
   const getColumnComponent = (field: (typeof editableFields)[0]): string => {
@@ -205,8 +272,8 @@ export const generateDataProvider = ({
     }*/
 
     const fieldName = field.relationName
-      ? `Prisma.${entityClassName}ScalarFieldEnum.${field.relationFromFields?.[0]}`
-      : `Prisma.${entityClassName}ScalarFieldEnum.${field.name}`;
+      ? `Prisma.${entityClassName}ScalarFieldEnum.${field.relationFromFields?.[0]} `
+      : `Prisma.${entityClassName}ScalarFieldEnum.${field.name} `;
     const label = field.relationName
       ? `$t('resource.name.${field.name}')`
       : `$t('resource.${entityClassName}.${field.name}')`;
@@ -220,66 +287,66 @@ export const generateDataProvider = ({
       const enumModel = enumModels.find((model) => model.name === field.type);
       if (enumModel) {
         return `    {
-      cellRender: {
-        name:'CellEnum',
-        options: [
-${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
-        ],
+        cellRender: {
+          name: 'CellEnum',
+            options: [
+              ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t('resource.${field.type}.${value.name}').split(' - ')[0], },`).join('\n')}
+            ],
       },
-      title: ${label},
-      field: ${fieldName},
-      sortable: true
-    },`;
+        title: ${label},
+        field: ${fieldName},
+        sortable: true
+      }, `;
       }
     }
 
     if (field.name === 'id') {
       return `    {
-      field: Prisma.${entityClassName}ScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },`;
+        field: Prisma.${entityClassName}ScalarFieldEnum.id,
+          title: $t('common.id'),
+            sortable: true
+      }, `;
     }
     if (field.name === 'createdAt') {
       return `    {
-      field: Prisma.${entityClassName}ScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },`;
+        field: Prisma.${entityClassName}ScalarFieldEnum.createdAt,
+          title: $t('common.createdAt'),
+            formatter: 'formatDateTime',
+              sortable: true
+      }, `;
     }
     if (field.name === 'updatedAt') {
       return `    {
-      field: Prisma.${entityClassName}ScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },`;
+        field: Prisma.${entityClassName}ScalarFieldEnum.updatedAt,
+          title: $t('common.updatedAt'),
+            formatter: 'formatDateTime',
+              sortable: true
+      }, `;
     }
     if (field.type === 'DateTime') {
       return `    {
-      title: ${label},
-      field: ${fieldName},
-      formatter: 'formatDateTime',
-      sortable: true
-    },`;
+        title: ${label},
+        field: ${fieldName},
+        formatter: 'formatDateTime',
+          sortable: true
+      }, `;
     }
     if (field.type === 'Boolean') {
       return `    {
-      cellRender: {
-        name:'CellTag',
+        cellRender: {
+          name: 'CellTag',
       },
-      title: ${label},
-      field: ${fieldName},
-      sortable: true
-    },`;
+        title: ${label},
+        field: ${fieldName},
+        sortable: true
+      }, `;
     }
 
     return `    {
-      title: ${label},
-      field: ${fieldName},
-      sortable: true
-    },`;
+        title: ${label},
+        field: ${fieldName},
+        sortable: true
+      }, `;
   };
 
   // Generate input fields for edit form (editable + read-only)
@@ -295,31 +362,43 @@ ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t
     }),
   ].join('\n');
 
+  const methods = [
+    ...new Set(
+      editableFields
+        .filter((field) => field.relationName)
+        .map((field) => {
+          const camelFieldName =
+            field.name.charAt(0).toLowerCase() + field.name.slice(1);
+          return `type ${field.name}, ${camelFieldName}ControllerFindMany`;
+        }),
+    ),
+  ].join(', ');
   return `import type { VbenFormSchema } from '#/adapter/form';
-import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { ${entityClassName} } from '#/generated/client';
-import { Prisma } from '#/generated/prisma/browser';
+      import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
+      ${methods ? `import  { ${methods}, type ${entityClassName} } from '#/generated/client';` : `import  {  type ${entityClassName} } from '#/generated/client';`}
+    import { getComponentProps } from '#/adapter/get-component-props';
+    import { Prisma } from '#/generated/prisma/browser';
 
-import { $t } from '#/locales';
+    import { $t } from '#/locales';
 
-export function use${entityClassName}FormSchema(): VbenFormSchema[] {
-  return [
-    ${formFields}
-  ];
-}
+    export function use${entityClassName}FormSchema(): VbenFormSchema[] {
+      return [
+        ${formFields}
+      ];
+    }
 
-export function use${entityClassName}FilterFormSchema(): VbenFormSchema[] {
-  return [
-    {
-      component: 'Input',
-      fieldName: 'searchText',
-      label: $t('common.searchText'),
-    },
-  ];
-}
+    export function use${entityClassName}FilterFormSchema(): VbenFormSchema[] {
+      return [
+        {
+          component: 'Input',
+          fieldName: 'searchText',
+          label: $t('common.searchText'),
+        },
+      ];
+    }
 
-export function use${entityClassName}Columns<T = ${entityClassName}>(
-  onActionClick: OnActionClickFn<T>,
+    export function use${entityClassName}Columns < T = ${entityClassName}> (
+      onActionClick: OnActionClickFn<T>,
 ): VxeTableGridOptions['columns'] {
   return [
     ${gridFields}

@@ -53,13 +53,13 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          coverLetter: item.coverLetter,
-        resumeUrl: item.resumeUrl,
-        portfolioUrl: item.portfolioUrl,
-        status: item.status,
-        statusNotes: item.statusNotes,
-        appliedAt: dayjs(item.appliedAt),
-        statusUpdatedAt: dayjs(item.statusUpdatedAt),
+          coverLetter: item.coverLetter||undefined,
+        resumeUrl: item.resumeUrl||undefined,
+        portfolioUrl: item.portfolioUrl||undefined,
+        status: item.status||undefined,
+        statusNotes: item.statusNotes||undefined,
+        appliedAt:item.appliedAt?dayjs(item.appliedAt):undefined,
+        statusUpdatedAt:item.statusUpdatedAt?dayjs(item.statusUpdatedAt):undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }

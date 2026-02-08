@@ -40,13 +40,13 @@ export const generateList = ({
         return 'TextInput';
     }*/
     if (field.type === 'Json') {
-      return `        ${field.name}: JSON.stringify(item.${field.name}),`;
+      return `        ${field.name}: item.${field.name}?JSON.stringify(item.${field.name}):undefined,`;
     }
 
     if (field.type === 'DateTime') {
-      return `        ${field.name}: dayjs(item.${field.name}),`;
+      return `        ${field.name}:item.${field.name}?dayjs(item.${field.name}):undefined,`;
     }
-    return `        ${field.name}: item.${field.name},`;
+    return `        ${field.name}: item.${field.name}||undefined,`;
   };
 
   const showFormFields = [

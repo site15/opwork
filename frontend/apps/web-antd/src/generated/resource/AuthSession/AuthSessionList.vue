@@ -53,7 +53,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          isActive: item.isActive,
+          isActive: item.isActive||undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }

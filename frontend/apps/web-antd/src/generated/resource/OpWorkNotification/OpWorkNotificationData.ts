@@ -1,19 +1,20 @@
 import type { VbenFormSchema } from '#/adapter/form';
-import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { OpWorkNotification } from '#/generated/client';
-import { Prisma } from '#/generated/prisma/browser';
+      import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
+      import  { type AuthUser, authUserControllerFindMany, type OpWorkProfile, opWorkProfileControllerFindMany, type OpWorkNotification } from '#/generated/client';
+    import { getComponentProps } from '#/adapter/get-component-props';
+    import { Prisma } from '#/generated/prisma/browser';
 
-import { $t } from '#/locales';
+    import { $t } from '#/locales';
 
-export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
-  return [
-        {
-      component: 'Select',
-      componentProps: {
-        allowClear: true,
-        filterOption: true,
-        options: [
-                    { value: 'APPLICATION_RECEIVED', label: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED').split(' - ')[0], },
+    export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
+      return [
+            {
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                          { value: 'APPLICATION_RECEIVED', label: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED').split(' - ')[0], },
           { value: 'APPLICATION_SHORTLISTED', label: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED').split(' - ')[0], },
           { value: 'INTERVIEW_SCHEDULED', label: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED').split(' - ')[0], },
           { value: 'JOB_OFFER', label: $t('resource.OpWorkNotificationType.JOB_OFFER').split(' - ')[0], },
@@ -25,119 +26,148 @@ export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
           { value: 'SYSTEM_ALERT', label: $t('resource.OpWorkNotificationType.SYSTEM_ALERT').split(' - ')[0], },
           { value: 'PROFILE_UPDATE', label: $t('resource.OpWorkNotificationType.PROFILE_UPDATE').split(' - ')[0], },
           { value: 'NETWORK_ACTIVITY', label: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY').split(' - ')[0], },
-        ],
-        showSearch: true,
+              ],
+                showSearch: true,
       },
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.type,
-      label: $t('resource.OpWorkNotification.type'),
+        fieldName: Prisma.OpWorkNotificationScalarFieldEnum.type,
+        label: $t('resource.OpWorkNotification.type'),
       rules: 'required',
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'Input',
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.title,
-      label: $t('resource.OpWorkNotification.title'),
+        component: 'Input',
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.title,
+        label: $t('resource.OpWorkNotification.title'),
       rules: 'required',
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.message,
-      label: $t('resource.OpWorkNotification.message'),
+        component: 'Textarea',
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.message,
+        label: $t('resource.OpWorkNotification.message'),
       rules: 'required',
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'Input',
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.data,
-      label: $t('resource.OpWorkNotification.data'),
+        component: 'Input',
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.data,
+        label: $t('resource.OpWorkNotification.data'),
       
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
+        component: 'RadioGroup',
+          componentProps: {
+          buttonStyle: 'solid',
+            options: [
+              { label: $t('common.yes'), value: true },
+              { label: $t('common.no'), value: false },
+            ],
+              optionType: 'button',
       },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.isRead,
-      label: $t('resource.OpWorkNotification.isRead'),
+        defaultValue: false,
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.isRead,
+        label: $t('resource.OpWorkNotification.isRead'),
       
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.enabled'), value: true },
-          { label: $t('common.disabled'), value: false },
-        ],
-        optionType: 'button',
+        component: 'RadioGroup',
+          componentProps: {
+          buttonStyle: 'solid',
+            options: [
+              { label: $t('common.yes'), value: true },
+              { label: $t('common.no'), value: false },
+            ],
+              optionType: 'button',
       },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.isArchived,
-      label: $t('resource.OpWorkNotification.isArchived'),
+        defaultValue: false,
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.isArchived,
+        label: $t('resource.OpWorkNotification.isArchived'),
       
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
     {
-      component: 'DatePicker',
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
-      label: $t('resource.OpWorkNotification.readAt'),
+        component: 'DatePicker',
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
+        label: $t('resource.OpWorkNotification.readAt'),
       
       
-      labelWidth: 200
-    },
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+
     {
-      component: 'Input',
+      component: 'ApiSelect',
+      ...getComponentProps<AuthUser>({
+        findMany: (searchText?: string) => authUserControllerFindMany({
+          query: {
+            perPage: 100,
+            ...(searchText ? { searchText } : {})
+          }
+        }),
+        getLabel: (item) => item.email || item.id,
+      }),
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.userId,
       label: $t('resource.name.AuthUser'),
       rules: 'required',
       
+      controlClass: 'w-full',
       labelWidth: 200
-    },
+    }, 
+
     {
-      component: 'Input',
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkProfile>({
+        findMany: (searchText?: string) => opWorkProfileControllerFindMany({
+          query: {
+            perPage: 100,
+            ...(searchText ? { searchText } : {})
+          }
+        }),
+        getLabel: (item) => item.title || item.id,
+      }),
       fieldName: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
       label: $t('resource.name.OpWorkProfile'),
       
       
+      controlClass: 'w-full',
       labelWidth: 200
-    },
-  ];
-}
+    }, 
+      ];
+    }
 
-export function useOpWorkNotificationFilterFormSchema(): VbenFormSchema[] {
-  return [
-    {
-      component: 'Input',
-      fieldName: 'searchText',
-      label: $t('common.searchText'),
-    },
-  ];
-}
+    export function useOpWorkNotificationFilterFormSchema(): VbenFormSchema[] {
+      return [
+        {
+          component: 'Input',
+          fieldName: 'searchText',
+          label: $t('common.searchText'),
+        },
+      ];
+    }
 
-export function useOpWorkNotificationColumns<T = OpWorkNotification>(
-  onActionClick: OnActionClickFn<T>,
+    export function useOpWorkNotificationColumns < T = OpWorkNotification> (
+      onActionClick: OnActionClickFn<T>,
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      cellRender: {
-        name:'CellEnum',
-        options: [
-          { value: 'APPLICATION_RECEIVED', label: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED').split(' - ')[0], },
+        cellRender: {
+          name: 'CellEnum',
+            options: [
+                        { value: 'APPLICATION_RECEIVED', label: $t('resource.OpWorkNotificationType.APPLICATION_RECEIVED').split(' - ')[0], },
           { value: 'APPLICATION_SHORTLISTED', label: $t('resource.OpWorkNotificationType.APPLICATION_SHORTLISTED').split(' - ')[0], },
           { value: 'INTERVIEW_SCHEDULED', label: $t('resource.OpWorkNotificationType.INTERVIEW_SCHEDULED').split(' - ')[0], },
           { value: 'JOB_OFFER', label: $t('resource.OpWorkNotificationType.JOB_OFFER').split(' - ')[0], },
@@ -149,59 +179,59 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
           { value: 'SYSTEM_ALERT', label: $t('resource.OpWorkNotificationType.SYSTEM_ALERT').split(' - ')[0], },
           { value: 'PROFILE_UPDATE', label: $t('resource.OpWorkNotificationType.PROFILE_UPDATE').split(' - ')[0], },
           { value: 'NETWORK_ACTIVITY', label: $t('resource.OpWorkNotificationType.NETWORK_ACTIVITY').split(' - ')[0], },
-        ],
+            ],
       },
-      title: $t('resource.OpWorkNotification.type'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.type,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.type'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.type ,
+        sortable: true
+      }, 
     {
-      title: $t('resource.OpWorkNotification.title'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.title,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.title'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.title ,
+        sortable: true
+      }, 
     {
-      title: $t('resource.OpWorkNotification.message'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.message,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.message'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.message ,
+        sortable: true
+      }, 
     {
-      title: $t('resource.OpWorkNotification.data'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.data,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.data'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.data ,
+        sortable: true
+      }, 
     {
-      cellRender: {
-        name:'CellTag',
+        cellRender: {
+          name: 'CellTag',
       },
-      title: $t('resource.OpWorkNotification.isRead'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.isRead,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.isRead'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.isRead ,
+        sortable: true
+      }, 
     {
-      cellRender: {
-        name:'CellTag',
+        cellRender: {
+          name: 'CellTag',
       },
-      title: $t('resource.OpWorkNotification.isArchived'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.isArchived,
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.isArchived'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.isArchived ,
+        sortable: true
+      }, 
     {
-      title: $t('resource.OpWorkNotification.readAt'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.readAt,
-      formatter: 'formatDateTime',
-      sortable: true
-    },
+        title: $t('resource.OpWorkNotification.readAt'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.readAt ,
+        formatter: 'formatDateTime',
+          sortable: true
+      }, 
     {
-      title: $t('resource.name.AuthUser'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.userId,
-      sortable: true
-    },
+        title: $t('resource.name.AuthUser'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.userId ,
+        sortable: true
+      }, 
     {
-      title: $t('resource.name.OpWorkProfile'),
-      field: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
-      sortable: true
-    },
+        title: $t('resource.name.OpWorkProfile'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.profileId ,
+        sortable: true
+      }, 
     {
       align: 'center',
       cellRender: {

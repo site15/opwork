@@ -53,9 +53,9 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          viewedAt: dayjs(item.viewedAt),
-        ipAddress: item.ipAddress,
-        userAgent: item.userAgent,
+          viewedAt:item.viewedAt?dayjs(item.viewedAt):undefined,
+        ipAddress: item.ipAddress||undefined,
+        userAgent: item.userAgent||undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }

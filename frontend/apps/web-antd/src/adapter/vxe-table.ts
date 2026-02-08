@@ -106,8 +106,8 @@ setupVbenVxeTable({
       renderTableDefault({ options, props }, { column, row }) {
         const value = get(row, column.field);
         const tagOptions = options ?? [
-          { color: 'success', label: $t('common.enabled'), value: true },
-          { color: 'error', label: $t('common.disabled'), value: false },
+          { color: 'success', label: $t('common.yes'), value: true },
+          { color: 'error', label: $t('common.no'), value: false },
         ];
         const tagItem = tagOptions.find((item) => item.value === value);
         return h(
@@ -125,9 +125,9 @@ setupVbenVxeTable({
       renderTableDefault({ attrs, props }, { column, row }) {
         const loadingKey = `__loading_${column.field}`;
         const finallyProps = {
-          checkedChildren: $t('common.enabled'),
+          checkedChildren: $t('common.yes'),
           checkedValue: true,
-          unCheckedChildren: $t('common.disabled'),
+          unCheckedChildren: $t('common.no'),
           unCheckedValue: false,
           ...props,
           checked: row[column.field],

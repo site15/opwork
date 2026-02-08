@@ -53,13 +53,13 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          type: item.type,
-        title: item.title,
-        message: item.message,
-        data: JSON.stringify(item.data),
-        isRead: item.isRead,
-        isArchived: item.isArchived,
-        readAt: dayjs(item.readAt),
+          type: item.type||undefined,
+        title: item.title||undefined,
+        message: item.message||undefined,
+        data: item.data?JSON.stringify(item.data):undefined,
+        isRead: item.isRead||undefined,
+        isArchived: item.isArchived||undefined,
+        readAt:item.readAt?dayjs(item.readAt):undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }
