@@ -35,6 +35,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isActive: values.isActive,
         frequency: values.frequency,
         lastSentAt: values.lastSentAt,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkSavedSearchControllerCreateOne({
       body: {
@@ -44,6 +45,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isActive: values.isActive,
         frequency: values.frequency,
         lastSentAt: values.lastSentAt,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
       .then((data) => {

@@ -30,10 +30,12 @@ const [Drawer, drawerApi] = useVbenDrawer({
       path: { id: id.value },
       body: {
         isActive: values.isActive,
+        AuthUser: { connect: { id: values.userId } },
       }
     }) : authSessionControllerCreateOne({
       body: {
         isActive: values.isActive,
+        AuthUser: { connect: { id: values.userId } },
       }
     }))
       .then((data) => {

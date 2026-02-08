@@ -31,11 +31,15 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         savedAt: values.savedAt,
         notes: values.notes,
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }) : opWorkSavedJobControllerCreateOne({
       body: {
         savedAt: values.savedAt,
         notes: values.notes,
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }))
       .then((data) => {

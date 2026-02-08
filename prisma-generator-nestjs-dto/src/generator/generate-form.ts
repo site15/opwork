@@ -16,7 +16,10 @@ export const generateForm = ({
 
   // Get fields for different form types
   const editableFields = update.fields.filter(
-    (field) => field.kind === 'scalar' || field.kind === 'enum',
+    (field) =>
+      field.kind === 'scalar' ||
+      field.kind === 'enum' ||
+      (field.kind === 'object' && field.relationName),
   );
 
   const getInputComponent = (field: (typeof editableFields)[0]): string => {
@@ -36,6 +39,9 @@ export const generateForm = ({
       default:
         return 'TextInput';
     }*/
+    if (field.relationName) {
+      return `        ${field.name}: { connect: { id: values.${field.relationFromFields?.[0]} } },`;
+    }
     if (field.type === 'Json') {
       return `        ${field.name}: values.${field.name} ? JSON.parse(values.${field.name} as any) : null,`;
     }

@@ -35,6 +35,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         pushApplicationUpdates: values.pushApplicationUpdates,
         pushJobAlerts: values.pushJobAlerts,
         jobAlertFrequency: values.jobAlertFrequency,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkNotificationSettingsControllerCreateOne({
       body: {
@@ -44,6 +45,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         pushApplicationUpdates: values.pushApplicationUpdates,
         pushJobAlerts: values.pushJobAlerts,
         jobAlertFrequency: values.jobAlertFrequency,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
       .then((data) => {

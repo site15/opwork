@@ -41,6 +41,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         location: values.location,
         avatarUrl: values.avatarUrl,
         coverImage: values.coverImage,
+        AuthUser: { connect: { id: values.userId } },
       }
     }) : opWorkProfileControllerCreateOne({
       body: {
@@ -56,6 +57,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         location: values.location,
         avatarUrl: values.avatarUrl,
         coverImage: values.coverImage,
+        AuthUser: { connect: { id: values.userId } },
       }
     }))
       .then((data) => {

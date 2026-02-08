@@ -32,12 +32,16 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,
+        OpWorkJob: { connect: { id: values.jobId } },
+        OpWorkSkill: { connect: { id: values.skillId } },
       }
     }) : opWorkJobSkillControllerCreateOne({
       body: {
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,
+        OpWorkJob: { connect: { id: values.jobId } },
+        OpWorkSkill: { connect: { id: values.skillId } },
       }
     }))
       .then((data) => {

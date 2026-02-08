@@ -32,12 +32,16 @@ const [Drawer, drawerApi] = useVbenDrawer({
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }) : opWorkJobViewControllerCreateOne({
       body: {
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }))
       .then((data) => {

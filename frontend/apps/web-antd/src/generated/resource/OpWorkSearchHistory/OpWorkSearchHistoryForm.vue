@@ -33,6 +33,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         resultsCount: values.resultsCount,
         searchedAt: values.searchedAt,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkSearchHistoryControllerCreateOne({
       body: {
@@ -40,6 +41,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         filters: values.filters ? JSON.parse(values.filters as any) : null,
         resultsCount: values.resultsCount,
         searchedAt: values.searchedAt,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
       .then((data) => {

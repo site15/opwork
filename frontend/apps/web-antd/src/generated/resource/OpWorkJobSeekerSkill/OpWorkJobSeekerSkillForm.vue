@@ -33,6 +33,8 @@ const [Drawer, drawerApi] = useVbenDrawer({
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,
         lastUsed: values.lastUsed,
+        OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
+        OpWorkSkill: { connect: { id: values.skillId } },
       }
     }) : opWorkJobSeekerSkillControllerCreateOne({
       body: {
@@ -40,6 +42,8 @@ const [Drawer, drawerApi] = useVbenDrawer({
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,
         lastUsed: values.lastUsed,
+        OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
+        OpWorkSkill: { connect: { id: values.skillId } },
       }
     }))
       .then((data) => {

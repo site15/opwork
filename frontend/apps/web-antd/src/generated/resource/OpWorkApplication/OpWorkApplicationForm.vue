@@ -36,6 +36,9 @@ const [Drawer, drawerApi] = useVbenDrawer({
         statusNotes: values.statusNotes,
         appliedAt: values.appliedAt,
         statusUpdatedAt: values.statusUpdatedAt,
+        OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }) : opWorkApplicationControllerCreateOne({
       body: {
@@ -46,6 +49,9 @@ const [Drawer, drawerApi] = useVbenDrawer({
         statusNotes: values.statusNotes,
         appliedAt: values.appliedAt,
         statusUpdatedAt: values.statusUpdatedAt,
+        OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
+        OpWorkProfile: { connect: { id: values.profileId } },
+        OpWorkJob: { connect: { id: values.jobId } },
       }
     }))
       .then((data) => {

@@ -44,6 +44,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         linkedinUrl: values.linkedinUrl,
         twitterUrl: values.twitterUrl,
         facebookUrl: values.facebookUrl,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkEmployerControllerCreateOne({
       body: {
@@ -62,6 +63,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         linkedinUrl: values.linkedinUrl,
         twitterUrl: values.twitterUrl,
         facebookUrl: values.facebookUrl,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
       .then((data) => {

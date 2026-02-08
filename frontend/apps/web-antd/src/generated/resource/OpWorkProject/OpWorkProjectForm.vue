@@ -52,6 +52,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         maintenanceDescription: values.maintenanceDescription,
         maintenanceStart: values.maintenanceStart,
         maintenanceEnd: values.maintenanceEnd,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkProjectControllerCreateOne({
       body: {
@@ -78,6 +79,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         maintenanceDescription: values.maintenanceDescription,
         maintenanceStart: values.maintenanceStart,
         maintenanceEnd: values.maintenanceEnd,
+        OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
       .then((data) => {

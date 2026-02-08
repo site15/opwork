@@ -33,7 +33,7 @@ export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
-{
+    {
       component: 'ApiSelect',
       componentProps: (componentProps) => {
         console.log({ componentProps })
