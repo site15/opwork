@@ -50,16 +50,6 @@ export function useAuthApiKeyColumns<T = AuthApiKey>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.AuthApiKeyScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.AuthApiKeyScalarFieldEnum.userId,
-      title: $t('resource.AuthApiKey.userId'),
-      sortable: true
-    },
-    {
       field: Prisma.AuthApiKeyScalarFieldEnum.apiKey,
       title: $t('resource.AuthApiKey.apiKey'),
       sortable: true
@@ -70,18 +60,6 @@ export function useAuthApiKeyColumns<T = AuthApiKey>(
       },
       title: $t('resource.AuthApiKey.isActive'),
       field: Prisma.AuthApiKeyScalarFieldEnum.isActive,
-      sortable: true
-    },
-    {
-      field: Prisma.AuthApiKeyScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.AuthApiKeyScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

@@ -4,6 +4,7 @@ import { ModelParams } from './types';
 export const generateForm = ({
   controller,
   templateHelpers,
+  update,
 }: ModelParams & {
   templateHelpers: TemplateHelpers;
 }): string => {
@@ -14,21 +15,11 @@ export const generateForm = ({
   const entityClassName = entityName(modelName);
 
   // Get fields for different form types
-  const allFields = model.fields.filter(
-    (field) =>
-      (field.kind === 'scalar' || field.kind === 'enum') &&
-      field.name !== 'deletedAt',
-  );
-  const editableFields = allFields.filter(
-    (field) =>
-      !field.isId &&
-      field.name !== 'userId' &&
-      field.name !== 'createdAt' &&
-      field.name !== 'updatedAt' &&
-      field.name !== 'deletedAt',
+  const editableFields = update.fields.filter(
+    (field) => field.kind === 'scalar' || field.kind === 'enum',
   );
 
-  const getInputComponent = (field: (typeof allFields)[0]): string => {
+  const getInputComponent = (field: (typeof editableFields)[0]): string => {
     /*switch (field.type) {
       case 'Json':
         return 'JsonViewerField';

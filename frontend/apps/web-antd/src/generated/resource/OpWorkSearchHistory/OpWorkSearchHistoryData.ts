@@ -9,14 +9,6 @@ export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSearchHistory.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.query,
       label: $t('resource.OpWorkSearchHistory.query'),
       rules: 'required',
@@ -65,16 +57,6 @@ export function useOpWorkSearchHistoryColumns<T = OpWorkSearchHistory>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSearchHistoryScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSearchHistoryScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkSearchHistory.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkSearchHistoryScalarFieldEnum.query,
       title: $t('resource.OpWorkSearchHistory.query'),
       sortable: true

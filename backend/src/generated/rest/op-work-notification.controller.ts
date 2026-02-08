@@ -17,14 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
+import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
+import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkNotificationDto } from './op-work-notification.dto';
 import { OpWorkNotification } from './op-work-notification.entity';
@@ -111,8 +111,6 @@ export class OpWorkNotificationController {
     return await this.prismaservice.opWorkNotification.create({
       data: { 
         ...args,
-        
-        
         AuthUser:{connect:{id:args.AuthUser?.connect.id}},
         OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
@@ -128,8 +126,6 @@ export class OpWorkNotificationController {
     return await this.prismaservice.opWorkNotification.update({
       data: {
         ...args,
-        
-        
         
         
         AuthUser: { connect: { id: args.AuthUser?.connect.id } },

@@ -8,22 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkSavedJobFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSavedJob.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkSavedJob.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'DatePicker',
       fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
       label: $t('resource.OpWorkSavedJob.savedAt'),
@@ -57,21 +41,6 @@ export function useOpWorkSavedJobColumns<T = OpWorkSavedJob>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSavedJobScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSavedJobScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkSavedJob.profileId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSavedJobScalarFieldEnum.jobId,
-      title: $t('resource.OpWorkSavedJob.jobId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkSavedJobScalarFieldEnum.savedAt,
       title: $t('resource.OpWorkSavedJob.savedAt'),
       formatter: 'formatDateTime',

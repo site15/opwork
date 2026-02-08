@@ -17,14 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
+import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
+import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { AuthSessionDto } from './auth-session.dto';
 import { AuthSession } from './auth-session.entity';
@@ -111,8 +111,6 @@ export class AuthSessionController {
     return await this.prismaservice.authSession.create({
       data: { 
         ...args,
-        
-        
         AuthUser:{connect:{id:args.AuthUser?.connect.id}}
       },
     });
@@ -128,8 +126,6 @@ export class AuthSessionController {
       data: {
         ...args,
         updatedAt: new Date(),
-        
-        
         
         AuthUser: { connect: { id: args.AuthUser?.connect.id } }
       },

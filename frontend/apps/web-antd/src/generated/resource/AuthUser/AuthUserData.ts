@@ -66,11 +66,6 @@ export function useAuthUserColumns<T = AuthUser>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.AuthUserScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
       field: Prisma.AuthUserScalarFieldEnum.anonymousId,
       title: $t('resource.AuthUser.anonymousId'),
       sortable: true
@@ -91,18 +86,6 @@ export function useAuthUserColumns<T = AuthUser>(
       },
       title: $t('resource.AuthUser.isActive'),
       field: Prisma.AuthUserScalarFieldEnum.isActive,
-      sortable: true
-    },
-    {
-      field: Prisma.AuthUserScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.AuthUserScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

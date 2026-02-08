@@ -111,8 +111,6 @@ export class OpWorkJobTagController {
     return await this.prismaservice.opWorkJobTag.create({
       data: { 
         ...args,
-        
-        
         OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}}
       },
     });
@@ -127,8 +125,6 @@ export class OpWorkJobTagController {
     return await this.prismaservice.opWorkJobTag.update({
       data: {
         ...args,
-        
-        
         
         
         OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }

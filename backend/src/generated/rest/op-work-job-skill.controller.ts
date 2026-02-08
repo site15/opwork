@@ -111,8 +111,6 @@ export class OpWorkJobSkillController {
     return await this.prismaservice.opWorkJobSkill.create({
       data: { 
         ...args,
-        
-        
         OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}},
         OpWorkSkill:{connect:{id:args.OpWorkSkill?.connect.id}}
       },
@@ -128,8 +126,6 @@ export class OpWorkJobSkillController {
     return await this.prismaservice.opWorkJobSkill.update({
       data: {
         ...args,
-        
-        
         
         
         OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } },

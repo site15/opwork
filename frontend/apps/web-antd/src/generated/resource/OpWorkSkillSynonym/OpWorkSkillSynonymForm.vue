@@ -29,12 +29,10 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkSkillSynonymControllerUpdateOne({
       path: { id: id.value },
       body: {
-        skillId: values.skillId,
         synonym: values.synonym,
       }
     }) : opWorkSkillSynonymControllerCreateOne({
       body: {
-        skillId: values.skillId,
         synonym: values.synonym,
       }
     }))

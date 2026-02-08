@@ -29,7 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkNotificationControllerUpdateOne({
       path: { id: id.value },
       body: {
-        profileId: values.profileId,
         type: values.type,
         title: values.title,
         message: values.message,
@@ -40,7 +39,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkNotificationControllerCreateOne({
       body: {
-        profileId: values.profileId,
         type: values.type,
         title: values.title,
         message: values.message,

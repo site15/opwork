@@ -9,14 +9,6 @@ export function useOpWorkSavedSearchFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkSavedSearch.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.name,
       label: $t('resource.OpWorkSavedSearch.name'),
       rules: 'required',
@@ -103,16 +95,6 @@ export function useOpWorkSavedSearchColumns<T = OpWorkSavedSearch>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkSavedSearch.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkSavedSearchScalarFieldEnum.name,
       title: $t('resource.OpWorkSavedSearch.name'),
       sortable: true
@@ -154,18 +136,6 @@ export function useOpWorkSavedSearchColumns<T = OpWorkSavedSearch>(
     {
       field: Prisma.OpWorkSavedSearchScalarFieldEnum.lastSentAt,
       title: $t('resource.OpWorkSavedSearch.lastSentAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSavedSearchScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
       formatter: 'formatDateTime',
       sortable: true
     },

@@ -9,14 +9,6 @@ export function useOpWorkJobSeekerFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkJobSeeker.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition,
       label: $t('resource.OpWorkJobSeeker.currentPosition'),
       
@@ -156,16 +148,6 @@ export function useOpWorkJobSeekerColumns<T = OpWorkJobSeeker>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkJobSeeker.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition,
       title: $t('resource.OpWorkJobSeeker.currentPosition'),
       sortable: true
@@ -232,18 +214,6 @@ export function useOpWorkJobSeekerColumns<T = OpWorkJobSeeker>(
     {
       field: Prisma.OpWorkJobSeekerScalarFieldEnum.portfolioUrl,
       title: $t('resource.OpWorkJobSeeker.portfolioUrl'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

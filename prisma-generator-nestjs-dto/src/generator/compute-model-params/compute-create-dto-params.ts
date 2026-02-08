@@ -74,7 +74,9 @@ export const computeCreateDtoParams = ({
 
   const fields = model.fields.reduce((result, field) => {
     const { name } = field;
-    const overrides: Partial<ParsedField> = {};
+    const overrides: Partial<ParsedField> = {
+      dmmfField: field,
+    };
     const decorators: IDecorators = {};
 
     if (

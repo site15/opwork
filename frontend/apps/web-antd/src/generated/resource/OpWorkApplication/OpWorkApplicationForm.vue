@@ -29,9 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkApplicationControllerUpdateOne({
       path: { id: id.value },
       body: {
-        jobSeekerId: values.jobSeekerId,
-        profileId: values.profileId,
-        jobId: values.jobId,
         coverLetter: values.coverLetter,
         resumeUrl: values.resumeUrl,
         portfolioUrl: values.portfolioUrl,
@@ -42,9 +39,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkApplicationControllerCreateOne({
       body: {
-        jobSeekerId: values.jobSeekerId,
-        profileId: values.profileId,
-        jobId: values.jobId,
         coverLetter: values.coverLetter,
         resumeUrl: values.resumeUrl,
         portfolioUrl: values.portfolioUrl,

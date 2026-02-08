@@ -9,14 +9,6 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkEducationScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkEducation.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkEducationScalarFieldEnum.institution,
       label: $t('resource.OpWorkEducation.institution'),
       rules: 'required',
@@ -145,16 +137,6 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkEducationScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkEducationScalarFieldEnum.jobSeekerId,
-      title: $t('resource.OpWorkEducation.jobSeekerId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkEducationScalarFieldEnum.institution,
       title: $t('resource.OpWorkEducation.institution'),
       sortable: true
@@ -232,12 +214,6 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       },
       title: $t('resource.OpWorkEducation.grade'),
       field: Prisma.OpWorkEducationScalarFieldEnum.grade,
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkEducationScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

@@ -9,14 +9,6 @@ export function useOpWorkProjectFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkProjectScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkProject.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkProjectScalarFieldEnum.title,
       label: $t('resource.OpWorkProject.title'),
       rules: 'required',
@@ -262,16 +254,6 @@ export function useOpWorkProjectColumns<T = OpWorkProject>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkProjectScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProjectScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkProject.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkProjectScalarFieldEnum.title,
       title: $t('resource.OpWorkProject.title'),
       sortable: true
@@ -435,18 +417,6 @@ export function useOpWorkProjectColumns<T = OpWorkProject>(
     {
       field: Prisma.OpWorkProjectScalarFieldEnum.maintenanceEnd,
       title: $t('resource.OpWorkProject.maintenanceEnd'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProjectScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProjectScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
       formatter: 'formatDateTime',
       sortable: true
     },

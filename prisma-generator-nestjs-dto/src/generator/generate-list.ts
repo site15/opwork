@@ -4,6 +4,7 @@ import { ModelParams } from './types';
 export const generateList = ({
   controller,
   templateHelpers,
+  update,
 }: ModelParams & {
   templateHelpers: TemplateHelpers;
 }): string => {
@@ -14,14 +15,12 @@ export const generateList = ({
   const entityClassName = entityName(modelName);
 
   // Get fields for different form types
-  const allFields = model.fields.filter(
-    (field) =>
-      (field.kind === 'scalar' || field.kind === 'enum') &&
-      field.name !== 'deletedAt',
+  const allFields = update.fields.filter(
+    (field) => field.kind === 'scalar' || field.kind === 'enum',
   );
 
   const defaultSortColumn =
-    model.fields.find((field) => field.name === 'createdAt') || model.fields[0];
+    allFields.find((field) => field.name === 'createdAt') || update.fields[0];
 
   const getInputComponent = (field: (typeof allFields)[0]): string => {
     /*switch (field.type) {

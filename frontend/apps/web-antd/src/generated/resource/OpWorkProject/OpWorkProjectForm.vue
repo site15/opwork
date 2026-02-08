@@ -29,7 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkProjectControllerUpdateOne({
       path: { id: id.value },
       body: {
-        profileId: values.profileId,
         title: values.title,
         description: values.description,
         status: values.status,
@@ -56,7 +55,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkProjectControllerCreateOne({
       body: {
-        profileId: values.profileId,
         title: values.title,
         description: values.description,
         status: values.status,

@@ -42,33 +42,11 @@ export function useAuthSessionColumns<T = AuthSession>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.AuthSessionScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.AuthSessionScalarFieldEnum.userId,
-      title: $t('resource.AuthSession.userId'),
-      sortable: true
-    },
-    {
       cellRender: {
         name:'CellTag',
       },
       title: $t('resource.AuthSession.isActive'),
       field: Prisma.AuthSessionScalarFieldEnum.isActive,
-      sortable: true
-    },
-    {
-      field: Prisma.AuthSessionScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.AuthSessionScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

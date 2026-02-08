@@ -29,16 +29,12 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkJobSkillControllerUpdateOne({
       path: { id: id.value },
       body: {
-        jobId: values.jobId,
-        skillId: values.skillId,
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,
       }
     }) : opWorkJobSkillControllerCreateOne({
       body: {
-        jobId: values.jobId,
-        skillId: values.skillId,
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,

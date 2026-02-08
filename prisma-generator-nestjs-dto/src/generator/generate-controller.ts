@@ -70,22 +70,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-${
-  fields.find((f) => f.name === 'userId' || f.name === 'profileId')
-    ? `import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';`
-    : ''
-}import {
+import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-${
-  fields.find((f) => f.name === 'userId' || f.name === 'profileId')
-    ? `import { AppRequest } from '../../types/request';`
-    : ''
-}import { StatusResponse } from '../../types/status-response';
+import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { ${plainDtoClassName} } from './${templateHelpers.plainDtoFilename(modelName, false).replace('.ts', '')}';
 import { ${entityClassName} } from './${templateHelpers.entityFilename(modelName, false).replace('.ts', '')}';

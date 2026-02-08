@@ -17,14 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { isUUID } from 'class-validator';
-import { CurrentAppRequest } from '../../decorators/current-app-request.decorator';import {
+import {
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
-import { AppRequest } from '../../types/request';import { StatusResponse } from '../../types/status-response';
+import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
 import { OpWorkProfileDto } from './op-work-profile.dto';
 import { OpWorkProfile } from './op-work-profile.entity';
@@ -111,8 +111,6 @@ export class OpWorkProfileController {
     return await this.prismaservice.opWorkProfile.create({
       data: { 
         ...args,
-        
-        
         AuthUser:{connect:{id:args.AuthUser?.connect.id}}
       },
     });
@@ -128,8 +126,6 @@ export class OpWorkProfileController {
       data: {
         ...args,
         updatedAt: new Date(),
-        
-        
         
         AuthUser: { connect: { id: args.AuthUser?.connect.id } }
       },

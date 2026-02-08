@@ -29,7 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkSavedSearchControllerUpdateOne({
       path: { id: id.value },
       body: {
-        profileId: values.profileId,
         name: values.name,
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,
@@ -39,7 +38,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkSavedSearchControllerCreateOne({
       body: {
-        profileId: values.profileId,
         name: values.name,
         query: values.query,
         filters: values.filters ? JSON.parse(values.filters as any) : null,

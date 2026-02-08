@@ -29,8 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkJobSeekerSkillControllerUpdateOne({
       path: { id: id.value },
       body: {
-        jobSeekerId: values.jobSeekerId,
-        skillId: values.skillId,
         level: values.level,
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,
@@ -38,8 +36,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkJobSeekerSkillControllerCreateOne({
       body: {
-        jobSeekerId: values.jobSeekerId,
-        skillId: values.skillId,
         level: values.level,
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,

@@ -9,14 +9,6 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkExperience.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkExperienceScalarFieldEnum.company,
       label: $t('resource.OpWorkExperience.company'),
       rules: 'required',
@@ -119,16 +111,6 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.jobSeekerId,
-      title: $t('resource.OpWorkExperience.jobSeekerId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkExperienceScalarFieldEnum.company,
       title: $t('resource.OpWorkExperience.company'),
       sortable: true
@@ -182,12 +164,6 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
       },
       title: $t('resource.OpWorkExperience.employmentType'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkExperienceScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

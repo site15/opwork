@@ -8,14 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkNotificationFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkNotification.profileId'),
-      
-      
-      labelWidth: 200
-    },
-    {
       component: 'Select',
       componentProps: {
         allowClear: true,
@@ -126,21 +118,6 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.userId,
-      title: $t('resource.OpWorkNotification.userId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkNotification.profileId'),
-      sortable: true
-    },
-    {
       cellRender: {
         name:'CellEnum',
         options: [
@@ -191,12 +168,6 @@ export function useOpWorkNotificationColumns<T = OpWorkNotification>(
       },
       title: $t('resource.OpWorkNotification.isArchived'),
       field: Prisma.OpWorkNotificationScalarFieldEnum.isArchived,
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkNotificationScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

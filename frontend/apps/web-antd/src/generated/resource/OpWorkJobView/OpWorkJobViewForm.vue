@@ -29,16 +29,12 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkJobViewControllerUpdateOne({
       path: { id: id.value },
       body: {
-        profileId: values.profileId,
-        jobId: values.jobId,
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,
       }
     }) : opWorkJobViewControllerCreateOne({
       body: {
-        profileId: values.profileId,
-        jobId: values.jobId,
         viewedAt: values.viewedAt,
         ipAddress: values.ipAddress,
         userAgent: values.userAgent,

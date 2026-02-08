@@ -44,7 +44,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkExperienceControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'company:desc'
             },
           }).then(async (result) => {
             if (result?.error) {
@@ -53,9 +53,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          id: item.id,
-        jobSeekerId: item.jobSeekerId,
-        company: item.company,
+          company: item.company,
         position: item.position,
         description: item.description,
         startDate: dayjs(item.startDate),
@@ -63,7 +61,6 @@ const [Grid, gridApi] = useVbenVxeGrid({
         isCurrent: item.isCurrent,
         location: item.location,
         employmentType: item.employmentType,
-        createdAt: dayjs(item.createdAt),
               })),
               total: result.data?.meta.totalResults || 0,
             }
@@ -81,7 +78,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: 'createdAt', order: 'desc' },
+      defaultSort: { field: 'company', order: 'desc' },
       remote: true,
     },
     rowConfig: {

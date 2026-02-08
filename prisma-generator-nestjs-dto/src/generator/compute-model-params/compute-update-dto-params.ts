@@ -77,6 +77,7 @@ export const computeUpdateDtoParams = ({
   const fields = model.fields.reduce((result, field) => {
     const { name } = field;
     const overrides: Partial<ParsedField> = {
+      dmmfField: field,
       isRequired: false,
       isNullable: !field.isRequired,
     };

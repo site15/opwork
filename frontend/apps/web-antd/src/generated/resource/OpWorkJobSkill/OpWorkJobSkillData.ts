@@ -8,22 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkJobSkill.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'RadioGroup',
       componentProps: {
         buttonStyle: 'solid',
@@ -74,21 +58,6 @@ export function useOpWorkJobSkillColumns<T = OpWorkJobSkill>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.jobId,
-      title: $t('resource.OpWorkJobSkill.jobId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
-      title: $t('resource.OpWorkJobSkill.skillId'),
-      sortable: true
-    },
-    {
       cellRender: {
         name:'CellTag',
       },
@@ -104,12 +73,6 @@ export function useOpWorkJobSkillColumns<T = OpWorkJobSkill>(
     {
       field: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
       title: $t('resource.OpWorkJobSkill.minLevel'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSkillScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

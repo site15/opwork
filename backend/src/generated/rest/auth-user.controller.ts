@@ -112,8 +112,6 @@ export class AuthUserController {
       data: { 
         ...args,
         
-        
-        
       },
     });
   }
@@ -128,8 +126,6 @@ export class AuthUserController {
       data: {
         ...args,
         updatedAt: new Date(),
-        
-        
         
         
       },

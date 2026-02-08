@@ -8,30 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkApplicationFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkApplication.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkApplication.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.jobId,
-      label: $t('resource.OpWorkApplication.jobId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'Textarea',
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.coverLetter,
       label: $t('resource.OpWorkApplication.coverLetter'),
@@ -119,26 +95,6 @@ export function useOpWorkApplicationColumns<T = OpWorkApplication>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.jobSeekerId,
-      title: $t('resource.OpWorkApplication.jobSeekerId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkApplication.profileId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkApplicationScalarFieldEnum.jobId,
-      title: $t('resource.OpWorkApplication.jobId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkApplicationScalarFieldEnum.coverLetter,
       title: $t('resource.OpWorkApplication.coverLetter'),
       sortable: true

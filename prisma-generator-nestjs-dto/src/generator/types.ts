@@ -45,6 +45,8 @@ export interface ParsedField {
   connectRelation?: boolean;
   updateRelation?: boolean;
   disconnectRelation?: boolean;
+  ///
+  dmmfField?: DMMF.Field;
 }
 
 export interface ExtraModel {

@@ -44,7 +44,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkApplicationControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'id:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'coverLetter:desc'
             },
           }).then(async (result) => {
             if (result?.error) {
@@ -53,11 +53,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          id: item.id,
-        jobSeekerId: item.jobSeekerId,
-        profileId: item.profileId,
-        jobId: item.jobId,
-        coverLetter: item.coverLetter,
+          coverLetter: item.coverLetter,
         resumeUrl: item.resumeUrl,
         portfolioUrl: item.portfolioUrl,
         status: item.status,
@@ -81,7 +77,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: 'id', order: 'desc' },
+      defaultSort: { field: 'coverLetter', order: 'desc' },
       remote: true,
     },
     rowConfig: {

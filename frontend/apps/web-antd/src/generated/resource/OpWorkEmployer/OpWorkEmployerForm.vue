@@ -29,7 +29,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkEmployerControllerUpdateOne({
       path: { id: id.value },
       body: {
-        profileId: values.profileId,
         companyName: values.companyName,
         industry: values.industry,
         description: values.description,
@@ -48,7 +47,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkEmployerControllerCreateOne({
       body: {
-        profileId: values.profileId,
         companyName: values.companyName,
         industry: values.industry,
         description: values.description,

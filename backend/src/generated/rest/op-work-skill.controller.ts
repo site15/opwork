@@ -112,8 +112,6 @@ export class OpWorkSkillController {
       data: { 
         ...args,
         
-        
-        
       },
     });
   }
@@ -127,8 +125,6 @@ export class OpWorkSkillController {
     return await this.prismaservice.opWorkSkill.update({
       data: {
         ...args,
-        
-        
         
         
         

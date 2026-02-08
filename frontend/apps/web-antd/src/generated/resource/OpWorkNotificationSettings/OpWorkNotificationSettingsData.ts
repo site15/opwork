@@ -8,14 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkNotificationSettingsFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkNotificationSettingsScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkNotificationSettings.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'RadioGroup',
       componentProps: {
         buttonStyle: 'solid',
@@ -139,16 +131,6 @@ export function useOpWorkNotificationSettingsColumns<T = OpWorkNotificationSetti
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkNotificationSettings.profileId'),
-      sortable: true
-    },
-    {
       cellRender: {
         name:'CellTag',
       },
@@ -202,12 +184,6 @@ export function useOpWorkNotificationSettingsColumns<T = OpWorkNotificationSetti
       },
       title: $t('resource.OpWorkNotificationSettings.jobAlertFrequency'),
       field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.jobAlertFrequency,
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkNotificationSettingsScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

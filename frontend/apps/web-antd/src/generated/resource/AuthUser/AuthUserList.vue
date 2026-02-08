@@ -44,7 +44,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await authUserControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'createdAt:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'anonymousId:desc'
             },
           }).then(async (result) => {
             if (result?.error) {
@@ -53,13 +53,10 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          id: item.id,
-        anonymousId: item.anonymousId,
+          anonymousId: item.anonymousId,
         supabaseUserId: item.supabaseUserId,
         supabaseUserData: JSON.stringify(item.supabaseUserData),
         isActive: item.isActive,
-        createdAt: dayjs(item.createdAt),
-        updatedAt: dayjs(item.updatedAt),
               })),
               total: result.data?.meta.totalResults || 0,
             }
@@ -77,7 +74,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: 'createdAt', order: 'desc' },
+      defaultSort: { field: 'anonymousId', order: 'desc' },
       remote: true,
     },
     rowConfig: {

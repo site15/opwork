@@ -44,7 +44,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
           return await opWorkNotificationSettingsControllerFindMany({
             query: {
               curPage: options.page.currentPage, perPage: options.page.pageSize, searchText: formValues.searchText,
-              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'id:desc'
+              sort: (options.sort?.field && options.sort?.order) ? `${options.sort.field}:${options.sort.order}` : 'emailApplicationUpdates:desc'
             },
           }).then(async (result) => {
             if (result?.error) {
@@ -53,15 +53,12 @@ const [Grid, gridApi] = useVbenVxeGrid({
             return {
               items: (result.data?.items || []).map((item) => ({
                 ...item,
-          id: item.id,
-        profileId: item.profileId,
-        emailApplicationUpdates: item.emailApplicationUpdates,
+          emailApplicationUpdates: item.emailApplicationUpdates,
         emailJobAlerts: item.emailJobAlerts,
         emailNewsletter: item.emailNewsletter,
         pushApplicationUpdates: item.pushApplicationUpdates,
         pushJobAlerts: item.pushJobAlerts,
         jobAlertFrequency: item.jobAlertFrequency,
-        updatedAt: dayjs(item.updatedAt),
               })),
               total: result.data?.meta.totalResults || 0,
             }
@@ -79,7 +76,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true
     },
     sortConfig: {
-      defaultSort: { field: 'id', order: 'desc' },
+      defaultSort: { field: 'emailApplicationUpdates', order: 'desc' },
       remote: true,
     },
     rowConfig: {

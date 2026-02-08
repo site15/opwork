@@ -159,16 +159,6 @@ export function useOpWorkProfileColumns<T = OpWorkProfile>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkProfileScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProfileScalarFieldEnum.userId,
-      title: $t('resource.OpWorkProfile.userId'),
-      sortable: true
-    },
-    {
       cellRender: {
         name:'CellEnum',
         options: [
@@ -248,18 +238,6 @@ export function useOpWorkProfileColumns<T = OpWorkProfile>(
     {
       field: Prisma.OpWorkProfileScalarFieldEnum.coverImage,
       title: $t('resource.OpWorkProfile.coverImage'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProfileScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkProfileScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

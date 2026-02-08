@@ -9,14 +9,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkEmployer.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.companyName,
       label: $t('resource.OpWorkEmployer.companyName'),
       rules: 'required',
@@ -153,16 +145,6 @@ export function useOpWorkEmployerColumns<T = OpWorkEmployer>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkEmployer.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkEmployerScalarFieldEnum.companyName,
       title: $t('resource.OpWorkEmployer.companyName'),
       sortable: true
@@ -235,18 +217,6 @@ export function useOpWorkEmployerColumns<T = OpWorkEmployer>(
     {
       field: Prisma.OpWorkEmployerScalarFieldEnum.facebookUrl,
       title: $t('resource.OpWorkEmployer.facebookUrl'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkEmployerScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {

@@ -9,22 +9,6 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkJobScalarFieldEnum.employerId,
-      label: $t('resource.OpWorkJob.employerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobScalarFieldEnum.profileId,
-      label: $t('resource.OpWorkJob.profileId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkJobScalarFieldEnum.title,
       label: $t('resource.OpWorkJob.title'),
       rules: 'required',
@@ -233,21 +217,6 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobScalarFieldEnum.employerId,
-      title: $t('resource.OpWorkJob.employerId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobScalarFieldEnum.profileId,
-      title: $t('resource.OpWorkJob.profileId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkJobScalarFieldEnum.title,
       title: $t('resource.OpWorkJob.title'),
       sortable: true
@@ -372,18 +341,6 @@ export function useOpWorkJobColumns<T = OpWorkJob>(
     {
       field: Prisma.OpWorkJobScalarFieldEnum.expiresAt,
       title: $t('resource.OpWorkJob.expiresAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobScalarFieldEnum.updatedAt,
-      title: $t('common.updatedAt'),
       formatter: 'formatDateTime',
       sortable: true
     },

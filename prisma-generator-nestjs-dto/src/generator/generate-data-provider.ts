@@ -9,6 +9,7 @@ export const generateDataProvider = ({
   controller,
   templateHelpers,
   enumModels,
+  update,
 }: ModelParams & {
   templateHelpers: TemplateHelpers;
 } & {
@@ -26,27 +27,15 @@ export const generateDataProvider = ({
   // Convert to camelCase for SDK method names
   const camelModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
 
-  // Get fields for different form types
-  const allFields = model.fields.filter(
-    (field) =>
-      (field.kind === 'scalar' || field.kind === 'enum') &&
-      field.name !== 'deletedAt',
-  );
-
   if (model.name === 'OpWorkNotificationSettings') {
     //  console.dir(model, { depth: 20 });
   }
   //jobAlertFrequency
-  const editableFields = allFields.filter(
-    (field) =>
-      !field.isId &&
-      field.name !== 'userId' &&
-      field.name !== 'createdAt' &&
-      field.name !== 'updatedAt' &&
-      field.name !== 'deletedAt',
+  const editableFields = update.fields.filter(
+    (field) => field.kind === 'scalar' || field.kind === 'enum',
   );
 
-  const getInputComponent = (field: (typeof allFields)[0]): string => {
+  const getInputComponent = (field: (typeof editableFields)[0]): string => {
     /*
     switch (field.type) {
       case 'Json':
@@ -65,8 +54,9 @@ export const generateDataProvider = ({
         return 'TextInput';
     }*/
 
-    const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-    const required = field.isRequired;
+    const multiline =
+      field.dmmfField?.nativeType?.[0] === 'Text' ? ' multiline' : '';
+    const required = field.dmmfField?.isRequired;
     const readonly = !editableFields.find((f) => f.name === field.name);
     let component = 'Input';
     if (multiline) {
@@ -185,7 +175,7 @@ export const generateDataProvider = ({
     },`;
   };
 
-  const getColumnComponent = (field: (typeof allFields)[0]): string => {
+  const getColumnComponent = (field: (typeof editableFields)[0]): string => {
     /*
     switch (field.type) {
       case 'Json':
@@ -204,8 +194,9 @@ export const generateDataProvider = ({
         return 'TextInput';
     }*/
 
-    const multiline = field.nativeType?.[0] === 'Text' ? ' multiline' : '';
-    const required = field.isRequired;
+    const multiline =
+      field.dmmfField?.nativeType?.[0] === 'Text' ? ' multiline' : '';
+    const required = field.dmmfField?.isRequired;
     const readonly = !editableFields.find((f) => f.name === field.name);
 
     if (field.kind === 'enum') {
@@ -282,7 +273,7 @@ ${enumModel.values.map((value) => `          { value: '${value.name}', label: $t
   ].join('\n');
 
   const gridFields = [
-    ...allFields.map((field) => {
+    ...editableFields.map((field) => {
       return getColumnComponent(field);
     }),
   ].join('\n');

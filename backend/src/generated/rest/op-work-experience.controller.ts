@@ -111,8 +111,6 @@ export class OpWorkExperienceController {
     return await this.prismaservice.opWorkExperience.create({
       data: { 
         ...args,
-        
-        
         OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}}
       },
     });
@@ -127,8 +125,6 @@ export class OpWorkExperienceController {
     return await this.prismaservice.opWorkExperience.update({
       data: {
         ...args,
-        
-        
         
         
         OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }

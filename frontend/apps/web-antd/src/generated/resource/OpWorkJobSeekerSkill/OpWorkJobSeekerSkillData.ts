@@ -8,22 +8,6 @@ import { $t } from '#/locales';
 export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
   return [
         {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
-      label: $t('resource.OpWorkJobSeekerSkill.jobSeekerId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkJobSeekerSkill.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
       component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
       label: $t('resource.OpWorkJobSeekerSkill.level'),
@@ -82,21 +66,6 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
-      title: $t('resource.OpWorkJobSeekerSkill.jobSeekerId'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
-      title: $t('resource.OpWorkJobSeekerSkill.skillId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
       title: $t('resource.OpWorkJobSeekerSkill.level'),
       sortable: true
@@ -117,12 +86,6 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
     {
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
       title: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
-      formatter: 'formatDateTime',
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
       formatter: 'formatDateTime',
       sortable: true
     },

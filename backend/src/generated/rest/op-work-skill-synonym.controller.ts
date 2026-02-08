@@ -111,8 +111,6 @@ export class OpWorkSkillSynonymController {
     return await this.prismaservice.opWorkSkillSynonym.create({
       data: { 
         ...args,
-        
-        
         OpWorkSkill:{connect:{id:args.OpWorkSkill?.connect.id}}
       },
     });
@@ -127,8 +125,6 @@ export class OpWorkSkillSynonymController {
     return await this.prismaservice.opWorkSkillSynonym.update({
       data: {
         ...args,
-        
-        
         
         
         OpWorkSkill: { connect: { id: args.OpWorkSkill?.connect.id } }

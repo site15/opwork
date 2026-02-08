@@ -9,14 +9,6 @@ export function useOpWorkSkillSynonymFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
-      fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
-      label: $t('resource.OpWorkSkillSynonym.skillId'),
-      rules: 'required',
-      
-      labelWidth: 200
-    },
-    {
-      component: 'Input',
       fieldName: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
       label: $t('resource.OpWorkSkillSynonym.synonym'),
       rules: 'required',
@@ -41,24 +33,8 @@ export function useOpWorkSkillSynonymColumns<T = OpWorkSkillSynonym>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
-      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.id,
-      title: $t('common.id'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.skillId,
-      title: $t('resource.OpWorkSkillSynonym.skillId'),
-      sortable: true
-    },
-    {
       field: Prisma.OpWorkSkillSynonymScalarFieldEnum.synonym,
       title: $t('resource.OpWorkSkillSynonym.synonym'),
-      sortable: true
-    },
-    {
-      field: Prisma.OpWorkSkillSynonymScalarFieldEnum.createdAt,
-      title: $t('common.createdAt'),
-      formatter: 'formatDateTime',
       sortable: true
     },
     {
