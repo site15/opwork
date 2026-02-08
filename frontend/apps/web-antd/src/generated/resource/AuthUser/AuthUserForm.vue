@@ -29,6 +29,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? authUserControllerUpdateOne({
       path: { id: id.value },
       body: {
+        email: values.email,
         anonymousId: values.anonymousId,
         supabaseUserId: values.supabaseUserId,
         supabaseUserData: values.supabaseUserData ? JSON.parse(values.supabaseUserData as any) : null,
@@ -36,6 +37,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : authUserControllerCreateOne({
       body: {
+        email: values.email,
         anonymousId: values.anonymousId,
         supabaseUserId: values.supabaseUserId,
         supabaseUserData: values.supabaseUserData ? JSON.parse(values.supabaseUserData as any) : null,

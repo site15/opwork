@@ -9,6 +9,14 @@ export function useAuthUserFormSchema(): VbenFormSchema[] {
   return [
         {
       component: 'Input',
+      fieldName: Prisma.AuthUserScalarFieldEnum.email,
+      label: $t('resource.AuthUser.email'),
+      
+      
+      labelWidth: 200
+    },
+    {
+      component: 'Input',
       fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
       label: $t('resource.AuthUser.anonymousId'),
       
@@ -66,6 +74,11 @@ export function useAuthUserColumns<T = AuthUser>(
 ): VxeTableGridOptions['columns'] {
   return [
         {
+      title: $t('resource.AuthUser.email'),
+      field: Prisma.AuthUserScalarFieldEnum.email,
+      sortable: true
+    },
+    {
       title: $t('resource.AuthUser.anonymousId'),
       field: Prisma.AuthUserScalarFieldEnum.anonymousId,
       sortable: true

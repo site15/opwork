@@ -14,6 +14,14 @@ export class UpdateAuthUserDto {
 })
 @IsOptional()
 @IsString()
+email?: string  | null;
+@ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
 anonymousId?: string  | null;
 @ApiProperty({
   type: 'string',

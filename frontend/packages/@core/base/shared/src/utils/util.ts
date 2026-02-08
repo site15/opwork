@@ -29,7 +29,7 @@ export function getNestedValue<T>(obj: T, path: string): any {
     throw new Error('Path must be a non-empty string');
   }
   // 把路径字符串按 "." 分割成数组
-  const keys = path.split('.') as (number | string)[];
+  const keys = (path || '').split('.') as (number | string)[];
 
   let current: any = obj;
 

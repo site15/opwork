@@ -1,9 +1,10 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { AuthApiKey } from '#/generated/client';
+import { authUserControllerFindMany, type AuthApiKey } from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 
 import { $t } from '#/locales';
+import { notification } from 'ant-design-vue';
 
 export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
   return [
@@ -32,12 +33,34 @@ export function useAuthApiKeyFormSchema(): VbenFormSchema[] {
       
       labelWidth: 200
     },
-    {
-      component: 'Input',
+{
+      component: 'ApiSelect',
+      componentProps: (componentProps) => {
+        console.log({ componentProps })
+        return {
+          api: async (options: any) => {
+                  console.log({ options })
+            return await authUserControllerFindMany({query:{perPage:100, searchText:''}}).then(async (result) => {
+            if (result?.error) {              
+              notification.error({
+                message: $t('actions.common.findManyFailed'),
+                description: result.error instanceof Error ? result.error.message : '',
+                duration: 3000,
+              });
+              return [];
+            }
+            return result.data?.items.map(item=>({ label: item.id, value: item.id }))||[];
+          });
+          },
+          filterOption: false,
+          debounce: 300,
+          showSearch: true,
+        };
+      },
       fieldName: Prisma.AuthApiKeyScalarFieldEnum.userId,
       label: $t('resource.name.AuthUser'),
       rules: 'required',
-      
+
       labelWidth: 200
     },
   ];

@@ -31,11 +31,13 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         apiKey: values.apiKey,
         isActive: values.isActive,
+        AuthUser: { connect: { id: values.userId } }
       }
     }) : authApiKeyControllerCreateOne({
       body: {
         apiKey: values.apiKey,
         isActive: values.isActive,
+        AuthUser: { connect: { id: values.userId } }
       }
     }))
       .then((data) => {

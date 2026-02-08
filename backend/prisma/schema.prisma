@@ -355,6 +355,9 @@ model AuthUser {
   /// Генерируется автоматически при создании записи
   id String @id(map: "PK_AUTH_USER") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
 
+  /// Электронная почта пользователя
+  email String?
+
   /// Анонимный идентификатор пользователя для гостей
   /// Используется до привязки к внешней системе аутентификации
   anonymousId String?

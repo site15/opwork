@@ -377,6 +377,7 @@ export type OpWorkProfile = {
 
 export type AuthUser = {
     id: string;
+    email: string | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -403,6 +404,7 @@ export type FindManyAuthUserResponse = {
 };
 
 export type CreateAuthUserDto = {
+    email?: string | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
@@ -413,6 +415,7 @@ export type CreateAuthUserDto = {
 
 export type AuthUserDto = {
     id: string;
+    email: string | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -424,6 +427,7 @@ export type AuthUserDto = {
 };
 
 export type UpdateAuthUserDto = {
+    email?: string | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
