@@ -6,7 +6,8 @@
     "isActive": "Активен",
     "id": "ID",
     "createdAt": "Создано",
-    "updatedAt": "Обновлено"
+    "updatedAt": "Обновлено",
+    "email": "Email"
   },
   "name": {
     "AuthUser": "Пользователь",

@@ -6,7 +6,8 @@
     "isActive": "Is Active",
     "id": "Id",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "email": "Email"
   },
   "name": {
     "AuthUser": "User",

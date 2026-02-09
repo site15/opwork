@@ -12,7 +12,8 @@
     "errorTip": "Error Tip"
   },
   "placeholder": {
-    "upload": "Upload"
+    "upload": "Upload",
+    "select": "Select"
   },
   "actionTitle": {
     "delete": "Delete",

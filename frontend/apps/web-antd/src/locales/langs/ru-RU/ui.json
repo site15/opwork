@@ -12,7 +12,8 @@
     "errorTip": "Ошибка"
   },
   "placeholder": {
-    "upload": "Загрузить"
+    "upload": "Загрузить",
+    "select": "Выбрать"
   },
   "actionTitle": {
     "delete": "Удалить",

@@ -10,5 +10,7 @@
   "operation": "Operation",
   "create": "Create",
   "loadingMenu": "Loading Menu",
-  "updatedAt": "Updated At"
+  "updatedAt": "Updated At",
+  "yes": "Yes",
+  "no": "No"
 }

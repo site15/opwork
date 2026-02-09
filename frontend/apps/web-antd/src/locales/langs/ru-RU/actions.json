@@ -1,0 +1,8 @@
+{
+  "common": {
+    "findManyFailed": "Ошибка множественного поиска",
+    "updateFailed": "Ошибка обновления",
+    "createFailed": "Ошибка создания",
+    "deleteFailed": "Ошибка удаления"
+  }
+}

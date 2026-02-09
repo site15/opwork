@@ -10,5 +10,7 @@
   "operation": "Операция",
   "create": "Создать",
   "loadingMenu": "Загрузка меню",
-  "updatedAt": "Обновлено"
+  "updatedAt": "Обновлено",
+  "yes": "Да",
+  "no": "Нет"
 }
