@@ -1,25 +1,22 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
-import { App } from 'supertest/types';
-import { AppModule } from './../src/app.module';
+import { AuthService } from './AuthService';
+import { client } from './generated/client/client.gen';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication<App>;
+  let authService: AuthService;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    authService = new AuthService();
+    client.setConfig({
+      baseUrl: process.env.VITE_GLOB_API_URL,
+    });
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('login by ApiKey', async () => {
+    const result = await authService.login({
+      apiKey: process.env.ADMIN_API_KEYS?.split(',')[0] || '',
+    });
+    expect(result.isActive).toBeTruthy();
+    expect(result.email).toContain('admin');
+    console.log({ result });
   });
 });

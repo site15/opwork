@@ -24,11 +24,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.json --setupFiles dotenv/config",
     "prisma:migrate": "./node_modules/.bin/prisma migrate deploy",
     "generate": "./node_modules/.bin/prisma generate",
     "prisma:create": "./node_modules/.bin/prisma migrate dev --name ",
-    "prisma:reset": "./node_modules/.bin/prisma migrate reset"
+    "prisma:reset": "./node_modules/.bin/prisma migrate reset",
+    "generate:openapi-ts": "openapi-ts"
   },
   "dependencies": {
     "@fastify/static": "^9.0.0",

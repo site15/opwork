@@ -30,7 +30,8 @@
     "useDefineForClassFields": false,
     "module": "commonjs",
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "target": "es2021"
   }
