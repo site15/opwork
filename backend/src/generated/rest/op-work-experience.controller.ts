@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkExperience } from './op-work-experience.entity';
 import { CreateOpWorkExperienceDto } from './create-op-work-experience.dto';
 import { UpdateOpWorkExperienceDto } from './update-op-work-experience.dto';
 
-export class FindManyOpWorkExperienceArgs extends FindManyArgs {}
+export class FindManyOpWorkExperienceArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  jobSeekerId?: string;}
 
 export class FindManyOpWorkExperienceResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkExperienceResponse {
 @ApiTags('op-work')
 @Controller('op-work/experience')
 export class OpWorkExperienceController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkExperienceResponse })
   async findMany(@Query() args: FindManyOpWorkExperienceArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -78,6 +86,12 @@ export class OpWorkExperienceController {
 { position: { contains: searchText, mode: 'insensitive' } },
 { description: { contains: searchText, mode: 'insensitive' } },
 { location: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.jobSeekerId)
+            ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
+            : []),
             ],
           }
         : {}),

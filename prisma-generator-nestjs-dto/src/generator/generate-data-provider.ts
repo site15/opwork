@@ -71,6 +71,10 @@ export const generateDataProvider = ({
       component = 'Textarea';
     }
 
+    if (field.name.toLowerCase().endsWith('password')) {
+      component = 'InputPassword';
+    }
+
     if (
       field.type === 'Int' ||
       field.type === 'Float' ||

@@ -61,7 +61,7 @@
     "update:deps": "npx taze -r -w",
     "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
     "catalog": "pnpx codemod pnpm/catalog",
-    "generate": "openapi-ts"
+    "generate": "openapi-ts && pnpm -F @vben/web-antd run i18n:extract"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:",

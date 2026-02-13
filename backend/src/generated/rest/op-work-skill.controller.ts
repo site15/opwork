@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -46,13 +48,16 @@ export class FindManyOpWorkSkillResponse {
 @ApiTags('op-work')
 @Controller('op-work/skill')
 export class OpWorkSkillController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSkillResponse })
   async findMany(@Query() args: FindManyOpWorkSkillArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -79,6 +84,7 @@ export class OpWorkSkillController {
 { category: { contains: searchText, mode: 'insensitive' } },
 { icon: { contains: searchText, mode: 'insensitive' } }
             ],
+            
           }
         : {}),
       

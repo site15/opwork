@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,14 @@ import { OpWorkSavedJob } from './op-work-saved-job.entity';
 import { CreateOpWorkSavedJobDto } from './create-op-work-saved-job.dto';
 import { UpdateOpWorkSavedJobDto } from './update-op-work-saved-job.dto';
 
-export class FindManyOpWorkSavedJobArgs extends FindManyArgs {}
+export class FindManyOpWorkSavedJobArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  profileId?: string;
+
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  jobId?: string;}
 
 export class FindManyOpWorkSavedJobResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +55,16 @@ export class FindManyOpWorkSavedJobResponse {
 @ApiTags('op-work')
 @Controller('op-work/saved-job')
 export class OpWorkSavedJobController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSavedJobResponse })
   async findMany(@Query() args: FindManyOpWorkSavedJobArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +87,16 @@ export class OpWorkSavedJobController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { notes: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+
+          ...(isUUID(otherArgs.jobId)
+            ? [{ jobId: { equals: otherArgs.jobId } }]
+            : []),
             ],
           }
         : {}),

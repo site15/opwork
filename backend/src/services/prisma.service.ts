@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '../generated/prisma/client';
+import { Provider } from '@nestjs/common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { Type } from 'class-transformer';
 import { IsOptional } from 'class-validator';
+import { PrismaClient } from '../generated/prisma/client';
+import { universalPasswordHashingExtension } from './extensions/universal-password-hashing';
 
 export * as PrismaSdk from '../generated/prisma/client';
 
@@ -51,15 +52,22 @@ export function getFirstSkipFromCurPerPage(args: FindManyArgs): {
   return { take: perPage, skip, curPage, perPage };
 }
 
-@Injectable()
-export class PrismaService extends PrismaClient {
-  static instance: PrismaService;
-  constructor() {
-    super({
-      adapter: new PrismaPg({
-        connectionString: process.env.DATABASE_URL,
-      }),
-    });
-    PrismaService.instance = this;
-  }
+const prismaService = (connectionString: string) =>
+  new PrismaClient({
+    adapter: new PrismaPg({
+      connectionString,
+    }),
+  }).$extends(universalPasswordHashingExtension);
+
+export type PrismaService = ReturnType<typeof prismaService>;
+
+export const PRISMA_SERVICE = Symbol('PrismaService');
+
+export function providePrismaService(connectionString: string): Provider {
+  return {
+    provide: PRISMA_SERVICE,
+    useFactory: () => {
+      return prismaService(connectionString);
+    },
+  } satisfies Provider;
 }

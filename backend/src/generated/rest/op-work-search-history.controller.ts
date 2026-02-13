@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkSearchHistory } from './op-work-search-history.entity';
 import { CreateOpWorkSearchHistoryDto } from './create-op-work-search-history.dto';
 import { UpdateOpWorkSearchHistoryDto } from './update-op-work-search-history.dto';
 
-export class FindManyOpWorkSearchHistoryArgs extends FindManyArgs {}
+export class FindManyOpWorkSearchHistoryArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  profileId?: string;}
 
 export class FindManyOpWorkSearchHistoryResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkSearchHistoryResponse {
 @ApiTags('op-work')
 @Controller('op-work/search-history')
 export class OpWorkSearchHistoryController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSearchHistoryResponse })
   async findMany(@Query() args: FindManyOpWorkSearchHistoryArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +83,12 @@ export class OpWorkSearchHistoryController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { query: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
             ],
           }
         : {}),

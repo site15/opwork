@@ -17,6 +17,11 @@ email!: string  | null;
   type: 'string',
   nullable: true,
 })
+password!: string  | null;
+@ApiProperty({
+  type: 'string',
+  nullable: true,
+})
 anonymousId!: string  | null;
 @ApiProperty({
   type: 'string',

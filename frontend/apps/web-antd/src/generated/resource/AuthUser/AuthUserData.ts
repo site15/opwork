@@ -18,6 +18,15 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
+        component: 'InputPassword',
+          fieldName: Prisma.AuthUserScalarFieldEnum.password,
+        label: $t('resource.AuthUser.password'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
         component: 'Input',
           fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
         label: $t('resource.AuthUser.anonymousId'),
@@ -82,6 +91,11 @@ import type { VbenFormSchema } from '#/adapter/form';
         {
         title: $t('resource.AuthUser.email'),
         field: Prisma.AuthUserScalarFieldEnum.email ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.AuthUser.password'),
+        field: Prisma.AuthUserScalarFieldEnum.password ,
         sortable: true
       }, 
     {

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { AuthApiKey } from './auth-api-key.entity';
 import { CreateAuthApiKeyDto } from './create-auth-api-key.dto';
 import { UpdateAuthApiKeyDto } from './update-auth-api-key.dto';
 
-export class FindManyAuthApiKeyArgs extends FindManyArgs {}
+export class FindManyAuthApiKeyArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  userId?: string;}
 
 export class FindManyAuthApiKeyResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyAuthApiKeyResponse {
 @ApiTags('auth')
 @Controller('auth/api-key')
 export class AuthApiKeyController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthApiKeyResponse })
   async findMany(@Query() args: FindManyAuthApiKeyArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +83,12 @@ export class AuthApiKeyController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { apiKey: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.userId)
+            ? [{ userId: { equals: otherArgs.userId } }]
+            : []),
             ],
           }
         : {}),

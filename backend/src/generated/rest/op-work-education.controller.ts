@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkEducation } from './op-work-education.entity';
 import { CreateOpWorkEducationDto } from './create-op-work-education.dto';
 import { UpdateOpWorkEducationDto } from './update-op-work-education.dto';
 
-export class FindManyOpWorkEducationArgs extends FindManyArgs {}
+export class FindManyOpWorkEducationArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  jobSeekerId?: string;}
 
 export class FindManyOpWorkEducationResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkEducationResponse {
 @ApiTags('op-work')
 @Controller('op-work/education')
 export class OpWorkEducationController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkEducationResponse })
   async findMany(@Query() args: FindManyOpWorkEducationArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -77,6 +85,12 @@ export class OpWorkEducationController {
               { institution: { contains: searchText, mode: 'insensitive' } },
 { fieldOfStudy: { contains: searchText, mode: 'insensitive' } },
 { description: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.jobSeekerId)
+            ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
+            : []),
             ],
           }
         : {}),

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkJobSeeker } from './op-work-job-seeker.entity';
 import { CreateOpWorkJobSeekerDto } from './create-op-work-job-seeker.dto';
 import { UpdateOpWorkJobSeekerDto } from './update-op-work-job-seeker.dto';
 
-export class FindManyOpWorkJobSeekerArgs extends FindManyArgs {}
+export class FindManyOpWorkJobSeekerArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  profileId?: string;}
 
 export class FindManyOpWorkJobSeekerResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkJobSeekerResponse {
 @ApiTags('op-work')
 @Controller('op-work/job-seeker')
 export class OpWorkJobSeekerController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkJobSeekerResponse })
   async findMany(@Query() args: FindManyOpWorkJobSeekerArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -82,6 +90,12 @@ export class OpWorkJobSeekerController {
 { linkedinUrl: { contains: searchText, mode: 'insensitive' } },
 { githubUrl: { contains: searchText, mode: 'insensitive' } },
 { portfolioUrl: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
             ],
           }
         : {}),

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkNotificationSettings } from './op-work-notification-settings.enti
 import { CreateOpWorkNotificationSettingsDto } from './create-op-work-notification-settings.dto';
 import { UpdateOpWorkNotificationSettingsDto } from './update-op-work-notification-settings.dto';
 
-export class FindManyOpWorkNotificationSettingsArgs extends FindManyArgs {}
+export class FindManyOpWorkNotificationSettingsArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  profileId?: string;}
 
 export class FindManyOpWorkNotificationSettingsResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkNotificationSettingsResponse {
 @ApiTags('op-work')
 @Controller('op-work/notification-settings')
 export class OpWorkNotificationSettingsController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkNotificationSettingsResponse })
   async findMany(@Query() args: FindManyOpWorkNotificationSettingsArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +83,12 @@ export class OpWorkNotificationSettingsController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
             ],
           }
         : {}),

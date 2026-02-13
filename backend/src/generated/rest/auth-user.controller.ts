@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -46,13 +48,16 @@ export class FindManyAuthUserResponse {
 @ApiTags('auth')
 @Controller('auth/user')
 export class AuthUserController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyAuthUserResponse })
   async findMany(@Query() args: FindManyAuthUserArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,9 +80,11 @@ export class AuthUserController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { email: { contains: searchText, mode: 'insensitive' } },
+{ password: { contains: searchText, mode: 'insensitive' } },
 { anonymousId: { contains: searchText, mode: 'insensitive' } },
 { supabaseUserId: { contains: searchText, mode: 'insensitive' } }
             ],
+            
           }
         : {}),
       

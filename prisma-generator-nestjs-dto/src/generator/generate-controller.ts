@@ -82,6 +82,26 @@ export const generateController = ({
         ?.map((f) => f.name) || []),
     ]),
   ]);
+
+  const relationsDtoFields = (fields || [])
+    .filter((f) => f.relationName && f.relationFromFields?.[0])
+    .map(
+      (f) => `
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  ${f.relationFromFields?.[0]}?: string;`,
+    )
+    .join('\n');
+  const relationsAndWhere = (fields || [])
+    .filter((f) => f.relationName && f.relationFromFields?.[0])
+    .map(
+      (f) => `
+          ...(isUUID(otherArgs.${f.relationFromFields?.[0]})
+            ? [{ ${f.relationFromFields?.[0]}: { equals: otherArgs.${f.relationFromFields?.[0]} } }]
+            : []),`,
+    )
+    .join('\n');
+
   const searchTexts = [
     ...new Set([
       ...(modelParams.create.fields
@@ -112,6 +132,7 @@ export const generateController = ({
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -123,8 +144,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -138,7 +160,7 @@ import { ${entityClassName} } from './${templateHelpers.entityFilename(modelName
 import { ${createDtoClassName} } from './${templateHelpers.createDtoFilename(modelName, false).replace('.ts', '')}';
 import { ${updateDtoClassName} } from './${templateHelpers.updateDtoFilename(modelName, false).replace('.ts', '')}';
 
-export class ${findManyArgsName} extends FindManyArgs {}
+export class ${findManyArgsName} extends FindManyArgs {${relationsDtoFields}}
 
 export class ${findManyResponseMetaName} extends FindManyResponseMeta {}
 
@@ -153,13 +175,16 @@ export class ${findManyResponseName} {
 @ApiTags('${apiTagName}')
 @Controller('${basePath}')
 export class ${controllerName} {
-  constructor(private readonly ${camelServiceName}: ${serviceName}) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly ${camelServiceName}: ${serviceName}
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: ${findManyResponseName} })
   async findMany(@Query() args: ${findManyArgsName}) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -183,6 +208,13 @@ export class ${controllerName} {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               ${searchTexts}
             ],
+            ${
+              relationsAndWhere
+                ? `AND: [
+              ${relationsAndWhere}
+            ],`
+                : ''
+            }
           }
         : {}),
       ${hasDeletedAt ? 'deletedAt: null,' : ''}

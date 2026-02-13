@@ -1,7 +1,7 @@
 import { AuthService } from './AuthService';
 import { client } from './generated/client/client.gen';
 
-describe('AppController (e2e)', () => {
+describe('Auth Api Key (e2e)', () => {
   let authService: AuthService;
 
   beforeEach(async () => {

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,14 @@ import { OpWorkJobSkill } from './op-work-job-skill.entity';
 import { CreateOpWorkJobSkillDto } from './create-op-work-job-skill.dto';
 import { UpdateOpWorkJobSkillDto } from './update-op-work-job-skill.dto';
 
-export class FindManyOpWorkJobSkillArgs extends FindManyArgs {}
+export class FindManyOpWorkJobSkillArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  jobId?: string;
+
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  skillId?: string;}
 
 export class FindManyOpWorkJobSkillResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +55,16 @@ export class FindManyOpWorkJobSkillResponse {
 @ApiTags('op-work')
 @Controller('op-work/job-skill')
 export class OpWorkJobSkillController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkJobSkillResponse })
   async findMany(@Query() args: FindManyOpWorkJobSkillArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +87,16 @@ export class OpWorkJobSkillController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.jobId)
+            ? [{ jobId: { equals: otherArgs.jobId } }]
+            : []),
+
+          ...(isUUID(otherArgs.skillId)
+            ? [{ skillId: { equals: otherArgs.skillId } }]
+            : []),
             ],
           }
         : {}),

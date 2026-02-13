@@ -1,11 +1,14 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { OpWorkProfileType, OpWorkUserType } from '../generated/prisma/client';
-import { PrismaService } from './prisma.service';
-const { createHash } = require('node:crypto');
+import { createHashFromString } from '../utils/create-hash-from-string';
+import { PRISMA_SERVICE, PrismaService } from './prisma.service';
 
 @Injectable()
 export class DefaultDataBootstrapService implements OnApplicationBootstrap {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService,
+  ) {}
 
   async onApplicationBootstrap() {
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
@@ -88,10 +91,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     apiKey: string | undefined;
     userType: OpWorkUserType;
   }) {
-    const email = `${userType.toLowerCase()}_${createHash('sha256')
-      .update(apiKey)
-      .digest('hex')
-      .slice(0, 7)}@example.com`;
+    const email = `${userType.toLowerCase()}_${createHashFromString(apiKey || '').slice(0, 7)}@example.com`;
     let authApiKey = await this.prismaService.authApiKey.findFirst({
       include: { AuthUser: true },
       where: { apiKey },

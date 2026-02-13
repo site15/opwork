@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Inject,
   Post,
   Put,
   Query,
@@ -16,8 +17,9 @@ import {
   ApiPropertyOptional,
   ApiTags,
 } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { IsOptional, isUUID } from 'class-validator';
 import {
+  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
@@ -31,7 +33,10 @@ import { OpWorkSkillSynonym } from './op-work-skill-synonym.entity';
 import { CreateOpWorkSkillSynonymDto } from './create-op-work-skill-synonym.dto';
 import { UpdateOpWorkSkillSynonymDto } from './update-op-work-skill-synonym.dto';
 
-export class FindManyOpWorkSkillSynonymArgs extends FindManyArgs {}
+export class FindManyOpWorkSkillSynonymArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  skillId?: string;}
 
 export class FindManyOpWorkSkillSynonymResponseMeta extends FindManyResponseMeta {}
 
@@ -46,13 +51,16 @@ export class FindManyOpWorkSkillSynonymResponse {
 @ApiTags('op-work')
 @Controller('op-work/skill-synonym')
 export class OpWorkSkillSynonymController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(PRISMA_SERVICE)
+    private readonly prismaService: PrismaService
+  ) {}
 
   @Get()
   @ApiOkResponse({ type: FindManyOpWorkSkillSynonymResponse })
   async findMany(@Query() args: FindManyOpWorkSkillSynonymArgs) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
-    const searchText = args.searchText;
+    const { searchText, ...otherArgs } = args;
 
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
@@ -75,6 +83,12 @@ export class OpWorkSkillSynonymController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { synonym: { contains: searchText, mode: 'insensitive' } }
+            ],
+            AND: [
+              
+          ...(isUUID(otherArgs.skillId)
+            ? [{ skillId: { equals: otherArgs.skillId } }]
+            : []),
             ],
           }
         : {}),

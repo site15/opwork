@@ -378,6 +378,7 @@ export type OpWorkProfile = {
 export type AuthUser = {
     id: string;
     email: string | null;
+    password: string | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -405,6 +406,7 @@ export type FindManyAuthUserResponse = {
 
 export type CreateAuthUserDto = {
     email?: string | null;
+    password?: string | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
@@ -416,6 +418,7 @@ export type CreateAuthUserDto = {
 export type AuthUserDto = {
     id: string;
     email: string | null;
+    password: string | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -428,6 +431,7 @@ export type AuthUserDto = {
 
 export type UpdateAuthUserDto = {
     email?: string | null;
+    password?: string | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
@@ -1710,6 +1714,16 @@ export type UpdateOpWorkJobTagDto = {
     OpWorkJob?: UpdateOpWorkJobTagOpWorkJobRelationInputDto;
 };
 
+export type SignInArgs = {
+    email: string | null;
+    password: string | null;
+};
+
+export type SignInResponse = {
+    sessionId: string;
+    profile: AuthUser;
+};
+
 export type AuthUserControllerFindManyData = {
     body?: never;
     path?: never;
@@ -1814,6 +1828,7 @@ export type AuthApiKeyControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        userId?: string;
     };
     url: '/api/auth/api-key';
 };
@@ -1910,6 +1925,7 @@ export type AuthSessionControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        userId?: string;
     };
     url: '/api/auth/session';
 };
@@ -2006,6 +2022,7 @@ export type OpWorkProfileControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        userId?: string;
     };
     url: '/api/op-work/profile';
 };
@@ -2102,6 +2119,7 @@ export type OpWorkJobSeekerControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/job-seeker';
 };
@@ -2198,6 +2216,7 @@ export type OpWorkExperienceControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobSeekerId?: string;
     };
     url: '/api/op-work/experience';
 };
@@ -2294,6 +2313,7 @@ export type OpWorkEducationControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobSeekerId?: string;
     };
     url: '/api/op-work/education';
 };
@@ -2390,6 +2410,7 @@ export type OpWorkEmployerControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/employer';
 };
@@ -2486,6 +2507,7 @@ export type OpWorkProjectControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/project';
 };
@@ -2582,6 +2604,8 @@ export type OpWorkJobControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        employerId?: string;
+        profileId?: string;
     };
     url: '/api/op-work/job';
 };
@@ -2678,6 +2702,9 @@ export type OpWorkApplicationControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobSeekerId?: string;
+        profileId?: string;
+        jobId?: string;
     };
     url: '/api/op-work/application';
 };
@@ -2774,6 +2801,8 @@ export type OpWorkSavedJobControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
+        jobId?: string;
     };
     url: '/api/op-work/saved-job';
 };
@@ -2966,6 +2995,8 @@ export type OpWorkJobSeekerSkillControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobSeekerId?: string;
+        skillId?: string;
     };
     url: '/api/op-work/job-seeker-skill';
 };
@@ -3062,6 +3093,8 @@ export type OpWorkJobSkillControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobId?: string;
+        skillId?: string;
     };
     url: '/api/op-work/job-skill';
 };
@@ -3158,6 +3191,8 @@ export type OpWorkNotificationControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        userId?: string;
+        profileId?: string;
     };
     url: '/api/op-work/notification';
 };
@@ -3254,6 +3289,7 @@ export type OpWorkNotificationSettingsControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/notification-settings';
 };
@@ -3350,6 +3386,7 @@ export type OpWorkSearchHistoryControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/search-history';
 };
@@ -3446,6 +3483,8 @@ export type OpWorkJobViewControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
+        jobId?: string;
     };
     url: '/api/op-work/job-view';
 };
@@ -3542,6 +3581,7 @@ export type OpWorkSavedSearchControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/saved-search';
 };
@@ -3638,6 +3678,7 @@ export type OpWorkSkillSynonymControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        skillId?: string;
     };
     url: '/api/op-work/skill-synonym';
 };
@@ -3734,6 +3775,7 @@ export type OpWorkJobTagControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        jobId?: string;
     };
     url: '/api/op-work/job-tag';
 };
@@ -3840,3 +3882,60 @@ export type AuthControllerProfileResponses = {
 };
 
 export type AuthControllerProfileResponse = AuthControllerProfileResponses[keyof AuthControllerProfileResponses];
+
+export type AuthControllerSignOutData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/auth/sign-out';
+};
+
+export type AuthControllerSignOutErrors = {
+    default: AuthUser;
+};
+
+export type AuthControllerSignOutError = AuthControllerSignOutErrors[keyof AuthControllerSignOutErrors];
+
+export type AuthControllerSignOutResponses = {
+    200: AuthUser;
+};
+
+export type AuthControllerSignOutResponse = AuthControllerSignOutResponses[keyof AuthControllerSignOutResponses];
+
+export type AuthControllerSignUpData = {
+    body: SignInArgs;
+    path?: never;
+    query?: never;
+    url: '/api/auth/sign-up';
+};
+
+export type AuthControllerSignUpErrors = {
+    default: SignInResponse;
+};
+
+export type AuthControllerSignUpError = AuthControllerSignUpErrors[keyof AuthControllerSignUpErrors];
+
+export type AuthControllerSignUpResponses = {
+    200: SignInResponse;
+};
+
+export type AuthControllerSignUpResponse = AuthControllerSignUpResponses[keyof AuthControllerSignUpResponses];
+
+export type AuthControllerSignInData = {
+    body: SignInArgs;
+    path?: never;
+    query?: never;
+    url: '/api/auth/sign-in';
+};
+
+export type AuthControllerSignInErrors = {
+    default: SignInResponse;
+};
+
+export type AuthControllerSignInError = AuthControllerSignInErrors[keyof AuthControllerSignInErrors];
+
+export type AuthControllerSignInResponses = {
+    200: SignInResponse;
+};
+
+export type AuthControllerSignInResponse = AuthControllerSignInResponses[keyof AuthControllerSignInResponses];

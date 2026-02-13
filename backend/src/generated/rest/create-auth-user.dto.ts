@@ -22,6 +22,14 @@ email?: string  | null;
 })
 @IsOptional()
 @IsString()
+password?: string  | null;
+@ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
 anonymousId?: string  | null;
 @ApiProperty({
   type: 'string',

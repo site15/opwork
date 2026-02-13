@@ -10,7 +10,7 @@ import { CONTROLLERS } from './generated/rest/controllers';
 import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
-import { PrismaService } from './services/prisma.service';
+import { providePrismaService } from './services/prisma.service';
 
 const controllers = [...CONTROLLERS, AuthController];
 for (const controller of controllers) {
@@ -30,7 +30,7 @@ for (const controller of controllers) {
   ],
   controllers,
   providers: [
-    PrismaService,
+    providePrismaService(process.env.DATABASE_URL!),
     PrismaToolsService,
     DefaultDataBootstrapService,
     { provide: APP_GUARD, useClass: AuthGuard },
