@@ -10,7 +10,7 @@ import Mustache from 'mustache';
 import { AppModule } from './app.module';
 
 import 'dotenv/config';
-import { AppExceptionsFilter } from './filters/app.filter';
+import { AuthError } from './errors/auth.errors';
 import {
   X_API_KEY_HEADER_NAME,
   X_SESSION_ID_HEADER_NAME,
@@ -70,7 +70,9 @@ async function bootstrap() {
     .build();
 
   Logger.log('Generating Swagger documentation');
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    extraModels: [AuthError],
+  });
   try {
     Logger.log('Writing Swagger documentation to file');
     writeFileSync('./swagger.json', JSON.stringify(document));

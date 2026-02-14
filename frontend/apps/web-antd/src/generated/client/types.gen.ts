@@ -1724,6 +1724,19 @@ export type SignInResponse = {
     profile: AuthUser;
 };
 
+export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP';
+
+export type AuthError = {
+    /**
+     * Auth error (AUTH_ERROR), User already exists (ALREADY_EXISTS), Invalid credentials (INVALID_CREDENTIALS), API key is not active (API_KEY_NOT_ACTIVE), Session is not active (SESSION_NOT_ACTIVE), Unauthorized (UNAUTHORIZED), Forbidden: IP address not allowed (FORBIDDEN_IP)
+     */
+    message: string;
+    code: AuthErrorEnum;
+    metadata?: {
+        [key: string]: unknown;
+    };
+};
+
 export type AuthUserControllerFindManyData = {
     body?: never;
     path?: never;
@@ -3891,13 +3904,13 @@ export type AuthControllerSignOutData = {
 };
 
 export type AuthControllerSignOutErrors = {
-    default: AuthUser;
+    default: StatusResponse;
 };
 
 export type AuthControllerSignOutError = AuthControllerSignOutErrors[keyof AuthControllerSignOutErrors];
 
 export type AuthControllerSignOutResponses = {
-    200: AuthUser;
+    200: StatusResponse;
 };
 
 export type AuthControllerSignOutResponse = AuthControllerSignOutResponses[keyof AuthControllerSignOutResponses];
@@ -3910,6 +3923,7 @@ export type AuthControllerSignUpData = {
 };
 
 export type AuthControllerSignUpErrors = {
+    400: AuthError;
     default: SignInResponse;
 };
 
@@ -3929,6 +3943,7 @@ export type AuthControllerSignInData = {
 };
 
 export type AuthControllerSignInErrors = {
+    400: AuthError;
     default: SignInResponse;
 };
 
