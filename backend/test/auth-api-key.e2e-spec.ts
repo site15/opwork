@@ -10,7 +10,7 @@ describe('Auth: Api Key (e2e)', () => {
     const result = await activity.loginByApiKey({
       apiKey: firstAdminApiKey,
     });
-    expect(result.isActive).toBeTruthy();
-    expect(result.email).toContain('admin');
+    expect(result?.isActive).toBeTruthy();
+    expect(result?.email).toContain('admin');
   });
 });

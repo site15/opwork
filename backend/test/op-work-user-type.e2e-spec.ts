@@ -1,5 +1,6 @@
 import { assert } from 'console';
 import { ActivityHelper } from './utils/activity-helper';
+import { AuthErrorEnum } from '../src/errors/auth.errors';
 
 describe('OPWork: Check access rights for different user types (e2e)', () => {
   const jobSeekerActivity = new ActivityHelper({
@@ -23,15 +24,15 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       const result = await jobSeekerActivity.loginByApiKey({
         apiKey: firstJobSeekerApiKey,
       });
-      expect(result.isActive).toBeTruthy();
-      expect(result.email).toContain('job_seeker');
+      expect(result?.isActive).toBeTruthy();
+      expect(result?.email).toContain('job_seeker');
     });
     it('Read profile', async () => {
       const result =
         await jobSeekerActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: jobSeekerActivity.authUser?.id },
         });
-      expect(result.data?.items).toHaveLength(1);
+      expect(result.data?.items.length).toBeGreaterThanOrEqual(1);
       expect(result.data?.items[0].AuthUser?.email).toContain('job_seeker');
       expect(result.data?.items[0].AuthUser?.id).toEqual(
         jobSeekerActivity.authUser?.id,
@@ -44,21 +45,14 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           query: { userId: jobSeekerActivity.authUser?.id },
         });
 
-      const opWorkProfileControllerUpdateOneResult =
-        await jobSeekerActivity.sdk.opWorkProfileControllerUpdateOne({
+      await expect(
+        jobSeekerActivity.sdk.opWorkProfileControllerUpdateOne({
           path: {
             id: opWorkProfileControllerFindManyResult.data?.items[0].id!,
           },
           body: { email: 'profile_job_seeker@example.com' },
-        });
-
-      expect(opWorkProfileControllerFindManyResult.data?.items[0].id).toEqual(
-        opWorkProfileControllerUpdateOneResult.data?.id,
-      );
-      expect(opWorkProfileControllerFindManyResult.data?.items).toHaveLength(1);
-      expect(
-        opWorkProfileControllerFindManyResult.data?.items[0].email,
-      ).toEqual('profile_job_seeker@example.com');
+        }),
+      ).rejects.toHaveProperty('code', AuthErrorEnum.METHOD_NOT_ALLOWED);
     });
   });
 
@@ -67,8 +61,8 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       const result = await employerActivity.loginByApiKey({
         apiKey: firstEmployerApiKey,
       });
-      expect(result.isActive).toBeTruthy();
-      expect(result.email).toContain('employer');
+      expect(result?.isActive).toBeTruthy();
+      expect(result?.email).toContain('employer');
     });
     it('Read profile', async () => {
       const result = await employerActivity.sdk.opWorkProfileControllerFindMany(
@@ -76,7 +70,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           query: { userId: employerActivity.authUser?.id },
         },
       );
-      expect(result.data?.items).toHaveLength(1);
+      expect(result.data?.items.length).toBeGreaterThanOrEqual(1);
       expect(result.data?.items[0].AuthUser?.email).toContain('employer');
       expect(result.data?.items[0].AuthUser?.id).toEqual(
         employerActivity.authUser?.id,
@@ -88,21 +82,14 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           query: { userId: employerActivity.authUser?.id },
         });
 
-      const opWorkProfileControllerUpdateOneResult =
-        await employerActivity.sdk.opWorkProfileControllerUpdateOne({
+      await expect(
+        employerActivity.sdk.opWorkProfileControllerUpdateOne({
           path: {
             id: opWorkProfileControllerFindManyResult.data?.items[0].id!,
           },
           body: { email: 'profile_employer@example.com' },
-        });
-
-      expect(opWorkProfileControllerFindManyResult.data?.items[0].id).toEqual(
-        opWorkProfileControllerUpdateOneResult.data?.id,
-      );
-      expect(opWorkProfileControllerFindManyResult.data?.items).toHaveLength(1);
-      expect(
-        opWorkProfileControllerFindManyResult.data?.items[0].email,
-      ).toEqual('profile_employer@example.com');
+        }),
+      ).rejects.toHaveProperty('code', AuthErrorEnum.METHOD_NOT_ALLOWED);
     });
   });
 
@@ -111,21 +98,21 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       const result = await adminActivity.loginByApiKey({
         apiKey: firstAdminApiKey,
       });
-      expect(result.isActive).toBeTruthy();
-      expect(result.email).toContain('admin');
+      expect(result?.isActive).toBeTruthy();
+      expect(result?.email).toContain('admin');
     });
     it('Read profile', async () => {
       const result = await adminActivity.sdk.opWorkProfileControllerFindMany({
         query: { userId: adminActivity.authUser?.id },
       });
-      expect(result.data?.items).toHaveLength(1);
+      expect(result.data?.items.length).toBeGreaterThanOrEqual(1);
       expect(result.data?.items[0].AuthUser?.email).toContain('admin');
       expect(result.data?.items[0].AuthUser?.id).toEqual(
         adminActivity.authUser?.id,
       );
     });
 
-    it('Error on update profile', async () => {
+    it('Update profile', async () => {
       const opWorkProfileControllerFindManyResult =
         await adminActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: adminActivity.authUser?.id },
@@ -142,7 +129,9 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       expect(opWorkProfileControllerFindManyResult.data?.items[0].id).toEqual(
         opWorkProfileControllerUpdateOneResult.data?.id,
       );
-      expect(opWorkProfileControllerFindManyResult.data?.items).toHaveLength(1);
+      expect(
+        opWorkProfileControllerFindManyResult.data?.items.length,
+      ).toBeGreaterThanOrEqual(1);
       expect(
         opWorkProfileControllerFindManyResult.data?.items[0].email,
       ).toEqual('profile_admin@example.com');

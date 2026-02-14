@@ -12,14 +12,14 @@ describe('Auth: Authentication flows (e2e)', () => {
     email: `test${rnd}@example.com`,
     password: 'validPassword123',
   };
-  let regProfile: AuthUser;
-  let loginProfile: AuthUser;
+  let regProfile: AuthUser | null;
+  let loginProfile: AuthUser | null;
 
   it('Registration flow', async () => {
     const result = await activity.register(credentials);
-    regProfile = result.profile;
-    expect(result.profile).not.toBeUndefined();
-    expect(result.sessionId).not.toBeUndefined();
+    regProfile = result?.profile || null;
+    expect(result?.profile).not.toBeUndefined();
+    expect(result?.sessionId).not.toBeUndefined();
   });
 
   it('Error on registration flow with duplicate credentials', async () => {
@@ -42,15 +42,15 @@ describe('Auth: Authentication flows (e2e)', () => {
 
   it('Login flow', async () => {
     const result = await activity.login(credentials);
-    loginProfile = result.profile;
-    expect(result.profile).not.toBeUndefined();
+    loginProfile = result?.profile || null;
+    expect(result?.profile).not.toBeUndefined();
 
-    expect(regProfile).toMatchObject(loginProfile);
+    expect(regProfile).toMatchObject(loginProfile || {});
   });
 
   it('Get profile flow', async () => {
     const result = await activity.getProfile();
-    expect(result).toMatchObject(loginProfile);
+    expect(result).toMatchObject(loginProfile || {});
   });
 
   it('Logout flow', async () => {

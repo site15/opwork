@@ -8,6 +8,8 @@ export enum AuthErrorEnum {
   SESSION_NOT_ACTIVE = 'SESSION_NOT_ACTIVE',
   UNAUTHORIZED = 'UNAUTHORIZED',
   FORBIDDEN_IP = 'FORBIDDEN_IP',
+  PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND',
+  METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED',
 }
 
 export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
@@ -18,6 +20,8 @@ export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
   [AuthErrorEnum.SESSION_NOT_ACTIVE]: 'Session is not active',
   [AuthErrorEnum.UNAUTHORIZED]: 'Unauthorized',
   [AuthErrorEnum.FORBIDDEN_IP]: 'Forbidden: IP address not allowed',
+  [AuthErrorEnum.PROFILE_NOT_FOUND]: 'Profile not found',
+  [AuthErrorEnum.METHOD_NOT_ALLOWED]: 'Method not allowed',
 };
 
 export class AuthError<T = unknown> extends Error {

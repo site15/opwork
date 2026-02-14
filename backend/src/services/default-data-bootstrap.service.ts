@@ -13,8 +13,13 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
     for (const adminApiKey of adminApiKeys) {
-      await this.getOrCreateAuthApiKeyByApiKey({
+      const authApiKey = await this.getOrCreateAuthApiKeyByApiKey({
         apiKey: adminApiKey,
+        userType: OpWorkUserType.ADMIN,
+      });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authApiKey.userId,
+        profileType: OpWorkProfileType.EMPLOYER,
         userType: OpWorkUserType.ADMIN,
       });
     }
@@ -54,7 +59,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     userType: OpWorkUserType;
   }) {
     let opWorkProfile = await this.prismaService.opWorkProfile.findFirst({
-      where: { userId },
+      where: { userId, type: profileType, userType: userType },
     });
     if (!opWorkProfile) {
       opWorkProfile = await this.prismaService.opWorkProfile.create({

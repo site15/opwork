@@ -14,7 +14,7 @@ export class ActivityHelper {
   sdk: Sdk;
 
   constructor(config: Config = {}) {
-    this.client = createClient(config);
+    this.client = createClient({ ...config, throwOnError: true });
     this.sdk = new Sdk({
       client: this.client,
     });
@@ -22,13 +22,7 @@ export class ActivityHelper {
 
   async getProfile() {
     const result = await this.sdk.authControllerProfile();
-    if (result?.error) {
-      throw Object.assign(
-        new Error((result.error as any).error || 'Failed to get profile'),
-        result.error,
-      );
-    }
-    this.authUser = result.data;
+    this.authUser = result.data || null;
     return result.data;
   }
 
@@ -37,17 +31,8 @@ export class ActivityHelper {
       const result = await this.sdk.authControllerSignUp({
         body: args,
       });
-      if (result?.error) {
-        throw Object.assign(
-          new Error(
-            (result.error as any).error ||
-              'Invalid credentials, please try again',
-          ),
-          result.error,
-        );
-      }
-      this.sessionId = result.data.sessionId;
-      this.authUser = result.data.profile;
+      this.sessionId = result.data?.sessionId || null;
+      this.authUser = result.data?.profile || null;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
@@ -63,17 +48,8 @@ export class ActivityHelper {
       const result = await this.sdk.authControllerSignIn({
         body: args,
       });
-      if (result?.error) {
-        throw Object.assign(
-          new Error(
-            (result.error as any).error ||
-              'Invalid credentials, please try again',
-          ),
-          result.error,
-        );
-      }
-      this.sessionId = result.data.sessionId;
-      this.authUser = result.data.profile;
+      this.sessionId = result.data?.sessionId || null;
+      this.authUser = result.data?.profile || null;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
@@ -89,16 +65,7 @@ export class ActivityHelper {
       this.apiKey = apiKey;
       this.updateClientConfig();
       const result = await this.sdk.authControllerProfile();
-      if (result?.error) {
-        throw Object.assign(
-          new Error(
-            (result.error as any).error ||
-              'Invalid credentials, please try again',
-          ),
-          result.error,
-        );
-      }
-      this.authUser = result.data;
+      this.authUser = result.data || null;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
@@ -111,12 +78,6 @@ export class ActivityHelper {
 
   async logout() {
     const result = await this.sdk.authControllerSignOut();
-    if (result?.error) {
-      throw Object.assign(
-        new Error((result.error as any).error || 'Failed to logout'),
-        result.error,
-      );
-    }
     this.apiKey = null;
     this.sessionId = null;
     this.authUser = null;

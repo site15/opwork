@@ -6,16 +6,17 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { CheckOpWorkUserType } from '../decorators/check-op-work-user-type';
 import { SkipCheckAuth } from '../decorators/skip-check-auth';
 import { AuthError, AuthErrorEnum } from '../errors/auth.errors';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { AppRequest } from '../types/request';
 import { getRequestFromExecutionContext } from '../utils/get-request-fromExecution-context';
 import { getClientIp } from '../utils/request-ip';
-import { CheckOpWorkUserType } from '../decorators/check-op-work-user-type';
 
 export const X_API_KEY_HEADER_NAME = 'x-api-key';
 export const X_SESSION_ID_HEADER_NAME = 'x-session-id';
+export const X_PROFILE_ID_HEADER_NAME = 'x-profile-id';
 export const DEFAULT_ALLOWED_IPS = ['127.0.0.1', '192.168.168.1', '::1'];
 
 @Injectable()
@@ -28,6 +29,8 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = getRequestFromExecutionContext(context) as AppRequest;
+    const method = req.method;
+
     const skipCheckAuth = !!this.reflector.getAllAndOverride(SkipCheckAuth, [
       context.getHandler(),
       context.getClass(),
@@ -37,26 +40,29 @@ export class AuthGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
+    // List of allowed IP addresses for security filtering
+    const ALLOWED_IPS = process.env.ALLOWED_IPS
+      ? [...(process.env.ALLOWED_IPS?.split(',') || [])]
+      : [...DEFAULT_ALLOWED_IPS];
+
     req.userIp =
       process.env.CHECK_IP === 'true' ? getClientIp(req as any) : '127.0.0.1';
+    req.apiKey = req.headers[X_API_KEY_HEADER_NAME];
+    req.sessionId = req.headers[X_SESSION_ID_HEADER_NAME];
+    req.profileId = req.headers[X_PROFILE_ID_HEADER_NAME];
 
-    if (
-      !req.userId &&
-      !req.headers[X_API_KEY_HEADER_NAME] &&
-      !req.headers[X_SESSION_ID_HEADER_NAME] &&
-      !skipCheckAuth
-    ) {
-      throw new AuthError(AuthErrorEnum.UNAUTHORIZED);
+    if (!req.userIp || !ALLOWED_IPS.includes(req.userIp)) {
+      Logger.log('Blocked request from unauthorized IP', {
+        userIp: req.userIp,
+        allowedIps: ALLOWED_IPS,
+      });
+      throw new AuthError(AuthErrorEnum.FORBIDDEN_IP);
     }
 
-    if (
-      !req.userId &&
-      (req.headers[X_API_KEY_HEADER_NAME] ||
-        (req.headers[X_API_KEY_HEADER_NAME] && !skipCheckAuth))
-    ) {
+    if (!req.userId && req.apiKey) {
       const apiKey = await this.prismaService.authApiKey.findFirst({
         include: { AuthUser: { include: { OpWorkProfile: true } } },
-        where: { apiKey: req.headers[X_API_KEY_HEADER_NAME] },
+        where: { apiKey: req.apiKey },
       });
 
       if (apiKey && apiKey.AuthUser) {
@@ -69,17 +75,12 @@ export class AuthGuard implements CanActivate {
       }
     }
 
-    if (
-      !req.userId &&
-      (req.headers[X_SESSION_ID_HEADER_NAME] ||
-        (!req.headers[X_SESSION_ID_HEADER_NAME] && !skipCheckAuth))
-    ) {
+    if (!req.userId && req.sessionId) {
       const session = await this.prismaService.authSession.findFirst({
         include: { AuthUser: { include: { OpWorkProfile: true } } },
-        where: { id: req.headers[X_SESSION_ID_HEADER_NAME] },
+        where: { id: req.sessionId },
       });
       if (session && session.AuthUser) {
-        req.sessionId = session.id;
         req.userId = session.AuthUser.id;
         req.user = session.AuthUser;
       }
@@ -89,22 +90,38 @@ export class AuthGuard implements CanActivate {
       }
     }
 
-    console.log({ checkOpWorkUserType });
-    // List of allowed IP addresses for security filtering
-    const ALLOWED_IPS = process.env.ALLOWED_IPS
-      ? [...(process.env.ALLOWED_IPS?.split(',') || [])]
-      : [...DEFAULT_ALLOWED_IPS];
-
-    if (!req.userId && !skipCheckAuth) {
+    if (!req.userId && !req.apiKey && !req.sessionId && !skipCheckAuth) {
       throw new AuthError(AuthErrorEnum.UNAUTHORIZED);
     }
 
-    if (!req.userIp || !ALLOWED_IPS.includes(req.userIp)) {
-      Logger.log('Blocked request from unauthorized IP', {
-        userIp: req.userIp,
-        allowedIps: ALLOWED_IPS,
-      });
-      throw new AuthError(AuthErrorEnum.FORBIDDEN_IP);
+    if (
+      req.profileId ||
+      (!req.profileId && req.user?.OpWorkProfile.length > 0)
+    ) {
+      const profile =
+        req.user?.OpWorkProfile.find((p) => p.id === req.profileId) ||
+        req.user?.OpWorkProfile[0];
+      if (!profile) {
+        throw new AuthError(AuthErrorEnum.PROFILE_NOT_FOUND);
+      }
+      req.profileId = profile.id;
+      req.profile = profile;
+    }
+
+    if (
+      checkOpWorkUserType?.some(
+        (type) =>
+          type.method === req.method &&
+          !(
+            Array.isArray(type.userTypes) ? type.userTypes : [type.userTypes]
+          ).find((userType) => req.profile?.userType === userType),
+      )
+    ) {
+      throw new AuthError(AuthErrorEnum.METHOD_NOT_ALLOWED);
+    }
+
+    if (!req.userId && !skipCheckAuth) {
+      throw new AuthError(AuthErrorEnum.UNAUTHORIZED);
     }
 
     return true;

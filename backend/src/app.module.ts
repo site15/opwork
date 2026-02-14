@@ -37,7 +37,7 @@ for (const controller of generatedControllers) {
         OpWorkUserType.JOB_SEEKER,
       ],
     },
-  ]);
+  ])(controller);
 }
 
 // Register controllers
