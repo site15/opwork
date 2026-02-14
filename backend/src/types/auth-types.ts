@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 
 // Enums
@@ -40,7 +40,9 @@ export class SignInArgs {
   @ApiPropertyOptional({
     enum: UserType,
     enumName: 'UserType',
+    nullable: true,
   })
+  @IsOptional()
   userType?: UserType;
 }
 
@@ -74,6 +76,8 @@ export class SignUpArgs {
   @ApiPropertyOptional({
     enum: UserType,
     enumName: 'UserType',
+    nullable: true,
   })
+  @IsOptional()
   userType?: UserType;
 }

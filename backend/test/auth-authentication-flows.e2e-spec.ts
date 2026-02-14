@@ -9,7 +9,7 @@ describe('Auth: Authentication flows (e2e)', () => {
   });
   const rnd = createHashFromString(Date.now().toString());
   const credentials = {
-    email: `test${rnd}@example.com`,
+    email: `test_${rnd}@example.com`,
     password: 'validPassword123',
   };
   let regProfile: AuthUser | null;

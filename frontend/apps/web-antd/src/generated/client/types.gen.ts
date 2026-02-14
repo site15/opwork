@@ -1719,7 +1719,7 @@ export type UserType = 'JOB_SEEKER' | 'EMPLOYER';
 export type SignUpArgs = {
     email: string;
     password: string;
-    userType?: UserType;
+    userType?: UserType | null;
 };
 
 export type SignUpResponse = {
@@ -1730,7 +1730,7 @@ export type SignUpResponse = {
 export type SignInArgs = {
     email: string;
     password: string;
-    userType?: UserType;
+    userType?: UserType | null;
 };
 
 export type SignInResponse = {
@@ -1738,16 +1738,15 @@ export type SignInResponse = {
     profile: AuthUser;
 };
 
-export type ProfileResponse = {
-    [key: string]: unknown;
-};
-
-export type UpdateProfileDto = {
-    [key: string]: unknown;
-};
-
-export type UpdateProfileResponse = {
-    [key: string]: unknown;
+export type UpdateProfileArgs = {
+    title?: string | null;
+    description?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    website?: string | null;
+    location?: string | null;
+    avatarUrl?: string | null;
+    coverImage?: string | null;
 };
 
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
@@ -3997,47 +3996,26 @@ export type ProfileControllerGetProfileErrors = {
 export type ProfileControllerGetProfileError = ProfileControllerGetProfileErrors[keyof ProfileControllerGetProfileErrors];
 
 export type ProfileControllerGetProfileResponses = {
-    200: ProfileResponse;
+    200: OpWorkProfileDto;
 };
 
 export type ProfileControllerGetProfileResponse = ProfileControllerGetProfileResponses[keyof ProfileControllerGetProfileResponses];
 
 export type ProfileControllerUpdateProfileData = {
-    body: UpdateProfileDto;
+    body: UpdateProfileArgs;
     path?: never;
     query?: never;
     url: '/api/profile';
 };
 
 export type ProfileControllerUpdateProfileErrors = {
-    default: UpdateProfileResponse;
+    default: OpWorkProfileDto;
 };
 
 export type ProfileControllerUpdateProfileError = ProfileControllerUpdateProfileErrors[keyof ProfileControllerUpdateProfileErrors];
 
 export type ProfileControllerUpdateProfileResponses = {
-    200: UpdateProfileResponse;
+    200: OpWorkProfileDto;
 };
 
 export type ProfileControllerUpdateProfileResponse = ProfileControllerUpdateProfileResponses[keyof ProfileControllerUpdateProfileResponses];
-
-export type ProfileControllerGetProfileByIdData = {
-    body?: never;
-    path: {
-        id: string;
-    };
-    query?: never;
-    url: '/api/profile/{id}';
-};
-
-export type ProfileControllerGetProfileByIdErrors = {
-    default: ProfileResponse;
-};
-
-export type ProfileControllerGetProfileByIdError = ProfileControllerGetProfileByIdErrors[keyof ProfileControllerGetProfileByIdErrors];
-
-export type ProfileControllerGetProfileByIdResponses = {
-    200: ProfileResponse;
-};
-
-export type ProfileControllerGetProfileByIdResponse = ProfileControllerGetProfileByIdResponses[keyof ProfileControllerGetProfileByIdResponses];

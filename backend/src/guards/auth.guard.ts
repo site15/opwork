@@ -64,6 +64,9 @@ export class AuthGuard implements CanActivate {
         include: { AuthUser: { include: { OpWorkProfile: true } } },
         where: { apiKey: req.apiKey },
       });
+      if (apiKey?.apiKey) {
+        req.apiKey = apiKey.apiKey;
+      }
 
       if (apiKey && apiKey.AuthUser) {
         req.userId = apiKey.AuthUser.id;

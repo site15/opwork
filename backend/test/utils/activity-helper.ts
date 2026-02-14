@@ -2,7 +2,8 @@ import {
   X_API_KEY_HEADER_NAME,
   X_SESSION_ID_HEADER_NAME,
 } from '../../src/guards/auth.guard';
-import { AuthUser, Sdk, SignInArgs } from '../generated/client';
+import { createHashFromString } from '../../src/utils/create-hash-from-string';
+import { AuthUser, Sdk, SignInArgs, UserType } from '../generated/client';
 import { Client, Config, createClient } from '../generated/client/client';
 
 export class ActivityHelper {
@@ -74,6 +75,22 @@ export class ActivityHelper {
       this.updateClientConfig();
       throw error;
     }
+  }
+
+  async registerAndLogin(args: SignInArgs) {
+    await this.register(args);
+    return await this.login(args);
+  }
+
+  async registerAndLoginRandomUser(userType?: UserType) {
+    const rnd = createHashFromString(Date.now().toString());
+    const args = {
+      email: `test_${rnd}_${userType?.toLowerCase()}@example.com`,
+      password: 'validPassword123',
+      userType,
+    };
+    await this.register(args);
+    return await this.login(args);
   }
 
   async logout() {

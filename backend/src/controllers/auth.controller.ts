@@ -39,10 +39,12 @@ export class AuthController {
   @Get('sign-out')
   @ApiOkResponse({ type: StatusResponse })
   async signOut(@CurrentAppRequest() req: AppRequest): Promise<StatusResponse> {
-    await this.prismaService.authSession.update({
-      where: { id: req.sessionId },
-      data: { isActive: false },
-    });
+    if (req.sessionId) {
+      await this.prismaService.authSession.update({
+        where: { id: req.sessionId },
+        data: { isActive: false },
+      });
+    }
     return { message: 'ok' };
   }
 

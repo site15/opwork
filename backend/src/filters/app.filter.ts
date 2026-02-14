@@ -17,6 +17,7 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
   }
 
   override catch(exception: HttpException | Error, host: ArgumentsHost) {
+    this.logger.error(exception, exception.stack);
     const parsedException =
       this.prismaToolsService.convertPrismaErrorToDbError(exception);
     if (parsedException) {
