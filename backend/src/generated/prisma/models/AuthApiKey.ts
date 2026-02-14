@@ -545,6 +545,7 @@ export type $AuthApiKeyPayload<ExtArgs extends runtime.Types.Extensions.Internal
     /**
      * Значение API-ключа для аутентификации
      * Хранится в открытом виде для удобства использования
+     * @MaxLength(255)
      */
     apiKey: string | null
     /**

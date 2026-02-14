@@ -809,10 +809,14 @@ export type $OpWorkJobSeekerSkillPayload<ExtArgs extends runtime.Types.Extension
     skillId: string
     /**
      * Уровень владения навыком (1-5)
+     * @Minimum(1)
+     * @Maximum(5)
+     * @example(5)
      */
     level: number
     /**
      * Количество лет опыта с этим навыком
+     * @Minimum(0)
      */
     yearsOfExp: number | null
     /**
@@ -821,6 +825,7 @@ export type $OpWorkJobSeekerSkillPayload<ExtArgs extends runtime.Types.Extension
     isPrimary: boolean | null
     /**
      * Дата последнего использования навыка
+     * @IsDate
      */
     lastUsed: Date | null
     /**

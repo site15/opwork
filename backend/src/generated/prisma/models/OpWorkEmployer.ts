@@ -1093,10 +1093,12 @@ export type $OpWorkEmployerPayload<ExtArgs extends runtime.Types.Extensions.Inte
     profileId: string
     /**
      * Название компании
+     * @MaxLength(255)
      */
     companyName: string
     /**
      * Отрасль деятельности
+     * @MaxLength(255)
      */
     industry: string | null
     /**
@@ -1113,42 +1115,61 @@ export type $OpWorkEmployerPayload<ExtArgs extends runtime.Types.Extensions.Inte
     culture: string | null
     /**
      * Год основания компании
+     * @Minimum(1800)
+     * @Maximum(2100)
+     * @example(2020)
      */
     foundedYear: number | null
     /**
      * Главный офис/штаб-квартира
+     * @MaxLength(255)
      */
     headquarters: string | null
     /**
      * URL логотипа компании
+     * @MaxLength(500)
+     * @IsUrl
      */
     logoUrl: string | null
     /**
      * URL обложки профиля компании
+     * @MaxLength(500)
+     * @IsUrl
      */
     coverImageUrl: string | null
     /**
      * Корпоративная электронная почта
+     * @IsEmail
+     * @MaxLength(255)
      */
     companyEmail: string | null
     /**
      * Корпоративный телефон
+     * @MaxLength(50)
      */
     companyPhone: string | null
     /**
      * Официальный сайт компании
+     * @MaxLength(500)
+     * @IsUrl
      */
     companyWebsite: string | null
     /**
      * Профиль компании в LinkedIn
+     * @MaxLength(500)
+     * @IsUrl
      */
     linkedinUrl: string | null
     /**
      * Профиль компании в Twitter
+     * @MaxLength(500)
+     * @IsUrl
      */
     twitterUrl: string | null
     /**
      * Профиль компании в Facebook
+     * @MaxLength(500)
+     * @IsUrl
      */
     facebookUrl: string | null
     /**

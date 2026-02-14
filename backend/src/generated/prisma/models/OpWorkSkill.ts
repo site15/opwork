@@ -822,6 +822,7 @@ export type $OpWorkSkillPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     /**
      * Название навыка или технологии
+     * @MaxLength(255)
      */
     name: string
     /**
@@ -830,18 +831,23 @@ export type $OpWorkSkillPayload<ExtArgs extends runtime.Types.Extensions.Interna
     description: string | null
     /**
      * Тип навыка (язык программирования, фреймворк и т.д.)
+     * @IsEnum(OpWorkSkillType)
      */
     type: $Enums.OpWorkSkillType | null
     /**
      * Категория навыка для группировки
+     * @MaxLength(255)
      */
     category: string | null
     /**
      * URL иконки навыка
+     * @MaxLength(500)
+     * @IsUrl
      */
     icon: string | null
     /**
      * Популярность навыка (количество использований)
+     * @Minimum(0)
      */
     popularity: number
     /**

@@ -948,6 +948,7 @@ export type $AuthUserPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     /**
      * Электронная почта пользователя
+     * @IsEmail
      */
     email: string | null
     /**
@@ -957,11 +958,13 @@ export type $AuthUserPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     /**
      * Анонимный идентификатор пользователя для гостей
      * Используется до привязки к внешней системе аутентификации
+     * @MaxLength(255)
      */
     anonymousId: string | null
     /**
      * Идентификатор пользователя в системе Supabase
      * Уникальный идентификатор из внешней системы аутентификации
+     * @MaxLength(255)
      */
     supabaseUserId: string | null
     /**

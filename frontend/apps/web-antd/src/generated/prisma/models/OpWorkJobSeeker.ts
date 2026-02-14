@@ -1443,10 +1443,12 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
     profileId: string
     /**
      * Текущая должность
+     * @MaxLength(255)
      */
     currentPosition: string | null
     /**
      * Текущее место работы
+     * @MaxLength(255)
      */
     currentCompany: string | null
     /**
@@ -1455,10 +1457,12 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
     summary: string | null
     /**
      * Ожидаемый уровень заработной платы
+     * @Minimum(0)
      */
     expectedSalary: number | null
     /**
      * Валюта зарплаты (по умолчанию USD)
+     * @MaxLength(3)
      */
     salaryCurrency: string | null
     /**
@@ -1479,14 +1483,20 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
     preferredLocations: string | null
     /**
      * Профиль LinkedIn
+     * @MaxLength(500)
+     * @IsUrl
      */
     linkedinUrl: string | null
     /**
      * Профиль GitHub
+     * @MaxLength(500)
+     * @IsUrl
      */
     githubUrl: string | null
     /**
      * Портфолио или персональный сайт
+     * @MaxLength(500)
+     * @IsUrl
      */
     portfolioUrl: string | null
     /**

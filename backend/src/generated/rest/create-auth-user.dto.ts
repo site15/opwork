@@ -1,7 +1,7 @@
 
 import {Prisma} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsOptional,IsString} from 'class-validator'
+import {IsBoolean,IsEmail,IsOptional,IsString,MaxLength} from 'class-validator'
 
 
 
@@ -14,6 +14,7 @@ export class CreateAuthUserDto {
 })
 @IsOptional()
 @IsString()
+@IsEmail()
 email?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -30,6 +31,7 @@ password?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 anonymousId?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -38,6 +40,7 @@ anonymousId?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 supabaseUserId?: string  | null;
 @ApiProperty({
   type: () => Object,

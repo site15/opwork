@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsInt,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -23,6 +23,7 @@ export class UpdateOpWorkJobSeekerDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 currentPosition?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -31,6 +32,7 @@ currentPosition?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 currentCompany?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -56,6 +58,7 @@ expectedSalary?: number  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(3)
 salaryCurrency?: string  | null;
 @ApiProperty({
   type: 'boolean',
@@ -96,6 +99,8 @@ preferredLocations?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 linkedinUrl?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -104,6 +109,8 @@ linkedinUrl?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 githubUrl?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -112,6 +119,8 @@ githubUrl?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 portfolioUrl?: string  | null;
 @ApiProperty({
   required: false,

@@ -1048,14 +1048,19 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     coverLetter: string | null
     /**
      * URL резюме кандидата
+     * @MaxLength(500)
+     * @IsUrl
      */
     resumeUrl: string | null
     /**
      * URL портфолио или персонального сайта
+     * @MaxLength(500)
+     * @IsUrl
      */
     portfolioUrl: string | null
     /**
      * Текущий статус отклика в процессе рассмотрения
+     * @IsEnum(OpWorkApplicationStatus)
      */
     status: $Enums.OpWorkApplicationStatus
     /**
@@ -1064,10 +1069,12 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     statusNotes: string | null
     /**
      * Дата подачи отклика
+     * @IsDate
      */
     appliedAt: Date | null
     /**
      * Дата последнего обновления статуса
+     * @IsDate
      */
     statusUpdatedAt: Date | null
   }, ExtArgs["result"]["opWorkApplication"]>

@@ -714,22 +714,27 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
     jobSeekerId: string
     /**
      * Название учебного заведения
+     * @MaxLength(255)
      */
     institution: string
     /**
      * Уровень образования
+     * @IsEnum(OpWorkEducationDegree)
      */
     degree: $Enums.OpWorkEducationDegree | null
     /**
      * Специальность/направление подготовки
+     * @MaxLength(255)
      */
     fieldOfStudy: string | null
     /**
      * Дата начала обучения
+     * @IsDate
      */
     startDate: Date
     /**
      * Дата окончания обучения
+     * @IsDate
      */
     endDate: Date | null
     /**
@@ -742,6 +747,7 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
     description: string | null
     /**
      * Академическая успеваемость
+     * @IsEnum(OpWorkGrade)
      */
     grade: $Enums.OpWorkGrade | null
     /**

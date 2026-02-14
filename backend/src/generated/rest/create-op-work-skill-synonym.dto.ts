@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkSkillDto} from './connect-op-work-skill.dto'
 
@@ -21,6 +21,7 @@ export class CreateOpWorkSkillSynonymDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 synonym!: string ;
 @ApiProperty({
   type: CreateOpWorkSkillSynonymOpWorkSkillRelationInputDto,

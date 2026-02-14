@@ -2780,19 +2780,24 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * Тип профиля в системе
      * Определяет основное назначение профиля (проект/специалист/работодатель)
+     * @IsEnum(OpWorkProfileType)
      */
     type: $Enums.OpWorkProfileType
     /**
      * Тип пользователя в контексте рекрутинга
      * Определяет роль пользователя (соискатель/работодатель/админ)
+     * @IsEnum(OpWorkUserType)
      */
     userType: $Enums.OpWorkUserType
     /**
      * Заголовок профиля (имя, название компании, название проекта)
+     * @MaxLength(255)
      */
     title: string | null
     /**
      * Подробное описание профиля
+     * @MaxLength(2000)
+     * @example(vue developer with 5 years experience)
      */
     description: string | null
     /**
@@ -2805,26 +2810,36 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     isEmailVerified: boolean | null
     /**
      * Электронная почта для профессиональных контактов
+     * @IsEmail
+     * @MaxLength(255)
      */
     email: string | null
     /**
      * Номер телефона
+     * @MaxLength(50)
      */
     phone: string | null
     /**
      * Персональный или корпоративный сайт
+     * @MaxLength(500)
+     * @IsUrl
      */
     website: string | null
     /**
      * Географическое расположение
+     * @MaxLength(255)
      */
     location: string | null
     /**
      * URL аватара пользователя/логотипа компании
+     * @MaxLength(500)
+     * @IsUrl
      */
     avatarUrl: string | null
     /**
      * URL обложки профиля
+     * @MaxLength(500)
+     * @IsUrl
      */
     coverImage: string | null
     /**

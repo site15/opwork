@@ -1,7 +1,7 @@
 
 import {OpWorkSkillType} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
-import {IsEnum,IsInt,IsNotEmpty,IsOptional,IsString} from 'class-validator'
+import {IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength} from 'class-validator'
 
 
 
@@ -12,6 +12,7 @@ export class CreateOpWorkSkillDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 name!: string ;
 @ApiProperty({
   type: 'string',
@@ -37,6 +38,7 @@ type?: OpWorkSkillType  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 category?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -45,6 +47,8 @@ category?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 icon?: string  | null;
 @ApiProperty({
   type: 'integer',

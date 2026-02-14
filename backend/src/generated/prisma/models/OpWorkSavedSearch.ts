@@ -673,10 +673,12 @@ export type $OpWorkSavedSearchPayload<ExtArgs extends runtime.Types.Extensions.I
     profileId: string
     /**
      * Название сохраненного поиска
+     * @MaxLength(255)
      */
     name: string
     /**
      * Текст поискового запроса
+     * @MaxLength(500)
      */
     query: string
     /**
@@ -689,10 +691,12 @@ export type $OpWorkSavedSearchPayload<ExtArgs extends runtime.Types.Extensions.I
     isActive: boolean | null
     /**
      * Частота отправки уведомлений
+     * @IsEnum(OpWorkFrequency)
      */
     frequency: $Enums.OpWorkFrequency | null
     /**
      * Дата последней отправки уведомления
+     * @IsDate
      */
     lastSentAt: Date | null
     /**

@@ -1,7 +1,7 @@
 
 import {OpWorkApplicationStatus} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
@@ -52,6 +52,8 @@ coverLetter?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 resumeUrl?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -60,6 +62,8 @@ resumeUrl?: string  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(500)
 portfolioUrl?: string  | null;
 @ApiProperty({
   enum: OpWorkApplicationStatus,
@@ -84,6 +88,7 @@ statusNotes?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 appliedAt?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -93,6 +98,7 @@ appliedAt?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 statusUpdatedAt?: Date  | null;
 @ApiProperty({
   type: CreateOpWorkApplicationOpWorkJobSeekerRelationInputDto,

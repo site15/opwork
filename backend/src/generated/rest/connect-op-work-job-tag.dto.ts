@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class OpWorkJobTagUqOpWorkJobTagUniqueInputDto {
@@ -15,6 +15,7 @@ jobId!: string ;
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(100)
 name!: string ;
   }
 

@@ -1,7 +1,7 @@
 
 import {OpWorkEmploymentType} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 
@@ -22,12 +22,14 @@ export class CreateOpWorkExperienceDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 company!: string ;
 @ApiProperty({
   type: 'string',
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 position!: string ;
 @ApiProperty({
   type: 'string',
@@ -43,6 +45,7 @@ description?: string  | null;
 })
 @IsNotEmpty()
 @IsDateString()
+@IsDate()
 startDate!: Date ;
 @ApiProperty({
   type: 'string',
@@ -52,6 +55,7 @@ startDate!: Date ;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 endDate?: Date  | null;
 @ApiProperty({
   type: 'boolean',
@@ -68,6 +72,7 @@ isCurrent?: boolean  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 location?: string  | null;
 @ApiProperty({
   enum: OpWorkEmploymentType,

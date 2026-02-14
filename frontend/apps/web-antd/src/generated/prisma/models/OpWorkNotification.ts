@@ -869,10 +869,12 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
     profileId: string | null
     /**
      * Тип уведомления
+     * @IsEnum(OpWorkNotificationType)
      */
     type: $Enums.OpWorkNotificationType
     /**
      * Заголовок уведомления
+     * @MaxLength(255)
      */
     title: string
     /**
@@ -897,6 +899,7 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
     createdAt: Date
     /**
      * Временная метка прочтения уведомления
+     * @IsDate
      */
     readAt: Date | null
   }, ExtArgs["result"]["opWorkNotification"]>

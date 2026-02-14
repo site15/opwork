@@ -5,6 +5,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ApiSecurity } from '@nestjs/swagger';
 import { join } from 'path';
 import { AuthController } from './controllers/auth.controller';
+import { ProfileController } from './controllers/profile.controller';
 import { AppExceptionsFilter } from './filters/app.filter';
 import { CONTROLLERS } from './generated/rest/controllers';
 import { AuthGuard } from './guards/auth.guard';
@@ -15,7 +16,7 @@ import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
 import { OpWorkUserType } from './generated/prisma/enums';
 
 const generatedControllers = CONTROLLERS;
-const appControllers = [AuthController];
+const appControllers = [AuthController, ProfileController];
 const controllers = [...generatedControllers, ...appControllers];
 
 // Apply ApiSecurity to all controllers

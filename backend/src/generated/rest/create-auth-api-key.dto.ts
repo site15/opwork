@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectAuthUserDto} from './connect-auth-user.dto'
 
@@ -23,6 +23,7 @@ export class CreateAuthApiKeyDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 apiKey?: string  | null;
 @ApiProperty({
   type: 'boolean',

@@ -1714,9 +1714,23 @@ export type UpdateOpWorkJobTagDto = {
     OpWorkJob?: UpdateOpWorkJobTagOpWorkJobRelationInputDto;
 };
 
+export type UserType = 'JOB_SEEKER' | 'EMPLOYER';
+
+export type SignUpArgs = {
+    email: string;
+    password: string;
+    userType?: UserType;
+};
+
+export type SignUpResponse = {
+    sessionId: string;
+    profile: AuthUser;
+};
+
 export type SignInArgs = {
-    email: string | null;
-    password: string | null;
+    email: string;
+    password: string;
+    userType?: UserType;
 };
 
 export type SignInResponse = {
@@ -1724,11 +1738,23 @@ export type SignInResponse = {
     profile: AuthUser;
 };
 
-export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP';
+export type ProfileResponse = {
+    [key: string]: unknown;
+};
+
+export type UpdateProfileDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateProfileResponse = {
+    [key: string]: unknown;
+};
+
+export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
     /**
-     * Auth error (AUTH_ERROR), User already exists (ALREADY_EXISTS), Invalid credentials (INVALID_CREDENTIALS), API key is not active (API_KEY_NOT_ACTIVE), Session is not active (SESSION_NOT_ACTIVE), Unauthorized (UNAUTHORIZED), Forbidden: IP address not allowed (FORBIDDEN_IP)
+     * Auth error (AUTH_ERROR), User already exists (ALREADY_EXISTS), Invalid credentials (INVALID_CREDENTIALS), API key is not active (API_KEY_NOT_ACTIVE), Session is not active (SESSION_NOT_ACTIVE), Unauthorized (UNAUTHORIZED), Forbidden: IP address not allowed (FORBIDDEN_IP), Profile not found (PROFILE_NOT_FOUND), Method not allowed (METHOD_NOT_ALLOWED), Validation error (VALIDATION_ERROR)
      */
     message: string;
     code: AuthErrorEnum;
@@ -3916,7 +3942,7 @@ export type AuthControllerSignOutResponses = {
 export type AuthControllerSignOutResponse = AuthControllerSignOutResponses[keyof AuthControllerSignOutResponses];
 
 export type AuthControllerSignUpData = {
-    body: SignInArgs;
+    body: SignUpArgs;
     path?: never;
     query?: never;
     url: '/api/auth/sign-up';
@@ -3924,13 +3950,13 @@ export type AuthControllerSignUpData = {
 
 export type AuthControllerSignUpErrors = {
     400: AuthError;
-    default: SignInResponse;
+    default: SignUpResponse;
 };
 
 export type AuthControllerSignUpError = AuthControllerSignUpErrors[keyof AuthControllerSignUpErrors];
 
 export type AuthControllerSignUpResponses = {
-    200: SignInResponse;
+    200: SignUpResponse;
 };
 
 export type AuthControllerSignUpResponse = AuthControllerSignUpResponses[keyof AuthControllerSignUpResponses];
@@ -3954,3 +3980,64 @@ export type AuthControllerSignInResponses = {
 };
 
 export type AuthControllerSignInResponse = AuthControllerSignInResponses[keyof AuthControllerSignInResponses];
+
+export type ProfileControllerGetProfileData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/profile';
+};
+
+export type ProfileControllerGetProfileErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type ProfileControllerGetProfileError = ProfileControllerGetProfileErrors[keyof ProfileControllerGetProfileErrors];
+
+export type ProfileControllerGetProfileResponses = {
+    200: ProfileResponse;
+};
+
+export type ProfileControllerGetProfileResponse = ProfileControllerGetProfileResponses[keyof ProfileControllerGetProfileResponses];
+
+export type ProfileControllerUpdateProfileData = {
+    body: UpdateProfileDto;
+    path?: never;
+    query?: never;
+    url: '/api/profile';
+};
+
+export type ProfileControllerUpdateProfileErrors = {
+    default: UpdateProfileResponse;
+};
+
+export type ProfileControllerUpdateProfileError = ProfileControllerUpdateProfileErrors[keyof ProfileControllerUpdateProfileErrors];
+
+export type ProfileControllerUpdateProfileResponses = {
+    200: UpdateProfileResponse;
+};
+
+export type ProfileControllerUpdateProfileResponse = ProfileControllerUpdateProfileResponses[keyof ProfileControllerUpdateProfileResponses];
+
+export type ProfileControllerGetProfileByIdData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/profile/{id}';
+};
+
+export type ProfileControllerGetProfileByIdErrors = {
+    default: ProfileResponse;
+};
+
+export type ProfileControllerGetProfileByIdError = ProfileControllerGetProfileByIdErrors[keyof ProfileControllerGetProfileByIdErrors];
+
+export type ProfileControllerGetProfileByIdResponses = {
+    200: ProfileResponse;
+};
+
+export type ProfileControllerGetProfileByIdResponse = ProfileControllerGetProfileByIdResponses[keyof ProfileControllerGetProfileByIdResponses];

@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsInt,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsInt,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 import {ConnectOpWorkSkillDto} from './connect-op-work-skill.dto'
@@ -58,6 +58,7 @@ isPrimary?: boolean  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 lastUsed?: Date  | null;
 @ApiProperty({
   type: CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto,

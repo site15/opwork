@@ -514,10 +514,13 @@ export type $OpWorkJobTagPayload<ExtArgs extends runtime.Types.Extensions.Intern
     jobId: string
     /**
      * Название тега
+     * @MaxLength(100)
      */
     name: string
     /**
      * Цвет тега в формате HEX (#RRGGBB)
+     * @MaxLength(7)
+     * @example(#FF5733)
      */
     color: string | null
     /**

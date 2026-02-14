@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
@@ -42,6 +42,7 @@ export class UpdateOpWorkJobViewDto {
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 viewedAt?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -50,6 +51,7 @@ viewedAt?: Date  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(45)
 ipAddress?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -58,6 +60,7 @@ ipAddress?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(500)
 userAgent?: string  | null;
 @ApiProperty({
   required: false,

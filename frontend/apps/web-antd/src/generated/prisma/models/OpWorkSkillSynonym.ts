@@ -481,6 +481,7 @@ export type $OpWorkSkillSynonymPayload<ExtArgs extends runtime.Types.Extensions.
     skillId: string
     /**
      * Альтернативное название навыка
+     * @MaxLength(255)
      */
     synonym: string
     /**

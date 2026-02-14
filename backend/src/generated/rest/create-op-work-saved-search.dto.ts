@@ -1,7 +1,7 @@
 
 import {OpWorkFrequency,Prisma} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -22,12 +22,14 @@ export class CreateOpWorkSavedSearchDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 name!: string ;
 @ApiProperty({
   type: 'string',
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(500)
 query!: string ;
 @ApiProperty({
   type: () => Object,
@@ -61,6 +63,7 @@ frequency?: OpWorkFrequency  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 lastSentAt?: Date  | null;
 @ApiProperty({
   type: CreateOpWorkSavedSearchOpWorkProfileRelationInputDto,

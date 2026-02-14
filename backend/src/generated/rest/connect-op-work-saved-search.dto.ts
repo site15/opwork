@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class OpWorkSavedSearchUqOpWorkSavedSearchProfileNameUniqueInputDto {
@@ -15,6 +15,7 @@ profileId!: string ;
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 name!: string ;
   }
 

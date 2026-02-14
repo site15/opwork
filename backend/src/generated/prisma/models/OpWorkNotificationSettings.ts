@@ -602,6 +602,7 @@ export type $OpWorkNotificationSettingsPayload<ExtArgs extends runtime.Types.Ext
     pushJobAlerts: boolean | null
     /**
      * Частота отправки уведомлений о вакансиях
+     * @IsEnum(OpWorkFrequency)
      */
     jobAlertFrequency: $Enums.OpWorkFrequency | null
     /**

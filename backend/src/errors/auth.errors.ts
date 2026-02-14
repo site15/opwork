@@ -10,6 +10,7 @@ export enum AuthErrorEnum {
   FORBIDDEN_IP = 'FORBIDDEN_IP',
   PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND',
   METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED',
+  VALIDATION_ERROR = 'VALIDATION_ERROR',
 }
 
 export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
@@ -22,6 +23,7 @@ export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
   [AuthErrorEnum.FORBIDDEN_IP]: 'Forbidden: IP address not allowed',
   [AuthErrorEnum.PROFILE_NOT_FOUND]: 'Profile not found',
   [AuthErrorEnum.METHOD_NOT_ALLOWED]: 'Method not allowed',
+  [AuthErrorEnum.VALIDATION_ERROR]: 'Validation error',
 };
 
 export class AuthError<T = unknown> extends Error {

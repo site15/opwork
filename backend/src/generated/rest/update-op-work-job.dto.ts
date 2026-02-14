@@ -1,7 +1,7 @@
 
 import {OpWorkEmploymentType,OpWorkExperienceLevel,OpWorkJobStatus} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkEmployerDto} from './connect-op-work-employer.dto'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
@@ -33,6 +33,7 @@ export class UpdateOpWorkJobDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 title?: string ;
 @ApiProperty({
   type: 'string',
@@ -78,6 +79,7 @@ experienceLevel?: OpWorkExperienceLevel ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 department?: string  | null;
 @ApiProperty({
   type: 'integer',
@@ -104,6 +106,7 @@ salaryMax?: number  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(3)
 salaryCurrency?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -112,6 +115,7 @@ salaryCurrency?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 location?: string  | null;
 @ApiProperty({
   type: 'boolean',
@@ -161,6 +165,7 @@ savesCount?: number ;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 publishedAt?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -170,6 +175,7 @@ publishedAt?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 expiresAt?: Date  | null;
 @ApiProperty({
   required: false,

@@ -2353,6 +2353,7 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     profileId: string
     /**
      * Название должности
+     * @MaxLength(255)
      */
     title: string
     /**
@@ -2369,30 +2370,37 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     responsibilities: string
     /**
      * Тип занятости
+     * @IsEnum(OpWorkEmploymentType)
      */
     employmentType: $Enums.OpWorkEmploymentType
     /**
      * Требуемый уровень опыта
+     * @IsEnum(OpWorkExperienceLevel)
      */
     experienceLevel: $Enums.OpWorkExperienceLevel
     /**
      * Департамент/отдел
+     * @MaxLength(255)
      */
     department: string | null
     /**
      * Минимальный уровень заработной платы
+     * @Minimum(0)
      */
     salaryMin: number | null
     /**
      * Максимальный уровень заработной платы
+     * @Minimum(0)
      */
     salaryMax: number | null
     /**
      * Валюта заработной платы (по умолчанию USD)
+     * @MaxLength(3)
      */
     salaryCurrency: string | null
     /**
      * Местоположение работы
+     * @MaxLength(255)
      */
     location: string | null
     /**
@@ -2401,26 +2409,32 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     isRemote: boolean | null
     /**
      * Текущий статус вакансии
+     * @IsEnum(OpWorkJobStatus)
      */
     status: $Enums.OpWorkJobStatus
     /**
      * Количество просмотров вакансии
+     * @Minimum(0)
      */
     viewsCount: number
     /**
      * Количество откликов на вакансию
+     * @Minimum(0)
      */
     applicationsCount: number
     /**
      * Количество добавлений вакансии в избранное
+     * @Minimum(0)
      */
     savesCount: number
     /**
      * Дата публикации вакансии
+     * @IsDate
      */
     publishedAt: Date | null
     /**
      * Дата истечения вакансии
+     * @IsDate
      */
     expiresAt: Date | null
     /**

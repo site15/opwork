@@ -579,6 +579,7 @@ export type $OpWorkSearchHistoryPayload<ExtArgs extends runtime.Types.Extensions
     profileId: string
     /**
      * Текст поискового запроса
+     * @MaxLength(500)
      */
     query: string
     /**
@@ -587,10 +588,12 @@ export type $OpWorkSearchHistoryPayload<ExtArgs extends runtime.Types.Extensions
     filters: runtime.JsonValue | null
     /**
      * Количество найденных результатов
+     * @Minimum(0)
      */
     resultsCount: number | null
     /**
      * Временная метка выполнения поиска
+     * @IsDate
      */
     searchedAt: Date | null
   }, ExtArgs["result"]["opWorkSearchHistory"]>

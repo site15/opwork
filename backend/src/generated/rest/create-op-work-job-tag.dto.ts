@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
 
@@ -21,6 +21,7 @@ export class CreateOpWorkJobTagDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(100)
 name!: string ;
 @ApiProperty({
   type: 'string',
@@ -29,6 +30,7 @@ name!: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(7)
 color?: string  | null;
 @ApiProperty({
   type: CreateOpWorkJobTagOpWorkJobRelationInputDto,

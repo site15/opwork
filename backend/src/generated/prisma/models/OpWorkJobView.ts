@@ -676,14 +676,17 @@ export type $OpWorkJobViewPayload<ExtArgs extends runtime.Types.Extensions.Inter
     jobId: string
     /**
      * Временная метка просмотра
+     * @IsDate
      */
     viewedAt: Date | null
     /**
      * IP-адрес пользователя
+     * @MaxLength(45)
      */
     ipAddress: string | null
     /**
      * User-Agent браузера
+     * @MaxLength(500)
      */
     userAgent: string | null
   }, ExtArgs["result"]["opWorkJobView"]>

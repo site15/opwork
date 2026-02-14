@@ -1,7 +1,7 @@
 
 import {Prisma} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsInt,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsDate,IsDateString,IsInt,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -23,6 +23,7 @@ export class UpdateOpWorkSearchHistoryDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(500)
 query?: string ;
 @ApiProperty({
   type: () => Object,
@@ -48,6 +49,7 @@ resultsCount?: number  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 searchedAt?: Date  | null;
 @ApiProperty({
   required: false,

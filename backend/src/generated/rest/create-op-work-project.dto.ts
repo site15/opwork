@@ -1,7 +1,7 @@
 
 import {OpWorkProjectStatus,OpWorkProjectType} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -22,6 +22,7 @@ export class CreateOpWorkProjectDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 title!: string ;
 @ApiProperty({
   type: 'string',
@@ -54,6 +55,8 @@ type?: OpWorkProjectType  | null;
 })
 @IsOptional()
 @IsString()
+@IsUrl()
+@MaxLength(512)
 githubRepoUrl?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -87,6 +90,7 @@ plannedDatesDescription?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 plannedStartDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -96,6 +100,7 @@ plannedStartDate?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 plannedEndDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -113,6 +118,7 @@ implementationDescription?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 actualStartDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -122,6 +128,7 @@ actualStartDate?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 developmentStart?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -131,6 +138,7 @@ developmentStart?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 testingStart?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -148,6 +156,7 @@ launchDescription?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 launchDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -157,6 +166,7 @@ launchDate?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 goLiveDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -174,6 +184,7 @@ completionDescription?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 actualEndDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -183,6 +194,7 @@ actualEndDate?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 completionDate?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -200,6 +212,7 @@ maintenanceDescription?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 maintenanceStart?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -209,6 +222,7 @@ maintenanceStart?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 maintenanceEnd?: Date  | null;
 @ApiProperty({
   type: CreateOpWorkProjectOpWorkProfileRelationInputDto,

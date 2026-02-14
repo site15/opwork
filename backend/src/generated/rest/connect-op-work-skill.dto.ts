@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class OpWorkSkillUqOpWorkSkillNameUniqueInputDto {
@@ -9,6 +9,7 @@ export class OpWorkSkillUqOpWorkSkillNameUniqueInputDto {
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(255)
 name!: string ;
   }
 
@@ -27,6 +28,7 @@ id?: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 name?: string ;
 @ApiProperty({
   type: OpWorkSkillUqOpWorkSkillNameUniqueInputDto,

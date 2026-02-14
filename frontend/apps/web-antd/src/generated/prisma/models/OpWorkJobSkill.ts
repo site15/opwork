@@ -774,10 +774,15 @@ export type $OpWorkJobSkillPayload<ExtArgs extends runtime.Types.Extensions.Inte
     isRequired: boolean | null
     /**
      * Важность навыка (1-5)
+     * @Minimum(1)
+     * @Maximum(5)
+     * @example(3)
      */
     importance: number
     /**
      * Минимальный требуемый уровень владения
+     * @Minimum(1)
+     * @Maximum(5)
      */
     minLevel: number | null
     /**

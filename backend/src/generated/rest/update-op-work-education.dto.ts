@@ -1,7 +1,7 @@
 
 import {OpWorkEducationDegree,OpWorkGrade} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 
@@ -23,6 +23,7 @@ export class UpdateOpWorkEducationDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 institution?: string ;
 @ApiProperty({
   enum: OpWorkEducationDegree,
@@ -40,6 +41,7 @@ degree?: OpWorkEducationDegree  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 fieldOfStudy?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -48,6 +50,7 @@ fieldOfStudy?: string  | null;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 startDate?: Date ;
 @ApiProperty({
   type: 'string',
@@ -57,6 +60,7 @@ startDate?: Date ;
 })
 @IsOptional()
 @IsDateString()
+@IsDate()
 endDate?: Date  | null;
 @ApiProperty({
   type: 'boolean',
