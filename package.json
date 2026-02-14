@@ -1,7 +1,7 @@
 {
   "name": "opwork",
   "version": "1.0.0",
-  "description": "Modern question-answering system based on Retrieval-Augmented Generation (RAG) with support for multiple LLM providers and vector databases.",
+  "description": "Open source job search engine.",
   "author": {
     "name": "EndyKaufman",
     "email": "admin@site15.ru"

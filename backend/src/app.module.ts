@@ -15,6 +15,7 @@ import { providePrismaService } from './services/prisma.service';
 const controllers = [...CONTROLLERS, AuthController];
 for (const controller of controllers) {
   ApiSecurity('api_key')(controller);
+  ApiSecurity('session_id')(controller);
 }
 
 @Module({

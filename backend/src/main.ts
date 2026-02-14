@@ -11,7 +11,10 @@ import { AppModule } from './app.module';
 
 import 'dotenv/config';
 import { AppExceptionsFilter } from './filters/app.filter';
-import { X_API_KEY_HEADER_NAME } from './guards/auth.guard';
+import {
+  X_API_KEY_HEADER_NAME,
+  X_SESSION_ID_HEADER_NAME,
+} from './guards/auth.guard';
 
 Mustache.escape = function (text) {
   return text;
@@ -41,8 +44,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('RAG-system')
-    .setDescription('The RAG-system API description')
+    .setTitle('OPWork')
+    .setDescription('The OPWork API description')
     .setVersion('1.0')
     // Add the API key security definition
     .addApiKey(
@@ -53,6 +56,16 @@ async function bootstrap() {
         description: 'Enter your API key',
       },
       'api_key', // A unique name for the security scheme reference
+    )
+    // Add the API key security definition
+    .addApiKey(
+      {
+        type: 'apiKey',
+        name: X_SESSION_ID_HEADER_NAME, // The name of the header or query parameter
+        in: 'header', // The location (header, query, or cookie)
+        description: 'Enter your session ID',
+      },
+      'session_id', // A unique name for the security scheme reference
     )
     .build();
 

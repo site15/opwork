@@ -1,18 +1,19 @@
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import {
-  BadRequestException,
-  Body,
-  Controller,
-  Get,
-  Inject,
-  Post,
-} from '@nestjs/common';
-import { ApiOkResponse, ApiProperty, ApiTags, PickType } from '@nestjs/swagger';
+  ApiBadRequestResponse,
+  ApiOkResponse,
+  ApiProperty,
+  ApiTags,
+  refs,
+} from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { SkipCheckAuth } from '../decorators/skip-check-auth';
+import { AuthError, AuthErrorEnum } from '../errors/auth.errors';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 import { createHashFromString } from '../utils/create-hash-from-string';
 
 export class SignInResponse {
@@ -25,7 +26,14 @@ export class SignInResponse {
   profile!: AuthUser;
 }
 
-export class SignInArgs extends PickType(AuthUser, ['email']) {
+export class SignInArgs {
+  @ApiProperty({
+    type: 'string',
+    nullable: true,
+  })
+  @IsNotEmpty()
+  email!: string | null;
+
   @ApiProperty({
     type: 'string',
     nullable: true,
@@ -42,7 +50,6 @@ export class AuthController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @SkipCheckAuth()
   @Get('profile')
   @ApiOkResponse({ type: AuthUser })
   async profile(@CurrentAppRequest() req: AppRequest): Promise<AuthUser> {
@@ -50,48 +57,73 @@ export class AuthController {
   }
 
   @Get('sign-out')
-  @ApiOkResponse({ type: AuthUser })
-  async signOut(@CurrentAppRequest() req: AppRequest): Promise<AuthUser> {
+  @ApiOkResponse({ type: StatusResponse })
+  async signOut(@CurrentAppRequest() req: AppRequest): Promise<StatusResponse> {
     await this.prismaService.authSession.update({
       where: { id: req.sessionId },
       data: { isActive: false },
     });
-    return req.user;
+    return { message: 'ok' };
   }
 
-  @SkipCheckAuth({ skipCheckSessionId: true })
+  @ApiBadRequestResponse({
+    schema: { allOf: refs(AuthError) },
+  })
+  @SkipCheckAuth()
   @Post('sign-up')
   @ApiOkResponse({ type: SignInResponse })
   async signUp(@Body() args: SignInArgs): Promise<SignInResponse> {
-    const user = await this.prismaService.authUser.create({
-      data: {
-        email: args.email,
-        password: createHashFromString(args.password || ''),
-        isActive: true,
+    const email = args.email?.trim();
+    const password = args.password?.trim();
+
+    let user = await this.prismaService.authUser.findFirst({
+      where: {
+        email: { equals: email, mode: 'insensitive' },
       },
     });
+
+    if (user) {
+      throw new AuthError(AuthErrorEnum.ALREADY_EXISTS);
+    }
+
+    user =
+      await this.prismaService.$withoutUniversalPasswordHashing.authUser.create(
+        {
+          data: {
+            email,
+            password: createHashFromString(password || ''),
+            isActive: true,
+          },
+        },
+      );
     const session = await this.prismaService.authSession.create({
       data: { userId: user.id, isActive: true },
     });
     return { sessionId: session.id, profile: user };
   }
 
-  @SkipCheckAuth({ skipCheckSessionId: true })
+  @ApiBadRequestResponse({
+    schema: { allOf: refs(AuthError) },
+  })
+  @SkipCheckAuth()
   @Post('sign-in')
   @ApiOkResponse({ type: SignInResponse })
   async signIn(@Body() args: SignInArgs): Promise<SignInResponse> {
-    const user = await this.prismaService.authUser.findFirst({
-      where: {
-        email: args.email,
-        password: createHashFromString(args.password || ''),
-        isActive: true,
-      },
-    });
+    const email = args.email?.trim();
+    const password = args.password?.trim();
+
+    const user =
+      await this.prismaService.$withoutUniversalPasswordHashing.authUser.findFirst(
+        {
+          where: {
+            email: { equals: email, mode: 'insensitive' },
+            password: createHashFromString(password || ''),
+            isActive: true,
+          },
+        },
+      );
     if (!user) {
-      throw new BadRequestException({
-        code: 'UNAUTHORIZED',
-        message: 'Invalid credentials',
-      });
+      throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
     }
     const session = await this.prismaService.authSession.create({
       data: { userId: user.id },
