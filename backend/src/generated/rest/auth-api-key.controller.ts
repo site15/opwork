@@ -84,14 +84,14 @@ export class AuthApiKeyController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { apiKey: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.userId)
             ? [{ userId: { equals: otherArgs.userId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

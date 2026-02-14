@@ -12,6 +12,7 @@ import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { AppRequest } from '../types/request';
 import { getRequestFromExecutionContext } from '../utils/get-request-fromExecution-context';
 import { getClientIp } from '../utils/request-ip';
+import { CheckOpWorkUserType } from '../decorators/check-op-work-user-type';
 
 export const X_API_KEY_HEADER_NAME = 'x-api-key';
 export const X_SESSION_ID_HEADER_NAME = 'x-session-id';
@@ -31,6 +32,10 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
+    const checkOpWorkUserType = this.reflector.getAllAndOverride(
+      CheckOpWorkUserType,
+      [context.getHandler(), context.getClass()],
+    );
 
     req.userIp =
       process.env.CHECK_IP === 'true' ? getClientIp(req as any) : '127.0.0.1';
@@ -50,7 +55,7 @@ export class AuthGuard implements CanActivate {
         (req.headers[X_API_KEY_HEADER_NAME] && !skipCheckAuth))
     ) {
       const apiKey = await this.prismaService.authApiKey.findFirst({
-        select: { AuthUser: true, isActive: true },
+        include: { AuthUser: { include: { OpWorkProfile: true } } },
         where: { apiKey: req.headers[X_API_KEY_HEADER_NAME] },
       });
 
@@ -70,7 +75,7 @@ export class AuthGuard implements CanActivate {
         (!req.headers[X_SESSION_ID_HEADER_NAME] && !skipCheckAuth))
     ) {
       const session = await this.prismaService.authSession.findFirst({
-        select: { id: true, AuthUser: true, isActive: true },
+        include: { AuthUser: { include: { OpWorkProfile: true } } },
         where: { id: req.headers[X_SESSION_ID_HEADER_NAME] },
       });
       if (session && session.AuthUser) {
@@ -84,6 +89,7 @@ export class AuthGuard implements CanActivate {
       }
     }
 
+    console.log({ checkOpWorkUserType });
     // List of allowed IP addresses for security filtering
     const ALLOWED_IPS = process.env.ALLOWED_IPS
       ? [...(process.env.ALLOWED_IPS?.split(',') || [])]

@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   ParseUUIDPipe,
-  Inject,
   Post,
   Put,
   Query,
@@ -19,24 +19,25 @@ import {
 } from '@nestjs/swagger';
 import { IsOptional, isUUID } from 'class-validator';
 import {
-  PRISMA_SERVICE,
   FindManyArgs,
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
+  PRISMA_SERVICE,
   PrismaSdk,
   PrismaService,
 } from '../../services/prisma.service';
 import { StatusResponse } from '../../types/status-response';
 import { Prisma } from '../prisma/client';
+import { CreateOpWorkProfileDto } from './create-op-work-profile.dto';
 import { OpWorkProfileDto } from './op-work-profile.dto';
 import { OpWorkProfile } from './op-work-profile.entity';
-import { CreateOpWorkProfileDto } from './create-op-work-profile.dto';
 import { UpdateOpWorkProfileDto } from './update-op-work-profile.dto';
 
 export class FindManyOpWorkProfileArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
-  userId?: string;}
+  userId?: string;
+}
 
 export class FindManyOpWorkProfileResponseMeta extends FindManyResponseMeta {}
 
@@ -53,7 +54,7 @@ export class FindManyOpWorkProfileResponse {
 export class OpWorkProfileController {
   constructor(
     @Inject(PRISMA_SERVICE)
-    private readonly prismaService: PrismaService
+    private readonly prismaService: PrismaService,
   ) {}
 
   @Get()
@@ -83,30 +84,28 @@ export class OpWorkProfileController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { title: { contains: searchText, mode: 'insensitive' } },
-{ description: { contains: searchText, mode: 'insensitive' } },
-{ email: { contains: searchText, mode: 'insensitive' } },
-{ phone: { contains: searchText, mode: 'insensitive' } },
-{ website: { contains: searchText, mode: 'insensitive' } },
-{ location: { contains: searchText, mode: 'insensitive' } },
-{ avatarUrl: { contains: searchText, mode: 'insensitive' } },
-{ coverImage: { contains: searchText, mode: 'insensitive' } }
-            ],
-            AND: [
-              
-          ...(isUUID(otherArgs.userId)
-            ? [{ userId: { equals: otherArgs.userId } }]
-            : []),
+              { description: { contains: searchText, mode: 'insensitive' } },
+              { email: { contains: searchText, mode: 'insensitive' } },
+              { phone: { contains: searchText, mode: 'insensitive' } },
+              { website: { contains: searchText, mode: 'insensitive' } },
+              { location: { contains: searchText, mode: 'insensitive' } },
+              { avatarUrl: { contains: searchText, mode: 'insensitive' } },
+              { coverImage: { contains: searchText, mode: 'insensitive' } },
             ],
           }
         : {}),
-      
+      AND: [
+        ...(isUUID(otherArgs.userId)
+          ? [{ userId: { equals: otherArgs.userId } }]
+          : []),
+      ],
     };
 
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkProfile.findMany({
-          include:{
-AuthUser: true
+          include: {
+            AuthUser: true,
           },
           where: opWorkProfileWhereInput,
           take,
@@ -130,13 +129,11 @@ AuthUser: true
 
   @Post()
   @ApiCreatedResponse({ type: OpWorkProfileDto })
-  async createOne(
-    @Body() args: CreateOpWorkProfileDto,
-  ) {    
+  async createOne(@Body() args: CreateOpWorkProfileDto) {
     return await this.prismaService.opWorkProfile.create({
-      data: { 
+      data: {
         ...args,
-        AuthUser:{connect:{id:args.AuthUser?.connect.id}}
+        AuthUser: { connect: { id: args.AuthUser?.connect.id } },
       },
     });
   }
@@ -151,12 +148,13 @@ AuthUser: true
       data: {
         ...args,
         updatedAt: new Date(),
-        
-        ...(!args.AuthUser?{AuthUser:undefined}:{AuthUser: { connect: { id: args.AuthUser?.connect.id } }})
+
+        ...(!args.AuthUser
+          ? { AuthUser: undefined }
+          : { AuthUser: { connect: { id: args.AuthUser?.connect.id } } }),
       },
       where: {
         id,
-        
       },
     });
   }
@@ -178,7 +176,6 @@ AuthUser: true
     return await this.prismaService.opWorkProfile.findFirstOrThrow({
       where: {
         id,
-        
       },
     });
   }

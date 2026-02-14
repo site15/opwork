@@ -89,8 +89,10 @@ export class OpWorkNotificationController {
               { title: { contains: searchText, mode: 'insensitive' } },
 { message: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.userId)
             ? [{ userId: { equals: otherArgs.userId } }]
             : []),
@@ -98,9 +100,7 @@ export class OpWorkNotificationController {
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

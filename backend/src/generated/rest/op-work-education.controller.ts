@@ -86,14 +86,14 @@ export class OpWorkEducationController {
 { fieldOfStudy: { contains: searchText, mode: 'insensitive' } },
 { description: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.jobSeekerId)
             ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

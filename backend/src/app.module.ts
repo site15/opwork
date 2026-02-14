@@ -11,13 +11,36 @@ import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
+import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
+import { OpWorkUserType } from './generated/prisma/enums';
 
-const controllers = [...CONTROLLERS, AuthController];
+const generatedControllers = CONTROLLERS;
+const appControllers = [AuthController];
+const controllers = [...generatedControllers, ...appControllers];
+
+// Apply ApiSecurity to all controllers
 for (const controller of controllers) {
   ApiSecurity('api_key')(controller);
   ApiSecurity('session_id')(controller);
 }
 
+for (const controller of generatedControllers) {
+  CheckOpWorkUserType([
+    { method: 'POST', userTypes: [OpWorkUserType.ADMIN] },
+    { method: 'PUT', userTypes: [OpWorkUserType.ADMIN] },
+    { method: 'DELETE', userTypes: [OpWorkUserType.ADMIN] },
+    {
+      method: 'GET',
+      userTypes: [
+        OpWorkUserType.ADMIN,
+        OpWorkUserType.EMPLOYER,
+        OpWorkUserType.JOB_SEEKER,
+      ],
+    },
+  ]);
+}
+
+// Register controllers
 @Module({
   imports: [
     JwtModule,

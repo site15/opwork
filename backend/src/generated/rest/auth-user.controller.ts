@@ -84,9 +84,9 @@ export class AuthUserController {
 { anonymousId: { contains: searchText, mode: 'insensitive' } },
 { supabaseUserId: { contains: searchText, mode: 'insensitive' } }
             ],
-            
           }
         : {}),
+      
       
     };
 

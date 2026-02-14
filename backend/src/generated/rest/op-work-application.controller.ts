@@ -95,8 +95,10 @@ export class OpWorkApplicationController {
 { portfolioUrl: { contains: searchText, mode: 'insensitive' } },
 { statusNotes: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.jobSeekerId)
             ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
             : []),
@@ -108,9 +110,7 @@ export class OpWorkApplicationController {
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

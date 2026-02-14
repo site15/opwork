@@ -208,15 +208,15 @@ export class ${controllerName} {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               ${searchTexts}
             ],
-            ${
-              relationsAndWhere
-                ? `AND: [
-              ${relationsAndWhere}
-            ],`
-                : ''
-            }
           }
         : {}),
+      ${
+        relationsAndWhere
+          ? `AND: [
+        ${relationsAndWhere}
+      ],`
+          : ''
+      }
       ${hasDeletedAt ? 'deletedAt: null,' : ''}
     };
 

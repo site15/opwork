@@ -91,14 +91,14 @@ export class OpWorkJobSeekerController {
 { githubUrl: { contains: searchText, mode: 'insensitive' } },
 { portfolioUrl: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

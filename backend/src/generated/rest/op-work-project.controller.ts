@@ -93,14 +93,14 @@ export class OpWorkProjectController {
 { completionDescription: { contains: searchText, mode: 'insensitive' } },
 { maintenanceDescription: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

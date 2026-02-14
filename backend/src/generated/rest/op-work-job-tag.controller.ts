@@ -85,14 +85,14 @@ export class OpWorkJobTagController {
               { name: { contains: searchText, mode: 'insensitive' } },
 { color: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

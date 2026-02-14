@@ -84,14 +84,14 @@ export class OpWorkSearchHistoryController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { query: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

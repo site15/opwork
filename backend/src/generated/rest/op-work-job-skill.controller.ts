@@ -88,8 +88,10 @@ export class OpWorkJobSkillController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
@@ -97,9 +99,7 @@ export class OpWorkJobSkillController {
           ...(isUUID(otherArgs.skillId)
             ? [{ skillId: { equals: otherArgs.skillId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

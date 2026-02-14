@@ -88,8 +88,10 @@ export class OpWorkSavedJobController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { notes: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
@@ -97,9 +99,7 @@ export class OpWorkSavedJobController {
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

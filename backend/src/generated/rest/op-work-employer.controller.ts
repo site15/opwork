@@ -97,14 +97,14 @@ export class OpWorkEmployerController {
 { twitterUrl: { contains: searchText, mode: 'insensitive' } },
 { facebookUrl: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

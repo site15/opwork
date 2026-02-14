@@ -89,8 +89,10 @@ export class OpWorkJobViewController {
               { ipAddress: { contains: searchText, mode: 'insensitive' } },
 { userAgent: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
@@ -98,9 +100,7 @@ export class OpWorkJobViewController {
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

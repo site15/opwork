@@ -84,14 +84,14 @@ export class OpWorkNotificationSettingsController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

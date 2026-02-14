@@ -30,10 +30,10 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         userType: OpWorkUserType.EMPLOYER,
       });
     }
-    const specialistApiKeys = process.env.SPECIALIST_API_KEYS?.split(',') || [];
-    for (const specialistApiKey of specialistApiKeys) {
+    const jobSeekerApiKeys = process.env.JOB_SEEKER_API_KEYS?.split(',') || [];
+    for (const jobSeekerApiKey of jobSeekerApiKeys) {
       const authApiKey = await this.getOrCreateAuthApiKeyByApiKey({
-        apiKey: specialistApiKey,
+        apiKey: jobSeekerApiKey,
         userType: OpWorkUserType.JOB_SEEKER,
       });
       await this.getOrCreateOpWorkProfileByUserId({

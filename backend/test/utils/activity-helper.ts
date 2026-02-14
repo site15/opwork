@@ -8,10 +8,9 @@ import { Client, Config, createClient } from '../generated/client/client';
 export class ActivityHelper {
   private apiKey: string | null = null;
   private sessionId: string | null = null;
-  private profile: AuthUser | null = null;
-
   private client: Client;
 
+  authUser: AuthUser | null = null;
   sdk: Sdk;
 
   constructor(config: Config = {}) {
@@ -29,7 +28,7 @@ export class ActivityHelper {
         result.error,
       );
     }
-    this.profile = result.data;
+    this.authUser = result.data;
     return result.data;
   }
 
@@ -48,12 +47,12 @@ export class ActivityHelper {
         );
       }
       this.sessionId = result.data.sessionId;
-      this.profile = result.data.profile;
+      this.authUser = result.data.profile;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
       this.sessionId = null;
-      this.profile = null;
+      this.authUser = null;
       this.updateClientConfig();
       throw error;
     }
@@ -74,12 +73,12 @@ export class ActivityHelper {
         );
       }
       this.sessionId = result.data.sessionId;
-      this.profile = result.data.profile;
+      this.authUser = result.data.profile;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
       this.sessionId = null;
-      this.profile = null;
+      this.authUser = null;
       this.updateClientConfig();
       throw error;
     }
@@ -99,12 +98,12 @@ export class ActivityHelper {
           result.error,
         );
       }
-      this.profile = result.data;
+      this.authUser = result.data;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
       this.apiKey = null;
-      this.profile = null;
+      this.authUser = null;
       this.updateClientConfig();
       throw error;
     }
@@ -120,7 +119,7 @@ export class ActivityHelper {
     }
     this.apiKey = null;
     this.sessionId = null;
-    this.profile = null;
+    this.authUser = null;
     this.updateClientConfig();
     return result.data;
   }

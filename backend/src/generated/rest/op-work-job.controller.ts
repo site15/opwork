@@ -94,8 +94,10 @@ export class OpWorkJobController {
 { salaryCurrency: { contains: searchText, mode: 'insensitive' } },
 { location: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.employerId)
             ? [{ employerId: { equals: otherArgs.employerId } }]
             : []),
@@ -103,9 +105,7 @@ export class OpWorkJobController {
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

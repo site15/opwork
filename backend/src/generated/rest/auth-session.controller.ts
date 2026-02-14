@@ -84,14 +84,14 @@ export class AuthSessionController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.userId)
             ? [{ userId: { equals: otherArgs.userId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

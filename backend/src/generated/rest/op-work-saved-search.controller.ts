@@ -85,14 +85,14 @@ export class OpWorkSavedSearchController {
               { name: { contains: searchText, mode: 'insensitive' } },
 { query: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

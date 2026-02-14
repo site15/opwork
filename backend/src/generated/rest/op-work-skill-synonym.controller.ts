@@ -84,14 +84,14 @@ export class OpWorkSkillSynonymController {
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { synonym: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.skillId)
             ? [{ skillId: { equals: otherArgs.skillId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 

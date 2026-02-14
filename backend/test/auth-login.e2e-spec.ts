@@ -3,7 +3,7 @@ import { createHashFromString } from '../src/utils/create-hash-from-string';
 import { AuthUser } from './generated/client';
 import { ActivityHelper } from './utils/activity-helper';
 
-describe('Authentication flows (e2e)', () => {
+describe('Auth: Authentication flows (e2e)', () => {
   const activity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });

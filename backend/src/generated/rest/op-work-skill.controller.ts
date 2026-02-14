@@ -84,9 +84,9 @@ export class OpWorkSkillController {
 { category: { contains: searchText, mode: 'insensitive' } },
 { icon: { contains: searchText, mode: 'insensitive' } }
             ],
-            
           }
         : {}),
+      
       
     };
 

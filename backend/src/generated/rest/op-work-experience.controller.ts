@@ -87,14 +87,14 @@ export class OpWorkExperienceController {
 { description: { contains: searchText, mode: 'insensitive' } },
 { location: { contains: searchText, mode: 'insensitive' } }
             ],
-            AND: [
-              
+          }
+        : {}),
+      AND: [
+        
           ...(isUUID(otherArgs.jobSeekerId)
             ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
             : []),
-            ],
-          }
-        : {}),
+      ],
       
     };
 
