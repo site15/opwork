@@ -121,6 +121,7 @@ export class ActivityHelper {
     this.apiKey = null;
     this.sessionId = null;
     this.profile = null;
+    this.updateClientConfig();
     return result.data;
   }
 

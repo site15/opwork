@@ -2,45 +2,25 @@ import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
-  ApiProperty,
   ApiTags,
   refs,
 } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { SkipCheckAuth } from '../decorators/skip-check-auth';
 import { AuthError, AuthErrorEnum } from '../errors/auth.errors';
+import { OpWorkProfileType } from '../generated/prisma/enums';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
+import {
+  SignInArgs,
+  SignInResponse,
+  SignUpArgs,
+  SignUpResponse,
+  UserType,
+} from '../types/auth-types';
 import { AppRequest } from '../types/request';
 import { StatusResponse } from '../types/status-response';
 import { createHashFromString } from '../utils/create-hash-from-string';
-
-export class SignInResponse {
-  @ApiProperty({
-    type: 'string',
-  })
-  sessionId!: string;
-
-  @ApiProperty({ type: () => AuthUser })
-  profile!: AuthUser;
-}
-
-export class SignInArgs {
-  @ApiProperty({
-    type: 'string',
-    nullable: true,
-  })
-  @IsNotEmpty()
-  email!: string | null;
-
-  @ApiProperty({
-    type: 'string',
-    nullable: true,
-  })
-  @IsNotEmpty()
-  password!: string | null;
-}
 
 @ApiTags('auth')
 @Controller('auth')
@@ -71,11 +51,76 @@ export class AuthController {
   })
   @SkipCheckAuth()
   @Post('sign-up')
-  @ApiOkResponse({ type: SignInResponse })
-  async signUp(@Body() args: SignInArgs): Promise<SignInResponse> {
-    const email = args.email?.trim();
-    const password = args.password?.trim();
+  @ApiOkResponse({ type: SignUpResponse })
+  async signUp(@Body() args: SignUpArgs): Promise<SignUpResponse> {
+    const user = await this.createUser(args);
 
+    const session = await this.createAuthSession(user);
+    if (args.userType) {
+      await this.getOrCreateOpWorkProfile({ userType: args.userType, user });
+    }
+
+    return { sessionId: session.id, profile: user };
+  }
+
+  @ApiBadRequestResponse({
+    schema: { allOf: refs(AuthError) },
+  })
+  @SkipCheckAuth()
+  @Post('sign-in')
+  @ApiOkResponse({ type: SignInResponse })
+  async signIn(@Body() args: SignInArgs): Promise<SignInResponse> {
+    const user = await this.getAuthUserByEmailAndPassword(args);
+
+    const session = await this.createAuthSession(user);
+    if (args.userType) {
+      await this.getOrCreateOpWorkProfile({ userType: args.userType, user });
+    }
+
+    return { sessionId: session.id, profile: user };
+  }
+
+  private async getOrCreateOpWorkProfile({
+    userType,
+    user,
+  }: {
+    userType: UserType;
+    user: AuthUser;
+  }) {
+    const type =
+      userType === UserType.JOB_SEEKER
+        ? OpWorkProfileType.SPECIALIST
+        : OpWorkProfileType.EMPLOYER;
+    await this.prismaService.opWorkProfile.upsert({
+      where: {
+        uqOpWorkProfileUserType: { userId: user.id, type },
+      },
+      create: {
+        userId: user.id,
+        userType: userType,
+        type,
+      },
+      update: {
+        userId: user.id,
+        userType: userType,
+        type,
+      },
+    });
+  }
+
+  private async createAuthSession(user: AuthUser) {
+    return await this.prismaService.authSession.create({
+      data: { userId: user.id, isActive: true },
+    });
+  }
+
+  private async createUser({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
     let user = await this.prismaService.authUser.findFirst({
       where: {
         email: { equals: email, mode: 'insensitive' },
@@ -96,22 +141,16 @@ export class AuthController {
           },
         },
       );
-    const session = await this.prismaService.authSession.create({
-      data: { userId: user.id, isActive: true },
-    });
-    return { sessionId: session.id, profile: user };
+    return user;
   }
 
-  @ApiBadRequestResponse({
-    schema: { allOf: refs(AuthError) },
-  })
-  @SkipCheckAuth()
-  @Post('sign-in')
-  @ApiOkResponse({ type: SignInResponse })
-  async signIn(@Body() args: SignInArgs): Promise<SignInResponse> {
-    const email = args.email?.trim();
-    const password = args.password?.trim();
-
+  private async getAuthUserByEmailAndPassword({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
     const user =
       await this.prismaService.$withoutUniversalPasswordHashing.authUser.findFirst(
         {
@@ -125,9 +164,6 @@ export class AuthController {
     if (!user) {
       throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
     }
-    const session = await this.prismaService.authSession.create({
-      data: { userId: user.id },
-    });
-    return { sessionId: session.id, profile: user };
+    return user;
   }
 }
