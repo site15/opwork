@@ -5,6 +5,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ApiSecurity } from '@nestjs/swagger';
 import { join } from 'path';
 import { AuthController } from './controllers/auth.controller';
+import { EmployerWorkSkillController } from './controllers/employer-work-skill.controller';
+import { EmployerWorkController } from './controllers/employer-work.controller';
+import { EmployerController } from './controllers/employer.controller';
 import { JobSeekerEducationController } from './controllers/job-seeker-education.controller';
 import { JobSeekerExperienceController } from './controllers/job-seeker-experience.controller';
 import { JobSeekerSkillController } from './controllers/job-seeker-skill.controller';
@@ -18,8 +21,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
-import { EmployerController } from './controllers/employer.controller';
-import { EmployerWorkController } from './controllers/employer-work.controller';
 
 const generatedControllers = CONTROLLERS;
 const appControllers = [
@@ -31,6 +32,7 @@ const appControllers = [
   JobSeekerExperienceController,
   EmployerController,
   EmployerWorkController,
+  EmployerWorkSkillController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 

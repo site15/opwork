@@ -1,7 +1,8 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { UpdateOpWorkEmployerDto } from '../generated/rest/update-op-work-employer.dto';
+import { IsOptional, IsString, MaxLength } from 'class-validator';
+import { CreateOpWorkJobSkillDto } from '../generated/rest/create-op-work-job-skill.dto';
 import { CreateOpWorkJobDto } from '../generated/rest/create-op-work-job.dto';
-import { IsOptional, IsString } from 'class-validator';
+import { UpdateOpWorkEmployerDto } from '../generated/rest/update-op-work-employer.dto';
 
 export class SetEmployerProfileArgs extends OmitType(UpdateOpWorkEmployerDto, [
   'OpWorkProfile',
@@ -21,4 +22,34 @@ export class SetEmployerWorkArgs extends OmitType(CreateOpWorkJobDto, [
   @IsOptional()
   @IsString()
   id?: string;
+}
+
+export class SetEmployerWorkSkillArgs extends OmitType(
+  CreateOpWorkJobSkillDto,
+  ['OpWorkProfile', 'OpWorkJob', 'OpWorkSkill'],
+) {
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  id?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  skillName?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  skillId?: string;
 }

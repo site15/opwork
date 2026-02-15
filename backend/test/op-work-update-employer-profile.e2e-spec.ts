@@ -1,3 +1,4 @@
+import { assert } from 'console';
 import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
@@ -14,6 +15,7 @@ describe('OPWork: update employer profile (e2e)', () => {
   const skillName = getRandomSha7();
 
   let employerControllerSetProfileResultId: string | undefined;
+  let employerControllerSetEmployerWorkResultId: string | undefined;
 
   it('Login', async () => {
     const result = await employerActivity.registerAndLoginRandomUser(
@@ -122,6 +124,34 @@ describe('OPWork: update employer profile (e2e)', () => {
       publishedAt: '2023-01-01T00:00:00.000Z',
       isRemote: false,
       salaryCurrency: 'USD',
+    });
+    employerControllerSetEmployerWorkResultId =
+      employerControllerSetEmployerWorkResult.data?.id;
+  });
+
+  it('Create employer work skill', async () => {
+    const skillId = (
+      await employerActivity.sdk.opWorkSkillControllerFindMany({
+        query: { searchText: 'JavaScript' },
+      })
+    )?.data?.items?.[0]?.id;
+
+    const employerControllerSetEmployerWorkResult =
+      await employerActivity.sdk.employerWorkSkillControllerSetWorkSkill({
+        path: { job_id: employerControllerSetEmployerWorkResultId || '' },
+        body: {
+          skillId,
+          importance: 1,
+          isRequired: true,
+          minLevel: 1,
+        },
+      });
+
+    expect(employerControllerSetEmployerWorkResult.data).toMatchObject({
+      skillId,
+      importance: 1,
+      isRequired: true,
+      minLevel: 1,
     });
   });
 });

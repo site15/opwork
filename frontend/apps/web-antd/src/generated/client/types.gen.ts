@@ -1877,6 +1877,15 @@ export type SetEmployerWorkArgs = {
     id?: string;
 };
 
+export type SetEmployerWorkSkillArgs = {
+    isRequired?: boolean | null;
+    importance: number;
+    minLevel?: number | null;
+    id?: string;
+    skillName?: string;
+    skillId?: string;
+};
+
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
@@ -4383,3 +4392,45 @@ export type EmployerWorkControllerSetWorkResponses = {
 };
 
 export type EmployerWorkControllerSetWorkResponse = EmployerWorkControllerSetWorkResponses[keyof EmployerWorkControllerSetWorkResponses];
+
+export type EmployerWorkSkillControllerGetWorkSkillsData = {
+    body?: never;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/work-skill/{job_id}';
+};
+
+export type EmployerWorkSkillControllerGetWorkSkillsErrors = {
+    default: Array<OpWorkJobSkillDto>;
+};
+
+export type EmployerWorkSkillControllerGetWorkSkillsError = EmployerWorkSkillControllerGetWorkSkillsErrors[keyof EmployerWorkSkillControllerGetWorkSkillsErrors];
+
+export type EmployerWorkSkillControllerGetWorkSkillsResponses = {
+    200: Array<OpWorkJobSkillDto>;
+};
+
+export type EmployerWorkSkillControllerGetWorkSkillsResponse = EmployerWorkSkillControllerGetWorkSkillsResponses[keyof EmployerWorkSkillControllerGetWorkSkillsResponses];
+
+export type EmployerWorkSkillControllerSetWorkSkillData = {
+    body: SetEmployerWorkSkillArgs;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/work-skill/{job_id}';
+};
+
+export type EmployerWorkSkillControllerSetWorkSkillErrors = {
+    default: OpWorkJobSkillDto;
+};
+
+export type EmployerWorkSkillControllerSetWorkSkillError = EmployerWorkSkillControllerSetWorkSkillErrors[keyof EmployerWorkSkillControllerSetWorkSkillErrors];
+
+export type EmployerWorkSkillControllerSetWorkSkillResponses = {
+    200: OpWorkJobSkillDto;
+};
+
+export type EmployerWorkSkillControllerSetWorkSkillResponse = EmployerWorkSkillControllerSetWorkSkillResponses[keyof EmployerWorkSkillControllerSetWorkSkillResponses];
