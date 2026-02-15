@@ -1,20 +1,10 @@
 
 import {OpWorkNotificationType,Prisma} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDate,IsDateString,IsEnum,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
-import {ConnectAuthUserDto} from './connect-auth-user.dto'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
-export class UpdateOpWorkNotificationAuthUserRelationInputDto {
-    @ApiProperty({
-  type: ConnectAuthUserDto,
-})
-@IsNotEmpty()
-@ValidateNested()
-@Type(() => ConnectAuthUserDto)
-connect!: ConnectAuthUserDto ;
-  }
 export class UpdateOpWorkNotificationOpWorkProfileRelationInputDto {
     @ApiProperty({
   required: false,
@@ -33,7 +23,7 @@ connect?: ConnectOpWorkProfileDto ;
 disconnect?: boolean ;
   }
 
-@ApiExtraModels(ConnectAuthUserDto,UpdateOpWorkNotificationAuthUserRelationInputDto,ConnectOpWorkProfileDto,UpdateOpWorkNotificationOpWorkProfileRelationInputDto)
+@ApiExtraModels(ConnectOpWorkProfileDto,UpdateOpWorkNotificationOpWorkProfileRelationInputDto)
 export class UpdateOpWorkNotificationDto {
   @ApiProperty({
   enum: OpWorkNotificationType,
@@ -91,14 +81,6 @@ isArchived?: boolean  | null;
 @IsDateString()
 @IsDate()
 readAt?: Date  | null;
-@ApiProperty({
-  required: false,
-  type: UpdateOpWorkNotificationAuthUserRelationInputDto,
-})
-@IsOptional()
-@ValidateNested()
-@Type(() => UpdateOpWorkNotificationAuthUserRelationInputDto)
-AuthUser?: UpdateOpWorkNotificationAuthUserRelationInputDto ;
 @ApiProperty({
   required: false,
   type: UpdateOpWorkNotificationOpWorkProfileRelationInputDto,

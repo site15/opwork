@@ -47,7 +47,6 @@ generator prismaClassGenerator {
   prettier                        = "false"
   reExport                        = "false"
   updateDtoPrefix                 = "Update"
-  
 }
 
 // ============================================================================
@@ -598,6 +597,10 @@ model OpWorkProfile {
   opWorkSavedSearches        OpWorkSavedSearch[]
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+  opWorkJobSkills       OpWorkJobSkill[]
+  opWorkExperiences     OpWorkExperience[]
+  opWorkEducations      OpWorkEducation[]
+  opWorkJobSeekerSkills OpWorkJobSeekerSkill[]
 
   /// Уникальность комбинации пользователь-тип
   /// Гарантирует что у пользователя может быть только один профиль каждого типа
@@ -704,6 +707,8 @@ model OpWorkJobSeeker {
 model OpWorkExperience {
   /// Уникальный идентификатор записи опыта (UUID v4)
   id             String                @id(map: "PK_OPWORK_EXPERIENCE") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Связанный основной профиль
+  profileId      String                @db.Uuid
   /// Идентификатор соискателя
   jobSeekerId    String                @db.Uuid
   /// Название компании
@@ -731,6 +736,11 @@ model OpWorkExperience {
   /// Временная метка создания записи
   createdAt      DateTime              @default(now()) @db.Timestamp(6)
 
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EXPERIENCE__PROFILE_ID")
+
   /// Связь с профилем соискателя
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
@@ -747,6 +757,8 @@ model OpWorkExperience {
 model OpWorkEducation {
   /// Уникальный идентификатор записи образования (UUID v4)
   id           String                 @id(map: "PK_OPWORK_EDUCATION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Связанный основной профиль
+  profileId    String                 @db.Uuid
   /// Идентификатор соискателя
   jobSeekerId  String                 @db.Uuid
   /// Название учебного заведения
@@ -773,6 +785,11 @@ model OpWorkEducation {
   grade        OpWorkGrade?
   /// Временная метка создания записи
   createdAt    DateTime               @default(now()) @db.Timestamp(6)
+
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EDUCATION__PROFILE_ID")
 
   /// Связь с профилем соискателя
   /// @DtoRelationCanConnectOnCreate
@@ -1274,6 +1291,8 @@ model OpWorkSkill {
 model OpWorkJobSeekerSkill {
   /// Уникальный идентификатор связи (UUID v4)
   id          String    @id(map: "PK_OPWORK_JOB_SEEKER_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Связанный основной профиль
+  profileId   String    @db.Uuid
   /// Идентификатор соискателя
   jobSeekerId String    @db.Uuid
   /// Идентификатор навыка
@@ -1296,6 +1315,10 @@ model OpWorkJobSeekerSkill {
 
   /// === СВЯЗИ ===
 
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile   OpWorkProfile   @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER_SKILL__PROFILE_ID")
   /// Соискатель, владеющий данным навыком
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
@@ -1320,6 +1343,8 @@ model OpWorkJobSeekerSkill {
 model OpWorkJobSkill {
   /// Уникальный идентификатор требования (UUID v4)
   id         String   @id(map: "PK_OPWORK_JOB_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  /// Связанный основной профиль
+  profileId  String   @db.Uuid
   /// Идентификатор вакансии
   jobId      String   @db.Uuid
   /// Идентификатор требуемого навыка
@@ -1340,14 +1365,18 @@ model OpWorkJobSkill {
 
   /// === СВЯЗИ ===
 
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__PROFILE_ID")
   /// Вакансия, для которой указано требование
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
-  OpWorkJob   OpWorkJob   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__JOB_ID")
+  OpWorkJob     OpWorkJob     @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__JOB_ID")
   /// Требуемый навык
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
-  OpWorkSkill OpWorkSkill @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__SKILL_ID")
+  OpWorkSkill   OpWorkSkill   @relation(fields: [skillId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SKILL__SKILL_ID")
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
@@ -1368,8 +1397,6 @@ model OpWorkJobSkill {
 model OpWorkNotification {
   /// Уникальный идентификатор уведомления (UUID v4)
   id        String  @id(map: "PK_OPWORK_NOTIFICATION") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  /// Идентификатор пользователя-получателя
-  userId    String  @db.Uuid
   /// Идентификатор связанного профиля (если применимо)
   profileId String? @db.Uuid
 
@@ -1403,10 +1430,6 @@ model OpWorkNotification {
 
   /// === СВЯЗИ ===
 
-  /// Пользователь-получатель уведомления
-  /// @DtoRelationCanConnectOnCreate
-  /// @DtoRelationCanConnectOnUpdate
-  AuthUser      AuthUser       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__USER_ID")
   /// Связанный профиль (если применимо)
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
@@ -1414,8 +1437,9 @@ model OpWorkNotification {
   OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__PROFILE_ID")
 
   /// === ИНДЕКСЫ ===
+  authUser   AuthUser? @relation(fields: [authUserId], references: [id])
+  authUserId String?   @db.Uuid
 
-  @@index([userId], map: "IDX_OPWORK_NOTIFICATION__USER_ID")
   @@index([profileId], map: "IDX_OPWORK_NOTIFICATION__PROFILE_ID")
   @@index([type], map: "IDX_OPWORK_NOTIFICATION__TYPE")
   @@index([isRead], map: "IDX_OPWORK_NOTIFICATION__IS_READ")

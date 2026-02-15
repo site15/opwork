@@ -36,7 +36,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isRead: values.isRead,
         isArchived: values.isArchived,
         readAt: values.readAt,
-        AuthUser: { connect: { id: values.userId } },
         OpWorkProfile: { connect: { id: values.profileId } },
       }
     }) : opWorkNotificationControllerCreateOne({
@@ -48,7 +47,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isRead: values.isRead,
         isArchived: values.isArchived,
         readAt: values.readAt,
-        AuthUser: { connect: { id: values.userId } },
         OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))

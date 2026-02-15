@@ -37,6 +37,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isCurrent: values.isCurrent,
         location: values.location,
         employmentType: values.employmentType,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
       }
     }) : opWorkExperienceControllerCreateOne({
@@ -49,6 +50,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isCurrent: values.isCurrent,
         location: values.location,
         employmentType: values.employmentType,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
       }
     }))

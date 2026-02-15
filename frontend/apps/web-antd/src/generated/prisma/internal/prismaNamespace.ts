@@ -2176,6 +2176,7 @@ export type OpWorkJobSeekerScalarFieldEnum = (typeof OpWorkJobSeekerScalarFieldE
 
 export const OpWorkExperienceScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   jobSeekerId: 'jobSeekerId',
   company: 'company',
   position: 'position',
@@ -2193,6 +2194,7 @@ export type OpWorkExperienceScalarFieldEnum = (typeof OpWorkExperienceScalarFiel
 
 export const OpWorkEducationScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   jobSeekerId: 'jobSeekerId',
   institution: 'institution',
   degree: 'degree',
@@ -2339,6 +2341,7 @@ export type OpWorkSkillScalarFieldEnum = (typeof OpWorkSkillScalarFieldEnum)[key
 
 export const OpWorkJobSeekerSkillScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   jobSeekerId: 'jobSeekerId',
   skillId: 'skillId',
   level: 'level',
@@ -2353,6 +2356,7 @@ export type OpWorkJobSeekerSkillScalarFieldEnum = (typeof OpWorkJobSeekerSkillSc
 
 export const OpWorkJobSkillScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   jobId: 'jobId',
   skillId: 'skillId',
   isRequired: 'isRequired',
@@ -2366,7 +2370,6 @@ export type OpWorkJobSkillScalarFieldEnum = (typeof OpWorkJobSkillScalarFieldEnu
 
 export const OpWorkNotificationScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   profileId: 'profileId',
   type: 'type',
   title: 'title',
@@ -2375,7 +2378,8 @@ export const OpWorkNotificationScalarFieldEnum = {
   isRead: 'isRead',
   isArchived: 'isArchived',
   createdAt: 'createdAt',
-  readAt: 'readAt'
+  readAt: 'readAt',
+  authUserId: 'authUserId'
 } as const
 
 export type OpWorkNotificationScalarFieldEnum = (typeof OpWorkNotificationScalarFieldEnum)[keyof typeof OpWorkNotificationScalarFieldEnum]

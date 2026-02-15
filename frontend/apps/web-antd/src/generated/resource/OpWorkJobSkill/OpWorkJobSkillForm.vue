@@ -32,6 +32,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJob: { connect: { id: values.jobId } },
         OpWorkSkill: { connect: { id: values.skillId } },
       }
@@ -40,6 +41,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         isRequired: values.isRequired,
         importance: values.importance,
         minLevel: values.minLevel,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJob: { connect: { id: values.jobId } },
         OpWorkSkill: { connect: { id: values.skillId } },
       }

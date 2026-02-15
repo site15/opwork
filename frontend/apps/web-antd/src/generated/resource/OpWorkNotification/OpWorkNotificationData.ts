@@ -1,6 +1,6 @@
 import type { VbenFormSchema } from '#/adapter/form';
       import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-      import  { type AuthUser, authUserControllerFindMany, type OpWorkProfile, opWorkProfileControllerFindMany, type OpWorkNotification } from '#/generated/client';
+      import  { type OpWorkProfile, opWorkProfileControllerFindMany, type OpWorkNotification } from '#/generated/client';
     import { getComponentProps } from '#/adapter/get-component-props';
     import { Prisma } from '#/generated/prisma/browser';
 
@@ -111,25 +111,6 @@ import type { VbenFormSchema } from '#/adapter/form';
 
     {
       component: 'ApiSelect',
-      ...getComponentProps<AuthUser>({
-        findMany: (searchText?: string) => authUserControllerFindMany({
-          query: {
-            perPage: 100,
-            ...(searchText ? { searchText } : {})
-          }
-        }),
-        getLabel: (item) => item.email || item.id,
-      }),
-      fieldName: Prisma.OpWorkNotificationScalarFieldEnum.userId,
-      label: $t('resource.name.AuthUser'),
-      rules: 'required',
-      
-      controlClass: 'w-full',
-      labelWidth: 200
-    }, 
-
-    {
-      component: 'ApiSelect',
       ...getComponentProps<OpWorkProfile>({
         findMany: (searchText?: string) => opWorkProfileControllerFindMany({
           query: {
@@ -223,19 +204,6 @@ import type { VbenFormSchema } from '#/adapter/form';
         field: Prisma.OpWorkNotificationScalarFieldEnum.readAt ,
         formatter: 'formatDateTime',
           sortable: true
-      }, 
-    {
-        title: $t('resource.name.AuthUser'),
-        field: Prisma.OpWorkNotificationScalarFieldEnum.userId ,
-        cellRender: {
-          name: 'CellRender',
-          props:{
-            render: (row: any, column: any) => {
-              return row.AuthUser?.email || row[column.field] || '';
-            }
-          }
-        },
-        sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkProfile'),

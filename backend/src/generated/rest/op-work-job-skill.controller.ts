@@ -36,6 +36,10 @@ import { UpdateOpWorkJobSkillDto } from './update-op-work-job-skill.dto';
 export class FindManyOpWorkJobSkillArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
+  profileId?: string;
+
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
   jobId?: string;
 
   @ApiPropertyOptional({ type: 'string' })
@@ -92,6 +96,10 @@ export class OpWorkJobSkillController {
         : {}),
       AND: [
         
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
@@ -107,6 +115,7 @@ export class OpWorkJobSkillController {
       return {
         items: await prisma.opWorkJobSkill.findMany({
           include:{
+OpWorkProfile: true,
 OpWorkJob: true,
 OpWorkSkill: true
           },
@@ -138,6 +147,7 @@ OpWorkSkill: true
     return await this.prismaService.opWorkJobSkill.create({
       data: { 
         ...args,
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}},
         OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}},
         OpWorkSkill:{connect:{id:args.OpWorkSkill?.connect.id}}
       },
@@ -155,6 +165,7 @@ OpWorkSkill: true
         ...args,
         
         
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }}),
         ...(!args.OpWorkJob?{OpWorkJob:undefined}:{OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }}),
         ...(!args.OpWorkSkill?{OpWorkSkill:undefined}:{OpWorkSkill: { connect: { id: args.OpWorkSkill?.connect.id } }})
       },

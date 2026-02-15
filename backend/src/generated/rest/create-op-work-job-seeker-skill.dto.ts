@@ -2,9 +2,19 @@
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
 import {IsBoolean,IsDate,IsDateString,IsInt,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 import {ConnectOpWorkSkillDto} from './connect-op-work-skill.dto'
 
+export class CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 export class CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto {
     @ApiProperty({
   type: ConnectOpWorkJobSeekerDto,
@@ -24,7 +34,7 @@ export class CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto {
 connect!: ConnectOpWorkSkillDto ;
   }
 
-@ApiExtraModels(ConnectOpWorkJobSeekerDto,CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto,ConnectOpWorkSkillDto,CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto)
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto,ConnectOpWorkJobSeekerDto,CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto,ConnectOpWorkSkillDto,CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto)
 export class CreateOpWorkJobSeekerSkillDto {
   @ApiProperty({
   type: 'integer',
@@ -60,6 +70,13 @@ isPrimary?: boolean  | null;
 @IsDateString()
 @IsDate()
 lastUsed?: Date  | null;
+@ApiProperty({
+  type: CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto ;
 @ApiProperty({
   type: CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto,
 })

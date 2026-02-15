@@ -13,6 +13,10 @@ import {OpWorkNotificationSettings} from './op-work-notification-settings.entity
 import {OpWorkSearchHistory} from './op-work-search-history.entity'
 import {OpWorkJobView} from './op-work-job-view.entity'
 import {OpWorkSavedSearch} from './op-work-saved-search.entity'
+import {OpWorkJobSkill} from './op-work-job-skill.entity'
+import {OpWorkExperience} from './op-work-experience.entity'
+import {OpWorkEducation} from './op-work-education.entity'
+import {OpWorkJobSeekerSkill} from './op-work-job-seeker-skill.entity'
 
 
 export class OpWorkProfile {
@@ -165,4 +169,28 @@ opWorkJobViews?: OpWorkJobView[] ;
   required: false,
 })
 opWorkSavedSearches?: OpWorkSavedSearch[] ;
+@ApiProperty({
+  type: () => OpWorkJobSkill,
+  isArray: true,
+  required: false,
+})
+opWorkJobSkills?: OpWorkJobSkill[] ;
+@ApiProperty({
+  type: () => OpWorkExperience,
+  isArray: true,
+  required: false,
+})
+opWorkExperiences?: OpWorkExperience[] ;
+@ApiProperty({
+  type: () => OpWorkEducation,
+  isArray: true,
+  required: false,
+})
+opWorkEducations?: OpWorkEducation[] ;
+@ApiProperty({
+  type: () => OpWorkJobSeekerSkill,
+  isArray: true,
+  required: false,
+})
+opWorkJobSeekerSkills?: OpWorkJobSeekerSkill[] ;
 }

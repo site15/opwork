@@ -36,11 +36,11 @@ import { UpdateOpWorkNotificationDto } from './update-op-work-notification.dto';
 export class FindManyOpWorkNotificationArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
-  userId?: string;
+  profileId?: string;
 
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
-  profileId?: string;}
+  authUserId?: string;}
 
 export class FindManyOpWorkNotificationResponseMeta extends FindManyResponseMeta {}
 
@@ -93,12 +93,12 @@ export class OpWorkNotificationController {
         : {}),
       AND: [
         
-          ...(isUUID(otherArgs.userId)
-            ? [{ userId: { equals: otherArgs.userId } }]
-            : []),
-
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+
+          ...(isUUID(otherArgs.authUserId)
+            ? [{ authUserId: { equals: otherArgs.authUserId } }]
             : []),
       ],
       
@@ -108,7 +108,6 @@ export class OpWorkNotificationController {
       return {
         items: await prisma.opWorkNotification.findMany({
           include:{
-AuthUser: true,
 OpWorkProfile: true
           },
           where: opWorkNotificationWhereInput,
@@ -139,7 +138,6 @@ OpWorkProfile: true
     return await this.prismaService.opWorkNotification.create({
       data: { 
         ...args,
-        AuthUser:{connect:{id:args.AuthUser?.connect.id}},
         OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
     });
@@ -156,7 +154,6 @@ OpWorkProfile: true
         ...args,
         
         
-        ...(!args.AuthUser?{AuthUser:undefined}:{AuthUser: { connect: { id: args.AuthUser?.connect.id } }}),
         ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: args.OpWorkProfile?.connect
           ? { connect: { id: args.OpWorkProfile?.connect.id } }
           : { disconnect: true }})

@@ -31,6 +31,7 @@ export type OpWorkEmploymentType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INT
 
 export type OpWorkExperience = {
     id: string;
+    profileId: string;
     jobSeekerId: string;
     company: string;
     position: string;
@@ -41,6 +42,7 @@ export type OpWorkExperience = {
     location: string | null;
     employmentType: OpWorkEmploymentType | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile;
     OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
@@ -50,6 +52,7 @@ export type OpWorkGrade = 'A_PLUS' | 'A' | 'A_MINUS' | 'B_PLUS' | 'B' | 'B_MINUS
 
 export type OpWorkEducation = {
     id: string;
+    profileId: string;
     jobSeekerId: string;
     institution: string;
     degree: OpWorkEducationDegree | null;
@@ -60,6 +63,7 @@ export type OpWorkEducation = {
     description: string | null;
     grade: OpWorkGrade | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile;
     OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
@@ -177,12 +181,14 @@ export type OpWorkJob = {
 
 export type OpWorkJobSkill = {
     id: string;
+    profileId: string;
     jobId: string;
     skillId: string;
     isRequired: boolean | null;
     importance: number;
     minLevel: number | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile;
     OpWorkJob?: OpWorkJob;
     OpWorkSkill?: OpWorkSkill;
 };
@@ -211,6 +217,7 @@ export type OpWorkSkill = {
 
 export type OpWorkJobSeekerSkill = {
     id: string;
+    profileId: string;
     jobSeekerId: string;
     skillId: string;
     level: number;
@@ -218,6 +225,7 @@ export type OpWorkJobSeekerSkill = {
     isPrimary: boolean | null;
     lastUsed: string | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile;
     OpWorkJobSeeker?: OpWorkJobSeeker;
     OpWorkSkill?: OpWorkSkill;
 };
@@ -285,7 +293,6 @@ export type OpWorkNotificationType = 'APPLICATION_RECEIVED' | 'APPLICATION_SHORT
 
 export type OpWorkNotification = {
     id: string;
-    userId: string;
     profileId: string | null;
     type: OpWorkNotificationType;
     title: string;
@@ -297,8 +304,9 @@ export type OpWorkNotification = {
     isArchived: boolean | null;
     createdAt: string;
     readAt: string | null;
-    AuthUser?: AuthUser;
     OpWorkProfile?: OpWorkProfile | null;
+    authUser?: AuthUser | null;
+    authUserId: string | null;
 };
 
 export type OpWorkFrequency = 'MINUTELY' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'ON_DEMAND';
@@ -373,6 +381,10 @@ export type OpWorkProfile = {
     opWorkSearchHistories?: Array<OpWorkSearchHistory>;
     opWorkJobViews?: Array<OpWorkJobView>;
     opWorkSavedSearches?: Array<OpWorkSavedSearch>;
+    opWorkJobSkills?: Array<OpWorkJobSkill>;
+    opWorkExperiences?: Array<OpWorkExperience>;
+    opWorkEducations?: Array<OpWorkEducation>;
+    opWorkJobSeekerSkills?: Array<OpWorkJobSeekerSkill>;
 };
 
 export type AuthUser = {
@@ -688,6 +700,10 @@ export type FindManyOpWorkExperienceResponse = {
     meta: FindManyOpWorkExperienceResponseMeta;
 };
 
+export type CreateOpWorkExperienceOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type OpWorkJobSeekerUqOpWorkJobSeekerProfileUniqueInputDto = {
     profileId: string;
 };
@@ -711,6 +727,7 @@ export type CreateOpWorkExperienceDto = {
     isCurrent?: boolean | null;
     location?: string | null;
     employmentType?: OpWorkEmploymentType | null;
+    OpWorkProfile: CreateOpWorkExperienceOpWorkProfileRelationInputDto;
     OpWorkJobSeeker: CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto;
 };
 
@@ -727,6 +744,10 @@ export type OpWorkExperienceDto = {
     createdAt: string;
 };
 
+export type UpdateOpWorkExperienceOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkExperienceOpWorkJobSeekerRelationInputDto = {
     connect: ConnectOpWorkJobSeekerDto;
 };
@@ -740,6 +761,7 @@ export type UpdateOpWorkExperienceDto = {
     isCurrent?: boolean | null;
     location?: string | null;
     employmentType?: OpWorkEmploymentType | null;
+    OpWorkProfile?: UpdateOpWorkExperienceOpWorkProfileRelationInputDto;
     OpWorkJobSeeker?: UpdateOpWorkExperienceOpWorkJobSeekerRelationInputDto;
 };
 
@@ -752,6 +774,10 @@ export type FindManyOpWorkEducationResponseMeta = {
 export type FindManyOpWorkEducationResponse = {
     items: Array<OpWorkEducation>;
     meta: FindManyOpWorkEducationResponseMeta;
+};
+
+export type CreateOpWorkEducationOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
 };
 
 export type CreateOpWorkEducationOpWorkJobSeekerRelationInputDto = {
@@ -767,6 +793,7 @@ export type CreateOpWorkEducationDto = {
     isCurrent?: boolean | null;
     description?: string | null;
     grade?: OpWorkGrade | null;
+    OpWorkProfile: CreateOpWorkEducationOpWorkProfileRelationInputDto;
     OpWorkJobSeeker: CreateOpWorkEducationOpWorkJobSeekerRelationInputDto;
 };
 
@@ -783,6 +810,10 @@ export type OpWorkEducationDto = {
     createdAt: string;
 };
 
+export type UpdateOpWorkEducationOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto = {
     connect: ConnectOpWorkJobSeekerDto;
 };
@@ -796,6 +827,7 @@ export type UpdateOpWorkEducationDto = {
     isCurrent?: boolean | null;
     description?: string | null;
     grade?: OpWorkGrade | null;
+    OpWorkProfile?: UpdateOpWorkEducationOpWorkProfileRelationInputDto;
     OpWorkJobSeeker?: UpdateOpWorkEducationOpWorkJobSeekerRelationInputDto;
 };
 
@@ -1260,6 +1292,10 @@ export type FindManyOpWorkJobSeekerSkillResponse = {
     meta: FindManyOpWorkJobSeekerSkillResponseMeta;
 };
 
+export type CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto = {
     connect: ConnectOpWorkJobSeekerDto;
 };
@@ -1283,6 +1319,7 @@ export type CreateOpWorkJobSeekerSkillDto = {
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
+    OpWorkProfile: CreateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto;
     OpWorkJobSeeker: CreateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto;
     OpWorkSkill: CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto;
 };
@@ -1294,6 +1331,10 @@ export type OpWorkJobSeekerSkillDto = {
     isPrimary: boolean | null;
     lastUsed: string | null;
     createdAt: string;
+};
+
+export type UpdateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
 };
 
 export type UpdateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto = {
@@ -1309,6 +1350,7 @@ export type UpdateOpWorkJobSeekerSkillDto = {
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
+    OpWorkProfile?: UpdateOpWorkJobSeekerSkillOpWorkProfileRelationInputDto;
     OpWorkJobSeeker?: UpdateOpWorkJobSeekerSkillOpWorkJobSeekerRelationInputDto;
     OpWorkSkill?: UpdateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto;
 };
@@ -1324,6 +1366,10 @@ export type FindManyOpWorkJobSkillResponse = {
     meta: FindManyOpWorkJobSkillResponseMeta;
 };
 
+export type CreateOpWorkJobSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkJobSkillOpWorkJobRelationInputDto = {
     connect: ConnectOpWorkJobDto;
 };
@@ -1336,6 +1382,7 @@ export type CreateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
     importance: number;
     minLevel?: number | null;
+    OpWorkProfile: CreateOpWorkJobSkillOpWorkProfileRelationInputDto;
     OpWorkJob: CreateOpWorkJobSkillOpWorkJobRelationInputDto;
     OpWorkSkill: CreateOpWorkJobSkillOpWorkSkillRelationInputDto;
 };
@@ -1346,6 +1393,10 @@ export type OpWorkJobSkillDto = {
     importance: number;
     minLevel: number | null;
     createdAt: string;
+};
+
+export type UpdateOpWorkJobSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
 };
 
 export type UpdateOpWorkJobSkillOpWorkJobRelationInputDto = {
@@ -1360,6 +1411,7 @@ export type UpdateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
     importance?: number;
     minLevel?: number | null;
+    OpWorkProfile?: UpdateOpWorkJobSkillOpWorkProfileRelationInputDto;
     OpWorkJob?: UpdateOpWorkJobSkillOpWorkJobRelationInputDto;
     OpWorkSkill?: UpdateOpWorkJobSkillOpWorkSkillRelationInputDto;
 };
@@ -1373,10 +1425,6 @@ export type FindManyOpWorkNotificationResponseMeta = {
 export type FindManyOpWorkNotificationResponse = {
     items: Array<OpWorkNotification>;
     meta: FindManyOpWorkNotificationResponseMeta;
-};
-
-export type CreateOpWorkNotificationAuthUserRelationInputDto = {
-    connect: ConnectAuthUserDto;
 };
 
 export type CreateOpWorkNotificationOpWorkProfileRelationInputDto = {
@@ -1393,7 +1441,6 @@ export type CreateOpWorkNotificationDto = {
     isRead?: boolean | null;
     isArchived?: boolean | null;
     readAt?: string | null;
-    AuthUser: CreateOpWorkNotificationAuthUserRelationInputDto;
     OpWorkProfile?: CreateOpWorkNotificationOpWorkProfileRelationInputDto;
 };
 
@@ -1411,10 +1458,6 @@ export type OpWorkNotificationDto = {
     readAt: string | null;
 };
 
-export type UpdateOpWorkNotificationAuthUserRelationInputDto = {
-    connect: ConnectAuthUserDto;
-};
-
 export type UpdateOpWorkNotificationOpWorkProfileRelationInputDto = {
     connect?: ConnectOpWorkProfileDto;
     disconnect?: boolean;
@@ -1430,7 +1473,6 @@ export type UpdateOpWorkNotificationDto = {
     isRead?: boolean | null;
     isArchived?: boolean | null;
     readAt?: string | null;
-    AuthUser?: UpdateOpWorkNotificationAuthUserRelationInputDto;
     OpWorkProfile?: UpdateOpWorkNotificationOpWorkProfileRelationInputDto;
 };
 
@@ -2254,6 +2296,7 @@ export type OpWorkExperienceControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
         jobSeekerId?: string;
     };
     url: '/api/op-work/experience';
@@ -2351,6 +2394,7 @@ export type OpWorkEducationControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
         jobSeekerId?: string;
     };
     url: '/api/op-work/education';
@@ -3033,6 +3077,7 @@ export type OpWorkJobSeekerSkillControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
         jobSeekerId?: string;
         skillId?: string;
     };
@@ -3131,6 +3176,7 @@ export type OpWorkJobSkillControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
         jobId?: string;
         skillId?: string;
     };
@@ -3229,8 +3275,8 @@ export type OpWorkNotificationControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
-        userId?: string;
         profileId?: string;
+        authUserId?: string;
     };
     url: '/api/op-work/notification';
 };

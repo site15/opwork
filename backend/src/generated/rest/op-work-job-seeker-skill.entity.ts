@@ -1,5 +1,6 @@
 
 import {ApiProperty} from '@nestjs/swagger'
+import {OpWorkProfile} from './op-work-profile.entity'
 import {OpWorkJobSeeker} from './op-work-job-seeker.entity'
 import {OpWorkSkill} from './op-work-skill.entity'
 
@@ -9,6 +10,10 @@ export class OpWorkJobSeekerSkill {
   type: 'string',
 })
 id!: string ;
+@ApiProperty({
+  type: 'string',
+})
+profileId!: string ;
 @ApiProperty({
   type: 'string',
 })
@@ -44,6 +49,11 @@ lastUsed!: Date  | null;
   format: 'date-time',
 })
 createdAt!: Date ;
+@ApiProperty({
+  type: () => OpWorkProfile,
+  required: false,
+})
+OpWorkProfile?: OpWorkProfile ;
 @ApiProperty({
   type: () => OpWorkJobSeeker,
   required: false,

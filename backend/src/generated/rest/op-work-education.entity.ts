@@ -1,6 +1,7 @@
 
 import {OpWorkEducationDegree,OpWorkGrade} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
+import {OpWorkProfile} from './op-work-profile.entity'
 import {OpWorkJobSeeker} from './op-work-job-seeker.entity'
 
 
@@ -9,6 +10,10 @@ export class OpWorkEducation {
   type: 'string',
 })
 id!: string ;
+@ApiProperty({
+  type: 'string',
+})
+profileId!: string ;
 @ApiProperty({
   type: 'string',
 })
@@ -60,6 +65,11 @@ grade!: OpWorkGrade  | null;
   format: 'date-time',
 })
 createdAt!: Date ;
+@ApiProperty({
+  type: () => OpWorkProfile,
+  required: false,
+})
+OpWorkProfile?: OpWorkProfile ;
 @ApiProperty({
   type: () => OpWorkJobSeeker,
   required: false,

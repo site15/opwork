@@ -422,6 +422,11 @@ export type AuthUserScalarRelationFilter = {
   isNot?: Prisma.AuthUserWhereInput
 }
 
+export type AuthUserNullableScalarRelationFilter = {
+  is?: Prisma.AuthUserWhereInput | null
+  isNot?: Prisma.AuthUserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -486,10 +491,12 @@ export type AuthUserCreateNestedOneWithoutOpWorkNotificationsInput = {
   connect?: Prisma.AuthUserWhereUniqueInput
 }
 
-export type AuthUserUpdateOneRequiredWithoutOpWorkNotificationsNestedInput = {
+export type AuthUserUpdateOneWithoutOpWorkNotificationsNestedInput = {
   create?: Prisma.XOR<Prisma.AuthUserCreateWithoutOpWorkNotificationsInput, Prisma.AuthUserUncheckedCreateWithoutOpWorkNotificationsInput>
   connectOrCreate?: Prisma.AuthUserCreateOrConnectWithoutOpWorkNotificationsInput
   upsert?: Prisma.AuthUserUpsertWithoutOpWorkNotificationsInput
+  disconnect?: Prisma.AuthUserWhereInput | boolean
+  delete?: Prisma.AuthUserWhereInput | boolean
   connect?: Prisma.AuthUserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AuthUserUpdateToOneWithWhereWithoutOpWorkNotificationsInput, Prisma.AuthUserUpdateWithoutOpWorkNotificationsInput>, Prisma.AuthUserUncheckedUpdateWithoutOpWorkNotificationsInput>
 }

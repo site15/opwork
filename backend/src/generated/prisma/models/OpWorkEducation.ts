@@ -27,6 +27,7 @@ export type AggregateOpWorkEducation = {
 
 export type OpWorkEducationMinAggregateOutputType = {
   id: string | null
+  profileId: string | null
   jobSeekerId: string | null
   institution: string | null
   degree: $Enums.OpWorkEducationDegree | null
@@ -41,6 +42,7 @@ export type OpWorkEducationMinAggregateOutputType = {
 
 export type OpWorkEducationMaxAggregateOutputType = {
   id: string | null
+  profileId: string | null
   jobSeekerId: string | null
   institution: string | null
   degree: $Enums.OpWorkEducationDegree | null
@@ -55,6 +57,7 @@ export type OpWorkEducationMaxAggregateOutputType = {
 
 export type OpWorkEducationCountAggregateOutputType = {
   id: number
+  profileId: number
   jobSeekerId: number
   institution: number
   degree: number
@@ -71,6 +74,7 @@ export type OpWorkEducationCountAggregateOutputType = {
 
 export type OpWorkEducationMinAggregateInputType = {
   id?: true
+  profileId?: true
   jobSeekerId?: true
   institution?: true
   degree?: true
@@ -85,6 +89,7 @@ export type OpWorkEducationMinAggregateInputType = {
 
 export type OpWorkEducationMaxAggregateInputType = {
   id?: true
+  profileId?: true
   jobSeekerId?: true
   institution?: true
   degree?: true
@@ -99,6 +104,7 @@ export type OpWorkEducationMaxAggregateInputType = {
 
 export type OpWorkEducationCountAggregateInputType = {
   id?: true
+  profileId?: true
   jobSeekerId?: true
   institution?: true
   degree?: true
@@ -186,6 +192,7 @@ export type OpWorkEducationGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 
 export type OpWorkEducationGroupByOutputType = {
   id: string
+  profileId: string
   jobSeekerId: string
   institution: string
   degree: $Enums.OpWorkEducationDegree | null
@@ -221,6 +228,7 @@ export type OpWorkEducationWhereInput = {
   OR?: Prisma.OpWorkEducationWhereInput[]
   NOT?: Prisma.OpWorkEducationWhereInput | Prisma.OpWorkEducationWhereInput[]
   id?: Prisma.UuidFilter<"OpWorkEducation"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkEducation"> | string
   jobSeekerId?: Prisma.UuidFilter<"OpWorkEducation"> | string
   institution?: Prisma.StringFilter<"OpWorkEducation"> | string
   degree?: Prisma.EnumOpWorkEducationDegreeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkEducationDegree | null
@@ -231,11 +239,13 @@ export type OpWorkEducationWhereInput = {
   description?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
   grade?: Prisma.EnumOpWorkGradeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkGrade | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput>
 }
 
 export type OpWorkEducationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobSeekerId?: Prisma.SortOrder
   institution?: Prisma.SortOrder
   degree?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -246,6 +256,7 @@ export type OpWorkEducationOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   grade?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerOrderByWithRelationInput
 }
 
@@ -254,6 +265,7 @@ export type OpWorkEducationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OpWorkEducationWhereInput | Prisma.OpWorkEducationWhereInput[]
   OR?: Prisma.OpWorkEducationWhereInput[]
   NOT?: Prisma.OpWorkEducationWhereInput | Prisma.OpWorkEducationWhereInput[]
+  profileId?: Prisma.UuidFilter<"OpWorkEducation"> | string
   jobSeekerId?: Prisma.UuidFilter<"OpWorkEducation"> | string
   institution?: Prisma.StringFilter<"OpWorkEducation"> | string
   degree?: Prisma.EnumOpWorkEducationDegreeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkEducationDegree | null
@@ -264,11 +276,13 @@ export type OpWorkEducationWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
   grade?: Prisma.EnumOpWorkGradeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkGrade | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput>
 }, "id">
 
 export type OpWorkEducationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobSeekerId?: Prisma.SortOrder
   institution?: Prisma.SortOrder
   degree?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -289,6 +303,7 @@ export type OpWorkEducationScalarWhereWithAggregatesInput = {
   OR?: Prisma.OpWorkEducationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OpWorkEducationScalarWhereWithAggregatesInput | Prisma.OpWorkEducationScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"OpWorkEducation"> | string
+  profileId?: Prisma.UuidWithAggregatesFilter<"OpWorkEducation"> | string
   jobSeekerId?: Prisma.UuidWithAggregatesFilter<"OpWorkEducation"> | string
   institution?: Prisma.StringWithAggregatesFilter<"OpWorkEducation"> | string
   degree?: Prisma.EnumOpWorkEducationDegreeNullableWithAggregatesFilter<"OpWorkEducation"> | $Enums.OpWorkEducationDegree | null
@@ -312,11 +327,13 @@ export type OpWorkEducationCreateInput = {
   description?: string | null
   grade?: $Enums.OpWorkGrade | null
   createdAt?: Date | string
+  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEducationsInput
   OpWorkJobSeeker: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkEducationInput
 }
 
 export type OpWorkEducationUncheckedCreateInput = {
   id?: string
+  profileId: string
   jobSeekerId: string
   institution: string
   degree?: $Enums.OpWorkEducationDegree | null
@@ -340,11 +357,13 @@ export type OpWorkEducationUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grade?: Prisma.NullableEnumOpWorkGradeFieldUpdateOperationsInput | $Enums.OpWorkGrade | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkEducationsNestedInput
   OpWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkEducationNestedInput
 }
 
 export type OpWorkEducationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobSeekerId?: Prisma.StringFieldUpdateOperationsInput | string
   institution?: Prisma.StringFieldUpdateOperationsInput | string
   degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
@@ -359,6 +378,7 @@ export type OpWorkEducationUncheckedUpdateInput = {
 
 export type OpWorkEducationCreateManyInput = {
   id?: string
+  profileId: string
   jobSeekerId: string
   institution: string
   degree?: $Enums.OpWorkEducationDegree | null
@@ -386,6 +406,7 @@ export type OpWorkEducationUpdateManyMutationInput = {
 
 export type OpWorkEducationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobSeekerId?: Prisma.StringFieldUpdateOperationsInput | string
   institution?: Prisma.StringFieldUpdateOperationsInput | string
   degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
@@ -410,6 +431,7 @@ export type OpWorkEducationOrderByRelationAggregateInput = {
 
 export type OpWorkEducationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobSeekerId?: Prisma.SortOrder
   institution?: Prisma.SortOrder
   degree?: Prisma.SortOrder
@@ -424,6 +446,7 @@ export type OpWorkEducationCountOrderByAggregateInput = {
 
 export type OpWorkEducationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobSeekerId?: Prisma.SortOrder
   institution?: Prisma.SortOrder
   degree?: Prisma.SortOrder
@@ -438,6 +461,7 @@ export type OpWorkEducationMaxOrderByAggregateInput = {
 
 export type OpWorkEducationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobSeekerId?: Prisma.SortOrder
   institution?: Prisma.SortOrder
   degree?: Prisma.SortOrder
@@ -448,6 +472,48 @@ export type OpWorkEducationMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEducationCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+}
+
+export type OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEducationCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+}
+
+export type OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkEducationUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEducationCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  delete?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  connect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  update?: Prisma.OpWorkEducationUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkEducationUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
+}
+
+export type OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkEducationUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEducationCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  delete?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  connect?: Prisma.OpWorkEducationWhereUniqueInput | Prisma.OpWorkEducationWhereUniqueInput[]
+  update?: Prisma.OpWorkEducationUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkEducationUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkEducationUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
 }
 
 export type OpWorkEducationCreateNestedManyWithoutOpWorkJobSeekerInput = {
@@ -500,8 +566,23 @@ export type NullableEnumOpWorkGradeFieldUpdateOperationsInput = {
   set?: $Enums.OpWorkGrade | null
 }
 
-export type OpWorkEducationCreateWithoutOpWorkJobSeekerInput = {
+export type OpWorkEducationCreateWithoutOpWorkProfileInput = {
   id?: string
+  institution: string
+  degree?: $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: string | null
+  startDate: Date | string
+  endDate?: Date | string | null
+  isCurrent?: boolean | null
+  description?: string | null
+  grade?: $Enums.OpWorkGrade | null
+  createdAt?: Date | string
+  OpWorkJobSeeker: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkEducationInput
+}
+
+export type OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput = {
+  id?: string
+  jobSeekerId: string
   institution: string
   degree?: $Enums.OpWorkEducationDegree | null
   fieldOfStudy?: string | null
@@ -513,8 +594,67 @@ export type OpWorkEducationCreateWithoutOpWorkJobSeekerInput = {
   createdAt?: Date | string
 }
 
+export type OpWorkEducationCreateOrConnectWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEducationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkEducationCreateManyOpWorkProfileInputEnvelope = {
+  data: Prisma.OpWorkEducationCreateManyOpWorkProfileInput | Prisma.OpWorkEducationCreateManyOpWorkProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type OpWorkEducationUpsertWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEducationWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpWorkEducationUpdateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedUpdateWithoutOpWorkProfileInput>
+  create: Prisma.XOR<Prisma.OpWorkEducationCreateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkEducationUpdateWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEducationWhereUniqueInput
+  data: Prisma.XOR<Prisma.OpWorkEducationUpdateWithoutOpWorkProfileInput, Prisma.OpWorkEducationUncheckedUpdateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkEducationUpdateManyWithWhereWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEducationScalarWhereInput
+  data: Prisma.XOR<Prisma.OpWorkEducationUpdateManyMutationInput, Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileInput>
+}
+
+export type OpWorkEducationScalarWhereInput = {
+  AND?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
+  OR?: Prisma.OpWorkEducationScalarWhereInput[]
+  NOT?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkEducation"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkEducation"> | string
+  jobSeekerId?: Prisma.UuidFilter<"OpWorkEducation"> | string
+  institution?: Prisma.StringFilter<"OpWorkEducation"> | string
+  degree?: Prisma.EnumOpWorkEducationDegreeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
+  startDate?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"OpWorkEducation"> | Date | string | null
+  isCurrent?: Prisma.BoolNullableFilter<"OpWorkEducation"> | boolean | null
+  description?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
+  grade?: Prisma.EnumOpWorkGradeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkGrade | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
+}
+
+export type OpWorkEducationCreateWithoutOpWorkJobSeekerInput = {
+  id?: string
+  institution: string
+  degree?: $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: string | null
+  startDate: Date | string
+  endDate?: Date | string | null
+  isCurrent?: boolean | null
+  description?: string | null
+  grade?: $Enums.OpWorkGrade | null
+  createdAt?: Date | string
+  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEducationsInput
+}
+
 export type OpWorkEducationUncheckedCreateWithoutOpWorkJobSeekerInput = {
   id?: string
+  profileId: string
   institution: string
   degree?: $Enums.OpWorkEducationDegree | null
   fieldOfStudy?: string | null
@@ -552,25 +692,65 @@ export type OpWorkEducationUpdateManyWithWhereWithoutOpWorkJobSeekerInput = {
   data: Prisma.XOR<Prisma.OpWorkEducationUpdateManyMutationInput, Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkJobSeekerInput>
 }
 
-export type OpWorkEducationScalarWhereInput = {
-  AND?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
-  OR?: Prisma.OpWorkEducationScalarWhereInput[]
-  NOT?: Prisma.OpWorkEducationScalarWhereInput | Prisma.OpWorkEducationScalarWhereInput[]
-  id?: Prisma.UuidFilter<"OpWorkEducation"> | string
-  jobSeekerId?: Prisma.UuidFilter<"OpWorkEducation"> | string
-  institution?: Prisma.StringFilter<"OpWorkEducation"> | string
-  degree?: Prisma.EnumOpWorkEducationDegreeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkEducationDegree | null
-  fieldOfStudy?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
-  startDate?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
-  endDate?: Prisma.DateTimeNullableFilter<"OpWorkEducation"> | Date | string | null
-  isCurrent?: Prisma.BoolNullableFilter<"OpWorkEducation"> | boolean | null
-  description?: Prisma.StringNullableFilter<"OpWorkEducation"> | string | null
-  grade?: Prisma.EnumOpWorkGradeNullableFilter<"OpWorkEducation"> | $Enums.OpWorkGrade | null
-  createdAt?: Prisma.DateTimeFilter<"OpWorkEducation"> | Date | string
+export type OpWorkEducationCreateManyOpWorkProfileInput = {
+  id?: string
+  jobSeekerId: string
+  institution: string
+  degree?: $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: string | null
+  startDate: Date | string
+  endDate?: Date | string | null
+  isCurrent?: boolean | null
+  description?: string | null
+  grade?: $Enums.OpWorkGrade | null
+  createdAt?: Date | string
+}
+
+export type OpWorkEducationUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  institution?: Prisma.StringFieldUpdateOperationsInput | string
+  degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grade?: Prisma.NullableEnumOpWorkGradeFieldUpdateOperationsInput | $Enums.OpWorkGrade | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkEducationNestedInput
+}
+
+export type OpWorkEducationUncheckedUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jobSeekerId?: Prisma.StringFieldUpdateOperationsInput | string
+  institution?: Prisma.StringFieldUpdateOperationsInput | string
+  degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grade?: Prisma.NullableEnumOpWorkGradeFieldUpdateOperationsInput | $Enums.OpWorkGrade | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jobSeekerId?: Prisma.StringFieldUpdateOperationsInput | string
+  institution?: Prisma.StringFieldUpdateOperationsInput | string
+  degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
+  fieldOfStudy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCurrent?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grade?: Prisma.NullableEnumOpWorkGradeFieldUpdateOperationsInput | $Enums.OpWorkGrade | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OpWorkEducationCreateManyOpWorkJobSeekerInput = {
   id?: string
+  profileId: string
   institution: string
   degree?: $Enums.OpWorkEducationDegree | null
   fieldOfStudy?: string | null
@@ -593,10 +773,12 @@ export type OpWorkEducationUpdateWithoutOpWorkJobSeekerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grade?: Prisma.NullableEnumOpWorkGradeFieldUpdateOperationsInput | $Enums.OpWorkGrade | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkEducationsNestedInput
 }
 
 export type OpWorkEducationUncheckedUpdateWithoutOpWorkJobSeekerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   institution?: Prisma.StringFieldUpdateOperationsInput | string
   degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
   fieldOfStudy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -610,6 +792,7 @@ export type OpWorkEducationUncheckedUpdateWithoutOpWorkJobSeekerInput = {
 
 export type OpWorkEducationUncheckedUpdateManyWithoutOpWorkJobSeekerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   institution?: Prisma.StringFieldUpdateOperationsInput | string
   degree?: Prisma.NullableEnumOpWorkEducationDegreeFieldUpdateOperationsInput | $Enums.OpWorkEducationDegree | null
   fieldOfStudy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -625,6 +808,7 @@ export type OpWorkEducationUncheckedUpdateManyWithoutOpWorkJobSeekerInput = {
 
 export type OpWorkEducationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobSeekerId?: boolean
   institution?: boolean
   degree?: boolean
@@ -635,11 +819,13 @@ export type OpWorkEducationSelect<ExtArgs extends runtime.Types.Extensions.Inter
   description?: boolean
   grade?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEducation"]>
 
 export type OpWorkEducationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobSeekerId?: boolean
   institution?: boolean
   degree?: boolean
@@ -650,11 +836,13 @@ export type OpWorkEducationSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   description?: boolean
   grade?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEducation"]>
 
 export type OpWorkEducationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobSeekerId?: boolean
   institution?: boolean
   degree?: boolean
@@ -665,11 +853,13 @@ export type OpWorkEducationSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   description?: boolean
   grade?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEducation"]>
 
 export type OpWorkEducationSelectScalar = {
   id?: boolean
+  profileId?: boolean
   jobSeekerId?: boolean
   institution?: boolean
   degree?: boolean
@@ -682,20 +872,29 @@ export type OpWorkEducationSelectScalar = {
   createdAt?: boolean
 }
 
-export type OpWorkEducationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jobSeekerId" | "institution" | "degree" | "fieldOfStudy" | "startDate" | "endDate" | "isCurrent" | "description" | "grade" | "createdAt", ExtArgs["result"]["opWorkEducation"]>
+export type OpWorkEducationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "jobSeekerId" | "institution" | "degree" | "fieldOfStudy" | "startDate" | "endDate" | "isCurrent" | "description" | "grade" | "createdAt", ExtArgs["result"]["opWorkEducation"]>
 export type OpWorkEducationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }
 export type OpWorkEducationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }
 export type OpWorkEducationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJobSeeker?: boolean | Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>
 }
 
 export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OpWorkEducation"
   objects: {
+    /**
+     * Связанный основной профиль
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
+     */
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
     /**
      * Связь с профилем соискателя
      * @DtoRelationCanConnectOnCreate
@@ -708,6 +907,10 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
      * Уникальный идентификатор записи образования (UUID v4)
      */
     id: string
+    /**
+     * Связанный основной профиль
+     */
+    profileId: string
     /**
      * Идентификатор соискателя
      */
@@ -1148,6 +1351,7 @@ readonly fields: OpWorkEducationFieldRefs;
  */
 export interface Prisma__OpWorkEducationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  OpWorkProfile<T extends Prisma.OpWorkProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   OpWorkJobSeeker<T extends Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkJobSeekerDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkJobSeekerClient<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSeekerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1179,6 +1383,7 @@ export interface Prisma__OpWorkEducationClient<T, Null = never, ExtArgs extends 
  */
 export interface OpWorkEducationFieldRefs {
   readonly id: Prisma.FieldRef<"OpWorkEducation", 'String'>
+  readonly profileId: Prisma.FieldRef<"OpWorkEducation", 'String'>
   readonly jobSeekerId: Prisma.FieldRef<"OpWorkEducation", 'String'>
   readonly institution: Prisma.FieldRef<"OpWorkEducation", 'String'>
   readonly degree: Prisma.FieldRef<"OpWorkEducation", 'OpWorkEducationDegree'>

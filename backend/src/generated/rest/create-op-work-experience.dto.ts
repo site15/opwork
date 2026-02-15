@@ -3,8 +3,18 @@ import {OpWorkEmploymentType} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
 import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
 
+export class CreateOpWorkExperienceOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 export class CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto {
     @ApiProperty({
   type: ConnectOpWorkJobSeekerDto,
@@ -15,7 +25,7 @@ export class CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto {
 connect!: ConnectOpWorkJobSeekerDto ;
   }
 
-@ApiExtraModels(ConnectOpWorkJobSeekerDto,CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto)
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkExperienceOpWorkProfileRelationInputDto,ConnectOpWorkJobSeekerDto,CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto)
 export class CreateOpWorkExperienceDto {
   @ApiProperty({
   type: 'string',
@@ -83,6 +93,13 @@ location?: string  | null;
 @IsOptional()
 @IsEnum(OpWorkEmploymentType)
 employmentType?: OpWorkEmploymentType  | null;
+@ApiProperty({
+  type: CreateOpWorkExperienceOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkExperienceOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkExperienceOpWorkProfileRelationInputDto ;
 @ApiProperty({
   type: CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto,
 })

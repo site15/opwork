@@ -1,6 +1,5 @@
 import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { OpWorkProfileType, OpWorkUserType } from '../generated/prisma/client';
-import { createHashFromString } from '../utils/create-hash-from-string';
 import { PRISMA_SERVICE, PrismaService } from './prisma.service';
 
 @Injectable()
@@ -13,38 +12,47 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
     for (const adminApiKey of adminApiKeys) {
+      const email = `test_${OpWorkUserType.ADMIN.toLowerCase()}@example.com`;
       const authApiKey = await this.getOrCreateAuthApiKeyByApiKey({
         apiKey: adminApiKey,
         userType: OpWorkUserType.ADMIN,
+        email,
       });
       await this.getOrCreateOpWorkProfileByUserId({
         userId: authApiKey.userId,
         profileType: OpWorkProfileType.EMPLOYER,
         userType: OpWorkUserType.ADMIN,
+        email,
       });
     }
     const employerApiKeys = process.env.EMPLOYER_API_KEYS?.split(',') || [];
     for (const employerApiKey of employerApiKeys) {
+      const email = `test_${OpWorkUserType.EMPLOYER.toLowerCase()}@example.com`;
       const authApiKey = await this.getOrCreateAuthApiKeyByApiKey({
         apiKey: employerApiKey,
         userType: OpWorkUserType.EMPLOYER,
+        email,
       });
       await this.getOrCreateOpWorkProfileByUserId({
         userId: authApiKey.userId,
         profileType: OpWorkProfileType.EMPLOYER,
         userType: OpWorkUserType.EMPLOYER,
+        email,
       });
     }
     const jobSeekerApiKeys = process.env.JOB_SEEKER_API_KEYS?.split(',') || [];
     for (const jobSeekerApiKey of jobSeekerApiKeys) {
+      const email = `test_${OpWorkUserType.JOB_SEEKER.toLowerCase()}@example.com`;
       const authApiKey = await this.getOrCreateAuthApiKeyByApiKey({
         apiKey: jobSeekerApiKey,
         userType: OpWorkUserType.JOB_SEEKER,
+        email,
       });
       await this.getOrCreateOpWorkProfileByUserId({
         userId: authApiKey.userId,
         profileType: OpWorkProfileType.SPECIALIST,
         userType: OpWorkUserType.JOB_SEEKER,
+        email,
       });
     }
   }
@@ -53,10 +61,12 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     userId,
     profileType,
     userType,
+    email,
   }: {
     userId: string;
     profileType: OpWorkProfileType;
     userType: OpWorkUserType;
+    email: string;
   }) {
     let opWorkProfile = await this.prismaService.opWorkProfile.findFirst({
       where: { userId, type: profileType, userType: userType },
@@ -68,13 +78,15 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
           isActive: true,
           type: profileType,
           userType: userType,
+          email,
         },
       });
     }
     if (
       (!opWorkProfile?.isActive ||
         opWorkProfile?.type !== profileType ||
-        opWorkProfile?.userType !== userType) &&
+        opWorkProfile?.userType !== userType ||
+        opWorkProfile.email !== email) &&
       opWorkProfile?.id
     ) {
       opWorkProfile = await this.prismaService.opWorkProfile.update({
@@ -83,6 +95,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
           isActive: true,
           type: profileType,
           userType: userType,
+          email,
         },
       });
     }
@@ -92,11 +105,12 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   private async getOrCreateAuthApiKeyByApiKey({
     apiKey,
     userType,
+    email,
   }: {
     apiKey: string | undefined;
     userType: OpWorkUserType;
+    email: string;
   }) {
-    const email = `${userType.toLowerCase()}_${createHashFromString(apiKey || '').slice(0, 7)}@example.com`;
     let authApiKey = await this.prismaService.authApiKey.findFirst({
       include: { AuthUser: true },
       where: { apiKey },

@@ -36,6 +36,10 @@ import { UpdateOpWorkEducationDto } from './update-op-work-education.dto';
 export class FindManyOpWorkEducationArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
+  profileId?: string;
+
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
   jobSeekerId?: string;}
 
 export class FindManyOpWorkEducationResponseMeta extends FindManyResponseMeta {}
@@ -90,6 +94,10 @@ export class OpWorkEducationController {
         : {}),
       AND: [
         
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+
           ...(isUUID(otherArgs.jobSeekerId)
             ? [{ jobSeekerId: { equals: otherArgs.jobSeekerId } }]
             : []),
@@ -101,6 +109,7 @@ export class OpWorkEducationController {
       return {
         items: await prisma.opWorkEducation.findMany({
           include:{
+OpWorkProfile: true,
 OpWorkJobSeeker: true
           },
           where: opWorkEducationWhereInput,
@@ -131,6 +140,7 @@ OpWorkJobSeeker: true
     return await this.prismaService.opWorkEducation.create({
       data: { 
         ...args,
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}},
         OpWorkJobSeeker:{connect:{id:args.OpWorkJobSeeker?.connect.id}}
       },
     });
@@ -147,6 +157,7 @@ OpWorkJobSeeker: true
         ...args,
         
         
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }}),
         ...(!args.OpWorkJobSeeker?{OpWorkJobSeeker:undefined}:{OpWorkJobSeeker: { connect: { id: args.OpWorkJobSeeker?.connect.id } }})
       },
       where: {

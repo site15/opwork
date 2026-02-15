@@ -2,9 +2,19 @@
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
 import {IsBoolean,IsInt,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
 import {ConnectOpWorkSkillDto} from './connect-op-work-skill.dto'
 
+export class CreateOpWorkJobSkillOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 export class CreateOpWorkJobSkillOpWorkJobRelationInputDto {
     @ApiProperty({
   type: ConnectOpWorkJobDto,
@@ -24,7 +34,7 @@ export class CreateOpWorkJobSkillOpWorkSkillRelationInputDto {
 connect!: ConnectOpWorkSkillDto ;
   }
 
-@ApiExtraModels(ConnectOpWorkJobDto,CreateOpWorkJobSkillOpWorkJobRelationInputDto,ConnectOpWorkSkillDto,CreateOpWorkJobSkillOpWorkSkillRelationInputDto)
+@ApiExtraModels(ConnectOpWorkProfileDto,CreateOpWorkJobSkillOpWorkProfileRelationInputDto,ConnectOpWorkJobDto,CreateOpWorkJobSkillOpWorkJobRelationInputDto,ConnectOpWorkSkillDto,CreateOpWorkJobSkillOpWorkSkillRelationInputDto)
 export class CreateOpWorkJobSkillDto {
   @ApiProperty({
   type: 'boolean',
@@ -50,6 +60,13 @@ importance!: number ;
 @IsOptional()
 @IsInt()
 minLevel?: number  | null;
+@ApiProperty({
+  type: CreateOpWorkJobSkillOpWorkProfileRelationInputDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => CreateOpWorkJobSkillOpWorkProfileRelationInputDto)
+OpWorkProfile!: CreateOpWorkJobSkillOpWorkProfileRelationInputDto ;
 @ApiProperty({
   type: CreateOpWorkJobSkillOpWorkJobRelationInputDto,
 })

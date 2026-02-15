@@ -33,6 +33,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,
         lastUsed: values.lastUsed,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
         OpWorkSkill: { connect: { id: values.skillId } },
       }
@@ -42,6 +43,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
         yearsOfExp: values.yearsOfExp,
         isPrimary: values.isPrimary,
         lastUsed: values.lastUsed,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
         OpWorkSkill: { connect: { id: values.skillId } },
       }
