@@ -2,9 +2,9 @@ import {
   X_API_KEY_HEADER_NAME,
   X_SESSION_ID_HEADER_NAME,
 } from '../../src/guards/auth.guard';
-import { createHashFromString } from '../../src/utils/create-hash-from-string';
 import { AuthUser, Sdk, SignInArgs, UserType } from '../generated/client';
 import { Client, Config, createClient } from '../generated/client/client';
+import { getRandomSha7 } from './utils';
 
 export class ActivityHelper {
   private apiKey: string | null = null;
@@ -83,9 +83,8 @@ export class ActivityHelper {
   }
 
   async registerAndLoginRandomUser(userType?: UserType) {
-    const rnd = createHashFromString(Date.now().toString());
     const args = {
-      email: `test_${rnd}_${userType?.toLowerCase()}@example.com`,
+      email: `test_${getRandomSha7()}_${userType?.toLowerCase()}@example.com`,
       password: 'validPassword123',
       userType,
     };

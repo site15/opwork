@@ -1,6 +1,6 @@
-import { assert } from 'console';
-import { ActivityHelper } from './utils/activity-helper';
 import { AuthErrorEnum } from '../src/errors/auth.errors';
+import { ActivityHelper } from './utils/activity-helper';
+import { getRandomSha7 } from './utils/utils';
 
 describe('OPWork: Check access rights for different user types (e2e)', () => {
   const jobSeekerActivity = new ActivityHelper({
@@ -27,7 +27,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       expect(result?.isActive).toBeTruthy();
       expect(result?.email).toContain('job_seeker');
     });
-    it('Read profile', async () => {
+    it('Read profile (CRUD)', async () => {
       const result =
         await jobSeekerActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: jobSeekerActivity.authUser?.id },
@@ -39,7 +39,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       );
     });
 
-    it('Error on update profile', async () => {
+    it('Error on update profile (CRUD)', async () => {
       const opWorkProfileControllerFindManyResult =
         await jobSeekerActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: jobSeekerActivity.authUser?.id },
@@ -50,7 +50,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           path: {
             id: opWorkProfileControllerFindManyResult.data?.items[0].id!,
           },
-          body: { email: 'profile_job_seeker@example.com' },
+          body: { email: 'test_profile_job_seeker@example.com' },
         }),
       ).rejects.toHaveProperty('code', AuthErrorEnum.METHOD_NOT_ALLOWED);
     });
@@ -64,7 +64,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       expect(result?.isActive).toBeTruthy();
       expect(result?.email).toContain('employer');
     });
-    it('Read profile', async () => {
+    it('Read profile (CRUD)', async () => {
       const result = await employerActivity.sdk.opWorkProfileControllerFindMany(
         {
           query: { userId: employerActivity.authUser?.id },
@@ -76,7 +76,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
         employerActivity.authUser?.id,
       );
     });
-    it('Error on update profile', async () => {
+    it('Error on update profile (CRUD)', async () => {
       const opWorkProfileControllerFindManyResult =
         await employerActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: employerActivity.authUser?.id },
@@ -87,7 +87,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           path: {
             id: opWorkProfileControllerFindManyResult.data?.items[0].id!,
           },
-          body: { email: 'profile_employer@example.com' },
+          body: { email: 'test_profile_employer@example.com' },
         }),
       ).rejects.toHaveProperty('code', AuthErrorEnum.METHOD_NOT_ALLOWED);
     });
@@ -101,7 +101,7 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       expect(result?.isActive).toBeTruthy();
       expect(result?.email).toContain('admin');
     });
-    it('Read profile', async () => {
+    it('Read profile (CRUD)', async () => {
       const result = await adminActivity.sdk.opWorkProfileControllerFindMany({
         query: { userId: adminActivity.authUser?.id },
       });
@@ -112,7 +112,8 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
       );
     });
 
-    it('Update profile', async () => {
+    it('Update profile (CRUD)', async () => {
+      const email = `test_profile_admin_${getRandomSha7()}@example.com`;
       const opWorkProfileControllerFindManyResult =
         await adminActivity.sdk.opWorkProfileControllerFindMany({
           query: { userId: adminActivity.authUser?.id },
@@ -123,18 +124,20 @@ describe('OPWork: Check access rights for different user types (e2e)', () => {
           path: {
             id: opWorkProfileControllerFindManyResult.data?.items[0].id!,
           },
-          body: { email: 'profile_admin@example.com' },
+          body: { email },
         });
 
       expect(opWorkProfileControllerFindManyResult.data?.items[0].id).toEqual(
         opWorkProfileControllerUpdateOneResult.data?.id,
       );
       expect(
-        opWorkProfileControllerFindManyResult.data?.items.length,
-      ).toBeGreaterThanOrEqual(1);
+        opWorkProfileControllerFindManyResult.data?.items[0].email,
+      ).not.toEqual(email);
+      expect(opWorkProfileControllerUpdateOneResult.data?.email).toEqual(email);
+
       expect(
         opWorkProfileControllerFindManyResult.data?.items[0].email,
-      ).toEqual('profile_admin@example.com');
+      ).not.toEqual(opWorkProfileControllerUpdateOneResult.data?.email);
     });
   });
 });

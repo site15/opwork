@@ -1,15 +1,14 @@
 import { AuthErrorEnum } from '../src/errors/auth.errors';
-import { createHashFromString } from '../src/utils/create-hash-from-string';
 import { AuthUser } from './generated/client';
 import { ActivityHelper } from './utils/activity-helper';
+import { getRandomSha7 } from './utils/utils';
 
 describe('Auth: Authentication flows (e2e)', () => {
   const activity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
-  const rnd = createHashFromString(Date.now().toString());
   const credentials = {
-    email: `test_${rnd}@example.com`,
+    email: `test_${getRandomSha7()}@example.com`,
     password: 'validPassword123',
   };
   let regProfile: AuthUser | null;
