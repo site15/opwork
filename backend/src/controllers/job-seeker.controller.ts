@@ -23,7 +23,7 @@ export class JobSeekerController {
       include: {
         OpWorkEducation: true,
         OpWorkExperience: true,
-        OpWorkJobSeekerSkill: true,
+        OpWorkJobSeekerSkill: { include: { OpWorkSkill: true } },
       },
       where: {
         profileId: req.opWorkProfileId,
@@ -47,7 +47,7 @@ export class JobSeekerController {
         include: {
           OpWorkEducation: true,
           OpWorkExperience: true,
-          OpWorkJobSeekerSkill: true,
+          OpWorkJobSeekerSkill: { include: { OpWorkSkill: true } },
         },
         where: {
           profileId: req.opWorkProfileId,
@@ -72,7 +72,7 @@ export class JobSeekerController {
         include: {
           OpWorkEducation: true,
           OpWorkExperience: true,
-          OpWorkJobSeekerSkill: true,
+          OpWorkJobSeekerSkill: { include: { OpWorkSkill: true } },
         },
         data: {
           profileId: req.opWorkProfileId,

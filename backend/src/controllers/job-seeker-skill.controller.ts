@@ -1,7 +1,7 @@
 import { Body, Controller, Inject, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
-import { OpWorkJobSeekerSkillDto } from '../generated/rest/op-work-job-seeker-skill.dto';
+import { OpWorkJobSeekerSkill } from '../generated/rest/op-work-job-seeker-skill.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerSkillArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
@@ -15,11 +15,11 @@ export class JobSeekerSkillController {
   ) {}
 
   @Put()
-  @ApiOkResponse({ type: OpWorkJobSeekerSkillDto })
+  @ApiOkResponse({ type: OpWorkJobSeekerSkill })
   async setSkill(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerSkillArgs,
-  ): Promise<OpWorkJobSeekerSkillDto> {
+  ): Promise<OpWorkJobSeekerSkill> {
     if (!args.skillId && args.skillName) {
       args.skillId = (
         (await this.prismaService.opWorkSkill.findFirst({
@@ -32,6 +32,7 @@ export class JobSeekerSkillController {
     }
     if (args.id) {
       return await this.prismaService.opWorkJobSeekerSkill.update({
+        include: { OpWorkSkill: true },
         where: { id: args.id },
         data: {
           isPrimary: args.isPrimary,
@@ -49,6 +50,7 @@ export class JobSeekerSkillController {
           },
         });
       return await this.prismaService.opWorkJobSeekerSkill.create({
+        include: { OpWorkSkill: true },
         data: {
           isPrimary: args.isPrimary,
           lastUsed: args.lastUsed,

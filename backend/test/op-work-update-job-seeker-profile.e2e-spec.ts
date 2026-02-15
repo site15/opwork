@@ -6,11 +6,15 @@ import {
 import { UserType } from '../src/types/auth-types';
 import { Sdk } from './generated/client';
 import { ActivityHelper } from './utils/activity-helper';
+import { getRandomSha7 } from './utils/utils';
 
 describe('OPWork: update job seeker profile (e2e)', () => {
   const jobSeekerActivity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
+  const skillName = getRandomSha7();
+
+  let jobSeekerControllerSetSkillResultId: string | undefined;
 
   it('Login', async () => {
     const result = await jobSeekerActivity.registerAndLoginRandomUser(
@@ -98,7 +102,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     });
   });
 
-  it('Create education for job seeker profile', async () => {
+  it('Create experience for job seeker profile', async () => {
     const jobSeekerControllerSetEducationResult =
       await jobSeekerActivity.sdk.jobSeekerExperienceControllerSetExperience({
         body: {
@@ -146,6 +150,57 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       lastUsed: new Date('2020-09-01').toISOString(),
       yearsOfExp: 2,
       skillId: skillId,
+      OpWorkSkill: { name: 'JavaScript' },
+    });
+    jobSeekerControllerSetSkillResultId =
+      jobSeekerControllerSetSkillResult.data?.id;
+  });
+
+  it('Create skill with random name for job seeker profile', async () => {
+    const jobSeekerControllerSetSkillResult =
+      await jobSeekerActivity.sdk.jobSeekerSkillControllerSetSkill({
+        body: {
+          level: 5,
+          isPrimary: true,
+          lastUsed: new Date('2020-09-01').toISOString(),
+          yearsOfExp: 2,
+          skillName,
+        },
+      });
+
+    expect(jobSeekerControllerSetSkillResult.data?.id).not.toEqual(
+      jobSeekerControllerSetSkillResultId,
+    );
+    expect(jobSeekerControllerSetSkillResult.data).toMatchObject({
+      level: 5,
+      isPrimary: true,
+      lastUsed: new Date('2020-09-01').toISOString(),
+      yearsOfExp: 2,
+      OpWorkSkill: { name: skillName },
+    });
+    jobSeekerControllerSetSkillResultId =
+      jobSeekerControllerSetSkillResult.data?.id;
+  });
+
+  it('Update skill options for job seeker profile', async () => {
+    const jobSeekerControllerUpdateSkillResult =
+      await jobSeekerActivity.sdk.jobSeekerSkillControllerSetSkill({
+        body: {
+          id: jobSeekerControllerSetSkillResultId,
+          level: 6,
+          isPrimary: true,
+          lastUsed: new Date('2020-09-01').toISOString(),
+          yearsOfExp: 2,
+          skillName,
+        },
+      });
+    expect(jobSeekerControllerUpdateSkillResult.data).toMatchObject({
+      id: jobSeekerControllerSetSkillResultId,
+      level: 6,
+      isPrimary: true,
+      lastUsed: new Date('2020-09-01').toISOString(),
+      yearsOfExp: 2,
+      OpWorkSkill: { name: skillName },
     });
   });
 
@@ -189,6 +244,14 @@ describe('OPWork: update job seeker profile (e2e)', () => {
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
           skillId: skillId,
+          OpWorkSkill: { name: 'JavaScript' },
+        },
+        {
+          level: 6,
+          isPrimary: true,
+          lastUsed: new Date('2020-09-01').toISOString(),
+          yearsOfExp: 2,
+          OpWorkSkill: { name: skillName },
         },
       ],
       currentPosition: 'Software Engineer',
