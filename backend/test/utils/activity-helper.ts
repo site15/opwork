@@ -8,7 +8,7 @@ import { getRandomSha7 } from './utils';
 
 export class ActivityHelper {
   private apiKey: string | null = null;
-  private sessionId: string | null = null;
+  private authSessionId: string | null = null;
   private client: Client;
 
   authUser: AuthUser | null = null;
@@ -32,12 +32,12 @@ export class ActivityHelper {
       const result = await this.sdk.authControllerSignUp({
         body: args,
       });
-      this.sessionId = result.data?.sessionId || null;
+      this.authSessionId = result.data?.sessionId || null;
       this.authUser = result.data?.profile || null;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
-      this.sessionId = null;
+      this.authSessionId = null;
       this.authUser = null;
       this.updateClientConfig();
       throw error;
@@ -49,12 +49,12 @@ export class ActivityHelper {
       const result = await this.sdk.authControllerSignIn({
         body: args,
       });
-      this.sessionId = result.data?.sessionId || null;
+      this.authSessionId = result.data?.sessionId || null;
       this.authUser = result.data?.profile || null;
       this.updateClientConfig();
       return result.data;
     } catch (error) {
-      this.sessionId = null;
+      this.authSessionId = null;
       this.authUser = null;
       this.updateClientConfig();
       throw error;
@@ -95,7 +95,7 @@ export class ActivityHelper {
   async logout() {
     const result = await this.sdk.authControllerSignOut();
     this.apiKey = null;
-    this.sessionId = null;
+    this.authSessionId = null;
     this.authUser = null;
     this.updateClientConfig();
     return result.data;
@@ -103,7 +103,7 @@ export class ActivityHelper {
 
   private updateClientConfig() {
     this.client.setConfig({
-      headers: { [X_SESSION_ID_HEADER_NAME]: this.sessionId || null },
+      headers: { [X_SESSION_ID_HEADER_NAME]: this.authSessionId || null },
     });
     this.client.setConfig({
       headers: { [X_API_KEY_HEADER_NAME]: this.apiKey || null },

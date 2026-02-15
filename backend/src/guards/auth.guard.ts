@@ -29,7 +29,6 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = getRequestFromExecutionContext(context) as AppRequest;
-    const method = req.method;
 
     const skipCheckAuth = !!this.reflector.getAllAndOverride(SkipCheckAuth, [
       context.getHandler(),
@@ -48,8 +47,8 @@ export class AuthGuard implements CanActivate {
     req.userIp =
       process.env.CHECK_IP === 'true' ? getClientIp(req as any) : '127.0.0.1';
     req.apiKey = req.headers[X_API_KEY_HEADER_NAME];
-    req.sessionId = req.headers[X_SESSION_ID_HEADER_NAME];
-    req.profileId = req.headers[X_PROFILE_ID_HEADER_NAME];
+    req.authSessionId = req.headers[X_SESSION_ID_HEADER_NAME];
+    req.opWorkProfileId = req.headers[X_PROFILE_ID_HEADER_NAME];
 
     if (!req.userIp || !ALLOWED_IPS.includes(req.userIp)) {
       Logger.log('Blocked request from unauthorized IP', {
@@ -59,7 +58,7 @@ export class AuthGuard implements CanActivate {
       throw new AuthError(AuthErrorEnum.FORBIDDEN_IP);
     }
 
-    if (!req.userId && req.apiKey) {
+    if (!req.authUserId && req.apiKey) {
       const apiKey = await this.prismaService.authApiKey.findFirst({
         include: { AuthUser: { include: { OpWorkProfile: true } } },
         where: { apiKey: req.apiKey },
@@ -69,46 +68,57 @@ export class AuthGuard implements CanActivate {
       }
 
       if (apiKey && apiKey.AuthUser) {
-        req.userId = apiKey.AuthUser.id;
-        req.user = apiKey.AuthUser;
+        req.authUserId = apiKey.AuthUser.id;
+        req.authUser = apiKey.AuthUser;
       }
 
-      if (!req.userId && apiKey && !apiKey.isActive && !skipCheckAuth) {
+      if (!req.authUserId && apiKey && !apiKey.isActive && !skipCheckAuth) {
         throw new AuthError(AuthErrorEnum.API_KEY_NOT_ACTIVE);
       }
     }
 
-    if (!req.userId && req.sessionId) {
-      const session = await this.prismaService.authSession.findFirst({
+    if (!req.authUserId && req.authSessionId) {
+      const authSession = await this.prismaService.authSession.findFirst({
         include: { AuthUser: { include: { OpWorkProfile: true } } },
-        where: { id: req.sessionId },
+        where: { id: req.authSessionId },
       });
-      if (session && session.AuthUser) {
-        req.userId = session.AuthUser.id;
-        req.user = session.AuthUser;
+      if (authSession && authSession.AuthUser) {
+        req.authSession = authSession;
+        req.authUserId = authSession.AuthUser.id;
+        req.authUser = authSession.AuthUser;
       }
 
-      if (!req.userId && session && !session.isActive && !skipCheckAuth) {
+      if (
+        !req.authUserId &&
+        authSession &&
+        !authSession.isActive &&
+        !skipCheckAuth
+      ) {
         throw new AuthError(AuthErrorEnum.SESSION_NOT_ACTIVE);
       }
     }
 
-    if (!req.userId && !req.apiKey && !req.sessionId && !skipCheckAuth) {
+    if (
+      !req.authUserId &&
+      !req.apiKey &&
+      !req.authSessionId &&
+      !skipCheckAuth
+    ) {
       throw new AuthError(AuthErrorEnum.UNAUTHORIZED);
     }
 
     if (
-      req.profileId ||
-      (!req.profileId && req.user?.OpWorkProfile.length > 0)
+      req.opWorkProfileId ||
+      (!req.opWorkProfileId && req.authUser?.OpWorkProfile.length > 0)
     ) {
       const profile =
-        req.user?.OpWorkProfile.find((p) => p.id === req.profileId) ||
-        req.user?.OpWorkProfile[0];
+        req.authUser?.OpWorkProfile.find((p) => p.id === req.opWorkProfileId) ||
+        req.authUser?.OpWorkProfile[0];
       if (!profile) {
         throw new AuthError(AuthErrorEnum.PROFILE_NOT_FOUND);
       }
-      req.profileId = profile.id;
-      req.profile = profile;
+      req.opWorkProfileId = profile.id;
+      req.opWorkProfile = profile;
     }
 
     if (
@@ -117,13 +127,13 @@ export class AuthGuard implements CanActivate {
           type.method === req.method &&
           !(
             Array.isArray(type.userTypes) ? type.userTypes : [type.userTypes]
-          ).find((userType) => req.profile?.userType === userType),
+          ).find((userType) => req.opWorkProfile?.userType === userType),
       )
     ) {
       throw new AuthError(AuthErrorEnum.METHOD_NOT_ALLOWED);
     }
 
-    if (!req.userId && !skipCheckAuth) {
+    if (!req.authUserId && !skipCheckAuth) {
       throw new AuthError(AuthErrorEnum.UNAUTHORIZED);
     }
 

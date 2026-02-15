@@ -33,15 +33,15 @@ export class AuthController {
   @Get('profile')
   @ApiOkResponse({ type: AuthUser })
   async profile(@CurrentAppRequest() req: AppRequest): Promise<AuthUser> {
-    return req.user;
+    return req.authUser;
   }
 
   @Get('sign-out')
   @ApiOkResponse({ type: StatusResponse })
   async signOut(@CurrentAppRequest() req: AppRequest): Promise<StatusResponse> {
-    if (req.sessionId) {
+    if (req.authSessionId) {
       await this.prismaService.authSession.update({
-        where: { id: req.sessionId },
+        where: { id: req.authSessionId },
         data: { isActive: false },
       });
     }

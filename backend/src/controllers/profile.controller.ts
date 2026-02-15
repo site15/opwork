@@ -21,7 +21,7 @@ export class ProfileController {
   ): Promise<OpWorkProfileDto | null> {
     return await this.prismaService.opWorkProfile.findFirstOrThrow({
       where: {
-        id: req.profileId,
+        id: req.opWorkProfileId,
       },
     });
   }
@@ -34,7 +34,7 @@ export class ProfileController {
   ): Promise<OpWorkProfileDto> {
     return await this.prismaService.opWorkProfile.update({
       where: {
-        id: req.profileId,
+        id: req.opWorkProfileId,
       },
       data: {
         title: args.title,
