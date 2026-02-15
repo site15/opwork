@@ -1,60 +1,11 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional, OmitType } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
+import { UpdateOpWorkProfileDto } from '../generated/rest/update-op-work-profile.dto';
 
-export class UpdateProfileArgs {
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  title?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  description?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  email?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  phone?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  website?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  location?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  avatarUrl?: string | null;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    nullable: true,
-  })
-  @IsOptional()
-  coverImage?: string | null;
-}
+export class SetProfileArgs extends OmitType(UpdateOpWorkProfileDto, [
+  'AuthUser',
+  'isActive',
+  'isEmailVerified',
+  'type',
+  'userType',
+]) {}

@@ -3,7 +3,7 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkProfileDto } from '../generated/rest/op-work-profile.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { UpdateProfileArgs } from '../types/profile-types';
+import { SetProfileArgs } from '../types/profile-types';
 import { AppRequest } from '../types/request';
 
 @ApiTags('profile')
@@ -28,9 +28,9 @@ export class ProfileController {
 
   @Put()
   @ApiOkResponse({ type: OpWorkProfileDto })
-  async updateProfile(
+  async setProfile(
     @CurrentAppRequest() req: AppRequest,
-    @Body() args: UpdateProfileArgs,
+    @Body() args: SetProfileArgs,
   ): Promise<OpWorkProfileDto> {
     return await this.prismaService.opWorkProfile.update({
       where: {

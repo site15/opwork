@@ -28,7 +28,7 @@ describe('OPWork: Read and update profile (e2e)', () => {
     const profileControllerGetProfileResult =
       await jobSeekerActivity.sdk.profileControllerGetProfile();
     const profileControllerUpdateProfileResult =
-      await jobSeekerActivity.sdk.profileControllerUpdateProfile({
+      await jobSeekerActivity.sdk.profileControllerSetProfile({
         body: {
           title: 'Software Engineer',
         },

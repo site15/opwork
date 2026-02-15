@@ -642,7 +642,6 @@ export type $OpWorkSavedJobPayload<ExtArgs extends runtime.Types.Extensions.Inte
     jobId: string
     /**
      * Дата сохранения вакансии
-     * @IsDate
      */
     savedAt: Date | null
     /**

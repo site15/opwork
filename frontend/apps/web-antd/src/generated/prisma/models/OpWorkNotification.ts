@@ -893,7 +893,6 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
     createdAt: Date
     /**
      * Временная метка прочтения уведомления
-     * @IsDate
      */
     readAt: Date | null
     authUserId: string | null

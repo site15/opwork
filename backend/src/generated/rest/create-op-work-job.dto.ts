@@ -1,7 +1,7 @@
 
 import {OpWorkEmploymentType,OpWorkExperienceLevel,OpWorkJobStatus} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDate,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkEmployerDto} from './connect-op-work-employer.dto'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
@@ -155,7 +155,6 @@ savesCount!: number ;
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 publishedAt?: Date  | null;
 @ApiProperty({
   type: 'string',
@@ -165,7 +164,6 @@ publishedAt?: Date  | null;
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 expiresAt?: Date  | null;
 @ApiProperty({
   type: CreateOpWorkJobOpWorkEmployerRelationInputDto,

@@ -1,7 +1,7 @@
 
 import {OpWorkNotificationType,Prisma} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -68,7 +68,6 @@ isArchived?: boolean  | null;
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 readAt?: Date  | null;
 @ApiProperty({
   required: false,

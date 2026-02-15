@@ -676,7 +676,6 @@ export type $OpWorkJobViewPayload<ExtArgs extends runtime.Types.Extensions.Inter
     jobId: string
     /**
      * Временная метка просмотра
-     * @IsDate
      */
     viewedAt: Date | null
     /**

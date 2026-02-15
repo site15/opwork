@@ -1069,12 +1069,10 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     statusNotes: string | null
     /**
      * Дата подачи отклика
-     * @IsDate
      */
     appliedAt: Date | null
     /**
      * Дата последнего обновления статуса
-     * @IsDate
      */
     statusUpdatedAt: Date | null
   }, ExtArgs["result"]["opWorkApplication"]>

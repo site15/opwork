@@ -1164,12 +1164,10 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     plannedDatesDescription: string | null
     /**
      * Предполагаемая дата начала проекта (по плану)
-     * @IsDate
      */
     plannedStartDate: Date | null
     /**
      * Предполагаемая дата завершения проекта (по плану)
-     * @IsDate
      */
     plannedEndDate: Date | null
     /**
@@ -1179,17 +1177,14 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     implementationDescription: string | null
     /**
      * Фактическая дата начала проекта
-     * @IsDate
      */
     actualStartDate: Date | null
     /**
      * Дата начала фазы активной разработки
-     * @IsDate
      */
     developmentStart: Date | null
     /**
      * Дата начала фазы тестирования
-     * @IsDate
      */
     testingStart: Date | null
     /**
@@ -1199,12 +1194,10 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     launchDescription: string | null
     /**
      * Планируемая дата запуска продукта
-     * @IsDate
      */
     launchDate: Date | null
     /**
      * Фактическая дата выхода продукта в продакшен
-     * @IsDate
      */
     goLiveDate: Date | null
     /**
@@ -1214,12 +1207,10 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     completionDescription: string | null
     /**
      * Фактическая дата завершения всех работ по проекту
-     * @IsDate
      */
     actualEndDate: Date | null
     /**
      * Дата официального завершения проекта (подписание актов и т.д.)
-     * @IsDate
      */
     completionDate: Date | null
     /**
@@ -1229,12 +1220,10 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     maintenanceDescription: string | null
     /**
      * Дата начала фазы поддержки и сопровождения
-     * @IsDate
      */
     maintenanceStart: Date | null
     /**
      * Дата окончания фазы поддержки (если планируется)
-     * @IsDate
      */
     maintenanceEnd: Date | null
     /**

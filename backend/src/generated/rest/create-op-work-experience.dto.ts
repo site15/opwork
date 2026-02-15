@@ -1,7 +1,7 @@
 
 import {OpWorkEmploymentType} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDate,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobSeekerDto} from './connect-op-work-job-seeker.dto'
@@ -55,7 +55,6 @@ description?: string  | null;
 })
 @IsNotEmpty()
 @IsDateString()
-@IsDate()
 startDate!: Date ;
 @ApiProperty({
   type: 'string',
@@ -65,7 +64,6 @@ startDate!: Date ;
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 endDate?: Date  | null;
 @ApiProperty({
   type: 'boolean',

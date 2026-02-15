@@ -696,7 +696,6 @@ export type $OpWorkSavedSearchPayload<ExtArgs extends runtime.Types.Extensions.I
     frequency: $Enums.OpWorkFrequency | null
     /**
      * Дата последней отправки уведомления
-     * @IsDate
      */
     lastSentAt: Date | null
     /**

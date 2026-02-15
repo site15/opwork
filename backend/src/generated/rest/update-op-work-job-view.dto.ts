@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDate,IsDateString,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
@@ -42,7 +42,6 @@ export class UpdateOpWorkJobViewDto {
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 viewedAt?: Date  | null;
 @ApiProperty({
   type: 'string',

@@ -1016,7 +1016,6 @@ export type $OpWorkJobSeekerSkillPayload<ExtArgs extends runtime.Types.Extension
     isPrimary: boolean | null
     /**
      * Дата последнего использования навыка
-     * @IsDate
      */
     lastUsed: Date | null
     /**

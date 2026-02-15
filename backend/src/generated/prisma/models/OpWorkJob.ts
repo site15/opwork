@@ -2429,12 +2429,10 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     savesCount: number
     /**
      * Дата публикации вакансии
-     * @IsDate
      */
     publishedAt: Date | null
     /**
      * Дата истечения вакансии
-     * @IsDate
      */
     expiresAt: Date | null
     /**

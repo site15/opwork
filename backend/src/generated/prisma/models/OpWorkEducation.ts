@@ -932,12 +932,10 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
     fieldOfStudy: string | null
     /**
      * Дата начала обучения
-     * @IsDate
      */
     startDate: Date
     /**
      * Дата окончания обучения
-     * @IsDate
      */
     endDate: Date | null
     /**

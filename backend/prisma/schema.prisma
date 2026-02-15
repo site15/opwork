@@ -924,10 +924,8 @@ model OpWorkExperience {
   /// Описание обязанностей и достижений
   description    String?               @db.Text
   /// Дата начала работы
-  /// @IsDate
   startDate      DateTime              @db.Timestamp(6)
   /// Дата окончания работы (null если текущее место)
-  /// @IsDate
   endDate        DateTime?             @db.Timestamp(6)
   /// Признак текущего места работы
   isCurrent      Boolean?
@@ -975,10 +973,8 @@ model OpWorkEducation {
   /// @MaxLength(255)
   fieldOfStudy String?                @db.VarChar(255)
   /// Дата начала обучения
-  /// @IsDate
   startDate    DateTime               @db.Timestamp(6)
   /// Дата окончания обучения
-  /// @IsDate
   endDate      DateTime?              @db.Timestamp(6)
   /// Признак текущего обучения
   isCurrent    Boolean?
@@ -1147,53 +1143,42 @@ model OpWorkProject {
   /// Описание планируемых сроков проекта
   plannedDatesDescription String?   @db.Text
   /// Предполагаемая дата начала проекта (по плану)
-  /// @IsDate
   plannedStartDate        DateTime? @db.Timestamp(6)
   /// Предполагаемая дата завершения проекта (по плану)
-  /// @IsDate
   plannedEndDate          DateTime? @db.Timestamp(6)
 
   /// === РЕАЛИЗАЦИЯ ===
   /// Описание этапа реализации проекта
   implementationDescription String?   @db.Text
   /// Фактическая дата начала проекта
-  /// @IsDate
   actualStartDate           DateTime? @db.Timestamp(6)
   /// Дата начала фазы активной разработки
-  /// @IsDate
   developmentStart          DateTime? @db.Timestamp(6)
   /// Дата начала фазы тестирования
-  /// @IsDate
   testingStart              DateTime? @db.Timestamp(6)
 
   /// === ЗАПУСК ===
   /// Описание этапа запуска продукта
   launchDescription String?   @db.Text
   /// Планируемая дата запуска продукта
-  /// @IsDate
   launchDate        DateTime? @db.Timestamp(6)
   /// Фактическая дата выхода продукта в продакшен
-  /// @IsDate
   goLiveDate        DateTime? @db.Timestamp(6)
 
   /// === ЗАВЕРШЕНИЕ ===
   /// Описание завершающего этапа проекта
   completionDescription String?   @db.Text
   /// Фактическая дата завершения всех работ по проекту
-  /// @IsDate
   actualEndDate         DateTime? @db.Timestamp(6)
   /// Дата официального завершения проекта (подписание актов и т.д.)
-  /// @IsDate
   completionDate        DateTime? @db.Timestamp(6)
 
   /// === ПОДДЕРЖКА ===
   /// Описание этапа поддержки и сопровождения
   maintenanceDescription String?   @db.Text
   /// Дата начала фазы поддержки и сопровождения
-  /// @IsDate
   maintenanceStart       DateTime? @db.Timestamp(6)
   /// Дата окончания фазы поддержки (если планируется)
-  /// @IsDate
   maintenanceEnd         DateTime? @db.Timestamp(6)
 
   /// === СИСТЕМНЫЕ ДАТЫ ===
@@ -1294,10 +1279,8 @@ model OpWorkJob {
   /// === ДАТЫ ===
 
   /// Дата публикации вакансии
-  /// @IsDate
   publishedAt DateTime? @db.Timestamp(6)
   /// Дата истечения вакансии
-  /// @IsDate
   expiresAt   DateTime? @db.Timestamp(6)
   /// Временная метка создания вакансии
   createdAt   DateTime  @default(now()) @db.Timestamp(6)
@@ -1373,10 +1356,8 @@ model OpWorkApplication {
   /// === ДАТЫ ===
 
   /// Дата подачи отклика
-  /// @IsDate
   appliedAt       DateTime? @db.Timestamp(6)
   /// Дата последнего обновления статуса
-  /// @IsDate
   statusUpdatedAt DateTime? @db.Timestamp(6)
 
   /// === СВЯЗИ ===
@@ -1416,7 +1397,6 @@ model OpWorkSavedJob {
   /// Идентификатор сохраненной вакансии
   jobId     String    @db.Uuid
   /// Дата сохранения вакансии
-  /// @IsDate
   savedAt   DateTime? @db.Timestamp(6)
   /// Персональные заметки пользователя о вакансии
   notes     String?   @db.Text
@@ -1512,7 +1492,6 @@ model OpWorkJobSeekerSkill {
   /// Признак основного/ключевого навыка
   isPrimary   Boolean?
   /// Дата последнего использования навыка
-  /// @IsDate
   lastUsed    DateTime? @db.Timestamp(6)
   /// Временная метка создания записи
   createdAt   DateTime  @default(now()) @db.Timestamp(6)
@@ -1629,7 +1608,6 @@ model OpWorkNotification {
   /// Временная метка создания уведомления
   createdAt DateTime  @default(now()) @db.Timestamp(6)
   /// Временная метка прочтения уведомления
-  /// @IsDate
   readAt    DateTime? @db.Timestamp(6)
 
   /// === СВЯЗИ ===
@@ -1715,7 +1693,6 @@ model OpWorkSearchHistory {
   /// @Minimum(0)
   resultsCount Int?
   /// Временная метка выполнения поиска
-  /// @IsDate
   searchedAt   DateTime? @db.Timestamp(6)
 
   /// === СВЯЗИ ===
@@ -1741,7 +1718,6 @@ model OpWorkJobView {
   /// Идентификатор просмотренной вакансии
   jobId     String    @db.Uuid
   /// Временная метка просмотра
-  /// @IsDate
   viewedAt  DateTime? @db.Timestamp(6)
   /// IP-адрес пользователя
   /// @MaxLength(45)
@@ -1790,7 +1766,6 @@ model OpWorkSavedSearch {
   /// @IsEnum(OpWorkFrequency)
   frequency  OpWorkFrequency?
   /// Дата последней отправки уведомления
-  /// @IsDate
   lastSentAt DateTime?        @db.Timestamp(6)
   /// Временная метка создания
   createdAt  DateTime         @default(now()) @db.Timestamp(6)

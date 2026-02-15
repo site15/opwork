@@ -67,7 +67,7 @@ export type OpWorkEducation = {
     OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
-export type OpWorkSkillType = 'PROGRAMMING_LANGUAGE' | 'FRAMEWORK' | 'DATABASE' | 'TOOL' | 'PLATFORM' | 'LANGUAGE' | 'SOFT_SKILL';
+export type OpWorkSkillType = 'CORE_DEVELOPMENT__PROGRAMMING_LANGUAGE' | 'CORE_DEVELOPMENT__FRAMEWORK' | 'CORE_DEVELOPMENT__LIBRARY' | 'CORE_DEVELOPMENT__RUNTIME' | 'CORE_DEVELOPMENT__API_TECHNOLOGY' | 'CORE_DEVELOPMENT__ARCHITECTURE_PATTERN' | 'CORE_DEVELOPMENT__ARCHITECTURE_METHOD' | 'DATA_AI__DATABASE' | 'DATA_AI__DATA_WAREHOUSE' | 'DATA_AI__BIG_DATA' | 'DATA_AI__DATA_ENGINEERING' | 'DATA_AI__MACHINE_LEARNING' | 'DATA_AI__DEEP_LEARNING' | 'DATA_AI__GENERATIVE_AI' | 'DATA_AI__COMPUTER_VISION' | 'DATA_AI__NLP' | 'DATA_AI__MLOPS' | 'DEVOPS_CLOUD__TOOL' | 'DEVOPS_CLOUD__CONTAINERIZATION' | 'DEVOPS_CLOUD__ORCHESTRATION' | 'DEVOPS_CLOUD__CI_CD' | 'DEVOPS_CLOUD__INFRASTRUCTURE_AS_CODE' | 'DEVOPS_CLOUD__CONFIGURATION_MANAGEMENT' | 'DEVOPS_CLOUD__PLATFORM' | 'DEVOPS_CLOUD__SERVERLESS' | 'DEVOPS_CLOUD__OBSERVABILITY' | 'DEVOPS_CLOUD__MONITORING' | 'DEVOPS_CLOUD__NETWORKING' | 'SECURITY__CYBERSECURITY' | 'SECURITY__APPLICATION_SECURITY' | 'SECURITY__CLOUD_SECURITY' | 'SECURITY__CRYPTOGRAPHY' | 'WEB_MOBILE__FRONTEND_TECH' | 'WEB_MOBILE__BACKEND_TECH' | 'WEB_MOBILE__MOBILE_DEVELOPMENT' | 'WEB_MOBILE__GAME_DEVELOPMENT' | 'WEB_MOBILE__WEB3' | 'QA_PROCESS__TESTING' | 'QA_PROCESS__PERFORMANCE_TESTING' | 'QA_PROCESS__TEST_AUTOMATION' | 'QA_PROCESS__DEVELOPMENT_METHODOLOGY' | 'QA_PROCESS__PROJECT_MANAGEMENT' | 'QA_PROCESS__PRODUCT_MANAGEMENT' | 'DESIGN__UI_DESIGN' | 'DESIGN__UX_RESEARCH' | 'DESIGN__GRAPHIC_DESIGN' | 'DESIGN__MOTION_DESIGN' | 'BUSINESS_MANAGEMENT__LEADERSHIP' | 'BUSINESS_MANAGEMENT__PEOPLE_MANAGEMENT' | 'BUSINESS_MANAGEMENT__RECRUITMENT' | 'BUSINESS_MANAGEMENT__TECHNICAL_WRITING' | 'BUSINESS_MANAGEMENT__SOFT_SKILL' | 'LANGUAGES__LANGUAGE' | 'OTHER__EMBEDDED' | 'OTHER__IOT' | 'OTHER__AR_VR' | 'OTHER__ROBOTICS';
 
 export type OpWorkExperienceLevel = 'INTERNSHIP' | 'ENTRY_LEVEL' | 'JUNIOR' | 'MIDDLE' | 'SENIOR' | 'LEAD' | 'EXPERT';
 
@@ -1780,7 +1780,7 @@ export type SignInResponse = {
     profile: AuthUser;
 };
 
-export type UpdateProfileArgs = {
+export type SetProfileArgs = {
     title?: string | null;
     description?: string | null;
     email?: string | null;
@@ -1789,6 +1789,55 @@ export type UpdateProfileArgs = {
     location?: string | null;
     avatarUrl?: string | null;
     coverImage?: string | null;
+};
+
+export type SetJobSeekerProfileArgs = {
+    currentPosition?: string | null;
+    currentCompany?: string | null;
+    summary?: string | null;
+    expectedSalary?: number | null;
+    salaryCurrency?: string | null;
+    isOpenToWork?: boolean | null;
+    isOpenToRemote?: boolean | null;
+    isOpenToRelocation?: boolean | null;
+    preferredLocations?: string | null;
+    linkedinUrl?: string | null;
+    githubUrl?: string | null;
+    portfolioUrl?: string | null;
+};
+
+export type SetJobSeekerSkillArgs = {
+    level: number;
+    yearsOfExp?: number | null;
+    isPrimary?: boolean | null;
+    lastUsed?: string | null;
+    id?: string;
+    skillName?: string;
+    skillId?: string;
+};
+
+export type SetJobSeekerEducationArgs = {
+    institution: string;
+    degree?: OpWorkEducationDegree | null;
+    fieldOfStudy?: string | null;
+    startDate: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    description?: string | null;
+    grade?: OpWorkGrade | null;
+    id?: string;
+};
+
+export type SetJobSeekerExperienceArgs = {
+    company: string;
+    position: string;
+    description?: string | null;
+    startDate: string;
+    endDate?: string | null;
+    isCurrent?: boolean | null;
+    location?: string | null;
+    employmentType?: OpWorkEmploymentType | null;
+    id?: string;
 };
 
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
@@ -4047,21 +4096,118 @@ export type ProfileControllerGetProfileResponses = {
 
 export type ProfileControllerGetProfileResponse = ProfileControllerGetProfileResponses[keyof ProfileControllerGetProfileResponses];
 
-export type ProfileControllerUpdateProfileData = {
-    body: UpdateProfileArgs;
+export type ProfileControllerSetProfileData = {
+    body: SetProfileArgs;
     path?: never;
     query?: never;
     url: '/api/profile';
 };
 
-export type ProfileControllerUpdateProfileErrors = {
+export type ProfileControllerSetProfileErrors = {
     default: OpWorkProfileDto;
 };
 
-export type ProfileControllerUpdateProfileError = ProfileControllerUpdateProfileErrors[keyof ProfileControllerUpdateProfileErrors];
+export type ProfileControllerSetProfileError = ProfileControllerSetProfileErrors[keyof ProfileControllerSetProfileErrors];
 
-export type ProfileControllerUpdateProfileResponses = {
+export type ProfileControllerSetProfileResponses = {
     200: OpWorkProfileDto;
 };
 
-export type ProfileControllerUpdateProfileResponse = ProfileControllerUpdateProfileResponses[keyof ProfileControllerUpdateProfileResponses];
+export type ProfileControllerSetProfileResponse = ProfileControllerSetProfileResponses[keyof ProfileControllerSetProfileResponses];
+
+export type JobSeekerControllerGetProfileData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker';
+};
+
+export type JobSeekerControllerGetProfileErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type JobSeekerControllerGetProfileError = JobSeekerControllerGetProfileErrors[keyof JobSeekerControllerGetProfileErrors];
+
+export type JobSeekerControllerGetProfileResponses = {
+    200: OpWorkJobSeeker;
+};
+
+export type JobSeekerControllerGetProfileResponse = JobSeekerControllerGetProfileResponses[keyof JobSeekerControllerGetProfileResponses];
+
+export type JobSeekerControllerSetProfileData = {
+    body: SetJobSeekerProfileArgs;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker';
+};
+
+export type JobSeekerControllerSetProfileErrors = {
+    default: OpWorkJobSeeker;
+};
+
+export type JobSeekerControllerSetProfileError = JobSeekerControllerSetProfileErrors[keyof JobSeekerControllerSetProfileErrors];
+
+export type JobSeekerControllerSetProfileResponses = {
+    200: OpWorkJobSeeker;
+};
+
+export type JobSeekerControllerSetProfileResponse = JobSeekerControllerSetProfileResponses[keyof JobSeekerControllerSetProfileResponses];
+
+export type JobSeekerSkillControllerSetSkillData = {
+    body: SetJobSeekerSkillArgs;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/skill';
+};
+
+export type JobSeekerSkillControllerSetSkillErrors = {
+    default: OpWorkJobSeekerSkillDto;
+};
+
+export type JobSeekerSkillControllerSetSkillError = JobSeekerSkillControllerSetSkillErrors[keyof JobSeekerSkillControllerSetSkillErrors];
+
+export type JobSeekerSkillControllerSetSkillResponses = {
+    200: OpWorkJobSeekerSkillDto;
+};
+
+export type JobSeekerSkillControllerSetSkillResponse = JobSeekerSkillControllerSetSkillResponses[keyof JobSeekerSkillControllerSetSkillResponses];
+
+export type JobSeekerEducationControllerSetEducationData = {
+    body: SetJobSeekerEducationArgs;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/education';
+};
+
+export type JobSeekerEducationControllerSetEducationErrors = {
+    default: OpWorkEducationDto;
+};
+
+export type JobSeekerEducationControllerSetEducationError = JobSeekerEducationControllerSetEducationErrors[keyof JobSeekerEducationControllerSetEducationErrors];
+
+export type JobSeekerEducationControllerSetEducationResponses = {
+    200: OpWorkEducationDto;
+};
+
+export type JobSeekerEducationControllerSetEducationResponse = JobSeekerEducationControllerSetEducationResponses[keyof JobSeekerEducationControllerSetEducationResponses];
+
+export type JobSeekerExperienceControllerSetExperienceData = {
+    body: SetJobSeekerExperienceArgs;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/experience';
+};
+
+export type JobSeekerExperienceControllerSetExperienceErrors = {
+    default: OpWorkExperienceDto;
+};
+
+export type JobSeekerExperienceControllerSetExperienceError = JobSeekerExperienceControllerSetExperienceErrors[keyof JobSeekerExperienceControllerSetExperienceErrors];
+
+export type JobSeekerExperienceControllerSetExperienceResponses = {
+    200: OpWorkExperienceDto;
+};
+
+export type JobSeekerExperienceControllerSetExperienceResponse = JobSeekerExperienceControllerSetExperienceResponses[keyof JobSeekerExperienceControllerSetExperienceResponses];

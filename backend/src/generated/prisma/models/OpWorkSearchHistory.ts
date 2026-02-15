@@ -593,7 +593,6 @@ export type $OpWorkSearchHistoryPayload<ExtArgs extends runtime.Types.Extensions
     resultsCount: number | null
     /**
      * Временная метка выполнения поиска
-     * @IsDate
      */
     searchedAt: Date | null
   }, ExtArgs["result"]["opWorkSearchHistory"]>

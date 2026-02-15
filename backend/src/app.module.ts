@@ -5,18 +5,29 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ApiSecurity } from '@nestjs/swagger';
 import { join } from 'path';
 import { AuthController } from './controllers/auth.controller';
+import { JobSeekerEducationController } from './controllers/job-seeker-education.controller';
+import { JobSeekerExperienceController } from './controllers/job-seeker-experience.controller';
+import { JobSeekerSkillController } from './controllers/job-seeker-skill.controller';
+import { JobSeekerController } from './controllers/job-seeker.controller';
 import { ProfileController } from './controllers/profile.controller';
+import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
 import { AppExceptionsFilter } from './filters/app.filter';
+import { OpWorkUserType } from './generated/prisma/enums';
 import { CONTROLLERS } from './generated/rest/controllers';
 import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
-import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
-import { OpWorkUserType } from './generated/prisma/enums';
 
 const generatedControllers = CONTROLLERS;
-const appControllers = [AuthController, ProfileController];
+const appControllers = [
+  AuthController,
+  ProfileController,
+  JobSeekerController,
+  JobSeekerSkillController,
+  JobSeekerEducationController,
+  JobSeekerExperienceController,
+];
 const controllers = [...generatedControllers, ...appControllers];
 
 // Apply ApiSecurity to all controllers

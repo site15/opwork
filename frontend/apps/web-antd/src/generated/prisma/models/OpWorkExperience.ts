@@ -931,12 +931,10 @@ export type $OpWorkExperiencePayload<ExtArgs extends runtime.Types.Extensions.In
     description: string | null
     /**
      * Дата начала работы
-     * @IsDate
      */
     startDate: Date
     /**
      * Дата окончания работы (null если текущее место)
-     * @IsDate
      */
     endDate: Date | null
     /**

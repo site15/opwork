@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsDate,IsDateString,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsDateString,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
@@ -34,7 +34,6 @@ export class CreateOpWorkSavedJobDto {
 })
 @IsOptional()
 @IsDateString()
-@IsDate()
 savedAt?: Date  | null;
 @ApiProperty({
   type: 'string',
