@@ -1,6 +1,11 @@
 import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { OpWorkProfileType, OpWorkUserType } from '../generated/prisma/client';
+import {
+  OpWorkProfileType,
+  OpWorkSkillType,
+  OpWorkUserType,
+} from '../generated/prisma/client';
 import { PRISMA_SERVICE, PrismaService } from './prisma.service';
+import { SKILL_CATEGORIES } from '../constants/skill-categories';
 
 @Injectable()
 export class DefaultDataBootstrapService implements OnApplicationBootstrap {
@@ -10,6 +15,28 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   ) {}
 
   async onApplicationBootstrap() {
+    await this.createOrUpdateDefaultApiKeys();
+    for (const skillCategory of Object.values(OpWorkSkillType)) {
+      for (const name of SKILL_CATEGORIES[skillCategory]) {
+        const [, category] = skillCategory.split('__');
+        const exist = await this.prismaService.opWorkSkill.findFirst({
+          where: { name },
+        });
+        if (!exist) {
+          await this.prismaService.opWorkSkill.create({
+            data: { type: skillCategory, category, name, popularity: 0 },
+          });
+        } else {
+          await this.prismaService.opWorkSkill.updateMany({
+            where: { name },
+            data: { type: skillCategory, category },
+          });
+        }
+      }
+    }
+  }
+
+  private async createOrUpdateDefaultApiKeys() {
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
     for (const adminApiKey of adminApiKeys) {
       const email = `test_${OpWorkUserType.ADMIN.toLowerCase()}@example.com`;

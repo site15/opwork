@@ -144,26 +144,230 @@ enum OpWorkProfileType {
   /// Работодатель - профиль компании или рекрутера
   EMPLOYER
 }
-
 /// Тип навыка или технологии
-/// Классификация навыков для удобства поиска и фильтрации
+/// Расширенная классификация навыков для рынка 2026
 enum OpWorkSkillType {
-  /// Язык программирования - JavaScript, Python, Java и т.д.
-  PROGRAMMING_LANGUAGE
-  /// Фреймворк - React, Angular, Django и т.д.
-  FRAMEWORK
-  /// База данных - PostgreSQL, MongoDB, Redis и т.д.
-  DATABASE
-  /// Инструмент - Git, Docker, Jenkins и т.д.
-  TOOL
-  /// Платформа - AWS, Azure, Google Cloud и т.д.
-  PLATFORM
-  /// Язык (иностранный) - English, German, French и т.д.
-  LANGUAGE
-  /// Мягкий навык - коммуникация, лидерство, управление временем
-  SOFT_SKILL
-}
 
+  /// =========================
+  /// CORE DEVELOPMENT
+  /// =========================
+
+  /// Язык программирования - JavaScript, Python, Go, Rust, Kotlin и т.д.
+  CORE_DEVELOPMENT__PROGRAMMING_LANGUAGE
+
+  /// Фреймворк - React, Angular, NestJS, Django, Spring и т.д.
+  CORE_DEVELOPMENT__FRAMEWORK
+
+  /// Библиотека - Redux, RxJS, TensorFlow, Pandas и т.д.
+  CORE_DEVELOPMENT__LIBRARY
+
+  /// Runtime / среда выполнения - Node.js, Deno, JVM, .NET CLR
+  CORE_DEVELOPMENT__RUNTIME
+
+  /// API стиль - REST, GraphQL, gRPC, WebSocket
+  CORE_DEVELOPMENT__API_TECHNOLOGY
+
+  /// Архитектурный стиль - Microservices, Monolith, Event-Driven
+  CORE_DEVELOPMENT__ARCHITECTURE_PATTERN
+
+  /// Архитектурная методология - Clean Architecture, DDD, Hexagonal
+  CORE_DEVELOPMENT__ARCHITECTURE_METHOD
+
+
+  /// =========================
+  /// DATA & AI
+  /// =========================
+
+  /// База данных - PostgreSQL, MySQL, MongoDB, Redis
+  DATA_AI__DATABASE
+
+  /// Data Warehouse - BigQuery, Snowflake, Redshift
+  DATA_AI__DATA_WAREHOUSE
+
+  /// Big Data - Hadoop, Spark, Kafka Streams
+  DATA_AI__BIG_DATA
+
+  /// Data Engineering - ETL, Airflow, dbt
+  DATA_AI__DATA_ENGINEERING
+
+  /// Machine Learning - Scikit-learn, XGBoost
+  DATA_AI__MACHINE_LEARNING
+
+  /// Deep Learning - PyTorch, TensorFlow
+  DATA_AI__DEEP_LEARNING
+
+  /// LLM / Generative AI - OpenAI, LangChain, RAG
+  DATA_AI__GENERATIVE_AI
+
+  /// Computer Vision - OpenCV, YOLO
+  DATA_AI__COMPUTER_VISION
+
+  /// NLP - spaCy, HuggingFace
+  DATA_AI__NLP
+
+  /// MLOps - MLflow, Kubeflow
+  DATA_AI__MLOPS
+
+
+  /// =========================
+  /// DEVOPS & CLOUD
+  /// =========================
+
+  /// Инструмент - Git, Docker, Jenkins
+  DEVOPS_CLOUD__TOOL
+
+  /// Контейнеризация - Docker, Podman
+  DEVOPS_CLOUD__CONTAINERIZATION
+
+  /// Оркестрация - Kubernetes, Nomad
+  DEVOPS_CLOUD__ORCHESTRATION
+
+  /// CI/CD - GitHub Actions, GitLab CI
+  DEVOPS_CLOUD__CI_CD
+
+  /// Infrastructure as Code - Terraform, Pulumi
+  DEVOPS_CLOUD__INFRASTRUCTURE_AS_CODE
+
+  /// Configuration Management - Ansible, Chef
+  DEVOPS_CLOUD__CONFIGURATION_MANAGEMENT
+
+  /// Платформа - AWS, Azure, GCP
+  DEVOPS_CLOUD__PLATFORM
+
+  /// Serverless - AWS Lambda, Cloud Functions
+  DEVOPS_CLOUD__SERVERLESS
+
+  /// Observability - Prometheus, Grafana, OpenTelemetry
+  DEVOPS_CLOUD__OBSERVABILITY
+
+  /// Monitoring - Datadog, NewRelic
+  DEVOPS_CLOUD__MONITORING
+
+  /// Networking - TCP/IP, Nginx, Cloudflare
+  DEVOPS_CLOUD__NETWORKING
+
+
+  /// =========================
+  /// SECURITY
+  /// =========================
+
+  /// Кибербезопасность - OWASP, Pentesting
+  SECURITY__CYBERSECURITY
+
+  /// Application Security - SAST, DAST
+  SECURITY__APPLICATION_SECURITY
+
+  /// Cloud Security - IAM, Zero Trust
+  SECURITY__CLOUD_SECURITY
+
+  /// Cryptography - SSL/TLS, JWT, OAuth
+  SECURITY__CRYPTOGRAPHY
+
+
+  /// =========================
+  /// WEB & MOBILE
+  /// =========================
+
+  /// Frontend технология - HTML, CSS, Webpack
+  WEB_MOBILE__FRONTEND_TECH
+
+  /// Backend технология - Express, FastAPI
+  WEB_MOBILE__BACKEND_TECH
+
+  /// Mobile разработка - iOS, Android, Flutter
+  WEB_MOBILE__MOBILE_DEVELOPMENT
+
+  /// Game Development - Unity, Unreal Engine
+  WEB_MOBILE__GAME_DEVELOPMENT
+
+  /// Web3 / Blockchain - Solidity, Ethereum
+  WEB_MOBILE__WEB3
+
+
+  /// =========================
+  /// QA & PROCESS
+  /// =========================
+
+  /// Тестирование - Jest, Cypress, Playwright
+  QA_PROCESS__TESTING
+
+  /// Performance Testing - k6, JMeter
+  QA_PROCESS__PERFORMANCE_TESTING
+
+  /// Automation QA
+  QA_PROCESS__TEST_AUTOMATION
+
+  /// Методология разработки - Agile, Scrum, Kanban
+  QA_PROCESS__DEVELOPMENT_METHODOLOGY
+
+  /// Управление проектами - Jira, Confluence
+  QA_PROCESS__PROJECT_MANAGEMENT
+
+  /// Product Management - Discovery, Roadmap
+  QA_PROCESS__PRODUCT_MANAGEMENT
+
+
+  /// =========================
+  /// DESIGN
+  /// =========================
+
+  /// UI Design - Figma, Sketch
+  DESIGN__UI_DESIGN
+
+  /// UX Research
+  DESIGN__UX_RESEARCH
+
+  /// Graphic Design
+  DESIGN__GRAPHIC_DESIGN
+
+  /// Motion Design
+  DESIGN__MOTION_DESIGN
+
+
+  /// =========================
+  /// BUSINESS & MANAGEMENT
+  /// =========================
+
+  /// Leadership
+  BUSINESS_MANAGEMENT__LEADERSHIP
+
+  /// People Management
+  BUSINESS_MANAGEMENT__PEOPLE_MANAGEMENT
+
+  /// Hiring / Recruitment
+  BUSINESS_MANAGEMENT__RECRUITMENT
+
+  /// Technical Writing
+  BUSINESS_MANAGEMENT__TECHNICAL_WRITING
+
+  /// Soft skills - коммуникация, тайм-менеджмент
+  BUSINESS_MANAGEMENT__SOFT_SKILL
+
+
+  /// =========================
+  /// LANGUAGES
+  /// =========================
+
+  /// Иностранный язык - English, German
+  LANGUAGES__LANGUAGE
+
+
+  /// =========================
+  /// OTHER
+  /// =========================
+
+  /// Hardware / Embedded
+  OTHER__EMBEDDED
+
+  /// IoT
+  OTHER__IOT
+
+  /// AR / VR
+  OTHER__AR_VR
+
+  /// Robotics
+  OTHER__ROBOTICS
+}
 /// Уровень образования кандидата
 /// Стандартная классификация образовательных степеней
 enum OpWorkEducationDegree {
