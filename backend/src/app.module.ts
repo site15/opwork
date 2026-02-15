@@ -19,6 +19,7 @@ import { DefaultDataBootstrapService } from './services/default-data-bootstrap.s
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
 import { EmployerController } from './controllers/employer.controller';
+import { EmployerWorkController } from './controllers/employer-work.controller';
 
 const generatedControllers = CONTROLLERS;
 const appControllers = [
@@ -29,6 +30,7 @@ const appControllers = [
   JobSeekerEducationController,
   JobSeekerExperienceController,
   EmployerController,
+  EmployerWorkController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 

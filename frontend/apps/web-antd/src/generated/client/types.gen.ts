@@ -1858,6 +1858,25 @@ export type SetEmployerProfileArgs = {
     facebookUrl?: string | null;
 };
 
+export type SetEmployerWorkArgs = {
+    title: string;
+    description: string;
+    requirements: string;
+    responsibilities: string;
+    employmentType: OpWorkEmploymentType;
+    experienceLevel: OpWorkExperienceLevel;
+    department?: string | null;
+    salaryMin?: number | null;
+    salaryMax?: number | null;
+    salaryCurrency?: string | null;
+    location?: string | null;
+    isRemote?: boolean | null;
+    status: OpWorkJobStatus;
+    publishedAt?: string | null;
+    expiresAt?: string | null;
+    id?: string;
+};
+
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
@@ -4326,3 +4345,41 @@ export type EmployerControllerSetProfileResponses = {
 };
 
 export type EmployerControllerSetProfileResponse = EmployerControllerSetProfileResponses[keyof EmployerControllerSetProfileResponses];
+
+export type EmployerWorkControllerGetWorksData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/employer/work';
+};
+
+export type EmployerWorkControllerGetWorksErrors = {
+    default: Array<OpWorkJobDto>;
+};
+
+export type EmployerWorkControllerGetWorksError = EmployerWorkControllerGetWorksErrors[keyof EmployerWorkControllerGetWorksErrors];
+
+export type EmployerWorkControllerGetWorksResponses = {
+    200: Array<OpWorkJobDto>;
+};
+
+export type EmployerWorkControllerGetWorksResponse = EmployerWorkControllerGetWorksResponses[keyof EmployerWorkControllerGetWorksResponses];
+
+export type EmployerWorkControllerSetWorkData = {
+    body: SetEmployerWorkArgs;
+    path?: never;
+    query?: never;
+    url: '/api/employer/work';
+};
+
+export type EmployerWorkControllerSetWorkErrors = {
+    default: OpWorkJobDto;
+};
+
+export type EmployerWorkControllerSetWorkError = EmployerWorkControllerSetWorkErrors[keyof EmployerWorkControllerSetWorkErrors];
+
+export type EmployerWorkControllerSetWorkResponses = {
+    200: OpWorkJobDto;
+};
+
+export type EmployerWorkControllerSetWorkResponse = EmployerWorkControllerSetWorkResponses[keyof EmployerWorkControllerSetWorkResponses];
