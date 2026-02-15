@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Put } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkEducationDto } from '../generated/rest/op-work-education.dto';
@@ -13,6 +13,18 @@ export class JobSeekerEducationController {
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
+
+  @Get()
+  @ApiOkResponse({ type: OpWorkEducationDto, isArray: true })
+  async getEducations(
+    @CurrentAppRequest() req: AppRequest,
+  ): Promise<OpWorkEducationDto[]> {
+    return await this.prismaService.opWorkEducation.findMany({
+      where: {
+        profileId: req.opWorkProfileId,
+      },
+    });
+  }
 
   @Put()
   @ApiOkResponse({ type: OpWorkEducationDto })

@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Put } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkExperienceDto } from '../generated/rest/op-work-experience.dto';
@@ -13,6 +13,18 @@ export class JobSeekerExperienceController {
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
+
+  @Get()
+  @ApiOkResponse({ type: OpWorkExperienceDto, isArray: true })
+  async getExperiences(
+    @CurrentAppRequest() req: AppRequest,
+  ): Promise<OpWorkExperienceDto[]> {
+    return await this.prismaService.opWorkExperience.findMany({
+      where: {
+        profileId: req.opWorkProfileId,
+      },
+    });
+  }
 
   @Put()
   @ApiOkResponse({ type: OpWorkExperienceDto })

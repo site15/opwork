@@ -1840,6 +1840,24 @@ export type SetJobSeekerExperienceArgs = {
     id?: string;
 };
 
+export type SetEmployerProfileArgs = {
+    companyName?: string;
+    industry?: string | null;
+    description?: string | null;
+    mission?: string | null;
+    culture?: string | null;
+    foundedYear?: number | null;
+    headquarters?: string | null;
+    logoUrl?: string | null;
+    coverImageUrl?: string | null;
+    companyEmail?: string | null;
+    companyPhone?: string | null;
+    companyWebsite?: string | null;
+    linkedinUrl?: string | null;
+    twitterUrl?: string | null;
+    facebookUrl?: string | null;
+};
+
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
@@ -4155,6 +4173,25 @@ export type JobSeekerControllerSetProfileResponses = {
 
 export type JobSeekerControllerSetProfileResponse = JobSeekerControllerSetProfileResponses[keyof JobSeekerControllerSetProfileResponses];
 
+export type JobSeekerSkillControllerGetSkillsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/skill';
+};
+
+export type JobSeekerSkillControllerGetSkillsErrors = {
+    default: Array<OpWorkJobSeekerSkill>;
+};
+
+export type JobSeekerSkillControllerGetSkillsError = JobSeekerSkillControllerGetSkillsErrors[keyof JobSeekerSkillControllerGetSkillsErrors];
+
+export type JobSeekerSkillControllerGetSkillsResponses = {
+    200: Array<OpWorkJobSeekerSkill>;
+};
+
+export type JobSeekerSkillControllerGetSkillsResponse = JobSeekerSkillControllerGetSkillsResponses[keyof JobSeekerSkillControllerGetSkillsResponses];
+
 export type JobSeekerSkillControllerSetSkillData = {
     body: SetJobSeekerSkillArgs;
     path?: never;
@@ -4163,16 +4200,35 @@ export type JobSeekerSkillControllerSetSkillData = {
 };
 
 export type JobSeekerSkillControllerSetSkillErrors = {
-    default: OpWorkJobSeekerSkillDto;
+    default: OpWorkJobSeekerSkill;
 };
 
 export type JobSeekerSkillControllerSetSkillError = JobSeekerSkillControllerSetSkillErrors[keyof JobSeekerSkillControllerSetSkillErrors];
 
 export type JobSeekerSkillControllerSetSkillResponses = {
-    200: OpWorkJobSeekerSkillDto;
+    200: OpWorkJobSeekerSkill;
 };
 
 export type JobSeekerSkillControllerSetSkillResponse = JobSeekerSkillControllerSetSkillResponses[keyof JobSeekerSkillControllerSetSkillResponses];
+
+export type JobSeekerEducationControllerGetEducationsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/education';
+};
+
+export type JobSeekerEducationControllerGetEducationsErrors = {
+    default: Array<OpWorkEducationDto>;
+};
+
+export type JobSeekerEducationControllerGetEducationsError = JobSeekerEducationControllerGetEducationsErrors[keyof JobSeekerEducationControllerGetEducationsErrors];
+
+export type JobSeekerEducationControllerGetEducationsResponses = {
+    200: Array<OpWorkEducationDto>;
+};
+
+export type JobSeekerEducationControllerGetEducationsResponse = JobSeekerEducationControllerGetEducationsResponses[keyof JobSeekerEducationControllerGetEducationsResponses];
 
 export type JobSeekerEducationControllerSetEducationData = {
     body: SetJobSeekerEducationArgs;
@@ -4193,6 +4249,25 @@ export type JobSeekerEducationControllerSetEducationResponses = {
 
 export type JobSeekerEducationControllerSetEducationResponse = JobSeekerEducationControllerSetEducationResponses[keyof JobSeekerEducationControllerSetEducationResponses];
 
+export type JobSeekerExperienceControllerGetExperiencesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/experience';
+};
+
+export type JobSeekerExperienceControllerGetExperiencesErrors = {
+    default: Array<OpWorkExperienceDto>;
+};
+
+export type JobSeekerExperienceControllerGetExperiencesError = JobSeekerExperienceControllerGetExperiencesErrors[keyof JobSeekerExperienceControllerGetExperiencesErrors];
+
+export type JobSeekerExperienceControllerGetExperiencesResponses = {
+    200: Array<OpWorkExperienceDto>;
+};
+
+export type JobSeekerExperienceControllerGetExperiencesResponse = JobSeekerExperienceControllerGetExperiencesResponses[keyof JobSeekerExperienceControllerGetExperiencesResponses];
+
 export type JobSeekerExperienceControllerSetExperienceData = {
     body: SetJobSeekerExperienceArgs;
     path?: never;
@@ -4211,3 +4286,43 @@ export type JobSeekerExperienceControllerSetExperienceResponses = {
 };
 
 export type JobSeekerExperienceControllerSetExperienceResponse = JobSeekerExperienceControllerSetExperienceResponses[keyof JobSeekerExperienceControllerSetExperienceResponses];
+
+export type EmployerControllerGetProfileData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/employer';
+};
+
+export type EmployerControllerGetProfileErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type EmployerControllerGetProfileError = EmployerControllerGetProfileErrors[keyof EmployerControllerGetProfileErrors];
+
+export type EmployerControllerGetProfileResponses = {
+    200: OpWorkEmployer;
+};
+
+export type EmployerControllerGetProfileResponse = EmployerControllerGetProfileResponses[keyof EmployerControllerGetProfileResponses];
+
+export type EmployerControllerSetProfileData = {
+    body: SetEmployerProfileArgs;
+    path?: never;
+    query?: never;
+    url: '/api/employer';
+};
+
+export type EmployerControllerSetProfileErrors = {
+    default: OpWorkEmployer;
+};
+
+export type EmployerControllerSetProfileError = EmployerControllerSetProfileErrors[keyof EmployerControllerSetProfileErrors];
+
+export type EmployerControllerSetProfileResponses = {
+    200: OpWorkEmployer;
+};
+
+export type EmployerControllerSetProfileResponse = EmployerControllerSetProfileResponses[keyof EmployerControllerSetProfileResponses];

@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
+import { EmployerController } from './controllers/employer.controller';
 
 const generatedControllers = CONTROLLERS;
 const appControllers = [
@@ -27,6 +28,7 @@ const appControllers = [
   JobSeekerSkillController,
   JobSeekerEducationController,
   JobSeekerExperienceController,
+  EmployerController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 
