@@ -319,7 +319,7 @@ describe('Vacancies: search (e2e)', () => {
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(2);
     expect(searchResult?.items[0].location).toContain('San Francisco1');
     expect(searchResult?.items[1].location).toContain('San Francisco2');
-    console.log(searchResult?.items[0]);
+
     expect(
       searchResult?.items[0].OpWorkJobSkill?.[0].OpWorkSkill?.name,
     ).toContain(employer1SkillName);
