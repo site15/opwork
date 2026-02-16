@@ -14,6 +14,7 @@ import { JobSeekerExperienceController } from './controllers/job-seeker-experien
 import { JobSeekerSkillController } from './controllers/job-seeker-skill.controller';
 import { JobSeekerController } from './controllers/job-seeker.controller';
 import { ProfileController } from './controllers/profile.controller';
+import { VacanciesController } from './controllers/vacancies.controller';
 import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
 import { AppExceptionsFilter } from './filters/app.filter';
 import { OpWorkUserType } from './generated/prisma/enums';
@@ -35,6 +36,7 @@ const appControllers = [
   EmployeJobController,
   EmployerWorkSkillController,
   EmployerJobTagsController,
+  VacanciesController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 

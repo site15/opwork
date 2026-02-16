@@ -1905,6 +1905,17 @@ export type SetEmployerJobTagsArgs = {
     id?: string;
 };
 
+export type FindManyVacanciesResponseMeta = {
+    curPage?: number;
+    perPage?: number;
+    totalResults: number;
+};
+
+export type FindManyVacanciesResponse = {
+    items: Array<OpWorkJob>;
+    meta: FindManyVacanciesResponseMeta;
+};
+
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
@@ -4496,3 +4507,30 @@ export type EmployerJobTagsControllerSetJobTagsResponses = {
 };
 
 export type EmployerJobTagsControllerSetJobTagsResponse = EmployerJobTagsControllerSetJobTagsResponses[keyof EmployerJobTagsControllerSetJobTagsResponses];
+
+export type VacanciesControllerFindManyData = {
+    body?: never;
+    path?: never;
+    query?: {
+        curPage?: number;
+        perPage?: number;
+        searchText?: string;
+        sort?: string;
+        locations?: Array<string>;
+        salaryMin?: number;
+        employmentTypes?: Array<OpWorkEmploymentType>;
+        experienceLevels?: Array<OpWorkExperienceLevel>;
+        skills?: Array<string>;
+    };
+    url: '/api/vacancies';
+};
+
+export type VacanciesControllerFindManyErrors = {
+    default: unknown;
+};
+
+export type VacanciesControllerFindManyResponses = {
+    200: FindManyVacanciesResponse;
+};
+
+export type VacanciesControllerFindManyResponse = VacanciesControllerFindManyResponses[keyof VacanciesControllerFindManyResponses];
