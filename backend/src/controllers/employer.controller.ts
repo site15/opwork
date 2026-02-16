@@ -24,7 +24,7 @@ export class EmployerController {
         OpWorkJob: {
           include: {
             OpWorkJobSkill: { include: { OpWorkSkill: true } },
-            opWorkJobTags: { include: { OpWorkJob: true } },
+            opWorkJobTags: true,
           },
         },
       },
@@ -51,7 +51,7 @@ export class EmployerController {
           OpWorkJob: {
             include: {
               OpWorkJobSkill: { include: { OpWorkSkill: true } },
-              opWorkJobTags: { include: { OpWorkJob: true } },
+              opWorkJobTags: true,
             },
           },
         },
@@ -82,7 +82,7 @@ export class EmployerController {
           OpWorkJob: {
             include: {
               OpWorkJobSkill: { include: { OpWorkSkill: true } },
-              opWorkJobTags: { include: { OpWorkJob: true } },
+              opWorkJobTags: true,
             },
           },
         },

@@ -1,4 +1,3 @@
-import { assert } from 'console';
 import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
@@ -87,9 +86,9 @@ describe('OPWork: update employer profile (e2e)', () => {
       employerControllerSetProfileResult.data?.id;
   });
 
-  it('Create employer work', async () => {
-    const employerControllerSetEmployerWorkResult =
-      await employerActivity.sdk.employerWorkControllerSetWork({
+  it('Create employer job', async () => {
+    const employeJobControllerSetJobResult =
+      await employerActivity.sdk.employeJobControllerSetJob({
         body: {
           description: 'This is a test description.',
           employmentType: OpWorkEmploymentType.FULL_TIME,
@@ -108,7 +107,7 @@ describe('OPWork: update employer profile (e2e)', () => {
           salaryCurrency: 'USD',
         },
       });
-    expect(employerControllerSetEmployerWorkResult.data).toMatchObject({
+    expect(employeJobControllerSetJobResult.data).toMatchObject({
       description: 'This is a test description.',
       employmentType: OpWorkEmploymentType.FULL_TIME,
       experienceLevel: OpWorkExperienceLevel.JUNIOR,
@@ -126,18 +125,18 @@ describe('OPWork: update employer profile (e2e)', () => {
       salaryCurrency: 'USD',
     });
     employerControllerSetEmployerWorkResultId =
-      employerControllerSetEmployerWorkResult.data?.id;
+      employeJobControllerSetJobResult.data?.id;
   });
 
-  it('Create employer work skill', async () => {
+  it('Create employer job skill', async () => {
     const skillId = (
       await employerActivity.sdk.opWorkSkillControllerFindMany({
         query: { searchText: 'JavaScript' },
       })
     )?.data?.items?.[0]?.id;
 
-    const employerControllerSetEmployerWorkResult =
-      await employerActivity.sdk.employerWorkSkillControllerSetWorkSkill({
+    const employerWorkSkillControllerSetJobSkillResult =
+      await employerActivity.sdk.employerWorkSkillControllerSetJobSkill({
         path: { job_id: employerControllerSetEmployerWorkResultId || '' },
         body: {
           skillId,
@@ -147,11 +146,88 @@ describe('OPWork: update employer profile (e2e)', () => {
         },
       });
 
-    expect(employerControllerSetEmployerWorkResult.data).toMatchObject({
+    expect(employerWorkSkillControllerSetJobSkillResult.data).toMatchObject({
       skillId,
       importance: 1,
       isRequired: true,
       minLevel: 1,
+    });
+  });
+
+  it('Create employer job tags', async () => {
+    const employerJobTagsControllerSetJobTagsResult =
+      await employerActivity.sdk.employerJobTagsControllerSetJobTags({
+        path: { job_id: employerControllerSetEmployerWorkResultId || '' },
+        body: {
+          name: 'MVP',
+          color: '#FF0000',
+        },
+      });
+
+    expect(employerJobTagsControllerSetJobTagsResult.data).toMatchObject({
+      name: 'MVP',
+      color: '#FF0000',
+    });
+  });
+
+  it('Read employer profile', async () => {
+    const skillId = (
+      await employerActivity.sdk.opWorkSkillControllerFindMany({
+        query: { searchText: 'JavaScript' },
+      })
+    )?.data?.items?.[0]?.id;
+    const employerControllerGetProfileResult =
+      await employerActivity.sdk.employerControllerGetProfile();
+    expect(employerControllerGetProfileResult.data).toMatchObject({
+      OpWorkJob: [
+        {
+          opWorkJobTags: [
+            {
+              name: 'MVP',
+              color: '#FF0000',
+            },
+          ],
+          OpWorkJobSkill: [
+            {
+              skillId,
+              importance: 1,
+              isRequired: true,
+              minLevel: 1,
+            },
+          ],
+          description: 'This is a test description.',
+          employmentType: OpWorkEmploymentType.FULL_TIME,
+          experienceLevel: OpWorkExperienceLevel.JUNIOR,
+          requirements: 'These are the requirements.',
+          responsibilities: 'These are the responsibilities.',
+          status: OpWorkJobStatus.ACTIVE,
+          title: 'Test Title',
+          salaryMin: 50000,
+          salaryMax: 100000,
+          location: 'San Francisco',
+          department: 'Engineering',
+          expiresAt: '2023-12-31T23:59:59.999Z',
+          publishedAt: '2023-01-01T00:00:00.000Z',
+          isRemote: false,
+          salaryCurrency: 'USD',
+        },
+      ],
+      companyEmail: 'employer@example.com',
+      companyName: 'ABC Company',
+      companyPhone: '123-456-7890',
+      companyWebsite: 'https://www.abccompany.com',
+      coverImageUrl: 'https://www.abccompany.com/cover-image.jpg',
+      culture: 'Startup culture',
+      mission: 'Innovate and solve problems',
+      description:
+        'ABC Company is a startup that innovates and solves problems.',
+      industry: 'Technology',
+      facebookUrl: 'https://facebook.com/abccompany',
+      twitterUrl: 'https://twitter.com/abccompany',
+      linkedinUrl: 'https://linkedin.com/in/abccompany',
+      foundedYear: 2010,
+      headquarters: 'San Francisco',
+      logoUrl: 'https://www.abccompany.com/logo.jpg',
     });
   });
 });

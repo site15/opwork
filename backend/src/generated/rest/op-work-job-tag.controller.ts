@@ -36,6 +36,10 @@ import { UpdateOpWorkJobTagDto } from './update-op-work-job-tag.dto';
 export class FindManyOpWorkJobTagArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
+  profileId?: string;
+
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
   jobId?: string;}
 
 export class FindManyOpWorkJobTagResponseMeta extends FindManyResponseMeta {}
@@ -89,6 +93,10 @@ export class OpWorkJobTagController {
         : {}),
       AND: [
         
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+
           ...(isUUID(otherArgs.jobId)
             ? [{ jobId: { equals: otherArgs.jobId } }]
             : []),
@@ -100,6 +108,7 @@ export class OpWorkJobTagController {
       return {
         items: await prisma.opWorkJobTag.findMany({
           include:{
+OpWorkProfile: true,
 OpWorkJob: true
           },
           where: opWorkJobTagWhereInput,
@@ -130,6 +139,7 @@ OpWorkJob: true
     return await this.prismaService.opWorkJobTag.create({
       data: { 
         ...args,
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}},
         OpWorkJob:{connect:{id:args.OpWorkJob?.connect.id}}
       },
     });
@@ -146,6 +156,7 @@ OpWorkJob: true
         ...args,
         
         
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }}),
         ...(!args.OpWorkJob?{OpWorkJob:undefined}:{OpWorkJob: { connect: { id: args.OpWorkJob?.connect.id } }})
       },
       where: {

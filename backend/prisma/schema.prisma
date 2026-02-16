@@ -144,10 +144,10 @@ enum OpWorkProfileType {
   /// Работодатель - профиль компании или рекрутера
   EMPLOYER
 }
+
 /// Тип навыка или технологии
 /// Расширенная классификация навыков для рынка 2026
 enum OpWorkSkillType {
-
   /// =========================
   /// CORE DEVELOPMENT
   /// =========================
@@ -172,7 +172,6 @@ enum OpWorkSkillType {
 
   /// Архитектурная методология - Clean Architecture, DDD, Hexagonal
   CORE_DEVELOPMENT__ARCHITECTURE_METHOD
-
 
   /// =========================
   /// DATA & AI
@@ -207,7 +206,6 @@ enum OpWorkSkillType {
 
   /// MLOps - MLflow, Kubeflow
   DATA_AI__MLOPS
-
 
   /// =========================
   /// DEVOPS & CLOUD
@@ -246,7 +244,6 @@ enum OpWorkSkillType {
   /// Networking - TCP/IP, Nginx, Cloudflare
   DEVOPS_CLOUD__NETWORKING
 
-
   /// =========================
   /// SECURITY
   /// =========================
@@ -262,7 +259,6 @@ enum OpWorkSkillType {
 
   /// Cryptography - SSL/TLS, JWT, OAuth
   SECURITY__CRYPTOGRAPHY
-
 
   /// =========================
   /// WEB & MOBILE
@@ -282,7 +278,6 @@ enum OpWorkSkillType {
 
   /// Web3 / Blockchain - Solidity, Ethereum
   WEB_MOBILE__WEB3
-
 
   /// =========================
   /// QA & PROCESS
@@ -306,7 +301,6 @@ enum OpWorkSkillType {
   /// Product Management - Discovery, Roadmap
   QA_PROCESS__PRODUCT_MANAGEMENT
 
-
   /// =========================
   /// DESIGN
   /// =========================
@@ -322,7 +316,6 @@ enum OpWorkSkillType {
 
   /// Motion Design
   DESIGN__MOTION_DESIGN
-
 
   /// =========================
   /// BUSINESS & MANAGEMENT
@@ -343,14 +336,12 @@ enum OpWorkSkillType {
   /// Soft skills - коммуникация, тайм-менеджмент
   BUSINESS_MANAGEMENT__SOFT_SKILL
 
-
   /// =========================
   /// LANGUAGES
   /// =========================
 
   /// Иностранный язык - English, German
   LANGUAGES__LANGUAGE
-
 
   /// =========================
   /// OTHER
@@ -368,6 +359,7 @@ enum OpWorkSkillType {
   /// Robotics
   OTHER__ROBOTICS
 }
+
 /// Уровень образования кандидата
 /// Стандартная классификация образовательных степеней
 enum OpWorkEducationDegree {
@@ -805,6 +797,7 @@ model OpWorkProfile {
   opWorkExperiences     OpWorkExperience[]
   opWorkEducations      OpWorkEducation[]
   opWorkJobSeekerSkills OpWorkJobSeekerSkill[]
+  opWorkJobTags         OpWorkJobTag[]
 
   /// Уникальность комбинации пользователь-тип
   /// Гарантирует что у пользователя может быть только один профиль каждого типа
@@ -1825,7 +1818,11 @@ model OpWorkSkillSynonym {
 /// Позволяет добавлять произвольные метки к вакансиям
 model OpWorkJobTag {
   /// Уникальный идентификатор тега (UUID v4)
-  id        String   @id(map: "PK_OPWORK_JOB_TAG") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id String @id(map: "PK_OPWORK_JOB_TAG") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  /// Связанный основной профиль
+  profileId String @db.Uuid
+
   /// Идентификатор вакансии
   jobId     String   @db.Uuid
   /// Название тега
@@ -1839,6 +1836,12 @@ model OpWorkJobTag {
   createdAt DateTime @default(now()) @db.Timestamp(6)
 
   /// === СВЯЗИ ===
+
+  /// === СВЯЗИ ===
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_TAG__PROFILE_ID")
 
   /// Вакансия, к которой прикреплен тег
   /// @DtoRelationCanConnectOnCreate

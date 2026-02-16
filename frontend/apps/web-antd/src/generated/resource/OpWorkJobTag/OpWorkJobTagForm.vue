@@ -31,12 +31,14 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         name: values.name,
         color: values.color,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJob: { connect: { id: values.jobId } },
       }
     }) : opWorkJobTagControllerCreateOne({
       body: {
         name: values.name,
         color: values.color,
+        OpWorkProfile: { connect: { id: values.profileId } },
         OpWorkJob: { connect: { id: values.jobId } },
       }
     }))

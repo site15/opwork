@@ -11,11 +11,11 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSkillDto } from '../generated/rest/op-work-job-skill.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { SetEmployerWorkSkillArgs } from '../types/employer-types';
+import { SetEmployerJobSkillArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
 
 @ApiTags('employer')
-@Controller('employer/work-skill')
+@Controller('employer/job-skill')
 export class EmployerWorkSkillController {
   constructor(
     @Inject(PRISMA_SERVICE)
@@ -24,8 +24,7 @@ export class EmployerWorkSkillController {
 
   @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJobSkillDto, isArray: true })
-  async getWorkSkills(
-    @CurrentAppRequest() req: AppRequest,
+  async getJobSkills(
     @Param('job_id', new ParseUUIDPipe()) jobId: string,
   ): Promise<OpWorkJobSkillDto[]> {
     return await this.prismaService.opWorkJobSkill.findMany({
@@ -38,10 +37,10 @@ export class EmployerWorkSkillController {
 
   @Put(':job_id')
   @ApiOkResponse({ type: OpWorkJobSkillDto })
-  async setWorkSkill(
+  async setJobSkill(
     @CurrentAppRequest() req: AppRequest,
     @Param('job_id', new ParseUUIDPipe()) jobId: string,
-    @Body() args: SetEmployerWorkSkillArgs,
+    @Body() args: SetEmployerJobSkillArgs,
   ): Promise<OpWorkJobSkillDto> {
     if (!args.skillId && args.skillName) {
       args.skillId = (

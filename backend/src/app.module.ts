@@ -5,8 +5,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ApiSecurity } from '@nestjs/swagger';
 import { join } from 'path';
 import { AuthController } from './controllers/auth.controller';
-import { EmployerWorkSkillController } from './controllers/employer-work-skill.controller';
-import { EmployerWorkController } from './controllers/employer-work.controller';
+import { EmployerWorkSkillController } from './controllers/employer-job-skill.controller';
+import { EmployerJobTagsController } from './controllers/employer-job-tags.controller';
+import { EmployeJobController } from './controllers/employer-job.controller';
 import { EmployerController } from './controllers/employer.controller';
 import { JobSeekerEducationController } from './controllers/job-seeker-education.controller';
 import { JobSeekerExperienceController } from './controllers/job-seeker-experience.controller';
@@ -31,8 +32,9 @@ const appControllers = [
   JobSeekerEducationController,
   JobSeekerExperienceController,
   EmployerController,
-  EmployerWorkController,
+  EmployeJobController,
   EmployerWorkSkillController,
+  EmployerJobTagsController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 

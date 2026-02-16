@@ -1,6 +1,6 @@
 import type { VbenFormSchema } from '#/adapter/form';
       import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-      import  { type OpWorkJob, opWorkJobControllerFindMany, type OpWorkJobTag } from '#/generated/client';
+      import  { type OpWorkProfile, opWorkProfileControllerFindMany, type OpWorkJob, opWorkJobControllerFindMany, type OpWorkJobTag } from '#/generated/client';
     import { getComponentProps } from '#/adapter/get-component-props';
     import { Prisma } from '#/generated/prisma/browser';
 
@@ -26,6 +26,25 @@ import type { VbenFormSchema } from '#/adapter/form';
         controlClass: 'w-full',
         labelWidth: 200
       }, 
+
+    {
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkProfile>({
+        findMany: (searchText?: string) => opWorkProfileControllerFindMany({
+          query: {
+            perPage: 100,
+            ...(searchText ? { searchText } : {})
+          }
+        }),
+        getLabel: (item) => item.title || item.id,
+      }),
+      fieldName: Prisma.OpWorkJobTagScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      rules: 'required',
+      
+      controlClass: 'w-full',
+      labelWidth: 200
+    }, 
 
     {
       component: 'ApiSelect',
@@ -70,6 +89,19 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.OpWorkJobTag.color'),
         field: Prisma.OpWorkJobTagScalarFieldEnum.color ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.name.OpWorkProfile'),
+        field: Prisma.OpWorkJobTagScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.title || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

@@ -2,13 +2,13 @@ import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { SetEmployerWorkArgs } from '../types/employer-types';
+import { SetEmployerJobArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
 import { OpWorkJobDto } from '../generated/rest/op-work-job.dto';
 
 @ApiTags('employer')
-@Controller('employer/work')
-export class EmployerWorkController {
+@Controller('employer/job')
+export class EmployeJobController {
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
@@ -16,13 +16,11 @@ export class EmployerWorkController {
 
   @Get()
   @ApiOkResponse({ type: OpWorkJobDto, isArray: true })
-  async getWorks(
-    @CurrentAppRequest() req: AppRequest,
-  ): Promise<OpWorkJobDto[]> {
+  async getJobs(@CurrentAppRequest() req: AppRequest): Promise<OpWorkJobDto[]> {
     return await this.prismaService.opWorkJob.findMany({
       include: {
         OpWorkJobSkill: { include: { OpWorkSkill: true } },
-        opWorkJobTags: { include: { OpWorkJob: true } },
+        opWorkJobTags: true,
       },
       where: {
         profileId: req.opWorkProfileId,
@@ -32,15 +30,15 @@ export class EmployerWorkController {
 
   @Put()
   @ApiOkResponse({ type: OpWorkJobDto })
-  async setWork(
+  async setJob(
     @CurrentAppRequest() req: AppRequest,
-    @Body() args: SetEmployerWorkArgs,
+    @Body() args: SetEmployerJobArgs,
   ): Promise<OpWorkJobDto> {
     if (args.id) {
       return await this.prismaService.opWorkJob.update({
         include: {
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
-          opWorkJobTags: { include: { OpWorkJob: true } },
+          opWorkJobTags: true,
         },
         where: { id: args.id },
         data: {
@@ -71,7 +69,7 @@ export class EmployerWorkController {
       return await this.prismaService.opWorkJob.create({
         include: {
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
-          opWorkJobTags: { include: { OpWorkJob: true } },
+          opWorkJobTags: true,
         },
         data: {
           title: args.title,

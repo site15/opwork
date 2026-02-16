@@ -139,10 +139,12 @@ export type OpWorkJobView = {
 
 export type OpWorkJobTag = {
     id: string;
+    profileId: string;
     jobId: string;
     name: string;
     color: string | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile;
     OpWorkJob?: OpWorkJob;
 };
 
@@ -385,6 +387,7 @@ export type OpWorkProfile = {
     opWorkExperiences?: Array<OpWorkExperience>;
     opWorkEducations?: Array<OpWorkEducation>;
     opWorkJobSeekerSkills?: Array<OpWorkJobSeekerSkill>;
+    opWorkJobTags?: Array<OpWorkJobTag>;
 };
 
 export type AuthUser = {
@@ -1729,6 +1732,10 @@ export type FindManyOpWorkJobTagResponse = {
     meta: FindManyOpWorkJobTagResponseMeta;
 };
 
+export type CreateOpWorkJobTagOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkJobTagOpWorkJobRelationInputDto = {
     connect: ConnectOpWorkJobDto;
 };
@@ -1736,6 +1743,7 @@ export type CreateOpWorkJobTagOpWorkJobRelationInputDto = {
 export type CreateOpWorkJobTagDto = {
     name: string;
     color?: string | null;
+    OpWorkProfile: CreateOpWorkJobTagOpWorkProfileRelationInputDto;
     OpWorkJob: CreateOpWorkJobTagOpWorkJobRelationInputDto;
 };
 
@@ -1746,6 +1754,10 @@ export type OpWorkJobTagDto = {
     createdAt: string;
 };
 
+export type UpdateOpWorkJobTagOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkJobTagOpWorkJobRelationInputDto = {
     connect: ConnectOpWorkJobDto;
 };
@@ -1753,6 +1765,7 @@ export type UpdateOpWorkJobTagOpWorkJobRelationInputDto = {
 export type UpdateOpWorkJobTagDto = {
     name?: string;
     color?: string | null;
+    OpWorkProfile?: UpdateOpWorkJobTagOpWorkProfileRelationInputDto;
     OpWorkJob?: UpdateOpWorkJobTagOpWorkJobRelationInputDto;
 };
 
@@ -1858,7 +1871,7 @@ export type SetEmployerProfileArgs = {
     facebookUrl?: string | null;
 };
 
-export type SetEmployerWorkArgs = {
+export type SetEmployerJobArgs = {
     title: string;
     description: string;
     requirements: string;
@@ -1877,13 +1890,19 @@ export type SetEmployerWorkArgs = {
     id?: string;
 };
 
-export type SetEmployerWorkSkillArgs = {
+export type SetEmployerJobSkillArgs = {
     isRequired?: boolean | null;
     importance: number;
     minLevel?: number | null;
     id?: string;
     skillName?: string;
     skillId?: string;
+};
+
+export type SetEmployerJobTagsArgs = {
+    name: string;
+    color?: string | null;
+    id?: string;
 };
 
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
@@ -3954,6 +3973,7 @@ export type OpWorkJobTagControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
         jobId?: string;
     };
     url: '/api/op-work/job-tag';
@@ -4355,82 +4375,124 @@ export type EmployerControllerSetProfileResponses = {
 
 export type EmployerControllerSetProfileResponse = EmployerControllerSetProfileResponses[keyof EmployerControllerSetProfileResponses];
 
-export type EmployerWorkControllerGetWorksData = {
+export type EmployeJobControllerGetJobsData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/api/employer/work';
+    url: '/api/employer/job';
 };
 
-export type EmployerWorkControllerGetWorksErrors = {
+export type EmployeJobControllerGetJobsErrors = {
     default: Array<OpWorkJobDto>;
 };
 
-export type EmployerWorkControllerGetWorksError = EmployerWorkControllerGetWorksErrors[keyof EmployerWorkControllerGetWorksErrors];
+export type EmployeJobControllerGetJobsError = EmployeJobControllerGetJobsErrors[keyof EmployeJobControllerGetJobsErrors];
 
-export type EmployerWorkControllerGetWorksResponses = {
+export type EmployeJobControllerGetJobsResponses = {
     200: Array<OpWorkJobDto>;
 };
 
-export type EmployerWorkControllerGetWorksResponse = EmployerWorkControllerGetWorksResponses[keyof EmployerWorkControllerGetWorksResponses];
+export type EmployeJobControllerGetJobsResponse = EmployeJobControllerGetJobsResponses[keyof EmployeJobControllerGetJobsResponses];
 
-export type EmployerWorkControllerSetWorkData = {
-    body: SetEmployerWorkArgs;
+export type EmployeJobControllerSetJobData = {
+    body: SetEmployerJobArgs;
     path?: never;
     query?: never;
-    url: '/api/employer/work';
+    url: '/api/employer/job';
 };
 
-export type EmployerWorkControllerSetWorkErrors = {
+export type EmployeJobControllerSetJobErrors = {
     default: OpWorkJobDto;
 };
 
-export type EmployerWorkControllerSetWorkError = EmployerWorkControllerSetWorkErrors[keyof EmployerWorkControllerSetWorkErrors];
+export type EmployeJobControllerSetJobError = EmployeJobControllerSetJobErrors[keyof EmployeJobControllerSetJobErrors];
 
-export type EmployerWorkControllerSetWorkResponses = {
+export type EmployeJobControllerSetJobResponses = {
     200: OpWorkJobDto;
 };
 
-export type EmployerWorkControllerSetWorkResponse = EmployerWorkControllerSetWorkResponses[keyof EmployerWorkControllerSetWorkResponses];
+export type EmployeJobControllerSetJobResponse = EmployeJobControllerSetJobResponses[keyof EmployeJobControllerSetJobResponses];
 
-export type EmployerWorkSkillControllerGetWorkSkillsData = {
+export type EmployerWorkSkillControllerGetJobSkillsData = {
     body?: never;
     path: {
         job_id: string;
     };
     query?: never;
-    url: '/api/employer/work-skill/{job_id}';
+    url: '/api/employer/job-skill/{job_id}';
 };
 
-export type EmployerWorkSkillControllerGetWorkSkillsErrors = {
+export type EmployerWorkSkillControllerGetJobSkillsErrors = {
     default: Array<OpWorkJobSkillDto>;
 };
 
-export type EmployerWorkSkillControllerGetWorkSkillsError = EmployerWorkSkillControllerGetWorkSkillsErrors[keyof EmployerWorkSkillControllerGetWorkSkillsErrors];
+export type EmployerWorkSkillControllerGetJobSkillsError = EmployerWorkSkillControllerGetJobSkillsErrors[keyof EmployerWorkSkillControllerGetJobSkillsErrors];
 
-export type EmployerWorkSkillControllerGetWorkSkillsResponses = {
+export type EmployerWorkSkillControllerGetJobSkillsResponses = {
     200: Array<OpWorkJobSkillDto>;
 };
 
-export type EmployerWorkSkillControllerGetWorkSkillsResponse = EmployerWorkSkillControllerGetWorkSkillsResponses[keyof EmployerWorkSkillControllerGetWorkSkillsResponses];
+export type EmployerWorkSkillControllerGetJobSkillsResponse = EmployerWorkSkillControllerGetJobSkillsResponses[keyof EmployerWorkSkillControllerGetJobSkillsResponses];
 
-export type EmployerWorkSkillControllerSetWorkSkillData = {
-    body: SetEmployerWorkSkillArgs;
+export type EmployerWorkSkillControllerSetJobSkillData = {
+    body: SetEmployerJobSkillArgs;
     path: {
         job_id: string;
     };
     query?: never;
-    url: '/api/employer/work-skill/{job_id}';
+    url: '/api/employer/job-skill/{job_id}';
 };
 
-export type EmployerWorkSkillControllerSetWorkSkillErrors = {
+export type EmployerWorkSkillControllerSetJobSkillErrors = {
     default: OpWorkJobSkillDto;
 };
 
-export type EmployerWorkSkillControllerSetWorkSkillError = EmployerWorkSkillControllerSetWorkSkillErrors[keyof EmployerWorkSkillControllerSetWorkSkillErrors];
+export type EmployerWorkSkillControllerSetJobSkillError = EmployerWorkSkillControllerSetJobSkillErrors[keyof EmployerWorkSkillControllerSetJobSkillErrors];
 
-export type EmployerWorkSkillControllerSetWorkSkillResponses = {
+export type EmployerWorkSkillControllerSetJobSkillResponses = {
     200: OpWorkJobSkillDto;
 };
 
-export type EmployerWorkSkillControllerSetWorkSkillResponse = EmployerWorkSkillControllerSetWorkSkillResponses[keyof EmployerWorkSkillControllerSetWorkSkillResponses];
+export type EmployerWorkSkillControllerSetJobSkillResponse = EmployerWorkSkillControllerSetJobSkillResponses[keyof EmployerWorkSkillControllerSetJobSkillResponses];
+
+export type EmployerJobTagsControllerGetJobTagsData = {
+    body?: never;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-tags/{job_id}';
+};
+
+export type EmployerJobTagsControllerGetJobTagsErrors = {
+    default: Array<OpWorkJobTagDto>;
+};
+
+export type EmployerJobTagsControllerGetJobTagsError = EmployerJobTagsControllerGetJobTagsErrors[keyof EmployerJobTagsControllerGetJobTagsErrors];
+
+export type EmployerJobTagsControllerGetJobTagsResponses = {
+    200: Array<OpWorkJobTagDto>;
+};
+
+export type EmployerJobTagsControllerGetJobTagsResponse = EmployerJobTagsControllerGetJobTagsResponses[keyof EmployerJobTagsControllerGetJobTagsResponses];
+
+export type EmployerJobTagsControllerSetJobTagsData = {
+    body: SetEmployerJobTagsArgs;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-tags/{job_id}';
+};
+
+export type EmployerJobTagsControllerSetJobTagsErrors = {
+    default: OpWorkJobTagDto;
+};
+
+export type EmployerJobTagsControllerSetJobTagsError = EmployerJobTagsControllerSetJobTagsErrors[keyof EmployerJobTagsControllerSetJobTagsErrors];
+
+export type EmployerJobTagsControllerSetJobTagsResponses = {
+    200: OpWorkJobTagDto;
+};
+
+export type EmployerJobTagsControllerSetJobTagsResponse = EmployerJobTagsControllerSetJobTagsResponses[keyof EmployerJobTagsControllerSetJobTagsResponses];

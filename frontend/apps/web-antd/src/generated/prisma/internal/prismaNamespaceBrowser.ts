@@ -451,6 +451,7 @@ export type OpWorkSkillSynonymScalarFieldEnum = (typeof OpWorkSkillSynonymScalar
 
 export const OpWorkJobTagScalarFieldEnum = {
   id: 'id',
+  profileId: 'profileId',
   jobId: 'jobId',
   name: 'name',
   color: 'color',

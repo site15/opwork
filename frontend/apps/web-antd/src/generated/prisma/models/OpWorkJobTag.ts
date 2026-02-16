@@ -27,6 +27,7 @@ export type AggregateOpWorkJobTag = {
 
 export type OpWorkJobTagMinAggregateOutputType = {
   id: string | null
+  profileId: string | null
   jobId: string | null
   name: string | null
   color: string | null
@@ -35,6 +36,7 @@ export type OpWorkJobTagMinAggregateOutputType = {
 
 export type OpWorkJobTagMaxAggregateOutputType = {
   id: string | null
+  profileId: string | null
   jobId: string | null
   name: string | null
   color: string | null
@@ -43,6 +45,7 @@ export type OpWorkJobTagMaxAggregateOutputType = {
 
 export type OpWorkJobTagCountAggregateOutputType = {
   id: number
+  profileId: number
   jobId: number
   name: number
   color: number
@@ -53,6 +56,7 @@ export type OpWorkJobTagCountAggregateOutputType = {
 
 export type OpWorkJobTagMinAggregateInputType = {
   id?: true
+  profileId?: true
   jobId?: true
   name?: true
   color?: true
@@ -61,6 +65,7 @@ export type OpWorkJobTagMinAggregateInputType = {
 
 export type OpWorkJobTagMaxAggregateInputType = {
   id?: true
+  profileId?: true
   jobId?: true
   name?: true
   color?: true
@@ -69,6 +74,7 @@ export type OpWorkJobTagMaxAggregateInputType = {
 
 export type OpWorkJobTagCountAggregateInputType = {
   id?: true
+  profileId?: true
   jobId?: true
   name?: true
   color?: true
@@ -150,6 +156,7 @@ export type OpWorkJobTagGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type OpWorkJobTagGroupByOutputType = {
   id: string
+  profileId: string
   jobId: string
   name: string
   color: string | null
@@ -179,19 +186,23 @@ export type OpWorkJobTagWhereInput = {
   OR?: Prisma.OpWorkJobTagWhereInput[]
   NOT?: Prisma.OpWorkJobTagWhereInput | Prisma.OpWorkJobTagWhereInput[]
   id?: Prisma.UuidFilter<"OpWorkJobTag"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
   jobId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
   name?: Prisma.StringFilter<"OpWorkJobTag"> | string
   color?: Prisma.StringNullableFilter<"OpWorkJobTag"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkJobTag"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
 }
 
 export type OpWorkJobTagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
   OpWorkJob?: Prisma.OpWorkJobOrderByWithRelationInput
 }
 
@@ -201,15 +212,18 @@ export type OpWorkJobTagWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OpWorkJobTagWhereInput | Prisma.OpWorkJobTagWhereInput[]
   OR?: Prisma.OpWorkJobTagWhereInput[]
   NOT?: Prisma.OpWorkJobTagWhereInput | Prisma.OpWorkJobTagWhereInput[]
+  profileId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
   jobId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
   name?: Prisma.StringFilter<"OpWorkJobTag"> | string
   color?: Prisma.StringNullableFilter<"OpWorkJobTag"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkJobTag"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
 }, "id" | "uqOpWorkJobTag">
 
 export type OpWorkJobTagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -224,6 +238,7 @@ export type OpWorkJobTagScalarWhereWithAggregatesInput = {
   OR?: Prisma.OpWorkJobTagScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OpWorkJobTagScalarWhereWithAggregatesInput | Prisma.OpWorkJobTagScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"OpWorkJobTag"> | string
+  profileId?: Prisma.UuidWithAggregatesFilter<"OpWorkJobTag"> | string
   jobId?: Prisma.UuidWithAggregatesFilter<"OpWorkJobTag"> | string
   name?: Prisma.StringWithAggregatesFilter<"OpWorkJobTag"> | string
   color?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobTag"> | string | null
@@ -235,11 +250,13 @@ export type OpWorkJobTagCreateInput = {
   name: string
   color?: string | null
   createdAt?: Date | string
+  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkJobTagsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobTagsInput
 }
 
 export type OpWorkJobTagUncheckedCreateInput = {
   id?: string
+  profileId: string
   jobId: string
   name: string
   color?: string | null
@@ -251,11 +268,13 @@ export type OpWorkJobTagUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkJobTagsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkJobTagsNestedInput
 }
 
 export type OpWorkJobTagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -264,6 +283,7 @@ export type OpWorkJobTagUncheckedUpdateInput = {
 
 export type OpWorkJobTagCreateManyInput = {
   id?: string
+  profileId: string
   jobId: string
   name: string
   color?: string | null
@@ -279,6 +299,7 @@ export type OpWorkJobTagUpdateManyMutationInput = {
 
 export type OpWorkJobTagUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -302,6 +323,7 @@ export type OpWorkJobTagUqOpWorkJobTagCompoundUniqueInput = {
 
 export type OpWorkJobTagCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -310,6 +332,7 @@ export type OpWorkJobTagCountOrderByAggregateInput = {
 
 export type OpWorkJobTagMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   color?: Prisma.SortOrder
@@ -318,10 +341,53 @@ export type OpWorkJobTagMaxOrderByAggregateInput = {
 
 export type OpWorkJobTagMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   color?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkJobTagCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+}
+
+export type OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkJobTagCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+}
+
+export type OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkJobTagUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkJobTagCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  delete?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  connect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  update?: Prisma.OpWorkJobTagUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkJobTagUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
+}
+
+export type OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkJobTagUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkJobTagCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  delete?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  connect?: Prisma.OpWorkJobTagWhereUniqueInput | Prisma.OpWorkJobTagWhereUniqueInput[]
+  update?: Prisma.OpWorkJobTagUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkJobTagUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkJobTagUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
 }
 
 export type OpWorkJobTagCreateNestedManyWithoutOpWorkJobInput = {
@@ -366,15 +432,71 @@ export type OpWorkJobTagUncheckedUpdateManyWithoutOpWorkJobNestedInput = {
   deleteMany?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
 }
 
-export type OpWorkJobTagCreateWithoutOpWorkJobInput = {
+export type OpWorkJobTagCreateWithoutOpWorkProfileInput = {
   id?: string
+  name: string
+  color?: string | null
+  createdAt?: Date | string
+  OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobTagsInput
+}
+
+export type OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput = {
+  id?: string
+  jobId: string
   name: string
   color?: string | null
   createdAt?: Date | string
 }
 
+export type OpWorkJobTagCreateOrConnectWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkJobTagWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkJobTagCreateManyOpWorkProfileInputEnvelope = {
+  data: Prisma.OpWorkJobTagCreateManyOpWorkProfileInput | Prisma.OpWorkJobTagCreateManyOpWorkProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type OpWorkJobTagUpsertWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkJobTagWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpWorkJobTagUpdateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedUpdateWithoutOpWorkProfileInput>
+  create: Prisma.XOR<Prisma.OpWorkJobTagCreateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkJobTagUpdateWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkJobTagWhereUniqueInput
+  data: Prisma.XOR<Prisma.OpWorkJobTagUpdateWithoutOpWorkProfileInput, Prisma.OpWorkJobTagUncheckedUpdateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkJobTagUpdateManyWithWhereWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkJobTagScalarWhereInput
+  data: Prisma.XOR<Prisma.OpWorkJobTagUpdateManyMutationInput, Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileInput>
+}
+
+export type OpWorkJobTagScalarWhereInput = {
+  AND?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
+  OR?: Prisma.OpWorkJobTagScalarWhereInput[]
+  NOT?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkJobTag"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
+  jobId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
+  name?: Prisma.StringFilter<"OpWorkJobTag"> | string
+  color?: Prisma.StringNullableFilter<"OpWorkJobTag"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkJobTag"> | Date | string
+}
+
+export type OpWorkJobTagCreateWithoutOpWorkJobInput = {
+  id?: string
+  name: string
+  color?: string | null
+  createdAt?: Date | string
+  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkJobTagsInput
+}
+
 export type OpWorkJobTagUncheckedCreateWithoutOpWorkJobInput = {
   id?: string
+  profileId: string
   name: string
   color?: string | null
   createdAt?: Date | string
@@ -406,19 +528,41 @@ export type OpWorkJobTagUpdateManyWithWhereWithoutOpWorkJobInput = {
   data: Prisma.XOR<Prisma.OpWorkJobTagUpdateManyMutationInput, Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkJobInput>
 }
 
-export type OpWorkJobTagScalarWhereInput = {
-  AND?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
-  OR?: Prisma.OpWorkJobTagScalarWhereInput[]
-  NOT?: Prisma.OpWorkJobTagScalarWhereInput | Prisma.OpWorkJobTagScalarWhereInput[]
-  id?: Prisma.UuidFilter<"OpWorkJobTag"> | string
-  jobId?: Prisma.UuidFilter<"OpWorkJobTag"> | string
-  name?: Prisma.StringFilter<"OpWorkJobTag"> | string
-  color?: Prisma.StringNullableFilter<"OpWorkJobTag"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"OpWorkJobTag"> | Date | string
+export type OpWorkJobTagCreateManyOpWorkProfileInput = {
+  id?: string
+  jobId: string
+  name: string
+  color?: string | null
+  createdAt?: Date | string
+}
+
+export type OpWorkJobTagUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkJobTagsNestedInput
+}
+
+export type OpWorkJobTagUncheckedUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OpWorkJobTagCreateManyOpWorkJobInput = {
   id?: string
+  profileId: string
   name: string
   color?: string | null
   createdAt?: Date | string
@@ -429,10 +573,12 @@ export type OpWorkJobTagUpdateWithoutOpWorkJobInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkJobTagsNestedInput
 }
 
 export type OpWorkJobTagUncheckedUpdateWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,6 +586,7 @@ export type OpWorkJobTagUncheckedUpdateWithoutOpWorkJobInput = {
 
 export type OpWorkJobTagUncheckedUpdateManyWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -449,53 +596,68 @@ export type OpWorkJobTagUncheckedUpdateManyWithoutOpWorkJobInput = {
 
 export type OpWorkJobTagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobId?: boolean
   name?: boolean
   color?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkJobTag"]>
 
 export type OpWorkJobTagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobId?: boolean
   name?: boolean
   color?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkJobTag"]>
 
 export type OpWorkJobTagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  profileId?: boolean
   jobId?: boolean
   name?: boolean
   color?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkJobTag"]>
 
 export type OpWorkJobTagSelectScalar = {
   id?: boolean
+  profileId?: boolean
   jobId?: boolean
   name?: boolean
   color?: boolean
   createdAt?: boolean
 }
 
-export type OpWorkJobTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "jobId" | "name" | "color" | "createdAt", ExtArgs["result"]["opWorkJobTag"]>
+export type OpWorkJobTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "jobId" | "name" | "color" | "createdAt", ExtArgs["result"]["opWorkJobTag"]>
 export type OpWorkJobTagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }
 export type OpWorkJobTagIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }
 export type OpWorkJobTagIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkJobDefaultArgs<ExtArgs>
 }
 
 export type $OpWorkJobTagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OpWorkJobTag"
   objects: {
+    /**
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
+     */
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
     /**
      * Вакансия, к которой прикреплен тег
      * @DtoRelationCanConnectOnCreate
@@ -508,6 +670,10 @@ export type $OpWorkJobTagPayload<ExtArgs extends runtime.Types.Extensions.Intern
      * Уникальный идентификатор тега (UUID v4)
      */
     id: string
+    /**
+     * Связанный основной профиль
+     */
+    profileId: string
     /**
      * Идентификатор вакансии
      */
@@ -921,6 +1087,7 @@ readonly fields: OpWorkJobTagFieldRefs;
  */
 export interface Prisma__OpWorkJobTagClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  OpWorkProfile<T extends Prisma.OpWorkProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   OpWorkJob<T extends Prisma.OpWorkJobDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkJobDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkJobClient<runtime.Types.Result.GetResult<Prisma.$OpWorkJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -952,6 +1119,7 @@ export interface Prisma__OpWorkJobTagClient<T, Null = never, ExtArgs extends run
  */
 export interface OpWorkJobTagFieldRefs {
   readonly id: Prisma.FieldRef<"OpWorkJobTag", 'String'>
+  readonly profileId: Prisma.FieldRef<"OpWorkJobTag", 'String'>
   readonly jobId: Prisma.FieldRef<"OpWorkJobTag", 'String'>
   readonly name: Prisma.FieldRef<"OpWorkJobTag", 'String'>
   readonly color: Prisma.FieldRef<"OpWorkJobTag", 'String'>
