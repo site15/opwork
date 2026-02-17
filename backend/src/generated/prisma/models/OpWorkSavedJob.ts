@@ -646,6 +646,7 @@ export type $OpWorkSavedJobPayload<ExtArgs extends runtime.Types.Extensions.Inte
     savedAt: Date | null
     /**
      * Персональные заметки пользователя о вакансии
+     * @MaxLength(4000)
      */
     notes: string | null
   }, ExtArgs["result"]["opWorkSavedJob"]>

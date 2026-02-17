@@ -827,6 +827,7 @@ export type $OpWorkSkillPayload<ExtArgs extends runtime.Types.Extensions.Interna
     name: string
     /**
      * Подробное описание навыка
+     * @MaxLength(4000)
      */
     description: string | null
     /**

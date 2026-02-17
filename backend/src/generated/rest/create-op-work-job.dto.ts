@@ -39,18 +39,21 @@ title!: string ;
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(6000)
 description!: string ;
 @ApiProperty({
   type: 'string',
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(4000)
 requirements!: string ;
 @ApiProperty({
   type: 'string',
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(6000)
 responsibilities!: string ;
 @ApiProperty({
   enum: OpWorkEmploymentType,

@@ -31,6 +31,7 @@ title?: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(6000)
 description?: string ;
 @ApiProperty({
   enum: OpWorkProjectStatus,
@@ -67,6 +68,7 @@ githubRepoUrl?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 technologies?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -75,6 +77,7 @@ technologies?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 architecture?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -83,6 +86,7 @@ architecture?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 plannedDatesDescription?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -109,6 +113,7 @@ plannedEndDate?: Date  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 implementationDescription?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -144,6 +149,7 @@ testingStart?: Date  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 launchDescription?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -170,6 +176,7 @@ goLiveDate?: Date  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 completionDescription?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -196,6 +203,7 @@ completionDate?: Date  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 maintenanceDescription?: string  | null;
 @ApiProperty({
   type: 'string',

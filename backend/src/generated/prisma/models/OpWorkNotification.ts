@@ -873,6 +873,7 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
     title: string
     /**
      * Текст сообщения уведомления
+     * @MaxLength(4000)
      */
     message: string
     /**

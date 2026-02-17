@@ -1905,6 +1905,11 @@ export type SetEmployerJobTagsArgs = {
     id?: string;
 };
 
+export type VacanciesApplyArgs = {
+    jobSeekerId: string;
+    coverLetter?: string;
+};
+
 export type FindManyVacanciesResponseMeta = {
     curPage?: number;
     perPage?: number;
@@ -4507,6 +4512,25 @@ export type EmployerJobTagsControllerSetJobTagsResponses = {
 };
 
 export type EmployerJobTagsControllerSetJobTagsResponse = EmployerJobTagsControllerSetJobTagsResponses[keyof EmployerJobTagsControllerSetJobTagsResponses];
+
+export type VacanciesControllerApplyData = {
+    body: VacanciesApplyArgs;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/vacancies/{job_id}';
+};
+
+export type VacanciesControllerApplyErrors = {
+    default: unknown;
+};
+
+export type VacanciesControllerApplyResponses = {
+    200: StatusResponse;
+};
+
+export type VacanciesControllerApplyResponse = VacanciesControllerApplyResponses[keyof VacanciesControllerApplyResponses];
 
 export type VacanciesControllerFindManyData = {
     body?: never;

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -48,6 +48,7 @@ export class AuthController {
     return { message: 'ok' };
   }
 
+  @HttpCode(200)
   @ApiBadRequestResponse({
     schema: { allOf: refs(AuthError) },
   })
@@ -65,6 +66,7 @@ export class AuthController {
     return { sessionId: session.id, profile: user };
   }
 
+  @HttpCode(200)
   @ApiBadRequestResponse({
     schema: { allOf: refs(AuthError) },
   })

@@ -46,7 +46,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkNotificationScalarFieldEnum.message,
         label: $t('resource.OpWorkNotification.message'),
       rules: 'required',

@@ -85,6 +85,7 @@ isCurrent?: boolean  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 description?: string  | null;
 @ApiProperty({
   enum: OpWorkGrade,

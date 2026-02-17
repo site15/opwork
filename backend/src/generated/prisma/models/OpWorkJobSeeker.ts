@@ -1453,6 +1453,7 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
     currentCompany: string | null
     /**
      * Профессиональное резюме
+     * @MaxLength(10000)
      */
     summary: string | null
     /**
@@ -1479,6 +1480,7 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
     isOpenToRelocation: boolean | null
     /**
      * Предпочтительные локации для работы
+     * @MaxLength(255)
      */
     preferredLocations: string | null
     /**

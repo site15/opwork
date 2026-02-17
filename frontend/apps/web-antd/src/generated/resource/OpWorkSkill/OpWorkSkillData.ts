@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkSkillScalarFieldEnum.description,
         label: $t('resource.OpWorkSkill.description'),
       

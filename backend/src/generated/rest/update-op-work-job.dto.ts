@@ -41,6 +41,7 @@ title?: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(6000)
 description?: string ;
 @ApiProperty({
   type: 'string',
@@ -48,6 +49,7 @@ description?: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 requirements?: string ;
 @ApiProperty({
   type: 'string',
@@ -55,6 +57,7 @@ requirements?: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(6000)
 responsibilities?: string ;
 @ApiProperty({
   enum: OpWorkEmploymentType,

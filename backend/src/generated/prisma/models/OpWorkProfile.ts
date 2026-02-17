@@ -3964,7 +3964,7 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     title: string | null
     /**
      * Подробное описание профиля
-     * @MaxLength(2000)
+     * @MaxLength(6000)
      * @example(vue developer with 5 years experience)
      */
     description: string | null

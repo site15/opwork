@@ -720,9 +720,9 @@ model OpWorkProfile {
   /// @MaxLength(255)
   title           String?  @db.VarChar(255)
   /// Подробное описание профиля
-  /// @MaxLength(2000)
+  /// @MaxLength(6000)
   /// @example(vue developer with 5 years experience)
-  description     String?  @db.Text
+  description     String?  @db.VarChar(6000)
   /// Статус активности профиля
   isActive        Boolean?
   /// Статус верификации email адреса
@@ -827,7 +827,8 @@ model OpWorkJobSeeker {
   /// @MaxLength(255)
   currentCompany  String? @db.VarChar(255)
   /// Профессиональное резюме
-  summary         String? @db.Text
+  /// @MaxLength(10000)
+  summary         String?@db.VarChar(10000)
 
   /// === ЗАРПЛАТНЫЕ ОЖИДАНИЯ ===
 
@@ -847,7 +848,8 @@ model OpWorkJobSeeker {
   /// Готовность к переезду
   isOpenToRelocation Boolean?
   /// Предпочтительные локации для работы
-  preferredLocations String?  @db.Text
+  /// @MaxLength(255)
+  preferredLocations String?  @db.VarChar(255)
 
   /// === СОЦИАЛЬНЫЕ СЕТИ ===
 
@@ -915,7 +917,8 @@ model OpWorkExperience {
   /// @MaxLength(255)
   position       String                @db.VarChar(255)
   /// Описание обязанностей и достижений
-  description    String?               @db.Text
+  /// @MaxLength(6000)
+  description    String?               @db.VarChar(6000)
   /// Дата начала работы
   startDate      DateTime              @db.Timestamp(6)
   /// Дата окончания работы (null если текущее место)
@@ -972,7 +975,8 @@ model OpWorkEducation {
   /// Признак текущего обучения
   isCurrent    Boolean?
   /// Описание программы обучения или достижений
-  description  String?                @db.Text
+  /// @MaxLength(4000)
+  description  String?                @db.VarChar(4000)
   /// Академическая успеваемость
   /// @IsEnum(OpWorkGrade)
   grade        OpWorkGrade?
@@ -1012,11 +1016,14 @@ model OpWorkEmployer {
   /// @MaxLength(255)
   industry    String? @db.VarChar(255)
   /// Описание компании
-  description String? @db.Text
+  /// @MaxLength(4000)
+  description String? @db.VarChar(4000)
   /// Миссия компании
-  mission     String? @db.Text
+  /// @MaxLength(4000)
+  mission     String? @db.VarChar(4000)
   /// Корпоративная культура
-  culture     String? @db.Text
+  /// @MaxLength(4000)
+  culture     String? @db.VarChar(4000)
 
   /// === ДЕТАЛИ КОМПАНИИ ===
 
@@ -1111,7 +1118,8 @@ model OpWorkProject {
   /// @MaxLength(255)
   title       String               @db.VarChar(255)
   /// Подробное описание проекта
-  description String               @db.Text
+  /// @MaxLength(6000)
+  description String               @db.VarChar(6000)
   /// Текущий статус проекта в жизненном цикле
   /// @IsEnum(OpWorkProjectStatus)
   status      OpWorkProjectStatus?
@@ -1126,15 +1134,18 @@ model OpWorkProject {
   /// @IsUrl
   githubRepoUrl String? @db.VarChar(512)
   /// Используемые технологии и стек
-  technologies  String? @db.Text
+  /// @MaxLength(4000)
+  technologies  String? @db.VarChar(4000)
   /// Архитектурное описание проекта
-  architecture  String? @db.Text
+  /// @MaxLength(4000)
+  architecture  String? @db.VarChar(4000)
 
   /// === ДАТЫ ПРОЕКТА ===
 
   /// === ПЛАНИРОВАНИЕ ===
   /// Описание планируемых сроков проекта
-  plannedDatesDescription String?   @db.Text
+  /// @MaxLength(4000)
+  plannedDatesDescription String?   @db.VarChar(4000)
   /// Предполагаемая дата начала проекта (по плану)
   plannedStartDate        DateTime? @db.Timestamp(6)
   /// Предполагаемая дата завершения проекта (по плану)
@@ -1142,7 +1153,8 @@ model OpWorkProject {
 
   /// === РЕАЛИЗАЦИЯ ===
   /// Описание этапа реализации проекта
-  implementationDescription String?   @db.Text
+  /// @MaxLength(4000)
+  implementationDescription String?   @db.VarChar(4000)
   /// Фактическая дата начала проекта
   actualStartDate           DateTime? @db.Timestamp(6)
   /// Дата начала фазы активной разработки
@@ -1152,7 +1164,8 @@ model OpWorkProject {
 
   /// === ЗАПУСК ===
   /// Описание этапа запуска продукта
-  launchDescription String?   @db.Text
+  /// @MaxLength(4000)
+  launchDescription String?   @db.VarChar(4000)
   /// Планируемая дата запуска продукта
   launchDate        DateTime? @db.Timestamp(6)
   /// Фактическая дата выхода продукта в продакшен
@@ -1160,7 +1173,8 @@ model OpWorkProject {
 
   /// === ЗАВЕРШЕНИЕ ===
   /// Описание завершающего этапа проекта
-  completionDescription String?   @db.Text
+  /// @MaxLength(4000)
+  completionDescription String?   @db.VarChar(4000)
   /// Фактическая дата завершения всех работ по проекту
   actualEndDate         DateTime? @db.Timestamp(6)
   /// Дата официального завершения проекта (подписание актов и т.д.)
@@ -1168,7 +1182,8 @@ model OpWorkProject {
 
   /// === ПОДДЕРЖКА ===
   /// Описание этапа поддержки и сопровождения
-  maintenanceDescription String?   @db.Text
+  /// @MaxLength(4000)
+  maintenanceDescription String?   @db.VarChar(4000)
   /// Дата начала фазы поддержки и сопровождения
   maintenanceStart       DateTime? @db.Timestamp(6)
   /// Дата окончания фазы поддержки (если планируется)
@@ -1213,11 +1228,14 @@ model OpWorkJob {
   /// @MaxLength(255)
   title            String @db.VarChar(255)
   /// Подробное описание вакансии
-  description      String @db.Text
+  /// @MaxLength(6000)
+  description      String @db.VarChar(6000)
   /// Требования к кандидату
-  requirements     String @db.Text
+  /// @MaxLength(4000)
+  requirements     String @db.VarChar(4000)   
   /// Обязанности на должности
-  responsibilities String @db.Text
+  /// @MaxLength(6000)
+  responsibilities String @db.VarChar(6000)
 
   /// === ДЕТАЛИ ВАКАНСИИ ===
 
@@ -1328,7 +1346,8 @@ model OpWorkApplication {
   /// === ДЕТАЛИ ОТКЛИКА ===
 
   /// Сопроводительное письмо кандидата
-  coverLetter  String? @db.Text
+  /// @MaxLength(6000)
+  coverLetter  String? @db.VarChar(6000)
   /// URL резюме кандидата
   /// @MaxLength(500)
   /// @IsUrl
@@ -1344,7 +1363,8 @@ model OpWorkApplication {
   /// @IsEnum(OpWorkApplicationStatus)
   status      OpWorkApplicationStatus
   /// Заметки по отклику от HR или рекрутера
-  statusNotes String?                 @db.Text
+  /// @MaxLength(4000)
+  statusNotes String?                 @db.VarChar(4000)
 
   /// === ДАТЫ ===
 
@@ -1392,7 +1412,8 @@ model OpWorkSavedJob {
   /// Дата сохранения вакансии
   savedAt   DateTime? @db.Timestamp(6)
   /// Персональные заметки пользователя о вакансии
-  notes     String?   @db.Text
+  /// @MaxLength(4000)
+  notes     String?   @db.VarChar(4000)
 
   /// === СВЯЗИ ===
 
@@ -1427,7 +1448,8 @@ model OpWorkSkill {
   /// @MaxLength(255)
   name        String           @db.VarChar(255)
   /// Подробное описание навыка
-  description String?          @db.Text
+  /// @MaxLength(4000)
+  description String?          @db.VarChar(4000)
   /// Тип навыка (язык программирования, фреймворк и т.д.)
   /// @IsEnum(OpWorkSkillType)
   type        OpWorkSkillType?
@@ -1585,7 +1607,8 @@ model OpWorkNotification {
   /// @MaxLength(255)
   title   String                 @db.VarChar(255)
   /// Текст сообщения уведомления
-  message String                 @db.Text
+  /// @MaxLength(4000)
+  message String                 @db.VarChar(4000)
   /// Дополнительные данные в формате JSON
   data    Json?
 

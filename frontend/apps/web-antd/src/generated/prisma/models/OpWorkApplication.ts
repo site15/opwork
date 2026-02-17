@@ -1044,6 +1044,7 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     jobId: string
     /**
      * Сопроводительное письмо кандидата
+     * @MaxLength(6000)
      */
     coverLetter: string | null
     /**
@@ -1065,6 +1066,7 @@ export type $OpWorkApplicationPayload<ExtArgs extends runtime.Types.Extensions.I
     status: $Enums.OpWorkApplicationStatus
     /**
      * Заметки по отклику от HR или рекрутера
+     * @MaxLength(4000)
      */
     statusNotes: string | null
     /**

@@ -11,6 +11,7 @@ export class ActivityHelper {
   private authSessionId: string | null = null;
   private client: Client;
 
+  randomSha7 = getRandomSha7();
   authUser: AuthUser | null = null;
   sdk: Sdk;
 
@@ -84,7 +85,7 @@ export class ActivityHelper {
 
   async registerAndLoginRandomUser(userType?: UserType) {
     const args = {
-      email: `test_${getRandomSha7()}_${userType?.toLowerCase()}@example.com`,
+      email: `test_${this.randomSha7}_${userType?.toLowerCase()}@example.com`,
       password: 'validPassword123',
       userType,
     };

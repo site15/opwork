@@ -39,6 +39,7 @@ industry?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 description?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -47,6 +48,7 @@ description?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 mission?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -55,6 +57,7 @@ mission?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 culture?: string  | null;
 @ApiProperty({
   type: 'integer',

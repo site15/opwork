@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.description,
         label: $t('resource.OpWorkProject.description'),
       rules: 'required',
@@ -99,7 +99,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.technologies,
         label: $t('resource.OpWorkProject.technologies'),
       
@@ -108,7 +108,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.architecture,
         label: $t('resource.OpWorkProject.architecture'),
       
@@ -117,7 +117,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.plannedDatesDescription,
         label: $t('resource.OpWorkProject.plannedDatesDescription'),
       
@@ -144,7 +144,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.implementationDescription,
         label: $t('resource.OpWorkProject.implementationDescription'),
       
@@ -180,7 +180,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.launchDescription,
         label: $t('resource.OpWorkProject.launchDescription'),
       
@@ -207,7 +207,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.completionDescription,
         label: $t('resource.OpWorkProject.completionDescription'),
       
@@ -234,7 +234,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkProjectScalarFieldEnum.maintenanceDescription,
         label: $t('resource.OpWorkProject.maintenanceDescription'),
       

@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkSavedJobScalarFieldEnum.notes,
         label: $t('resource.OpWorkSavedJob.notes'),
       

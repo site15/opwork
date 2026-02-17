@@ -944,6 +944,7 @@ export type $OpWorkEducationPayload<ExtArgs extends runtime.Types.Extensions.Int
     isCurrent: boolean | null
     /**
      * Описание программы обучения или достижений
+     * @MaxLength(4000)
      */
     description: string | null
     /**

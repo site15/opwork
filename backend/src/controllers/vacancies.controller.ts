@@ -1,4 +1,14 @@
-import { Controller, Get, Inject, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiProperty,
@@ -6,8 +16,19 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsArray, IsEnum, IsNumber, IsOptional, isUUID } from 'class-validator';
 import {
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  isUUID,
+  MaxLength,
+} from 'class-validator';
+import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
+import {
+  OpWorkApplicationStatus,
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   Prisma,
@@ -23,7 +44,10 @@ import {
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
+import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
+//
 export class FindManyVacanciesArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: () => [String] })
   @IsOptional()
@@ -77,7 +101,6 @@ export class FindManyVacanciesArgs extends FindManyArgs {
 }
 
 export class FindManyVacanciesResponseMeta extends FindManyResponseMeta {}
-
 export class FindManyVacanciesResponse {
   @ApiProperty({ type: () => [OpWorkJob] })
   items!: OpWorkJob[];
@@ -85,6 +108,28 @@ export class FindManyVacanciesResponse {
   @ApiProperty({ type: () => FindManyVacanciesResponseMeta })
   meta!: FindManyVacanciesResponseMeta;
 }
+
+//
+
+export class VacanciesApplyArgs {
+  @ApiProperty({
+    type: 'string',
+  })
+  @IsNotEmpty()
+  @IsString()
+  jobSeekerId!: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(2000)
+  coverLetter?: string;
+}
+
+//
 
 @ApiTags('vacancies')
 @Controller('vacancies')
@@ -94,9 +139,37 @@ export class VacanciesController {
     private readonly prismaService: PrismaService,
   ) {}
 
+  @HttpCode(200)
+  @Post(':job_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async apply(
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
+    @Body() args: VacanciesApplyArgs,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
+    await this.prismaService.opWorkApplication.create({
+      data: {
+        jobSeekerId: args.jobSeekerId,
+        profileId: req.opWorkProfileId,
+        coverLetter: args.coverLetter,
+        jobId: jobId,
+        status: OpWorkApplicationStatus.PENDING,
+        appliedAt: new Date(),
+      },
+    });
+    await this.prismaService.opWorkJob.update({
+      where: { id: jobId },
+      data: { applicationsCount: { increment: 1 } },
+    });
+    return { message: 'ok' };
+  }
+
   @Get()
   @ApiOkResponse({ type: FindManyVacanciesResponse })
-  async findMany(@Query() args: FindManyVacanciesArgs) {
+  async findMany(
+    @Query() args: FindManyVacanciesArgs,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
     const { searchText, ...otherArgs } = args;
 
@@ -168,6 +241,7 @@ export class VacanciesController {
         include: {
           OpWorkEmployer: true,
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
+          OpWorkApplication: { where: { profileId: req.opWorkProfileId } },
         },
         where: opWorkJobWhereInput,
         take,

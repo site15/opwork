@@ -36,6 +36,7 @@ title!: string ;
 })
 @IsNotEmpty()
 @IsString()
+@MaxLength(4000)
 message!: string ;
 @ApiProperty({
   type: () => Object,

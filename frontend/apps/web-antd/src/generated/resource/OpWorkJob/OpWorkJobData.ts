@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkJobScalarFieldEnum.description,
         label: $t('resource.OpWorkJob.description'),
       rules: 'required',
@@ -27,7 +27,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkJobScalarFieldEnum.requirements,
         label: $t('resource.OpWorkJob.requirements'),
       rules: 'required',
@@ -36,7 +36,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkJobScalarFieldEnum.responsibilities,
         label: $t('resource.OpWorkJob.responsibilities'),
       rules: 'required',

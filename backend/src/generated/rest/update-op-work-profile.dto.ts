@@ -49,7 +49,7 @@ title?: string  | null;
 })
 @IsOptional()
 @IsString()
-@MaxLength(2000)
+@MaxLength(6000)
 description?: string  | null;
 @ApiProperty({
   type: 'boolean',

@@ -1131,6 +1131,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     title: string
     /**
      * Подробное описание проекта
+     * @MaxLength(6000)
      */
     description: string
     /**
@@ -1151,15 +1152,18 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     githubRepoUrl: string | null
     /**
      * Используемые технологии и стек
+     * @MaxLength(4000)
      */
     technologies: string | null
     /**
      * Архитектурное описание проекта
+     * @MaxLength(4000)
      */
     architecture: string | null
     /**
      * === ПЛАНИРОВАНИЕ ===
      * Описание планируемых сроков проекта
+     * @MaxLength(4000)
      */
     plannedDatesDescription: string | null
     /**
@@ -1173,6 +1177,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * === РЕАЛИЗАЦИЯ ===
      * Описание этапа реализации проекта
+     * @MaxLength(4000)
      */
     implementationDescription: string | null
     /**
@@ -1190,6 +1195,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * === ЗАПУСК ===
      * Описание этапа запуска продукта
+     * @MaxLength(4000)
      */
     launchDescription: string | null
     /**
@@ -1203,6 +1209,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * === ЗАВЕРШЕНИЕ ===
      * Описание завершающего этапа проекта
+     * @MaxLength(4000)
      */
     completionDescription: string | null
     /**
@@ -1216,6 +1223,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * === ПОДДЕРЖКА ===
      * Описание этапа поддержки и сопровождения
+     * @MaxLength(4000)
      */
     maintenanceDescription: string | null
     /**

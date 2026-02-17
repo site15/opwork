@@ -927,6 +927,7 @@ export type $OpWorkExperiencePayload<ExtArgs extends runtime.Types.Extensions.In
     position: string
     /**
      * Описание обязанностей и достижений
+     * @MaxLength(6000)
      */
     description: string | null
     /**

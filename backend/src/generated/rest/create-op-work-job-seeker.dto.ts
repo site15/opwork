@@ -41,6 +41,7 @@ currentCompany?: string  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(10000)
 summary?: string  | null;
 @ApiProperty({
   type: 'integer',
@@ -91,6 +92,7 @@ isOpenToRelocation?: boolean  | null;
 })
 @IsOptional()
 @IsString()
+@MaxLength(255)
 preferredLocations?: string  | null;
 @ApiProperty({
   type: 'string',

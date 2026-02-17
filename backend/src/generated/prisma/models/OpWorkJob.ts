@@ -2358,14 +2358,17 @@ export type $OpWorkJobPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     title: string
     /**
      * Подробное описание вакансии
+     * @MaxLength(6000)
      */
     description: string
     /**
      * Требования к кандидату
+     * @MaxLength(4000)
      */
     requirements: string
     /**
      * Обязанности на должности
+     * @MaxLength(6000)
      */
     responsibilities: string
     /**

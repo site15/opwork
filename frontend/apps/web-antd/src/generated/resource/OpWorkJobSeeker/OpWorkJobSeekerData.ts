@@ -27,7 +27,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.summary,
         label: $t('resource.OpWorkJobSeeker.summary'),
       
@@ -108,7 +108,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Textarea',
+        component: 'Input',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.preferredLocations,
         label: $t('resource.OpWorkJobSeeker.preferredLocations'),
       

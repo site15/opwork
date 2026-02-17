@@ -1103,14 +1103,17 @@ export type $OpWorkEmployerPayload<ExtArgs extends runtime.Types.Extensions.Inte
     industry: string | null
     /**
      * Описание компании
+     * @MaxLength(4000)
      */
     description: string | null
     /**
      * Миссия компании
+     * @MaxLength(4000)
      */
     mission: string | null
     /**
      * Корпоративная культура
+     * @MaxLength(4000)
      */
     culture: string | null
     /**

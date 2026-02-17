@@ -44,6 +44,7 @@ export class UpdateOpWorkApplicationDto {
 })
 @IsOptional()
 @IsString()
+@MaxLength(6000)
 coverLetter?: string  | null;
 @ApiProperty({
   type: 'string',
@@ -80,6 +81,7 @@ status?: OpWorkApplicationStatus ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(4000)
 statusNotes?: string  | null;
 @ApiProperty({
   type: 'string',

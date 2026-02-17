@@ -48,6 +48,7 @@ position!: string ;
 })
 @IsOptional()
 @IsString()
+@MaxLength(6000)
 description?: string  | null;
 @ApiProperty({
   type: 'string',
