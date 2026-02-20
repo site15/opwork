@@ -1,12 +1,9 @@
 import {
-  Body,
   Controller,
   Get,
-  HttpCode,
   Inject,
   Param,
   ParseUUIDPipe,
-  Post,
   Query,
 } from '@nestjs/common';
 import {
@@ -16,19 +13,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import {
-  IsArray,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  isUUID,
-  MaxLength,
-} from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsOptional, isUUID } from 'class-validator';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import {
-  OpWorkApplicationStatus,
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   Prisma,
@@ -45,10 +32,9 @@ import {
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
 import { AppRequest } from '../types/request';
-import { StatusResponse } from '../types/status-response';
 
 //
-export class FindManyVacanciesArgs extends FindManyArgs {
+export class FindManyVacancyArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: () => [String] })
   @IsOptional()
   @IsArray()
@@ -100,74 +86,50 @@ export class FindManyVacanciesArgs extends FindManyArgs {
   skills?: string[];
 }
 
-export class FindManyVacanciesResponseMeta extends FindManyResponseMeta {}
-export class FindManyVacanciesResponse {
+export class FindManyVacancyResponseMeta extends FindManyResponseMeta {}
+export class FindManyVacancyResponse {
   @ApiProperty({ type: () => [OpWorkJob] })
   items!: OpWorkJob[];
 
-  @ApiProperty({ type: () => FindManyVacanciesResponseMeta })
-  meta!: FindManyVacanciesResponseMeta;
+  @ApiProperty({ type: () => FindManyVacancyResponseMeta })
+  meta!: FindManyVacancyResponseMeta;
 }
 
 //
 
-export class VacanciesApplyArgs {
-  @ApiProperty({
-    type: 'string',
-  })
-  @IsNotEmpty()
-  @IsString()
-  jobSeekerId!: string;
-
-  @ApiProperty({
-    type: 'string',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  @MaxLength(2000)
-  coverLetter?: string;
-}
-
-//
-
-@ApiTags('vacancies')
-@Controller('vacancies')
-export class VacanciesController {
+@ApiTags('vacancy')
+@Controller('vacancy')
+export class VacancyController {
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
 
-  @HttpCode(200)
-  @Post(':job_id')
-  @ApiOkResponse({ type: StatusResponse })
-  async apply(
-    @Param('job_id', new ParseUUIDPipe()) jobId: string,
-    @Body() args: VacanciesApplyArgs,
+  @Get(':vacancy_id')
+  @ApiOkResponse({ type: OpWorkJob })
+  async findOne(
+    @Param('vacancy_id', new ParseUUIDPipe()) jobId: string,
     @CurrentAppRequest() req: AppRequest,
   ) {
-    await this.prismaService.opWorkApplication.create({
-      data: {
-        jobSeekerId: args.jobSeekerId,
-        profileId: req.opWorkProfileId,
-        coverLetter: args.coverLetter,
-        jobId: jobId,
-        status: OpWorkApplicationStatus.PENDING,
-        appliedAt: new Date(),
+    return await this.prismaService.opWorkJob.findFirstOrThrow({
+      include: {
+        OpWorkApplication: {
+          include: { OpWorkJobSeeker: { include: { OpWorkProfile: true } } },
+        },
+        OpWorkProfile: true,
+        OpWorkEmployer: true,
+        OpWorkJobSkill: { include: { OpWorkSkill: true } },
+      },
+      where: {
+        id: jobId,
       },
     });
-    await this.prismaService.opWorkJob.update({
-      where: { id: jobId },
-      data: { applicationsCount: { increment: 1 } },
-    });
-    return { message: 'ok' };
   }
 
   @Get()
-  @ApiOkResponse({ type: FindManyVacanciesResponse })
+  @ApiOkResponse({ type: FindManyVacancyResponse })
   async findMany(
-    @Query() args: FindManyVacanciesArgs,
+    @Query() args: FindManyVacancyArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
@@ -239,9 +201,9 @@ export class VacanciesController {
     return {
       items: await this.prismaService.opWorkJob.findMany({
         include: {
+          OpWorkProfile: true,
           OpWorkEmployer: true,
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
-          OpWorkApplication: { where: { profileId: req.opWorkProfileId } },
         },
         where: opWorkJobWhereInput,
         take,

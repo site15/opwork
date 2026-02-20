@@ -1905,20 +1905,47 @@ export type SetEmployerJobTagsArgs = {
     id?: string;
 };
 
-export type VacanciesApplyArgs = {
+export type VacanyApplicationApplyArgs = {
     jobSeekerId: string;
     coverLetter?: string;
 };
 
-export type FindManyVacanciesResponseMeta = {
+export type VacanyApplicationChangeStatusArgs = {
+    status?: OpWorkApplicationStatus;
+    statusNotes?: string | null;
+};
+
+export type FindManyVacanyApplicationResponseMeta = {
     curPage?: number;
     perPage?: number;
     totalResults: number;
 };
 
-export type FindManyVacanciesResponse = {
+export type FindManyVacanyApplicationResponse = {
     items: Array<OpWorkJob>;
-    meta: FindManyVacanciesResponseMeta;
+    meta: FindManyVacanyApplicationResponseMeta;
+};
+
+export type FindManyVacancyResponseMeta = {
+    curPage?: number;
+    perPage?: number;
+    totalResults: number;
+};
+
+export type FindManyVacancyResponse = {
+    items: Array<OpWorkJob>;
+    meta: FindManyVacancyResponseMeta;
+};
+
+export type FindManyResumeResponseMeta = {
+    curPage?: number;
+    perPage?: number;
+    totalResults: number;
+};
+
+export type FindManyResumeResponse = {
+    items: Array<OpWorkJobSeeker>;
+    meta: FindManyResumeResponseMeta;
 };
 
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
@@ -4513,26 +4540,94 @@ export type EmployerJobTagsControllerSetJobTagsResponses = {
 
 export type EmployerJobTagsControllerSetJobTagsResponse = EmployerJobTagsControllerSetJobTagsResponses[keyof EmployerJobTagsControllerSetJobTagsResponses];
 
-export type VacanciesControllerApplyData = {
-    body: VacanciesApplyArgs;
+export type VacanyApplicationControllerApplyData = {
+    body: VacanyApplicationApplyArgs;
     path: {
-        job_id: string;
+        vacancy_id: string;
     };
     query?: never;
-    url: '/api/vacancies/{job_id}';
+    url: '/api/vacancy/{vacancy_id}/apply';
 };
 
-export type VacanciesControllerApplyErrors = {
+export type VacanyApplicationControllerApplyErrors = {
     default: unknown;
 };
 
-export type VacanciesControllerApplyResponses = {
+export type VacanyApplicationControllerApplyResponses = {
     200: StatusResponse;
 };
 
-export type VacanciesControllerApplyResponse = VacanciesControllerApplyResponses[keyof VacanciesControllerApplyResponses];
+export type VacanyApplicationControllerApplyResponse = VacanyApplicationControllerApplyResponses[keyof VacanyApplicationControllerApplyResponses];
 
-export type VacanciesControllerFindManyData = {
+export type VacanyApplicationControllerChangeStatusData = {
+    body: VacanyApplicationChangeStatusArgs;
+    path: {
+        vacancy_id: string;
+        id: string;
+    };
+    query?: never;
+    url: '/api/vacancy/{vacancy_id}/applications/{id}/change-status';
+};
+
+export type VacanyApplicationControllerChangeStatusErrors = {
+    default: unknown;
+};
+
+export type VacanyApplicationControllerChangeStatusResponses = {
+    200: StatusResponse;
+};
+
+export type VacanyApplicationControllerChangeStatusResponse = VacanyApplicationControllerChangeStatusResponses[keyof VacanyApplicationControllerChangeStatusResponses];
+
+export type VacanyApplicationControllerFindManyData = {
+    body?: never;
+    path: {
+        vacancy_id: string;
+    };
+    query?: {
+        curPage?: number;
+        perPage?: number;
+        searchText?: string;
+        sort?: string;
+        opWorkApplicationStatuses?: Array<OpWorkApplicationStatus>;
+    };
+    url: '/api/vacancy/{vacancy_id}/applications';
+};
+
+export type VacanyApplicationControllerFindManyErrors = {
+    default: unknown;
+};
+
+export type VacanyApplicationControllerFindManyResponses = {
+    200: FindManyVacanyApplicationResponse;
+};
+
+export type VacanyApplicationControllerFindManyResponse = VacanyApplicationControllerFindManyResponses[keyof VacanyApplicationControllerFindManyResponses];
+
+export type VacancyControllerFindOneData = {
+    body?: never;
+    path: {
+        vacancy_id: string;
+    };
+    query?: never;
+    url: '/api/vacancy/{vacancy_id}';
+};
+
+export type VacancyControllerFindOneErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type VacancyControllerFindOneError = VacancyControllerFindOneErrors[keyof VacancyControllerFindOneErrors];
+
+export type VacancyControllerFindOneResponses = {
+    200: OpWorkJob;
+};
+
+export type VacancyControllerFindOneResponse = VacancyControllerFindOneResponses[keyof VacancyControllerFindOneResponses];
+
+export type VacancyControllerFindManyData = {
     body?: never;
     path?: never;
     query?: {
@@ -4546,15 +4641,68 @@ export type VacanciesControllerFindManyData = {
         experienceLevels?: Array<OpWorkExperienceLevel>;
         skills?: Array<string>;
     };
-    url: '/api/vacancies';
+    url: '/api/vacancy';
 };
 
-export type VacanciesControllerFindManyErrors = {
+export type VacancyControllerFindManyErrors = {
     default: unknown;
 };
 
-export type VacanciesControllerFindManyResponses = {
-    200: FindManyVacanciesResponse;
+export type VacancyControllerFindManyResponses = {
+    200: FindManyVacancyResponse;
 };
 
-export type VacanciesControllerFindManyResponse = VacanciesControllerFindManyResponses[keyof VacanciesControllerFindManyResponses];
+export type VacancyControllerFindManyResponse = VacancyControllerFindManyResponses[keyof VacancyControllerFindManyResponses];
+
+export type ResumeControllerFindOneData = {
+    body?: never;
+    path: {
+        resume_id: string;
+    };
+    query?: never;
+    url: '/api/resume/{resume_id}';
+};
+
+export type ResumeControllerFindOneErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type ResumeControllerFindOneError = ResumeControllerFindOneErrors[keyof ResumeControllerFindOneErrors];
+
+export type ResumeControllerFindOneResponses = {
+    200: OpWorkJobSeeker;
+};
+
+export type ResumeControllerFindOneResponse = ResumeControllerFindOneResponses[keyof ResumeControllerFindOneResponses];
+
+export type ResumeControllerFindManyData = {
+    body?: never;
+    path?: never;
+    query?: {
+        curPage?: number;
+        perPage?: number;
+        searchText?: string;
+        sort?: string;
+        locations?: Array<string>;
+        salaryMin?: number;
+        salaryMax?: number;
+        isOpenToWork?: boolean | null;
+        isOpenToRemote?: boolean | null;
+        isOpenToRelocation?: boolean | null;
+        experienceLevels?: Array<OpWorkExperienceLevel>;
+        skills?: Array<string>;
+    };
+    url: '/api/resume';
+};
+
+export type ResumeControllerFindManyErrors = {
+    default: unknown;
+};
+
+export type ResumeControllerFindManyResponses = {
+    200: FindManyResumeResponse;
+};
+
+export type ResumeControllerFindManyResponse = ResumeControllerFindManyResponses[keyof ResumeControllerFindManyResponses];

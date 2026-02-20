@@ -5,7 +5,7 @@ import {
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import {
-  FindManyVacanciesResponse,
+  FindManyVacancyResponse,
   OpWorkEmployer,
   OpWorkJobDto,
   OpWorkJobSkillDto,
@@ -14,7 +14,7 @@ import {
 import { ActivityHelper } from './utils/activity-helper';
 import { getRandomSha7 } from './utils/utils';
 
-describe('Vacancies: search (e2e)', () => {
+describe('Vacancy: search (e2e)', () => {
   const employer1Activity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
@@ -50,7 +50,7 @@ describe('Vacancies: search (e2e)', () => {
   } = {};
 
   const vacancyData: {
-    vacanciesControllerFindManyResult?: FindManyVacanciesResponse;
+    vacancyControllerFindManyResult?: FindManyVacancyResponse;
   } = {};
 
   const employer1SkillName = getRandomSha7();
@@ -249,7 +249,7 @@ describe('Vacancies: search (e2e)', () => {
 
   it('Search for jobs by location', async () => {
     const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+      .vacancyControllerFindMany({
         query: {
           locations: [
             'San Francisco4',
@@ -269,7 +269,7 @@ describe('Vacancies: search (e2e)', () => {
 
   it('Search for jobs by employment type', async () => {
     const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+      .vacancyControllerFindMany({
         query: {
           employmentTypes: [OpWorkEmploymentType.PART_TIME],
         },
@@ -286,9 +286,10 @@ describe('Vacancies: search (e2e)', () => {
 
   it('Search for jobs by experience level', async () => {
     const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+      .vacancyControllerFindMany({
         query: {
           experienceLevels: [OpWorkExperienceLevel.JUNIOR],
+          locations: [`San Francisco${employer1Activity.randomSha7}`],
         },
       })
       .then(async ({ data }) => data);
@@ -303,9 +304,10 @@ describe('Vacancies: search (e2e)', () => {
 
   it('Search for jobs by salary', async () => {
     const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+      .vacancyControllerFindMany({
         query: {
           salaryMin: 50000,
+          locations: [`San Francisco${employer2Activity.randomSha7}`],
         },
       })
       .then(async ({ data }) => data);
@@ -320,7 +322,7 @@ describe('Vacancies: search (e2e)', () => {
 
   it('Search for jobs by skill', async () => {
     const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+      .vacancyControllerFindMany({
         query: {
           skills: [employer1SkillName, employer2SkillName],
           sort: 'createdAt:asc',
@@ -346,55 +348,39 @@ describe('Vacancies: search (e2e)', () => {
   });
 
   it('Search for jobs by text', async () => {
-    const searchResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
-        query: {
-          searchText: 'This is a test description2.',
-        },
-      })
-      .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
-    expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
-    expect(searchResult?.items[0].description).toContain(
-      'This is a test description2.',
-    );
-  });
-
-  it('Search for jobs by text', async () => {
-    const vacanciesControllerFindManyResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+    const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
+      .vacancyControllerFindMany({
         query: {
           searchText: `This is a test description${employer2Activity.randomSha7}.`,
         },
       })
       .then(async ({ data }) => data);
-    expect(vacanciesControllerFindManyResult).toBeDefined();
-    expect(vacanciesControllerFindManyResult?.items).toBeDefined();
+    expect(vacancyControllerFindManyResult).toBeDefined();
+    expect(vacancyControllerFindManyResult?.items).toBeDefined();
     expect(
-      vacanciesControllerFindManyResult?.items.length,
+      vacancyControllerFindManyResult?.items.length,
     ).toBeGreaterThanOrEqual(1);
-    expect(vacanciesControllerFindManyResult?.items[0].description).toContain(
+    expect(vacancyControllerFindManyResult?.items[0].description).toContain(
       `This is a test description${employer2Activity.randomSha7}.`,
     );
 
+    expect(vacancyControllerFindManyResult?.items[0].applicationsCount).toEqual(
+      0,
+    );
     expect(
-      vacanciesControllerFindManyResult?.items[0].applicationsCount,
-    ).toEqual(0);
-    expect(
-      vacanciesControllerFindManyResult?.items[0].OpWorkApplication?.length,
+      vacancyControllerFindManyResult?.items[0].OpWorkApplication?.length || 0,
     ).toEqual(0);
 
     Object.assign(vacancyData, {
-      vacanciesControllerFindManyResult,
+      vacancyControllerFindManyResult,
     });
   });
 
   it('Apply for a vacancy', async () => {
     const applyResult = await jobSeekerActivity.sdk
-      .vacanciesControllerApply({
+      .vacanyApplicationControllerApply({
         path: {
-          job_id: vacancyData.vacanciesControllerFindManyResult?.items[0].id!,
+          vacancy_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
         },
         body: {
           jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
@@ -405,38 +391,50 @@ describe('Vacancies: search (e2e)', () => {
     expect(applyResult).toBeDefined();
     expect(applyResult?.message).toEqual('ok');
 
-    const vacanciesControllerFindManyResult = await jobSeekerActivity.sdk
-      .vacanciesControllerFindMany({
+    const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
+      .vacancyControllerFindMany({
         query: {
           searchText: `This is a test description${employer2Activity.randomSha7}.`,
         },
       })
       .then(async ({ data }) => data);
-    expect(vacanciesControllerFindManyResult).toBeDefined();
-    expect(vacanciesControllerFindManyResult?.items).toBeDefined();
+    expect(vacancyControllerFindManyResult).toBeDefined();
+    expect(vacancyControllerFindManyResult?.items).toBeDefined();
     expect(
-      vacanciesControllerFindManyResult?.items.length,
+      vacancyControllerFindManyResult?.items.length,
     ).toBeGreaterThanOrEqual(1);
-    expect(vacanciesControllerFindManyResult?.items[0].description).toContain(
+    expect(vacancyControllerFindManyResult?.items[0].description).toContain(
       `This is a test description${employer2Activity.randomSha7}.`,
     );
+    expect(vacancyControllerFindManyResult?.items[0].applicationsCount).toEqual(
+      1,
+    );
+  });
+
+  it('Check application of vaction', async () => {
+    const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
+      .vacancyControllerFindOne({
+        path: {
+          vacancy_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
+        },
+      })
+      .then(async ({ data }) => data);
+    expect(vacancyControllerFindManyResult).toBeDefined();
+    expect(vacancyControllerFindManyResult?.description).toContain(
+      `This is a test description${employer2Activity.randomSha7}.`,
+    );
+    expect(vacancyControllerFindManyResult?.applicationsCount).toEqual(1);
+    expect(vacancyControllerFindManyResult?.OpWorkApplication?.length).toEqual(
+      1,
+    );
     expect(
-      vacanciesControllerFindManyResult?.items[0].applicationsCount,
-    ).toEqual(1);
-    expect(
-      vacanciesControllerFindManyResult?.items[0].OpWorkApplication?.length,
-    ).toEqual(1);
-    expect(
-      vacanciesControllerFindManyResult?.items[0].OpWorkApplication?.[0]
-        .profileId,
+      vacancyControllerFindManyResult?.OpWorkApplication?.[0].profileId,
     ).toEqual(jobSeekerData.profileControllerSetProfileResult?.id!);
     expect(
-      vacanciesControllerFindManyResult?.items[0].OpWorkApplication?.[0]
-        .jobSeekerId,
+      vacancyControllerFindManyResult?.OpWorkApplication?.[0].jobSeekerId,
     ).toEqual(jobSeekerData.jobSeekerControllerSetProfileResult?.id!);
     expect(
-      vacanciesControllerFindManyResult?.items[0].OpWorkApplication?.[0]
-        .coverLetter,
+      vacancyControllerFindManyResult?.OpWorkApplication?.[0].coverLetter,
     ).toEqual(`This is a cover letter${employer2Activity.randomSha7}.`);
   });
 });
