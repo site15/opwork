@@ -8,6 +8,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
 import Mustache from 'mustache';
 import { AppModule } from './app.module';
+import cookieParser from 'cookie-parser';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 import 'dotenv/config';
 import { AuthError } from './errors/auth.errors';
@@ -25,6 +27,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({ logger: true }),
     {
+      forceCloseConnections: true,
       cors: {
         origin: '*',
         methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
@@ -34,6 +37,9 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('/api');
+
+  app.use(cookieParser());
+  app.useWebSocketAdapter(new WsAdapter(app));
 
   app.useGlobalPipes(
     new ValidationPipe({

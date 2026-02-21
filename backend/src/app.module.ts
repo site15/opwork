@@ -13,6 +13,7 @@ import { JobSeekerEducationController } from './controllers/job-seeker-education
 import { JobSeekerExperienceController } from './controllers/job-seeker-experience.controller';
 import { JobSeekerSkillController } from './controllers/job-seeker-skill.controller';
 import { JobSeekerController } from './controllers/job-seeker.controller';
+import { NotificationController } from './controllers/notification.controller';
 import { ProfileController } from './controllers/profile.controller';
 import { ResumeController } from './controllers/resume.controller';
 import { VacanyApplicationController } from './controllers/vacancy-application.controller';
@@ -23,8 +24,10 @@ import { OpWorkUserType } from './generated/prisma/enums';
 import { CONTROLLERS } from './generated/rest/controllers';
 import { AuthGuard } from './guards/auth.guard';
 import { DefaultDataBootstrapService } from './services/default-data-bootstrap.service';
+import { NotificationService } from './services/notification.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
+import { TimeController } from './controllers/time.controller';
 
 const generatedControllers = CONTROLLERS;
 const appControllers = [
@@ -41,6 +44,8 @@ const appControllers = [
   VacanyApplicationController,
   VacancyController,
   ResumeController,
+  NotificationController,
+  TimeController,
 ];
 const controllers = [...generatedControllers, ...appControllers];
 
@@ -82,6 +87,7 @@ for (const controller of generatedControllers) {
   providers: [
     providePrismaService(process.env.DATABASE_URL!),
     PrismaToolsService,
+    NotificationService,
     DefaultDataBootstrapService,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_FILTER, useClass: AppExceptionsFilter },

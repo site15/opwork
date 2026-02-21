@@ -16,18 +16,13 @@ import { Transform } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
-  IsBooleanString,
   IsEnum,
   IsNumber,
   IsOptional,
   isUUID,
 } from 'class-validator';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
-import {
-  OpWorkEmploymentType,
-  OpWorkExperienceLevel,
-  Prisma,
-} from '../generated/prisma/client';
+import { OpWorkExperienceLevel, Prisma } from '../generated/prisma/client';
 import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
 import {
   PRISMA_SERVICE,
@@ -40,7 +35,6 @@ import {
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
 import { AppRequest } from '../types/request';
-import { OpWorkJobSeekerSkill } from '../generated/rest/op-work-job-seeker-skill.entity';
 
 //
 export class FindManyResumeArgs extends FindManyArgs {
@@ -70,7 +64,10 @@ export class FindManyResumeArgs extends FindManyArgs {
     nullable: true,
   })
   @IsOptional()
-  @IsBooleanString()
+  @IsBoolean()
+  @Transform(({ value }) =>
+    value !== undefined ? (value === 'true' ? true : false) : undefined,
+  )
   isOpenToWork?: boolean | null;
   @ApiProperty({
     type: 'boolean',
@@ -78,7 +75,10 @@ export class FindManyResumeArgs extends FindManyArgs {
     nullable: true,
   })
   @IsOptional()
-  @IsBooleanString()
+  @IsBoolean()
+  @Transform(({ value }) =>
+    value !== undefined ? (value === 'true' ? true : false) : undefined,
+  )
   isOpenToRemote?: boolean | null;
   @ApiProperty({
     type: 'boolean',
@@ -86,7 +86,10 @@ export class FindManyResumeArgs extends FindManyArgs {
     nullable: true,
   })
   @IsOptional()
-  @IsBooleanString()
+  @IsBoolean()
+  @Transform(({ value }) =>
+    value !== undefined ? (value === 'true' ? true : false) : undefined,
+  )
   isOpenToRelocation?: boolean | null;
 
   @ApiProperty({
@@ -185,12 +188,18 @@ export class ResumeController {
               { currentCompany: { contains: searchText, mode: 'insensitive' } },
               { summary: { contains: searchText, mode: 'insensitive' } },
               { salaryCurrency: { contains: searchText, mode: 'insensitive' } },
-              // employmentTypes
-              { isOpenToRelocation: { equals: otherArgs.isOpenToRelocation } },
-              { isOpenToRemote: { equals: otherArgs.isOpenToRemote } },
-              { isOpenToWork: { equals: otherArgs.isOpenToWork } },
             ],
           }
+        : {}),
+      // employmentTypes
+      ...(otherArgs.isOpenToRelocation !== undefined
+        ? { isOpenToRelocation: { equals: otherArgs.isOpenToRelocation } }
+        : {}),
+      ...(otherArgs.isOpenToRemote !== undefined
+        ? { isOpenToRemote: { equals: otherArgs.isOpenToRemote } }
+        : {}),
+      ...(otherArgs.isOpenToWork !== undefined
+        ? { isOpenToWork: { equals: otherArgs.isOpenToWork } }
         : {}),
       AND: [
         // locations

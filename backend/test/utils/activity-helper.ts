@@ -1,9 +1,11 @@
+import { finalize, from, map, mergeMap } from 'rxjs';
 import {
   X_API_KEY_HEADER_NAME,
   X_SESSION_ID_HEADER_NAME,
 } from '../../src/guards/auth.guard';
 import { AuthUser, Sdk, SignInArgs, UserType } from '../generated/client';
 import { Client, Config, createClient } from '../generated/client/client';
+import { client } from '../generated/client/client.gen';
 import { getRandomSha7 } from './utils';
 
 export class ActivityHelper {
@@ -20,6 +22,21 @@ export class ActivityHelper {
     this.sdk = new Sdk({
       client: this.client,
     });
+  }
+
+  sse<T>(...args: Parameters<typeof client.sse.get>) {
+    const controller = new AbortController();
+    const options = args[0];
+    return from(
+      this.client.sse.get({
+        ...options,
+        signal: controller.signal,
+      }),
+    ).pipe(
+      mergeMap(({ stream }) => from(stream)),
+      map((e) => e as T),
+      finalize(() => controller.abort()),
+    );
   }
 
   async getProfile() {

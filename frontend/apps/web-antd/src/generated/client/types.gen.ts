@@ -1945,6 +1945,21 @@ export type FindManyResumeResponse = {
     meta: FindManyResumeResponseMeta;
 };
 
+export type FindManyResponseMeta = {
+    curPage?: number;
+    perPage?: number;
+    totalResults: number;
+};
+
+export type FindManyNotificationResponse = {
+    items: Array<OpWorkNotification>;
+    meta: FindManyResponseMeta;
+};
+
+export type Date = {
+    [key: string]: unknown;
+};
+
 export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
 
 export type AuthError = {
@@ -4702,3 +4717,62 @@ export type ResumeControllerFindManyResponses = {
 };
 
 export type ResumeControllerFindManyResponse = ResumeControllerFindManyResponses[keyof ResumeControllerFindManyResponses];
+
+export type NotificationControllerFindManyData = {
+    body?: never;
+    path?: never;
+    query?: {
+        curPage?: number;
+        perPage?: number;
+        searchText?: string;
+        sort?: string;
+        isRead?: boolean | null;
+        isArchived?: boolean | null;
+        experienceLevels?: Array<OpWorkNotificationType>;
+    };
+    url: '/api/notification';
+};
+
+export type NotificationControllerFindManyErrors = {
+    default: unknown;
+};
+
+export type NotificationControllerFindManyResponses = {
+    200: FindManyNotificationResponse;
+};
+
+export type NotificationControllerFindManyResponse = NotificationControllerFindManyResponses[keyof NotificationControllerFindManyResponses];
+
+export type TimeControllerTimeData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/time';
+};
+
+export type TimeControllerTimeErrors = {
+    default: Date;
+};
+
+export type TimeControllerTimeError = TimeControllerTimeErrors[keyof TimeControllerTimeErrors];
+
+export type TimeControllerTimeResponses = {
+    200: Date;
+};
+
+export type TimeControllerTimeResponse = TimeControllerTimeResponses[keyof TimeControllerTimeResponses];
+
+export type TimeControllerStreamData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/time/stream';
+};
+
+export type TimeControllerStreamResponses = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type TimeControllerStreamResponse = TimeControllerStreamResponses[keyof TimeControllerStreamResponses];
