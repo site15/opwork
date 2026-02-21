@@ -2,7 +2,6 @@
 import {OpWorkNotificationType,Prisma} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
 import {OpWorkProfile} from './op-work-profile.entity'
-import {AuthUser} from './auth-user.entity'
 
 
 export class OpWorkNotification {
@@ -60,15 +59,4 @@ readAt!: Date  | null;
   nullable: true,
 })
 OpWorkProfile?: OpWorkProfile  | null;
-@ApiProperty({
-  type: () => AuthUser,
-  required: false,
-  nullable: true,
-})
-authUser?: AuthUser  | null;
-@ApiProperty({
-  type: 'string',
-  nullable: true,
-})
-authUserId!: string  | null;
 }

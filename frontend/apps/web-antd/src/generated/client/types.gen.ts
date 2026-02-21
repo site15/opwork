@@ -307,8 +307,6 @@ export type OpWorkNotification = {
     createdAt: string;
     readAt: string | null;
     OpWorkProfile?: OpWorkProfile | null;
-    authUser?: AuthUser | null;
-    authUserId: string | null;
 };
 
 export type OpWorkFrequency = 'MINUTELY' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'ON_DEMAND';
@@ -405,7 +403,6 @@ export type AuthUser = {
     AuthApiKey?: Array<AuthApiKey>;
     AuthSession?: Array<AuthSession>;
     OpWorkProfile?: Array<OpWorkProfile>;
-    opWorkNotifications?: Array<OpWorkNotification>;
 };
 
 export type FindManyAuthUserResponseMeta = {
@@ -3433,7 +3430,6 @@ export type OpWorkNotificationControllerFindManyData = {
         searchText?: string;
         sort?: string;
         profileId?: string;
-        authUserId?: string;
     };
     url: '/api/op-work/notification';
 };

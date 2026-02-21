@@ -35,7 +35,6 @@ export type OpWorkNotificationMinAggregateOutputType = {
   isArchived: boolean | null
   createdAt: Date | null
   readAt: Date | null
-  authUserId: string | null
 }
 
 export type OpWorkNotificationMaxAggregateOutputType = {
@@ -48,7 +47,6 @@ export type OpWorkNotificationMaxAggregateOutputType = {
   isArchived: boolean | null
   createdAt: Date | null
   readAt: Date | null
-  authUserId: string | null
 }
 
 export type OpWorkNotificationCountAggregateOutputType = {
@@ -62,7 +60,6 @@ export type OpWorkNotificationCountAggregateOutputType = {
   isArchived: number
   createdAt: number
   readAt: number
-  authUserId: number
   _all: number
 }
 
@@ -77,7 +74,6 @@ export type OpWorkNotificationMinAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
-  authUserId?: true
 }
 
 export type OpWorkNotificationMaxAggregateInputType = {
@@ -90,7 +86,6 @@ export type OpWorkNotificationMaxAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
-  authUserId?: true
 }
 
 export type OpWorkNotificationCountAggregateInputType = {
@@ -104,7 +99,6 @@ export type OpWorkNotificationCountAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
-  authUserId?: true
   _all?: true
 }
 
@@ -191,7 +185,6 @@ export type OpWorkNotificationGroupByOutputType = {
   isArchived: boolean | null
   createdAt: Date
   readAt: Date | null
-  authUserId: string | null
   _count: OpWorkNotificationCountAggregateOutputType | null
   _min: OpWorkNotificationMinAggregateOutputType | null
   _max: OpWorkNotificationMaxAggregateOutputType | null
@@ -226,9 +219,7 @@ export type OpWorkNotificationWhereInput = {
   isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
-  authUserId?: Prisma.UuidNullableFilter<"OpWorkNotification"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
-  authUser?: Prisma.XOR<Prisma.AuthUserNullableScalarRelationFilter, Prisma.AuthUserWhereInput> | null
 }
 
 export type OpWorkNotificationOrderByWithRelationInput = {
@@ -242,9 +233,7 @@ export type OpWorkNotificationOrderByWithRelationInput = {
   isArchived?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  authUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
-  authUser?: Prisma.AuthUserOrderByWithRelationInput
 }
 
 export type OpWorkNotificationWhereUniqueInput = Prisma.AtLeast<{
@@ -261,9 +250,7 @@ export type OpWorkNotificationWhereUniqueInput = Prisma.AtLeast<{
   isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
-  authUserId?: Prisma.UuidNullableFilter<"OpWorkNotification"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
-  authUser?: Prisma.XOR<Prisma.AuthUserNullableScalarRelationFilter, Prisma.AuthUserWhereInput> | null
 }, "id">
 
 export type OpWorkNotificationOrderByWithAggregationInput = {
@@ -277,7 +264,6 @@ export type OpWorkNotificationOrderByWithAggregationInput = {
   isArchived?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  authUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpWorkNotificationCountOrderByAggregateInput
   _max?: Prisma.OpWorkNotificationMaxOrderByAggregateInput
   _min?: Prisma.OpWorkNotificationMinOrderByAggregateInput
@@ -297,7 +283,6 @@ export type OpWorkNotificationScalarWhereWithAggregatesInput = {
   isArchived?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkNotification"> | Date | string | null
-  authUserId?: Prisma.UuidNullableWithAggregatesFilter<"OpWorkNotification"> | string | null
 }
 
 export type OpWorkNotificationCreateInput = {
@@ -311,7 +296,6 @@ export type OpWorkNotificationCreateInput = {
   createdAt?: Date | string
   readAt?: Date | string | null
   OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkNotificationsInput
-  authUser?: Prisma.AuthUserCreateNestedOneWithoutOpWorkNotificationsInput
 }
 
 export type OpWorkNotificationUncheckedCreateInput = {
@@ -325,7 +309,6 @@ export type OpWorkNotificationUncheckedCreateInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
-  authUserId?: string | null
 }
 
 export type OpWorkNotificationUpdateInput = {
@@ -339,7 +322,6 @@ export type OpWorkNotificationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkNotificationsNestedInput
-  authUser?: Prisma.AuthUserUpdateOneWithoutOpWorkNotificationsNestedInput
 }
 
 export type OpWorkNotificationUncheckedUpdateInput = {
@@ -353,7 +335,6 @@ export type OpWorkNotificationUncheckedUpdateInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  authUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationCreateManyInput = {
@@ -367,7 +348,6 @@ export type OpWorkNotificationCreateManyInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
-  authUserId?: string | null
 }
 
 export type OpWorkNotificationUpdateManyMutationInput = {
@@ -393,7 +373,6 @@ export type OpWorkNotificationUncheckedUpdateManyInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  authUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationListRelationFilter = {
@@ -417,7 +396,6 @@ export type OpWorkNotificationCountOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
-  authUserId?: Prisma.SortOrder
 }
 
 export type OpWorkNotificationMaxOrderByAggregateInput = {
@@ -430,7 +408,6 @@ export type OpWorkNotificationMaxOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
-  authUserId?: Prisma.SortOrder
 }
 
 export type OpWorkNotificationMinOrderByAggregateInput = {
@@ -443,49 +420,6 @@ export type OpWorkNotificationMinOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
-  authUserId?: Prisma.SortOrder
-}
-
-export type OpWorkNotificationCreateNestedManyWithoutAuthUserInput = {
-  create?: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput> | Prisma.OpWorkNotificationCreateWithoutAuthUserInput[] | Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput[]
-  connectOrCreate?: Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput | Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput[]
-  createMany?: Prisma.OpWorkNotificationCreateManyAuthUserInputEnvelope
-  connect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-}
-
-export type OpWorkNotificationUncheckedCreateNestedManyWithoutAuthUserInput = {
-  create?: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput> | Prisma.OpWorkNotificationCreateWithoutAuthUserInput[] | Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput[]
-  connectOrCreate?: Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput | Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput[]
-  createMany?: Prisma.OpWorkNotificationCreateManyAuthUserInputEnvelope
-  connect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-}
-
-export type OpWorkNotificationUpdateManyWithoutAuthUserNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput> | Prisma.OpWorkNotificationCreateWithoutAuthUserInput[] | Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput[]
-  connectOrCreate?: Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput | Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput[]
-  upsert?: Prisma.OpWorkNotificationUpsertWithWhereUniqueWithoutAuthUserInput | Prisma.OpWorkNotificationUpsertWithWhereUniqueWithoutAuthUserInput[]
-  createMany?: Prisma.OpWorkNotificationCreateManyAuthUserInputEnvelope
-  set?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  disconnect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  delete?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  connect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  update?: Prisma.OpWorkNotificationUpdateWithWhereUniqueWithoutAuthUserInput | Prisma.OpWorkNotificationUpdateWithWhereUniqueWithoutAuthUserInput[]
-  updateMany?: Prisma.OpWorkNotificationUpdateManyWithWhereWithoutAuthUserInput | Prisma.OpWorkNotificationUpdateManyWithWhereWithoutAuthUserInput[]
-  deleteMany?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
-}
-
-export type OpWorkNotificationUncheckedUpdateManyWithoutAuthUserNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput> | Prisma.OpWorkNotificationCreateWithoutAuthUserInput[] | Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput[]
-  connectOrCreate?: Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput | Prisma.OpWorkNotificationCreateOrConnectWithoutAuthUserInput[]
-  upsert?: Prisma.OpWorkNotificationUpsertWithWhereUniqueWithoutAuthUserInput | Prisma.OpWorkNotificationUpsertWithWhereUniqueWithoutAuthUserInput[]
-  createMany?: Prisma.OpWorkNotificationCreateManyAuthUserInputEnvelope
-  set?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  disconnect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  delete?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  connect?: Prisma.OpWorkNotificationWhereUniqueInput | Prisma.OpWorkNotificationWhereUniqueInput[]
-  update?: Prisma.OpWorkNotificationUpdateWithWhereUniqueWithoutAuthUserInput | Prisma.OpWorkNotificationUpdateWithWhereUniqueWithoutAuthUserInput[]
-  updateMany?: Prisma.OpWorkNotificationUpdateManyWithWhereWithoutAuthUserInput | Prisma.OpWorkNotificationUpdateManyWithWhereWithoutAuthUserInput[]
-  deleteMany?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
 }
 
 export type OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput = {
@@ -534,75 +468,6 @@ export type EnumOpWorkNotificationTypeFieldUpdateOperationsInput = {
   set?: $Enums.OpWorkNotificationType
 }
 
-export type OpWorkNotificationCreateWithoutAuthUserInput = {
-  id?: string
-  type: $Enums.OpWorkNotificationType
-  title: string
-  message: string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: boolean | null
-  isArchived?: boolean | null
-  createdAt?: Date | string
-  readAt?: Date | string | null
-  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkNotificationsInput
-}
-
-export type OpWorkNotificationUncheckedCreateWithoutAuthUserInput = {
-  id?: string
-  profileId?: string | null
-  type: $Enums.OpWorkNotificationType
-  title: string
-  message: string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: boolean | null
-  isArchived?: boolean | null
-  createdAt?: Date | string
-  readAt?: Date | string | null
-}
-
-export type OpWorkNotificationCreateOrConnectWithoutAuthUserInput = {
-  where: Prisma.OpWorkNotificationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput>
-}
-
-export type OpWorkNotificationCreateManyAuthUserInputEnvelope = {
-  data: Prisma.OpWorkNotificationCreateManyAuthUserInput | Prisma.OpWorkNotificationCreateManyAuthUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type OpWorkNotificationUpsertWithWhereUniqueWithoutAuthUserInput = {
-  where: Prisma.OpWorkNotificationWhereUniqueInput
-  update: Prisma.XOR<Prisma.OpWorkNotificationUpdateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedUpdateWithoutAuthUserInput>
-  create: Prisma.XOR<Prisma.OpWorkNotificationCreateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedCreateWithoutAuthUserInput>
-}
-
-export type OpWorkNotificationUpdateWithWhereUniqueWithoutAuthUserInput = {
-  where: Prisma.OpWorkNotificationWhereUniqueInput
-  data: Prisma.XOR<Prisma.OpWorkNotificationUpdateWithoutAuthUserInput, Prisma.OpWorkNotificationUncheckedUpdateWithoutAuthUserInput>
-}
-
-export type OpWorkNotificationUpdateManyWithWhereWithoutAuthUserInput = {
-  where: Prisma.OpWorkNotificationScalarWhereInput
-  data: Prisma.XOR<Prisma.OpWorkNotificationUpdateManyMutationInput, Prisma.OpWorkNotificationUncheckedUpdateManyWithoutAuthUserInput>
-}
-
-export type OpWorkNotificationScalarWhereInput = {
-  AND?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
-  OR?: Prisma.OpWorkNotificationScalarWhereInput[]
-  NOT?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
-  id?: Prisma.UuidFilter<"OpWorkNotification"> | string
-  profileId?: Prisma.UuidNullableFilter<"OpWorkNotification"> | string | null
-  type?: Prisma.EnumOpWorkNotificationTypeFilter<"OpWorkNotification"> | $Enums.OpWorkNotificationType
-  title?: Prisma.StringFilter<"OpWorkNotification"> | string
-  message?: Prisma.StringFilter<"OpWorkNotification"> | string
-  data?: Prisma.JsonNullableFilter<"OpWorkNotification">
-  isRead?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
-  isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
-  createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
-  readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
-  authUserId?: Prisma.UuidNullableFilter<"OpWorkNotification"> | string | null
-}
-
 export type OpWorkNotificationCreateWithoutOpWorkProfileInput = {
   id?: string
   type: $Enums.OpWorkNotificationType
@@ -613,7 +478,6 @@ export type OpWorkNotificationCreateWithoutOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
-  authUser?: Prisma.AuthUserCreateNestedOneWithoutOpWorkNotificationsInput
 }
 
 export type OpWorkNotificationUncheckedCreateWithoutOpWorkProfileInput = {
@@ -626,7 +490,6 @@ export type OpWorkNotificationUncheckedCreateWithoutOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
-  authUserId?: string | null
 }
 
 export type OpWorkNotificationCreateOrConnectWithoutOpWorkProfileInput = {
@@ -655,56 +518,20 @@ export type OpWorkNotificationUpdateManyWithWhereWithoutOpWorkProfileInput = {
   data: Prisma.XOR<Prisma.OpWorkNotificationUpdateManyMutationInput, Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileInput>
 }
 
-export type OpWorkNotificationCreateManyAuthUserInput = {
-  id?: string
-  profileId?: string | null
-  type: $Enums.OpWorkNotificationType
-  title: string
-  message: string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: boolean | null
-  isArchived?: boolean | null
-  createdAt?: Date | string
-  readAt?: Date | string | null
-}
-
-export type OpWorkNotificationUpdateWithoutAuthUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumOpWorkNotificationTypeFieldUpdateOperationsInput | $Enums.OpWorkNotificationType
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.StringFieldUpdateOperationsInput | string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkNotificationsNestedInput
-}
-
-export type OpWorkNotificationUncheckedUpdateWithoutAuthUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumOpWorkNotificationTypeFieldUpdateOperationsInput | $Enums.OpWorkNotificationType
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.StringFieldUpdateOperationsInput | string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type OpWorkNotificationUncheckedUpdateManyWithoutAuthUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumOpWorkNotificationTypeFieldUpdateOperationsInput | $Enums.OpWorkNotificationType
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.StringFieldUpdateOperationsInput | string
-  data?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  isRead?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+export type OpWorkNotificationScalarWhereInput = {
+  AND?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
+  OR?: Prisma.OpWorkNotificationScalarWhereInput[]
+  NOT?: Prisma.OpWorkNotificationScalarWhereInput | Prisma.OpWorkNotificationScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkNotification"> | string
+  profileId?: Prisma.UuidNullableFilter<"OpWorkNotification"> | string | null
+  type?: Prisma.EnumOpWorkNotificationTypeFilter<"OpWorkNotification"> | $Enums.OpWorkNotificationType
+  title?: Prisma.StringFilter<"OpWorkNotification"> | string
+  message?: Prisma.StringFilter<"OpWorkNotification"> | string
+  data?: Prisma.JsonNullableFilter<"OpWorkNotification">
+  isRead?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
+  isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
+  readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
 }
 
 export type OpWorkNotificationCreateManyOpWorkProfileInput = {
@@ -717,7 +544,6 @@ export type OpWorkNotificationCreateManyOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
-  authUserId?: string | null
 }
 
 export type OpWorkNotificationUpdateWithoutOpWorkProfileInput = {
@@ -730,7 +556,6 @@ export type OpWorkNotificationUpdateWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  authUser?: Prisma.AuthUserUpdateOneWithoutOpWorkNotificationsNestedInput
 }
 
 export type OpWorkNotificationUncheckedUpdateWithoutOpWorkProfileInput = {
@@ -743,7 +568,6 @@ export type OpWorkNotificationUncheckedUpdateWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  authUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileInput = {
@@ -756,7 +580,6 @@ export type OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  authUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -772,9 +595,7 @@ export type OpWorkNotificationSelect<ExtArgs extends runtime.Types.Extensions.In
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
-  authUserId?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
 export type OpWorkNotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -788,9 +609,7 @@ export type OpWorkNotificationSelectCreateManyAndReturn<ExtArgs extends runtime.
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
-  authUserId?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
 export type OpWorkNotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -804,9 +623,7 @@ export type OpWorkNotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
-  authUserId?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
 export type OpWorkNotificationSelectScalar = {
@@ -820,21 +637,17 @@ export type OpWorkNotificationSelectScalar = {
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
-  authUserId?: boolean
 }
 
-export type OpWorkNotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "type" | "title" | "message" | "data" | "isRead" | "isArchived" | "createdAt" | "readAt" | "authUserId", ExtArgs["result"]["opWorkNotification"]>
+export type OpWorkNotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "type" | "title" | "message" | "data" | "isRead" | "isArchived" | "createdAt" | "readAt", ExtArgs["result"]["opWorkNotification"]>
 export type OpWorkNotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }
 export type OpWorkNotificationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }
 export type OpWorkNotificationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
-  authUser?: boolean | Prisma.OpWorkNotification$authUserArgs<ExtArgs>
 }
 
 export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -847,10 +660,6 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
      * @DtoRelationCanDisconnectOnUpdate
      */
     OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
-    /**
-     * === ИНДЕКСЫ ===
-     */
-    authUser: Prisma.$AuthUserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -896,7 +705,6 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
      * Временная метка прочтения уведомления
      */
     readAt: Date | null
-    authUserId: string | null
   }, ExtArgs["result"]["opWorkNotification"]>
   composites: {}
 }
@@ -1292,7 +1100,6 @@ readonly fields: OpWorkNotificationFieldRefs;
 export interface Prisma__OpWorkNotificationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   OpWorkProfile<T extends Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  authUser<T extends Prisma.OpWorkNotification$authUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkNotification$authUserArgs<ExtArgs>>): Prisma.Prisma__AuthUserClient<runtime.Types.Result.GetResult<Prisma.$AuthUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1332,7 +1139,6 @@ export interface OpWorkNotificationFieldRefs {
   readonly isArchived: Prisma.FieldRef<"OpWorkNotification", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"OpWorkNotification", 'DateTime'>
   readonly readAt: Prisma.FieldRef<"OpWorkNotification", 'DateTime'>
-  readonly authUserId: Prisma.FieldRef<"OpWorkNotification", 'String'>
 }
     
 
@@ -1745,25 +1551,6 @@ export type OpWorkNotification$OpWorkProfileArgs<ExtArgs extends runtime.Types.E
    */
   include?: Prisma.OpWorkProfileInclude<ExtArgs> | null
   where?: Prisma.OpWorkProfileWhereInput
-}
-
-/**
- * OpWorkNotification.authUser
- */
-export type OpWorkNotification$authUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AuthUser
-   */
-  select?: Prisma.AuthUserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AuthUser
-   */
-  omit?: Prisma.AuthUserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AuthUserInclude<ExtArgs> | null
-  where?: Prisma.AuthUserWhereInput
 }
 
 /**

@@ -36,11 +36,7 @@ import { UpdateOpWorkNotificationDto } from './update-op-work-notification.dto';
 export class FindManyOpWorkNotificationArgs extends FindManyArgs {
   @ApiPropertyOptional({ type: 'string' })
   @IsOptional()
-  profileId?: string;
-
-  @ApiPropertyOptional({ type: 'string' })
-  @IsOptional()
-  authUserId?: string;}
+  profileId?: string;}
 
 export class FindManyOpWorkNotificationResponseMeta extends FindManyResponseMeta {}
 
@@ -95,10 +91,6 @@ export class OpWorkNotificationController {
         
           ...(isUUID(otherArgs.profileId)
             ? [{ profileId: { equals: otherArgs.profileId } }]
-            : []),
-
-          ...(isUUID(otherArgs.authUserId)
-            ? [{ authUserId: { equals: otherArgs.authUserId } }]
             : []),
       ],
       

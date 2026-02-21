@@ -596,7 +596,6 @@ model AuthUser {
   /// Профили пользователя в профессиональной сети
   /// Связь с основной бизнес-системой поиска работы
   OpWorkProfile       OpWorkProfile[]
-  opWorkNotifications OpWorkNotification[]
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
@@ -1635,9 +1634,6 @@ model OpWorkNotification {
   OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_NOTIFICATION__PROFILE_ID")
 
   /// === ИНДЕКСЫ ===
-  authUser   AuthUser? @relation(fields: [authUserId], references: [id])
-  authUserId String?   @db.Uuid
-
   @@index([profileId], map: "IDX_OPWORK_NOTIFICATION__PROFILE_ID")
   @@index([type], map: "IDX_OPWORK_NOTIFICATION__TYPE")
   @@index([isRead], map: "IDX_OPWORK_NOTIFICATION__IS_READ")
