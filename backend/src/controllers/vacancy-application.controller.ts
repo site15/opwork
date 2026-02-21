@@ -146,16 +146,16 @@ export class VacanyApplicationController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: VacanyApplicationChangeStatusArgs,
   ) {
-    return await this.prismaService.opWorkApplication.update({
+    await this.prismaService.opWorkApplication.update({
       data: {
         status: args.status,
         statusNotes: args.statusNotes,
       },
       where: {
-        jobId: vacancyId,
         id,
       },
     });
+    return { message: 'ok' };
   }
 
   @Get(':vacancy_id/applications')
