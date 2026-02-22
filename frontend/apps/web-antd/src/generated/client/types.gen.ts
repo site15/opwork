@@ -1945,6 +1945,10 @@ export type FindManyResumeResponse = {
     meta: FindManyResumeResponseMeta;
 };
 
+export type NotificationMarkAsReadArgs = {
+    ids: Array<string>;
+};
+
 export type FindManyResponseMeta = {
     curPage?: number;
     perPage?: number;
@@ -4717,6 +4721,55 @@ export type ResumeControllerFindManyResponses = {
 };
 
 export type ResumeControllerFindManyResponse = ResumeControllerFindManyResponses[keyof ResumeControllerFindManyResponses];
+
+export type NotificationControllerMarkAsReadData = {
+    body: NotificationMarkAsReadArgs;
+    path?: never;
+    query?: never;
+    url: '/api/notification/mark-as-read';
+};
+
+export type NotificationControllerMarkAsReadErrors = {
+    default: unknown;
+};
+
+export type NotificationControllerMarkAsReadResponses = {
+    200: StatusResponse;
+};
+
+export type NotificationControllerMarkAsReadResponse = NotificationControllerMarkAsReadResponses[keyof NotificationControllerMarkAsReadResponses];
+
+export type NotificationControllerMarkAsArchivedData = {
+    body: NotificationMarkAsReadArgs;
+    path?: never;
+    query?: never;
+    url: '/api/notification/mark-as-archived';
+};
+
+export type NotificationControllerMarkAsArchivedErrors = {
+    default: unknown;
+};
+
+export type NotificationControllerMarkAsArchivedResponses = {
+    200: StatusResponse;
+};
+
+export type NotificationControllerMarkAsArchivedResponse = NotificationControllerMarkAsArchivedResponses[keyof NotificationControllerMarkAsArchivedResponses];
+
+export type NotificationControllerStreamData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/notification/stream';
+};
+
+export type NotificationControllerStreamResponses = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type NotificationControllerStreamResponse = NotificationControllerStreamResponses[keyof NotificationControllerStreamResponses];
 
 export type NotificationControllerFindManyData = {
     body?: never;

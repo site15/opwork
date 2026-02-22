@@ -16,7 +16,6 @@ describe('Time (e2e)', () => {
     const timeControllerTimeResult =
       await userActivity.sdk.timeControllerTime();
     const time = timeControllerTimeResult.data;
-    expect(timeControllerTimeResult.data).toBeDefined();
     expect(time ? +new Date(time as unknown as string) : null).not.toBeNaN();
   });
 

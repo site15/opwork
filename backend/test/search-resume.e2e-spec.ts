@@ -211,8 +211,6 @@ describe('Resume: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].preferredLocations).toContain(
       `New York, San Francisco ${jobSeeker1Activity.randomSha7}`,
@@ -231,8 +229,6 @@ describe('Resume: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].isOpenToRelocation).toBe(false);
     expect(searchResult?.items[0].currentPosition).toContain(
@@ -249,8 +245,6 @@ describe('Resume: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].expectedSalary).toEqual(500000);
     expect(searchResult?.items[0].salaryCurrency).toBe('USD');
@@ -264,8 +258,6 @@ describe('Resume: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(resumeControllerFindManyResult).toBeDefined();
-    expect(resumeControllerFindManyResult?.items).toBeDefined();
     expect(resumeControllerFindManyResult?.items.length).toBeGreaterThanOrEqual(
       1,
     );

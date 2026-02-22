@@ -23,6 +23,7 @@ import {
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkApplicationStatus, Prisma } from '../generated/prisma/client';
 import { OpWorkJob } from '../generated/rest/op-work-job.entity';
+import { NotificationService } from '../services/notification.service';
 import {
   PRISMA_SERVICE,
   PrismaSdk,
@@ -33,7 +34,7 @@ import {
   FindManyResponseMeta,
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
-import { AppRequest } from '../types/request';
+import { AppRequest, getAppRequestData } from '../types/request';
 import { StatusResponse } from '../types/status-response';
 
 //
@@ -112,6 +113,7 @@ export class VacanyApplicationController {
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
+    private readonly notificationService: NotificationService,
   ) {}
 
   @HttpCode(200)
@@ -132,9 +134,24 @@ export class VacanyApplicationController {
         appliedAt: new Date(),
       },
     });
-    await this.prismaService.opWorkJob.update({
+    const updatedJob = await this.prismaService.opWorkJob.update({
       where: { id: vacancyId },
       data: { applicationsCount: { increment: 1 } },
+    });
+    await this.notificationService.create({
+      profileId: updatedJob.profileId,
+      type: 'APPLICATION_RECEIVED',
+      title: 'New Application Received',
+      message: `You have received a new application for your job listing.`,
+      data: {
+        class: 'VacanyApplicationController',
+        method: 'apply',
+        options: {
+          params: { vacancyId },
+          body: args,
+          request: getAppRequestData(req),
+        },
+      } as object,
     });
     return { message: 'ok' };
   }
@@ -150,6 +167,7 @@ export class VacanyApplicationController {
       data: {
         status: args.status,
         statusNotes: args.statusNotes,
+        statusUpdatedAt: new Date(),
       },
       where: {
         id,

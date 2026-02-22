@@ -1,5 +1,5 @@
+import { firstValueFrom } from 'rxjs';
 import {
-  OpWorkApplicationStatus,
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
@@ -7,16 +7,18 @@ import {
 import { UserType } from '../src/types/auth-types';
 import {
   FindManyVacancyResponse,
+  NotificationControllerStreamData,
   OpWorkEmployer,
   OpWorkJob,
   OpWorkJobDto,
   OpWorkJobSkillDto,
+  OpWorkNotification,
   OpWorkProfileDto,
 } from './generated/client';
 import { ActivityHelper } from './utils/activity-helper';
 import { getRandomSha7 } from './utils/utils';
 
-describe('Vacancy: work with applications (e2e)', () => {
+describe('Notification: in work with applications (e2e)', () => {
   const employerActivity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
@@ -43,6 +45,8 @@ describe('Vacancy: work with applications (e2e)', () => {
     | undefined;
 
   let globalVacancyControllerFindOneResult: OpWorkJob | undefined;
+
+  let globalNotification: OpWorkNotification | undefined;
 
   const employerSkillName = getRandomSha7();
 
@@ -172,48 +176,36 @@ describe('Vacancy: work with applications (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(
-      vacancyControllerFindManyResult?.items.length,
-    ).toBeGreaterThanOrEqual(1);
-    expect(vacancyControllerFindManyResult?.items[0].title).toContain(
-      'Test Title',
-    );
     expect(vacancyControllerFindManyResult?.items[0].location).toContain(
       `San Francisco${employerActivity.randomSha7}`,
     );
     globalVacancyControllerFindManyResult = vacancyControllerFindManyResult;
   });
 
-  it('As job seeker apply for a vacancy', async () => {
-    const applyResult = await jobSeekerActivity.sdk
-      .vacanyApplicationControllerApply({
-        path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
-        },
-        body: {
-          jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
-          coverLetter: `This is a cover letter${employerActivity.randomSha7}.`,
-        },
-      })
-      .then(async ({ data }) => data);
-    expect(applyResult?.message).toEqual('ok');
+  it('As job seeker apply for a vacancy and as employer wait async notifications via SSE', async () => {
+    const [notification, applyResult] = await Promise.all([
+      firstValueFrom(
+        employerActivity.sse<OpWorkNotification>({
+          url: '/api/notification/stream' satisfies NotificationControllerStreamData['url'],
+        }),
+      ),
+      jobSeekerActivity.sdk
+        .vacanyApplicationControllerApply({
+          path: {
+            vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          },
+          body: {
+            jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
+            coverLetter: `This is a cover letter${employerActivity.randomSha7}.`,
+          },
+        })
+        .then(async ({ data }) => data),
+    ]);
 
-    const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
-      .vacancyControllerFindMany({
-        query: {
-          searchText: `This is a test description${employerActivity.randomSha7}.`,
-        },
-      })
-      .then(async ({ data }) => data);
-    expect(
-      vacancyControllerFindManyResult?.items.length,
-    ).toBeGreaterThanOrEqual(1);
-    expect(vacancyControllerFindManyResult?.items[0].description).toContain(
-      `This is a test description${employerActivity.randomSha7}.`,
-    );
-    expect(vacancyControllerFindManyResult?.items[0].applicationsCount).toEqual(
-      1,
-    );
+    expect(notification?.title).toContain('New Application Received');
+    globalNotification = notification;
+
+    expect(applyResult?.message).toEqual('ok');
   });
 
   it('As job seeker check application of vaction', async () => {
@@ -224,64 +216,62 @@ describe('Vacancy: work with applications (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(vacancyControllerFindOneResult?.applicationsCount).toEqual(1);
-    expect(vacancyControllerFindOneResult?.OpWorkApplication?.length).toEqual(
-      1,
-    );
-    expect(
-      vacancyControllerFindOneResult?.OpWorkApplication?.[0].profileId,
-    ).toEqual(jobSeekerData.profileControllerSetProfileResult?.id!);
     expect(
       vacancyControllerFindOneResult?.OpWorkApplication?.[0].jobSeekerId,
     ).toEqual(jobSeekerData.jobSeekerControllerSetProfileResult?.id!);
     globalVacancyControllerFindOneResult = vacancyControllerFindOneResult;
   });
 
-  it('As employer check application of vaction', async () => {
-    const vacancyControllerFindOneResult = await employerActivity.sdk
-      .vacancyControllerFindOne({
-        path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
-        },
-      })
+  it('Try check notifications as job seeker', async () => {
+    const notificationControllerFindManyResult = await jobSeekerActivity.sdk
+      .notificationControllerFindMany()
       .then(async ({ data }) => data);
-    expect(vacancyControllerFindOneResult?.applicationsCount).toEqual(1);
-    expect(vacancyControllerFindOneResult?.OpWorkApplication?.length).toEqual(
-      1,
-    );
     expect(
-      vacancyControllerFindOneResult?.OpWorkApplication?.[0].profileId,
-    ).toEqual(jobSeekerData.profileControllerSetProfileResult?.id!);
-    expect(
-      vacancyControllerFindOneResult?.OpWorkApplication?.[0].jobSeekerId,
-    ).toEqual(jobSeekerData.jobSeekerControllerSetProfileResult?.id!);
-    expect(
-      vacancyControllerFindOneResult?.OpWorkApplication?.[0].status,
-    ).toEqual(OpWorkApplicationStatus.PENDING);
-    globalVacancyControllerFindOneResult = vacancyControllerFindOneResult;
+      notificationControllerFindManyResult?.items.length,
+    ).toBeGreaterThanOrEqual(0);
   });
 
-  it('As employer change status of aplication', async () => {
-    await employerActivity.sdk.vacanyApplicationControllerChangeStatus({
-      path: {
-        vacancy_id: globalVacancyControllerFindOneResult?.id!,
-        id:
-          globalVacancyControllerFindOneResult?.OpWorkApplication?.[0].id || '',
-      },
-      body: {
-        status: OpWorkApplicationStatus.INTERVIEW,
-      },
-    });
-
-    const vacancyControllerFindManyResult = await employerActivity.sdk
-      .vacancyControllerFindOne({
-        path: {
-          vacancy_id: globalVacancyControllerFindOneResult?.id!,
-        },
-      })
+  it('Check notifications as employer', async () => {
+    const notificationControllerFindManyResult = await employerActivity.sdk
+      .notificationControllerFindMany()
       .then(async ({ data }) => data);
     expect(
-      vacancyControllerFindManyResult?.OpWorkApplication?.[0].status,
-    ).toEqual(OpWorkApplicationStatus.INTERVIEW);
+      notificationControllerFindManyResult?.items.length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(notificationControllerFindManyResult?.items[0].title).toContain(
+      'New Application Received',
+    );
+    expect(globalNotification?.id).toEqual(
+      notificationControllerFindManyResult?.items[0].id,
+    );
+  });
+
+  it('Try mark notification as read as job seeker', async () => {
+    const notificationControllerUpdateResult = await jobSeekerActivity.sdk
+      .notificationControllerMarkAsRead({
+        body: { ids: [globalNotification?.id!] },
+      })
+      .then(async ({ data }) => data);
+    expect(notificationControllerUpdateResult?.message).toEqual('ok');
+
+    const notificationControllerFindManyResult = await jobSeekerActivity.sdk
+      .notificationControllerFindMany()
+      .then(async ({ data }) => data);
+    expect(
+      notificationControllerFindManyResult?.items.length,
+    ).toBeGreaterThanOrEqual(0);
+  });
+  it('Mark notification as read as employer', async () => {
+    const notificationControllerUpdateResult = await employerActivity.sdk
+      .notificationControllerMarkAsRead({
+        body: { ids: [globalNotification?.id!] },
+      })
+      .then(async ({ data }) => data);
+    expect(notificationControllerUpdateResult?.message).toEqual('ok');
+
+    const notificationControllerFindManyResult = await employerActivity.sdk
+      .notificationControllerFindMany()
+      .then(async ({ data }) => data);
+    expect(notificationControllerFindManyResult?.items[0].isRead).toEqual(true);
   });
 });

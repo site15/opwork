@@ -258,8 +258,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].title).toContain('Test Title');
     expect(searchResult?.items[0].location).toContain(
@@ -275,8 +273,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].location).toContain(
       `San Francisco${employer2Activity.randomSha7}`,
@@ -293,8 +289,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].location).toContain(
       `San Francisco${employer1Activity.randomSha7}`,
@@ -311,8 +305,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(1);
     expect(searchResult?.items[0].location).toContain(
       `San Francisco${employer2Activity.randomSha7}`,
@@ -329,8 +321,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(searchResult).toBeDefined();
-    expect(searchResult?.items).toBeDefined();
     expect(searchResult?.items.length).toBeGreaterThanOrEqual(2);
     expect(searchResult?.items[0].location).toContain(
       `San Francisco${employer1Activity.randomSha7}`,
@@ -355,8 +345,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(vacancyControllerFindManyResult).toBeDefined();
-    expect(vacancyControllerFindManyResult?.items).toBeDefined();
     expect(
       vacancyControllerFindManyResult?.items.length,
     ).toBeGreaterThanOrEqual(1);
@@ -388,7 +376,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(applyResult).toBeDefined();
     expect(applyResult?.message).toEqual('ok');
 
     const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
@@ -398,8 +385,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(vacancyControllerFindManyResult).toBeDefined();
-    expect(vacancyControllerFindManyResult?.items).toBeDefined();
     expect(
       vacancyControllerFindManyResult?.items.length,
     ).toBeGreaterThanOrEqual(1);
@@ -419,7 +404,6 @@ describe('Vacancy: search (e2e)', () => {
         },
       })
       .then(async ({ data }) => data);
-    expect(vacancyControllerFindManyResult).toBeDefined();
     expect(vacancyControllerFindManyResult?.description).toContain(
       `This is a test description${employer2Activity.randomSha7}.`,
     );

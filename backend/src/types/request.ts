@@ -14,3 +14,20 @@ export type AppRequest = {
   userIp: string | null;
   headers: Record<string, string>;
 } & Request;
+
+export function getAppRequestData(req: AppRequest) {
+  return {
+    authUser: req.authUser,
+    opWorkProfile: req.opWorkProfile,
+    authSession: req.authSession,
+    //
+    authUserId: req.authUserId,
+    opWorkProfileId: req.opWorkProfileId,
+    authSessionId: req.authSessionId,
+    //
+    apiKey: req.apiKey,
+    //
+    userIp: req.userIp,
+    headers: req.headers,
+  };
+}

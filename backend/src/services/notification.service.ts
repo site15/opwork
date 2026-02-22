@@ -1,8 +1,9 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { Subject } from 'rxjs';
-import { PRISMA_SERVICE, PrismaService } from './prisma.service';
-import { OpWorkNotification } from '../generated/rest/op-work-notification.entity';
 import assert from 'assert';
+import { Subject } from 'rxjs';
+import { CreateOpWorkNotificationDto } from '../generated/rest/create-op-work-notification.dto';
+import { OpWorkNotification } from '../generated/rest/op-work-notification.entity';
+import { PRISMA_SERVICE, PrismaService } from './prisma.service';
 
 @Injectable()
 export class NotificationService {
@@ -17,12 +18,14 @@ export class NotificationService {
     return this.events$.asObservable();
   }
 
-  async create(notification: OpWorkNotification) {
-    assert(notification.profileId, 'Profile ID is required');
-
-    this.logger.log(`Creating notification ${notification.id}`);
+  async create(
+    notification: Omit<CreateOpWorkNotificationDto, 'OpWorkProfile'> & {
+      profileId: string;
+    },
+  ) {
     const createdNotification =
       await this.prismaService.opWorkNotification.create({
+        include: { OpWorkProfile: true },
         data: {
           message: notification.message,
           type: notification.type,

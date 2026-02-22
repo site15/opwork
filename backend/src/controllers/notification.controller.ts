@@ -1,10 +1,30 @@
-import { Controller, Get, Inject, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  Inject,
+  Logger,
+  MessageEvent,
+  Post,
+  Query,
+  Sse,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsEnum, IsOptional, isUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  isUUID,
+} from 'class-validator';
+import { filter, map, Observable, tap } from 'rxjs';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkNotificationType, Prisma } from '../generated/prisma/client';
 import { OpWorkNotification } from '../generated/rest/op-work-notification.entity';
+import { NotificationService } from '../services/notification.service';
 import {
   PRISMA_SERVICE,
   PrismaSdk,
@@ -16,6 +36,7 @@ import {
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 //
 export class FindManyNotificationArgs extends FindManyArgs {
@@ -68,13 +89,81 @@ export class FindManyNotificationResponse {
 
 //
 
+export class NotificationMarkAsReadArgs {
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+    required: true,
+  })
+  @IsNotEmpty()
+  @Transform(({ value }) =>
+    !value ? [] : !Array.isArray(value) ? value.split(',') : value,
+  )
+  ids!: string[];
+}
+
+//
+
 @ApiTags('notification')
 @Controller('notification')
 export class NotificationController {
+  private logger = new Logger(NotificationController.name);
+
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
+    private readonly notificationService: NotificationService,
   ) {}
+
+  @HttpCode(200)
+  @Post('mark-as-read')
+  @ApiOkResponse({ type: StatusResponse })
+  async markAsRead(
+    @Body() args: NotificationMarkAsReadArgs,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
+    await this.prismaService.opWorkNotification.updateMany({
+      where: { id: { in: args.ids }, profileId: req.opWorkProfileId },
+      data: {
+        isRead: true,
+        readAt: new Date(),
+      },
+    });
+    return { message: 'ok' };
+  }
+
+  @HttpCode(200)
+  @Post('mark-as-archived')
+  @ApiOkResponse({ type: StatusResponse })
+  async markAsArchived(
+    @Body() args: NotificationMarkAsReadArgs,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
+    await this.prismaService.opWorkNotification.updateMany({
+      where: { id: { in: args.ids }, profileId: req.opWorkProfileId },
+      data: {
+        isArchived: true,
+      },
+    });
+    return { message: 'ok' };
+  }
+
+  @Sse('stream')
+  @Header('Content-Type', 'text/event-stream')
+  @Header('Cache-Control', 'no-cache')
+  stream(@CurrentAppRequest() req: AppRequest): Observable<MessageEvent> {
+    this.logger.log(`Stream requested for ${req.authUserId}`);
+    return this.notificationService.events.pipe(
+      tap((e) => this.logger.log(`Event received: ${JSON.stringify(e)}`)),
+      filter(
+        (e) => !!(req.authUserId && e.OpWorkProfile?.userId === req.authUserId),
+      ),
+      tap((e) => this.logger.log(`Event filtered: ${JSON.stringify(e)}`)),
+      map(
+        (e) => ({ data: e, type: 'OpWorkNotification' }) satisfies MessageEvent,
+      ),
+    );
+  }
 
   @Get()
   @ApiOkResponse({ type: FindManyNotificationResponse })
@@ -118,6 +207,7 @@ export class NotificationController {
       ...(otherArgs.isArchived !== undefined
         ? { isArchived: { equals: otherArgs.isArchived } }
         : {}),
+      profileId: req.opWorkProfileId,
     };
 
     return {
