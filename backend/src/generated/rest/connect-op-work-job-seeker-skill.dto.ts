@@ -1,18 +1,20 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,IsUUID,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class OpWorkJobSeekerSkillUqOpWorkJobSeekerSkillUniqueInputDto {
     @ApiProperty({
   type: 'string',
 })
+@IsUUID('4')
 @IsNotEmpty()
 @IsString()
 jobSeekerId!: string ;
 @ApiProperty({
   type: 'string',
 })
+@IsUUID('4')
 @IsNotEmpty()
 @IsString()
 skillId!: string ;
@@ -24,6 +26,7 @@ export class ConnectOpWorkJobSeekerSkillDto {
   type: 'string',
   required: false,
 })
+@IsUUID('4')
 @IsOptional()
 @IsString()
 id?: string ;

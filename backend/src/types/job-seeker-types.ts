@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsOptional, IsString, IsUUID, MaxLength } from 'class-validator';
 import { CreateOpWorkEducationDto } from '../generated/rest/create-op-work-education.dto';
 import { CreateOpWorkExperienceDto } from '../generated/rest/create-op-work-experience.dto';
 import { CreateOpWorkJobSeekerSkillDto } from '../generated/rest/create-op-work-job-seeker-skill.dto';
@@ -20,6 +20,7 @@ export class SetJobSeekerSkillArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
+  @IsUUID('4', { each: true })
   id?: string;
 
   @ApiProperty({
@@ -37,6 +38,7 @@ export class SetJobSeekerSkillArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
+  @IsUUID('4', { each: true })
   skillId?: string;
 }
 
@@ -50,6 +52,7 @@ export class SetJobSeekerEducationArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
+  @IsUUID('4', { each: true })
   id?: string;
 }
 
@@ -63,5 +66,6 @@ export class SetJobSeekerExperienceArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
+  @IsUUID('4', { each: true })
   id?: string;
 }

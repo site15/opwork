@@ -199,6 +199,9 @@ export function parseClassValidators(
 ): IClassValidator[] {
   const validators: IClassValidator[] = [];
 
+  if ('nativeType' in field && (field as any).nativeType?.[0] === 'Uuid') {
+    validators.push({ name: 'IsUUID', value: `'4'` });
+  }
   if (field.isRequired) {
     validators.push({ name: 'IsNotEmpty' });
   } else {

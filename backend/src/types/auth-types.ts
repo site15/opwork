@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 
 // Enums
@@ -16,6 +16,7 @@ export class SignInResponse {
   @ApiProperty({
     type: 'string',
   })
+  @IsUUID('4', { each: true })
   sessionId!: string;
 
   @ApiProperty({ type: () => AuthUser })
@@ -52,6 +53,7 @@ export class SignUpResponse {
   @ApiProperty({
     type: 'string',
   })
+  @IsUUID('4', { each: true })
   sessionId!: string;
 
   @ApiProperty({ type: () => AuthUser })

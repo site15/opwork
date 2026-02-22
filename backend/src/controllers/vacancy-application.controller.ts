@@ -17,6 +17,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUUID,
   isUUID,
   MaxLength,
 } from 'class-validator';
@@ -71,6 +72,7 @@ export class VacanyApplicationApplyArgs {
   })
   @IsNotEmpty()
   @IsString()
+  @IsUUID('4', { each: true })
   jobSeekerId!: string;
 
   @ApiProperty({

@@ -1,12 +1,13 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,IsUUID,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class OpWorkProjectUqOpWorkProjectProfileUniqueInputDto {
     @ApiProperty({
   type: 'string',
 })
+@IsUUID('4')
 @IsNotEmpty()
 @IsString()
 profileId!: string ;
@@ -18,6 +19,7 @@ export class ConnectOpWorkProjectDto {
   type: 'string',
   required: false,
 })
+@IsUUID('4')
 @IsOptional()
 @IsString()
 id?: string ;
@@ -25,6 +27,7 @@ id?: string ;
   type: 'string',
   required: false,
 })
+@IsUUID('4')
 @IsOptional()
 @IsString()
 profileId?: string ;

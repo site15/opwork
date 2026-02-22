@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsNotEmpty,IsOptional,IsString,IsUUID,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 
 export class AuthUserUqSupabaseUserIdUniqueInputDto {
@@ -19,6 +19,7 @@ export class ConnectAuthUserDto {
   type: 'string',
   required: false,
 })
+@IsUUID('4')
 @IsOptional()
 @IsString()
 id?: string ;

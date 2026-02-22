@@ -18,6 +18,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsOptional,
+  IsUUID,
   isUUID,
 } from 'class-validator';
 import { filter, map, Observable, tap } from 'rxjs';
@@ -96,6 +97,7 @@ export class NotificationMarkAsReadArgs {
     required: true,
   })
   @IsNotEmpty()
+  @IsUUID('4', { each: true })
   @Transform(({ value }) =>
     !value ? [] : !Array.isArray(value) ? value.split(',') : value,
   )

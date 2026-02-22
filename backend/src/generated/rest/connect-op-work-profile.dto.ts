@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsEnum,IsNotEmpty,IsOptional,IsString,ValidateNested} from 'class-validator'
+import {IsEnum,IsNotEmpty,IsOptional,IsString,IsUUID,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {OpWorkProfileType} from '../prisma/client'
 
@@ -8,6 +8,7 @@ export class OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto {
     @ApiProperty({
   type: 'string',
 })
+@IsUUID('4')
 @IsNotEmpty()
 @IsString()
 userId!: string ;
@@ -26,6 +27,7 @@ export class ConnectOpWorkProfileDto {
   type: 'string',
   required: false,
 })
+@IsUUID('4')
 @IsOptional()
 @IsString()
 id?: string ;
