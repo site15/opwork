@@ -2378,7 +2378,8 @@ export const OpWorkNotificationScalarFieldEnum = {
   isRead: 'isRead',
   isArchived: 'isArchived',
   createdAt: 'createdAt',
-  readAt: 'readAt'
+  readAt: 'readAt',
+  autoMarkReadAtIds: 'autoMarkReadAtIds'
 } as const
 
 export type OpWorkNotificationScalarFieldEnum = (typeof OpWorkNotificationScalarFieldEnum)[keyof typeof OpWorkNotificationScalarFieldEnum]

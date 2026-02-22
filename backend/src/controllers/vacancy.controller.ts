@@ -32,6 +32,7 @@ import {
   getFirstSkipFromCurPerPage,
 } from '../types/prisma-types';
 import { AppRequest } from '../types/request';
+import { NotificationService } from '../services/notification.service';
 
 //
 export class FindManyVacancyArgs extends FindManyArgs {
@@ -103,6 +104,7 @@ export class VacancyController {
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
+    private readonly notificationService: NotificationService,
   ) {}
 
   @Get(':vacancy_id')
@@ -111,7 +113,7 @@ export class VacancyController {
     @Param('vacancy_id', new ParseUUIDPipe()) jobId: string,
     @CurrentAppRequest() req: AppRequest,
   ) {
-    return await this.prismaService.opWorkJob.findFirstOrThrow({
+    const result = await this.prismaService.opWorkJob.findFirstOrThrow({
       include: {
         OpWorkApplication: {
           include: { OpWorkJobSeeker: { include: { OpWorkProfile: true } } },
@@ -124,6 +126,11 @@ export class VacancyController {
         id: jobId,
       },
     });
+    await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
+      [result.id],
+      req.opWorkProfileId,
+    );
+    return result;
   }
 
   @Get()

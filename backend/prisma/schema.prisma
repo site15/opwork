@@ -595,7 +595,7 @@ model AuthUser {
 
   /// Профили пользователя в профессиональной сети
   /// Связь с основной бизнес-системой поиска работы
-  OpWorkProfile       OpWorkProfile[]
+  OpWorkProfile OpWorkProfile[]
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
@@ -827,7 +827,7 @@ model OpWorkJobSeeker {
   currentCompany  String? @db.VarChar(255)
   /// Профессиональное резюме
   /// @MaxLength(10000)
-  summary         String?@db.VarChar(10000)
+  summary         String? @db.VarChar(10000)
 
   /// === ЗАРПЛАТНЫЕ ОЖИДАНИЯ ===
 
@@ -1231,7 +1231,7 @@ model OpWorkJob {
   description      String @db.VarChar(6000)
   /// Требования к кандидату
   /// @MaxLength(4000)
-  requirements     String @db.VarChar(4000)   
+  requirements     String @db.VarChar(4000)
   /// Обязанности на должности
   /// @MaxLength(6000)
   responsibilities String @db.VarChar(6000)
@@ -1624,6 +1624,12 @@ model OpWorkNotification {
   createdAt DateTime  @default(now()) @db.Timestamp(6)
   /// Временная метка прочтения уведомления
   readAt    DateTime? @db.Timestamp(6)
+
+  /// Уведомления могут быть связаны с различными объектами системы
+  /// Например, вакансия, отклик, сообщение и т.д.
+  /// и иногда нужно помечать уведомления прочитанными после того как отобразили некий обьект
+  /// все ид обьектов системы при отображении которых нужно это делать будем копить тут
+  autoMarkReadAtIds String? @db.VarChar(4000)
 
   /// === СВЯЗИ ===
 

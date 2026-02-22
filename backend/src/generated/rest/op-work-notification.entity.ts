@@ -54,6 +54,11 @@ createdAt!: Date ;
 })
 readAt!: Date  | null;
 @ApiProperty({
+  type: 'string',
+  nullable: true,
+})
+autoMarkReadAtIds!: string  | null;
+@ApiProperty({
   type: () => OpWorkProfile,
   required: false,
   nullable: true,

@@ -18,7 +18,7 @@ import {
 import { ActivityHelper } from './utils/activity-helper';
 import { getRandomSha7 } from './utils/utils';
 
-describe('Notification: work with applications (e2e)', () => {
+describe('Notification: work with auto mark read at applications (e2e)', () => {
   const employerActivity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
@@ -246,28 +246,15 @@ describe('Notification: work with applications (e2e)', () => {
     );
   });
 
-  it('Try mark notification as read as job seeker but it not effect', async () => {
-    const notificationControllerUpdateResult = await jobSeekerActivity.sdk
-      .notificationControllerMarkAsRead({
-        body: { ids: [globalNotification?.id!] },
+  it('Read application as employer with auto mark read', async () => {
+    const vacanyApplicationControllerFindManyResult = await employerActivity.sdk
+      .vacanyApplicationControllerFindMany({
+        path: {
+          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+        },
       })
       .then(async ({ data }) => data);
-    expect(notificationControllerUpdateResult?.message).toEqual('ok');
-
-    const notificationControllerFindManyResult = await jobSeekerActivity.sdk
-      .notificationControllerFindMany()
-      .then(async ({ data }) => data);
-    expect(
-      notificationControllerFindManyResult?.items.length,
-    ).toBeGreaterThanOrEqual(0);
-  });
-  it('Mark notification as read as employer', async () => {
-    const notificationControllerUpdateResult = await employerActivity.sdk
-      .notificationControllerMarkAsRead({
-        body: { ids: [globalNotification?.id!] },
-      })
-      .then(async ({ data }) => data);
-    expect(notificationControllerUpdateResult?.message).toEqual('ok');
+    expect(vacanyApplicationControllerFindManyResult?.items.length).toEqual(1);
 
     const notificationControllerFindManyResult = await employerActivity.sdk
       .notificationControllerFindMany()

@@ -59,6 +59,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
         isRead: item.isRead||undefined,
         isArchived: item.isArchived||undefined,
         readAt:item.readAt?dayjs(item.readAt):undefined,
+        autoMarkReadAtIds: item.autoMarkReadAtIds||undefined,
               })),
               total: result.data?.meta.totalResults || 0,
             }

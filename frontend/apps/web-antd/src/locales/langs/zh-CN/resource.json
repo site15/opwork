@@ -197,7 +197,8 @@
     "isRead": "Is Read",
     "isArchived": "Is Archived",
     "readAt": "Read At",
-    "type": "Type"
+    "type": "Type",
+    "autoMarkReadAtIds": "Auto Mark Read At Ids"
   },
   "OpWorkNotificationSettings": {
     "id": "Id",

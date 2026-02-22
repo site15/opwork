@@ -83,7 +83,8 @@ export class OpWorkNotificationController {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
               { title: { contains: searchText, mode: 'insensitive' } },
-{ message: { contains: searchText, mode: 'insensitive' } }
+{ message: { contains: searchText, mode: 'insensitive' } },
+{ autoMarkReadAtIds: { contains: searchText, mode: 'insensitive' } }
             ],
           }
         : {}),

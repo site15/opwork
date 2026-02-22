@@ -306,6 +306,7 @@ export type OpWorkNotification = {
     isArchived: boolean | null;
     createdAt: string;
     readAt: string | null;
+    autoMarkReadAtIds: string | null;
     OpWorkProfile?: OpWorkProfile | null;
 };
 
@@ -1441,6 +1442,7 @@ export type CreateOpWorkNotificationDto = {
     isRead?: boolean | null;
     isArchived?: boolean | null;
     readAt?: string | null;
+    autoMarkReadAtIds?: string | null;
     OpWorkProfile?: CreateOpWorkNotificationOpWorkProfileRelationInputDto;
 };
 
@@ -1456,6 +1458,7 @@ export type OpWorkNotificationDto = {
     isArchived: boolean | null;
     createdAt: string;
     readAt: string | null;
+    autoMarkReadAtIds: string | null;
 };
 
 export type UpdateOpWorkNotificationOpWorkProfileRelationInputDto = {
@@ -1473,6 +1476,7 @@ export type UpdateOpWorkNotificationDto = {
     isRead?: boolean | null;
     isArchived?: boolean | null;
     readAt?: string | null;
+    autoMarkReadAtIds?: string | null;
     OpWorkProfile?: UpdateOpWorkNotificationOpWorkProfileRelationInputDto;
 };
 

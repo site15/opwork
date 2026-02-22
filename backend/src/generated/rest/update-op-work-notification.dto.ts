@@ -82,6 +82,14 @@ isArchived?: boolean  | null;
 @IsDateString()
 readAt?: Date  | null;
 @ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
+autoMarkReadAtIds?: string  | null;
+@ApiProperty({
   required: false,
   type: UpdateOpWorkNotificationOpWorkProfileRelationInputDto,
 })

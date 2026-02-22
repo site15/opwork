@@ -35,6 +35,7 @@ export type OpWorkNotificationMinAggregateOutputType = {
   isArchived: boolean | null
   createdAt: Date | null
   readAt: Date | null
+  autoMarkReadAtIds: string | null
 }
 
 export type OpWorkNotificationMaxAggregateOutputType = {
@@ -47,6 +48,7 @@ export type OpWorkNotificationMaxAggregateOutputType = {
   isArchived: boolean | null
   createdAt: Date | null
   readAt: Date | null
+  autoMarkReadAtIds: string | null
 }
 
 export type OpWorkNotificationCountAggregateOutputType = {
@@ -60,6 +62,7 @@ export type OpWorkNotificationCountAggregateOutputType = {
   isArchived: number
   createdAt: number
   readAt: number
+  autoMarkReadAtIds: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type OpWorkNotificationMinAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
+  autoMarkReadAtIds?: true
 }
 
 export type OpWorkNotificationMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type OpWorkNotificationMaxAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
+  autoMarkReadAtIds?: true
 }
 
 export type OpWorkNotificationCountAggregateInputType = {
@@ -99,6 +104,7 @@ export type OpWorkNotificationCountAggregateInputType = {
   isArchived?: true
   createdAt?: true
   readAt?: true
+  autoMarkReadAtIds?: true
   _all?: true
 }
 
@@ -185,6 +191,7 @@ export type OpWorkNotificationGroupByOutputType = {
   isArchived: boolean | null
   createdAt: Date
   readAt: Date | null
+  autoMarkReadAtIds: string | null
   _count: OpWorkNotificationCountAggregateOutputType | null
   _min: OpWorkNotificationMinAggregateOutputType | null
   _max: OpWorkNotificationMaxAggregateOutputType | null
@@ -219,6 +226,7 @@ export type OpWorkNotificationWhereInput = {
   isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
+  autoMarkReadAtIds?: Prisma.StringNullableFilter<"OpWorkNotification"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
 }
 
@@ -233,6 +241,7 @@ export type OpWorkNotificationOrderByWithRelationInput = {
   isArchived?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  autoMarkReadAtIds?: Prisma.SortOrderInput | Prisma.SortOrder
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
 }
 
@@ -250,6 +259,7 @@ export type OpWorkNotificationWhereUniqueInput = Prisma.AtLeast<{
   isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
+  autoMarkReadAtIds?: Prisma.StringNullableFilter<"OpWorkNotification"> | string | null
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
 }, "id">
 
@@ -264,6 +274,7 @@ export type OpWorkNotificationOrderByWithAggregationInput = {
   isArchived?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  autoMarkReadAtIds?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpWorkNotificationCountOrderByAggregateInput
   _max?: Prisma.OpWorkNotificationMaxOrderByAggregateInput
   _min?: Prisma.OpWorkNotificationMinOrderByAggregateInput
@@ -283,6 +294,7 @@ export type OpWorkNotificationScalarWhereWithAggregatesInput = {
   isArchived?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkNotification"> | Date | string | null
+  autoMarkReadAtIds?: Prisma.StringNullableWithAggregatesFilter<"OpWorkNotification"> | string | null
 }
 
 export type OpWorkNotificationCreateInput = {
@@ -295,6 +307,7 @@ export type OpWorkNotificationCreateInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
   OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkNotificationsInput
 }
 
@@ -309,6 +322,7 @@ export type OpWorkNotificationUncheckedCreateInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
 }
 
 export type OpWorkNotificationUpdateInput = {
@@ -321,6 +335,7 @@ export type OpWorkNotificationUpdateInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkNotificationsNestedInput
 }
 
@@ -335,6 +350,7 @@ export type OpWorkNotificationUncheckedUpdateInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationCreateManyInput = {
@@ -348,6 +364,7 @@ export type OpWorkNotificationCreateManyInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
 }
 
 export type OpWorkNotificationUpdateManyMutationInput = {
@@ -360,6 +377,7 @@ export type OpWorkNotificationUpdateManyMutationInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationUncheckedUpdateManyInput = {
@@ -373,6 +391,7 @@ export type OpWorkNotificationUncheckedUpdateManyInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationListRelationFilter = {
@@ -396,6 +415,7 @@ export type OpWorkNotificationCountOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
+  autoMarkReadAtIds?: Prisma.SortOrder
 }
 
 export type OpWorkNotificationMaxOrderByAggregateInput = {
@@ -408,6 +428,7 @@ export type OpWorkNotificationMaxOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
+  autoMarkReadAtIds?: Prisma.SortOrder
 }
 
 export type OpWorkNotificationMinOrderByAggregateInput = {
@@ -420,6 +441,7 @@ export type OpWorkNotificationMinOrderByAggregateInput = {
   isArchived?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
+  autoMarkReadAtIds?: Prisma.SortOrder
 }
 
 export type OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput = {
@@ -478,6 +500,7 @@ export type OpWorkNotificationCreateWithoutOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
 }
 
 export type OpWorkNotificationUncheckedCreateWithoutOpWorkProfileInput = {
@@ -490,6 +513,7 @@ export type OpWorkNotificationUncheckedCreateWithoutOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
 }
 
 export type OpWorkNotificationCreateOrConnectWithoutOpWorkProfileInput = {
@@ -532,6 +556,7 @@ export type OpWorkNotificationScalarWhereInput = {
   isArchived?: Prisma.BoolNullableFilter<"OpWorkNotification"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkNotification"> | Date | string
   readAt?: Prisma.DateTimeNullableFilter<"OpWorkNotification"> | Date | string | null
+  autoMarkReadAtIds?: Prisma.StringNullableFilter<"OpWorkNotification"> | string | null
 }
 
 export type OpWorkNotificationCreateManyOpWorkProfileInput = {
@@ -544,6 +569,7 @@ export type OpWorkNotificationCreateManyOpWorkProfileInput = {
   isArchived?: boolean | null
   createdAt?: Date | string
   readAt?: Date | string | null
+  autoMarkReadAtIds?: string | null
 }
 
 export type OpWorkNotificationUpdateWithoutOpWorkProfileInput = {
@@ -556,6 +582,7 @@ export type OpWorkNotificationUpdateWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationUncheckedUpdateWithoutOpWorkProfileInput = {
@@ -568,6 +595,7 @@ export type OpWorkNotificationUncheckedUpdateWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileInput = {
@@ -580,6 +608,7 @@ export type OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileInput = {
   isArchived?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoMarkReadAtIds?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -595,6 +624,7 @@ export type OpWorkNotificationSelect<ExtArgs extends runtime.Types.Extensions.In
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
+  autoMarkReadAtIds?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
@@ -609,6 +639,7 @@ export type OpWorkNotificationSelectCreateManyAndReturn<ExtArgs extends runtime.
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
+  autoMarkReadAtIds?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
@@ -623,6 +654,7 @@ export type OpWorkNotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
+  autoMarkReadAtIds?: boolean
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkNotification"]>
 
@@ -637,9 +669,10 @@ export type OpWorkNotificationSelectScalar = {
   isArchived?: boolean
   createdAt?: boolean
   readAt?: boolean
+  autoMarkReadAtIds?: boolean
 }
 
-export type OpWorkNotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "type" | "title" | "message" | "data" | "isRead" | "isArchived" | "createdAt" | "readAt", ExtArgs["result"]["opWorkNotification"]>
+export type OpWorkNotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "type" | "title" | "message" | "data" | "isRead" | "isArchived" | "createdAt" | "readAt" | "autoMarkReadAtIds", ExtArgs["result"]["opWorkNotification"]>
 export type OpWorkNotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   OpWorkProfile?: boolean | Prisma.OpWorkNotification$OpWorkProfileArgs<ExtArgs>
 }
@@ -705,6 +738,13 @@ export type $OpWorkNotificationPayload<ExtArgs extends runtime.Types.Extensions.
      * Временная метка прочтения уведомления
      */
     readAt: Date | null
+    /**
+     * Уведомления могут быть связаны с различными объектами системы
+     * Например, вакансия, отклик, сообщение и т.д.
+     * и иногда нужно помечать уведомления прочитанными после того как отобразили некий обьект
+     * все ид обьектов системы при отображении которых нужно это делать будем копить тут
+     */
+    autoMarkReadAtIds: string | null
   }, ExtArgs["result"]["opWorkNotification"]>
   composites: {}
 }
@@ -1139,6 +1179,7 @@ export interface OpWorkNotificationFieldRefs {
   readonly isArchived: Prisma.FieldRef<"OpWorkNotification", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"OpWorkNotification", 'DateTime'>
   readonly readAt: Prisma.FieldRef<"OpWorkNotification", 'DateTime'>
+  readonly autoMarkReadAtIds: Prisma.FieldRef<"OpWorkNotification", 'String'>
 }
     
 

@@ -197,7 +197,8 @@
     "isRead": "Прочитано",
     "isArchived": "Архивировано",
     "readAt": "Время прочтения",
-    "type": "Тип"
+    "type": "Тип",
+    "autoMarkReadAtIds": "Авто-mark-read-ids"
   },
   "OpWorkNotificationSettings": {
     "id": "ID",

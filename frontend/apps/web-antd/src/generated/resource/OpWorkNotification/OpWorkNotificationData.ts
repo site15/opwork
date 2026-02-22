@@ -108,6 +108,15 @@ import type { VbenFormSchema } from '#/adapter/form';
         controlClass: 'w-full',
         labelWidth: 200
       }, 
+    {
+        component: 'Input',
+          fieldName: Prisma.OpWorkNotificationScalarFieldEnum.autoMarkReadAtIds,
+        label: $t('resource.OpWorkNotification.autoMarkReadAtIds'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
 
     {
       component: 'ApiSelect',
@@ -204,6 +213,11 @@ import type { VbenFormSchema } from '#/adapter/form';
         field: Prisma.OpWorkNotificationScalarFieldEnum.readAt ,
         formatter: 'formatDateTime',
           sortable: true
+      }, 
+    {
+        title: $t('resource.OpWorkNotification.autoMarkReadAtIds'),
+        field: Prisma.OpWorkNotificationScalarFieldEnum.autoMarkReadAtIds ,
+        sortable: true
       }, 
     {
         title: $t('resource.name.OpWorkProfile'),

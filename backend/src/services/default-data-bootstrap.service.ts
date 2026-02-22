@@ -1,20 +1,28 @@
-import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  Logger,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
+import { SKILL_CATEGORIES } from '../constants/skill-categories';
 import {
   OpWorkProfileType,
   OpWorkSkillType,
   OpWorkUserType,
 } from '../generated/prisma/client';
 import { PRISMA_SERVICE, PrismaService } from './prisma.service';
-import { SKILL_CATEGORIES } from '../constants/skill-categories';
 
 @Injectable()
 export class DefaultDataBootstrapService implements OnApplicationBootstrap {
+  private logger = new Logger(DefaultDataBootstrapService.name);
+
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
 
   async onApplicationBootstrap() {
+    this.logger.log('Bootstraping default data...');
     await this.createOrUpdateDefaultApiKeys();
     for (const skillCategory of Object.values(OpWorkSkillType)) {
       for (const name of SKILL_CATEGORIES[skillCategory]) {

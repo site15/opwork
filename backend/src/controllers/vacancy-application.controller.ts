@@ -126,16 +126,17 @@ export class VacanyApplicationController {
     @Body() args: VacanyApplicationApplyArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
-    await this.prismaService.opWorkApplication.create({
-      data: {
-        jobSeekerId: args.jobSeekerId,
-        profileId: req.opWorkProfileId,
-        coverLetter: args.coverLetter,
-        jobId: vacancyId,
-        status: OpWorkApplicationStatus.PENDING,
-        appliedAt: new Date(),
-      },
-    });
+    const createdApplication =
+      await this.prismaService.opWorkApplication.create({
+        data: {
+          jobSeekerId: args.jobSeekerId,
+          profileId: req.opWorkProfileId,
+          coverLetter: args.coverLetter,
+          jobId: vacancyId,
+          status: OpWorkApplicationStatus.PENDING,
+          appliedAt: new Date(),
+        },
+      });
     const updatedJob = await this.prismaService.opWorkJob.update({
       where: { id: vacancyId },
       data: { applicationsCount: { increment: 1 } },
@@ -153,7 +154,8 @@ export class VacanyApplicationController {
           body: args,
           request: getAppRequestData(req),
         },
-      } as object,
+      },
+      autoMarkReadAtIds: [createdApplication.id],
     });
     return { message: 'ok' };
   }
@@ -231,7 +233,7 @@ export class VacanyApplicationController {
       OpWorkJob: { id: vacancyId },
     };
 
-    return {
+    const result = {
       items: await this.prismaService.opWorkApplication.findMany({
         include: {
           OpWorkJobSeeker: { include: { OpWorkProfile: true } },
@@ -250,5 +252,10 @@ export class VacanyApplicationController {
         perPage,
       },
     };
+    await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
+      result.items.map((item) => item.id),
+      req.opWorkProfileId,
+    );
+    return result;
   }
 }

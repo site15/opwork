@@ -124,13 +124,7 @@ export class NotificationController {
     @Body() args: NotificationMarkAsReadArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
-    await this.prismaService.opWorkNotification.updateMany({
-      where: { id: { in: args.ids }, profileId: req.opWorkProfileId },
-      data: {
-        isRead: true,
-        readAt: new Date(),
-      },
-    });
+    this.notificationService.markAsRead(args.ids, req.opWorkProfileId);
     return { message: 'ok' };
   }
 
@@ -141,12 +135,7 @@ export class NotificationController {
     @Body() args: NotificationMarkAsReadArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
-    await this.prismaService.opWorkNotification.updateMany({
-      where: { id: { in: args.ids }, profileId: req.opWorkProfileId },
-      data: {
-        isArchived: true,
-      },
-    });
+    this.notificationService.markAsArchived(args.ids, req.opWorkProfileId);
     return { message: 'ok' };
   }
 
