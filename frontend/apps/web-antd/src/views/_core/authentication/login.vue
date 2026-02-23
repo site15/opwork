@@ -17,11 +17,20 @@ const formSchema = computed((): VbenFormSchema[] => {
     {
       component: 'VbenInput',
       componentProps: {
-        placeholder: $t('authentication.apiKey'),
+        placeholder: $t('authentication.emailTip'),
       },
-      fieldName: 'apiKey',
-      label: $t('authentication.apiKey'),
-      rules: z.string().min(1, { message: $t('authentication.apiKeyTip') }),
+      fieldName: 'email',
+      label: $t('authentication.email'),
+      rules: z.string().min(1, { message: $t('authentication.emailTip') }),
+    },
+    {
+      component: 'VbenInputPassword',
+      componentProps: {
+        placeholder: $t('authentication.passwordTip'),
+      },
+      fieldName: 'password',
+      label: $t('authentication.password'),
+      rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
   ];
 });
@@ -31,6 +40,8 @@ const formSchema = computed((): VbenFormSchema[] => {
   <AuthenticationLogin
     :form-schema="formSchema"
     :loading="authStore.loginLoading"
-    @submit="authStore.authLogin({ apiKey: $event.apiKey })"
+    @submit="
+      authStore.authLogin({ email: $event.email, password: $event.password })
+    "
   />
 </template>

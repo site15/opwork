@@ -21,6 +21,7 @@ import {
 import { AppRequest } from '../types/request';
 import { StatusResponse } from '../types/status-response';
 import { createHashFromString } from '../utils/create-hash-from-string';
+import { verifyPassword } from '../utils/hashPassword';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -155,18 +156,35 @@ export class AuthController {
     email: string;
     password: string;
   }) {
+    console.log({
+      email,
+      password,
+      q: {
+        where: {
+          email: { equals: email, mode: 'insensitive' },
+          password: createHashFromString(password || ''),
+        },
+      },
+    });
     const user =
       await this.prismaService.$withoutUniversalPasswordHashing.authUser.findFirst(
         {
           where: {
             email: { equals: email, mode: 'insensitive' },
-            password: createHashFromString(password || ''),
-            isActive: true,
           },
         },
       );
-    if (!user) {
+
+    if (
+      !user ||
+      !user.password ||
+      (user && !verifyPassword(password, user.password))
+    ) {
       throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
+    }
+
+    if (!user?.isActive) {
+      throw new AuthError(AuthErrorEnum.DISABLED);
     }
     return user;
   }

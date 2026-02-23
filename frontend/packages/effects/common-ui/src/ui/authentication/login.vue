@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   showCodeLogin: false,
   showForgetPassword: false,
   showQrcodeLogin: false,
-  showRegister: false,
+  showRegister: true,
   showRememberMe: false,
   showThirdPartyLogin: false,
   submitButtonText: '',

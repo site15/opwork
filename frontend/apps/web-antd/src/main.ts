@@ -3,7 +3,7 @@ import { unmountGlobalLoading } from '@vben/utils';
 
 import { client } from './generated/client/client.gen';
 import { overridesPreferences } from './preferences';
-import { authService, X_API_KEY } from './services/AuthService';
+import { authService, X_SESSION_ID } from './services/AuthService';
 
 /**
  * 应用初始化完成之后再进行页面加载渲染
@@ -11,7 +11,7 @@ import { authService, X_API_KEY } from './services/AuthService';
 async function initApplication() {
   client.setConfig({
     baseUrl: import.meta.env.VITE_GLOB_API_URL,
-    headers: { [X_API_KEY]: authService.getApiKey() },
+    headers: { [X_SESSION_ID]: authService.getApiKey() },
   });
 
   // name用于指定项目唯一标识

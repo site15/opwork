@@ -11,6 +11,7 @@ export enum AuthErrorEnum {
   PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND',
   METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED',
   VALIDATION_ERROR = 'VALIDATION_ERROR',
+  DISABLED = 'DISABLED',
 }
 
 export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
@@ -24,6 +25,7 @@ export const AUTH_ERROR_ENUM_TITLES: Record<AuthErrorEnum, string> = {
   [AuthErrorEnum.PROFILE_NOT_FOUND]: 'Profile not found',
   [AuthErrorEnum.METHOD_NOT_ALLOWED]: 'Method not allowed',
   [AuthErrorEnum.VALIDATION_ERROR]: 'Validation error',
+  [AuthErrorEnum.DISABLED]: 'Disabled',
 };
 
 export class AuthError<T = unknown> extends Error {

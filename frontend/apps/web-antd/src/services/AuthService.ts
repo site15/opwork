@@ -1,16 +1,19 @@
-import { authControllerProfile } from '#/generated/client';
+import {
+  authControllerProfile,
+  authControllerSignIn,
+} from '#/generated/client';
 
 import { client } from '../generated/client/client.gen';
 
-export const X_API_KEY = 'x-api-key';
+export const X_SESSION_ID = 'x-session-id';
 
 export class AuthService {
   async checkAccess() {
-    return localStorage.getItem('apiKey') !== null;
+    return localStorage.getItem('sessionId') !== null;
   }
 
   getApiKey() {
-    return localStorage.getItem('apiKey');
+    return localStorage.getItem('sessionId');
   }
 
   async getProfile() {
@@ -30,11 +33,9 @@ export class AuthService {
     }
   }
 
-  async login({ apiKey }: { apiKey: string }) {
+  async login({ email, password }: { email: string; password: string }) {
     try {
-      const result = await authControllerProfile({
-        headers: { [X_API_KEY]: apiKey },
-      });
+      const result = await authControllerSignIn({ body: { email, password } });
 
       if (result?.error) {
         throw Object.assign(
@@ -46,20 +47,22 @@ export class AuthService {
         );
       }
 
-      localStorage.setItem('apiKey', apiKey);
-      client.setConfig({ headers: { [X_API_KEY]: apiKey } });
-      return result.data;
+      const sessionId = result.data.sessionId;
+
+      localStorage.setItem('sessionId', sessionId);
+      client.setConfig({ headers: { [X_SESSION_ID]: sessionId } });
+      return result.data.profile;
     } catch (error) {
-      localStorage.removeItem('apiKey');
-      client.setConfig({ headers: { [X_API_KEY]: null } });
+      localStorage.removeItem('sessionId');
+      client.setConfig({ headers: { [X_SESSION_ID]: null } });
       console.error(error);
       throw error;
     }
   }
 
   async logout() {
-    localStorage.removeItem('apiKey');
-    client.setConfig({ headers: { [X_API_KEY]: null } });
+    localStorage.removeItem('sessionId');
+    client.setConfig({ headers: { [X_SESSION_ID]: null } });
   }
 }
 

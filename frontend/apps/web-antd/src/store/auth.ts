@@ -21,7 +21,7 @@ export const useAuthStore = defineStore('auth', () => {
   const loginLoading = ref(false);
 
   async function authLogin(
-    params: { apiKey: string },
+    params: { email: string; password: string },
     onSuccess?: () => Promise<void> | void,
   ) {
     // 异步处理用户登录操作并获取 accessToken
@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
         userId: authUser?.id,
         username: '',
       });
-      accessStore.setAccessToken(params.apiKey);
+      accessStore.setAccessToken(params.email || '');
 
       onSuccess
         ? await onSuccess?.()

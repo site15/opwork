@@ -1,7 +1,7 @@
 import { Prisma } from '../../generated/prisma/client';
 import { hashPassword } from '../../utils/hashPassword';
 
-const UNIVERSAL_PASSWORD_HASHING = Symbol('skipUniversalPasswordHashing');
+const SKIP_UNIVERSAL_PASSWORD_HASHING = Symbol('skipUniversalPasswordHashing');
 const PASSWORD_MASK = '********';
 
 export const universalPasswordHashingExtension = Prisma.defineExtension(
@@ -16,7 +16,7 @@ export const universalPasswordHashingExtension = Prisma.defineExtension(
                 $allOperations({ args, query }) {
                   return query({
                     ...args,
-                    [UNIVERSAL_PASSWORD_HASHING]: true,
+                    [SKIP_UNIVERSAL_PASSWORD_HASHING]: true,
                   } as unknown as typeof args);
                 },
               },
@@ -27,7 +27,7 @@ export const universalPasswordHashingExtension = Prisma.defineExtension(
       query: {
         $allModels: {
           async $allOperations({ operation, args, query }) {
-            const shouldSkip = (args as any)[UNIVERSAL_PASSWORD_HASHING];
+            const shouldSkip = (args as any)[SKIP_UNIVERSAL_PASSWORD_HASHING];
             if (
               !shouldSkip &&
               ['create', 'update', 'upsert', 'createMany'].includes(operation)
@@ -55,7 +55,7 @@ export const universalPasswordHashingExtension = Prisma.defineExtension(
               }
             }
             if (args) {
-              delete (args as any)[UNIVERSAL_PASSWORD_HASHING];
+              delete (args as any)[SKIP_UNIVERSAL_PASSWORD_HASHING];
             }
             const result = await query(args);
             if (!shouldSkip && result) {
