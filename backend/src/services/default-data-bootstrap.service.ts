@@ -10,7 +10,9 @@ import {
   OpWorkSkillType,
   OpWorkUserType,
 } from '../generated/prisma/client';
+import { verifyPassword } from '../utils/hashPassword';
 import { PRISMA_SERVICE, PrismaService } from './prisma.service';
+import { getRandomSha7 } from '../../test/utils/utils';
 
 @Injectable()
 export class DefaultDataBootstrapService implements OnApplicationBootstrap {
@@ -24,6 +26,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     this.logger.log('Bootstraping default data...');
     await this.createOrUpdateDefaultApiKeys();
+    await this.createOrUpdateDefaultUsers();
     for (const skillCategory of Object.values(OpWorkSkillType)) {
       for (const name of SKILL_CATEGORIES[skillCategory]) {
         const [, category] = skillCategory.split('__');
@@ -44,6 +47,59 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     }
   }
 
+  private async createOrUpdateDefaultUsers() {
+    const admins =
+      process.env.ADMINS?.split(',').map((user) => (user + ':').split(':')) ||
+      [];
+    for (const [email, password] of admins) {
+      const authUser = await this.getOrCreateAuthAuthUser({
+        userType: OpWorkUserType.ADMIN,
+        email,
+        password,
+      });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authUser.id,
+        profileType: OpWorkProfileType.EMPLOYER,
+        userType: OpWorkUserType.ADMIN,
+        email,
+      });
+    }
+    const employers =
+      process.env.EMPLOYERS?.split(',').map((user) =>
+        (user + ':').split(':'),
+      ) || [];
+    for (const [email, password] of employers) {
+      const authUser = await this.getOrCreateAuthAuthUser({
+        userType: OpWorkUserType.EMPLOYER,
+        email,
+        password,
+      });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authUser.id,
+        profileType: OpWorkProfileType.EMPLOYER,
+        userType: OpWorkUserType.EMPLOYER,
+        email,
+      });
+    }
+    const jobSeekers =
+      process.env.JOB_SEEKERS?.split(',').map((user) =>
+        (user + ':').split(':'),
+      ) || [];
+    for (const [email, password] of jobSeekers) {
+      const authUser = await this.getOrCreateAuthAuthUser({
+        userType: OpWorkUserType.JOB_SEEKER,
+        email,
+        password,
+      });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authUser.id,
+        profileType: OpWorkProfileType.SPECIALIST,
+        userType: OpWorkUserType.JOB_SEEKER,
+        email,
+      });
+    }
+  }
+
   private async createOrUpdateDefaultApiKeys() {
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
     for (const adminApiKey of adminApiKeys) {
@@ -52,6 +108,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         apiKey: adminApiKey,
         userType: OpWorkUserType.ADMIN,
         email,
+        password: getRandomSha7(),
       });
       await this.getOrCreateOpWorkProfileByUserId({
         userId: authApiKey.userId,
@@ -141,10 +198,12 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     apiKey,
     userType,
     email,
+    password,
   }: {
     apiKey: string | undefined;
     userType: OpWorkUserType;
     email: string;
+    password?: string;
   }) {
     let authApiKey = await this.prismaService.authApiKey.findFirst({
       include: { AuthUser: true },
@@ -160,6 +219,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
             create: {
               isActive: true,
               email,
+              password,
             },
           },
         },
@@ -178,11 +238,45 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
       const authUser = await this.prismaService.authUser.update({
         where: { id: authApiKey.AuthUser.id },
         data: {
+          password,
           email,
         },
       });
       authApiKey.AuthUser = authUser;
     }
     return authApiKey;
+  }
+
+  private async getOrCreateAuthAuthUser({
+    email,
+    password,
+  }: {
+    userType: OpWorkUserType;
+    email: string;
+    password?: string;
+  }) {
+    let authUser =
+      await this.prismaService.$withoutUniversalPasswordHashing.authUser.findFirst(
+        { where: { email } },
+      );
+    if (!authUser) {
+      authUser = await this.prismaService.authUser.create({
+        data: {
+          isActive: true,
+          email,
+          password,
+        },
+      });
+    }
+    if (!authUser?.isActive && authUser?.id) {
+      authUser = await this.prismaService.authUser.update({
+        where: { id: authUser.id },
+        data: {
+          isActive: true,
+          password,
+        },
+      });
+    }
+    return authUser;
   }
 }
