@@ -82,7 +82,7 @@ export const generateResourcesIndex = ({
           title: $t('page.resource.${entityClassName}'),
         },
         name: '${entityClassName}',
-        path: '/${model.custom.namespace}/${model.custom.name}',
+        path: '/resource/${model.custom.namespace}/${model.custom.name}',
         component: () =>
           import('#/generated/resource/${entityClassName}/${entityClassName}List.vue'),
       },`;

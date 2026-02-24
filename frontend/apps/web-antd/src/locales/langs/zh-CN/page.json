@@ -37,5 +37,15 @@
     "OpWorkSavedSearch": "Saved Search",
     "OpWorkSkillSynonym": "Skill Synonym",
     "OpWorkJobTag": "Job Tag"
+  },
+  "resume": {
+    "title": "Resumes",
+    "search": "Search",
+    "list": "List"
+  },
+  "vacancy": {
+    "title": "Vacancies",
+    "search": "Search",
+    "list": "List"
   }
 }

@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.AuthUser'),
         },
         name: 'AuthUser',
-        path: '/auth/user',
+        path: '/resource/auth/user',
         component: () =>
           import('#/generated/resource/AuthUser/AuthUserList.vue'),
       },
@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.AuthApiKey'),
         },
         name: 'AuthApiKey',
-        path: '/auth/api-key',
+        path: '/resource/auth/api-key',
         component: () =>
           import('#/generated/resource/AuthApiKey/AuthApiKeyList.vue'),
       },
@@ -36,7 +36,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.AuthSession'),
         },
         name: 'AuthSession',
-        path: '/auth/session',
+        path: '/resource/auth/session',
         component: () =>
           import('#/generated/resource/AuthSession/AuthSessionList.vue'),
       },

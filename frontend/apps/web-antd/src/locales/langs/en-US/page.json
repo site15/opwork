@@ -37,5 +37,15 @@
     "title": "Dashboard",
     "analytics": "Analytics",
     "workspace": "Workspace"
+  },
+  "resume": {
+    "title": "Resumes",
+    "search": "Search",
+    "list": "List"
+  },
+  "vacancy": {
+    "title": "Vacancies",
+    "search": "Search",
+    "list": "List"
   }
 }

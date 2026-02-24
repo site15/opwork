@@ -1968,11 +1968,11 @@ export type Date = {
     [key: string]: unknown;
 };
 
-export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR';
+export type AuthErrorEnum = 'AUTH_ERROR' | 'ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'API_KEY_NOT_ACTIVE' | 'SESSION_NOT_ACTIVE' | 'UNAUTHORIZED' | 'FORBIDDEN_IP' | 'PROFILE_NOT_FOUND' | 'METHOD_NOT_ALLOWED' | 'VALIDATION_ERROR' | 'DISABLED';
 
 export type AuthError = {
     /**
-     * Auth error (AUTH_ERROR), User already exists (ALREADY_EXISTS), Invalid credentials (INVALID_CREDENTIALS), API key is not active (API_KEY_NOT_ACTIVE), Session is not active (SESSION_NOT_ACTIVE), Unauthorized (UNAUTHORIZED), Forbidden: IP address not allowed (FORBIDDEN_IP), Profile not found (PROFILE_NOT_FOUND), Method not allowed (METHOD_NOT_ALLOWED), Validation error (VALIDATION_ERROR)
+     * Auth error (AUTH_ERROR), User already exists (ALREADY_EXISTS), Invalid credentials (INVALID_CREDENTIALS), API key is not active (API_KEY_NOT_ACTIVE), Session is not active (SESSION_NOT_ACTIVE), Unauthorized (UNAUTHORIZED), Forbidden: IP address not allowed (FORBIDDEN_IP), Profile not found (PROFILE_NOT_FOUND), Method not allowed (METHOD_NOT_ALLOWED), Validation error (VALIDATION_ERROR), Disabled (DISABLED)
      */
     message: string;
     code: AuthErrorEnum;

@@ -37,5 +37,15 @@
     "OpWorkSavedSearch": "Сохранённый поиск",
     "OpWorkSkillSynonym": "Синонимы навыков",
     "OpWorkJobTag": "Метка вакансии"
+  },
+  "resume": {
+    "title": "Резюме",
+    "search": "Поиск",
+    "list": "Список"
+  },
+  "vacancy": {
+    "title": "Вакансии",
+    "search": "Поиск",
+    "list": "Список"
   }
 }

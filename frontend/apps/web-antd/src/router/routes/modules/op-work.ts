@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkProfile'),
         },
         name: 'OpWorkProfile',
-        path: '/op-work/profile',
+        path: '/resource/op-work/profile',
         component: () =>
           import('#/generated/resource/OpWorkProfile/OpWorkProfileList.vue'),
       },
@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJobSeeker'),
         },
         name: 'OpWorkJobSeeker',
-        path: '/op-work/job-seeker',
+        path: '/resource/op-work/job-seeker',
         component: () =>
           import('#/generated/resource/OpWorkJobSeeker/OpWorkJobSeekerList.vue'),
       },
@@ -36,7 +36,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkExperience'),
         },
         name: 'OpWorkExperience',
-        path: '/op-work/experience',
+        path: '/resource/op-work/experience',
         component: () =>
           import('#/generated/resource/OpWorkExperience/OpWorkExperienceList.vue'),
       },
@@ -45,7 +45,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkEducation'),
         },
         name: 'OpWorkEducation',
-        path: '/op-work/education',
+        path: '/resource/op-work/education',
         component: () =>
           import('#/generated/resource/OpWorkEducation/OpWorkEducationList.vue'),
       },
@@ -54,7 +54,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkEmployer'),
         },
         name: 'OpWorkEmployer',
-        path: '/op-work/employer',
+        path: '/resource/op-work/employer',
         component: () =>
           import('#/generated/resource/OpWorkEmployer/OpWorkEmployerList.vue'),
       },
@@ -63,7 +63,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkProject'),
         },
         name: 'OpWorkProject',
-        path: '/op-work/project',
+        path: '/resource/op-work/project',
         component: () =>
           import('#/generated/resource/OpWorkProject/OpWorkProjectList.vue'),
       },
@@ -72,7 +72,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJob'),
         },
         name: 'OpWorkJob',
-        path: '/op-work/job',
+        path: '/resource/op-work/job',
         component: () =>
           import('#/generated/resource/OpWorkJob/OpWorkJobList.vue'),
       },
@@ -81,7 +81,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkApplication'),
         },
         name: 'OpWorkApplication',
-        path: '/op-work/application',
+        path: '/resource/op-work/application',
         component: () =>
           import('#/generated/resource/OpWorkApplication/OpWorkApplicationList.vue'),
       },
@@ -90,7 +90,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkSavedJob'),
         },
         name: 'OpWorkSavedJob',
-        path: '/op-work/saved-job',
+        path: '/resource/op-work/saved-job',
         component: () =>
           import('#/generated/resource/OpWorkSavedJob/OpWorkSavedJobList.vue'),
       },
@@ -99,7 +99,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkSkill'),
         },
         name: 'OpWorkSkill',
-        path: '/op-work/skill',
+        path: '/resource/op-work/skill',
         component: () =>
           import('#/generated/resource/OpWorkSkill/OpWorkSkillList.vue'),
       },
@@ -108,7 +108,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJobSeekerSkill'),
         },
         name: 'OpWorkJobSeekerSkill',
-        path: '/op-work/job-seeker-skill',
+        path: '/resource/op-work/job-seeker-skill',
         component: () =>
           import('#/generated/resource/OpWorkJobSeekerSkill/OpWorkJobSeekerSkillList.vue'),
       },
@@ -117,7 +117,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJobSkill'),
         },
         name: 'OpWorkJobSkill',
-        path: '/op-work/job-skill',
+        path: '/resource/op-work/job-skill',
         component: () =>
           import('#/generated/resource/OpWorkJobSkill/OpWorkJobSkillList.vue'),
       },
@@ -126,7 +126,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkNotification'),
         },
         name: 'OpWorkNotification',
-        path: '/op-work/notification',
+        path: '/resource/op-work/notification',
         component: () =>
           import('#/generated/resource/OpWorkNotification/OpWorkNotificationList.vue'),
       },
@@ -135,7 +135,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkNotificationSettings'),
         },
         name: 'OpWorkNotificationSettings',
-        path: '/op-work/notification-settings',
+        path: '/resource/op-work/notification-settings',
         component: () =>
           import('#/generated/resource/OpWorkNotificationSettings/OpWorkNotificationSettingsList.vue'),
       },
@@ -144,7 +144,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkSearchHistory'),
         },
         name: 'OpWorkSearchHistory',
-        path: '/op-work/search-history',
+        path: '/resource/op-work/search-history',
         component: () =>
           import('#/generated/resource/OpWorkSearchHistory/OpWorkSearchHistoryList.vue'),
       },
@@ -153,7 +153,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJobView'),
         },
         name: 'OpWorkJobView',
-        path: '/op-work/job-view',
+        path: '/resource/op-work/job-view',
         component: () =>
           import('#/generated/resource/OpWorkJobView/OpWorkJobViewList.vue'),
       },
@@ -162,7 +162,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkSavedSearch'),
         },
         name: 'OpWorkSavedSearch',
-        path: '/op-work/saved-search',
+        path: '/resource/op-work/saved-search',
         component: () =>
           import('#/generated/resource/OpWorkSavedSearch/OpWorkSavedSearchList.vue'),
       },
@@ -171,7 +171,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkSkillSynonym'),
         },
         name: 'OpWorkSkillSynonym',
-        path: '/op-work/skill-synonym',
+        path: '/resource/op-work/skill-synonym',
         component: () =>
           import('#/generated/resource/OpWorkSkillSynonym/OpWorkSkillSynonymList.vue'),
       },
@@ -180,7 +180,7 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.resource.OpWorkJobTag'),
         },
         name: 'OpWorkJobTag',
-        path: '/op-work/job-tag',
+        path: '/resource/op-work/job-tag',
         component: () =>
           import('#/generated/resource/OpWorkJobTag/OpWorkJobTagList.vue'),
       },
