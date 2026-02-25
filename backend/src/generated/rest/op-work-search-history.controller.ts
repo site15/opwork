@@ -65,9 +65,8 @@ export class OpWorkSearchHistoryController {
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
       .map((s) => s.split(':'))
-      .reduce(
-        (all, [key, value]) => ({
-          ...all,
+      .map(
+        ([key, value]) => ({
           ...(key in PrismaSdk.Prisma.OpWorkSearchHistoryScalarFieldEnum
             ? {
                 [key]: value === 'desc' ? 'desc' : 'asc',

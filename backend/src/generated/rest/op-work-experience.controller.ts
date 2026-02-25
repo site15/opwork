@@ -69,9 +69,8 @@ export class OpWorkExperienceController {
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
       .map((s) => s.split(':'))
-      .reduce(
-        (all, [key, value]) => ({
-          ...all,
+      .map(
+        ([key, value]) => ({
           ...(key in PrismaSdk.Prisma.OpWorkExperienceScalarFieldEnum
             ? {
                 [key]: value === 'desc' ? 'desc' : 'asc',

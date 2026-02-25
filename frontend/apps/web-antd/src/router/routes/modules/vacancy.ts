@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
     path: '/vacancy',
     children: [
       {
-        name: 'Search',
+        name: 'VacancySearch',
         path: '/vacancy/search',
         component: () => import('#/views/vacancy/search/index.vue'),
         meta: {
@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        name: 'Vacancies',
+        name: 'VacancyList',
         path: '/vacancy/list',
         component: () => import('#/views/vacancy/list/index.vue'),
         meta: {
