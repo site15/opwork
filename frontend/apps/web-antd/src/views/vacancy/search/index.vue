@@ -67,6 +67,9 @@ const handleSortChange = (sortInfo: {
       )
       .join(',');
   }
+  if (currentFilters.value) {
+    currentFilters.value.curPage = 1;
+  }
 
   performSearch();
 };
@@ -90,7 +93,10 @@ onMounted(() => {
   <div class="p-5">
     <div class="mt-5 flex flex-col lg:flex-row">
       <div class="mb-4 mr-4 w-full lg:mb-0 lg:w-1/5">
-        <VacancySearchFilterForm title="Filter" @search="handleSearch" />
+        <VacancySearchFilterForm
+          :title="$t('common.filter.title')"
+          @search="handleSearch"
+        />
       </div>
       <div class="w-full lg:w-4/5">
         <VacancySearchList
@@ -99,7 +105,7 @@ onMounted(() => {
           :pagination="pagination"
           @page-change="handlePageChange"
           @sort-change="handleSortChange"
-          title="Vacancies"
+          :title="$t('vacancy.search.list.title')"
         />
       </div>
     </div>

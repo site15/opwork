@@ -78,41 +78,57 @@ const handlePageChange = (page: number) => {
       </div>
       <div class="flex flex-wrap gap-2">
         <div class="flex items-center gap-1">
-          <label class="text-sm font-medium text-gray-700">Salary:</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t('common.filter.salary')
+          }}</label>
           <select
             class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
             v-model="sortForm.salary"
             @change="handleSortChange"
           >
-            <option value="">None</option>
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
+            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="asc">
+              {{ $t('common.filter.sort.lowToHigh') }}
+            </option>
+            <option value="desc">
+              {{ $t('common.filter.sort.highToLow') }}
+            </option>
           </select>
         </div>
 
         <div class="flex items-center gap-1">
-          <label class="text-sm font-medium text-gray-700">Published:</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t('common.filter.published')
+          }}</label>
           <select
             class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
             v-model="sortForm.publishedAt"
             @change="handleSortChange"
           >
-            <option value="">None</option>
-            <option value="asc">Old to New</option>
-            <option value="desc">New to Old</option>
+            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="asc">{{ $t('common.filter.sort.oldToNew') }}</option>
+            <option value="desc">
+              {{ $t('common.filter.sort.newToOld') }}
+            </option>
           </select>
         </div>
 
         <div class="flex items-center gap-1">
-          <label class="text-sm font-medium text-gray-700">Apps:</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t('common.filter.apps')
+          }}</label>
           <select
             class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
             v-model="sortForm.applicationsCount"
             @change="handleSortChange"
           >
-            <option value="">None</option>
-            <option value="asc">Few to Many</option>
-            <option value="desc">Many to Few</option>
+            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="asc">
+              {{ $t('common.filter.sort.fewToMany') }}
+            </option>
+            <option value="desc">
+              {{ $t('common.filter.sort.manyToFew') }}
+            </option>
           </select>
         </div>
       </div>
@@ -122,16 +138,16 @@ const handlePageChange = (page: number) => {
         <div
           class="inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-blue-500"
         ></div>
-        <p class="mt-2 text-sm text-gray-500">Loading vacancies...</p>
+        <p class="mt-2 text-sm text-gray-500">{{ $t('common.loading') }}</p>
       </div>
       <div v-else-if="items.length === 0" class="w-full py-10 text-center">
-        <p class="text-sm text-gray-500">No vacancies found</p>
+        <p class="text-sm text-gray-500">{{ $t('common.noResults') }}</p>
       </div>
       <ul v-else class="w-full divide-y divide-border" role="list">
         <li
           v-for="item in items"
           :key="item.id"
-          class="flex cursor-pointer justify-between gap-x-6 py-5 transition-colors hover:bg-gray-50"
+          class="flex cursor-pointer justify-between gap-x-6 py-5 pl-5 pr-5 transition-colors hover:bg-gray-50"
         >
           <div class="flex min-w-0 flex-1 items-center gap-x-4">
             <div class="min-w-0 flex-auto">
@@ -166,11 +182,15 @@ const handlePageChange = (page: number) => {
                     {{ item.salaryCurrency }}
                   </template>
                   <template v-else-if="item.salaryMin">
-                    From ${{ item.salaryMin.toLocaleString() }}
+                    {{ $t('common.filter.from') }} ${{
+                      item.salaryMin.toLocaleString()
+                    }}
                     {{ item.salaryCurrency }}
                   </template>
                   <template v-else-if="item.salaryMax">
-                    Up to ${{ item.salaryMax.toLocaleString() }}
+                    {{ $t('common.filter.upTo') }} ${{
+                      item.salaryMax.toLocaleString()
+                    }}
                     {{ item.salaryCurrency }}
                   </template>
                 </span>
@@ -184,7 +204,7 @@ const handlePageChange = (page: number) => {
                   v-if="item.isRemote"
                   class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-800"
                 >
-                  Remote
+                  {{ $t('vacancy.remoteWork') }}
                 </span>
               </div>
               <!-- eslint-disable vue/no-v-html -->
@@ -194,14 +214,14 @@ const handlePageChange = (page: number) => {
               ></p>
               <div class="mt-2 flex items-center gap-x-4">
                 <span class="text-xs text-gray-500">
-                  Published:
+                  {{ $t('common.filter.published') }}:
                   {{ new Date(item.publishedAt!).toLocaleDateString() }}
                 </span>
                 <span class="text-xs text-gray-500">
-                  Applications: {{ item.applicationsCount }}
+                  {{ $t('common.filter.apps') }}: {{ item.applicationsCount }}
                 </span>
                 <span class="text-xs text-gray-500">
-                  Views: {{ item.viewsCount }}
+                  {{ $t('common.filter.views') }}: {{ item.viewsCount }}
                 </span>
               </div>
             </div>
@@ -215,18 +235,17 @@ const handlePageChange = (page: number) => {
         class="mt-6 flex w-full flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row"
       >
         <div class="text-sm text-gray-700">
-          Showing
-          <span class="font-medium">{{
-            (pagination.currentPage - 1) * pagination.pageSize + 1
-          }}</span>
-          to
-          <span class="font-medium">{{
-            Math.min(
-              pagination.currentPage * pagination.pageSize,
-              pagination.total,
-            )
-          }}</span>
-          of <span class="font-medium">{{ pagination.total }}</span> results
+          {{
+            $t('common.pagination.showingFromToOfTotalResults', {
+              showingFrom:
+                (pagination.currentPage - 1) * pagination.pageSize + 1,
+              showingTo: Math.min(
+                pagination.currentPage * pagination.pageSize,
+                pagination.total,
+              ),
+              totalResults: pagination.total,
+            })
+          }}
         </div>
         <div class="flex flex-wrap items-center justify-center gap-2">
           <button
@@ -234,7 +253,7 @@ const handlePageChange = (page: number) => {
             :disabled="pagination.currentPage <= 1"
             class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            First
+            {{ $t('common.pagination.first') }}
           </button>
 
           <button
@@ -242,7 +261,7 @@ const handlePageChange = (page: number) => {
             :disabled="pagination.currentPage <= 1"
             class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Prev
+            {{ $t('common.pagination.prev') }}
           </button>
 
           <span
@@ -266,7 +285,7 @@ const handlePageChange = (page: number) => {
             "
             class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Next
+            {{ $t('common.pagination.next') }}
           </button>
 
           <button
@@ -281,7 +300,7 @@ const handlePageChange = (page: number) => {
             "
             class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Last
+            {{ $t('common.pagination.last') }}
           </button>
         </div>
       </div>

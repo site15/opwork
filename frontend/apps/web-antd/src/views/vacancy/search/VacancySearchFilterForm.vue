@@ -49,8 +49,10 @@ const handleReset = async () => {
       </div>
     </CardContent>
     <CardFooter class="flex flex-wrap gap-2">
-      <Button type="primary" @click="handleSearch">{{ $t('Search') }}</Button>
-      <Button @click="handleReset">{{ $t('Reset') }}</Button>
+      <Button type="primary" @click="handleSearch">
+        {{ $t('common.filter.search') }}
+      </Button>
+      <Button @click="handleReset">{{ $t('common.filter.reset') }}</Button>
     </CardFooter>
   </Card>
 </template>

@@ -12,5 +12,35 @@
   "loadingMenu": "Загрузка меню",
   "updatedAt": "Обновлено",
   "yes": "Да",
-  "no": "Нет"
+  "no": "Нет",
+  "filter": {
+    "search": "Найти",
+    "reset": "Сбросить",
+    "salary": "Зарплата",
+    "published": "Опубликовано",
+    "sort": {
+      "none": "Ничего",
+      "oldToNew": "От старой к новой",
+      "newToOld": "От новой к старой",
+      "fewToMany": "От меньшего к большему",
+      "manyToFew": "От большего к меньшему",
+      "lowToHigh": "От низкой к высокой",
+      "highToLow": "От высокой к низкой"
+    },
+    "apps": "Отклики",
+    "views": "Просмотры",
+    "from": "От",
+    "upTo": "До",
+    "title": "Фильтры",
+    "remote": "Remote"
+  },
+  "loading": "Загрузка",
+  "noResults": "Нет результатов",
+  "pagination": {
+    "showingFromToOfTotalResults": "Показано с {showingFrom} по {showingTo} из {totalResults} результатов",
+    "first": "Первая",
+    "prev": "Предыдущая",
+    "next": "Следующая",
+    "last": "Последняя"
+  }
 }

@@ -12,5 +12,35 @@
   "loadingMenu": "Loading Menu",
   "updatedAt": "Updated At",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "filter": {
+    "search": "Search",
+    "reset": "Reset",
+    "salary": "Salary",
+    "published": "Published",
+    "sort": {
+      "none": "None",
+      "oldToNew": "Old To New",
+      "newToOld": "New To Old",
+      "fewToMany": "Few To Many",
+      "manyToFew": "Many To Few",
+      "lowToHigh": "Low To High",
+      "highToLow": "High To Low"
+    },
+    "apps": "Apps",
+    "views": "Views",
+    "title": "Title",
+    "from": "From",
+    "upTo": "Up To",
+    "remote": "Remote"
+  },
+  "loading": "Loading",
+  "noResults": "No Results",
+  "pagination": {
+    "showingFromToOfTotalResults": "Showing {showingFrom} to {showingTo} of {totalResults} results",
+    "first": "First",
+    "prev": "Prev",
+    "next": "Next",
+    "last": "Last"
+  }
 }
