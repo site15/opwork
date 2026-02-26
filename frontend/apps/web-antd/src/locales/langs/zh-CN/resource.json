@@ -132,7 +132,9 @@
     "expiresAt": "Expires At",
     "employmentType": "Employment Type",
     "experienceLevel": "Experience Level",
-    "status": "Status"
+    "status": "Status",
+    "skills": "Skills",
+    "tags": "Tags"
   },
   "OpWorkJobSeeker": {
     "id": "Id",

@@ -85,6 +85,14 @@ export class FindManyVacancyArgs extends FindManyArgs {
     !value ? [] : !Array.isArray(value) ? value.split(',') : value,
   )
   skills?: string[];
+
+  @ApiPropertyOptional({ type: () => [String] })
+  @IsOptional()
+  @IsArray()
+  @Transform(({ value }) =>
+    !value ? [] : !Array.isArray(value) ? value.split(',') : value,
+  )
+  tags?: string[];
 }
 
 export class FindManyVacancyResponseMeta extends FindManyResponseMeta {}
@@ -121,6 +129,7 @@ export class VacancyController {
         OpWorkProfile: true,
         OpWorkEmployer: true,
         OpWorkJobSkill: { include: { OpWorkSkill: true } },
+        opWorkJobTags: true,
       },
       where: {
         id: jobId,
@@ -201,6 +210,16 @@ export class VacancyController {
               },
             ]
           : []),
+        // tags
+        ...(otherArgs.tags?.length && otherArgs.tags?.length > 0
+          ? [
+              {
+                opWorkJobTags: {
+                  some: { jobId: { in: otherArgs.tags } },
+                },
+              },
+            ]
+          : []),
       ],
     };
 
@@ -210,6 +229,7 @@ export class VacancyController {
           OpWorkProfile: true,
           OpWorkEmployer: true,
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
+          opWorkJobTags: true,
         },
         where: opWorkJobWhereInput,
         take,

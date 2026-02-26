@@ -19,5 +19,12 @@
     "employerInfo": "Employer Info",
     "employerNotFound": "Employer Not Found"
   },
-  "inOffice": "In Office"
+  "inOffice": "In Office",
+  "my": {
+    "list": {
+      "title": "My vacancies"
+    }
+  },
+  "tags": "Tags",
+  "skills": "Skills"
 }

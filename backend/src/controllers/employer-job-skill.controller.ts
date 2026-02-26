@@ -13,6 +13,7 @@ import { OpWorkJobSkillDto } from '../generated/rest/op-work-job-skill.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobSkillArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
+import { OpWorkJobSkill } from '../generated/rest/op-work-job-skill.entity';
 
 @ApiTags('employer')
 @Controller('employer/job-skill')
@@ -21,6 +22,19 @@ export class EmployerWorkSkillController {
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
+
+  @Get('all')
+  @ApiOkResponse({ type: OpWorkJobSkill, isArray: true })
+  async getAllJobSkills(
+    @CurrentAppRequest() req: AppRequest,
+  ): Promise<OpWorkJobSkillDto[]> {
+    return await this.prismaService.opWorkJobSkill.findMany({
+      include: { OpWorkSkill: true },
+      where: {
+        OpWorkJob: { id: req.opWorkProfileId },
+      },
+    });
+  }
 
   @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJobSkillDto, isArray: true })

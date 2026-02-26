@@ -4475,6 +4475,25 @@ export type EmployeJobControllerSetJobResponses = {
 
 export type EmployeJobControllerSetJobResponse = EmployeJobControllerSetJobResponses[keyof EmployeJobControllerSetJobResponses];
 
+export type EmployerWorkSkillControllerGetAllJobSkillsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/employer/job-skill/all';
+};
+
+export type EmployerWorkSkillControllerGetAllJobSkillsErrors = {
+    default: Array<OpWorkJobSkillDto>;
+};
+
+export type EmployerWorkSkillControllerGetAllJobSkillsError = EmployerWorkSkillControllerGetAllJobSkillsErrors[keyof EmployerWorkSkillControllerGetAllJobSkillsErrors];
+
+export type EmployerWorkSkillControllerGetAllJobSkillsResponses = {
+    200: Array<OpWorkJobSkill>;
+};
+
+export type EmployerWorkSkillControllerGetAllJobSkillsResponse = EmployerWorkSkillControllerGetAllJobSkillsResponses[keyof EmployerWorkSkillControllerGetAllJobSkillsResponses];
+
 export type EmployerWorkSkillControllerGetJobSkillsData = {
     body?: never;
     path: {
@@ -4516,6 +4535,25 @@ export type EmployerWorkSkillControllerSetJobSkillResponses = {
 };
 
 export type EmployerWorkSkillControllerSetJobSkillResponse = EmployerWorkSkillControllerSetJobSkillResponses[keyof EmployerWorkSkillControllerSetJobSkillResponses];
+
+export type EmployerJobTagsControllerGetAllTagsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/employer/job-tags/all';
+};
+
+export type EmployerJobTagsControllerGetAllTagsErrors = {
+    default: Array<OpWorkJobTagDto>;
+};
+
+export type EmployerJobTagsControllerGetAllTagsError = EmployerJobTagsControllerGetAllTagsErrors[keyof EmployerJobTagsControllerGetAllTagsErrors];
+
+export type EmployerJobTagsControllerGetAllTagsResponses = {
+    200: Array<OpWorkJobTag>;
+};
+
+export type EmployerJobTagsControllerGetAllTagsResponse = EmployerJobTagsControllerGetAllTagsResponses[keyof EmployerJobTagsControllerGetAllTagsResponses];
 
 export type EmployerJobTagsControllerGetJobTagsData = {
     body?: never;
@@ -4659,6 +4697,7 @@ export type VacancyControllerFindManyData = {
         employmentTypes?: Array<OpWorkEmploymentType>;
         experienceLevels?: Array<OpWorkExperienceLevel>;
         skills?: Array<string>;
+        tags?: Array<string>;
     };
     url: '/api/vacancy';
 };

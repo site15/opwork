@@ -22,13 +22,13 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        name: 'VacancyList',
-        path: '/vacancy/list',
-        component: () => import('#/views/vacancy/list/index.vue'),
+        name: 'VacancyMy',
+        path: '/vacancy/my',
+        component: () => import('#/views/vacancy/my/index.vue'),
         meta: {
           affixTab: true,
           icon: 'lucide:briefcase-business',
-          title: $t('page.vacancy.list'),
+          title: $t('page.vacancy.my'),
         },
       },
       {

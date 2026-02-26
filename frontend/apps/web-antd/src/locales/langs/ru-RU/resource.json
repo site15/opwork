@@ -132,7 +132,9 @@
     "expiresAt": "Срок окончания публикации",
     "employmentType": "Тип занятости",
     "experienceLevel": "Уровень опыта",
-    "status": "Статус"
+    "status": "Статус",
+    "skills": "Навыки",
+    "tags": "Метки"
   },
   "OpWorkJobSeeker": {
     "id": "ID",

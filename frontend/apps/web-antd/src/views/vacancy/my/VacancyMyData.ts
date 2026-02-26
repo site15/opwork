@@ -1,11 +1,16 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { OpWorkJob } from '#/generated/client';
+import type { OpWorkJob, OpWorkJobTag, OpWorkSkill } from '#/generated/client';
 
+import { getComponentProps } from '#/adapter/get-component-props';
+import {
+  employerJobTagsControllerGetAllTags,
+  employerWorkSkillControllerGetAllJobSkills,
+} from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 
-export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
+export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
   return [
     {
       component: 'Input',
@@ -130,14 +135,38 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
 
       controlClass: 'w-full',
     },
+
     {
-      component: 'Input',
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkSkill>({
+        findMany: () =>
+          employerWorkSkillControllerGetAllJobSkills().then(async (res) => ({
+            data: {
+              items:
+                res.data?.flatMap((item) =>
+                  item.OpWorkSkill ? [item.OpWorkSkill] : [],
+                ) || [],
+            },
+          })),
+        getLabel: (item) => item.name || item.id,
+      }),
       fieldName: 'skills',
-      label: $t('resource.OpWorkSkill.name'),
-      componentProps: {
-        placeholder: $t('resource.OpWorkSkill.name'),
-        mode: 'tags',
-      },
+      label: $t('resource.OpWorkJob.skills'),
+
+      controlClass: 'w-full',
+    },
+
+    {
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkJobTag>({
+        findMany: () =>
+          employerJobTagsControllerGetAllTags().then(async (res) => ({
+            data: { items: res.data || [] },
+          })),
+        getLabel: (item) => item.name || item.id,
+      }),
+      fieldName: 'tags',
+      label: $t('resource.OpWorkJob.tags'),
 
       controlClass: 'w-full',
     },

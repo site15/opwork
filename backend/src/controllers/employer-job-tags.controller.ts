@@ -10,6 +10,7 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobTagDto } from '../generated/rest/op-work-job-tag.dto';
+import { OpWorkJobTag } from '../generated/rest/op-work-job-tag.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobTagsArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
@@ -21,6 +22,18 @@ export class EmployerJobTagsController {
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
   ) {}
+
+  @Get('all')
+  @ApiOkResponse({ type: OpWorkJobTag, isArray: true })
+  async getAllTags(
+    @CurrentAppRequest() req: AppRequest,
+  ): Promise<OpWorkJobTagDto[]> {
+    return await this.prismaService.opWorkJobTag.findMany({
+      where: {
+        OpWorkJob: { profileId: req.opWorkProfileId },
+      },
+    });
+  }
 
   @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJobTagDto, isArray: true })

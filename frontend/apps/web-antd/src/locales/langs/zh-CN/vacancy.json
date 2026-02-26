@@ -19,5 +19,12 @@
     "employerInfo": "Employer Info",
     "employerNotFound": "Employer Not Found"
   },
-  "inOffice": "In Office"
+  "inOffice": "In Office",
+  "my": {
+    "list": {
+      "title": "我的职位"
+    }
+  },
+  "tags": "标签",
+  "skills": "技能"
 }

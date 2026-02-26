@@ -8,10 +8,10 @@ import { onMounted, ref } from 'vue';
 
 import { vacancyControllerFindMany } from '#/generated/client';
 
-import VacancySearchFilterForm from './VacancySearchFilterForm.vue';
-import VacancySearchList from './VacancySearchList.vue';
+import VacancyMyFilterForm from './VacancyMyFilterForm.vue';
+import VacancyMyList from './VacancyMyList.vue';
 
-defineOptions({ name: 'VacancySearch' });
+defineOptions({ name: 'VacancyMy' });
 
 const vacancies = ref<OpWorkJob[]>([]);
 const loading = ref(false);
@@ -93,19 +93,19 @@ onMounted(() => {
   <div class="p-5">
     <div class="mt-5 flex flex-col lg:flex-row">
       <div class="mb-4 mr-4 w-full lg:mb-0 lg:w-1/5">
-        <VacancySearchFilterForm
+        <VacancyMyFilterForm
           :title="$t('common.filter.title')"
           @search="handleSearch"
         />
       </div>
       <div class="w-full lg:w-4/5">
-        <VacancySearchList
+        <VacancyMyList
           :items="vacancies"
           :loading="loading"
           :pagination="pagination"
           @page-change="handlePageChange"
           @sort-change="handleSortChange"
-          :title="$t('vacancy.search.list.title')"
+          :title="$t('vacancy.my.list.title')"
         />
       </div>
     </div>
