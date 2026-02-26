@@ -2,6 +2,7 @@
 import type { OpWorkJob } from '#/generated/client';
 
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { $t } from '#/locales';
 
@@ -36,7 +37,6 @@ interface Emits {
 defineOptions({
   name: 'VacancySearchList',
 });
-
 const props = withDefaults(defineProps<Props>(), {
   items: () => [],
   loading: false,
@@ -46,8 +46,8 @@ const props = withDefaults(defineProps<Props>(), {
     total: 0,
   }),
 });
-
 const emit = defineEmits<Emits>();
+const router = useRouter();
 
 // Reactive form for sorting
 const sortForm = reactive({
@@ -63,6 +63,10 @@ const handleSortChange = () => {
 
 const handlePageChange = (page: number) => {
   emit('pageChange', page, props.pagination.pageSize);
+};
+
+const handleItemClick = (item: OpWorkJob) => {
+  router.push(`/vacancy/${item.id}`);
 };
 </script>
 
@@ -148,6 +152,7 @@ const handlePageChange = (page: number) => {
           v-for="item in items"
           :key="item.id"
           class="flex cursor-pointer justify-between gap-x-6 py-5 pl-5 pr-5 transition-colors hover:bg-gray-50"
+          @click="handleItemClick(item)"
         >
           <div class="flex min-w-0 flex-1 items-center gap-x-4">
             <div class="min-w-0 flex-auto">

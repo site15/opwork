@@ -4,5 +4,20 @@
       "title": "Вакансии"
     }
   },
-  "remoteWork": "Удаленная работа"
+  "remoteWork": "Удаленная работа",
+  "detail": {
+    "notFound": "Не найдено",
+    "compensation": "Условия",
+    "description": "Описание",
+    "responsibilities": "Обязанности",
+    "requirements": "Требования",
+    "statusAndStats": "Статус и статистика",
+    "skills": "Навыки",
+    "noSkills": "Нет навыков",
+    "tags": "Теги",
+    "noTags": "Нет тегов",
+    "employerInfo": "Информация о работодателе",
+    "employerNotFound": "Работодатель не найден"
+  },
+  "inOffice": "В офисе"
 }

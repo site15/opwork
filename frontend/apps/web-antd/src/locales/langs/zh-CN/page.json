@@ -46,6 +46,7 @@
   "vacancy": {
     "title": "Vacancies",
     "search": "Search",
-    "list": "List"
+    "list": "List",
+    "detail": "Detail"
   }
 }

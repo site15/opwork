@@ -31,6 +31,16 @@ const routes: RouteRecordRaw[] = [
           title: $t('page.vacancy.list'),
         },
       },
+      {
+        name: 'VacancyDetail',
+        path: '/vacancy/:id',
+        component: () => import('#/views/vacancy/detail/index.vue'),
+        meta: {
+          hideInMenu: true,
+          icon: 'lucide:briefcase-business',
+          title: $t('page.vacancy.detail'),
+        },
+      },
     ],
   },
 ];

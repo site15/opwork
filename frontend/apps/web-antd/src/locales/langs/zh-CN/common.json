@@ -42,5 +42,7 @@
     "prev": "Prev",
     "next": "Next",
     "last": "Last"
-  }
+  },
+  "notSpecified": "Not Specified",
+  "salary": "Salary"
 }

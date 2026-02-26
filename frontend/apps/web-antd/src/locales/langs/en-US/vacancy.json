@@ -4,5 +4,20 @@
       "title": "Vacancies"
     }
   },
-  "remoteWork": "Remote Work"
+  "remoteWork": "Remote Work",
+  "detail": {
+    "notFound": "Not Found",
+    "compensation": "Compensation",
+    "description": "Description",
+    "responsibilities": "Responsibilities",
+    "requirements": "Requirements",
+    "statusAndStats": "Status And Stats",
+    "skills": "Skills",
+    "noSkills": "No Skills",
+    "tags": "Tags",
+    "noTags": "No Tags",
+    "employerInfo": "Employer Info",
+    "employerNotFound": "Employer Not Found"
+  },
+  "inOffice": "In Office"
 }
