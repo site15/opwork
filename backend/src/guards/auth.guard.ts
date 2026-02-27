@@ -14,9 +14,9 @@ import { AppRequest } from '../types/request';
 import { getRequestFromExecutionContext } from '../utils/get-request-fromExecution-context';
 import { getClientIp } from '../utils/request-ip';
 
-export const X_API_KEY_HEADER_NAME = 'x-api-key';
-export const X_SESSION_ID_HEADER_NAME = 'x-session-id';
-export const X_PROFILE_ID_HEADER_NAME = 'x-profile-id';
+export const X_API_KEY = 'x-api-key';
+export const X_SESSION_ID = 'x-session-id';
+export const X_PROFILE_ID = 'x-profile-id';
 export const DEFAULT_ALLOWED_IPS = ['127.0.0.1', '192.168.168.1', '::1'];
 
 @Injectable()
@@ -46,9 +46,9 @@ export class AuthGuard implements CanActivate {
 
     req.userIp =
       process.env.CHECK_IP === 'true' ? getClientIp(req as any) : '127.0.0.1';
-    req.apiKey = req.headers[X_API_KEY_HEADER_NAME];
-    req.authSessionId = req.headers[X_SESSION_ID_HEADER_NAME];
-    req.opWorkProfileId = req.headers[X_PROFILE_ID_HEADER_NAME];
+    req.apiKey = req.headers[X_API_KEY];
+    req.authSessionId = req.headers[X_SESSION_ID];
+    req.opWorkProfileId = req.headers[X_PROFILE_ID];
 
     if (!req.userIp || !ALLOWED_IPS.includes(req.userIp)) {
       Logger.log('Blocked request from unauthorized IP', {
@@ -82,6 +82,7 @@ export class AuthGuard implements CanActivate {
         include: { AuthUser: { include: { OpWorkProfile: true } } },
         where: { id: req.authSessionId },
       });
+
       if (authSession && authSession.AuthUser) {
         req.authSession = authSession;
         req.authUserId = authSession.AuthUser.id;

@@ -26,6 +26,12 @@
   },
   "widgets": {
     "document": "Document",
-    "qa": "Qa"
+    "qa": "Qa",
+    "timezone": {
+      "setTimezone": "Set Timezone"
+    },
+    "profile": {
+      "setProfile": "Set Profile"
+    }
   }
 }

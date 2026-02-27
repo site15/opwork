@@ -22,6 +22,8 @@ import { $t } from '#/locales';
 import { useAuthStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
 
+import ProfileButton from './header/profile/profile-button.vue';
+
 const notifications = ref<NotificationItem[]>([
   {
     id: 1,
@@ -180,6 +182,9 @@ watch(
         tag-text="Pro"
         @logout="handleLogout"
       />
+    </template>
+    <template #role>
+      <ProfileButton />
     </template>
     <template #notification>
       <Notification

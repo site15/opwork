@@ -12,6 +12,7 @@ import { defineStore } from 'pinia';
 
 import { $t } from '#/locales';
 import { authService } from '#/services/AuthService';
+import { opWorkProfileService } from '#/services/ProfileService';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
@@ -66,7 +67,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout(redirect: boolean = true) {
     try {
-      await authService.logout();
+      await authService.clean();
+      await opWorkProfileService.clean();
     } catch {
       // 不做任何处理
     }

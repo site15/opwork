@@ -1,8 +1,5 @@
 import { finalize, from, map, mergeMap } from 'rxjs';
-import {
-  X_API_KEY_HEADER_NAME,
-  X_SESSION_ID_HEADER_NAME,
-} from '../../src/guards/auth.guard';
+import { X_API_KEY, X_SESSION_ID } from '../../src/guards/auth.guard';
 import { AuthUser, Sdk, SignInArgs, UserType } from '../generated/client';
 import { Client, Config, createClient } from '../generated/client/client';
 import { client } from '../generated/client/client.gen';
@@ -40,7 +37,7 @@ export class ActivityHelper {
   }
 
   async getProfile() {
-    const result = await this.sdk.authControllerProfile();
+    const result = await this.sdk.authControllerInfo();
     this.authUser = result.data || null;
     return result.data;
   }
@@ -83,7 +80,7 @@ export class ActivityHelper {
     try {
       this.apiKey = apiKey;
       this.updateClientConfig();
-      const result = await this.sdk.authControllerProfile();
+      const result = await this.sdk.authControllerInfo();
       this.authUser = result.data || null;
       this.updateClientConfig();
       return result.data;
@@ -121,10 +118,10 @@ export class ActivityHelper {
 
   private updateClientConfig() {
     this.client.setConfig({
-      headers: { [X_SESSION_ID_HEADER_NAME]: this.authSessionId || null },
+      headers: { [X_SESSION_ID]: this.authSessionId || null },
     });
     this.client.setConfig({
-      headers: { [X_API_KEY_HEADER_NAME]: this.apiKey || null },
+      headers: { [X_API_KEY]: this.apiKey || null },
     });
   }
 }

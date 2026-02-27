@@ -60,15 +60,21 @@ export const universalPasswordHashingExtension = Prisma.defineExtension(
             const result = await query(args);
             if (!shouldSkip && result) {
               const mask = (obj: any) => {
-                if (obj && typeof obj === 'object' && 'password' in obj) {
-                  obj.password = PASSWORD_MASK;
+                if (obj && typeof obj !== 'object' && Array.isArray(obj)) {
+                  return obj.forEach(mask);
                 }
+                if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+                  Object.keys(obj).forEach((key) => {
+                    if (key === 'password') {
+                      obj[key] = PASSWORD_MASK;
+                    } else {
+                      obj[key] = mask(obj[key]);
+                    }
+                  });
+                }
+                return obj;
               };
-              if (Array.isArray(result)) {
-                result.forEach(mask);
-              } else {
-                mask(result);
-              }
+              return mask(result);
             }
             return result;
           },

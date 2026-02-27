@@ -188,7 +188,7 @@ onMounted(() => {
             <h2 class="mb-4 text-xl font-semibold">
               {{ $t('vacancy.detail.description') }}
             </h2>
-            <div class="prose max-w-none" v-html="vacancy.description"></div>
+            <div class="prose max-w-none">{{ vacancy.description }}</div>
           </div>
 
           <!-- Responsibilities Panel -->
@@ -196,10 +196,7 @@ onMounted(() => {
             <h2 class="mb-4 text-xl font-semibold">
               {{ $t('vacancy.detail.responsibilities') }}
             </h2>
-            <div
-              class="prose max-w-none"
-              v-html="vacancy.responsibilities"
-            ></div>
+            <div class="prose max-w-none">{{ vacancy.responsibilities }}</div>
           </div>
 
           <!-- Requirements Panel -->
@@ -207,7 +204,7 @@ onMounted(() => {
             <h2 class="mb-4 text-xl font-semibold">
               {{ $t('vacancy.detail.requirements') }}
             </h2>
-            <div class="prose max-w-none" v-html="vacancy.requirements"></div>
+            <div class="prose max-w-none">{{ vacancy.requirements }}</div>
           </div>
         </div>
 

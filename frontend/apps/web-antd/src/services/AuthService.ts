@@ -1,7 +1,4 @@
-import {
-  authControllerProfile,
-  authControllerSignIn,
-} from '#/generated/client';
+import { authControllerInfo, authControllerSignIn } from '#/generated/client';
 
 import { client } from '../generated/client/client.gen';
 
@@ -12,13 +9,13 @@ export class AuthService {
     return localStorage.getItem('sessionId') !== null;
   }
 
-  getApiKey() {
-    return localStorage.getItem('sessionId');
+  async clean() {
+    this.setSessionId(null);
   }
 
   async getProfile() {
     try {
-      const result = await authControllerProfile();
+      const result = await authControllerInfo();
 
       if (result?.error) {
         throw Object.assign(
@@ -30,6 +27,21 @@ export class AuthService {
     } catch (error) {
       console.error(error);
       throw error;
+    }
+  }
+
+  getSessionId() {
+    return localStorage.getItem('sessionId');
+  }
+
+  init() {
+    const sessionId = this.getSessionId();
+    if (sessionId) {
+      client.setConfig({
+        headers: {
+          [X_SESSION_ID]: sessionId,
+        },
+      });
     }
   }
 
@@ -47,22 +59,28 @@ export class AuthService {
         );
       }
 
-      const sessionId = result.data.sessionId;
-
-      localStorage.setItem('sessionId', sessionId);
-      client.setConfig({ headers: { [X_SESSION_ID]: sessionId } });
+      this.setSessionId(result.data.sessionId);
       return result.data.profile;
     } catch (error) {
-      localStorage.removeItem('sessionId');
-      client.setConfig({ headers: { [X_SESSION_ID]: null } });
+      this.setSessionId(null);
       console.error(error);
       throw error;
     }
   }
 
-  async logout() {
-    localStorage.removeItem('sessionId');
-    client.setConfig({ headers: { [X_SESSION_ID]: null } });
+  setSessionId(sessionId: null | string) {
+    const config = client.getConfig();
+    client.setConfig({
+      ...config,
+      headers: {
+        ...config.headers,
+        [X_SESSION_ID]: sessionId,
+      },
+    });
+    if (sessionId) {
+      return localStorage.setItem('sessionId', sessionId);
+    }
+    return localStorage.removeItem('sessionId');
   }
 }
 

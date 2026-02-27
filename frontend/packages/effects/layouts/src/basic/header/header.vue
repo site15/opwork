@@ -85,6 +85,12 @@ const rightSlots = computed(() => {
       name: 'notification',
     });
   }
+  if (preferences.widget.role) {
+    list.push({
+      index: REFERENCE_VALUE + 70,
+      name: 'role',
+    });
+  }
 
   Object.keys(slots).forEach((key) => {
     const name = key.split('-');

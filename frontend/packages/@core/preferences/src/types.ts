@@ -275,6 +275,8 @@ interface WidgetPreferences {
   notification: boolean;
   /** 显示刷新按钮 */
   refresh: boolean;
+  /** 是否显示角色部件 */
+  role: boolean;
   /** 是否显示侧边栏显示/隐藏部件 */
   sidebarToggle: boolean;
   /** 是否显示主题切换部件 */

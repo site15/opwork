@@ -27,6 +27,10 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     this.logger.log('Bootstraping default data...');
     await this.createOrUpdateDefaultApiKeys();
     await this.createOrUpdateDefaultUsers();
+    await this.createOrUpdateDefaultSkills();
+  }
+
+  private async createOrUpdateDefaultSkills() {
     for (const skillCategory of Object.values(OpWorkSkillType)) {
       for (const name of SKILL_CATEGORIES[skillCategory]) {
         const [, category] = skillCategory.split('__');
@@ -48,6 +52,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   }
 
   private async createOrUpdateDefaultUsers() {
+    //
     const admins =
       process.env.ADMINS?.split(',').map((user) => (user + ':').split(':')) ||
       [];
@@ -63,7 +68,14 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         userType: OpWorkUserType.ADMIN,
         email,
       });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authUser.id,
+        profileType: OpWorkProfileType.SPECIALIST,
+        userType: OpWorkUserType.ADMIN,
+        email,
+      });
     }
+    //
     const employers =
       process.env.EMPLOYERS?.split(',').map((user) =>
         (user + ':').split(':'),
@@ -81,6 +93,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         email,
       });
     }
+    //
     const jobSeekers =
       process.env.JOB_SEEKERS?.split(',').map((user) =>
         (user + ':').split(':'),
@@ -101,6 +114,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
   }
 
   private async createOrUpdateDefaultApiKeys() {
+    //
     const adminApiKeys = process.env.ADMIN_API_KEYS?.split(',') || [];
     for (const adminApiKey of adminApiKeys) {
       const email = `test_${OpWorkUserType.ADMIN.toLowerCase()}@example.com`;
@@ -116,7 +130,14 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         userType: OpWorkUserType.ADMIN,
         email,
       });
+      await this.getOrCreateOpWorkProfileByUserId({
+        userId: authApiKey.userId,
+        profileType: OpWorkProfileType.SPECIALIST,
+        userType: OpWorkUserType.ADMIN,
+        email,
+      });
     }
+    //
     const employerApiKeys = process.env.EMPLOYER_API_KEYS?.split(',') || [];
     for (const employerApiKey of employerApiKeys) {
       const email = `test_${OpWorkUserType.EMPLOYER.toLowerCase()}@example.com`;
@@ -132,6 +153,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         email,
       });
     }
+    //
     const jobSeekerApiKeys = process.env.JOB_SEEKER_API_KEYS?.split(',') || [];
     for (const jobSeekerApiKey of jobSeekerApiKeys) {
       const email = `test_${OpWorkUserType.JOB_SEEKER.toLowerCase()}@example.com`;
@@ -205,36 +227,48 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
     email: string;
     password?: string;
   }) {
-    let authApiKey = await this.prismaService.authApiKey.findFirst({
-      include: { AuthUser: true },
-      where: { apiKey },
-    });
+    let authApiKey =
+      await this.prismaService.$withoutUniversalPasswordHashing.authApiKey.findFirst(
+        {
+          include: { AuthUser: true },
+          where: { apiKey },
+        },
+      );
     if (!authApiKey) {
-      authApiKey = await this.prismaService.authApiKey.create({
-        include: { AuthUser: true },
-        data: {
-          apiKey,
-          isActive: true,
-          AuthUser: {
-            create: {
+      authApiKey =
+        await this.prismaService.$withoutUniversalPasswordHashing.authApiKey.create(
+          {
+            include: { AuthUser: true },
+            data: {
+              apiKey,
               isActive: true,
-              email,
-              password,
+              AuthUser: {
+                create: {
+                  isActive: true,
+                  email,
+                  password,
+                },
+              },
             },
           },
-        },
-      });
+        );
     }
     if (!authApiKey?.isActive && authApiKey?.id) {
-      authApiKey = await this.prismaService.authApiKey.update({
-        include: { AuthUser: true },
-        where: { id: authApiKey.id },
-        data: {
-          isActive: true,
-        },
-      });
+      authApiKey =
+        await this.prismaService.$withoutUniversalPasswordHashing.authApiKey.update(
+          {
+            include: { AuthUser: true },
+            where: { id: authApiKey.id },
+            data: {
+              isActive: true,
+            },
+          },
+        );
     }
-    if (authApiKey.AuthUser.email !== email) {
+    if (
+      authApiKey.AuthUser.email !== email ||
+      !verifyPassword(password, authApiKey.AuthUser.password)
+    ) {
       const authUser = await this.prismaService.authUser.update({
         where: { id: authApiKey.AuthUser.id },
         data: {
@@ -268,7 +302,10 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
         },
       });
     }
-    if (!authUser?.isActive && authUser?.id) {
+    if (
+      (!authUser?.isActive || !verifyPassword(password, authUser?.password)) &&
+      authUser?.id
+    ) {
       authUser = await this.prismaService.authUser.update({
         where: { id: authUser.id },
         data: {

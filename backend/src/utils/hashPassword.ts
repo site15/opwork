@@ -1,13 +1,25 @@
 import { randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 
-export const hashPassword = (password: string): string => {
+export const hashPassword = (password?: string | null): string => {
+  if (!password) {
+    password = 'empty';
+  }
   const salt = randomBytes(16).toString('hex');
   const hashed = scryptSync(password, salt, 64).toString('hex');
   return `${salt}:${hashed}`; // Сохраняем соль вместе с хэшем
 };
 
-export function verifyPassword(password: string, storedHash: string): boolean {
+export function verifyPassword(
+  password?: string | null,
+  storedHash?: string | null,
+): boolean {
+  if (!password) {
+    password = 'empty';
+  }
+  if (!storedHash) {
+    return false;
+  }
   const [salt, hash] = storedHash.split(':');
   const buffer = scryptSync(password, salt, 64);
-  return timingSafeEqual(buffer, Buffer.from(hash, 'hex'));
+  return hash ? timingSafeEqual(buffer, Buffer.from(hash, 'hex')) : false;
 }

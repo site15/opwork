@@ -136,6 +136,7 @@ const defaultPreferences: Preferences = {
     sidebarToggle: true,
     themeToggle: true,
     timezone: true,
+    role: true,
   },
 };
 

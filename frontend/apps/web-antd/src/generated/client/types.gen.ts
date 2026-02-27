@@ -4125,24 +4125,24 @@ export type OpWorkJobTagControllerUpdateOneResponses = {
 
 export type OpWorkJobTagControllerUpdateOneResponse = OpWorkJobTagControllerUpdateOneResponses[keyof OpWorkJobTagControllerUpdateOneResponses];
 
-export type AuthControllerProfileData = {
+export type AuthControllerInfoData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/api/auth/profile';
+    url: '/api/auth/info';
 };
 
-export type AuthControllerProfileErrors = {
+export type AuthControllerInfoErrors = {
     default: AuthUser;
 };
 
-export type AuthControllerProfileError = AuthControllerProfileErrors[keyof AuthControllerProfileErrors];
+export type AuthControllerInfoError = AuthControllerInfoErrors[keyof AuthControllerInfoErrors];
 
-export type AuthControllerProfileResponses = {
+export type AuthControllerInfoResponses = {
     200: AuthUser;
 };
 
-export type AuthControllerProfileResponse = AuthControllerProfileResponses[keyof AuthControllerProfileResponses];
+export type AuthControllerInfoResponse = AuthControllerInfoResponses[keyof AuthControllerInfoResponses];
 
 export type AuthControllerSignOutData = {
     body?: never;
@@ -4242,6 +4242,25 @@ export type ProfileControllerSetProfileResponses = {
 };
 
 export type ProfileControllerSetProfileResponse = ProfileControllerSetProfileResponses[keyof ProfileControllerSetProfileResponses];
+
+export type ProfileControllerGetAllProfilesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/profile/all';
+};
+
+export type ProfileControllerGetAllProfilesErrors = {
+    default: Array<OpWorkProfileDto>;
+};
+
+export type ProfileControllerGetAllProfilesError = ProfileControllerGetAllProfilesErrors[keyof ProfileControllerGetAllProfilesErrors];
+
+export type ProfileControllerGetAllProfilesResponses = {
+    200: Array<OpWorkProfileDto>;
+};
+
+export type ProfileControllerGetAllProfilesResponse = ProfileControllerGetAllProfilesResponses[keyof ProfileControllerGetAllProfilesResponses];
 
 export type JobSeekerControllerGetProfileData = {
     body?: never;

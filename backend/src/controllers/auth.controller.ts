@@ -20,7 +20,6 @@ import {
 } from '../types/auth-types';
 import { AppRequest } from '../types/request';
 import { StatusResponse } from '../types/status-response';
-import { createHashFromString } from '../utils/create-hash-from-string';
 import { verifyPassword } from '../utils/hashPassword';
 
 @ApiTags('auth')
@@ -31,9 +30,9 @@ export class AuthController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get('profile')
+  @Get('info')
   @ApiOkResponse({ type: AuthUser })
-  async profile(@CurrentAppRequest() req: AppRequest): Promise<AuthUser> {
+  async info(@CurrentAppRequest() req: AppRequest): Promise<AuthUser> {
     return req.authUser;
   }
 
@@ -136,16 +135,13 @@ export class AuthController {
       throw new AuthError(AuthErrorEnum.ALREADY_EXISTS);
     }
 
-    user =
-      await this.prismaService.$withoutUniversalPasswordHashing.authUser.create(
-        {
-          data: {
-            email,
-            password: createHashFromString(password || ''),
-            isActive: true,
-          },
-        },
-      );
+    user = await this.prismaService.authUser.create({
+      data: {
+        email,
+        password,
+        isActive: true,
+      },
+    });
     return user;
   }
 
@@ -156,36 +152,27 @@ export class AuthController {
     email: string;
     password: string;
   }) {
-    console.log({
-      email,
-      password,
-      q: {
-        where: {
-          email: { equals: email, mode: 'insensitive' },
-          password: createHashFromString(password || ''),
-        },
-      },
-    });
     const user =
       await this.prismaService.$withoutUniversalPasswordHashing.authUser.findFirst(
         {
+          select: { password: true, isActive: true, id: true },
           where: {
             email: { equals: email, mode: 'insensitive' },
           },
         },
       );
 
-    if (
-      !user ||
-      !user.password ||
-      (user && !verifyPassword(password, user.password))
-    ) {
+    if (!user || !user.password || !verifyPassword(password, user.password)) {
       throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
     }
 
     if (!user?.isActive) {
       throw new AuthError(AuthErrorEnum.DISABLED);
     }
-    return user;
+    return await this.prismaService.authUser.findUniqueOrThrow({
+      where: {
+        id: user.id,
+      },
+    });
   }
 }

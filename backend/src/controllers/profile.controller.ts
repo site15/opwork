@@ -26,6 +26,18 @@ export class ProfileController {
     });
   }
 
+  @Get('all')
+  @ApiOkResponse({ type: OpWorkProfileDto, isArray: true })
+  async getAllProfiles(
+    @CurrentAppRequest() req: AppRequest,
+  ): Promise<OpWorkProfileDto[]> {
+    return await this.prismaService.opWorkProfile.findMany({
+      where: {
+        userId: req.authUserId,
+      },
+    });
+  }
+
   @Put()
   @ApiOkResponse({ type: OpWorkProfileDto })
   async setProfile(

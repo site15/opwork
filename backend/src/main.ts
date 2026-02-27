@@ -13,10 +13,7 @@ import { WsAdapter } from '@nestjs/platform-ws';
 
 import 'dotenv/config';
 import { AuthError } from './errors/auth.errors';
-import {
-  X_API_KEY_HEADER_NAME,
-  X_SESSION_ID_HEADER_NAME,
-} from './guards/auth.guard';
+import { X_API_KEY, X_SESSION_ID } from './guards/auth.guard';
 
 Mustache.escape = function (text) {
   return text;
@@ -57,7 +54,7 @@ async function bootstrap() {
     .addApiKey(
       {
         type: 'apiKey',
-        name: X_API_KEY_HEADER_NAME, // The name of the header or query parameter
+        name: X_API_KEY, // The name of the header or query parameter
         in: 'header', // The location (header, query, or cookie)
         description: 'Enter your API key',
       },
@@ -67,7 +64,7 @@ async function bootstrap() {
     .addApiKey(
       {
         type: 'apiKey',
-        name: X_SESSION_ID_HEADER_NAME, // The name of the header or query parameter
+        name: X_SESSION_ID, // The name of the header or query parameter
         in: 'header', // The location (header, query, or cookie)
         description: 'Enter your session ID',
       },
