@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
@@ -50,7 +58,7 @@ export class JobSeekerController {
           OpWorkJobSeekerSkill: { include: { OpWorkSkill: true } },
         },
         where: {
-          profileId: req.opWorkProfileId,
+          id: opWorkJobSeeker.id,
         },
         data: {
           currentCompany: args.currentCompany,

@@ -329,8 +329,8 @@ export type OpWorkEmployerWhereInput = {
   facebookUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
-  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.OpWorkJobListRelationFilter
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
 }
 
 export type OpWorkEmployerOrderByWithRelationInput = {
@@ -353,16 +353,16 @@ export type OpWorkEmployerOrderByWithRelationInput = {
   facebookUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
   OpWorkJob?: Prisma.OpWorkJobOrderByRelationAggregateInput
+  OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
 }
 
 export type OpWorkEmployerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  profileId?: string
   AND?: Prisma.OpWorkEmployerWhereInput | Prisma.OpWorkEmployerWhereInput[]
   OR?: Prisma.OpWorkEmployerWhereInput[]
   NOT?: Prisma.OpWorkEmployerWhereInput | Prisma.OpWorkEmployerWhereInput[]
+  profileId?: Prisma.UuidFilter<"OpWorkEmployer"> | string
   companyName?: Prisma.StringFilter<"OpWorkEmployer"> | string
   industry?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
   description?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
@@ -380,9 +380,9 @@ export type OpWorkEmployerWhereUniqueInput = Prisma.AtLeast<{
   facebookUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
-  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.OpWorkJobListRelationFilter
-}, "id" | "uqOpWorkEmployerProfile">
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
+}, "id">
 
 export type OpWorkEmployerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -455,8 +455,8 @@ export type OpWorkEmployerCreateInput = {
   facebookUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEmployerInput
   OpWorkJob?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkEmployerInput
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEmployerInput
 }
 
 export type OpWorkEmployerUncheckedCreateInput = {
@@ -501,8 +501,8 @@ export type OpWorkEmployerUpdateInput = {
   facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkEmployerNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateManyWithoutOpWorkEmployerNestedInput
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkEmployerNestedInput
 }
 
 export type OpWorkEmployerUncheckedUpdateInput = {
@@ -593,9 +593,14 @@ export type OpWorkEmployerUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type OpWorkEmployerNullableScalarRelationFilter = {
-  is?: Prisma.OpWorkEmployerWhereInput | null
-  isNot?: Prisma.OpWorkEmployerWhereInput | null
+export type OpWorkEmployerListRelationFilter = {
+  every?: Prisma.OpWorkEmployerWhereInput
+  some?: Prisma.OpWorkEmployerWhereInput
+  none?: Prisma.OpWorkEmployerWhereInput
+}
+
+export type OpWorkEmployerOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type OpWorkEmployerCountOrderByAggregateInput = {
@@ -677,36 +682,46 @@ export type OpWorkEmployerScalarRelationFilter = {
   isNot?: Prisma.OpWorkEmployerWhereInput
 }
 
-export type OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput = {
-  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput
-  connect?: Prisma.OpWorkEmployerWhereUniqueInput
+export type OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEmployerCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
 }
 
-export type OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput = {
-  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput
-  connect?: Prisma.OpWorkEmployerWhereUniqueInput
+export type OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEmployerCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
 }
 
-export type OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput
-  upsert?: Prisma.OpWorkEmployerUpsertWithoutOpWorkProfileInput
-  disconnect?: Prisma.OpWorkEmployerWhereInput | boolean
-  delete?: Prisma.OpWorkEmployerWhereInput | boolean
-  connect?: Prisma.OpWorkEmployerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkEmployerUpdateToOneWithWhereWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUpdateWithoutOpWorkProfileInput>, Prisma.OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput>
+export type OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkEmployerUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEmployerCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  delete?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  connect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  update?: Prisma.OpWorkEmployerUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkEmployerUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkEmployerScalarWhereInput | Prisma.OpWorkEmployerScalarWhereInput[]
 }
 
-export type OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput
-  upsert?: Prisma.OpWorkEmployerUpsertWithoutOpWorkProfileInput
-  disconnect?: Prisma.OpWorkEmployerWhereInput | boolean
-  delete?: Prisma.OpWorkEmployerWhereInput | boolean
-  connect?: Prisma.OpWorkEmployerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkEmployerUpdateToOneWithWhereWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUpdateWithoutOpWorkProfileInput>, Prisma.OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput>
+export type OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkEmployerUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkEmployerCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  delete?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  connect?: Prisma.OpWorkEmployerWhereUniqueInput | Prisma.OpWorkEmployerWhereUniqueInput[]
+  update?: Prisma.OpWorkEmployerUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkEmployerUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkEmployerUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkEmployerScalarWhereInput | Prisma.OpWorkEmployerScalarWhereInput[]
 }
 
 export type OpWorkEmployerCreateNestedOneWithoutOpWorkJobInput = {
@@ -772,59 +787,50 @@ export type OpWorkEmployerCreateOrConnectWithoutOpWorkProfileInput = {
   create: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
 }
 
-export type OpWorkEmployerUpsertWithoutOpWorkProfileInput = {
-  update: Prisma.XOR<Prisma.OpWorkEmployerUpdateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput>
-  create: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
-  where?: Prisma.OpWorkEmployerWhereInput
+export type OpWorkEmployerCreateManyOpWorkProfileInputEnvelope = {
+  data: Prisma.OpWorkEmployerCreateManyOpWorkProfileInput | Prisma.OpWorkEmployerCreateManyOpWorkProfileInput[]
+  skipDuplicates?: boolean
 }
 
-export type OpWorkEmployerUpdateToOneWithWhereWithoutOpWorkProfileInput = {
-  where?: Prisma.OpWorkEmployerWhereInput
+export type OpWorkEmployerUpsertWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEmployerWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpWorkEmployerUpdateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput>
+  create: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkEmployerUpdateWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEmployerWhereUniqueInput
   data: Prisma.XOR<Prisma.OpWorkEmployerUpdateWithoutOpWorkProfileInput, Prisma.OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput>
 }
 
-export type OpWorkEmployerUpdateWithoutOpWorkProfileInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  mission?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  culture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  headquarters?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  OpWorkJob?: Prisma.OpWorkJobUpdateManyWithoutOpWorkEmployerNestedInput
+export type OpWorkEmployerUpdateManyWithWhereWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkEmployerScalarWhereInput
+  data: Prisma.XOR<Prisma.OpWorkEmployerUpdateManyMutationInput, Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileInput>
 }
 
-export type OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  mission?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  culture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  headquarters?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  OpWorkJob?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkEmployerNestedInput
+export type OpWorkEmployerScalarWhereInput = {
+  AND?: Prisma.OpWorkEmployerScalarWhereInput | Prisma.OpWorkEmployerScalarWhereInput[]
+  OR?: Prisma.OpWorkEmployerScalarWhereInput[]
+  NOT?: Prisma.OpWorkEmployerScalarWhereInput | Prisma.OpWorkEmployerScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkEmployer"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkEmployer"> | string
+  companyName?: Prisma.StringFilter<"OpWorkEmployer"> | string
+  industry?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  description?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  mission?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  culture?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  foundedYear?: Prisma.IntNullableFilter<"OpWorkEmployer"> | number | null
+  headquarters?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  logoUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  companyEmail?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  companyPhone?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  companyWebsite?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  linkedinUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  twitterUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  facebookUrl?: Prisma.StringNullableFilter<"OpWorkEmployer"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OpWorkEmployer"> | Date | string
 }
 
 export type OpWorkEmployerCreateWithoutOpWorkJobInput = {
@@ -846,7 +852,7 @@ export type OpWorkEmployerCreateWithoutOpWorkJobInput = {
   facebookUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEmployerInput
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkEmployerInput
 }
 
 export type OpWorkEmployerUncheckedCreateWithoutOpWorkJobInput = {
@@ -906,12 +912,98 @@ export type OpWorkEmployerUpdateWithoutOpWorkJobInput = {
   facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkEmployerNestedInput
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkEmployerNestedInput
 }
 
 export type OpWorkEmployerUncheckedUpdateWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mission?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  culture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  headquarters?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OpWorkEmployerCreateManyOpWorkProfileInput = {
+  id?: string
+  companyName: string
+  industry?: string | null
+  description?: string | null
+  mission?: string | null
+  culture?: string | null
+  foundedYear?: number | null
+  headquarters?: string | null
+  logoUrl?: string | null
+  coverImageUrl?: string | null
+  companyEmail?: string | null
+  companyPhone?: string | null
+  companyWebsite?: string | null
+  linkedinUrl?: string | null
+  twitterUrl?: string | null
+  facebookUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OpWorkEmployerUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mission?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  culture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  headquarters?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJob?: Prisma.OpWorkJobUpdateManyWithoutOpWorkEmployerNestedInput
+}
+
+export type OpWorkEmployerUncheckedUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mission?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  culture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  headquarters?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJob?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkEmployerNestedInput
+}
+
+export type OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -982,8 +1074,8 @@ export type OpWorkEmployerSelect<ExtArgs extends runtime.Types.Extensions.Intern
   facebookUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkEmployer$OpWorkJobArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
   _count?: boolean | Prisma.OpWorkEmployerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEmployer"]>
 
@@ -1007,7 +1099,7 @@ export type OpWorkEmployerSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   facebookUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEmployer"]>
 
 export type OpWorkEmployerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1030,7 +1122,7 @@ export type OpWorkEmployerSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   facebookUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkEmployer"]>
 
 export type OpWorkEmployerSelectScalar = {
@@ -1057,30 +1149,30 @@ export type OpWorkEmployerSelectScalar = {
 
 export type OpWorkEmployerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "companyName" | "industry" | "description" | "mission" | "culture" | "foundedYear" | "headquarters" | "logoUrl" | "coverImageUrl" | "companyEmail" | "companyPhone" | "companyWebsite" | "linkedinUrl" | "twitterUrl" | "facebookUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkEmployer"]>
 export type OpWorkEmployerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
   OpWorkJob?: boolean | Prisma.OpWorkEmployer$OpWorkJobArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
   _count?: boolean | Prisma.OpWorkEmployerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OpWorkEmployerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
 }
 export type OpWorkEmployerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>
 }
 
 export type $OpWorkEmployerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OpWorkEmployer"
   objects: {
     /**
+     * Все вакансии, размещенные этой компанией
+     */
+    OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>[]
+    /**
      * Связанный основной профиль
      * @DtoRelationCanConnectOnCreate
      * @DtoRelationCanConnectOnUpdate
      */
-    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
-    /**
-     * Все вакансии, размещенные этой компанией
-     */
-    OpWorkJob: Prisma.$OpWorkJobPayload<ExtArgs>[]
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -1577,8 +1669,8 @@ readonly fields: OpWorkEmployerFieldRefs;
  */
 export interface Prisma__OpWorkEmployerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  OpWorkProfile<T extends Prisma.OpWorkProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   OpWorkJob<T extends Prisma.OpWorkEmployer$OpWorkJobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkEmployer$OpWorkJobArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  OpWorkProfile<T extends Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkEmployer$OpWorkProfileArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2044,6 +2136,25 @@ export type OpWorkEmployer$OpWorkJobArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.OpWorkJobScalarFieldEnum | Prisma.OpWorkJobScalarFieldEnum[]
+}
+
+/**
+ * OpWorkEmployer.OpWorkProfile
+ */
+export type OpWorkEmployer$OpWorkProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OpWorkProfile
+   */
+  select?: Prisma.OpWorkProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OpWorkProfile
+   */
+  omit?: Prisma.OpWorkProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkProfileInclude<ExtArgs> | null
+  where?: Prisma.OpWorkProfileWhereInput
 }
 
 /**

@@ -157,10 +157,11 @@ twitterUrl?: string  | null;
 @MaxLength(500)
 facebookUrl?: string  | null;
 @ApiProperty({
+  required: false,
   type: CreateOpWorkEmployerOpWorkProfileRelationInputDto,
 })
-@IsNotEmpty()
+@IsOptional()
 @ValidateNested()
 @Type(() => CreateOpWorkEmployerOpWorkProfileRelationInputDto)
-OpWorkProfile!: CreateOpWorkEmployerOpWorkProfileRelationInputDto ;
+OpWorkProfile?: CreateOpWorkEmployerOpWorkProfileRelationInputDto ;
 }

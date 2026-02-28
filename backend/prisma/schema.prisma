@@ -767,13 +767,14 @@ model OpWorkProfile {
   /// Владелец профиля в системе аутентификации
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
-  AuthUser                   AuthUser                    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROFILE__USER_ID")
+  AuthUser        AuthUser          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROFILE__USER_ID")
   /// Профиль соискателя (если применимо)
-  opWorkJobSeeker            OpWorkJobSeeker?
+  opWorkJobSeeker OpWorkJobSeeker[]
   /// Профиль работодателя (если применимо)
-  opWorkEmployer             OpWorkEmployer?
+  opWorkEmployer  OpWorkEmployer[]
   /// Профиль проекта (если применимо)
-  opWorkProject              OpWorkProject?
+  opWorkProject   OpWorkProject[]
+
   /// Размещенные вакансии
   opWorkJobs                 OpWorkJob[]
   /// Отклики на вакансии
@@ -872,13 +873,6 @@ model OpWorkJobSeeker {
   /// Временная метка последнего обновления
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
-  /// === СВЯЗИ ===
-
-  /// Связанный основной профиль
-  /// @DtoRelationCanConnectOnCreate
-  /// @DtoRelationCanConnectOnUpdate
-  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_JOB_SEEKER__PROFILE_ID")
-
   /// === ДЕТАЛИ ===
 
   /// Опыт работы соискателя
@@ -892,9 +886,13 @@ model OpWorkJobSeeker {
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
-  /// Уникальность профиля соискателя
-  /// Гарантирует что у основного профиля может быть только один профиль соискателя
-  @@unique(name: "uqOpWorkJobSeekerProfile", [profileId], map: "UQ_OPWORK_JOB_SEEKER__PROFILE_ID")
+  /// === СВЯЗИ ===
+
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], map: "FK_OPWORK_JOB_SEEKER__PROFILE_ID")
+
   /// Индексы для оптимизации поиска
   @@index([profileId], map: "IDX_OPWORK_JOB_SEEKER__PROFILE_ID")
   @@index([isOpenToWork], map: "IDX_OPWORK_JOB_SEEKER__IS_OPEN_TO_WORK")
@@ -1079,13 +1077,6 @@ model OpWorkEmployer {
   /// Временная метка последнего обновления
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
-  /// === СВЯЗИ ===
-
-  /// Связанный основной профиль
-  /// @DtoRelationCanConnectOnCreate
-  /// @DtoRelationCanConnectOnUpdate
-  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_EMPLOYER__PROFILE_ID")
-
   /// === ВАКАНСИИ ===
 
   /// Все вакансии, размещенные этой компанией
@@ -1093,9 +1084,13 @@ model OpWorkEmployer {
 
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
-  /// Уникальность профиля работодателя
-  /// Гарантирует что у основного профиля может быть только один профиль работодателя
-  @@unique(name: "uqOpWorkEmployerProfile", [profileId], map: "UQ_OPWORK_EMPLOYER__PROFILE_ID")
+  /// === СВЯЗИ ===
+
+  /// Связанный основной профиль
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], map: "FK_OPWORK_EMPLOYER__PROFILE_ID")
+
   /// Индексы для оптимизации поиска
   @@index([profileId], map: "IDX_OPWORK_EMPLOYER__PROFILE_ID")
   @@index([companyName], map: "IDX_OPWORK_EMPLOYER__COMPANY_NAME")
@@ -1194,18 +1189,15 @@ model OpWorkProject {
   /// Временная метка последнего обновления
   updatedAt DateTime @default(now()) @db.Timestamp(6)
 
+  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
+
   /// === СВЯЗИ ===
 
   /// Связанный основной профиль
   /// @DtoRelationCanConnectOnCreate
   /// @DtoRelationCanConnectOnUpdate
-  OpWorkProfile OpWorkProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_PROJECT__PROFILE_ID")
+  OpWorkProfile OpWorkProfile? @relation(fields: [profileId], references: [id], map: "FK_OPWORK_PROJECT__PROFILE_ID")
 
-  /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
-
-  /// Уникальность профиля проекта
-  /// Гарантирует что у основного профиля может быть только один профиль проекта
-  @@unique(name: "uqOpWorkProjectProfile", [profileId], map: "UQ_OPWORK_PROJECT__PROFILE_ID")
   /// Индексы для оптимизации поиска
   @@index([profileId], map: "IDX_OPWORK_PROJECT__PROFILE_ID")
   @@index([title], map: "IDX_OPWORK_PROJECT__TITLE")

@@ -272,9 +272,9 @@ export type OpWorkProfileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"OpWorkProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkProfile"> | Date | string
   AuthUser?: Prisma.XOR<Prisma.AuthUserScalarRelationFilter, Prisma.AuthUserWhereInput>
-  opWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerNullableScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput> | null
-  opWorkEmployer?: Prisma.XOR<Prisma.OpWorkEmployerNullableScalarRelationFilter, Prisma.OpWorkEmployerWhereInput> | null
-  opWorkProject?: Prisma.XOR<Prisma.OpWorkProjectNullableScalarRelationFilter, Prisma.OpWorkProjectWhereInput> | null
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerListRelationFilter
+  opWorkEmployer?: Prisma.OpWorkEmployerListRelationFilter
+  opWorkProject?: Prisma.OpWorkProjectListRelationFilter
   opWorkJobs?: Prisma.OpWorkJobListRelationFilter
   opWorkApplications?: Prisma.OpWorkApplicationListRelationFilter
   opWorkSavedJobs?: Prisma.OpWorkSavedJobListRelationFilter
@@ -308,9 +308,9 @@ export type OpWorkProfileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   AuthUser?: Prisma.AuthUserOrderByWithRelationInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerOrderByWithRelationInput
-  opWorkEmployer?: Prisma.OpWorkEmployerOrderByWithRelationInput
-  opWorkProject?: Prisma.OpWorkProjectOrderByWithRelationInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerOrderByRelationAggregateInput
+  opWorkEmployer?: Prisma.OpWorkEmployerOrderByRelationAggregateInput
+  opWorkProject?: Prisma.OpWorkProjectOrderByRelationAggregateInput
   opWorkJobs?: Prisma.OpWorkJobOrderByRelationAggregateInput
   opWorkApplications?: Prisma.OpWorkApplicationOrderByRelationAggregateInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobOrderByRelationAggregateInput
@@ -348,9 +348,9 @@ export type OpWorkProfileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"OpWorkProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkProfile"> | Date | string
   AuthUser?: Prisma.XOR<Prisma.AuthUserScalarRelationFilter, Prisma.AuthUserWhereInput>
-  opWorkJobSeeker?: Prisma.XOR<Prisma.OpWorkJobSeekerNullableScalarRelationFilter, Prisma.OpWorkJobSeekerWhereInput> | null
-  opWorkEmployer?: Prisma.XOR<Prisma.OpWorkEmployerNullableScalarRelationFilter, Prisma.OpWorkEmployerWhereInput> | null
-  opWorkProject?: Prisma.XOR<Prisma.OpWorkProjectNullableScalarRelationFilter, Prisma.OpWorkProjectWhereInput> | null
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerListRelationFilter
+  opWorkEmployer?: Prisma.OpWorkEmployerListRelationFilter
+  opWorkProject?: Prisma.OpWorkProjectListRelationFilter
   opWorkJobs?: Prisma.OpWorkJobListRelationFilter
   opWorkApplications?: Prisma.OpWorkApplicationListRelationFilter
   opWorkSavedJobs?: Prisma.OpWorkSavedJobListRelationFilter
@@ -427,9 +427,9 @@ export type OpWorkProfileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -462,9 +462,9 @@ export type OpWorkProfileUncheckedCreateInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -497,9 +497,9 @@ export type OpWorkProfileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -532,9 +532,9 @@ export type OpWorkProfileUncheckedUpdateInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -678,14 +678,14 @@ export type OpWorkProfileMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type OpWorkProfileScalarRelationFilter = {
-  is?: Prisma.OpWorkProfileWhereInput
-  isNot?: Prisma.OpWorkProfileWhereInput
-}
-
 export type OpWorkProfileNullableScalarRelationFilter = {
   is?: Prisma.OpWorkProfileWhereInput | null
   isNot?: Prisma.OpWorkProfileWhereInput | null
+}
+
+export type OpWorkProfileScalarRelationFilter = {
+  is?: Prisma.OpWorkProfileWhereInput
+  isNot?: Prisma.OpWorkProfileWhereInput
 }
 
 export type OpWorkProfileCreateNestedManyWithoutAuthUserInput = {
@@ -744,10 +744,12 @@ export type OpWorkProfileCreateNestedOneWithoutOpWorkJobSeekerInput = {
   connect?: Prisma.OpWorkProfileWhereUniqueInput
 }
 
-export type OpWorkProfileUpdateOneRequiredWithoutOpWorkJobSeekerNestedInput = {
+export type OpWorkProfileUpdateOneWithoutOpWorkJobSeekerNestedInput = {
   create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkJobSeekerInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerInput>
   connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkJobSeekerInput
   upsert?: Prisma.OpWorkProfileUpsertWithoutOpWorkJobSeekerInput
+  disconnect?: Prisma.OpWorkProfileWhereInput | boolean
+  delete?: Prisma.OpWorkProfileWhereInput | boolean
   connect?: Prisma.OpWorkProfileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProfileUpdateToOneWithWhereWithoutOpWorkJobSeekerInput, Prisma.OpWorkProfileUpdateWithoutOpWorkJobSeekerInput>, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerInput>
 }
@@ -786,10 +788,12 @@ export type OpWorkProfileCreateNestedOneWithoutOpWorkEmployerInput = {
   connect?: Prisma.OpWorkProfileWhereUniqueInput
 }
 
-export type OpWorkProfileUpdateOneRequiredWithoutOpWorkEmployerNestedInput = {
+export type OpWorkProfileUpdateOneWithoutOpWorkEmployerNestedInput = {
   create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkEmployerInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkEmployerInput>
   connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkEmployerInput
   upsert?: Prisma.OpWorkProfileUpsertWithoutOpWorkEmployerInput
+  disconnect?: Prisma.OpWorkProfileWhereInput | boolean
+  delete?: Prisma.OpWorkProfileWhereInput | boolean
   connect?: Prisma.OpWorkProfileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProfileUpdateToOneWithWhereWithoutOpWorkEmployerInput, Prisma.OpWorkProfileUpdateWithoutOpWorkEmployerInput>, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkEmployerInput>
 }
@@ -800,10 +804,12 @@ export type OpWorkProfileCreateNestedOneWithoutOpWorkProjectInput = {
   connect?: Prisma.OpWorkProfileWhereUniqueInput
 }
 
-export type OpWorkProfileUpdateOneRequiredWithoutOpWorkProjectNestedInput = {
+export type OpWorkProfileUpdateOneWithoutOpWorkProjectNestedInput = {
   create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkProjectInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkProjectInput>
   connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkProjectInput
   upsert?: Prisma.OpWorkProfileUpsertWithoutOpWorkProjectInput
+  disconnect?: Prisma.OpWorkProfileWhereInput | boolean
+  delete?: Prisma.OpWorkProfileWhereInput | boolean
   connect?: Prisma.OpWorkProfileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProfileUpdateToOneWithWhereWithoutOpWorkProjectInput, Prisma.OpWorkProfileUpdateWithoutOpWorkProjectInput>, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkProjectInput>
 }
@@ -982,9 +988,9 @@ export type OpWorkProfileCreateWithoutAuthUserInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1016,9 +1022,9 @@ export type OpWorkProfileUncheckedCreateWithoutAuthUserInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1099,8 +1105,8 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1133,8 +1139,8 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1183,8 +1189,8 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -1217,8 +1223,8 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -1251,9 +1257,9 @@ export type OpWorkProfileCreateWithoutOpWorkExperiencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1285,9 +1291,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkExperiencesInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1335,9 +1341,9 @@ export type OpWorkProfileUpdateWithoutOpWorkExperiencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -1369,9 +1375,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkExperiencesInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -1403,9 +1409,9 @@ export type OpWorkProfileCreateWithoutOpWorkEducationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1437,9 +1443,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEducationsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1487,9 +1493,9 @@ export type OpWorkProfileUpdateWithoutOpWorkEducationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -1521,9 +1527,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEducationsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -1555,8 +1561,8 @@ export type OpWorkProfileCreateWithoutOpWorkEmployerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1589,8 +1595,8 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEmployerInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1639,8 +1645,8 @@ export type OpWorkProfileUpdateWithoutOpWorkEmployerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -1673,8 +1679,8 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEmployerInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -1707,8 +1713,8 @@ export type OpWorkProfileCreateWithoutOpWorkProjectInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -1741,8 +1747,8 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkProjectInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1791,8 +1797,8 @@ export type OpWorkProfileUpdateWithoutOpWorkProjectInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -1825,8 +1831,8 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkProjectInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -1859,9 +1865,9 @@ export type OpWorkProfileCreateWithoutOpWorkJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput
@@ -1893,9 +1899,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -1943,9 +1949,9 @@ export type OpWorkProfileUpdateWithoutOpWorkJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutOpWorkProfileNestedInput
@@ -1977,9 +1983,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2011,9 +2017,9 @@ export type OpWorkProfileCreateWithoutOpWorkApplicationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput
@@ -2045,9 +2051,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkApplicationsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2095,9 +2101,9 @@ export type OpWorkProfileUpdateWithoutOpWorkApplicationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutOpWorkProfileNestedInput
@@ -2129,9 +2135,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkApplicationsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2163,9 +2169,9 @@ export type OpWorkProfileCreateWithoutOpWorkSavedJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput
@@ -2197,9 +2203,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedJobsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2247,9 +2253,9 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutOpWorkProfileNestedInput
@@ -2281,9 +2287,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedJobsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2315,9 +2321,9 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -2349,9 +2355,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerSkillsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2399,9 +2405,9 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -2433,9 +2439,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerSkillsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2467,9 +2473,9 @@ export type OpWorkProfileCreateWithoutOpWorkJobSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -2501,9 +2507,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSkillsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2551,9 +2557,9 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -2585,9 +2591,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSkillsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2619,9 +2625,9 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -2653,9 +2659,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2703,9 +2709,9 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -2737,9 +2743,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2771,9 +2777,9 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationSettingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -2805,9 +2811,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationSettingsInput =
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -2855,9 +2861,9 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationSettingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -2889,9 +2895,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationSettingsInput =
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2923,9 +2929,9 @@ export type OpWorkProfileCreateWithoutOpWorkSearchHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -2957,9 +2963,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSearchHistoriesInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -3007,9 +3013,9 @@ export type OpWorkProfileUpdateWithoutOpWorkSearchHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -3041,9 +3047,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSearchHistoriesInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -3075,9 +3081,9 @@ export type OpWorkProfileCreateWithoutOpWorkJobViewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -3109,9 +3115,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobViewsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -3159,9 +3165,9 @@ export type OpWorkProfileUpdateWithoutOpWorkJobViewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -3193,9 +3199,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobViewsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -3227,9 +3233,9 @@ export type OpWorkProfileCreateWithoutOpWorkSavedSearchesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -3261,9 +3267,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedSearchesInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -3311,9 +3317,9 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedSearchesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -3345,9 +3351,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedSearchesInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -3379,9 +3385,9 @@ export type OpWorkProfileCreateWithoutOpWorkJobTagsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
@@ -3413,9 +3419,9 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobTagsInput = {
   coverImage?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedOneWithoutOpWorkProfileInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
@@ -3463,9 +3469,9 @@ export type OpWorkProfileUpdateWithoutOpWorkJobTagsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -3497,9 +3503,9 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobTagsInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -3548,9 +3554,9 @@ export type OpWorkProfileUpdateWithoutAuthUserInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
@@ -3582,9 +3588,9 @@ export type OpWorkProfileUncheckedUpdateWithoutAuthUserInput = {
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateOneWithoutOpWorkProfileNestedInput
-  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -3624,6 +3630,9 @@ export type OpWorkProfileUncheckedUpdateManyWithoutAuthUserInput = {
  */
 
 export type OpWorkProfileCountOutputType = {
+  opWorkJobSeeker: number
+  opWorkEmployer: number
+  opWorkProject: number
   opWorkJobs: number
   opWorkApplications: number
   opWorkSavedJobs: number
@@ -3639,6 +3648,9 @@ export type OpWorkProfileCountOutputType = {
 }
 
 export type OpWorkProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  opWorkJobSeeker?: boolean | OpWorkProfileCountOutputTypeCountOpWorkJobSeekerArgs
+  opWorkEmployer?: boolean | OpWorkProfileCountOutputTypeCountOpWorkEmployerArgs
+  opWorkProject?: boolean | OpWorkProfileCountOutputTypeCountOpWorkProjectArgs
   opWorkJobs?: boolean | OpWorkProfileCountOutputTypeCountOpWorkJobsArgs
   opWorkApplications?: boolean | OpWorkProfileCountOutputTypeCountOpWorkApplicationsArgs
   opWorkSavedJobs?: boolean | OpWorkProfileCountOutputTypeCountOpWorkSavedJobsArgs
@@ -3661,6 +3673,27 @@ export type OpWorkProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
    * Select specific fields to fetch from the OpWorkProfileCountOutputType
    */
   select?: Prisma.OpWorkProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * OpWorkProfileCountOutputType without action
+ */
+export type OpWorkProfileCountOutputTypeCountOpWorkJobSeekerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OpWorkJobSeekerWhereInput
+}
+
+/**
+ * OpWorkProfileCountOutputType without action
+ */
+export type OpWorkProfileCountOutputTypeCountOpWorkEmployerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OpWorkEmployerWhereInput
+}
+
+/**
+ * OpWorkProfileCountOutputType without action
+ */
+export type OpWorkProfileCountOutputTypeCountOpWorkProjectArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OpWorkProjectWhereInput
 }
 
 /**
@@ -3884,15 +3917,15 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * Профиль соискателя (если применимо)
      */
-    opWorkJobSeeker: Prisma.$OpWorkJobSeekerPayload<ExtArgs> | null
+    opWorkJobSeeker: Prisma.$OpWorkJobSeekerPayload<ExtArgs>[]
     /**
      * Профиль работодателя (если применимо)
      */
-    opWorkEmployer: Prisma.$OpWorkEmployerPayload<ExtArgs> | null
+    opWorkEmployer: Prisma.$OpWorkEmployerPayload<ExtArgs>[]
     /**
      * Профиль проекта (если применимо)
      */
-    opWorkProject: Prisma.$OpWorkProjectPayload<ExtArgs> | null
+    opWorkProject: Prisma.$OpWorkProjectPayload<ExtArgs>[]
     /**
      * Размещенные вакансии
      */
@@ -4413,9 +4446,9 @@ readonly fields: OpWorkProfileFieldRefs;
 export interface Prisma__OpWorkProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   AuthUser<T extends Prisma.AuthUserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthUserDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthUserClient<runtime.Types.Result.GetResult<Prisma.$AuthUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  opWorkJobSeeker<T extends Prisma.OpWorkProfile$opWorkJobSeekerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkJobSeekerArgs<ExtArgs>>): Prisma.Prisma__OpWorkJobSeekerClient<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSeekerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  opWorkEmployer<T extends Prisma.OpWorkProfile$opWorkEmployerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkEmployerArgs<ExtArgs>>): Prisma.Prisma__OpWorkEmployerClient<runtime.Types.Result.GetResult<Prisma.$OpWorkEmployerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  opWorkProject<T extends Prisma.OpWorkProfile$opWorkProjectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkProjectArgs<ExtArgs>>): Prisma.Prisma__OpWorkProjectClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  opWorkJobSeeker<T extends Prisma.OpWorkProfile$opWorkJobSeekerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkJobSeekerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSeekerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  opWorkEmployer<T extends Prisma.OpWorkProfile$opWorkEmployerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkEmployerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkEmployerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  opWorkProject<T extends Prisma.OpWorkProfile$opWorkProjectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkProjectArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkJobs<T extends Prisma.OpWorkProfile$opWorkJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkApplications<T extends Prisma.OpWorkProfile$opWorkApplicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkSavedJobs<T extends Prisma.OpWorkProfile$opWorkSavedJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkSavedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkSavedJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4886,6 +4919,11 @@ export type OpWorkProfile$opWorkJobSeekerArgs<ExtArgs extends runtime.Types.Exte
    */
   include?: Prisma.OpWorkJobSeekerInclude<ExtArgs> | null
   where?: Prisma.OpWorkJobSeekerWhereInput
+  orderBy?: Prisma.OpWorkJobSeekerOrderByWithRelationInput | Prisma.OpWorkJobSeekerOrderByWithRelationInput[]
+  cursor?: Prisma.OpWorkJobSeekerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OpWorkJobSeekerScalarFieldEnum | Prisma.OpWorkJobSeekerScalarFieldEnum[]
 }
 
 /**
@@ -4905,6 +4943,11 @@ export type OpWorkProfile$opWorkEmployerArgs<ExtArgs extends runtime.Types.Exten
    */
   include?: Prisma.OpWorkEmployerInclude<ExtArgs> | null
   where?: Prisma.OpWorkEmployerWhereInput
+  orderBy?: Prisma.OpWorkEmployerOrderByWithRelationInput | Prisma.OpWorkEmployerOrderByWithRelationInput[]
+  cursor?: Prisma.OpWorkEmployerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OpWorkEmployerScalarFieldEnum | Prisma.OpWorkEmployerScalarFieldEnum[]
 }
 
 /**
@@ -4924,6 +4967,11 @@ export type OpWorkProfile$opWorkProjectArgs<ExtArgs extends runtime.Types.Extens
    */
   include?: Prisma.OpWorkProjectInclude<ExtArgs> | null
   where?: Prisma.OpWorkProjectWhereInput
+  orderBy?: Prisma.OpWorkProjectOrderByWithRelationInput | Prisma.OpWorkProjectOrderByWithRelationInput[]
+  cursor?: Prisma.OpWorkProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OpWorkProjectScalarFieldEnum | Prisma.OpWorkProjectScalarFieldEnum[]
 }
 
 /**

@@ -222,10 +222,11 @@ maintenanceStart?: Date  | null;
 @IsDateString()
 maintenanceEnd?: Date  | null;
 @ApiProperty({
+  required: false,
   type: CreateOpWorkProjectOpWorkProfileRelationInputDto,
 })
-@IsNotEmpty()
+@IsOptional()
 @ValidateNested()
 @Type(() => CreateOpWorkProjectOpWorkProfileRelationInputDto)
-OpWorkProfile!: CreateOpWorkProjectOpWorkProfileRelationInputDto ;
+OpWorkProfile?: CreateOpWorkProjectOpWorkProfileRelationInputDto ;
 }

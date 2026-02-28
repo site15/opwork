@@ -359,7 +359,7 @@ export type OpWorkProjectWhereInput = {
   maintenanceEnd?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
-  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
 }
 
 export type OpWorkProjectOrderByWithRelationInput = {
@@ -395,10 +395,10 @@ export type OpWorkProjectOrderByWithRelationInput = {
 
 export type OpWorkProjectWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  profileId?: string
   AND?: Prisma.OpWorkProjectWhereInput | Prisma.OpWorkProjectWhereInput[]
   OR?: Prisma.OpWorkProjectWhereInput[]
   NOT?: Prisma.OpWorkProjectWhereInput | Prisma.OpWorkProjectWhereInput[]
+  profileId?: Prisma.UuidFilter<"OpWorkProject"> | string
   title?: Prisma.StringFilter<"OpWorkProject"> | string
   description?: Prisma.StringFilter<"OpWorkProject"> | string
   status?: Prisma.EnumOpWorkProjectStatusNullableFilter<"OpWorkProject"> | $Enums.OpWorkProjectStatus | null
@@ -424,8 +424,8 @@ export type OpWorkProjectWhereUniqueInput = Prisma.AtLeast<{
   maintenanceEnd?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
-  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
-}, "id" | "uqOpWorkProjectProfile">
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
+}, "id">
 
 export type OpWorkProjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -520,7 +520,7 @@ export type OpWorkProjectCreateInput = {
   maintenanceEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkProjectInput
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkProjectInput
 }
 
 export type OpWorkProjectUncheckedCreateInput = {
@@ -580,7 +580,7 @@ export type OpWorkProjectUpdateInput = {
   maintenanceEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkProjectNestedInput
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkProjectNestedInput
 }
 
 export type OpWorkProjectUncheckedUpdateInput = {
@@ -702,9 +702,14 @@ export type OpWorkProjectUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type OpWorkProjectNullableScalarRelationFilter = {
-  is?: Prisma.OpWorkProjectWhereInput | null
-  isNot?: Prisma.OpWorkProjectWhereInput | null
+export type OpWorkProjectListRelationFilter = {
+  every?: Prisma.OpWorkProjectWhereInput
+  some?: Prisma.OpWorkProjectWhereInput
+  none?: Prisma.OpWorkProjectWhereInput
+}
+
+export type OpWorkProjectOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type OpWorkProjectCountOrderByAggregateInput = {
@@ -797,36 +802,46 @@ export type OpWorkProjectMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type OpWorkProjectCreateNestedOneWithoutOpWorkProfileInput = {
-  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput
-  connect?: Prisma.OpWorkProjectWhereUniqueInput
+export type OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkProjectCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
 }
 
-export type OpWorkProjectUncheckedCreateNestedOneWithoutOpWorkProfileInput = {
-  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput
-  connect?: Prisma.OpWorkProjectWhereUniqueInput
+export type OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkProjectCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
 }
 
-export type OpWorkProjectUpdateOneWithoutOpWorkProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput
-  upsert?: Prisma.OpWorkProjectUpsertWithoutOpWorkProfileInput
-  disconnect?: Prisma.OpWorkProjectWhereInput | boolean
-  delete?: Prisma.OpWorkProjectWhereInput | boolean
-  connect?: Prisma.OpWorkProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProjectUpdateToOneWithWhereWithoutOpWorkProfileInput, Prisma.OpWorkProjectUpdateWithoutOpWorkProfileInput>, Prisma.OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput>
+export type OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkProjectUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkProjectCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  delete?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  connect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  update?: Prisma.OpWorkProjectUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkProjectUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkProjectScalarWhereInput | Prisma.OpWorkProjectScalarWhereInput[]
 }
 
-export type OpWorkProjectUncheckedUpdateOneWithoutOpWorkProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
-  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput
-  upsert?: Prisma.OpWorkProjectUpsertWithoutOpWorkProfileInput
-  disconnect?: Prisma.OpWorkProjectWhereInput | boolean
-  delete?: Prisma.OpWorkProjectWhereInput | boolean
-  connect?: Prisma.OpWorkProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProjectUpdateToOneWithWhereWithoutOpWorkProfileInput, Prisma.OpWorkProjectUpdateWithoutOpWorkProfileInput>, Prisma.OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput>
+export type OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkProjectUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkProjectCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  delete?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  connect?: Prisma.OpWorkProjectWhereUniqueInput | Prisma.OpWorkProjectWhereUniqueInput[]
+  update?: Prisma.OpWorkProjectUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkProjectUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkProjectUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkProjectScalarWhereInput | Prisma.OpWorkProjectScalarWhereInput[]
 }
 
 export type NullableEnumOpWorkProjectStatusFieldUpdateOperationsInput = {
@@ -900,15 +915,87 @@ export type OpWorkProjectCreateOrConnectWithoutOpWorkProfileInput = {
   create: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
 }
 
-export type OpWorkProjectUpsertWithoutOpWorkProfileInput = {
-  update: Prisma.XOR<Prisma.OpWorkProjectUpdateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput>
-  create: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
-  where?: Prisma.OpWorkProjectWhereInput
+export type OpWorkProjectCreateManyOpWorkProfileInputEnvelope = {
+  data: Prisma.OpWorkProjectCreateManyOpWorkProfileInput | Prisma.OpWorkProjectCreateManyOpWorkProfileInput[]
+  skipDuplicates?: boolean
 }
 
-export type OpWorkProjectUpdateToOneWithWhereWithoutOpWorkProfileInput = {
-  where?: Prisma.OpWorkProjectWhereInput
+export type OpWorkProjectUpsertWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpWorkProjectUpdateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput>
+  create: Prisma.XOR<Prisma.OpWorkProjectCreateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkProjectUpdateWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkProjectWhereUniqueInput
   data: Prisma.XOR<Prisma.OpWorkProjectUpdateWithoutOpWorkProfileInput, Prisma.OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkProjectUpdateManyWithWhereWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.OpWorkProjectUpdateManyMutationInput, Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileInput>
+}
+
+export type OpWorkProjectScalarWhereInput = {
+  AND?: Prisma.OpWorkProjectScalarWhereInput | Prisma.OpWorkProjectScalarWhereInput[]
+  OR?: Prisma.OpWorkProjectScalarWhereInput[]
+  NOT?: Prisma.OpWorkProjectScalarWhereInput | Prisma.OpWorkProjectScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkProject"> | string
+  profileId?: Prisma.UuidFilter<"OpWorkProject"> | string
+  title?: Prisma.StringFilter<"OpWorkProject"> | string
+  description?: Prisma.StringFilter<"OpWorkProject"> | string
+  status?: Prisma.EnumOpWorkProjectStatusNullableFilter<"OpWorkProject"> | $Enums.OpWorkProjectStatus | null
+  type?: Prisma.EnumOpWorkProjectTypeNullableFilter<"OpWorkProject"> | $Enums.OpWorkProjectType | null
+  githubRepoUrl?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  technologies?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  architecture?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  plannedDatesDescription?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  plannedStartDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  plannedEndDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  implementationDescription?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  actualStartDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  developmentStart?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  testingStart?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  launchDescription?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  launchDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  goLiveDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  completionDescription?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  actualEndDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  completionDate?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  maintenanceDescription?: Prisma.StringNullableFilter<"OpWorkProject"> | string | null
+  maintenanceStart?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  maintenanceEnd?: Prisma.DateTimeNullableFilter<"OpWorkProject"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OpWorkProject"> | Date | string
+}
+
+export type OpWorkProjectCreateManyOpWorkProfileInput = {
+  id?: string
+  title: string
+  description: string
+  status?: $Enums.OpWorkProjectStatus | null
+  type?: $Enums.OpWorkProjectType | null
+  githubRepoUrl?: string | null
+  technologies?: string | null
+  architecture?: string | null
+  plannedDatesDescription?: string | null
+  plannedStartDate?: Date | string | null
+  plannedEndDate?: Date | string | null
+  implementationDescription?: string | null
+  actualStartDate?: Date | string | null
+  developmentStart?: Date | string | null
+  testingStart?: Date | string | null
+  launchDescription?: string | null
+  launchDate?: Date | string | null
+  goLiveDate?: Date | string | null
+  completionDescription?: string | null
+  actualEndDate?: Date | string | null
+  completionDate?: Date | string | null
+  maintenanceDescription?: string | null
+  maintenanceStart?: Date | string | null
+  maintenanceEnd?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OpWorkProjectUpdateWithoutOpWorkProfileInput = {
@@ -969,6 +1056,35 @@ export type OpWorkProjectUncheckedUpdateWithoutOpWorkProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableEnumOpWorkProjectStatusFieldUpdateOperationsInput | $Enums.OpWorkProjectStatus | null
+  type?: Prisma.NullableEnumOpWorkProjectTypeFieldUpdateOperationsInput | $Enums.OpWorkProjectType | null
+  githubRepoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  technologies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architecture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plannedDatesDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  plannedStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  plannedEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  implementationDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  developmentStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testingStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  launchDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  goLiveDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actualEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  maintenanceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maintenanceStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  maintenanceEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type OpWorkProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -999,7 +1115,7 @@ export type OpWorkProjectSelect<ExtArgs extends runtime.Types.Extensions.Interna
   maintenanceEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkProject"]>
 
 export type OpWorkProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1030,7 +1146,7 @@ export type OpWorkProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   maintenanceEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkProject"]>
 
 export type OpWorkProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1061,7 +1177,7 @@ export type OpWorkProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   maintenanceEnd?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkProject"]>
 
 export type OpWorkProjectSelectScalar = {
@@ -1096,13 +1212,13 @@ export type OpWorkProjectSelectScalar = {
 
 export type OpWorkProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "title" | "description" | "status" | "type" | "githubRepoUrl" | "technologies" | "architecture" | "plannedDatesDescription" | "plannedStartDate" | "plannedEndDate" | "implementationDescription" | "actualStartDate" | "developmentStart" | "testingStart" | "launchDescription" | "launchDate" | "goLiveDate" | "completionDescription" | "actualEndDate" | "completionDate" | "maintenanceDescription" | "maintenanceStart" | "maintenanceEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkProject"]>
 export type OpWorkProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }
 export type OpWorkProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }
 export type OpWorkProjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  OpWorkProfile?: boolean | Prisma.OpWorkProfileDefaultArgs<ExtArgs>
+  OpWorkProfile?: boolean | Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>
 }
 
 export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1113,7 +1229,7 @@ export type $OpWorkProjectPayload<ExtArgs extends runtime.Types.Extensions.Inter
      * @DtoRelationCanConnectOnCreate
      * @DtoRelationCanConnectOnUpdate
      */
-    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs>
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -1637,7 +1753,7 @@ readonly fields: OpWorkProjectFieldRefs;
  */
 export interface Prisma__OpWorkProjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  OpWorkProfile<T extends Prisma.OpWorkProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  OpWorkProfile<T extends Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProject$OpWorkProfileArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2087,6 +2203,25 @@ export type OpWorkProjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many OpWorkProjects to delete.
    */
   limit?: number
+}
+
+/**
+ * OpWorkProject.OpWorkProfile
+ */
+export type OpWorkProject$OpWorkProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OpWorkProfile
+   */
+  select?: Prisma.OpWorkProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OpWorkProfile
+   */
+  omit?: Prisma.OpWorkProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkProfileInclude<ExtArgs> | null
+  where?: Prisma.OpWorkProfileWhereInput
 }
 
 /**

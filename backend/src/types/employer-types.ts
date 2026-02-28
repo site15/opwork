@@ -5,9 +5,7 @@ import { CreateOpWorkJobTagDto } from '../generated/rest/create-op-work-job-tag.
 import { CreateOpWorkJobDto } from '../generated/rest/create-op-work-job.dto';
 import { UpdateOpWorkEmployerDto } from '../generated/rest/update-op-work-employer.dto';
 
-export class SetEmployerProfileArgs extends OmitType(UpdateOpWorkEmployerDto, [
-  'OpWorkProfile',
-]) {}
+export class SetEmployerProfileArgs extends UpdateOpWorkEmployerDto {}
 
 export class SetEmployerJobArgs extends OmitType(CreateOpWorkJobDto, [
   'OpWorkEmployer',

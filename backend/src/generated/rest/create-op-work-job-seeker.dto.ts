@@ -125,10 +125,11 @@ githubUrl?: string  | null;
 @MaxLength(500)
 portfolioUrl?: string  | null;
 @ApiProperty({
+  required: false,
   type: CreateOpWorkJobSeekerOpWorkProfileRelationInputDto,
 })
-@IsNotEmpty()
+@IsOptional()
 @ValidateNested()
 @Type(() => CreateOpWorkJobSeekerOpWorkProfileRelationInputDto)
-OpWorkProfile!: CreateOpWorkJobSeekerOpWorkProfileRelationInputDto ;
+OpWorkProfile?: CreateOpWorkJobSeekerOpWorkProfileRelationInputDto ;
 }

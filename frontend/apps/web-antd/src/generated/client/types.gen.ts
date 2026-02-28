@@ -75,7 +75,7 @@ export type OpWorkJobStatus = 'DRAFT' | 'ACTIVE' | 'PAUSED' | 'CLOSED' | 'ARCHIV
 
 export type OpWorkEmployer = {
     id: string;
-    profileId: string;
+    profileId: string | null;
     companyName: string;
     industry: string | null;
     description: string | null;
@@ -93,8 +93,8 @@ export type OpWorkEmployer = {
     facebookUrl: string | null;
     createdAt: string;
     updatedAt: string;
-    OpWorkProfile?: OpWorkProfile;
     OpWorkJob?: Array<OpWorkJob>;
+    OpWorkProfile?: OpWorkProfile | null;
 };
 
 export type OpWorkApplicationStatus = 'PENDING' | 'REVIEWED' | 'SHORTLISTED' | 'INTERVIEW' | 'OFFER' | 'REJECTED' | 'WITHDRAWN';
@@ -234,7 +234,7 @@ export type OpWorkJobSeekerSkill = {
 
 export type OpWorkJobSeeker = {
     id: string;
-    profileId: string;
+    profileId: string | null;
     currentPosition: string | null;
     currentCompany: string | null;
     summary: string | null;
@@ -249,11 +249,11 @@ export type OpWorkJobSeeker = {
     portfolioUrl: string | null;
     createdAt: string;
     updatedAt: string;
-    OpWorkProfile?: OpWorkProfile;
     OpWorkExperience?: Array<OpWorkExperience>;
     OpWorkEducation?: Array<OpWorkEducation>;
     OpWorkJobSeekerSkill?: Array<OpWorkJobSeekerSkill>;
     opWorkApplications?: Array<OpWorkApplication>;
+    OpWorkProfile?: OpWorkProfile | null;
 };
 
 export type OpWorkProjectStatus = 'IDEA' | 'PLANNING' | 'DEVELOPMENT' | 'TESTING' | 'LAUNCH_READY' | 'LIVE' | 'MAINTENANCE' | 'ON_HOLD' | 'CANCELLED' | 'COMPLETED' | 'ARCHIVED';
@@ -262,7 +262,7 @@ export type OpWorkProjectType = 'MVP' | 'STARTUP' | 'PRODUCT' | 'SERVICE' | 'CON
 
 export type OpWorkProject = {
     id: string;
-    profileId: string;
+    profileId: string | null;
     title: string;
     description: string;
     status: OpWorkProjectStatus | null;
@@ -288,7 +288,7 @@ export type OpWorkProject = {
     maintenanceEnd: string | null;
     createdAt: string;
     updatedAt: string;
-    OpWorkProfile?: OpWorkProfile;
+    OpWorkProfile?: OpWorkProfile | null;
 };
 
 export type OpWorkNotificationType = 'APPLICATION_RECEIVED' | 'APPLICATION_SHORTLISTED' | 'INTERVIEW_SCHEDULED' | 'JOB_OFFER' | 'JOB_MATCH' | 'JOB_STATUS_CHANGED' | 'NEW_PROJECT' | 'MESSAGE_RECEIVED' | 'REMINDER' | 'SYSTEM_ALERT' | 'PROFILE_UPDATE' | 'NETWORK_ACTIVITY';
@@ -371,9 +371,9 @@ export type OpWorkProfile = {
     createdAt: string;
     updatedAt: string;
     AuthUser?: AuthUser;
-    opWorkJobSeeker?: OpWorkJobSeeker | null;
-    opWorkEmployer?: OpWorkEmployer | null;
-    opWorkProject?: OpWorkProject | null;
+    opWorkJobSeeker?: Array<OpWorkJobSeeker>;
+    opWorkEmployer?: Array<OpWorkEmployer>;
+    opWorkProject?: Array<OpWorkProject>;
     opWorkJobs?: Array<OpWorkJob>;
     opWorkApplications?: Array<OpWorkApplication>;
     opWorkSavedJobs?: Array<OpWorkSavedJob>;
@@ -622,20 +622,6 @@ export type FindManyOpWorkJobSeekerResponse = {
     meta: FindManyOpWorkJobSeekerResponseMeta;
 };
 
-export type OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto = {
-    userId: string;
-    type: OpWorkProfileType;
-};
-
-export type ConnectOpWorkProfileDto = {
-    id?: string;
-    uqOpWorkProfileUserType?: OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto;
-};
-
-export type CreateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
-};
-
 export type CreateOpWorkJobSeekerDto = {
     currentPosition?: string | null;
     currentCompany?: string | null;
@@ -649,7 +635,6 @@ export type CreateOpWorkJobSeekerDto = {
     linkedinUrl?: string | null;
     githubUrl?: string | null;
     portfolioUrl?: string | null;
-    OpWorkProfile: CreateOpWorkJobSeekerOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkJobSeekerDto = {
@@ -670,10 +655,6 @@ export type OpWorkJobSeekerDto = {
     updatedAt: string;
 };
 
-export type UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
-};
-
 export type UpdateOpWorkJobSeekerDto = {
     currentPosition?: string | null;
     currentCompany?: string | null;
@@ -687,7 +668,6 @@ export type UpdateOpWorkJobSeekerDto = {
     linkedinUrl?: string | null;
     githubUrl?: string | null;
     portfolioUrl?: string | null;
-    OpWorkProfile?: UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkExperienceResponseMeta = {
@@ -701,18 +681,22 @@ export type FindManyOpWorkExperienceResponse = {
     meta: FindManyOpWorkExperienceResponseMeta;
 };
 
+export type OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto = {
+    userId: string;
+    type: OpWorkProfileType;
+};
+
+export type ConnectOpWorkProfileDto = {
+    id?: string;
+    uqOpWorkProfileUserType?: OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto;
+};
+
 export type CreateOpWorkExperienceOpWorkProfileRelationInputDto = {
     connect: ConnectOpWorkProfileDto;
 };
 
-export type OpWorkJobSeekerUqOpWorkJobSeekerProfileUniqueInputDto = {
-    profileId: string;
-};
-
 export type ConnectOpWorkJobSeekerDto = {
-    id?: string;
-    profileId?: string;
-    uqOpWorkJobSeekerProfile?: OpWorkJobSeekerUqOpWorkJobSeekerProfileUniqueInputDto;
+    id: string;
 };
 
 export type CreateOpWorkExperienceOpWorkJobSeekerRelationInputDto = {
@@ -843,10 +827,6 @@ export type FindManyOpWorkEmployerResponse = {
     meta: FindManyOpWorkEmployerResponseMeta;
 };
 
-export type CreateOpWorkEmployerOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
-};
-
 export type CreateOpWorkEmployerDto = {
     companyName: string;
     industry?: string | null;
@@ -863,7 +843,6 @@ export type CreateOpWorkEmployerDto = {
     linkedinUrl?: string | null;
     twitterUrl?: string | null;
     facebookUrl?: string | null;
-    OpWorkProfile: CreateOpWorkEmployerOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkEmployerDto = {
@@ -887,10 +866,6 @@ export type OpWorkEmployerDto = {
     updatedAt: string;
 };
 
-export type UpdateOpWorkEmployerOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
-};
-
 export type UpdateOpWorkEmployerDto = {
     companyName?: string;
     industry?: string | null;
@@ -907,7 +882,6 @@ export type UpdateOpWorkEmployerDto = {
     linkedinUrl?: string | null;
     twitterUrl?: string | null;
     facebookUrl?: string | null;
-    OpWorkProfile?: UpdateOpWorkEmployerOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkProjectResponseMeta = {
@@ -919,10 +893,6 @@ export type FindManyOpWorkProjectResponseMeta = {
 export type FindManyOpWorkProjectResponse = {
     items: Array<OpWorkProject>;
     meta: FindManyOpWorkProjectResponseMeta;
-};
-
-export type CreateOpWorkProjectOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
 };
 
 export type CreateOpWorkProjectDto = {
@@ -949,7 +919,6 @@ export type CreateOpWorkProjectDto = {
     maintenanceDescription?: string | null;
     maintenanceStart?: string | null;
     maintenanceEnd?: string | null;
-    OpWorkProfile: CreateOpWorkProjectOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkProjectDto = {
@@ -981,10 +950,6 @@ export type OpWorkProjectDto = {
     updatedAt: string;
 };
 
-export type UpdateOpWorkProjectOpWorkProfileRelationInputDto = {
-    connect: ConnectOpWorkProfileDto;
-};
-
 export type UpdateOpWorkProjectDto = {
     title?: string;
     description?: string;
@@ -1009,7 +974,6 @@ export type UpdateOpWorkProjectDto = {
     maintenanceDescription?: string | null;
     maintenanceStart?: string | null;
     maintenanceEnd?: string | null;
-    OpWorkProfile?: UpdateOpWorkProjectOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkJobResponseMeta = {
@@ -1023,14 +987,8 @@ export type FindManyOpWorkJobResponse = {
     meta: FindManyOpWorkJobResponseMeta;
 };
 
-export type OpWorkEmployerUqOpWorkEmployerProfileUniqueInputDto = {
-    profileId: string;
-};
-
 export type ConnectOpWorkEmployerDto = {
-    id?: string;
-    profileId?: string;
-    uqOpWorkEmployerProfile?: OpWorkEmployerUqOpWorkEmployerProfileUniqueInputDto;
+    id: string;
 };
 
 export type CreateOpWorkJobOpWorkEmployerRelationInputDto = {

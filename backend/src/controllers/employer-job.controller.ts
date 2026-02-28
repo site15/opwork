@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
@@ -40,7 +48,10 @@ export class EmployeJobController {
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
           opWorkJobTags: true,
         },
-        where: { id: args.id },
+        where: {
+          profileId: req.opWorkProfileId,
+          id: args.id,
+        },
         data: {
           title: args.title,
           description: args.description,

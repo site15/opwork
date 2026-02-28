@@ -106,22 +106,22 @@ updatedAt!: Date ;
 AuthUser?: AuthUser ;
 @ApiProperty({
   type: () => OpWorkJobSeeker,
+  isArray: true,
   required: false,
-  nullable: true,
 })
-opWorkJobSeeker?: OpWorkJobSeeker  | null;
+opWorkJobSeeker?: OpWorkJobSeeker[] ;
 @ApiProperty({
   type: () => OpWorkEmployer,
+  isArray: true,
   required: false,
-  nullable: true,
 })
-opWorkEmployer?: OpWorkEmployer  | null;
+opWorkEmployer?: OpWorkEmployer[] ;
 @ApiProperty({
   type: () => OpWorkProject,
+  isArray: true,
   required: false,
-  nullable: true,
 })
-opWorkProject?: OpWorkProject  | null;
+opWorkProject?: OpWorkProject[] ;
 @ApiProperty({
   type: () => OpWorkJob,
   isArray: true,

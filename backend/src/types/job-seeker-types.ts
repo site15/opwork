@@ -5,10 +5,7 @@ import { CreateOpWorkExperienceDto } from '../generated/rest/create-op-work-expe
 import { CreateOpWorkJobSeekerSkillDto } from '../generated/rest/create-op-work-job-seeker-skill.dto';
 import { UpdateOpWorkJobSeekerDto } from '../generated/rest/update-op-work-job-seeker.dto';
 
-export class SetJobSeekerProfileArgs extends OmitType(
-  UpdateOpWorkJobSeekerDto,
-  ['OpWorkProfile'],
-) {}
+export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {}
 
 export class SetJobSeekerSkillArgs extends OmitType(
   CreateOpWorkJobSeekerSkillDto,

@@ -11,8 +11,9 @@ export class OpWorkProject {
 id!: string ;
 @ApiProperty({
   type: 'string',
+  nullable: true,
 })
-profileId!: string ;
+profileId!: string  | null;
 @ApiProperty({
   type: 'string',
 })
@@ -152,6 +153,7 @@ updatedAt!: Date ;
 @ApiProperty({
   type: () => OpWorkProfile,
   required: false,
+  nullable: true,
 })
-OpWorkProfile?: OpWorkProfile ;
+OpWorkProfile?: OpWorkProfile  | null;
 }

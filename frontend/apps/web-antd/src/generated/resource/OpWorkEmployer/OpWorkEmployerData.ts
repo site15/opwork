@@ -157,7 +157,7 @@ import type { VbenFormSchema } from '#/adapter/form';
       }),
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
       label: $t('resource.name.OpWorkProfile'),
-      rules: 'required',
+      
       
       controlClass: 'w-full',
       labelWidth: 200

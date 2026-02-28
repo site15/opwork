@@ -31,7 +31,7 @@ export class EmployerWorkSkillController {
     return await this.prismaService.opWorkJobSkill.findMany({
       include: { OpWorkSkill: true },
       where: {
-        OpWorkJob: { id: req.opWorkProfileId },
+        OpWorkJob: { profileId: req.opWorkProfileId },
       },
     });
   }

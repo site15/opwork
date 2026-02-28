@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeekerSkill } from '../generated/rest/op-work-job-seeker-skill.entity';
@@ -36,7 +44,9 @@ export class JobSeekerSkillController {
     if (!args.skillId && args.skillName) {
       args.skillId = (
         (await this.prismaService.opWorkSkill.findFirst({
-          where: { name: args.skillName },
+          where: {
+            name: args.skillName,
+          },
         })) ||
         (await this.prismaService.opWorkSkill.create({
           data: { name: args.skillName, popularity: -1 },
