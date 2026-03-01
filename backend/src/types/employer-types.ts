@@ -5,6 +5,17 @@ import { CreateOpWorkJobTagDto } from '../generated/rest/create-op-work-job-tag.
 import { CreateOpWorkJobDto } from '../generated/rest/create-op-work-job.dto';
 import { UpdateOpWorkEmployerDto } from '../generated/rest/update-op-work-employer.dto';
 
+export class DetEmployerProfileArgs {
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  id?: string;
+}
+
 export class SetEmployerProfileArgs extends UpdateOpWorkEmployerDto {
   @ApiProperty({
     type: 'string',
@@ -40,6 +51,17 @@ export class SetEmployerJobArgs extends OmitType(CreateOpWorkJobDto, [
   @IsString()
   @IsUUID('4', { each: true })
   employerId?: string;
+}
+
+export class DelEmployerJobArgs {
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  id?: string;
 }
 
 export class SetEmployerJobSkillArgs extends OmitType(CreateOpWorkJobSkillDto, [

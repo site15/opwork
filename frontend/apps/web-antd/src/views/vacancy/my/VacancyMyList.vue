@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router';
 
 import { confirm } from '@vben/common-ui';
 
+import { employeJobControllerDelJob } from '#/generated/client';
 import { $t } from '#/locales';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -90,9 +91,11 @@ const handleDeleteClick = (item: OpWorkJob, event: Event) => {
   confirm(
     $t('common.confirm'),
     $t('common.deleteConfirm', { name: item.title }),
-  ).then(() => {
-    // todo: console.log('Deleting vacancy:', item.id);
-  });
+  )
+    .then(async () => {
+      await employeJobControllerDelJob({ body: { id: item.id } });
+    })
+    .then();
 };
 </script>
 

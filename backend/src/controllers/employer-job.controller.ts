@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -11,8 +12,12 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobDto } from '../generated/rest/op-work-job.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { SetEmployerJobArgs } from '../types/employer-types';
+import {
+  DelEmployerJobArgs,
+  SetEmployerJobArgs,
+} from '../types/employer-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('employer')
 @Controller('employer/job')
@@ -36,6 +41,19 @@ export class EmployeJobController {
         employerId: employerId,
       },
     });
+  }
+
+  @Delete()
+  @ApiOkResponse({ type: StatusResponse })
+  async delJob(@Body() args: DelEmployerJobArgs): Promise<StatusResponse> {
+    if (args.id) {
+      await this.prismaService.opWorkJob.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    }
+    return { message: 'ok' };
   }
 
   @Put()

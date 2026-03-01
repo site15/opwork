@@ -1793,6 +1793,10 @@ export type SetProfileArgs = {
     coverImage?: string | null;
 };
 
+export type DelJobSeekerProfileArgs = {
+    id?: string;
+};
+
 export type SetJobSeekerProfileArgs = {
     currentPosition?: string | null;
     currentCompany?: string | null;
@@ -1848,6 +1852,10 @@ export type SetJobSeekerExperienceArgs = {
     jobSeekerId?: string;
 };
 
+export type DetEmployerProfileArgs = {
+    id?: string;
+};
+
 export type SetEmployerProfileArgs = {
     companyName?: string;
     industry?: string | null;
@@ -1865,6 +1873,10 @@ export type SetEmployerProfileArgs = {
     twitterUrl?: string | null;
     facebookUrl?: string | null;
     OpWorkProfile?: UpdateOpWorkEmployerOpWorkProfileRelationInputDto;
+    id?: string;
+};
+
+export type DelEmployerJobArgs = {
     id?: string;
 };
 
@@ -4301,6 +4313,25 @@ export type JobSeekerControllerGetProfileResponses = {
 
 export type JobSeekerControllerGetProfileResponse = JobSeekerControllerGetProfileResponses[keyof JobSeekerControllerGetProfileResponses];
 
+export type JobSeekerControllerDelProfileData = {
+    body: DelJobSeekerProfileArgs;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker';
+};
+
+export type JobSeekerControllerDelProfileErrors = {
+    default: StatusResponse;
+};
+
+export type JobSeekerControllerDelProfileError = JobSeekerControllerDelProfileErrors[keyof JobSeekerControllerDelProfileErrors];
+
+export type JobSeekerControllerDelProfileResponses = {
+    200: StatusResponse;
+};
+
+export type JobSeekerControllerDelProfileResponse = JobSeekerControllerDelProfileResponses[keyof JobSeekerControllerDelProfileResponses];
+
 export type JobSeekerControllerSetProfileData = {
     body: SetJobSeekerProfileArgs;
     path?: never;
@@ -4482,6 +4513,25 @@ export type EmployerControllerGetProfileResponses = {
 
 export type EmployerControllerGetProfileResponse = EmployerControllerGetProfileResponses[keyof EmployerControllerGetProfileResponses];
 
+export type EmployerControllerDelProfileData = {
+    body: DetEmployerProfileArgs;
+    path?: never;
+    query?: never;
+    url: '/api/employer';
+};
+
+export type EmployerControllerDelProfileErrors = {
+    default: StatusResponse;
+};
+
+export type EmployerControllerDelProfileError = EmployerControllerDelProfileErrors[keyof EmployerControllerDelProfileErrors];
+
+export type EmployerControllerDelProfileResponses = {
+    200: StatusResponse;
+};
+
+export type EmployerControllerDelProfileResponse = EmployerControllerDelProfileResponses[keyof EmployerControllerDelProfileResponses];
+
 export type EmployerControllerSetProfileData = {
     body: SetEmployerProfileArgs;
     path?: never;
@@ -4521,6 +4571,25 @@ export type EmployeJobControllerGetJobsResponses = {
 };
 
 export type EmployeJobControllerGetJobsResponse = EmployeJobControllerGetJobsResponses[keyof EmployeJobControllerGetJobsResponses];
+
+export type EmployeJobControllerDelJobData = {
+    body: DelEmployerJobArgs;
+    path?: never;
+    query?: never;
+    url: '/api/employer/job';
+};
+
+export type EmployeJobControllerDelJobErrors = {
+    default: StatusResponse;
+};
+
+export type EmployeJobControllerDelJobError = EmployeJobControllerDelJobErrors[keyof EmployeJobControllerDelJobErrors];
+
+export type EmployeJobControllerDelJobResponses = {
+    200: StatusResponse;
+};
+
+export type EmployeJobControllerDelJobResponse = EmployeJobControllerDelJobResponses[keyof EmployeJobControllerDelJobResponses];
 
 export type EmployeJobControllerSetJobData = {
     body: SetEmployerJobArgs;

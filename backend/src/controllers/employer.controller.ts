@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -11,8 +12,12 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkEmployer } from '../generated/rest/op-work-employer.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { SetEmployerProfileArgs } from '../types/employer-types';
+import {
+  DetEmployerProfileArgs,
+  SetEmployerProfileArgs,
+} from '../types/employer-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('employer')
 @Controller('employer')
@@ -30,7 +35,7 @@ export class EmployerController {
     if (!req.opWorkProfileId) {
       return [];
     }
-    return await this.prismaService.opWorkEmployer.findMany({
+    const result = await this.prismaService.opWorkEmployer.findMany({
       include: {
         OpWorkJob: {
           include: {
@@ -43,6 +48,7 @@ export class EmployerController {
         profileId: req.opWorkProfileId,
       },
     });
+    return result;
   }
 
   @Get(':employer_id')
@@ -63,6 +69,41 @@ export class EmployerController {
         id: employerId,
       },
     });
+  }
+
+  @Delete()
+  @ApiOkResponse({ type: StatusResponse })
+  async delProfile(
+    @Body() args: DetEmployerProfileArgs,
+  ): Promise<StatusResponse> {
+    if (args.id) {
+      await this.prismaService.opWorkExperience.deleteMany({
+        where: {
+          jobSeekerId: args.id,
+        },
+      });
+      await this.prismaService.opWorkEducation.deleteMany({
+        where: {
+          jobSeekerId: args.id,
+        },
+      });
+      await this.prismaService.opWorkJobSeekerSkill.deleteMany({
+        where: {
+          jobSeekerId: args.id,
+        },
+      });
+      await this.prismaService.opWorkApplication.deleteMany({
+        where: {
+          jobSeekerId: args.id,
+        },
+      });
+      await this.prismaService.opWorkJobSeeker.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    }
+    return { message: 'ok' };
   }
 
   @Put()

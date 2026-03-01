@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -11,8 +12,12 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import { SetJobSeekerProfileArgs } from '../types/job-seeker-types';
+import {
+  DelJobSeekerProfileArgs,
+  SetJobSeekerProfileArgs,
+} from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker')
@@ -64,6 +69,21 @@ export class JobSeekerController {
     });
   }
 
+  @Delete()
+  @ApiOkResponse({ type: StatusResponse })
+  async delProfile(
+    @Body() args: DelJobSeekerProfileArgs,
+  ): Promise<StatusResponse> {
+    if (args.id) {
+      await this.prismaService.opWorkJobSeeker.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    }
+    return { message: 'ok' };
+  }
+
   @Put()
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async setProfile(
@@ -102,7 +122,6 @@ export class JobSeekerController {
           summary: args.summary,
         },
       });
-      console.log({ opWorkJobSeeker2: opWorkJobSeeker });
     } else {
       opWorkJobSeeker = await this.prismaService.opWorkJobSeeker.create({
         include: {
@@ -126,7 +145,6 @@ export class JobSeekerController {
           summary: args.summary,
         },
       });
-      console.log({ opWorkJobSeeker1: opWorkJobSeeker });
     }
 
     return opWorkJobSeeker;

@@ -5,6 +5,17 @@ import { CreateOpWorkExperienceDto } from '../generated/rest/create-op-work-expe
 import { CreateOpWorkJobSeekerSkillDto } from '../generated/rest/create-op-work-job-seeker-skill.dto';
 import { UpdateOpWorkJobSeekerDto } from '../generated/rest/update-op-work-job-seeker.dto';
 
+export class DelJobSeekerProfileArgs {
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  id?: string;
+}
+
 export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {
   @ApiProperty({
     type: 'string',
