@@ -105,6 +105,7 @@ onMounted(() => {
           :pagination="pagination"
           @page-change="handlePageChange"
           @sort-change="handleSortChange"
+          @deleted="performSearch"
           :title="$t('vacancy.my.list.title')"
         />
       </div>

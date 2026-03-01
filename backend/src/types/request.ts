@@ -1,7 +1,13 @@
 import { AuthSession, OpWorkProfile, Prisma } from '../generated/prisma/client';
 
 export type AppRequest = {
-  authUser: Prisma.AuthUserGetPayload<{ include: { OpWorkProfile: true } }>;
+  authUser: Prisma.AuthUserGetPayload<{
+    include: {
+      OpWorkProfile: {
+        include: { opWorkJobSeeker: true; opWorkEmployer: true };
+      };
+    };
+  }>;
   opWorkProfile: OpWorkProfile;
   authSession?: AuthSession;
   //

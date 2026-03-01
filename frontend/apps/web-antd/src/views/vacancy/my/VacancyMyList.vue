@@ -26,6 +26,7 @@ interface Props {
 }
 
 interface Emits {
+  (e: 'deleted', id: string): void;
   (e: 'pageChange', page: number, pageSize: number): void;
   (
     e: 'sortChange',
@@ -58,6 +59,10 @@ const sortForm = reactive({
   publishedAt: '',
   applicationsCount: '',
 });
+
+const handleDelete = (id: string) => {
+  emit('deleted', id);
+};
 
 const handleSortChange = () => {
   // Emit all sort fields together
@@ -94,6 +99,7 @@ const handleDeleteClick = (item: OpWorkJob, event: Event) => {
   )
     .then(async () => {
       await employeJobControllerDelJob({ body: { id: item.id } });
+      handleDelete(item.id);
     })
     .then();
 };
@@ -119,7 +125,9 @@ const handleDeleteClick = (item: OpWorkJob, event: Event) => {
             v-model="sortForm.salary"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">
               {{ $t('common.filter.sort.lowToHigh') }}
             </option>
@@ -138,7 +146,9 @@ const handleDeleteClick = (item: OpWorkJob, event: Event) => {
             v-model="sortForm.publishedAt"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">{{ $t('common.filter.sort.oldToNew') }}</option>
             <option value="desc">
               {{ $t('common.filter.sort.newToOld') }}
@@ -155,7 +165,9 @@ const handleDeleteClick = (item: OpWorkJob, event: Event) => {
             v-model="sortForm.applicationsCount"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">
               {{ $t('common.filter.sort.fewToMany') }}
             </option>

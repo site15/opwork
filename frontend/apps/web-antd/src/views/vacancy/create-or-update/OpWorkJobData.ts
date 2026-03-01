@@ -254,10 +254,11 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       component: 'ApiSelect',
       ...getComponentProps<OpWorkEmployer>({
         findMany: () =>
-          employerControllerGetProfiles().then(async (res) => ({
-            items: res.data || [],
-            error: undefined,
-          })),
+          employerControllerGetProfiles().then(async (res) => {
+            return {
+              data: { items: res.data || [] },
+            };
+          }),
         getLabel: (item) => item.companyName || item.id,
       }),
       fieldName: Prisma.OpWorkJobScalarFieldEnum.employerId,

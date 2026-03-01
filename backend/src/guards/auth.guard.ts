@@ -60,7 +60,15 @@ export class AuthGuard implements CanActivate {
 
     if (!req.authUserId && req.apiKey) {
       const apiKey = await this.prismaService.authApiKey.findFirst({
-        include: { AuthUser: { include: { OpWorkProfile: true } } },
+        include: {
+          AuthUser: {
+            include: {
+              OpWorkProfile: {
+                include: { opWorkJobSeeker: true, opWorkEmployer: true },
+              },
+            },
+          },
+        },
         where: { apiKey: req.apiKey },
       });
       if (apiKey?.apiKey) {
@@ -79,7 +87,15 @@ export class AuthGuard implements CanActivate {
 
     if (!req.authUserId && req.authSessionId) {
       const authSession = await this.prismaService.authSession.findFirst({
-        include: { AuthUser: { include: { OpWorkProfile: true } } },
+        include: {
+          AuthUser: {
+            include: {
+              OpWorkProfile: {
+                include: { opWorkJobSeeker: true, opWorkEmployer: true },
+              },
+            },
+          },
+        },
         where: { id: req.authSessionId },
       });
 
@@ -120,6 +136,33 @@ export class AuthGuard implements CanActivate {
       }
       req.opWorkProfileId = opWorkProfile.id;
       req.opWorkProfile = opWorkProfile;
+    }
+
+    if (
+      req.opWorkProfileId &&
+      req.opWorkProfile.type === 'EMPLOYER' &&
+      req.authUser?.OpWorkProfile &&
+      !req.authUser?.OpWorkProfile.some((p) => p.opWorkEmployer.length > 0)
+    ) {
+      await this.prismaService.opWorkEmployer.create({
+        data: {
+          companyName: '',
+          OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+        },
+      });
+    }
+
+    if (
+      req.opWorkProfileId &&
+      req.opWorkProfile.type === 'SPECIALIST' &&
+      req.authUser?.OpWorkProfile &&
+      !req.authUser?.OpWorkProfile.some((p) => p.opWorkJobSeeker.length > 0)
+    ) {
+      await this.prismaService.opWorkJobSeeker.create({
+        data: {
+          OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+        },
+      });
     }
 
     if (
