@@ -13,7 +13,8 @@ describe('OPWork: update job seeker profile (e2e)', () => {
   });
   const skillName = getRandomSha7();
 
-  let jobSeekerControllerSetSkillResultId: string | undefined;
+  let jobSeekerControllerSetSkillResultId: string | undefined = undefined;
+  let jobSeekerId: string | undefined = undefined;
 
   it('Login', async () => {
     const result = await jobSeekerActivity.registerAndLoginRandomUser(
@@ -26,6 +27,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
   it('Update profile', async () => {
     const profileControllerGetProfileResult =
       await jobSeekerActivity.sdk.profileControllerGetProfile();
+
     const profileControllerUpdateProfileResult =
       await jobSeekerActivity.sdk.profileControllerSetProfile({
         body: {
@@ -45,6 +47,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     const jobSeekerControllerSetProfileResult =
       await jobSeekerActivity.sdk.jobSeekerControllerSetProfile({
         body: {
+          jobSeekerId,
           currentPosition: 'Software Engineer',
           currentCompany: 'ABC Company',
           expectedSalary: 100000,
@@ -73,12 +76,14 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       isOpenToWork: true,
       summary: 'Software Engineer with 5 years of experience',
     });
+    jobSeekerId = jobSeekerControllerSetProfileResult.data?.id;
   });
 
   it('Create education for job seeker profile', async () => {
     const jobSeekerEducationControllerSetEducationResult =
       await jobSeekerActivity.sdk.jobSeekerEducationControllerSetEducation({
         body: {
+          jobSeekerId,
           degree: OpWorkEducationDegree.BACHELOR,
           institution: 'XYZ University',
           fieldOfStudy: 'Computer Science',
@@ -105,6 +110,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     const jobSeekerExperienceControllerSetExperienceResult =
       await jobSeekerActivity.sdk.jobSeekerExperienceControllerSetExperience({
         body: {
+          jobSeekerId,
           company: 'XYZ Company',
           position: 'Software Engineer',
           startDate: new Date('2015-09-01').toISOString(),
@@ -143,6 +149,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
           skillId: skillId,
+          jobSeekerId,
         },
       });
     expect(jobSeekerControllerSetSkillResult.data).toMatchObject({
@@ -150,7 +157,6 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       isPrimary: true,
       lastUsed: new Date('2020-09-01').toISOString(),
       yearsOfExp: 2,
-      skillId: skillId,
       OpWorkSkill: { name: 'JavaScript' },
     });
     jobSeekerControllerSetSkillResultId =
@@ -166,6 +172,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
           skillName,
+          jobSeekerId,
         },
       });
 
@@ -193,6 +200,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
           skillName,
+          jobSeekerId,
         },
       });
     expect(jobSeekerSkillControllerSetSkillResult.data).toMatchObject({
@@ -211,8 +219,12 @@ describe('OPWork: update job seeker profile (e2e)', () => {
         query: { searchText: 'JavaScript' },
       })
     )?.data?.items?.[0]?.id;
+
     const jobSeekerControllerGetProfileResult =
-      await jobSeekerActivity.sdk.jobSeekerControllerGetProfile();
+      await jobSeekerActivity.sdk.jobSeekerControllerGetProfile({
+        path: { job_seeker_id: jobSeekerId || '' },
+      });
+
     expect(jobSeekerControllerGetProfileResult.data).toMatchObject({
       OpWorkEducation: [
         {

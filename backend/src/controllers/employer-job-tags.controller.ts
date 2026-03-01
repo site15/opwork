@@ -28,6 +28,9 @@ export class EmployerJobTagsController {
   async getAllTags(
     @CurrentAppRequest() req: AppRequest,
   ): Promise<OpWorkJobTagDto[]> {
+    if (!req.opWorkProfileId) {
+      return [];
+    }
     return await this.prismaService.opWorkJobTag.findMany({
       where: {
         OpWorkJob: { profileId: req.opWorkProfileId },

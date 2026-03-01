@@ -1382,7 +1382,7 @@ model OpWorkApplication {
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
   /// Один соискатель может откликнуться на вакансию только один раз
-  @@unique(name: "uqOpWorkJobSeekerJob", [jobSeekerId, jobId], map: "UQ_OPWORK_APPLICATION__JOB_SEEKER_ID_JOB_ID")
+  @@unique(name: "uqOpWorkJobSeekerJob", [profileId, jobSeekerId, jobId], map: "UQ_OPWORK_APPLICATION__JOB_SEEKER_ID_JOB_ID")
   /// Индексы для оптимизации поиска
   @@index([jobSeekerId], map: "IDX_OPWORK_APPLICATION__JOB_SEEKER_ID")
   @@index([profileId], map: "IDX_OPWORK_APPLICATION__PROFILE_ID")
@@ -1520,7 +1520,7 @@ model OpWorkJobSeekerSkill {
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
   /// Уникальность связи (один соискатель - один навык)
-  @@unique(name: "uqOpWorkJobSeekerSkill", [jobSeekerId, skillId], map: "UQ_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID_SKILL_ID")
+  @@unique(name: "uqOpWorkJobSeekerSkill", [profileId, jobSeekerId, skillId], map: "UQ_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID_SKILL_ID")
   /// Индексы для оптимизации поиска
   @@index([jobSeekerId], map: "IDX_OPWORK_JOB_SEEKER_SKILL__JOB_SEEKER_ID")
   @@index([skillId], map: "IDX_OPWORK_JOB_SEEKER_SKILL__SKILL_ID")
@@ -1570,7 +1570,7 @@ model OpWorkJobSkill {
   /// === ОГРАНИЧЕНИЯ И ИНДЕКСЫ ===
 
   /// Уникальность требования (одна вакансия - один навык)
-  @@unique(name: "uqOpWorkJobSkill", [jobId, skillId], map: "UQ_OPWORK_JOB_SKILL__JOB_ID_SKILL_ID")
+  @@unique(name: "uqOpWorkJobSkill", [profileId, jobId, skillId], map: "UQ_OPWORK_JOB_SKILL__JOB_ID_SKILL_ID")
   /// Индексы для оптимизации поиска
   @@index([jobId], map: "IDX_OPWORK_JOB_SKILL__JOB_ID")
   @@index([skillId], map: "IDX_OPWORK_JOB_SKILL__SKILL_ID")

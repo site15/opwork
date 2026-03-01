@@ -622,6 +622,20 @@ export type FindManyOpWorkJobSeekerResponse = {
     meta: FindManyOpWorkJobSeekerResponseMeta;
 };
 
+export type OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto = {
+    userId: string;
+    type: OpWorkProfileType;
+};
+
+export type ConnectOpWorkProfileDto = {
+    id?: string;
+    uqOpWorkProfileUserType?: OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto;
+};
+
+export type CreateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkJobSeekerDto = {
     currentPosition?: string | null;
     currentCompany?: string | null;
@@ -635,6 +649,7 @@ export type CreateOpWorkJobSeekerDto = {
     linkedinUrl?: string | null;
     githubUrl?: string | null;
     portfolioUrl?: string | null;
+    OpWorkProfile?: CreateOpWorkJobSeekerOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkJobSeekerDto = {
@@ -655,6 +670,10 @@ export type OpWorkJobSeekerDto = {
     updatedAt: string;
 };
 
+export type UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkJobSeekerDto = {
     currentPosition?: string | null;
     currentCompany?: string | null;
@@ -668,6 +687,7 @@ export type UpdateOpWorkJobSeekerDto = {
     linkedinUrl?: string | null;
     githubUrl?: string | null;
     portfolioUrl?: string | null;
+    OpWorkProfile?: UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkExperienceResponseMeta = {
@@ -679,16 +699,6 @@ export type FindManyOpWorkExperienceResponseMeta = {
 export type FindManyOpWorkExperienceResponse = {
     items: Array<OpWorkExperience>;
     meta: FindManyOpWorkExperienceResponseMeta;
-};
-
-export type OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto = {
-    userId: string;
-    type: OpWorkProfileType;
-};
-
-export type ConnectOpWorkProfileDto = {
-    id?: string;
-    uqOpWorkProfileUserType?: OpWorkProfileUqOpWorkProfileUserTypeUniqueInputDto;
 };
 
 export type CreateOpWorkExperienceOpWorkProfileRelationInputDto = {
@@ -827,6 +837,10 @@ export type FindManyOpWorkEmployerResponse = {
     meta: FindManyOpWorkEmployerResponseMeta;
 };
 
+export type CreateOpWorkEmployerOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkEmployerDto = {
     companyName: string;
     industry?: string | null;
@@ -843,6 +857,7 @@ export type CreateOpWorkEmployerDto = {
     linkedinUrl?: string | null;
     twitterUrl?: string | null;
     facebookUrl?: string | null;
+    OpWorkProfile?: CreateOpWorkEmployerOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkEmployerDto = {
@@ -866,6 +881,10 @@ export type OpWorkEmployerDto = {
     updatedAt: string;
 };
 
+export type UpdateOpWorkEmployerOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkEmployerDto = {
     companyName?: string;
     industry?: string | null;
@@ -882,6 +901,7 @@ export type UpdateOpWorkEmployerDto = {
     linkedinUrl?: string | null;
     twitterUrl?: string | null;
     facebookUrl?: string | null;
+    OpWorkProfile?: UpdateOpWorkEmployerOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkProjectResponseMeta = {
@@ -893,6 +913,10 @@ export type FindManyOpWorkProjectResponseMeta = {
 export type FindManyOpWorkProjectResponse = {
     items: Array<OpWorkProject>;
     meta: FindManyOpWorkProjectResponseMeta;
+};
+
+export type CreateOpWorkProjectOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
 };
 
 export type CreateOpWorkProjectDto = {
@@ -919,6 +943,7 @@ export type CreateOpWorkProjectDto = {
     maintenanceDescription?: string | null;
     maintenanceStart?: string | null;
     maintenanceEnd?: string | null;
+    OpWorkProfile?: CreateOpWorkProjectOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkProjectDto = {
@@ -950,6 +975,10 @@ export type OpWorkProjectDto = {
     updatedAt: string;
 };
 
+export type UpdateOpWorkProjectOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkProjectDto = {
     title?: string;
     description?: string;
@@ -974,6 +1003,7 @@ export type UpdateOpWorkProjectDto = {
     maintenanceDescription?: string | null;
     maintenanceStart?: string | null;
     maintenanceEnd?: string | null;
+    OpWorkProfile?: UpdateOpWorkProjectOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkJobResponseMeta = {
@@ -1776,6 +1806,9 @@ export type SetJobSeekerProfileArgs = {
     linkedinUrl?: string | null;
     githubUrl?: string | null;
     portfolioUrl?: string | null;
+    OpWorkProfile?: UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto;
+    id?: string;
+    jobSeekerId?: string;
 };
 
 export type SetJobSeekerSkillArgs = {
@@ -1784,6 +1817,7 @@ export type SetJobSeekerSkillArgs = {
     isPrimary?: boolean | null;
     lastUsed?: string | null;
     id?: string;
+    jobSeekerId?: string;
     skillName?: string;
     skillId?: string;
 };
@@ -1798,6 +1832,7 @@ export type SetJobSeekerEducationArgs = {
     description?: string | null;
     grade?: OpWorkGrade | null;
     id?: string;
+    jobSeekerId?: string;
 };
 
 export type SetJobSeekerExperienceArgs = {
@@ -1810,6 +1845,7 @@ export type SetJobSeekerExperienceArgs = {
     location?: string | null;
     employmentType?: OpWorkEmploymentType | null;
     id?: string;
+    jobSeekerId?: string;
 };
 
 export type SetEmployerProfileArgs = {
@@ -1828,6 +1864,8 @@ export type SetEmployerProfileArgs = {
     linkedinUrl?: string | null;
     twitterUrl?: string | null;
     facebookUrl?: string | null;
+    OpWorkProfile?: UpdateOpWorkEmployerOpWorkProfileRelationInputDto;
+    id?: string;
 };
 
 export type SetEmployerJobArgs = {
@@ -1847,6 +1885,7 @@ export type SetEmployerJobArgs = {
     publishedAt?: string | null;
     expiresAt?: string | null;
     id?: string;
+    employerId?: string;
 };
 
 export type SetEmployerJobSkillArgs = {
@@ -4220,11 +4259,32 @@ export type ProfileControllerGetAllProfilesResponses = {
 
 export type ProfileControllerGetAllProfilesResponse = ProfileControllerGetAllProfilesResponses[keyof ProfileControllerGetAllProfilesResponses];
 
-export type JobSeekerControllerGetProfileData = {
+export type JobSeekerControllerGetProfilesData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/api/job-seeker';
+    url: '/api/job-seeker/all';
+};
+
+export type JobSeekerControllerGetProfilesErrors = {
+    default: Array<OpWorkJobSeeker>;
+};
+
+export type JobSeekerControllerGetProfilesError = JobSeekerControllerGetProfilesErrors[keyof JobSeekerControllerGetProfilesErrors];
+
+export type JobSeekerControllerGetProfilesResponses = {
+    200: Array<OpWorkJobSeeker>;
+};
+
+export type JobSeekerControllerGetProfilesResponse = JobSeekerControllerGetProfilesResponses[keyof JobSeekerControllerGetProfilesResponses];
+
+export type JobSeekerControllerGetProfileData = {
+    body?: never;
+    path: {
+        job_seeker_id: string;
+    };
+    query?: never;
+    url: '/api/job-seeker/{job_seeker_id}';
 };
 
 export type JobSeekerControllerGetProfileErrors = {
@@ -4262,9 +4322,11 @@ export type JobSeekerControllerSetProfileResponse = JobSeekerControllerSetProfil
 
 export type JobSeekerSkillControllerGetSkillsData = {
     body?: never;
-    path?: never;
+    path: {
+        job_seeker_id: string;
+    };
     query?: never;
-    url: '/api/job-seeker/skill';
+    url: '/api/job-seeker/skill/{job_seeker_id}';
 };
 
 export type JobSeekerSkillControllerGetSkillsErrors = {
@@ -4300,9 +4362,11 @@ export type JobSeekerSkillControllerSetSkillResponse = JobSeekerSkillControllerS
 
 export type JobSeekerEducationControllerGetEducationsData = {
     body?: never;
-    path?: never;
+    path: {
+        job_seeker_id: string;
+    };
     query?: never;
-    url: '/api/job-seeker/education';
+    url: '/api/job-seeker/education/{job_seeker_id}';
 };
 
 export type JobSeekerEducationControllerGetEducationsErrors = {
@@ -4338,9 +4402,11 @@ export type JobSeekerEducationControllerSetEducationResponse = JobSeekerEducatio
 
 export type JobSeekerExperienceControllerGetExperiencesData = {
     body?: never;
-    path?: never;
+    path: {
+        job_seeker_id: string;
+    };
     query?: never;
-    url: '/api/job-seeker/experience';
+    url: '/api/job-seeker/experience/{job_seeker_id}';
 };
 
 export type JobSeekerExperienceControllerGetExperiencesErrors = {
@@ -4374,11 +4440,32 @@ export type JobSeekerExperienceControllerSetExperienceResponses = {
 
 export type JobSeekerExperienceControllerSetExperienceResponse = JobSeekerExperienceControllerSetExperienceResponses[keyof JobSeekerExperienceControllerSetExperienceResponses];
 
-export type EmployerControllerGetProfileData = {
+export type EmployerControllerGetProfilesData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/api/employer';
+    url: '/api/employer/all';
+};
+
+export type EmployerControllerGetProfilesErrors = {
+    default: Array<OpWorkEmployer>;
+};
+
+export type EmployerControllerGetProfilesError = EmployerControllerGetProfilesErrors[keyof EmployerControllerGetProfilesErrors];
+
+export type EmployerControllerGetProfilesResponses = {
+    200: Array<OpWorkEmployer>;
+};
+
+export type EmployerControllerGetProfilesResponse = EmployerControllerGetProfilesResponses[keyof EmployerControllerGetProfilesResponses];
+
+export type EmployerControllerGetProfileData = {
+    body?: never;
+    path: {
+        employer_id: string;
+    };
+    query?: never;
+    url: '/api/employer/{employer_id}';
 };
 
 export type EmployerControllerGetProfileErrors = {
@@ -4416,9 +4503,11 @@ export type EmployerControllerSetProfileResponse = EmployerControllerSetProfileR
 
 export type EmployeJobControllerGetJobsData = {
     body?: never;
-    path?: never;
+    path: {
+        employer_id: string;
+    };
     query?: never;
-    url: '/api/employer/job';
+    url: '/api/employer/job/{employer_id}';
 };
 
 export type EmployeJobControllerGetJobsErrors = {

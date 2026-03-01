@@ -46,7 +46,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkNotificationScalarFieldEnum.message,
         label: $t('resource.OpWorkNotification.message'),
       rules: 'required',
@@ -109,7 +109,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkNotificationScalarFieldEnum.autoMarkReadAtIds,
         label: $t('resource.OpWorkNotification.autoMarkReadAtIds'),
       

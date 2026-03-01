@@ -10,6 +10,13 @@ export class OpWorkJobSeekerSkillUqOpWorkJobSeekerSkillUniqueInputDto {
 @IsUUID('4')
 @IsNotEmpty()
 @IsString()
+profileId!: string ;
+@ApiProperty({
+  type: 'string',
+})
+@IsUUID('4')
+@IsNotEmpty()
+@IsString()
 jobSeekerId!: string ;
 @ApiProperty({
   type: 'string',

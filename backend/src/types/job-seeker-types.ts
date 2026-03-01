@@ -5,7 +5,25 @@ import { CreateOpWorkExperienceDto } from '../generated/rest/create-op-work-expe
 import { CreateOpWorkJobSeekerSkillDto } from '../generated/rest/create-op-work-job-seeker-skill.dto';
 import { UpdateOpWorkJobSeekerDto } from '../generated/rest/update-op-work-job-seeker.dto';
 
-export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {}
+export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  id?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  jobSeekerId?: string;
+}
 
 export class SetJobSeekerSkillArgs extends OmitType(
   CreateOpWorkJobSeekerSkillDto,
@@ -19,6 +37,15 @@ export class SetJobSeekerSkillArgs extends OmitType(
   @IsString()
   @IsUUID('4', { each: true })
   id?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  jobSeekerId?: string;
 
   @ApiProperty({
     type: 'string',
@@ -51,6 +78,15 @@ export class SetJobSeekerEducationArgs extends OmitType(
   @IsString()
   @IsUUID('4', { each: true })
   id?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  jobSeekerId?: string;
 }
 
 export class SetJobSeekerExperienceArgs extends OmitType(
@@ -65,4 +101,13 @@ export class SetJobSeekerExperienceArgs extends OmitType(
   @IsString()
   @IsUUID('4', { each: true })
   id?: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID('4', { each: true })
+  jobSeekerId?: string;
 }

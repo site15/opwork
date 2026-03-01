@@ -22,12 +22,15 @@ export class JobSeekerController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
-  @ApiOkResponse({ type: OpWorkJobSeeker })
-  async getProfile(
+  @Get('all')
+  @ApiOkResponse({ type: OpWorkJobSeeker, isArray: true })
+  async getProfiles(
     @CurrentAppRequest() req: AppRequest,
-  ): Promise<OpWorkJobSeeker | null> {
-    return await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
+  ): Promise<OpWorkJobSeeker[]> {
+    if (!req.opWorkProfileId) {
+      return [];
+    }
+    return await this.prismaService.opWorkJobSeeker.findMany({
       include: {
         OpWorkEducation: true,
         OpWorkExperience: true,
@@ -39,17 +42,41 @@ export class JobSeekerController {
     });
   }
 
+  @Get(':job_seeker_id')
+  @ApiOkResponse({ type: OpWorkJobSeeker })
+  async getProfile(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id', new ParseUUIDPipe({ optional: true }))
+    jobSeekerId: string,
+  ): Promise<OpWorkJobSeeker | null> {
+    return await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
+      include: {
+        OpWorkEducation: true,
+        OpWorkExperience: true,
+        OpWorkJobSeekerSkill: {
+          include: { OpWorkSkill: true },
+          where: { jobSeekerId },
+        },
+      },
+      where: {
+        id: jobSeekerId,
+      },
+    });
+  }
+
   @Put()
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async setProfile(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerProfileArgs,
   ): Promise<OpWorkJobSeeker> {
-    let opWorkJobSeeker = await this.prismaService.opWorkJobSeeker.findFirst({
-      where: {
-        profileId: req.opWorkProfileId,
-      },
-    });
+    let opWorkJobSeeker = args.jobSeekerId
+      ? await this.prismaService.opWorkJobSeeker.findFirst({
+          where: {
+            id: args.jobSeekerId,
+          },
+        })
+      : null;
     if (opWorkJobSeeker) {
       opWorkJobSeeker = await this.prismaService.opWorkJobSeeker.update({
         include: {
@@ -75,6 +102,7 @@ export class JobSeekerController {
           summary: args.summary,
         },
       });
+      console.log({ opWorkJobSeeker2: opWorkJobSeeker });
     } else {
       opWorkJobSeeker = await this.prismaService.opWorkJobSeeker.create({
         include: {
@@ -98,6 +126,7 @@ export class JobSeekerController {
           summary: args.summary,
         },
       });
+      console.log({ opWorkJobSeeker1: opWorkJobSeeker });
     }
 
     return opWorkJobSeeker;

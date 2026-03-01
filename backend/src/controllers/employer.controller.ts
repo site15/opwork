@@ -22,12 +22,15 @@ export class EmployerController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
-  @ApiOkResponse({ type: OpWorkEmployer })
-  async getProfile(
+  @Get('all')
+  @ApiOkResponse({ type: OpWorkEmployer, isArray: true })
+  async getProfiles(
     @CurrentAppRequest() req: AppRequest,
-  ): Promise<OpWorkEmployer | null> {
-    return await this.prismaService.opWorkEmployer.findFirstOrThrow({
+  ): Promise<OpWorkEmployer[]> {
+    if (!req.opWorkProfileId) {
+      return [];
+    }
+    return await this.prismaService.opWorkEmployer.findMany({
       include: {
         OpWorkJob: {
           include: {
@@ -42,17 +45,39 @@ export class EmployerController {
     });
   }
 
+  @Get(':employer_id')
+  @ApiOkResponse({ type: OpWorkEmployer })
+  async getProfile(
+    @Param('employer_id', new ParseUUIDPipe()) employerId: string,
+  ): Promise<OpWorkEmployer | null> {
+    return await this.prismaService.opWorkEmployer.findFirstOrThrow({
+      include: {
+        OpWorkJob: {
+          include: {
+            OpWorkJobSkill: { include: { OpWorkSkill: true } },
+            opWorkJobTags: true,
+          },
+        },
+      },
+      where: {
+        id: employerId,
+      },
+    });
+  }
+
   @Put()
   @ApiOkResponse({ type: OpWorkEmployer })
   async setProfile(
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetEmployerProfileArgs,
   ): Promise<OpWorkEmployer> {
-    let opWorkEmployer = await this.prismaService.opWorkEmployer.findFirst({
-      where: {
-        profileId: req.opWorkProfileId,
-      },
-    });
+    let opWorkEmployer = !args.id
+      ? undefined
+      : await this.prismaService.opWorkEmployer.findFirst({
+          where: {
+            profileId: args.id,
+          },
+        });
     if (opWorkEmployer) {
       opWorkEmployer = await this.prismaService.opWorkEmployer.update({
         include: {

@@ -48,6 +48,8 @@
     "search": "Search",
     "list": "List",
     "detail": "Detail",
-    "my": "My vacancies"
+    "my": "My vacancies",
+    "create": "Create",
+    "edit": "Edit"
   }
 }

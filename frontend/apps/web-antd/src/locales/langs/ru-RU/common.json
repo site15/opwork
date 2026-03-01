@@ -19,13 +19,14 @@
     "salary": "Зарплата",
     "published": "Опубликовано",
     "sort": {
-      "none": "Ничего",
+      "withoutSorting": "Без сортировки",
       "oldToNew": "От старой к новой",
       "newToOld": "От новой к старой",
       "fewToMany": "От меньшего к большему",
       "manyToFew": "От большего к меньшему",
       "lowToHigh": "От низкой к высокой",
-      "highToLow": "От высокой к низкой"
+      "highToLow": "От высокой к низкой",
+      "none": "None"
     },
     "apps": "Отклики",
     "views": "Просмотры",
@@ -44,5 +45,10 @@
     "last": "Последняя"
   },
   "notSpecified": "Не указано",
-  "salary": "Зарплата"
+  "salary": "Зарплата",
+  "confirm": "Confirm",
+  "deleteConfirm": "Delete Confirm",
+  "add": "Add",
+  "save": "Save",
+  "update": "Update"
 }

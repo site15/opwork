@@ -272,7 +272,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
       const authUser = await this.prismaService.authUser.update({
         where: { id: authApiKey.AuthUser.id },
         data: {
-          password,
+          password: password || '',
           email,
         },
       });

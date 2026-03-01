@@ -9,7 +9,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     export function useOpWorkSearchHistoryFormSchema(): VbenFormSchema[] {
       return [
             {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkSearchHistoryScalarFieldEnum.query,
         label: $t('resource.OpWorkSearchHistory.query'),
       rules: 'required',

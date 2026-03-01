@@ -56,7 +56,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkProfileScalarFieldEnum.description,
         label: $t('resource.OpWorkProfile.description'),
       
@@ -119,7 +119,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkProfileScalarFieldEnum.website,
         label: $t('resource.OpWorkProfile.website'),
       
@@ -137,7 +137,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkProfileScalarFieldEnum.avatarUrl,
         label: $t('resource.OpWorkProfile.avatarUrl'),
       
@@ -146,7 +146,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkProfileScalarFieldEnum.coverImage,
         label: $t('resource.OpWorkProfile.coverImage'),
       

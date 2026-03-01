@@ -127,7 +127,7 @@ export class AuthController {
   }) {
     let user = await this.prismaService.authUser.findFirst({
       where: {
-        email: { equals: email, mode: 'insensitive' },
+        email: { equals: email || null, mode: 'insensitive' },
       },
     });
 
@@ -157,7 +157,7 @@ export class AuthController {
         {
           select: { password: true, isActive: true, id: true },
           where: {
-            email: { equals: email, mode: 'insensitive' },
+            email: { equals: email || null, mode: 'insensitive' },
           },
         },
       );

@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
+import { OpWorkJobDto } from '../generated/rest/op-work-job.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
-import { OpWorkJobDto } from '../generated/rest/op-work-job.dto';
 
 @ApiTags('employer')
 @Controller('employer/job')
@@ -22,16 +22,18 @@ export class EmployeJobController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
+  @Get(':employer_id')
   @ApiOkResponse({ type: OpWorkJobDto, isArray: true })
-  async getJobs(@CurrentAppRequest() req: AppRequest): Promise<OpWorkJobDto[]> {
+  async getJobs(
+    @Param('employer_id', new ParseUUIDPipe()) employerId: string,
+  ): Promise<OpWorkJobDto[]> {
     return await this.prismaService.opWorkJob.findMany({
       include: {
         OpWorkJobSkill: { include: { OpWorkSkill: true } },
         opWorkJobTags: true,
       },
       where: {
-        profileId: req.opWorkProfileId,
+        employerId: employerId,
       },
     });
   }
@@ -49,7 +51,6 @@ export class EmployeJobController {
           opWorkJobTags: true,
         },
         where: {
-          profileId: req.opWorkProfileId,
           id: args.id,
         },
         data: {
@@ -74,7 +75,7 @@ export class EmployeJobController {
       const opWorkEmployer =
         await this.prismaService.opWorkEmployer.findFirstOrThrow({
           where: {
-            profileId: req.opWorkProfileId,
+            id: args.employerId,
           },
         });
       return await this.prismaService.opWorkJob.create({

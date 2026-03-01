@@ -27,7 +27,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.summary,
         label: $t('resource.OpWorkJobSeeker.summary'),
       
@@ -117,7 +117,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.linkedinUrl,
         label: $t('resource.OpWorkJobSeeker.linkedinUrl'),
       
@@ -126,7 +126,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.githubUrl,
         label: $t('resource.OpWorkJobSeeker.githubUrl'),
       
@@ -135,7 +135,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.portfolioUrl,
         label: $t('resource.OpWorkJobSeeker.portfolioUrl'),
       

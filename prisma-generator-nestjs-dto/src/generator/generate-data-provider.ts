@@ -61,9 +61,15 @@ export const generateDataProvider = ({
     const label = field.relationName
       ? `$t('resource.name.${field.name}')`
       : `$t('resource.${entityClassName}.${field.name}')`;
-
-    const multiline =
+    let multiline =
       field.dmmfField?.nativeType?.[0] === 'Text' ? ' multiline' : '';
+    if (
+      field &&
+      field.dmmfField?.nativeType?.[0] === 'VarChar' &&
+      +field.dmmfField?.nativeType?.[1] > 255
+    ) {
+      multiline = 'multiline';
+    }
     const required = field.dmmfField?.isRequired;
     const readonly = !editableFields.find((f) => f.name === field.name);
     let component = 'Input';

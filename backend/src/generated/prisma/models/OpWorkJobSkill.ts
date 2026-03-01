@@ -397,6 +397,7 @@ export type OpWorkJobSkillOrderByRelationAggregateInput = {
 }
 
 export type OpWorkJobSkillUqOpWorkJobSkillCompoundUniqueInput = {
+  profileId: string
   jobId: string
   skillId: string
 }

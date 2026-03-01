@@ -8,11 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkExperienceDto } from '../generated/rest/op-work-experience.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerExperienceArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker/experience')
@@ -22,14 +22,14 @@ export class JobSeekerExperienceController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
+  @Get(':job_seeker_id')
   @ApiOkResponse({ type: OpWorkExperienceDto, isArray: true })
   async getExperiences(
-    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id', new ParseUUIDPipe()) jobSeekerId: string,
   ): Promise<OpWorkExperienceDto[]> {
     return await this.prismaService.opWorkExperience.findMany({
       where: {
-        profileId: req.opWorkProfileId,
+        jobSeekerId: jobSeekerId,
       },
     });
   }
@@ -58,7 +58,7 @@ export class JobSeekerExperienceController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            profileId: req.opWorkProfileId,
+            id: args.jobSeekerId,
           },
         });
       return await this.prismaService.opWorkExperience.create({

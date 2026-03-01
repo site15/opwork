@@ -90,7 +90,9 @@ const handleItemClick = (item: OpWorkJob) => {
             v-model="sortForm.salary"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">
               {{ $t('common.filter.sort.lowToHigh') }}
             </option>
@@ -109,7 +111,9 @@ const handleItemClick = (item: OpWorkJob) => {
             v-model="sortForm.publishedAt"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">{{ $t('common.filter.sort.oldToNew') }}</option>
             <option value="desc">
               {{ $t('common.filter.sort.newToOld') }}
@@ -126,7 +130,9 @@ const handleItemClick = (item: OpWorkJob) => {
             v-model="sortForm.applicationsCount"
             @change="handleSortChange"
           >
-            <option value="">{{ $t('common.filter.sort.none') }}</option>
+            <option value="">
+              {{ $t('common.filter.sort.withoutSorting') }}
+            </option>
             <option value="asc">
               {{ $t('common.filter.sort.fewToMany') }}
             </option>

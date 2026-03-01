@@ -4,6 +4,8 @@ import type { OpWorkJob } from '#/generated/client';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { confirm } from '@vben/common-ui';
+
 import { $t } from '#/locales';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -67,6 +69,30 @@ const handlePageChange = (page: number) => {
 
 const handleItemClick = (item: OpWorkJob) => {
   router.push(`/vacancy/${item.id}`);
+};
+
+const handleCreateClick = (event: Event) => {
+  // Prevent the parent click handler from triggering
+  event.stopPropagation();
+  router.push(`/vacancy/create`);
+};
+
+const handleEditClick = (item: OpWorkJob, event: Event) => {
+  // Prevent the parent click handler from triggering
+  event.stopPropagation();
+  router.push(`/vacancy/${item.id}/edit`);
+};
+
+const handleDeleteClick = (item: OpWorkJob, event: Event) => {
+  // Prevent the parent click handler from triggering
+  event.stopPropagation();
+
+  confirm(
+    $t('common.confirm'),
+    $t('common.deleteConfirm', { name: item.title }),
+  ).then(() => {
+    // todo: console.log('Deleting vacancy:', item.id);
+  });
 };
 </script>
 
@@ -135,6 +161,14 @@ const handleItemClick = (item: OpWorkJob) => {
             </option>
           </select>
         </div>
+
+        <!--кнопка добавления-->
+        <button
+          class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+          @click="handleCreateClick($event)"
+        >
+          {{ $t('common.add') }}
+        </button>
       </div>
     </CardHeader>
     <CardContent class="flex flex-wrap p-5 pt-0">
@@ -267,6 +301,22 @@ const handleItemClick = (item: OpWorkJob) => {
                 </span>
               </div>
             </div>
+          </div>
+          <div class="flex shrink-0 items-center gap-x-4">
+            <button
+              type="button"
+              class="rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600"
+              @click="handleEditClick(item, $event)"
+            >
+              {{ $t('common.edit') }}
+            </button>
+            <button
+              type="button"
+              class="rounded bg-red-500 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-600"
+              @click="handleDeleteClick(item, $event)"
+            >
+              {{ $t('common.delete') }}
+            </button>
           </div>
         </li>
       </ul>

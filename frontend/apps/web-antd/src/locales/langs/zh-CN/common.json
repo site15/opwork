@@ -19,13 +19,14 @@
     "salary": "Salary",
     "published": "Published",
     "sort": {
-      "none": "None",
+      "withoutSorting": "Without Sorting",
       "oldToNew": "Old To New",
       "newToOld": "New To Old",
       "fewToMany": "Few To Many",
       "manyToFew": "Many To Few",
       "lowToHigh": "Low To High",
-      "highToLow": "High To Low"
+      "highToLow": "High To Low",
+      "none": "None"
     },
     "apps": "Apps",
     "views": "Views",
@@ -44,5 +45,10 @@
     "last": "Last"
   },
   "notSpecified": "Not Specified",
-  "salary": "Salary"
+  "salary": "Salary",
+  "confirm": "Confirm",
+  "deleteConfirm": "Delete Confirm",
+  "add": "Add",
+  "save": "Save",
+  "update": "Update"
 }

@@ -14,7 +14,7 @@ describe('OPWork: update employer profile (e2e)', () => {
   const skillName = getRandomSha7();
 
   let employerControllerSetProfileResultId: string | undefined;
-  let employerControllerSetEmployerWorkResultId: string | undefined;
+  let jobId: string | undefined;
 
   it('Login', async () => {
     const result = await employerActivity.registerAndLoginRandomUser(
@@ -90,6 +90,7 @@ describe('OPWork: update employer profile (e2e)', () => {
     const employeJobControllerSetJobResult =
       await employerActivity.sdk.employeJobControllerSetJob({
         body: {
+          employerId: employerControllerSetProfileResultId || '',
           description: 'This is a test description.',
           employmentType: OpWorkEmploymentType.FULL_TIME,
           experienceLevel: OpWorkExperienceLevel.JUNIOR,
@@ -124,8 +125,7 @@ describe('OPWork: update employer profile (e2e)', () => {
       isRemote: false,
       salaryCurrency: 'USD',
     });
-    employerControllerSetEmployerWorkResultId =
-      employeJobControllerSetJobResult.data?.id;
+    jobId = employeJobControllerSetJobResult.data?.id;
   });
 
   it('Create employer job skill', async () => {
@@ -137,7 +137,7 @@ describe('OPWork: update employer profile (e2e)', () => {
 
     const employerWorkSkillControllerSetJobSkillResult =
       await employerActivity.sdk.employerWorkSkillControllerSetJobSkill({
-        path: { job_id: employerControllerSetEmployerWorkResultId || '' },
+        path: { job_id: jobId || '' },
         body: {
           skillId,
           importance: 1,
@@ -157,7 +157,7 @@ describe('OPWork: update employer profile (e2e)', () => {
   it('Create employer job tags', async () => {
     const employerJobTagsControllerSetJobTagsResult =
       await employerActivity.sdk.employerJobTagsControllerSetJobTags({
-        path: { job_id: employerControllerSetEmployerWorkResultId || '' },
+        path: { job_id: jobId || '' },
         body: {
           name: 'MVP',
           color: '#FF0000',
@@ -176,8 +176,11 @@ describe('OPWork: update employer profile (e2e)', () => {
         query: { searchText: 'JavaScript' },
       })
     )?.data?.items?.[0]?.id;
+
     const employerControllerGetProfileResult =
-      await employerActivity.sdk.employerControllerGetProfile();
+      await employerActivity.sdk.employerControllerGetProfile({
+        path: { employer_id: employerControllerSetProfileResultId || '' },
+      });
     expect(employerControllerGetProfileResult.data).toMatchObject({
       OpWorkJob: [
         {

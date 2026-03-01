@@ -112,14 +112,14 @@ export class AuthGuard implements CanActivate {
       req.opWorkProfileId ||
       (!req.opWorkProfileId && req.authUser?.OpWorkProfile.length > 0)
     ) {
-      const profile =
+      const opWorkProfile =
         req.authUser?.OpWorkProfile.find((p) => p.id === req.opWorkProfileId) ||
         req.authUser?.OpWorkProfile[0];
-      if (!profile) {
+      if (!opWorkProfile) {
         throw new AuthError(AuthErrorEnum.PROFILE_NOT_FOUND);
       }
-      req.opWorkProfileId = profile.id;
-      req.opWorkProfile = profile;
+      req.opWorkProfileId = opWorkProfile.id;
+      req.opWorkProfile = opWorkProfile;
     }
 
     if (

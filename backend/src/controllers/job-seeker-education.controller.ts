@@ -22,14 +22,14 @@ export class JobSeekerEducationController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
+  @Get(':job_seeker_id')
   @ApiOkResponse({ type: OpWorkEducationDto, isArray: true })
   async getEducations(
-    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id', new ParseUUIDPipe()) jobSeekerId: string,
   ): Promise<OpWorkEducationDto[]> {
     return await this.prismaService.opWorkEducation.findMany({
       where: {
-        profileId: req.opWorkProfileId,
+        jobSeekerId: jobSeekerId,
       },
     });
   }
@@ -58,7 +58,7 @@ export class JobSeekerEducationController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            profileId: req.opWorkProfileId,
+            id: args.jobSeekerId,
           },
         });
       return await this.prismaService.opWorkEducation.create({

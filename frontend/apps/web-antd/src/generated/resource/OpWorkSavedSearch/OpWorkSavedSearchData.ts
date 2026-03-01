@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkSavedSearchScalarFieldEnum.query,
         label: $t('resource.OpWorkSavedSearch.query'),
       rules: 'required',

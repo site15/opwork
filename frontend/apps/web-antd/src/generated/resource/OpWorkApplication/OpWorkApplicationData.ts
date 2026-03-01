@@ -9,7 +9,7 @@ import type { VbenFormSchema } from '#/adapter/form';
     export function useOpWorkApplicationFormSchema(): VbenFormSchema[] {
       return [
             {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkApplicationScalarFieldEnum.coverLetter,
         label: $t('resource.OpWorkApplication.coverLetter'),
       
@@ -18,7 +18,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkApplicationScalarFieldEnum.resumeUrl,
         label: $t('resource.OpWorkApplication.resumeUrl'),
       
@@ -27,7 +27,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkApplicationScalarFieldEnum.portfolioUrl,
         label: $t('resource.OpWorkApplication.portfolioUrl'),
       
@@ -59,7 +59,7 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'Input',
+        component: 'Textarea',
           fieldName: Prisma.OpWorkApplicationScalarFieldEnum.statusNotes,
         label: $t('resource.OpWorkApplication.statusNotes'),
       

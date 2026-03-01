@@ -414,6 +414,7 @@ export type OpWorkApplicationOrderByRelationAggregateInput = {
 }
 
 export type OpWorkApplicationUqOpWorkJobSeekerJobCompoundUniqueInput = {
+  profileId: string
   jobSeekerId: string
   jobId: string
 }

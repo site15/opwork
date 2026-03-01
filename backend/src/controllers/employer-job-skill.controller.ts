@@ -10,10 +10,10 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSkillDto } from '../generated/rest/op-work-job-skill.dto';
+import { OpWorkJobSkill } from '../generated/rest/op-work-job-skill.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobSkillArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
-import { OpWorkJobSkill } from '../generated/rest/op-work-job-skill.entity';
 
 @ApiTags('employer')
 @Controller('employer/job-skill')
@@ -28,6 +28,9 @@ export class EmployerWorkSkillController {
   async getAllJobSkills(
     @CurrentAppRequest() req: AppRequest,
   ): Promise<OpWorkJobSkillDto[]> {
+    if (!req.opWorkProfileId) {
+      return [];
+    }
     return await this.prismaService.opWorkJobSkill.findMany({
       include: { OpWorkSkill: true },
       where: {

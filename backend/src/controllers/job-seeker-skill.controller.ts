@@ -22,15 +22,15 @@ export class JobSeekerSkillController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get()
+  @Get(':job_seeker_id')
   @ApiOkResponse({ type: OpWorkJobSeekerSkill, isArray: true })
   async getSkills(
-    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id', new ParseUUIDPipe()) jobSeekerId: string,
   ): Promise<OpWorkJobSeekerSkill[]> {
     return await this.prismaService.opWorkJobSeekerSkill.findMany({
       include: { OpWorkSkill: true },
       where: {
-        profileId: req.opWorkProfileId,
+        jobSeekerId: jobSeekerId,
       },
     });
   }
@@ -41,17 +41,22 @@ export class JobSeekerSkillController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerSkillArgs,
   ): Promise<OpWorkJobSeekerSkill> {
-    if (!args.skillId && args.skillName) {
-      args.skillId = (
-        (await this.prismaService.opWorkSkill.findFirst({
-          where: {
-            name: args.skillName,
-          },
-        })) ||
-        (await this.prismaService.opWorkSkill.create({
-          data: { name: args.skillName, popularity: -1 },
-        }))
-      ).id;
+    if (args.skillName) {
+      args.skillId =
+        (
+          await this.prismaService.opWorkSkill.findFirst({
+            where: {
+              name: args.skillName,
+            },
+          })
+        )?.id || undefined;
+      if (!args.skillId) {
+        args.skillId = (
+          await this.prismaService.opWorkSkill.create({
+            data: { name: args.skillName, popularity: -1 },
+          })
+        ).id;
+      }
     }
     if (args.id) {
       return await this.prismaService.opWorkJobSeekerSkill.update({
@@ -69,9 +74,10 @@ export class JobSeekerSkillController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            profileId: req.opWorkProfileId,
+            id: args.jobSeekerId,
           },
         });
+
       return await this.prismaService.opWorkJobSeekerSkill.create({
         include: { OpWorkSkill: true },
         data: {

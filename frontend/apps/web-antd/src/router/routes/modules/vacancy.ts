@@ -32,6 +32,26 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'VacancyCreate',
+        path: '/vacancy/create',
+        component: () => import('#/views/vacancy/create-or-update/index.vue'),
+        meta: {
+          hideInMenu: true,
+          icon: 'lucide:briefcase-business',
+          title: $t('page.vacancy.create'),
+        },
+      },
+      {
+        name: 'VacancyEdit',
+        path: '/vacancy/:id/edit',
+        component: () => import('#/views/vacancy/create-or-update/index.vue'),
+        meta: {
+          hideInMenu: true,
+          icon: 'lucide:briefcase-business',
+          title: $t('page.vacancy.edit'),
+        },
+      },
+      {
         name: 'VacancyDetail',
         path: '/vacancy/:id',
         component: () => import('#/views/vacancy/detail/index.vue'),

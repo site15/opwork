@@ -129,10 +129,17 @@ export class VacancyController {
         OpWorkProfile: true,
         OpWorkEmployer: true,
         OpWorkJobSkill: { include: { OpWorkSkill: true } },
-        opWorkJobTags: true,
+        ...(req.opWorkProfile.type === 'EMPLOYER'
+          ? { opWorkJobTags: true }
+          : {}),
       },
       where: {
         id: jobId,
+        ...(req.opWorkProfile.type === 'EMPLOYER'
+          ? {
+              OpWorkProfile: { type: 'EMPLOYER', id: req.opWorkProfileId },
+            }
+          : {}),
       },
     });
     await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
@@ -211,7 +218,9 @@ export class VacancyController {
             ]
           : []),
         // tags
-        ...(otherArgs.tags?.length && otherArgs.tags?.length > 0
+        ...(req.opWorkProfile.type === 'EMPLOYER' &&
+        otherArgs.tags?.length &&
+        otherArgs.tags?.length > 0
           ? [
               {
                 opWorkJobTags: {
@@ -221,6 +230,11 @@ export class VacancyController {
             ]
           : []),
       ],
+      ...(req.opWorkProfile.type === 'EMPLOYER'
+        ? {
+            OpWorkProfile: { type: 'EMPLOYER', id: req.opWorkProfileId },
+          }
+        : {}),
     };
 
     return {
@@ -229,7 +243,9 @@ export class VacancyController {
           OpWorkProfile: true,
           OpWorkEmployer: true,
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
-          opWorkJobTags: true,
+          ...(req.opWorkProfile.type === 'EMPLOYER'
+            ? { opWorkJobTags: true }
+            : {}),
         },
         where: opWorkJobWhereInput,
         take,

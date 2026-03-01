@@ -198,7 +198,7 @@ export class NotificationController {
       ...(otherArgs.isArchived !== undefined
         ? { isArchived: { equals: otherArgs.isArchived } }
         : {}),
-      profileId: req.opWorkProfileId,
+      profileId: req.opWorkProfileId || null,
     };
 
     return {

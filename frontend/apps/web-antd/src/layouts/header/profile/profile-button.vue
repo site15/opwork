@@ -40,8 +40,8 @@ const [Modal, modalApi] = useVbenModal({
       if (profileId) {
         currentProfileIdRef.value = profileId;
       } else {
-        const profile = await opWorkProfileService.getProfile();
-        currentProfileIdRef.value = profile.id;
+        const opWorkProfile = await opWorkProfileService.getProfile();
+        currentProfileIdRef.value = opWorkProfile.id;
       }
       availableProfilesRef.value = await opWorkProfileService
         .getProfiles()

@@ -25,6 +25,7 @@
       "title": "My vacancies"
     }
   },
+  "createBtn": "Create Vacancy",
   "tags": "Tags",
   "skills": "Skills"
 }
