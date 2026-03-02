@@ -4,7 +4,13 @@ import type { OpWorkJob } from '#/generated/client';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { vacancyControllerFindOne } from '#/generated/client';
+import { confirm } from '@vben/common-ui';
+
+import {
+  employeJobControllerDelJob,
+  vacancyControllerFindOne,
+} from '#/generated/client';
+import { $t } from '#/locales';
 
 defineOptions({ name: 'VacancyDetail' });
 
@@ -12,6 +18,17 @@ const route = useRoute();
 
 const vacancy = ref<null | OpWorkJob>(null);
 const loading = ref(false);
+
+const handleDeleteClick = () => {
+  confirm(
+    $t('common.confirm'),
+    $t('common.deleteConfirm', { name: vacancy.value?.title }),
+  )
+    .then(async () => {
+      await employeJobControllerDelJob({ body: { id: vacancy.value?.id } });
+    })
+    .then();
+};
 
 const currentFilters = ref<{ id?: string }>();
 
@@ -59,39 +76,71 @@ onMounted(() => {
     <div v-else class="space-y-6">
       <!-- Header Section -->
       <div class="rounded-lg bg-white p-6 shadow">
-        <h1 class="mb-2 text-2xl font-bold text-gray-900">
-          {{ vacancy.title }}
-        </h1>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-          <div class="flex items-center">
-            <span class="mr-2 font-medium"
-              >{{ $t('resource.OpWorkJob.employmentType') }}:</span
+        <div
+          class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+        >
+          <div>
+            <!--основная информация-->
+            <h1 class="mb-2 text-2xl font-bold text-gray-900">
+              {{ vacancy.title }}
+            </h1>
+            <div
+              class="flex flex-wrap items-center gap-4 text-sm text-gray-600"
             >
-            <span
-              class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
-            >
-              {{
-                $t(`resource.OpWorkEmploymentType.${vacancy.employmentType}`)
-              }}
-            </span>
+              <div class="flex items-center">
+                <span class="mr-2 font-medium"
+                  >{{ $t('resource.OpWorkJob.employmentType') }}:</span
+                >
+                <span
+                  class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
+                >
+                  {{
+                    $t(
+                      `resource.OpWorkEmploymentType.${vacancy.employmentType}`,
+                    )
+                  }}
+                </span>
+              </div>
+              <div class="flex items-center">
+                <span class="mr-2 font-medium"
+                  >{{ $t('resource.OpWorkJob.experienceLevel') }}:</span
+                >
+                <span
+                  class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
+                >
+                  {{
+                    $t(
+                      `resource.OpWorkExperienceLevel.${vacancy.experienceLevel}`,
+                    )
+                  }}
+                </span>
+              </div>
+              <div class="flex items-center">
+                <span class="mr-2 font-medium"
+                  >{{ $t('resource.OpWorkJob.department') }}:</span
+                >
+                <span>{{
+                  vacancy.department || $t('common.notSpecified')
+                }}</span>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center">
-            <span class="mr-2 font-medium"
-              >{{ $t('resource.OpWorkJob.experienceLevel') }}:</span
+          <div class="flex items-center space-x-3">
+            <!--кнопки-->
+            <button
+              type="button"
+              class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+              @click="$router.push(`/vacancy/${vacancy.id}/edit`)"
             >
-            <span
-              class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
+              {{ $t('common.edit') }}
+            </button>
+            <button
+              type="button"
+              class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
+              @click="handleDeleteClick()"
             >
-              {{
-                $t(`resource.OpWorkExperienceLevel.${vacancy.experienceLevel}`)
-              }}
-            </span>
-          </div>
-          <div class="flex items-center">
-            <span class="mr-2 font-medium"
-              >{{ $t('resource.OpWorkJob.department') }}:</span
-            >
-            <span>{{ vacancy.department || $t('common.notSpecified') }}</span>
+              {{ $t('common.delete') }}
+            </button>
           </div>
         </div>
       </div>

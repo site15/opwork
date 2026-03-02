@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 import { useVbenForm } from '@vben/common-ui';
 import { $t } from '@vben/locales';
@@ -9,26 +9,21 @@ import { notification } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
 import {
-  employeJobControllerSetJob,
+  opWorkEmployerControllerCreateOne,
+  opWorkEmployerControllerUpdateOne,
   vacancyControllerFindOne,
 } from '#/generated/client';
 
-import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
-import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
-import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardFooter.vue';
-import CardHeader from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardHeader.vue';
-import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
-import { useOpWorkJobFormSchema } from './OpWorkJobData';
+import { useOpWorkEmployerFormSchema } from './OpWorkEmployerData';
 
-defineOptions({ name: 'VacancyCreateOrUpdate' });
+defineOptions({ name: 'EmployerProfile' });
 
-const router = useRouter();
 const route = useRoute();
 const loading = ref(false);
 
 const currentFilters = ref<{ id?: string }>();
 
-const loadVacany = () => {
+const loadProfile = () => {
   if (currentFilters.value?.id) {
     loading.value = true;
     vacancyControllerFindOne({
@@ -39,12 +34,6 @@ const loadVacany = () => {
       .then((response) => {
         const values = {
           ...response.data,
-          expiresAt: response.data?.expiresAt
-            ? dayjs(response.data.expiresAt)
-            : undefined,
-          publishedAt: response.data?.publishedAt
-            ? dayjs(response.data.publishedAt)
-            : undefined,
           createdAt: response.data?.createdAt
             ? dayjs(response.data.createdAt)
             : undefined,
@@ -68,7 +57,7 @@ const loadVacany = () => {
 
 const [Form, formApi] = useVbenForm({
   wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-4',
-  schema: useOpWorkJobFormSchema(),
+  schema: useOpWorkEmployerFormSchema(),
   showDefaultActions: false,
 });
 
@@ -77,31 +66,60 @@ const submit = async () => {
   if (!valid) return;
   const values = await formApi.getValues();
 
-  employeJobControllerSetJob({
-    body: {
-      id: currentFilters.value?.id,
-      title: values.title,
-      description: values.description,
-      requirements: values.requirements,
-      responsibilities: values.responsibilities,
-      employmentType: values.employmentType,
-      experienceLevel: values.experienceLevel,
-      department: values.department,
-      salaryMin: values.salaryMin,
-      salaryMax: values.salaryMax,
-      salaryCurrency: values.salaryCurrency,
-      location: values.location,
-      isRemote: values.isRemote,
-      status: values.status,
-      publishedAt: values.publishedAt,
-      expiresAt: values.expiresAt,
-    },
-  })
+  (currentFilters.value?.id
+    ? opWorkEmployerControllerUpdateOne({
+        path: { id: currentFilters.value?.id },
+        body: {
+          companyName: values.companyName,
+          industry: values.industry,
+          description: values.description,
+          mission: values.mission,
+          culture: values.culture,
+          foundedYear: values.foundedYear,
+          headquarters: values.headquarters,
+          logoUrl: values.logoUrl,
+          coverImageUrl: values.coverImageUrl,
+          companyEmail: values.companyEmail,
+          companyPhone: values.companyPhone,
+          companyWebsite: values.companyWebsite,
+          linkedinUrl: values.linkedinUrl,
+          twitterUrl: values.twitterUrl,
+          facebookUrl: values.facebookUrl,
+          OpWorkProfile: { connect: { id: values.profileId } },
+        },
+      })
+    : opWorkEmployerControllerCreateOne({
+        body: {
+          companyName: values.companyName,
+          industry: values.industry,
+          description: values.description,
+          mission: values.mission,
+          culture: values.culture,
+          foundedYear: values.foundedYear,
+          headquarters: values.headquarters,
+          logoUrl: values.logoUrl,
+          coverImageUrl: values.coverImageUrl,
+          companyEmail: values.companyEmail,
+          companyPhone: values.companyPhone,
+          companyWebsite: values.companyWebsite,
+          linkedinUrl: values.linkedinUrl,
+          twitterUrl: values.twitterUrl,
+          facebookUrl: values.facebookUrl,
+          OpWorkProfile: { connect: { id: values.profileId } },
+        },
+      })
+  )
     .then((data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
       }
-      router.push({ path: `/vacancy/${data.data.id}` });
+      notification.success({
+        message: currentFilters.value?.id
+          ? $t('actions.common.updateSuccess')
+          : $t('actions.common.createSuccess'),
+        description: $t('employer.detail.createSuccessDescription'),
+        duration: 3000,
+      });
     })
     .catch((error) => {
       notification.error({
@@ -116,7 +134,7 @@ const submit = async () => {
 onMounted(() => {
   // Load initial data with empty filters
   currentFilters.value = { id: route.params.id as string };
-  loadVacany();
+  loadProfile();
 });
 </script>
 
@@ -131,30 +149,18 @@ onMounted(() => {
       {{ $t('vacancy.detail.notFound') }}
     </div-->
     <div v-else class="space-y-6">
-      <Card>
-        <CardHeader class="py-4">
-          <CardTitle class="text-lg">
-            {{
-              currentFilters?.id
-                ? $t('vacancy.update.title')
-                : $t('vacancy.create.title')
-            }}
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-wrap gap-4">
-          <div class="w-full">
-            <Form />
-          </div>
-        </CardContent>
-        <CardFooter class="flex flex-wrap justify-end gap-2">
+      <!-- Header Section -->
+      <div class="rounded-lg bg-white p-6 shadow">
+        <Form />
+        <div class="flex justify-end">
           <button
             class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
             @click="submit"
           >
             {{ currentFilters?.id ? $t('common.update') : $t('common.create') }}
           </button>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </div>
   </div>
 </template>

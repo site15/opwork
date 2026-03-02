@@ -91,7 +91,7 @@ onMounted(() => {
 
 <template>
   <div class="p-5">
-    <div class="mt-5 flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row">
       <div class="mb-4 mr-4 w-full lg:mb-0 lg:w-1/5">
         <VacancyMyFilterForm
           :title="$t('common.filter.title')"

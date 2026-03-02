@@ -32,6 +32,16 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'EmployerProfile',
+        path: '/profile/employer',
+        component: () => import('#/views/profile/employer/index.vue'),
+        meta: {
+          affixTab: true,
+          icon: 'lucide:square-user-round',
+          title: $t('page.profile.employer'),
+        },
+      },
+      {
         name: 'VacancyCreate',
         path: '/vacancy/create',
         component: () => import('#/views/vacancy/create-or-update/index.vue'),
