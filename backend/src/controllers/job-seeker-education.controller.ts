@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Inject,
-  Param,
-  ParseUUIDPipe,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkEducationDto } from '../generated/rest/op-work-education.dto';
@@ -25,11 +17,12 @@ export class JobSeekerEducationController {
   @Get(':job_seeker_id')
   @ApiOkResponse({ type: OpWorkEducationDto, isArray: true })
   async getEducations(
-    @Param('job_seeker_id', new ParseUUIDPipe()) jobSeekerId: string,
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkEducationDto[]> {
     return await this.prismaService.opWorkEducation.findMany({
       where: {
-        jobSeekerId: jobSeekerId,
+        jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id,
       },
     });
   }
@@ -58,7 +51,7 @@ export class JobSeekerEducationController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            id: args.jobSeekerId,
+            id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
           },
         });
       return await this.prismaService.opWorkEducation.create({

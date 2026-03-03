@@ -5,7 +5,6 @@ import {
   Get,
   Inject,
   Param,
-  ParseUUIDPipe,
   Put,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
@@ -30,7 +29,8 @@ export class EmployeJobController {
   @Get(':employer_id')
   @ApiOkResponse({ type: OpWorkJobDto, isArray: true })
   async getJobs(
-    @Param('employer_id', new ParseUUIDPipe()) employerId: string,
+    @CurrentAppRequest() req: AppRequest,
+    @Param('employer_id') employerId: string,
   ): Promise<OpWorkJobDto[]> {
     return await this.prismaService.opWorkJob.findMany({
       include: {
@@ -38,7 +38,7 @@ export class EmployeJobController {
         opWorkJobTags: true,
       },
       where: {
-        employerId: employerId,
+        employerId: employerId || req.firstOpWorkEmployer?.id,
       },
     });
   }
@@ -93,7 +93,7 @@ export class EmployeJobController {
       const opWorkEmployer =
         await this.prismaService.opWorkEmployer.findFirstOrThrow({
           where: {
-            id: args.employerId,
+            id: args.employerId || req.firstOpWorkEmployer?.id,
           },
         });
       return await this.prismaService.opWorkJob.create({

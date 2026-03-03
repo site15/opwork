@@ -51,5 +51,8 @@
     "my": "My vacancies",
     "create": "Create",
     "edit": "Edit"
+  },
+  "profile": {
+    "employer": "Employer"
   }
 }

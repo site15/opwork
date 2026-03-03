@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Inject,
-  Param,
-  ParseUUIDPipe,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeekerSkill } from '../generated/rest/op-work-job-seeker-skill.entity';
@@ -25,12 +17,13 @@ export class JobSeekerSkillController {
   @Get(':job_seeker_id')
   @ApiOkResponse({ type: OpWorkJobSeekerSkill, isArray: true })
   async getSkills(
-    @Param('job_seeker_id', new ParseUUIDPipe()) jobSeekerId: string,
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkJobSeekerSkill[]> {
     return await this.prismaService.opWorkJobSeekerSkill.findMany({
       include: { OpWorkSkill: true },
       where: {
-        jobSeekerId: jobSeekerId,
+        jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id,
       },
     });
   }
@@ -74,7 +67,7 @@ export class JobSeekerSkillController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            id: args.jobSeekerId,
+            id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
           },
         });
 

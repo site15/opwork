@@ -27,5 +27,11 @@
   },
   "createBtn": "创建职位空缺",
   "tags": "标签",
-  "skills": "技能"
+  "skills": "技能",
+  "update": {
+    "title": "Title"
+  },
+  "create": {
+    "title": "Title"
+  }
 }

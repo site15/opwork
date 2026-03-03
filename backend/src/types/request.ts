@@ -1,4 +1,10 @@
-import { AuthSession, OpWorkProfile, Prisma } from '../generated/prisma/client';
+import {
+  AuthSession,
+  OpWorkEmployer,
+  OpWorkJobSeeker,
+  OpWorkProfile,
+  Prisma,
+} from '../generated/prisma/client';
 
 export type AppRequest = {
   authUser: Prisma.AuthUserGetPayload<{
@@ -8,7 +14,11 @@ export type AppRequest = {
       };
     };
   }>;
-  opWorkProfile: OpWorkProfile;
+  opWorkProfile: Prisma.OpWorkProfileGetPayload<{
+    include: { opWorkJobSeeker: true; opWorkEmployer: true };
+  }>;
+  firstOpWorkJobSeeker?: OpWorkJobSeeker;
+  firstOpWorkEmployer?: OpWorkEmployer;
   authSession?: AuthSession;
   //
   authUserId: string;

@@ -3,6 +3,7 @@
     "findManyFailed": "Find Many Failed",
     "updateFailed": "Update Failed",
     "createFailed": "Create Failed",
-    "deleteFailed": "Delete Failed"
+    "deleteFailed": "Delete Failed",
+    "updateSuccess": "Update Success"
   }
 }

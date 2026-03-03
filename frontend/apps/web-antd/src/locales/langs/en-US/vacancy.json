@@ -27,5 +27,11 @@
   },
   "createBtn": "Create Vacancy",
   "tags": "Tags",
-  "skills": "Skills"
+  "skills": "Skills",
+  "update": {
+    "title": "Title"
+  },
+  "create": {
+    "title": "Title"
+  }
 }

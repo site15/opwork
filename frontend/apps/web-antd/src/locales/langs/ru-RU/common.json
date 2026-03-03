@@ -33,7 +33,7 @@
     "from": "От",
     "upTo": "До",
     "title": "Фильтры",
-    "remote": "Remote"
+    "remote": "Удаленная работа"
   },
   "loading": "Загрузка",
   "noResults": "Нет результатов",
@@ -46,9 +46,9 @@
   },
   "notSpecified": "Не указано",
   "salary": "Зарплата",
-  "confirm": "Confirm",
-  "deleteConfirm": "Delete Confirm",
-  "add": "Add",
-  "save": "Save",
-  "update": "Update"
+  "confirm": "подтверждения",
+  "deleteConfirm": "Вы точно хотите удалить?",
+  "add": "Добавить",
+  "save": "Сохранить",
+  "update": "Обновить"
 }

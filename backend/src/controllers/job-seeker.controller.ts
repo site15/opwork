@@ -1,23 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Inject,
-  Param,
-  ParseUUIDPipe,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import {
-  DelJobSeekerProfileArgs,
-  SetJobSeekerProfileArgs,
-} from '../types/job-seeker-types';
+import { SetJobSeekerProfileArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
-import { StatusResponse } from '../types/status-response';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker')
@@ -51,7 +38,7 @@ export class JobSeekerController {
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async getProfile(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id', new ParseUUIDPipe({ optional: true }))
+    @Param('job_seeker_id')
     jobSeekerId: string,
   ): Promise<OpWorkJobSeeker | null> {
     return await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
@@ -60,28 +47,13 @@ export class JobSeekerController {
         OpWorkExperience: true,
         OpWorkJobSeekerSkill: {
           include: { OpWorkSkill: true },
-          where: { jobSeekerId },
+          where: { jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id },
         },
       },
       where: {
-        id: jobSeekerId,
+        id: jobSeekerId || req.firstOpWorkJobSeeker?.id,
       },
     });
-  }
-
-  @Delete()
-  @ApiOkResponse({ type: StatusResponse })
-  async delProfile(
-    @Body() args: DelJobSeekerProfileArgs,
-  ): Promise<StatusResponse> {
-    if (args.id) {
-      await this.prismaService.opWorkJobSeeker.delete({
-        where: {
-          id: args.id,
-        },
-      });
-    }
-    return { message: 'ok' };
   }
 
   @Put()
@@ -90,13 +62,12 @@ export class JobSeekerController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerProfileArgs,
   ): Promise<OpWorkJobSeeker> {
-    let opWorkJobSeeker = args.jobSeekerId
-      ? await this.prismaService.opWorkJobSeeker.findFirst({
-          where: {
-            id: args.jobSeekerId,
-          },
-        })
-      : null;
+    let opWorkJobSeeker =
+      (await this.prismaService.opWorkJobSeeker.findFirst({
+        where: {
+          id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+        },
+      })) || null;
     if (opWorkJobSeeker) {
       opWorkJobSeeker = await this.prismaService.opWorkJobSeeker.update({
         include: {

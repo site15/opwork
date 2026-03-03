@@ -49,7 +49,10 @@
     "list": "Список",
     "detail": "Подробно",
     "my": "Мои вакансии",
-    "create": "Create",
-    "edit": "Edit"
+    "create": "Создать",
+    "edit": "Редактировать"
+  },
+  "profile": {
+    "employer": "Моя профиль"
   }
 }

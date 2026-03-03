@@ -67,7 +67,7 @@ const loadVacany = () => {
 };
 
 const [Form, formApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-4',
+  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-2',
   schema: useOpWorkJobFormSchema(),
   showDefaultActions: false,
 });

@@ -1,8 +1,5 @@
 import type { VbenFormSchema } from '#/adapter/form';
-import type { OpWorkProfile } from '#/generated/client';
 
-import { getComponentProps } from '#/adapter/get-component-props';
-import { opWorkProfileControllerFindMany } from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 
@@ -15,7 +12,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Input',
@@ -23,7 +19,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.industry'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -31,7 +26,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.description'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -39,7 +33,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.mission'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -47,7 +40,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.culture'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'InputNumber',
@@ -55,7 +47,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.foundedYear'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Input',
@@ -63,7 +54,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.headquarters'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -71,7 +61,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.logoUrl'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -79,7 +68,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.coverImageUrl'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Input',
@@ -87,7 +75,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.companyEmail'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Input',
@@ -95,7 +82,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.companyPhone'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -103,7 +89,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.companyWebsite'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -111,7 +96,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.linkedinUrl'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -119,7 +103,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.twitterUrl'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
     },
     {
       component: 'Textarea',
@@ -127,26 +110,6 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEmployer.facebookUrl'),
 
       controlClass: 'w-full',
-      labelWidth: 200,
-    },
-
-    {
-      component: 'ApiSelect',
-      ...getComponentProps<OpWorkProfile>({
-        findMany: (searchText?: string) =>
-          opWorkProfileControllerFindMany({
-            query: {
-              perPage: 100,
-              ...(searchText ? { searchText } : {}),
-            },
-          }),
-        getLabel: (item) => item.title || item.id,
-      }),
-      fieldName: Prisma.OpWorkEmployerScalarFieldEnum.profileId,
-      label: $t('resource.name.OpWorkProfile'),
-
-      controlClass: 'w-full',
-      labelWidth: 200,
     },
   ];
 }

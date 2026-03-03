@@ -141,29 +141,34 @@ export class AuthGuard implements CanActivate {
     if (
       req.opWorkProfileId &&
       req.opWorkProfile.type === 'EMPLOYER' &&
-      req.authUser?.OpWorkProfile &&
-      !req.authUser?.OpWorkProfile.some((p) => p.opWorkEmployer.length > 0)
+      !req.opWorkProfile.opWorkEmployer?.length
     ) {
-      await this.prismaService.opWorkEmployer.create({
-        data: {
-          companyName: '',
-          OpWorkProfile: { connect: { id: req.opWorkProfileId } },
-        },
-      });
+      req.opWorkProfile.opWorkEmployer = [
+        await this.prismaService.opWorkEmployer.create({
+          data: {
+            companyName: '',
+            OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+          },
+        }),
+      ];
     }
 
     if (
       req.opWorkProfileId &&
       req.opWorkProfile.type === 'SPECIALIST' &&
-      req.authUser?.OpWorkProfile &&
-      !req.authUser?.OpWorkProfile.some((p) => p.opWorkJobSeeker.length > 0)
+      !req.opWorkProfile.opWorkJobSeeker?.length
     ) {
-      await this.prismaService.opWorkJobSeeker.create({
-        data: {
-          OpWorkProfile: { connect: { id: req.opWorkProfileId } },
-        },
-      });
+      req.opWorkProfile.opWorkJobSeeker = [
+        await this.prismaService.opWorkJobSeeker.create({
+          data: {
+            OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+          },
+        }),
+      ];
     }
+
+    req.firstOpWorkEmployer = req.opWorkProfile?.opWorkEmployer[0];
+    req.firstOpWorkJobSeeker = req.opWorkProfile?.opWorkJobSeeker[0];
 
     if (
       checkOpWorkUserType?.some(

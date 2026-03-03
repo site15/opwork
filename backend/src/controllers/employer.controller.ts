@@ -1,23 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Inject,
-  Param,
-  ParseUUIDPipe,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkEmployer } from '../generated/rest/op-work-employer.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
-import {
-  DetEmployerProfileArgs,
-  SetEmployerProfileArgs,
-} from '../types/employer-types';
+import { SetEmployerProfileArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
-import { StatusResponse } from '../types/status-response';
 
 @ApiTags('employer')
 @Controller('employer')
@@ -54,7 +41,8 @@ export class EmployerController {
   @Get(':employer_id')
   @ApiOkResponse({ type: OpWorkEmployer })
   async getProfile(
-    @Param('employer_id', new ParseUUIDPipe()) employerId: string,
+    @CurrentAppRequest() req: AppRequest,
+    @Param('employer_id') employerId: string,
   ): Promise<OpWorkEmployer | null> {
     return await this.prismaService.opWorkEmployer.findFirstOrThrow({
       include: {
@@ -66,44 +54,9 @@ export class EmployerController {
         },
       },
       where: {
-        id: employerId,
+        id: employerId || req.firstOpWorkEmployer?.id,
       },
     });
-  }
-
-  @Delete()
-  @ApiOkResponse({ type: StatusResponse })
-  async delProfile(
-    @Body() args: DetEmployerProfileArgs,
-  ): Promise<StatusResponse> {
-    if (args.id) {
-      await this.prismaService.opWorkExperience.deleteMany({
-        where: {
-          jobSeekerId: args.id,
-        },
-      });
-      await this.prismaService.opWorkEducation.deleteMany({
-        where: {
-          jobSeekerId: args.id,
-        },
-      });
-      await this.prismaService.opWorkJobSeekerSkill.deleteMany({
-        where: {
-          jobSeekerId: args.id,
-        },
-      });
-      await this.prismaService.opWorkApplication.deleteMany({
-        where: {
-          jobSeekerId: args.id,
-        },
-      });
-      await this.prismaService.opWorkJobSeeker.delete({
-        where: {
-          id: args.id,
-        },
-      });
-    }
-    return { message: 'ok' };
   }
 
   @Put()
@@ -116,7 +69,7 @@ export class EmployerController {
       ? undefined
       : await this.prismaService.opWorkEmployer.findFirst({
           where: {
-            profileId: args.id,
+            profileId: args.id || req.firstOpWorkEmployer?.id,
           },
         });
     if (opWorkEmployer) {
