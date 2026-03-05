@@ -124,13 +124,10 @@ const submit = async () => {
       body: {
         avatarUrl: profileValues.avatarUrl,
         coverImage: profileValues.coverImage,
-        description: profileValues.description,
         email: profileValues.email,
         location: profileValues.location,
         phone: profileValues.phone,
-        title: profileValues.title,
         website: profileValues.website,
-        isActive: profileValues.isActive,
       },
     }).then((data) => {
       if (data.error) {

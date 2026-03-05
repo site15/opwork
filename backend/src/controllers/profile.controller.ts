@@ -49,15 +49,12 @@ export class ProfileController {
         id: req.opWorkProfileId,
       },
       data: {
-        title: args.title,
         location: args.location,
-        description: args.description,
         avatarUrl: args.avatarUrl,
         coverImage: args.coverImage,
         email: args.email,
         phone: args.phone,
         website: args.website,
-        isActive: args.isActive,
       },
     });
   }

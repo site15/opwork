@@ -20,13 +20,6 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       controlClass: 'w-full',
     },
     {
-      component: 'Textarea',
-      fieldName: Prisma.OpWorkProfileScalarFieldEnum.description,
-      label: $t('resource.OpWorkProfile.description'),
-
-      controlClass: 'w-full',
-    },
-    {
       component: 'Input',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.email,
       label: $t('resource.OpWorkProfile.email'),
@@ -48,33 +41,9 @@ export function useOpWorkProfileFormSchema(): VbenFormSchema[] {
       controlClass: 'w-full',
     },
     {
-      component: 'Input',
-      fieldName: Prisma.OpWorkProfileScalarFieldEnum.title,
-      label: $t('resource.OpWorkProfile.title'),
-
-      controlClass: 'w-full',
-    },
-    {
       component: 'Textarea',
       fieldName: Prisma.OpWorkProfileScalarFieldEnum.website,
       label: $t('resource.OpWorkProfile.website'),
-
-      controlClass: 'w-full',
-    },
-
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.yes'), value: true },
-          { label: $t('common.no'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkProfileScalarFieldEnum.isActive,
-      label: $t('resource.OpWorkProfile.isActive'),
 
       controlClass: 'w-full',
     },

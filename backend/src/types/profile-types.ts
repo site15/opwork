@@ -4,7 +4,6 @@ import { UpdateOpWorkProfileDto } from '../generated/rest/update-op-work-profile
 
 export class SetProfileArgs extends OmitType(UpdateOpWorkProfileDto, [
   'AuthUser',
-  'isEmailVerified',
   'type',
   'userType',
 ]) {}

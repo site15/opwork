@@ -358,10 +358,6 @@ export type OpWorkProfile = {
     userId: string;
     type: OpWorkProfileType;
     userType: OpWorkUserType;
-    title: string | null;
-    description: string | null;
-    isActive: boolean | null;
-    isEmailVerified: boolean | null;
     email: string | null;
     phone: string | null;
     website: string | null;
@@ -393,6 +389,7 @@ export type AuthUser = {
     id: string;
     email: string | null;
     password: string | null;
+    isEmailVerified: boolean | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -420,6 +417,7 @@ export type FindManyAuthUserResponse = {
 export type CreateAuthUserDto = {
     email?: string | null;
     password?: string | null;
+    isEmailVerified?: boolean | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
@@ -432,6 +430,7 @@ export type AuthUserDto = {
     id: string;
     email: string | null;
     password: string | null;
+    isEmailVerified: boolean | null;
     anonymousId: string | null;
     supabaseUserId: string | null;
     supabaseUserData: {
@@ -445,6 +444,7 @@ export type AuthUserDto = {
 export type UpdateAuthUserDto = {
     email?: string | null;
     password?: string | null;
+    isEmailVerified?: boolean | null;
     anonymousId?: string | null;
     supabaseUserId?: string | null;
     supabaseUserData?: {
@@ -560,10 +560,6 @@ export type CreateOpWorkProfileAuthUserRelationInputDto = {
 export type CreateOpWorkProfileDto = {
     type: OpWorkProfileType;
     userType: OpWorkUserType;
-    title?: string | null;
-    description?: string | null;
-    isActive?: boolean | null;
-    isEmailVerified?: boolean | null;
     email?: string | null;
     phone?: string | null;
     website?: string | null;
@@ -577,10 +573,6 @@ export type OpWorkProfileDto = {
     id: string;
     type: OpWorkProfileType;
     userType: OpWorkUserType;
-    title: string | null;
-    description: string | null;
-    isActive: boolean | null;
-    isEmailVerified: boolean | null;
     email: string | null;
     phone: string | null;
     website: string | null;
@@ -598,10 +590,6 @@ export type UpdateOpWorkProfileAuthUserRelationInputDto = {
 export type UpdateOpWorkProfileDto = {
     type?: OpWorkProfileType;
     userType?: OpWorkUserType;
-    title?: string | null;
-    description?: string | null;
-    isActive?: boolean | null;
-    isEmailVerified?: boolean | null;
     email?: string | null;
     phone?: string | null;
     website?: string | null;
@@ -1783,9 +1771,6 @@ export type SignInResponse = {
 };
 
 export type SetProfileArgs = {
-    title?: string | null;
-    description?: string | null;
-    isActive?: boolean | null;
     email?: string | null;
     phone?: string | null;
     website?: string | null;

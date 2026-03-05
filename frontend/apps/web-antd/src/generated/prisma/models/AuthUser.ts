@@ -30,6 +30,7 @@ export type AuthUserMinAggregateOutputType = {
   id: string | null
   email: string | null
   password: string | null
+  isEmailVerified: boolean | null
   anonymousId: string | null
   supabaseUserId: string | null
   isActive: boolean | null
@@ -41,6 +42,7 @@ export type AuthUserMaxAggregateOutputType = {
   id: string | null
   email: string | null
   password: string | null
+  isEmailVerified: boolean | null
   anonymousId: string | null
   supabaseUserId: string | null
   isActive: boolean | null
@@ -52,6 +54,7 @@ export type AuthUserCountAggregateOutputType = {
   id: number
   email: number
   password: number
+  isEmailVerified: number
   anonymousId: number
   supabaseUserId: number
   supabaseUserData: number
@@ -66,6 +69,7 @@ export type AuthUserMinAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  isEmailVerified?: true
   anonymousId?: true
   supabaseUserId?: true
   isActive?: true
@@ -77,6 +81,7 @@ export type AuthUserMaxAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  isEmailVerified?: true
   anonymousId?: true
   supabaseUserId?: true
   isActive?: true
@@ -88,6 +93,7 @@ export type AuthUserCountAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  isEmailVerified?: true
   anonymousId?: true
   supabaseUserId?: true
   supabaseUserData?: true
@@ -173,6 +179,7 @@ export type AuthUserGroupByOutputType = {
   id: string
   email: string | null
   password: string | null
+  isEmailVerified: boolean | null
   anonymousId: string | null
   supabaseUserId: string | null
   supabaseUserData: runtime.JsonValue | null
@@ -206,6 +213,7 @@ export type AuthUserWhereInput = {
   id?: Prisma.UuidFilter<"AuthUser"> | string
   email?: Prisma.StringNullableFilter<"AuthUser"> | string | null
   password?: Prisma.StringNullableFilter<"AuthUser"> | string | null
+  isEmailVerified?: Prisma.BoolNullableFilter<"AuthUser"> | boolean | null
   anonymousId?: Prisma.StringNullableFilter<"AuthUser"> | string | null
   supabaseUserId?: Prisma.StringNullableFilter<"AuthUser"> | string | null
   supabaseUserData?: Prisma.JsonNullableFilter<"AuthUser">
@@ -221,6 +229,7 @@ export type AuthUserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   anonymousId?: Prisma.SortOrderInput | Prisma.SortOrder
   supabaseUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   supabaseUserData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -240,6 +249,7 @@ export type AuthUserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.AuthUserWhereInput | Prisma.AuthUserWhereInput[]
   email?: Prisma.StringNullableFilter<"AuthUser"> | string | null
   password?: Prisma.StringNullableFilter<"AuthUser"> | string | null
+  isEmailVerified?: Prisma.BoolNullableFilter<"AuthUser"> | boolean | null
   anonymousId?: Prisma.StringNullableFilter<"AuthUser"> | string | null
   supabaseUserData?: Prisma.JsonNullableFilter<"AuthUser">
   isActive?: Prisma.BoolNullableFilter<"AuthUser"> | boolean | null
@@ -254,6 +264,7 @@ export type AuthUserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   anonymousId?: Prisma.SortOrderInput | Prisma.SortOrder
   supabaseUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   supabaseUserData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -272,6 +283,7 @@ export type AuthUserScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"AuthUser"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"AuthUser"> | string | null
   password?: Prisma.StringNullableWithAggregatesFilter<"AuthUser"> | string | null
+  isEmailVerified?: Prisma.BoolNullableWithAggregatesFilter<"AuthUser"> | boolean | null
   anonymousId?: Prisma.StringNullableWithAggregatesFilter<"AuthUser"> | string | null
   supabaseUserId?: Prisma.StringNullableWithAggregatesFilter<"AuthUser"> | string | null
   supabaseUserData?: Prisma.JsonNullableWithAggregatesFilter<"AuthUser">
@@ -284,6 +296,7 @@ export type AuthUserCreateInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -299,6 +312,7 @@ export type AuthUserUncheckedCreateInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -314,6 +328,7 @@ export type AuthUserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -329,6 +344,7 @@ export type AuthUserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -344,6 +360,7 @@ export type AuthUserCreateManyInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -356,6 +373,7 @@ export type AuthUserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -368,6 +386,7 @@ export type AuthUserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -380,6 +399,7 @@ export type AuthUserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
   anonymousId?: Prisma.SortOrder
   supabaseUserId?: Prisma.SortOrder
   supabaseUserData?: Prisma.SortOrder
@@ -392,6 +412,7 @@ export type AuthUserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
   anonymousId?: Prisma.SortOrder
   supabaseUserId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -403,6 +424,7 @@ export type AuthUserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
   anonymousId?: Prisma.SortOrder
   supabaseUserId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -477,6 +499,7 @@ export type AuthUserCreateWithoutAuthApiKeyInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -491,6 +514,7 @@ export type AuthUserUncheckedCreateWithoutAuthApiKeyInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -521,6 +545,7 @@ export type AuthUserUpdateWithoutAuthApiKeyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -535,6 +560,7 @@ export type AuthUserUncheckedUpdateWithoutAuthApiKeyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -549,6 +575,7 @@ export type AuthUserCreateWithoutAuthSessionInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -563,6 +590,7 @@ export type AuthUserUncheckedCreateWithoutAuthSessionInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -593,6 +621,7 @@ export type AuthUserUpdateWithoutAuthSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -607,6 +636,7 @@ export type AuthUserUncheckedUpdateWithoutAuthSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -621,6 +651,7 @@ export type AuthUserCreateWithoutOpWorkProfileInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -635,6 +666,7 @@ export type AuthUserUncheckedCreateWithoutOpWorkProfileInput = {
   id?: string
   email?: string | null
   password?: string | null
+  isEmailVerified?: boolean | null
   anonymousId?: string | null
   supabaseUserId?: string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -665,6 +697,7 @@ export type AuthUserUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -679,6 +712,7 @@ export type AuthUserUncheckedUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   anonymousId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supabaseUserData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -742,6 +776,7 @@ export type AuthUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   email?: boolean
   password?: boolean
+  isEmailVerified?: boolean
   anonymousId?: boolean
   supabaseUserId?: boolean
   supabaseUserData?: boolean
@@ -758,6 +793,7 @@ export type AuthUserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   email?: boolean
   password?: boolean
+  isEmailVerified?: boolean
   anonymousId?: boolean
   supabaseUserId?: boolean
   supabaseUserData?: boolean
@@ -770,6 +806,7 @@ export type AuthUserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   email?: boolean
   password?: boolean
+  isEmailVerified?: boolean
   anonymousId?: boolean
   supabaseUserId?: boolean
   supabaseUserData?: boolean
@@ -782,6 +819,7 @@ export type AuthUserSelectScalar = {
   id?: boolean
   email?: boolean
   password?: boolean
+  isEmailVerified?: boolean
   anonymousId?: boolean
   supabaseUserId?: boolean
   supabaseUserData?: boolean
@@ -790,7 +828,7 @@ export type AuthUserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AuthUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "anonymousId" | "supabaseUserId" | "supabaseUserData" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["authUser"]>
+export type AuthUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "isEmailVerified" | "anonymousId" | "supabaseUserId" | "supabaseUserData" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["authUser"]>
 export type AuthUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   AuthApiKey?: boolean | Prisma.AuthUser$AuthApiKeyArgs<ExtArgs>
   AuthSession?: boolean | Prisma.AuthUser$AuthSessionArgs<ExtArgs>
@@ -834,6 +872,10 @@ export type $AuthUserPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Хэш пароля пользователя
      */
     password: string | null
+    /**
+     * Статус верификации email адреса
+     */
+    isEmailVerified: boolean | null
     /**
      * Анонимный идентификатор пользователя для гостей
      * Используется до привязки к внешней системе аутентификации
@@ -1295,6 +1337,7 @@ export interface AuthUserFieldRefs {
   readonly id: Prisma.FieldRef<"AuthUser", 'String'>
   readonly email: Prisma.FieldRef<"AuthUser", 'String'>
   readonly password: Prisma.FieldRef<"AuthUser", 'String'>
+  readonly isEmailVerified: Prisma.FieldRef<"AuthUser", 'Boolean'>
   readonly anonymousId: Prisma.FieldRef<"AuthUser", 'String'>
   readonly supabaseUserId: Prisma.FieldRef<"AuthUser", 'String'>
   readonly supabaseUserData: Prisma.FieldRef<"AuthUser", 'Json'>

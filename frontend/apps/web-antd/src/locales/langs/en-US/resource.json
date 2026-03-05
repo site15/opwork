@@ -8,7 +8,8 @@
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "isEmailVerified": "Is Email Verified"
   },
   "name": {
     "AuthUser": "User",

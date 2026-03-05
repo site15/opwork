@@ -557,6 +557,9 @@ model AuthUser {
   /// Хэш пароля пользователя
   password String?
 
+  /// Статус верификации email адреса
+  isEmailVerified Boolean?
+
   /// Анонимный идентификатор пользователя для гостей
   /// Используется до привязки к внешней системе аутентификации
   /// @MaxLength(255)
@@ -713,20 +716,6 @@ model OpWorkProfile {
   /// @IsEnum(OpWorkUserType)
   userType OpWorkUserType
 
-  /// === ОСНОВНАЯ ИНФОРМАЦИЯ ===
-
-  /// Заголовок профиля (имя, название компании, название проекта)
-  /// @MaxLength(255)
-  title           String?  @db.VarChar(255)
-  /// Подробное описание профиля
-  /// @MaxLength(6000)
-  /// @example(vue developer with 5 years experience)
-  description     String?  @db.VarChar(6000)
-  /// Статус активности профиля
-  isActive        Boolean?
-  /// Статус верификации email адреса
-  isEmailVerified Boolean?
-
   /// === КОНТАКТНАЯ ИНФОРМАЦИЯ ===
 
   /// Электронная почта для профессиональных контактов
@@ -806,7 +795,6 @@ model OpWorkProfile {
   @@index([userId], map: "IDX_OPWORK_PROFILE__USER_ID")
   @@index([type], map: "IDX_OPWORK_PROFILE__TYPE")
   @@index([userType], map: "IDX_OPWORK_PROFILE__USER_TYPE")
-  @@index([isActive], map: "IDX_OPWORK_PROFILE__IS_ACTIVE")
 }
 
 /// Профессиональный профиль соискателя работы

@@ -30,10 +30,6 @@ export type OpWorkProfileMinAggregateOutputType = {
   userId: string | null
   type: $Enums.OpWorkProfileType | null
   userType: $Enums.OpWorkUserType | null
-  title: string | null
-  description: string | null
-  isActive: boolean | null
-  isEmailVerified: boolean | null
   email: string | null
   phone: string | null
   website: string | null
@@ -49,10 +45,6 @@ export type OpWorkProfileMaxAggregateOutputType = {
   userId: string | null
   type: $Enums.OpWorkProfileType | null
   userType: $Enums.OpWorkUserType | null
-  title: string | null
-  description: string | null
-  isActive: boolean | null
-  isEmailVerified: boolean | null
   email: string | null
   phone: string | null
   website: string | null
@@ -68,10 +60,6 @@ export type OpWorkProfileCountAggregateOutputType = {
   userId: number
   type: number
   userType: number
-  title: number
-  description: number
-  isActive: number
-  isEmailVerified: number
   email: number
   phone: number
   website: number
@@ -89,10 +77,6 @@ export type OpWorkProfileMinAggregateInputType = {
   userId?: true
   type?: true
   userType?: true
-  title?: true
-  description?: true
-  isActive?: true
-  isEmailVerified?: true
   email?: true
   phone?: true
   website?: true
@@ -108,10 +92,6 @@ export type OpWorkProfileMaxAggregateInputType = {
   userId?: true
   type?: true
   userType?: true
-  title?: true
-  description?: true
-  isActive?: true
-  isEmailVerified?: true
   email?: true
   phone?: true
   website?: true
@@ -127,10 +107,6 @@ export type OpWorkProfileCountAggregateInputType = {
   userId?: true
   type?: true
   userType?: true
-  title?: true
-  description?: true
-  isActive?: true
-  isEmailVerified?: true
   email?: true
   phone?: true
   website?: true
@@ -219,10 +195,6 @@ export type OpWorkProfileGroupByOutputType = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title: string | null
-  description: string | null
-  isActive: boolean | null
-  isEmailVerified: boolean | null
   email: string | null
   phone: string | null
   website: string | null
@@ -259,10 +231,6 @@ export type OpWorkProfileWhereInput = {
   userId?: Prisma.UuidFilter<"OpWorkProfile"> | string
   type?: Prisma.EnumOpWorkProfileTypeFilter<"OpWorkProfile"> | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFilter<"OpWorkProfile"> | $Enums.OpWorkUserType
-  title?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  description?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
-  isEmailVerified?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
   email?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   phone?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   website?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
@@ -295,10 +263,6 @@ export type OpWorkProfileOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   userType?: Prisma.SortOrder
-  title?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
-  isEmailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -335,10 +299,6 @@ export type OpWorkProfileWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.UuidFilter<"OpWorkProfile"> | string
   type?: Prisma.EnumOpWorkProfileTypeFilter<"OpWorkProfile"> | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFilter<"OpWorkProfile"> | $Enums.OpWorkUserType
-  title?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  description?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
-  isEmailVerified?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
   email?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   phone?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   website?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
@@ -371,10 +331,6 @@ export type OpWorkProfileOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   userType?: Prisma.SortOrder
-  title?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrderInput | Prisma.SortOrder
-  isEmailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -396,10 +352,6 @@ export type OpWorkProfileScalarWhereWithAggregatesInput = {
   userId?: Prisma.UuidWithAggregatesFilter<"OpWorkProfile"> | string
   type?: Prisma.EnumOpWorkProfileTypeWithAggregatesFilter<"OpWorkProfile"> | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeWithAggregatesFilter<"OpWorkProfile"> | $Enums.OpWorkUserType
-  title?: Prisma.StringNullableWithAggregatesFilter<"OpWorkProfile"> | string | null
-  description?: Prisma.StringNullableWithAggregatesFilter<"OpWorkProfile"> | string | null
-  isActive?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkProfile"> | boolean | null
-  isEmailVerified?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkProfile"> | boolean | null
   email?: Prisma.StringNullableWithAggregatesFilter<"OpWorkProfile"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"OpWorkProfile"> | string | null
   website?: Prisma.StringNullableWithAggregatesFilter<"OpWorkProfile"> | string | null
@@ -414,10 +366,6 @@ export type OpWorkProfileCreateInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -450,10 +398,6 @@ export type OpWorkProfileUncheckedCreateInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -484,10 +428,6 @@ export type OpWorkProfileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -520,10 +460,6 @@ export type OpWorkProfileUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -555,10 +491,6 @@ export type OpWorkProfileCreateManyInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -573,10 +505,6 @@ export type OpWorkProfileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -592,10 +520,6 @@ export type OpWorkProfileUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -626,10 +550,6 @@ export type OpWorkProfileCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   userType?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  isEmailVerified?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   website?: Prisma.SortOrder
@@ -645,10 +565,6 @@ export type OpWorkProfileMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   userType?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  isEmailVerified?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   website?: Prisma.SortOrder
@@ -664,10 +580,6 @@ export type OpWorkProfileMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   userType?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  isEmailVerified?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   website?: Prisma.SortOrder
@@ -976,10 +888,6 @@ export type OpWorkProfileCreateWithoutAuthUserInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1010,10 +918,6 @@ export type OpWorkProfileUncheckedCreateWithoutAuthUserInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1074,10 +978,6 @@ export type OpWorkProfileScalarWhereInput = {
   userId?: Prisma.UuidFilter<"OpWorkProfile"> | string
   type?: Prisma.EnumOpWorkProfileTypeFilter<"OpWorkProfile"> | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFilter<"OpWorkProfile"> | $Enums.OpWorkUserType
-  title?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  description?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
-  isActive?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
-  isEmailVerified?: Prisma.BoolNullableFilter<"OpWorkProfile"> | boolean | null
   email?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   phone?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
   website?: Prisma.StringNullableFilter<"OpWorkProfile"> | string | null
@@ -1092,10 +992,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1127,10 +1023,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1176,10 +1068,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1211,10 +1099,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1244,10 +1128,6 @@ export type OpWorkProfileCreateWithoutOpWorkExperiencesInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1279,10 +1159,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkExperiencesInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1328,10 +1204,6 @@ export type OpWorkProfileUpdateWithoutOpWorkExperiencesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1363,10 +1235,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkExperiencesInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1396,10 +1264,6 @@ export type OpWorkProfileCreateWithoutOpWorkEducationsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1431,10 +1295,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEducationsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1480,10 +1340,6 @@ export type OpWorkProfileUpdateWithoutOpWorkEducationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1515,10 +1371,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEducationsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1548,10 +1400,6 @@ export type OpWorkProfileCreateWithoutOpWorkEmployerInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1583,10 +1431,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEmployerInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1632,10 +1476,6 @@ export type OpWorkProfileUpdateWithoutOpWorkEmployerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1667,10 +1507,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEmployerInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1700,10 +1536,6 @@ export type OpWorkProfileCreateWithoutOpWorkProjectInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1735,10 +1567,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkProjectInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1784,10 +1612,6 @@ export type OpWorkProfileUpdateWithoutOpWorkProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1819,10 +1643,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkProjectInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1852,10 +1672,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1887,10 +1703,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -1936,10 +1748,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1971,10 +1779,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2004,10 +1808,6 @@ export type OpWorkProfileCreateWithoutOpWorkApplicationsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2039,10 +1839,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkApplicationsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2088,10 +1884,6 @@ export type OpWorkProfileUpdateWithoutOpWorkApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2123,10 +1915,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkApplicationsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2156,10 +1944,6 @@ export type OpWorkProfileCreateWithoutOpWorkSavedJobsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2191,10 +1975,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedJobsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2240,10 +2020,6 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2275,10 +2051,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedJobsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2308,10 +2080,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerSkillsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2343,10 +2111,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerSkillsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2392,10 +2156,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerSkillsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2427,10 +2187,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerSkillsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2460,10 +2216,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobSkillsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2495,10 +2247,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSkillsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2544,10 +2292,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSkillsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2579,10 +2323,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSkillsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2612,10 +2352,6 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2647,10 +2383,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2696,10 +2428,6 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2731,10 +2459,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2764,10 +2488,6 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationSettingsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2799,10 +2519,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationSettingsInput =
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2848,10 +2564,6 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationSettingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2883,10 +2595,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationSettingsInput =
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2916,10 +2624,6 @@ export type OpWorkProfileCreateWithoutOpWorkSearchHistoriesInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -2951,10 +2655,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSearchHistoriesInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3000,10 +2700,6 @@ export type OpWorkProfileUpdateWithoutOpWorkSearchHistoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3035,10 +2731,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSearchHistoriesInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3068,10 +2760,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobViewsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3103,10 +2791,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobViewsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3152,10 +2836,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobViewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3187,10 +2867,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobViewsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3220,10 +2896,6 @@ export type OpWorkProfileCreateWithoutOpWorkSavedSearchesInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3255,10 +2927,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedSearchesInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3304,10 +2972,6 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedSearchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3339,10 +3003,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedSearchesInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3372,10 +3032,6 @@ export type OpWorkProfileCreateWithoutOpWorkJobTagsInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3407,10 +3063,6 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobTagsInput = {
   userId: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3456,10 +3108,6 @@ export type OpWorkProfileUpdateWithoutOpWorkJobTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3491,10 +3139,6 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobTagsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3524,10 +3168,6 @@ export type OpWorkProfileCreateManyAuthUserInput = {
   id?: string
   type: $Enums.OpWorkProfileType
   userType: $Enums.OpWorkUserType
-  title?: string | null
-  description?: string | null
-  isActive?: boolean | null
-  isEmailVerified?: boolean | null
   email?: string | null
   phone?: string | null
   website?: string | null
@@ -3542,10 +3182,6 @@ export type OpWorkProfileUpdateWithoutAuthUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3576,10 +3212,6 @@ export type OpWorkProfileUncheckedUpdateWithoutAuthUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3610,10 +3242,6 @@ export type OpWorkProfileUncheckedUpdateManyWithoutAuthUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
   userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3786,10 +3414,6 @@ export type OpWorkProfileSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userId?: boolean
   type?: boolean
   userType?: boolean
-  title?: boolean
-  description?: boolean
-  isActive?: boolean
-  isEmailVerified?: boolean
   email?: boolean
   phone?: boolean
   website?: boolean
@@ -3823,10 +3447,6 @@ export type OpWorkProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   type?: boolean
   userType?: boolean
-  title?: boolean
-  description?: boolean
-  isActive?: boolean
-  isEmailVerified?: boolean
   email?: boolean
   phone?: boolean
   website?: boolean
@@ -3843,10 +3463,6 @@ export type OpWorkProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   type?: boolean
   userType?: boolean
-  title?: boolean
-  description?: boolean
-  isActive?: boolean
-  isEmailVerified?: boolean
   email?: boolean
   phone?: boolean
   website?: boolean
@@ -3863,10 +3479,6 @@ export type OpWorkProfileSelectScalar = {
   userId?: boolean
   type?: boolean
   userType?: boolean
-  title?: boolean
-  description?: boolean
-  isActive?: boolean
-  isEmailVerified?: boolean
   email?: boolean
   phone?: boolean
   website?: boolean
@@ -3877,7 +3489,7 @@ export type OpWorkProfileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OpWorkProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "userType" | "title" | "description" | "isActive" | "isEmailVerified" | "email" | "phone" | "website" | "location" | "avatarUrl" | "coverImage" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkProfile"]>
+export type OpWorkProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "type" | "userType" | "email" | "phone" | "website" | "location" | "avatarUrl" | "coverImage" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkProfile"]>
 export type OpWorkProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   AuthUser?: boolean | Prisma.AuthUserDefaultArgs<ExtArgs>
   opWorkJobSeeker?: boolean | Prisma.OpWorkProfile$opWorkJobSeekerArgs<ExtArgs>
@@ -3990,25 +3602,6 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
      * @IsEnum(OpWorkUserType)
      */
     userType: $Enums.OpWorkUserType
-    /**
-     * Заголовок профиля (имя, название компании, название проекта)
-     * @MaxLength(255)
-     */
-    title: string | null
-    /**
-     * Подробное описание профиля
-     * @MaxLength(6000)
-     * @example(vue developer with 5 years experience)
-     */
-    description: string | null
-    /**
-     * Статус активности профиля
-     */
-    isActive: boolean | null
-    /**
-     * Статус верификации email адреса
-     */
-    isEmailVerified: boolean | null
     /**
      * Электронная почта для профессиональных контактов
      * @IsEmail
@@ -4495,10 +4088,6 @@ export interface OpWorkProfileFieldRefs {
   readonly userId: Prisma.FieldRef<"OpWorkProfile", 'String'>
   readonly type: Prisma.FieldRef<"OpWorkProfile", 'OpWorkProfileType'>
   readonly userType: Prisma.FieldRef<"OpWorkProfile", 'OpWorkUserType'>
-  readonly title: Prisma.FieldRef<"OpWorkProfile", 'String'>
-  readonly description: Prisma.FieldRef<"OpWorkProfile", 'String'>
-  readonly isActive: Prisma.FieldRef<"OpWorkProfile", 'Boolean'>
-  readonly isEmailVerified: Prisma.FieldRef<"OpWorkProfile", 'Boolean'>
   readonly email: Prisma.FieldRef<"OpWorkProfile", 'String'>
   readonly phone: Prisma.FieldRef<"OpWorkProfile", 'String'>
   readonly website: Prisma.FieldRef<"OpWorkProfile", 'String'>

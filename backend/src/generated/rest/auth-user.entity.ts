@@ -22,6 +22,11 @@ email!: string  | null;
 })
 password!: string  | null;
 @ApiProperty({
+  type: 'boolean',
+  nullable: true,
+})
+isEmailVerified!: boolean  | null;
+@ApiProperty({
   type: 'string',
   nullable: true,
 })

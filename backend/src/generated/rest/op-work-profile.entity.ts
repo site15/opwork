@@ -43,26 +43,6 @@ userType!: OpWorkUserType ;
   type: 'string',
   nullable: true,
 })
-title!: string  | null;
-@ApiProperty({
-  type: 'string',
-  nullable: true,
-})
-description!: string  | null;
-@ApiProperty({
-  type: 'boolean',
-  nullable: true,
-})
-isActive!: boolean  | null;
-@ApiProperty({
-  type: 'boolean',
-  nullable: true,
-})
-isEmailVerified!: boolean  | null;
-@ApiProperty({
-  type: 'string',
-  nullable: true,
-})
 email!: string  | null;
 @ApiProperty({
   type: 'string',

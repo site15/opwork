@@ -189,7 +189,6 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
       opWorkProfile = await this.prismaService.opWorkProfile.create({
         data: {
           userId,
-          isActive: true,
           type: profileType,
           userType: userType,
           email,
@@ -197,8 +196,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
       });
     }
     if (
-      (!opWorkProfile?.isActive ||
-        opWorkProfile?.type !== profileType ||
+      (opWorkProfile?.type !== profileType ||
         opWorkProfile?.userType !== userType ||
         opWorkProfile.email !== email) &&
       opWorkProfile?.id
@@ -206,7 +204,6 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
       opWorkProfile = await this.prismaService.opWorkProfile.update({
         where: { id: opWorkProfile.id },
         data: {
-          isActive: true,
           type: profileType,
           userType: userType,
           email,
@@ -247,6 +244,7 @@ export class DefaultDataBootstrapService implements OnApplicationBootstrap {
                   isActive: true,
                   email,
                   password,
+                  isEmailVerified: true,
                 },
               },
             },

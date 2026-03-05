@@ -2096,6 +2096,7 @@ export const AuthUserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   password: 'password',
+  isEmailVerified: 'isEmailVerified',
   anonymousId: 'anonymousId',
   supabaseUserId: 'supabaseUserId',
   supabaseUserData: 'supabaseUserData',
@@ -2135,10 +2136,6 @@ export const OpWorkProfileScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   userType: 'userType',
-  title: 'title',
-  description: 'description',
-  isActive: 'isActive',
-  isEmailVerified: 'isEmailVerified',
   email: 'email',
   phone: 'phone',
   website: 'website',
@@ -2524,6 +2521,13 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -2534,13 +2538,6 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

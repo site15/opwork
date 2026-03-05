@@ -54,6 +54,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
                 ...item,
           email: item.email||undefined,
         password: item.password||undefined,
+        isEmailVerified: item.isEmailVerified||undefined,
         anonymousId: item.anonymousId||undefined,
         supabaseUserId: item.supabaseUserId||undefined,
         supabaseUserData: item.supabaseUserData?JSON.stringify(item.supabaseUserData):undefined,

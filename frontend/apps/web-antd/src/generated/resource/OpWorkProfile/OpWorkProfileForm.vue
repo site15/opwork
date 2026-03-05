@@ -31,10 +31,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         type: values.type,
         userType: values.userType,
-        title: values.title,
-        description: values.description,
-        isActive: values.isActive,
-        isEmailVerified: values.isEmailVerified,
         email: values.email,
         phone: values.phone,
         website: values.website,
@@ -47,10 +43,6 @@ const [Drawer, drawerApi] = useVbenDrawer({
       body: {
         type: values.type,
         userType: values.userType,
-        title: values.title,
-        description: values.description,
-        isActive: values.isActive,
-        isEmailVerified: values.isEmailVerified,
         email: values.email,
         phone: values.phone,
         website: values.website,

@@ -25,6 +25,14 @@ email?: string  | null;
 @IsString()
 password?: string  | null;
 @ApiProperty({
+  type: 'boolean',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsBoolean()
+isEmailVerified?: boolean  | null;
+@ApiProperty({
   type: 'string',
   required: false,
   nullable: true,

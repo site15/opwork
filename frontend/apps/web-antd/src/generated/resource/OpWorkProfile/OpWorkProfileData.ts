@@ -48,60 +48,6 @@ import type { VbenFormSchema } from '#/adapter/form';
       }, 
     {
         component: 'Input',
-          fieldName: Prisma.OpWorkProfileScalarFieldEnum.title,
-        label: $t('resource.OpWorkProfile.title'),
-      
-      
-        controlClass: 'w-full',
-        labelWidth: 200
-      }, 
-    {
-        component: 'Textarea',
-          fieldName: Prisma.OpWorkProfileScalarFieldEnum.description,
-        label: $t('resource.OpWorkProfile.description'),
-      
-      
-        controlClass: 'w-full',
-        labelWidth: 200
-      }, 
-    {
-        component: 'RadioGroup',
-          componentProps: {
-          buttonStyle: 'solid',
-            options: [
-              { label: $t('common.yes'), value: true },
-              { label: $t('common.no'), value: false },
-            ],
-              optionType: 'button',
-      },
-        defaultValue: false,
-          fieldName: Prisma.OpWorkProfileScalarFieldEnum.isActive,
-        label: $t('resource.OpWorkProfile.isActive'),
-      
-      
-        controlClass: 'w-full',
-        labelWidth: 200
-      }, 
-    {
-        component: 'RadioGroup',
-          componentProps: {
-          buttonStyle: 'solid',
-            options: [
-              { label: $t('common.yes'), value: true },
-              { label: $t('common.no'), value: false },
-            ],
-              optionType: 'button',
-      },
-        defaultValue: false,
-          fieldName: Prisma.OpWorkProfileScalarFieldEnum.isEmailVerified,
-        label: $t('resource.OpWorkProfile.isEmailVerified'),
-      
-      
-        controlClass: 'w-full',
-        labelWidth: 200
-      }, 
-    {
-        component: 'Input',
           fieldName: Prisma.OpWorkProfileScalarFieldEnum.email,
         label: $t('resource.OpWorkProfile.email'),
       
@@ -218,32 +164,6 @@ import type { VbenFormSchema } from '#/adapter/form';
       },
         title: $t('resource.OpWorkProfile.userType'),
         field: Prisma.OpWorkProfileScalarFieldEnum.userType ,
-        sortable: true
-      }, 
-    {
-        title: $t('resource.OpWorkProfile.title'),
-        field: Prisma.OpWorkProfileScalarFieldEnum.title ,
-        sortable: true
-      }, 
-    {
-        title: $t('resource.OpWorkProfile.description'),
-        field: Prisma.OpWorkProfileScalarFieldEnum.description ,
-        sortable: true
-      }, 
-    {
-        cellRender: {
-          name: 'CellTag',
-      },
-        title: $t('resource.OpWorkProfile.isActive'),
-        field: Prisma.OpWorkProfileScalarFieldEnum.isActive ,
-        sortable: true
-      }, 
-    {
-        cellRender: {
-          name: 'CellTag',
-      },
-        title: $t('resource.OpWorkProfile.isEmailVerified'),
-        field: Prisma.OpWorkProfileScalarFieldEnum.isEmailVerified ,
         sortable: true
       }, 
     {

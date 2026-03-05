@@ -27,6 +27,24 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
+        component: 'RadioGroup',
+          componentProps: {
+          buttonStyle: 'solid',
+            options: [
+              { label: $t('common.yes'), value: true },
+              { label: $t('common.no'), value: false },
+            ],
+              optionType: 'button',
+      },
+        defaultValue: false,
+          fieldName: Prisma.AuthUserScalarFieldEnum.isEmailVerified,
+        label: $t('resource.AuthUser.isEmailVerified'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
         component: 'Input',
           fieldName: Prisma.AuthUserScalarFieldEnum.anonymousId,
         label: $t('resource.AuthUser.anonymousId'),
@@ -96,6 +114,14 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.AuthUser.password'),
         field: Prisma.AuthUserScalarFieldEnum.password ,
+        sortable: true
+      }, 
+    {
+        cellRender: {
+          name: 'CellTag',
+      },
+        title: $t('resource.AuthUser.isEmailVerified'),
+        field: Prisma.AuthUserScalarFieldEnum.isEmailVerified ,
         sortable: true
       }, 
     {

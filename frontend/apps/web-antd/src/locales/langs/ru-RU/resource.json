@@ -8,7 +8,8 @@
     "createdAt": "Создано",
     "updatedAt": "Обновлено",
     "email": "Email",
-    "password": "Пароль"
+    "password": "Пароль",
+    "isEmailVerified": "Is Email Verified"
   },
   "name": {
     "AuthUser": "Пользователь",

@@ -45,7 +45,7 @@ import type { VbenFormSchema } from '#/adapter/form';
             ...(searchText ? { searchText } : {})
           }
         }),
-        getLabel: (item) => item.title || item.id,
+        getLabel: (item) => item.email || item.id,
       }),
       fieldName: Prisma.OpWorkJobViewScalarFieldEnum.profileId,
       label: $t('resource.name.OpWorkProfile'),
@@ -113,7 +113,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           name: 'CellRender',
           props:{
             render: (row: any, column: any) => {
-              return row.OpWorkProfile?.title || row[column.field] || '';
+              return row.OpWorkProfile?.email || row[column.field] || '';
             }
           }
         },
