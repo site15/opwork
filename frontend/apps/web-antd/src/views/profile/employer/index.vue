@@ -130,6 +130,7 @@ const submit = async () => {
         phone: profileValues.phone,
         title: profileValues.title,
         website: profileValues.website,
+        isActive: profileValues.isActive,
       },
     }).then((data) => {
       if (data.error) {

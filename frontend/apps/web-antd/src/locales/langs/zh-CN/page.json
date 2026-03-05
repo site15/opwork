@@ -1,16 +1,11 @@
 {
   "auth": {
-    "login": "登录",
-    "register": "注册",
-    "codeLogin": "验证码登录",
-    "qrcodeLogin": "二维码登录",
-    "forgetPassword": "忘记密码",
-    "profile": "个人中心"
-  },
-  "dashboard": {
-    "title": "概览",
-    "analytics": "分析页",
-    "workspace": "工作台"
+    "login": "Login",
+    "register": "Register",
+    "codeLogin": "Code Login",
+    "qrcodeLogin": "Qr Code Login",
+    "forgetPassword": "Forget Password",
+    "profile": "Profile"
   },
   "resource": {
     "AuthUser": "Users",
@@ -38,6 +33,11 @@
     "OpWorkSkillSynonym": "Skill Synonym",
     "OpWorkJobTag": "Job Tag"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "analytics": "Analytics",
+    "workspace": "Workspace"
+  },
   "resume": {
     "title": "Resumes",
     "search": "Search",
@@ -45,7 +45,7 @@
   },
   "vacancy": {
     "title": "Vacancies",
-    "search": "Search",
+    "search": "Search resume",
     "list": "List",
     "detail": "Detail",
     "my": "My vacancies",
@@ -53,6 +53,9 @@
     "edit": "Edit"
   },
   "profile": {
-    "employer": "Employer"
+    "employer": "My company"
+  },
+  "employer": {
+    "title": "Employer"
   }
 }

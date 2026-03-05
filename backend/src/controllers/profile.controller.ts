@@ -57,6 +57,7 @@ export class ProfileController {
         email: args.email,
         phone: args.phone,
         website: args.website,
+        isActive: args.isActive,
       },
     });
   }

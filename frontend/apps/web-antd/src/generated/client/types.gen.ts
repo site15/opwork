@@ -1785,16 +1785,13 @@ export type SignInResponse = {
 export type SetProfileArgs = {
     title?: string | null;
     description?: string | null;
+    isActive?: boolean | null;
     email?: string | null;
     phone?: string | null;
     website?: string | null;
     location?: string | null;
     avatarUrl?: string | null;
     coverImage?: string | null;
-};
-
-export type DelJobSeekerProfileArgs = {
-    id?: string;
 };
 
 export type SetJobSeekerProfileArgs = {
@@ -1850,10 +1847,6 @@ export type SetJobSeekerExperienceArgs = {
     employmentType?: OpWorkEmploymentType | null;
     id?: string;
     jobSeekerId?: string;
-};
-
-export type DetEmployerProfileArgs = {
-    id?: string;
 };
 
 export type SetEmployerProfileArgs = {
@@ -4313,25 +4306,6 @@ export type JobSeekerControllerGetProfileResponses = {
 
 export type JobSeekerControllerGetProfileResponse = JobSeekerControllerGetProfileResponses[keyof JobSeekerControllerGetProfileResponses];
 
-export type JobSeekerControllerDelProfileData = {
-    body: DelJobSeekerProfileArgs;
-    path?: never;
-    query?: never;
-    url: '/api/job-seeker';
-};
-
-export type JobSeekerControllerDelProfileErrors = {
-    default: StatusResponse;
-};
-
-export type JobSeekerControllerDelProfileError = JobSeekerControllerDelProfileErrors[keyof JobSeekerControllerDelProfileErrors];
-
-export type JobSeekerControllerDelProfileResponses = {
-    200: StatusResponse;
-};
-
-export type JobSeekerControllerDelProfileResponse = JobSeekerControllerDelProfileResponses[keyof JobSeekerControllerDelProfileResponses];
-
 export type JobSeekerControllerSetProfileData = {
     body: SetJobSeekerProfileArgs;
     path?: never;
@@ -4512,25 +4486,6 @@ export type EmployerControllerGetProfileResponses = {
 };
 
 export type EmployerControllerGetProfileResponse = EmployerControllerGetProfileResponses[keyof EmployerControllerGetProfileResponses];
-
-export type EmployerControllerDelProfileData = {
-    body: DetEmployerProfileArgs;
-    path?: never;
-    query?: never;
-    url: '/api/employer';
-};
-
-export type EmployerControllerDelProfileErrors = {
-    default: StatusResponse;
-};
-
-export type EmployerControllerDelProfileError = EmployerControllerDelProfileErrors[keyof EmployerControllerDelProfileErrors];
-
-export type EmployerControllerDelProfileResponses = {
-    200: StatusResponse;
-};
-
-export type EmployerControllerDelProfileResponse = EmployerControllerDelProfileResponses[keyof EmployerControllerDelProfileResponses];
 
 export type EmployerControllerSetProfileData = {
     body: SetEmployerProfileArgs;

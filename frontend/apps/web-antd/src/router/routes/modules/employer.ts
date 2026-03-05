@@ -7,18 +7,18 @@ const routes: RouteRecordRaw[] = [
     meta: {
       icon: 'lucide:briefcase-business',
       order: -1,
-      title: $t('page.vacancy.title'),
+      title: $t('page.employer.title'),
     },
-    name: 'Vacancy',
+    name: 'Employer',
     path: '/vacancy',
     children: [
       {
-        name: 'VacancySearch',
-        path: '/vacancy/search',
-        component: () => import('#/views/vacancy/search/index.vue'),
+        name: 'ResumeSearch',
+        path: '/resume/search',
+        component: () => import('#/views/resume/search/index.vue'),
         meta: {
           icon: 'lucide:search',
-          title: $t('page.vacancy.search'),
+          title: $t('page.resume.search'),
         },
       },
       {

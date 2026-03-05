@@ -13,12 +13,12 @@ const routes: RouteRecordRaw[] = [
     path: '/resume',
     children: [
       {
-        name: 'ResumeSearch',
-        path: '/resume/search',
-        component: () => import('#/views/resume/search/index.vue'),
+        name: 'VacancySearch',
+        path: '/vacancy/search',
+        component: () => import('#/views/vacancy/search/index.vue'),
         meta: {
           icon: 'lucide:search',
-          title: $t('page.resume.search'),
+          title: $t('page.vacancy.search'),
         },
       },
       {
