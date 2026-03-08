@@ -1,0 +1,39 @@
+{
+  "noPosition": "No position specified",
+  "noCompany": "No company specified",
+  "remoteWork": "Remote work",
+  "relocation": "Relocation",
+  "openToWork": "Open to work",
+  "basicInfo": "Basic Information",
+  "positionPlaceholder": "e.g. Senior Developer",
+  "companyPlaceholder": "e.g. Tech Corp",
+  "summaryPlaceholder": "Brief description of your professional background...",
+  "salaryExpectations": "Salary Expectations",
+  "workPreferences": "Work Preferences",
+  "locationsPlaceholder": "e.g. New York, Remote",
+  "socialLinks": "Social Links",
+  "portfolio": "Portfolio",
+  "detail": {
+    "notFound": "Resume not found",
+    "summary": "Summary",
+    "experience": "Experience",
+    "education": "Education",
+    "preferences": "Preferences",
+    "skills": "Skills",
+    "socialLinks": "Social Links",
+    "contactInfo": "Contact Info",
+    "noSocialLinks": "No social links provided",
+    "updateSuccessDescription": "Your resume has been successfully updated"
+  },
+  "update": {
+    "title": "Update Resume"
+  },
+  "my": "My",
+  "search": {
+    "list": {
+      "title": "Search Resumes"
+    },
+    "locationsHelp": "Separate multiple locations with commas",
+    "selectExperienceLevels": "Select experience levels"
+  }
+}

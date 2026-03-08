@@ -150,7 +150,7 @@
     "isOpenToWork": "Готов приступить к работе",
     "isOpenToRemote": "Готов к удаленной работе",
     "isOpenToRelocation": "Готов к переезду",
-    "preferredLocations": "Предпочитаемые места работы",
+    "preferredLocations": "Предпочтительные локации для работы",
     "linkedinUrl": "Ссылка LinkedIn",
     "githubUrl": "GitHub профиль",
     "portfolioUrl": "Портфолио"
@@ -163,7 +163,8 @@
     "level": "Уровень владения",
     "yearsOfExp": "Лет опыта",
     "isPrimary": "Основной навык",
-    "lastUsed": "Последний раз использовался"
+    "lastUsed": "Последний раз использовался",
+    "experienceLevel": "Уровень опыта"
   },
   "OpWorkJobSkill": {
     "id": "ID",

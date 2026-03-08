@@ -161,16 +161,18 @@ export class VacancyController {
     const orderBy = (args.sort || 'createdAt:desc')
       .split(',')
       .map((s) => s.split(':'))
-      .map(
-        ([key, value]) => ({
+      .map(([key, value]) => {
+        if (key === 'salary') {
+          key = 'salaryMax';
+        }
+        return {
           ...(key in PrismaSdk.Prisma.OpWorkJobScalarFieldEnum
             ? {
                 [key]: value === 'desc' ? 'desc' : 'asc',
               }
             : {}),
-        }),
-        {},
-      );
+        };
+      }, {});
 
     const opWorkJobWhereInput: Prisma.OpWorkJobWhereInput = {
       ...(searchText

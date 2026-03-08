@@ -1,8 +1,5 @@
 import type { VbenFormSchema } from '#/adapter/form';
-import type { OpWorkEmployer } from '#/generated/client';
 
-import { getComponentProps } from '#/adapter/get-component-props';
-import { employerControllerGetProfiles } from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 
@@ -245,25 +242,6 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       component: 'DatePicker',
       fieldName: Prisma.OpWorkJobScalarFieldEnum.expiresAt,
       label: $t('resource.OpWorkJob.expiresAt'),
-
-      controlClass: 'w-full',
-      labelWidth: 200,
-    },
-
-    {
-      component: 'ApiSelect',
-      ...getComponentProps<OpWorkEmployer>({
-        findMany: () =>
-          employerControllerGetProfiles().then(async (res) => {
-            return {
-              data: { items: res.data || [] },
-            };
-          }),
-        getLabel: (item) => item.companyName || item.id,
-      }),
-      fieldName: Prisma.OpWorkJobScalarFieldEnum.employerId,
-      label: $t('resource.name.OpWorkEmployer'),
-      rules: 'required',
 
       controlClass: 'w-full',
       labelWidth: 200,

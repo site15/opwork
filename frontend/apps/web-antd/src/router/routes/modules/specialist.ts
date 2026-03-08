@@ -22,13 +22,23 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        name: 'ResumeList',
-        path: '/resume/list',
-        component: () => import('#/views/resume/list/index.vue'),
+        name: 'SpecialistProfile',
+        path: '/profile/specialist',
+        component: () => import('#/views/profile/specialist/index.vue'),
         meta: {
           affixTab: true,
-          icon: 'lucide:file-user',
-          title: $t('page.resume.list'),
+          icon: 'lucide:square-user-round',
+          title: $t('page.profile.specialist'),
+        },
+      },
+      {
+        name: 'ResumeDetail',
+        path: '/resume/:id',
+        component: () => import('#/views/resume/detail/index.vue'),
+        meta: {
+          hideInMenu: true,
+          icon: 'lucide:briefcase-business',
+          title: $t('page.resume.detail'),
         },
       },
     ],

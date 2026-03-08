@@ -1,0 +1,39 @@
+{
+  "noPosition": "Должность не указана",
+  "noCompany": "Компания не указана",
+  "remoteWork": "Удаленная работа",
+  "relocation": "Переезд",
+  "openToWork": "Открыт к предложениям",
+  "basicInfo": "Основная информация",
+  "positionPlaceholder": "например, Старший разработчик",
+  "companyPlaceholder": "например, Техно Корп",
+  "summaryPlaceholder": "Краткое описание вашего профессионального опыта...",
+  "salaryExpectations": "Ожидания по зарплате",
+  "workPreferences": "Предпочтения по работе",
+  "locationsPlaceholder": "например, Москва, Удаленно",
+  "socialLinks": "Социальные сети",
+  "portfolio": "Портфолио",
+  "detail": {
+    "notFound": "Резюме не найдено",
+    "summary": "Резюме",
+    "experience": "Опыт работы",
+    "education": "Образование",
+    "preferences": "Предпочтения",
+    "skills": "Навыки",
+    "socialLinks": "Социальные сети",
+    "contactInfo": "Контактная информация",
+    "noSocialLinks": "Социальные сети не указаны",
+    "updateSuccessDescription": "Ваше резюме успешно обновлено"
+  },
+  "update": {
+    "title": "Обновить резюме"
+  },
+  "my": "Мои резюме",
+  "search": {
+    "list": {
+      "title": "Поиск резюме"
+    },
+    "locationsHelp": "Разделяйте несколько мест запятыми",
+    "selectExperienceLevels": "Выберите уровни опыта"
+  }
+}

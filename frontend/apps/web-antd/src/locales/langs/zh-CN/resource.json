@@ -163,7 +163,8 @@
     "level": "Level",
     "yearsOfExp": "Years Of Exp",
     "isPrimary": "Is Primary",
-    "lastUsed": "Last Used"
+    "lastUsed": "Last Used",
+    "experienceLevel": "Experience Level"
   },
   "OpWorkJobSkill": {
     "id": "Id",

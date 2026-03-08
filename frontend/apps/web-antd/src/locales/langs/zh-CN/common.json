@@ -33,7 +33,8 @@
     "title": "Title",
     "from": "From",
     "upTo": "Up To",
-    "remote": "Remote"
+    "remote": "Remote",
+    "searchText": "Search Text"
   },
   "loading": "Loading",
   "noResults": "No Results",
@@ -47,8 +48,23 @@
   "notSpecified": "Not Specified",
   "salary": "Salary",
   "confirm": "Confirm",
-  "deleteConfirm": "Delete Confirm",
+  "deleteConfirm": "Are you sure you want to delete {name}?",
   "add": "Add",
   "save": "Save",
-  "update": "Update"
+  "update": "Update",
+  "saving": "Saving...",
+  "creating": "Creating...",
+  "present": "Present",
+  "email": "Email",
+  "phone": "Phone",
+  "location": "Location",
+  "success": {
+    "created": "Successfully created",
+    "updated": "Successfully updated"
+  },
+  "error": {
+    "loadingData": "Error loading data",
+    "creating": "Error creating",
+    "updating": "Error updating"
+  }
 }

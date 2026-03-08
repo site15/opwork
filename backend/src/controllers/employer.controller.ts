@@ -65,13 +65,11 @@ export class EmployerController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetEmployerProfileArgs,
   ): Promise<OpWorkEmployer> {
-    let opWorkEmployer = !args.id
-      ? undefined
-      : await this.prismaService.opWorkEmployer.findFirst({
-          where: {
-            profileId: args.id || req.firstOpWorkEmployer?.id,
-          },
-        });
+    let opWorkEmployer = await this.prismaService.opWorkEmployer.findFirst({
+      where: {
+        id: args.id || req.firstOpWorkEmployer?.id,
+      },
+    });
     if (opWorkEmployer) {
       opWorkEmployer = await this.prismaService.opWorkEmployer.update({
         include: {
