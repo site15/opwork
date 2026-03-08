@@ -1,21 +1,24 @@
 <script lang="ts" setup>
+import type { OpWorkEducation } from '#/generated/prisma/browser';
+
 import { computed, nextTick, ref } from 'vue';
-import { notification } from 'ant-design-vue';
 
 import { useVbenDrawer } from '@vben/common-ui';
 
+import { notification } from 'ant-design-vue';
+
 import { useVbenForm } from '#/adapter/form';
-import { opWorkSkillControllerCreateOne, opWorkSkillControllerUpdateOne } from '#/generated/client';
-import type { OpWorkSkill } from '#/generated/prisma/browser';
+import { jobSeekerEducationControllerSetEducation } from '#/generated/client';
 import { $t } from '#/locales';
-import { useOpWorkSkillFormSchema } from './OpWorkSkillData';
+
+import { useOpWorkEducationFormSchema } from './OpWorkEducationData';
 
 const emits = defineEmits(['success']);
 
-const formData = ref<OpWorkSkill>({} as OpWorkSkill);
+const formData = ref<OpWorkEducation>({} as OpWorkEducation);
 
 const [Form, formApi] = useVbenForm({
-  schema: useOpWorkSkillFormSchema(),
+  schema: useOpWorkEducationFormSchema(),
   showDefaultActions: false,
 });
 
@@ -26,40 +29,33 @@ const [Drawer, drawerApi] = useVbenDrawer({
     if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
-    (id.value ? opWorkSkillControllerUpdateOne({
-      path: { id: id.value },
+    jobSeekerEducationControllerSetEducation({
       body: {
-        name: values.name,
+        id: id.value,
+        institution: values.institution,
+        degree: values.degree,
+        fieldOfStudy: values.fieldOfStudy,
+        startDate: values.startDate,
+        endDate: values.endDate,
+        isCurrent: values.isCurrent,
         description: values.description,
-        type: values.type,
-        category: values.category,
-        icon: values.icon,
-        popularity: values.popularity,
-        OpWorkProfile: { connect: { id: values.profileId } },
-      }
-    }) : opWorkSkillControllerCreateOne({
-      body: {
-        name: values.name,
-        description: values.description,
-        type: values.type,
-        category: values.category,
-        icon: values.icon,
-        popularity: values.popularity,
-        OpWorkProfile: { connect: { id: values.profileId } },
-      }
-    }))
+        grade: values.grade,
+      },
+    })
       .then((data) => {
         if (data.error) {
-          throw new Error((data.error as any)?.message || 'Unknown error')
+          throw new Error((data.error as any)?.message || 'Unknown error');
         }
         emits('success');
         drawerApi.close();
       })
-      .catch((err) => {
+      .catch((error) => {
         drawerApi.unlock();
         notification.error({
-          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
-          description: err instanceof Error ? err.message : '',
+          message: id.value
+            ? $t('actions.common.updateFailed')
+            : $t('actions.common.createFailed'),
+          description: error instanceof Error ? error.message : '',
           duration: 3000,
         });
       });
@@ -67,7 +63,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
 
   async onOpenChange(isOpen) {
     if (isOpen) {
-      const data = drawerApi.getData<OpWorkSkill>();
+      const data = drawerApi.getData<OpWorkEducation>();
       formApi.resetForm();
 
       if (data) {
@@ -88,15 +84,13 @@ const [Drawer, drawerApi] = useVbenDrawer({
 
 const getDrawerTitle = computed(() => {
   return formData.value?.id
-    ? $t('common.edit', $t('resource.name.OpWorkSkill'))
-    : $t('common.create', $t('resource.name.OpWorkSkill'));
+    ? $t('common.edit', $t('resource.name.OpWorkEducation'))
+    : $t('common.create', $t('resource.name.OpWorkEducation'));
 });
-
 </script>
 <template>
   <Drawer :title="getDrawerTitle">
-    <Form>
-    </Form>
+    <Form />
   </Drawer>
 </template>
 <style lang="css" scoped>

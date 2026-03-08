@@ -256,6 +256,7 @@ export type OpWorkProfileWhereInput = {
   opWorkEducations?: Prisma.OpWorkEducationListRelationFilter
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillListRelationFilter
   opWorkJobTags?: Prisma.OpWorkJobTagListRelationFilter
+  opWorkSkills?: Prisma.OpWorkSkillListRelationFilter
 }
 
 export type OpWorkProfileOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type OpWorkProfileOrderByWithRelationInput = {
   opWorkEducations?: Prisma.OpWorkEducationOrderByRelationAggregateInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillOrderByRelationAggregateInput
   opWorkJobTags?: Prisma.OpWorkJobTagOrderByRelationAggregateInput
+  opWorkSkills?: Prisma.OpWorkSkillOrderByRelationAggregateInput
 }
 
 export type OpWorkProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -324,6 +326,7 @@ export type OpWorkProfileWhereUniqueInput = Prisma.AtLeast<{
   opWorkEducations?: Prisma.OpWorkEducationListRelationFilter
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillListRelationFilter
   opWorkJobTags?: Prisma.OpWorkJobTagListRelationFilter
+  opWorkSkills?: Prisma.OpWorkSkillListRelationFilter
 }, "id" | "uqOpWorkProfileUserType">
 
 export type OpWorkProfileOrderByWithAggregationInput = {
@@ -391,6 +394,7 @@ export type OpWorkProfileCreateInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateInput = {
@@ -422,6 +426,7 @@ export type OpWorkProfileUncheckedCreateInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUpdateInput = {
@@ -453,6 +458,7 @@ export type OpWorkProfileUpdateInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateInput = {
@@ -484,6 +490,7 @@ export type OpWorkProfileUncheckedUpdateInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateManyInput = {
@@ -768,6 +775,22 @@ export type OpWorkProfileUpdateOneRequiredWithoutOpWorkSavedJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProfileUpdateToOneWithWhereWithoutOpWorkSavedJobsInput, Prisma.OpWorkProfileUpdateWithoutOpWorkSavedJobsInput>, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkSavedJobsInput>
 }
 
+export type OpWorkProfileCreateNestedOneWithoutOpWorkSkillsInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkSkillsInput>
+  connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkSkillsInput
+  connect?: Prisma.OpWorkProfileWhereUniqueInput
+}
+
+export type OpWorkProfileUpdateOneWithoutOpWorkSkillsNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkSkillsInput>
+  connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkSkillsInput
+  upsert?: Prisma.OpWorkProfileUpsertWithoutOpWorkSkillsInput
+  disconnect?: Prisma.OpWorkProfileWhereInput | boolean
+  delete?: Prisma.OpWorkProfileWhereInput | boolean
+  connect?: Prisma.OpWorkProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkProfileUpdateToOneWithWhereWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUpdateWithoutOpWorkSkillsInput>, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkSkillsInput>
+}
+
 export type OpWorkProfileCreateNestedOneWithoutOpWorkJobSeekerSkillsInput = {
   create?: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkJobSeekerSkillsInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerSkillsInput>
   connectOrCreate?: Prisma.OpWorkProfileCreateOrConnectWithoutOpWorkJobSeekerSkillsInput
@@ -912,6 +935,7 @@ export type OpWorkProfileCreateWithoutAuthUserInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutAuthUserInput = {
@@ -942,6 +966,7 @@ export type OpWorkProfileUncheckedCreateWithoutAuthUserInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutAuthUserInput = {
@@ -1016,6 +1041,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerInput = {
@@ -1046,6 +1072,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobSeekerInput = {
@@ -1092,6 +1119,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerInput = {
@@ -1122,6 +1150,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkExperiencesInput = {
@@ -1152,6 +1181,7 @@ export type OpWorkProfileCreateWithoutOpWorkExperiencesInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkExperiencesInput = {
@@ -1182,6 +1212,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkExperiencesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkExperiencesInput = {
@@ -1228,6 +1259,7 @@ export type OpWorkProfileUpdateWithoutOpWorkExperiencesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkExperiencesInput = {
@@ -1258,6 +1290,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkExperiencesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkEducationsInput = {
@@ -1288,6 +1321,7 @@ export type OpWorkProfileCreateWithoutOpWorkEducationsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkEducationsInput = {
@@ -1318,6 +1352,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEducationsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkEducationsInput = {
@@ -1364,6 +1399,7 @@ export type OpWorkProfileUpdateWithoutOpWorkEducationsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkEducationsInput = {
@@ -1394,6 +1430,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEducationsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkEmployerInput = {
@@ -1424,6 +1461,7 @@ export type OpWorkProfileCreateWithoutOpWorkEmployerInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkEmployerInput = {
@@ -1454,6 +1492,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkEmployerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkEmployerInput = {
@@ -1500,6 +1539,7 @@ export type OpWorkProfileUpdateWithoutOpWorkEmployerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkEmployerInput = {
@@ -1530,6 +1570,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkEmployerInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkProjectInput = {
@@ -1560,6 +1601,7 @@ export type OpWorkProfileCreateWithoutOpWorkProjectInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkProjectInput = {
@@ -1590,6 +1632,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkProjectInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkProjectInput = {
@@ -1636,6 +1679,7 @@ export type OpWorkProfileUpdateWithoutOpWorkProjectInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkProjectInput = {
@@ -1666,6 +1710,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkProjectInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkJobsInput = {
@@ -1696,6 +1741,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobsInput = {
@@ -1726,6 +1772,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobsInput = {
@@ -1772,6 +1819,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobsInput = {
@@ -1802,6 +1850,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkApplicationsInput = {
@@ -1832,6 +1881,7 @@ export type OpWorkProfileCreateWithoutOpWorkApplicationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkApplicationsInput = {
@@ -1862,6 +1912,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkApplicationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkApplicationsInput = {
@@ -1908,6 +1959,7 @@ export type OpWorkProfileUpdateWithoutOpWorkApplicationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkApplicationsInput = {
@@ -1938,6 +1990,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkApplicationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkSavedJobsInput = {
@@ -1968,6 +2021,7 @@ export type OpWorkProfileCreateWithoutOpWorkSavedJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedJobsInput = {
@@ -1998,6 +2052,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkSavedJobsInput = {
@@ -2044,6 +2099,7 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedJobsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedJobsInput = {
@@ -2064,6 +2120,147 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedJobsInput = {
   opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsUncheckedUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkSearchHistories?: Prisma.OpWorkSearchHistoryUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobViews?: Prisma.OpWorkJobViewUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSavedSearches?: Prisma.OpWorkSavedSearchUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobSkills?: Prisma.OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkExperiences?: Prisma.OpWorkExperienceUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+}
+
+export type OpWorkProfileCreateWithoutOpWorkSkillsInput = {
+  id?: string
+  type: $Enums.OpWorkProfileType
+  userType: $Enums.OpWorkUserType
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  location?: string | null
+  avatarUrl?: string | null
+  coverImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  AuthUser: Prisma.AuthUserCreateNestedOneWithoutOpWorkProfileInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobs?: Prisma.OpWorkJobCreateNestedManyWithoutOpWorkProfileInput
+  opWorkApplications?: Prisma.OpWorkApplicationCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSavedJobs?: Prisma.OpWorkSavedJobCreateNestedManyWithoutOpWorkProfileInput
+  opWorkNotifications?: Prisma.OpWorkNotificationCreateNestedManyWithoutOpWorkProfileInput
+  opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsCreateNestedOneWithoutOpWorkProfileInput
+  opWorkSearchHistories?: Prisma.OpWorkSearchHistoryCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobViews?: Prisma.OpWorkJobViewCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSavedSearches?: Prisma.OpWorkSavedSearchCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobSkills?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkProfileInput
+  opWorkExperiences?: Prisma.OpWorkExperienceCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+}
+
+export type OpWorkProfileUncheckedCreateWithoutOpWorkSkillsInput = {
+  id?: string
+  userId: string
+  type: $Enums.OpWorkProfileType
+  userType: $Enums.OpWorkUserType
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  location?: string | null
+  avatarUrl?: string | null
+  coverImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobs?: Prisma.OpWorkJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkApplications?: Prisma.OpWorkApplicationUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkNotifications?: Prisma.OpWorkNotificationUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsUncheckedCreateNestedOneWithoutOpWorkProfileInput
+  opWorkSearchHistories?: Prisma.OpWorkSearchHistoryUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobViews?: Prisma.OpWorkJobViewUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSavedSearches?: Prisma.OpWorkSavedSearchUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobSkills?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkExperiences?: Prisma.OpWorkExperienceUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+}
+
+export type OpWorkProfileCreateOrConnectWithoutOpWorkSkillsInput = {
+  where: Prisma.OpWorkProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkSkillsInput>
+}
+
+export type OpWorkProfileUpsertWithoutOpWorkSkillsInput = {
+  update: Prisma.XOR<Prisma.OpWorkProfileUpdateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkSkillsInput>
+  create: Prisma.XOR<Prisma.OpWorkProfileCreateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedCreateWithoutOpWorkSkillsInput>
+  where?: Prisma.OpWorkProfileWhereInput
+}
+
+export type OpWorkProfileUpdateToOneWithWhereWithoutOpWorkSkillsInput = {
+  where?: Prisma.OpWorkProfileWhereInput
+  data: Prisma.XOR<Prisma.OpWorkProfileUpdateWithoutOpWorkSkillsInput, Prisma.OpWorkProfileUncheckedUpdateWithoutOpWorkSkillsInput>
+}
+
+export type OpWorkProfileUpdateWithoutOpWorkSkillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
+  userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AuthUser?: Prisma.AuthUserUpdateOneRequiredWithoutOpWorkProfileNestedInput
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobs?: Prisma.OpWorkJobUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkApplications?: Prisma.OpWorkApplicationUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSavedJobs?: Prisma.OpWorkSavedJobUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkNotifications?: Prisma.OpWorkNotificationUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsUpdateOneWithoutOpWorkProfileNestedInput
+  opWorkSearchHistories?: Prisma.OpWorkSearchHistoryUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobViews?: Prisma.OpWorkJobViewUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSavedSearches?: Prisma.OpWorkSavedSearchUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobSkills?: Prisma.OpWorkJobSkillUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkExperiences?: Prisma.OpWorkExperienceUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+}
+
+export type OpWorkProfileUncheckedUpdateWithoutOpWorkSkillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumOpWorkProfileTypeFieldUpdateOperationsInput | $Enums.OpWorkProfileType
+  userType?: Prisma.EnumOpWorkUserTypeFieldUpdateOperationsInput | $Enums.OpWorkUserType
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  opWorkJobSeeker?: Prisma.OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkEmployer?: Prisma.OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkProject?: Prisma.OpWorkProjectUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkJobs?: Prisma.OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkApplications?: Prisma.OpWorkApplicationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSavedJobs?: Prisma.OpWorkSavedJobUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotifications?: Prisma.OpWorkNotificationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkNotificationSettings?: Prisma.OpWorkNotificationSettingsUncheckedUpdateOneWithoutOpWorkProfileNestedInput
   opWorkSearchHistories?: Prisma.OpWorkSearchHistoryUncheckedUpdateManyWithoutOpWorkProfileNestedInput
@@ -2104,6 +2301,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobSeekerSkillsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceCreateNestedManyWithoutOpWorkProfileInput
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerSkillsInput = {
@@ -2134,6 +2332,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSeekerSkillsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobSeekerSkillsInput = {
@@ -2180,6 +2379,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSeekerSkillsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUpdateManyWithoutOpWorkProfileNestedInput
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerSkillsInput = {
@@ -2210,6 +2410,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSeekerSkillsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkJobSkillsInput = {
@@ -2240,6 +2441,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobSkillsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSkillsInput = {
@@ -2270,6 +2472,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobSkillsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobSkillsInput = {
@@ -2316,6 +2519,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobSkillsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSkillsInput = {
@@ -2346,6 +2550,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobSkillsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkNotificationsInput = {
@@ -2376,6 +2581,7 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationsInput = {
@@ -2406,6 +2612,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkNotificationsInput = {
@@ -2452,6 +2659,7 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationsInput = {
@@ -2482,6 +2690,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkNotificationSettingsInput = {
@@ -2512,6 +2721,7 @@ export type OpWorkProfileCreateWithoutOpWorkNotificationSettingsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationSettingsInput = {
@@ -2542,6 +2752,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkNotificationSettingsInput =
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkNotificationSettingsInput = {
@@ -2588,6 +2799,7 @@ export type OpWorkProfileUpdateWithoutOpWorkNotificationSettingsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationSettingsInput = {
@@ -2618,6 +2830,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkNotificationSettingsInput =
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkSearchHistoriesInput = {
@@ -2648,6 +2861,7 @@ export type OpWorkProfileCreateWithoutOpWorkSearchHistoriesInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkSearchHistoriesInput = {
@@ -2678,6 +2892,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSearchHistoriesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkSearchHistoriesInput = {
@@ -2724,6 +2939,7 @@ export type OpWorkProfileUpdateWithoutOpWorkSearchHistoriesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkSearchHistoriesInput = {
@@ -2754,6 +2970,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSearchHistoriesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkJobViewsInput = {
@@ -2784,6 +3001,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobViewsInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobViewsInput = {
@@ -2814,6 +3032,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobViewsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobViewsInput = {
@@ -2860,6 +3079,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobViewsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobViewsInput = {
@@ -2890,6 +3110,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobViewsInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkSavedSearchesInput = {
@@ -2920,6 +3141,7 @@ export type OpWorkProfileCreateWithoutOpWorkSavedSearchesInput = {
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedSearchesInput = {
@@ -2950,6 +3172,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkSavedSearchesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkSavedSearchesInput = {
@@ -2996,6 +3219,7 @@ export type OpWorkProfileUpdateWithoutOpWorkSavedSearchesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedSearchesInput = {
@@ -3026,6 +3250,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkSavedSearchesInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateWithoutOpWorkJobTagsInput = {
@@ -3056,6 +3281,7 @@ export type OpWorkProfileCreateWithoutOpWorkJobTagsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceCreateNestedManyWithoutOpWorkProfileInput
   opWorkEducations?: Prisma.OpWorkEducationCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileUncheckedCreateWithoutOpWorkJobTagsInput = {
@@ -3086,6 +3312,7 @@ export type OpWorkProfileUncheckedCreateWithoutOpWorkJobTagsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkEducations?: Prisma.OpWorkEducationUncheckedCreateNestedManyWithoutOpWorkProfileInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput
 }
 
 export type OpWorkProfileCreateOrConnectWithoutOpWorkJobTagsInput = {
@@ -3132,6 +3359,7 @@ export type OpWorkProfileUpdateWithoutOpWorkJobTagsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUpdateManyWithoutOpWorkProfileNestedInput
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobTagsInput = {
@@ -3162,6 +3390,7 @@ export type OpWorkProfileUncheckedUpdateWithoutOpWorkJobTagsInput = {
   opWorkExperiences?: Prisma.OpWorkExperienceUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileCreateManyAuthUserInput = {
@@ -3206,6 +3435,7 @@ export type OpWorkProfileUpdateWithoutAuthUserInput = {
   opWorkEducations?: Prisma.OpWorkEducationUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateWithoutAuthUserInput = {
@@ -3236,6 +3466,7 @@ export type OpWorkProfileUncheckedUpdateWithoutAuthUserInput = {
   opWorkEducations?: Prisma.OpWorkEducationUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobSeekerSkills?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
   opWorkJobTags?: Prisma.OpWorkJobTagUncheckedUpdateManyWithoutOpWorkProfileNestedInput
+  opWorkSkills?: Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput
 }
 
 export type OpWorkProfileUncheckedUpdateManyWithoutAuthUserInput = {
@@ -3273,6 +3504,7 @@ export type OpWorkProfileCountOutputType = {
   opWorkEducations: number
   opWorkJobSeekerSkills: number
   opWorkJobTags: number
+  opWorkSkills: number
 }
 
 export type OpWorkProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3291,6 +3523,7 @@ export type OpWorkProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   opWorkEducations?: boolean | OpWorkProfileCountOutputTypeCountOpWorkEducationsArgs
   opWorkJobSeekerSkills?: boolean | OpWorkProfileCountOutputTypeCountOpWorkJobSeekerSkillsArgs
   opWorkJobTags?: boolean | OpWorkProfileCountOutputTypeCountOpWorkJobTagsArgs
+  opWorkSkills?: boolean | OpWorkProfileCountOutputTypeCountOpWorkSkillsArgs
 }
 
 /**
@@ -3408,6 +3641,13 @@ export type OpWorkProfileCountOutputTypeCountOpWorkJobTagsArgs<ExtArgs extends r
   where?: Prisma.OpWorkJobTagWhereInput
 }
 
+/**
+ * OpWorkProfileCountOutputType without action
+ */
+export type OpWorkProfileCountOutputTypeCountOpWorkSkillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OpWorkSkillWhereInput
+}
+
 
 export type OpWorkProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3439,6 +3679,7 @@ export type OpWorkProfileSelect<ExtArgs extends runtime.Types.Extensions.Interna
   opWorkEducations?: boolean | Prisma.OpWorkProfile$opWorkEducationsArgs<ExtArgs>
   opWorkJobSeekerSkills?: boolean | Prisma.OpWorkProfile$opWorkJobSeekerSkillsArgs<ExtArgs>
   opWorkJobTags?: boolean | Prisma.OpWorkProfile$opWorkJobTagsArgs<ExtArgs>
+  opWorkSkills?: boolean | Prisma.OpWorkProfile$opWorkSkillsArgs<ExtArgs>
   _count?: boolean | Prisma.OpWorkProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkProfile"]>
 
@@ -3508,6 +3749,7 @@ export type OpWorkProfileInclude<ExtArgs extends runtime.Types.Extensions.Intern
   opWorkEducations?: boolean | Prisma.OpWorkProfile$opWorkEducationsArgs<ExtArgs>
   opWorkJobSeekerSkills?: boolean | Prisma.OpWorkProfile$opWorkJobSeekerSkillsArgs<ExtArgs>
   opWorkJobTags?: boolean | Prisma.OpWorkProfile$opWorkJobTagsArgs<ExtArgs>
+  opWorkSkills?: boolean | Prisma.OpWorkProfile$opWorkSkillsArgs<ExtArgs>
   _count?: boolean | Prisma.OpWorkProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OpWorkProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3578,6 +3820,7 @@ export type $OpWorkProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     opWorkEducations: Prisma.$OpWorkEducationPayload<ExtArgs>[]
     opWorkJobSeekerSkills: Prisma.$OpWorkJobSeekerSkillPayload<ExtArgs>[]
     opWorkJobTags: Prisma.$OpWorkJobTagPayload<ExtArgs>[]
+    opWorkSkills: Prisma.$OpWorkSkillPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -4055,6 +4298,7 @@ export interface Prisma__OpWorkProfileClient<T, Null = never, ExtArgs extends ru
   opWorkEducations<T extends Prisma.OpWorkProfile$opWorkEducationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkEducationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkJobSeekerSkills<T extends Prisma.OpWorkProfile$opWorkJobSeekerSkillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkJobSeekerSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSeekerSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkJobTags<T extends Prisma.OpWorkProfile$opWorkJobTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkJobTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  opWorkSkills<T extends Prisma.OpWorkProfile$opWorkSkillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkProfile$opWorkSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4868,6 +5112,30 @@ export type OpWorkProfile$opWorkJobTagsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.OpWorkJobTagScalarFieldEnum | Prisma.OpWorkJobTagScalarFieldEnum[]
+}
+
+/**
+ * OpWorkProfile.opWorkSkills
+ */
+export type OpWorkProfile$opWorkSkillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OpWorkSkill
+   */
+  select?: Prisma.OpWorkSkillSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OpWorkSkill
+   */
+  omit?: Prisma.OpWorkSkillOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkSkillInclude<ExtArgs> | null
+  where?: Prisma.OpWorkSkillWhereInput
+  orderBy?: Prisma.OpWorkSkillOrderByWithRelationInput | Prisma.OpWorkSkillOrderByWithRelationInput[]
+  cursor?: Prisma.OpWorkSkillWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OpWorkSkillScalarFieldEnum | Prisma.OpWorkSkillScalarFieldEnum[]
 }
 
 /**

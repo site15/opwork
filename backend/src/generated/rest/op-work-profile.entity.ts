@@ -18,6 +18,7 @@ import {OpWorkExperience} from './op-work-experience.entity'
 import {OpWorkEducation} from './op-work-education.entity'
 import {OpWorkJobSeekerSkill} from './op-work-job-seeker-skill.entity'
 import {OpWorkJobTag} from './op-work-job-tag.entity'
+import {OpWorkSkill} from './op-work-skill.entity'
 
 
 export class OpWorkProfile {
@@ -180,4 +181,10 @@ opWorkJobSeekerSkills?: OpWorkJobSeekerSkill[] ;
   required: false,
 })
 opWorkJobTags?: OpWorkJobTag[] ;
+@ApiProperty({
+  type: () => OpWorkSkill,
+  isArray: true,
+  required: false,
+})
+opWorkSkills?: OpWorkSkill[] ;
 }

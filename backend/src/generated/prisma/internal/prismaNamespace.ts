@@ -2330,6 +2330,7 @@ export const OpWorkSkillScalarFieldEnum = {
   category: 'category',
   icon: 'icon',
   popularity: 'popularity',
+  profileId: 'profileId',
   createdAt: 'createdAt'
 } as const
 

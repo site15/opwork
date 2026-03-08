@@ -43,6 +43,7 @@ export type OpWorkSkillMinAggregateOutputType = {
   category: string | null
   icon: string | null
   popularity: number | null
+  profileId: string | null
   createdAt: Date | null
 }
 
@@ -54,6 +55,7 @@ export type OpWorkSkillMaxAggregateOutputType = {
   category: string | null
   icon: string | null
   popularity: number | null
+  profileId: string | null
   createdAt: Date | null
 }
 
@@ -65,6 +67,7 @@ export type OpWorkSkillCountAggregateOutputType = {
   category: number
   icon: number
   popularity: number
+  profileId: number
   createdAt: number
   _all: number
 }
@@ -86,6 +89,7 @@ export type OpWorkSkillMinAggregateInputType = {
   category?: true
   icon?: true
   popularity?: true
+  profileId?: true
   createdAt?: true
 }
 
@@ -97,6 +101,7 @@ export type OpWorkSkillMaxAggregateInputType = {
   category?: true
   icon?: true
   popularity?: true
+  profileId?: true
   createdAt?: true
 }
 
@@ -108,6 +113,7 @@ export type OpWorkSkillCountAggregateInputType = {
   category?: true
   icon?: true
   popularity?: true
+  profileId?: true
   createdAt?: true
   _all?: true
 }
@@ -206,6 +212,7 @@ export type OpWorkSkillGroupByOutputType = {
   category: string | null
   icon: string | null
   popularity: number
+  profileId: string | null
   createdAt: Date
   _count: OpWorkSkillCountAggregateOutputType | null
   _avg: OpWorkSkillAvgAggregateOutputType | null
@@ -240,7 +247,9 @@ export type OpWorkSkillWhereInput = {
   category?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
   icon?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
   popularity?: Prisma.IntFilter<"OpWorkSkill"> | number
+  profileId?: Prisma.UuidNullableFilter<"OpWorkSkill"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkSkill"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillListRelationFilter
   OpWorkJobSkill?: Prisma.OpWorkJobSkillListRelationFilter
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymListRelationFilter
@@ -254,7 +263,9 @@ export type OpWorkSkillOrderByWithRelationInput = {
   category?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   popularity?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillOrderByRelationAggregateInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillOrderByRelationAggregateInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymOrderByRelationAggregateInput
@@ -263,6 +274,7 @@ export type OpWorkSkillOrderByWithRelationInput = {
 export type OpWorkSkillWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   name?: string
+  uqOpWorkProfileSkillName?: Prisma.OpWorkSkillUqOpWorkProfileSkillNameCompoundUniqueInput
   AND?: Prisma.OpWorkSkillWhereInput | Prisma.OpWorkSkillWhereInput[]
   OR?: Prisma.OpWorkSkillWhereInput[]
   NOT?: Prisma.OpWorkSkillWhereInput | Prisma.OpWorkSkillWhereInput[]
@@ -271,11 +283,13 @@ export type OpWorkSkillWhereUniqueInput = Prisma.AtLeast<{
   category?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
   icon?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
   popularity?: Prisma.IntFilter<"OpWorkSkill"> | number
+  profileId?: Prisma.UuidNullableFilter<"OpWorkSkill"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkSkill"> | Date | string
+  OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileNullableScalarRelationFilter, Prisma.OpWorkProfileWhereInput> | null
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillListRelationFilter
   OpWorkJobSkill?: Prisma.OpWorkJobSkillListRelationFilter
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymListRelationFilter
-}, "id" | "uqOpWorkSkillName">
+}, "id" | "uqOpWorkSkillName" | "uqOpWorkProfileSkillName">
 
 export type OpWorkSkillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -285,6 +299,7 @@ export type OpWorkSkillOrderByWithAggregationInput = {
   category?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   popularity?: Prisma.SortOrder
+  profileId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.OpWorkSkillCountOrderByAggregateInput
   _avg?: Prisma.OpWorkSkillAvgOrderByAggregateInput
@@ -304,6 +319,7 @@ export type OpWorkSkillScalarWhereWithAggregatesInput = {
   category?: Prisma.StringNullableWithAggregatesFilter<"OpWorkSkill"> | string | null
   icon?: Prisma.StringNullableWithAggregatesFilter<"OpWorkSkill"> | string | null
   popularity?: Prisma.IntWithAggregatesFilter<"OpWorkSkill"> | number
+  profileId?: Prisma.UuidNullableWithAggregatesFilter<"OpWorkSkill"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkSkill"> | Date | string
 }
 
@@ -316,6 +332,7 @@ export type OpWorkSkillCreateInput = {
   icon?: string | null
   popularity: number
   createdAt?: Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSkillsInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
@@ -329,6 +346,7 @@ export type OpWorkSkillUncheckedCreateInput = {
   category?: string | null
   icon?: string | null
   popularity: number
+  profileId?: string | null
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -344,6 +362,7 @@ export type OpWorkSkillUpdateInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkSkillsNestedInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkSkillNestedInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUpdateManyWithoutOpWorkSkillNestedInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUpdateManyWithoutOpWorkSkillNestedInput
@@ -357,6 +376,7 @@ export type OpWorkSkillUncheckedUpdateInput = {
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
@@ -371,6 +391,7 @@ export type OpWorkSkillCreateManyInput = {
   category?: string | null
   icon?: string | null
   popularity: number
+  profileId?: string | null
   createdAt?: Date | string
 }
 
@@ -393,7 +414,23 @@ export type OpWorkSkillUncheckedUpdateManyInput = {
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OpWorkSkillListRelationFilter = {
+  every?: Prisma.OpWorkSkillWhereInput
+  some?: Prisma.OpWorkSkillWhereInput
+  none?: Prisma.OpWorkSkillWhereInput
+}
+
+export type OpWorkSkillOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type OpWorkSkillUqOpWorkProfileSkillNameCompoundUniqueInput = {
+  profileId: string
+  name: string
 }
 
 export type OpWorkSkillCountOrderByAggregateInput = {
@@ -404,6 +441,7 @@ export type OpWorkSkillCountOrderByAggregateInput = {
   category?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   popularity?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -419,6 +457,7 @@ export type OpWorkSkillMaxOrderByAggregateInput = {
   category?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   popularity?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -430,6 +469,7 @@ export type OpWorkSkillMinOrderByAggregateInput = {
   category?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   popularity?: Prisma.SortOrder
+  profileId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -440,6 +480,48 @@ export type OpWorkSkillSumOrderByAggregateInput = {
 export type OpWorkSkillScalarRelationFilter = {
   is?: Prisma.OpWorkSkillWhereInput
   isNot?: Prisma.OpWorkSkillWhereInput
+}
+
+export type OpWorkSkillCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkSkillCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+}
+
+export type OpWorkSkillUncheckedCreateNestedManyWithoutOpWorkProfileInput = {
+  create?: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkSkillCreateManyOpWorkProfileInputEnvelope
+  connect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+}
+
+export type OpWorkSkillUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkSkillUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkSkillCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  delete?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  connect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  update?: Prisma.OpWorkSkillUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkSkillUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkSkillScalarWhereInput | Prisma.OpWorkSkillScalarWhereInput[]
+}
+
+export type OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput> | Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput[] | Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput[]
+  connectOrCreate?: Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput | Prisma.OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput[]
+  upsert?: Prisma.OpWorkSkillUpsertWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpsertWithWhereUniqueWithoutOpWorkProfileInput[]
+  createMany?: Prisma.OpWorkSkillCreateManyOpWorkProfileInputEnvelope
+  set?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  disconnect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  delete?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  connect?: Prisma.OpWorkSkillWhereUniqueInput | Prisma.OpWorkSkillWhereUniqueInput[]
+  update?: Prisma.OpWorkSkillUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
+  updateMany?: Prisma.OpWorkSkillUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkSkillUpdateManyWithWhereWithoutOpWorkProfileInput[]
+  deleteMany?: Prisma.OpWorkSkillScalarWhereInput | Prisma.OpWorkSkillScalarWhereInput[]
 }
 
 export type NullableEnumOpWorkSkillTypeFieldUpdateOperationsInput = {
@@ -488,6 +570,75 @@ export type OpWorkSkillUpdateOneRequiredWithoutOpWorkSkillSynonymsNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpWorkSkillUpdateToOneWithWhereWithoutOpWorkSkillSynonymsInput, Prisma.OpWorkSkillUpdateWithoutOpWorkSkillSynonymsInput>, Prisma.OpWorkSkillUncheckedUpdateWithoutOpWorkSkillSynonymsInput>
 }
 
+export type OpWorkSkillCreateWithoutOpWorkProfileInput = {
+  id?: string
+  name: string
+  description?: string | null
+  type?: $Enums.OpWorkSkillType | null
+  category?: string | null
+  icon?: string | null
+  popularity: number
+  createdAt?: Date | string
+  OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
+  OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
+  opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
+}
+
+export type OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput = {
+  id?: string
+  name: string
+  description?: string | null
+  type?: $Enums.OpWorkSkillType | null
+  category?: string | null
+  icon?: string | null
+  popularity: number
+  createdAt?: Date | string
+  OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
+  OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
+  opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedCreateNestedManyWithoutOpWorkSkillInput
+}
+
+export type OpWorkSkillCreateOrConnectWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkSkillWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkSkillCreateManyOpWorkProfileInputEnvelope = {
+  data: Prisma.OpWorkSkillCreateManyOpWorkProfileInput | Prisma.OpWorkSkillCreateManyOpWorkProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type OpWorkSkillUpsertWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkSkillWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpWorkSkillUpdateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedUpdateWithoutOpWorkProfileInput>
+  create: Prisma.XOR<Prisma.OpWorkSkillCreateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedCreateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkSkillUpdateWithWhereUniqueWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkSkillWhereUniqueInput
+  data: Prisma.XOR<Prisma.OpWorkSkillUpdateWithoutOpWorkProfileInput, Prisma.OpWorkSkillUncheckedUpdateWithoutOpWorkProfileInput>
+}
+
+export type OpWorkSkillUpdateManyWithWhereWithoutOpWorkProfileInput = {
+  where: Prisma.OpWorkSkillScalarWhereInput
+  data: Prisma.XOR<Prisma.OpWorkSkillUpdateManyMutationInput, Prisma.OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileInput>
+}
+
+export type OpWorkSkillScalarWhereInput = {
+  AND?: Prisma.OpWorkSkillScalarWhereInput | Prisma.OpWorkSkillScalarWhereInput[]
+  OR?: Prisma.OpWorkSkillScalarWhereInput[]
+  NOT?: Prisma.OpWorkSkillScalarWhereInput | Prisma.OpWorkSkillScalarWhereInput[]
+  id?: Prisma.UuidFilter<"OpWorkSkill"> | string
+  name?: Prisma.StringFilter<"OpWorkSkill"> | string
+  description?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
+  type?: Prisma.EnumOpWorkSkillTypeNullableFilter<"OpWorkSkill"> | $Enums.OpWorkSkillType | null
+  category?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
+  icon?: Prisma.StringNullableFilter<"OpWorkSkill"> | string | null
+  popularity?: Prisma.IntFilter<"OpWorkSkill"> | number
+  profileId?: Prisma.UuidNullableFilter<"OpWorkSkill"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"OpWorkSkill"> | Date | string
+}
+
 export type OpWorkSkillCreateWithoutOpWorkJobSeekerSkillInput = {
   id?: string
   name: string
@@ -497,6 +648,7 @@ export type OpWorkSkillCreateWithoutOpWorkJobSeekerSkillInput = {
   icon?: string | null
   popularity: number
   createdAt?: Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSkillsInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
 }
@@ -509,6 +661,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkJobSeekerSkillInput = {
   category?: string | null
   icon?: string | null
   popularity: number
+  profileId?: string | null
   createdAt?: Date | string
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -539,6 +692,7 @@ export type OpWorkSkillUpdateWithoutOpWorkJobSeekerSkillInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkSkillsNestedInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUpdateManyWithoutOpWorkSkillNestedInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUpdateManyWithoutOpWorkSkillNestedInput
 }
@@ -551,6 +705,7 @@ export type OpWorkSkillUncheckedUpdateWithoutOpWorkJobSeekerSkillInput = {
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedUpdateManyWithoutOpWorkSkillNestedInput
@@ -565,6 +720,7 @@ export type OpWorkSkillCreateWithoutOpWorkJobSkillInput = {
   icon?: string | null
   popularity: number
   createdAt?: Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSkillsInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymCreateNestedManyWithoutOpWorkSkillInput
 }
@@ -577,6 +733,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkJobSkillInput = {
   category?: string | null
   icon?: string | null
   popularity: number
+  profileId?: string | null
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -607,6 +764,7 @@ export type OpWorkSkillUpdateWithoutOpWorkJobSkillInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkSkillsNestedInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkSkillNestedInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUpdateManyWithoutOpWorkSkillNestedInput
 }
@@ -619,6 +777,7 @@ export type OpWorkSkillUncheckedUpdateWithoutOpWorkJobSkillInput = {
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
   opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedUpdateManyWithoutOpWorkSkillNestedInput
@@ -633,6 +792,7 @@ export type OpWorkSkillCreateWithoutOpWorkSkillSynonymsInput = {
   icon?: string | null
   popularity: number
   createdAt?: Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkSkillsInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillCreateNestedManyWithoutOpWorkSkillInput
 }
@@ -645,6 +805,7 @@ export type OpWorkSkillUncheckedCreateWithoutOpWorkSkillSynonymsInput = {
   category?: string | null
   icon?: string | null
   popularity: number
+  profileId?: string | null
   createdAt?: Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedCreateNestedManyWithoutOpWorkSkillInput
@@ -675,6 +836,7 @@ export type OpWorkSkillUpdateWithoutOpWorkSkillSynonymsInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkProfile?: Prisma.OpWorkProfileUpdateOneWithoutOpWorkSkillsNestedInput
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkSkillNestedInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUpdateManyWithoutOpWorkSkillNestedInput
 }
@@ -687,9 +849,60 @@ export type OpWorkSkillUncheckedUpdateWithoutOpWorkSkillSynonymsInput = {
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  profileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
   OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
+}
+
+export type OpWorkSkillCreateManyOpWorkProfileInput = {
+  id?: string
+  name: string
+  description?: string | null
+  type?: $Enums.OpWorkSkillType | null
+  category?: string | null
+  icon?: string | null
+  popularity: number
+  createdAt?: Date | string
+}
+
+export type OpWorkSkillUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableEnumOpWorkSkillTypeFieldUpdateOperationsInput | $Enums.OpWorkSkillType | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUpdateManyWithoutOpWorkSkillNestedInput
+  OpWorkJobSkill?: Prisma.OpWorkJobSkillUpdateManyWithoutOpWorkSkillNestedInput
+  opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUpdateManyWithoutOpWorkSkillNestedInput
+}
+
+export type OpWorkSkillUncheckedUpdateWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableEnumOpWorkSkillTypeFieldUpdateOperationsInput | $Enums.OpWorkSkillType | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  OpWorkJobSeekerSkill?: Prisma.OpWorkJobSeekerSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
+  OpWorkJobSkill?: Prisma.OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput
+  opWorkSkillSynonyms?: Prisma.OpWorkSkillSynonymUncheckedUpdateManyWithoutOpWorkSkillNestedInput
+}
+
+export type OpWorkSkillUncheckedUpdateManyWithoutOpWorkProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableEnumOpWorkSkillTypeFieldUpdateOperationsInput | $Enums.OpWorkSkillType | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  popularity?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -749,7 +962,9 @@ export type OpWorkSkillSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   category?: boolean
   icon?: boolean
   popularity?: boolean
+  profileId?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
   OpWorkJobSeekerSkill?: boolean | Prisma.OpWorkSkill$OpWorkJobSeekerSkillArgs<ExtArgs>
   OpWorkJobSkill?: boolean | Prisma.OpWorkSkill$OpWorkJobSkillArgs<ExtArgs>
   opWorkSkillSynonyms?: boolean | Prisma.OpWorkSkill$opWorkSkillSynonymsArgs<ExtArgs>
@@ -764,7 +979,9 @@ export type OpWorkSkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   category?: boolean
   icon?: boolean
   popularity?: boolean
+  profileId?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkSkill"]>
 
 export type OpWorkSkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -775,7 +992,9 @@ export type OpWorkSkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   category?: boolean
   icon?: boolean
   popularity?: boolean
+  profileId?: boolean
   createdAt?: boolean
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
 }, ExtArgs["result"]["opWorkSkill"]>
 
 export type OpWorkSkillSelectScalar = {
@@ -786,22 +1005,34 @@ export type OpWorkSkillSelectScalar = {
   category?: boolean
   icon?: boolean
   popularity?: boolean
+  profileId?: boolean
   createdAt?: boolean
 }
 
-export type OpWorkSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "type" | "category" | "icon" | "popularity" | "createdAt", ExtArgs["result"]["opWorkSkill"]>
+export type OpWorkSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "type" | "category" | "icon" | "popularity" | "profileId" | "createdAt", ExtArgs["result"]["opWorkSkill"]>
 export type OpWorkSkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
   OpWorkJobSeekerSkill?: boolean | Prisma.OpWorkSkill$OpWorkJobSeekerSkillArgs<ExtArgs>
   OpWorkJobSkill?: boolean | Prisma.OpWorkSkill$OpWorkJobSkillArgs<ExtArgs>
   opWorkSkillSynonyms?: boolean | Prisma.OpWorkSkill$opWorkSkillSynonymsArgs<ExtArgs>
   _count?: boolean | Prisma.OpWorkSkillCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type OpWorkSkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type OpWorkSkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type OpWorkSkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
+}
+export type OpWorkSkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  OpWorkProfile?: boolean | Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>
+}
 
 export type $OpWorkSkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OpWorkSkill"
   objects: {
+    /**
+     * Профиль пользователя, сохранившего вакансию
+     * @DtoRelationCanConnectOnCreate
+     * @DtoRelationCanConnectOnUpdate
+     */
+    OpWorkProfile: Prisma.$OpWorkProfilePayload<ExtArgs> | null
     /**
      * Все связи навыка с соискателями
      */
@@ -851,6 +1082,10 @@ export type $OpWorkSkillPayload<ExtArgs extends runtime.Types.Extensions.Interna
      * @Minimum(0)
      */
     popularity: number
+    /**
+     * Идентификатор профиля пользователя
+     */
+    profileId: string | null
     /**
      * Временная метка создания записи
      */
@@ -1249,6 +1484,7 @@ readonly fields: OpWorkSkillFieldRefs;
  */
 export interface Prisma__OpWorkSkillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  OpWorkProfile<T extends Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkSkill$OpWorkProfileArgs<ExtArgs>>): Prisma.Prisma__OpWorkProfileClient<runtime.Types.Result.GetResult<Prisma.$OpWorkProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   OpWorkJobSeekerSkill<T extends Prisma.OpWorkSkill$OpWorkJobSeekerSkillArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkSkill$OpWorkJobSeekerSkillArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSeekerSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   OpWorkJobSkill<T extends Prisma.OpWorkSkill$OpWorkJobSkillArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkSkill$OpWorkJobSkillArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkJobSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opWorkSkillSynonyms<T extends Prisma.OpWorkSkill$opWorkSkillSynonymsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OpWorkSkill$opWorkSkillSynonymsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpWorkSkillSynonymPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1288,6 +1524,7 @@ export interface OpWorkSkillFieldRefs {
   readonly category: Prisma.FieldRef<"OpWorkSkill", 'String'>
   readonly icon: Prisma.FieldRef<"OpWorkSkill", 'String'>
   readonly popularity: Prisma.FieldRef<"OpWorkSkill", 'Int'>
+  readonly profileId: Prisma.FieldRef<"OpWorkSkill", 'String'>
   readonly createdAt: Prisma.FieldRef<"OpWorkSkill", 'DateTime'>
 }
     
@@ -1538,6 +1775,10 @@ export type OpWorkSkillCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.OpWorkSkillCreateManyInput | Prisma.OpWorkSkillCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkSkillIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1608,6 +1849,10 @@ export type OpWorkSkillUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many OpWorkSkills to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkSkillIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1674,6 +1919,25 @@ export type OpWorkSkillDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many OpWorkSkills to delete.
    */
   limit?: number
+}
+
+/**
+ * OpWorkSkill.OpWorkProfile
+ */
+export type OpWorkSkill$OpWorkProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OpWorkProfile
+   */
+  select?: Prisma.OpWorkProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OpWorkProfile
+   */
+  omit?: Prisma.OpWorkProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpWorkProfileInclude<ExtArgs> | null
+  where?: Prisma.OpWorkProfileWhereInput
 }
 
 /**

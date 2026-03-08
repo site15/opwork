@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkEducationDto } from '../generated/rest/op-work-education.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerEducationArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker/education')
@@ -14,15 +24,17 @@ export class JobSeekerEducationController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get(':job_seeker_id')
+  @Get()
   @ApiOkResponse({ type: OpWorkEducationDto, isArray: true })
   async getEducations(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkEducationDto[]> {
+    if (!req.firstOpWorkJobSeeker?.id) {
+      return [];
+    }
     return await this.prismaService.opWorkEducation.findMany({
       where: {
-        jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id,
+        jobSeekerId: req.firstOpWorkJobSeeker?.id,
       },
     });
   }
@@ -35,7 +47,10 @@ export class JobSeekerEducationController {
   ): Promise<OpWorkEducationDto> {
     if (args.id) {
       return await this.prismaService.opWorkEducation.update({
-        where: { id: args.id },
+        where: {
+          id: args.id,
+          OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+        },
         data: {
           degree: args.degree,
           description: args.description,
@@ -73,5 +88,20 @@ export class JobSeekerEducationController {
         },
       });
     }
+  }
+
+  @Delete(':education_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async delEducation(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('education_id', new ParseUUIDPipe()) educationId: string,
+  ): Promise<StatusResponse> {
+    await this.prismaService.opWorkEducation.deleteMany({
+      where: {
+        id: educationId,
+        OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+      },
+    });
+    return { message: 'ok' };
   }
 }

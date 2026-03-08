@@ -73,13 +73,13 @@ const loadProfile = () => {
 };
 
 const [EmployerProfileForm, employerProfileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-2',
+  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
   schema: useOpWorkEmployerFormSchema(),
   showDefaultActions: false,
 });
 
 const [ProfileForm, profileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-2',
+  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
   schema: useOpWorkProfileFormSchema(),
   showDefaultActions: false,
 });

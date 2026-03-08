@@ -1,6 +1,7 @@
 
 import {OpWorkSkillType} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
+import {OpWorkProfile} from './op-work-profile.entity'
 import {OpWorkJobSeekerSkill} from './op-work-job-seeker-skill.entity'
 import {OpWorkJobSkill} from './op-work-job-skill.entity'
 import {OpWorkSkillSynonym} from './op-work-skill-synonym.entity'
@@ -43,9 +44,20 @@ icon!: string  | null;
 popularity!: number ;
 @ApiProperty({
   type: 'string',
+  nullable: true,
+})
+profileId!: string  | null;
+@ApiProperty({
+  type: 'string',
   format: 'date-time',
 })
 createdAt!: Date ;
+@ApiProperty({
+  type: () => OpWorkProfile,
+  required: false,
+  nullable: true,
+})
+OpWorkProfile?: OpWorkProfile  | null;
 @ApiProperty({
   type: () => OpWorkJobSeekerSkill,
   isArray: true,

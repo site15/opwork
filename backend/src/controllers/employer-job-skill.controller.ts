@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -14,6 +15,7 @@ import { OpWorkJobSkill } from '../generated/rest/op-work-job-skill.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobSkillArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('employer')
 @Controller('employer/job-skill')
@@ -62,10 +64,16 @@ export class EmployerWorkSkillController {
     if (!args.skillId && args.skillName) {
       args.skillId = (
         (await this.prismaService.opWorkSkill.findFirst({
+          include: { OpWorkProfile: true },
           where: { name: args.skillName },
         })) ||
         (await this.prismaService.opWorkSkill.create({
-          data: { name: args.skillName, popularity: -1 },
+          include: { OpWorkProfile: true },
+          data: {
+            name: args.skillName,
+            OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+            popularity: 0,
+          },
         }))
       ).id;
     }
@@ -92,5 +100,19 @@ export class EmployerWorkSkillController {
         },
       });
     }
+  }
+
+  @Delete(':job_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async delJobSkill(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
+  ): Promise<StatusResponse> {
+    await this.prismaService.opWorkJobSkill.deleteMany({
+      where: {
+        OpWorkJob: { id: jobId },
+      },
+    });
+    return { message: 'ok' };
   }
 }

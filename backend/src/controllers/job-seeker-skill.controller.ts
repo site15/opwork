@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkJobSeekerSkill } from '../generated/rest/op-work-job-seeker-skill.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerSkillArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker/skill')
@@ -14,16 +24,18 @@ export class JobSeekerSkillController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get(':job_seeker_id')
+  @Get()
   @ApiOkResponse({ type: OpWorkJobSeekerSkill, isArray: true })
   async getSkills(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkJobSeekerSkill[]> {
+    if (!req.firstOpWorkJobSeeker?.id) {
+      return [];
+    }
     return await this.prismaService.opWorkJobSeekerSkill.findMany({
       include: { OpWorkSkill: true },
       where: {
-        jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id,
+        jobSeekerId: req.firstOpWorkJobSeeker?.id,
       },
     });
   }
@@ -38,6 +50,7 @@ export class JobSeekerSkillController {
       args.skillId =
         (
           await this.prismaService.opWorkSkill.findFirst({
+            include: { OpWorkProfile: true },
             where: {
               name: args.skillName,
             },
@@ -46,7 +59,12 @@ export class JobSeekerSkillController {
       if (!args.skillId) {
         args.skillId = (
           await this.prismaService.opWorkSkill.create({
-            data: { name: args.skillName, popularity: -1 },
+            include: { OpWorkProfile: true },
+            data: {
+              name: args.skillName,
+              popularity: 0,
+              OpWorkProfile: { connect: { id: req.opWorkProfileId } },
+            },
           })
         ).id;
       }
@@ -54,7 +72,10 @@ export class JobSeekerSkillController {
     if (args.id) {
       return await this.prismaService.opWorkJobSeekerSkill.update({
         include: { OpWorkSkill: true },
-        where: { id: args.id },
+        where: {
+          id: args.id,
+          OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+        },
         data: {
           isPrimary: args.isPrimary,
           lastUsed: args.lastUsed,
@@ -88,5 +109,20 @@ export class JobSeekerSkillController {
         },
       });
     }
+  }
+
+  @Delete(':job_seeker_skill_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async delJobSkill(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_seeker_skill_id', new ParseUUIDPipe()) jobSeekerSkillId: string,
+  ): Promise<StatusResponse> {
+    await this.prismaService.opWorkJobSeekerSkill.deleteMany({
+      where: {
+        id: jobSeekerSkillId,
+        OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+      },
+    });
+    return { message: 'ok' };
   }
 }

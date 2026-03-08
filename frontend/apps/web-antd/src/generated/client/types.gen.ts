@@ -211,7 +211,9 @@ export type OpWorkSkill = {
     category: string | null;
     icon: string | null;
     popularity: number;
+    profileId: string | null;
     createdAt: string;
+    OpWorkProfile?: OpWorkProfile | null;
     OpWorkJobSeekerSkill?: Array<OpWorkJobSeekerSkill>;
     OpWorkJobSkill?: Array<OpWorkJobSkill>;
     opWorkSkillSynonyms?: Array<OpWorkSkillSynonym>;
@@ -383,6 +385,7 @@ export type OpWorkProfile = {
     opWorkEducations?: Array<OpWorkEducation>;
     opWorkJobSeekerSkills?: Array<OpWorkJobSeekerSkill>;
     opWorkJobTags?: Array<OpWorkJobTag>;
+    opWorkSkills?: Array<OpWorkSkill>;
 };
 
 export type AuthUser = {
@@ -1229,6 +1232,10 @@ export type FindManyOpWorkSkillResponse = {
     meta: FindManyOpWorkSkillResponseMeta;
 };
 
+export type CreateOpWorkSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type CreateOpWorkSkillDto = {
     name: string;
     description?: string | null;
@@ -1236,6 +1243,7 @@ export type CreateOpWorkSkillDto = {
     category?: string | null;
     icon?: string | null;
     popularity: number;
+    OpWorkProfile?: CreateOpWorkSkillOpWorkProfileRelationInputDto;
 };
 
 export type OpWorkSkillDto = {
@@ -1249,6 +1257,10 @@ export type OpWorkSkillDto = {
     createdAt: string;
 };
 
+export type UpdateOpWorkSkillOpWorkProfileRelationInputDto = {
+    connect: ConnectOpWorkProfileDto;
+};
+
 export type UpdateOpWorkSkillDto = {
     name?: string;
     description?: string | null;
@@ -1256,6 +1268,7 @@ export type UpdateOpWorkSkillDto = {
     category?: string | null;
     icon?: string | null;
     popularity?: number;
+    OpWorkProfile?: UpdateOpWorkSkillOpWorkProfileRelationInputDto;
 };
 
 export type FindManyOpWorkJobSeekerSkillResponseMeta = {
@@ -1281,10 +1294,16 @@ export type OpWorkSkillUqOpWorkSkillNameUniqueInputDto = {
     name: string;
 };
 
+export type OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto = {
+    profileId: string;
+    name: string;
+};
+
 export type ConnectOpWorkSkillDto = {
     id?: string;
     name?: string;
     uqOpWorkSkillName?: OpWorkSkillUqOpWorkSkillNameUniqueInputDto;
+    uqOpWorkProfileSkillName?: OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto;
 };
 
 export type CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto = {
@@ -3145,6 +3164,7 @@ export type OpWorkSkillControllerFindManyData = {
         perPage?: number;
         searchText?: string;
         sort?: string;
+        profileId?: string;
     };
     url: '/api/op-work/skill';
 };
@@ -4312,11 +4332,9 @@ export type JobSeekerControllerSetProfileResponse = JobSeekerControllerSetProfil
 
 export type JobSeekerSkillControllerGetSkillsData = {
     body?: never;
-    path: {
-        job_seeker_id: string;
-    };
+    path?: never;
     query?: never;
-    url: '/api/job-seeker/skill/{job_seeker_id}';
+    url: '/api/job-seeker/skill';
 };
 
 export type JobSeekerSkillControllerGetSkillsErrors = {
@@ -4350,13 +4368,32 @@ export type JobSeekerSkillControllerSetSkillResponses = {
 
 export type JobSeekerSkillControllerSetSkillResponse = JobSeekerSkillControllerSetSkillResponses[keyof JobSeekerSkillControllerSetSkillResponses];
 
-export type JobSeekerEducationControllerGetEducationsData = {
+export type JobSeekerSkillControllerDelJobSkillData = {
     body?: never;
     path: {
-        job_seeker_id: string;
+        job_seeker_skill_id: string;
     };
     query?: never;
-    url: '/api/job-seeker/education/{job_seeker_id}';
+    url: '/api/job-seeker/skill/{job_seeker_skill_id}';
+};
+
+export type JobSeekerSkillControllerDelJobSkillErrors = {
+    default: StatusResponse;
+};
+
+export type JobSeekerSkillControllerDelJobSkillError = JobSeekerSkillControllerDelJobSkillErrors[keyof JobSeekerSkillControllerDelJobSkillErrors];
+
+export type JobSeekerSkillControllerDelJobSkillResponses = {
+    200: StatusResponse;
+};
+
+export type JobSeekerSkillControllerDelJobSkillResponse = JobSeekerSkillControllerDelJobSkillResponses[keyof JobSeekerSkillControllerDelJobSkillResponses];
+
+export type JobSeekerEducationControllerGetEducationsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/education';
 };
 
 export type JobSeekerEducationControllerGetEducationsErrors = {
@@ -4390,13 +4427,32 @@ export type JobSeekerEducationControllerSetEducationResponses = {
 
 export type JobSeekerEducationControllerSetEducationResponse = JobSeekerEducationControllerSetEducationResponses[keyof JobSeekerEducationControllerSetEducationResponses];
 
-export type JobSeekerExperienceControllerGetExperiencesData = {
+export type JobSeekerEducationControllerDelEducationData = {
     body?: never;
     path: {
-        job_seeker_id: string;
+        education_id: string;
     };
     query?: never;
-    url: '/api/job-seeker/experience/{job_seeker_id}';
+    url: '/api/job-seeker/education/{education_id}';
+};
+
+export type JobSeekerEducationControllerDelEducationErrors = {
+    default: StatusResponse;
+};
+
+export type JobSeekerEducationControllerDelEducationError = JobSeekerEducationControllerDelEducationErrors[keyof JobSeekerEducationControllerDelEducationErrors];
+
+export type JobSeekerEducationControllerDelEducationResponses = {
+    200: StatusResponse;
+};
+
+export type JobSeekerEducationControllerDelEducationResponse = JobSeekerEducationControllerDelEducationResponses[keyof JobSeekerEducationControllerDelEducationResponses];
+
+export type JobSeekerExperienceControllerGetExperiencesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/job-seeker/experience';
 };
 
 export type JobSeekerExperienceControllerGetExperiencesErrors = {
@@ -4429,6 +4485,27 @@ export type JobSeekerExperienceControllerSetExperienceResponses = {
 };
 
 export type JobSeekerExperienceControllerSetExperienceResponse = JobSeekerExperienceControllerSetExperienceResponses[keyof JobSeekerExperienceControllerSetExperienceResponses];
+
+export type JobSeekerExperienceControllerDelExperienceData = {
+    body?: never;
+    path: {
+        experience_id: string;
+    };
+    query?: never;
+    url: '/api/job-seeker/experience/{experience_id}';
+};
+
+export type JobSeekerExperienceControllerDelExperienceErrors = {
+    default: StatusResponse;
+};
+
+export type JobSeekerExperienceControllerDelExperienceError = JobSeekerExperienceControllerDelExperienceErrors[keyof JobSeekerExperienceControllerDelExperienceErrors];
+
+export type JobSeekerExperienceControllerDelExperienceResponses = {
+    200: StatusResponse;
+};
+
+export type JobSeekerExperienceControllerDelExperienceResponse = JobSeekerExperienceControllerDelExperienceResponses[keyof JobSeekerExperienceControllerDelExperienceResponses];
 
 export type EmployerControllerGetProfilesData = {
     body?: never;
@@ -4569,6 +4646,27 @@ export type EmployerWorkSkillControllerGetAllJobSkillsResponses = {
 
 export type EmployerWorkSkillControllerGetAllJobSkillsResponse = EmployerWorkSkillControllerGetAllJobSkillsResponses[keyof EmployerWorkSkillControllerGetAllJobSkillsResponses];
 
+export type EmployerWorkSkillControllerDelJobSkillData = {
+    body?: never;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-skill/{job_id}';
+};
+
+export type EmployerWorkSkillControllerDelJobSkillErrors = {
+    default: StatusResponse;
+};
+
+export type EmployerWorkSkillControllerDelJobSkillError = EmployerWorkSkillControllerDelJobSkillErrors[keyof EmployerWorkSkillControllerDelJobSkillErrors];
+
+export type EmployerWorkSkillControllerDelJobSkillResponses = {
+    200: StatusResponse;
+};
+
+export type EmployerWorkSkillControllerDelJobSkillResponse = EmployerWorkSkillControllerDelJobSkillResponses[keyof EmployerWorkSkillControllerDelJobSkillResponses];
+
 export type EmployerWorkSkillControllerGetJobSkillsData = {
     body?: never;
     path: {
@@ -4629,6 +4727,27 @@ export type EmployerJobTagsControllerGetAllTagsResponses = {
 };
 
 export type EmployerJobTagsControllerGetAllTagsResponse = EmployerJobTagsControllerGetAllTagsResponses[keyof EmployerJobTagsControllerGetAllTagsResponses];
+
+export type EmployerJobTagsControllerDelJobTagsData = {
+    body: SetEmployerJobTagsArgs;
+    path: {
+        job_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-tags/{job_id}';
+};
+
+export type EmployerJobTagsControllerDelJobTagsErrors = {
+    default: StatusResponse;
+};
+
+export type EmployerJobTagsControllerDelJobTagsError = EmployerJobTagsControllerDelJobTagsErrors[keyof EmployerJobTagsControllerDelJobTagsErrors];
+
+export type EmployerJobTagsControllerDelJobTagsResponses = {
+    200: StatusResponse;
+};
+
+export type EmployerJobTagsControllerDelJobTagsResponse = EmployerJobTagsControllerDelJobTagsResponses[keyof EmployerJobTagsControllerDelJobTagsResponses];
 
 export type EmployerJobTagsControllerGetJobTagsData = {
     body?: never;

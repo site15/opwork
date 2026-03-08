@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Put,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkExperienceDto } from '../generated/rest/op-work-experience.dto';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerExperienceArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker/experience')
@@ -14,15 +24,17 @@ export class JobSeekerExperienceController {
     private readonly prismaService: PrismaService,
   ) {}
 
-  @Get(':job_seeker_id')
+  @Get()
   @ApiOkResponse({ type: OpWorkExperienceDto, isArray: true })
   async getExperiences(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkExperienceDto[]> {
+    if (!req.firstOpWorkJobSeeker?.id) {
+      return [];
+    }
     return await this.prismaService.opWorkExperience.findMany({
       where: {
-        jobSeekerId: jobSeekerId || req.firstOpWorkJobSeeker?.id,
+        jobSeekerId: req.firstOpWorkJobSeeker?.id,
       },
     });
   }
@@ -35,7 +47,10 @@ export class JobSeekerExperienceController {
   ): Promise<OpWorkExperienceDto> {
     if (args.id) {
       return await this.prismaService.opWorkExperience.update({
-        where: { id: args.id },
+        where: {
+          id: args.id,
+          OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+        },
         data: {
           company: args.company,
           description: args.description,
@@ -73,5 +88,20 @@ export class JobSeekerExperienceController {
         },
       });
     }
+  }
+
+  @Delete(':experience_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async delExperience(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('experience_id', new ParseUUIDPipe()) experienceId: string,
+  ): Promise<StatusResponse> {
+    await this.prismaService.opWorkExperience.deleteMany({
+      where: {
+        id: experienceId,
+        OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+      },
+    });
+    return { message: 'ok' };
   }
 }

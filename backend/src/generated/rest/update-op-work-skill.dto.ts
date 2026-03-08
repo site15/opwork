@@ -1,11 +1,21 @@
 
 import {OpWorkSkillType} from '../prisma/client'
-import {ApiProperty} from '@nestjs/swagger'
-import {IsEnum,IsInt,IsOptional,IsString,IsUrl,MaxLength} from 'class-validator'
+import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
+import {IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
+import {Type} from 'class-transformer'
+import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
+export class UpdateOpWorkSkillOpWorkProfileRelationInputDto {
+    @ApiProperty({
+  type: ConnectOpWorkProfileDto,
+})
+@IsNotEmpty()
+@ValidateNested()
+@Type(() => ConnectOpWorkProfileDto)
+connect!: ConnectOpWorkProfileDto ;
+  }
 
-
-
+@ApiExtraModels(ConnectOpWorkProfileDto,UpdateOpWorkSkillOpWorkProfileRelationInputDto)
 export class UpdateOpWorkSkillDto {
   @ApiProperty({
   type: 'string',
@@ -60,4 +70,12 @@ icon?: string  | null;
 @IsOptional()
 @IsInt()
 popularity?: number ;
+@ApiProperty({
+  required: false,
+  type: UpdateOpWorkSkillOpWorkProfileRelationInputDto,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => UpdateOpWorkSkillOpWorkProfileRelationInputDto)
+OpWorkProfile?: UpdateOpWorkSkillOpWorkProfileRelationInputDto ;
 }

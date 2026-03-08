@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -14,6 +15,7 @@ import { OpWorkJobTag } from '../generated/rest/op-work-job-tag.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerJobTagsArgs } from '../types/employer-types';
 import { AppRequest } from '../types/request';
+import { StatusResponse } from '../types/status-response';
 
 @ApiTags('employer')
 @Controller('employer/job-tags')
@@ -75,5 +77,18 @@ export class EmployerJobTagsController {
         },
       });
     }
+  }
+
+  @Delete(':job_id')
+  @ApiOkResponse({ type: StatusResponse })
+  async delJobTags(
+    @CurrentAppRequest() req: AppRequest,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
+    @Body() args: SetEmployerJobTagsArgs,
+  ): Promise<StatusResponse> {
+    await this.prismaService.opWorkJobTag.delete({
+      where: { id: args.id },
+    });
+    return { message: 'ok' };
   }
 }

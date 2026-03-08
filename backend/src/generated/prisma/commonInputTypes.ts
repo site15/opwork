@@ -474,16 +474,6 @@ export type EnumOpWorkSkillTypeNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
 }
 
-export type EnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.OpWorkSkillType | Prisma.EnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
-}
-
 export type UuidNullableFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
@@ -496,11 +486,14 @@ export type UuidNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedUuidNullableFilter<$PrismaModel> | string | null
 }
 
-export type EnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.OpWorkNotificationType | Prisma.EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumOpWorkNotificationTypeFilter<$PrismaModel> | $Enums.OpWorkNotificationType
+export type EnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillType | Prisma.EnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
 }
 
 export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -516,6 +509,13 @@ export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type EnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkNotificationType | Prisma.EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOpWorkNotificationTypeFilter<$PrismaModel> | $Enums.OpWorkNotificationType
 }
 
 export type EnumOpWorkNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -989,16 +989,6 @@ export type NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
 }
 
-export type NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.OpWorkSkillType | Prisma.EnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  in?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
-}
-
 export type NestedUuidNullableFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
@@ -1010,11 +1000,14 @@ export type NestedUuidNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedUuidNullableFilter<$PrismaModel> | string | null
 }
 
-export type NestedEnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.OpWorkNotificationType | Prisma.EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumOpWorkNotificationTypeFilter<$PrismaModel> | $Enums.OpWorkNotificationType
+export type NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillType | Prisma.EnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillType[] | Prisma.ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillTypeNullableFilter<$PrismaModel>
 }
 
 export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -1029,6 +1022,13 @@ export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkNotificationType | Prisma.EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OpWorkNotificationType[] | Prisma.ListEnumOpWorkNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOpWorkNotificationTypeFilter<$PrismaModel> | $Enums.OpWorkNotificationType
 }
 
 export type NestedEnumOpWorkNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {

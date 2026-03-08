@@ -12,8 +12,24 @@ export class OpWorkSkillUqOpWorkSkillNameUniqueInputDto {
 @MaxLength(255)
 name!: string ;
   }
+export class OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto {
+    @ApiProperty({
+  type: 'string',
+})
+@IsUUID('4')
+@IsNotEmpty()
+@IsString()
+profileId!: string ;
+@ApiProperty({
+  type: 'string',
+})
+@IsNotEmpty()
+@IsString()
+@MaxLength(255)
+name!: string ;
+  }
 
-@ApiExtraModels(OpWorkSkillUqOpWorkSkillNameUniqueInputDto)
+@ApiExtraModels(OpWorkSkillUqOpWorkSkillNameUniqueInputDto,OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto)
 export class ConnectOpWorkSkillDto {
   @ApiProperty({
   type: 'string',
@@ -39,4 +55,12 @@ name?: string ;
 @ValidateNested()
 @Type(() => OpWorkSkillUqOpWorkSkillNameUniqueInputDto)
 uqOpWorkSkillName?: OpWorkSkillUqOpWorkSkillNameUniqueInputDto ;
+@ApiProperty({
+  type: OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto,
+  required: false,
+})
+@IsOptional()
+@ValidateNested()
+@Type(() => OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto)
+uqOpWorkProfileSkillName?: OpWorkSkillUqOpWorkProfileSkillNameUniqueInputDto ;
 }

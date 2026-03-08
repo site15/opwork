@@ -787,6 +787,7 @@ model OpWorkProfile {
   opWorkEducations      OpWorkEducation[]
   opWorkJobSeekerSkills OpWorkJobSeekerSkill[]
   opWorkJobTags         OpWorkJobTag[]
+  opWorkSkills          OpWorkSkill[]
 
   /// Уникальность комбинации пользователь-тип
   /// Гарантирует что у пользователя может быть только один профиль каждого типа
@@ -1442,11 +1443,17 @@ model OpWorkSkill {
   /// Популярность навыка (количество использований)
   /// @Minimum(0)
   popularity  Int
+  /// Идентификатор профиля пользователя
+  profileId   String?          @db.Uuid
   /// Временная метка создания записи
   createdAt   DateTime         @default(now()) @db.Timestamp(6)
 
   /// === СВЯЗИ ===
 
+  /// Профиль пользователя, сохранившего вакансию
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  OpWorkProfile        OpWorkProfile?         @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_OPWORK_SAVED_JOB__PROFILE_ID")
   /// Все связи навыка с соискателями
   OpWorkJobSeekerSkill OpWorkJobSeekerSkill[]
   /// Все связи навыка с вакансиями
@@ -1458,7 +1465,9 @@ model OpWorkSkill {
 
   /// Уникальность имени навыка
   @@unique(name: "uqOpWorkSkillName", [name], map: "UQ_OPWORK_SKILL__NAME")
+  @@unique(name: "uqOpWorkProfileSkillName", [profileId, name], map: "UQ_OPWORK_SKILL__PROFILE_ID_NAME")
   /// Индексы для оптимизации поиска
+  @@index([profileId], map: "IDX_OPWORK_SKILL__PROFILE_ID")
   @@index([type], map: "IDX_OPWORK_SKILL__TYPE")
   @@index([category], map: "IDX_OPWORK_SKILL__CATEGORY")
   @@index([popularity], map: "IDX_OPWORK_SKILL__POPULARITY")

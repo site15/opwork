@@ -10,106 +10,121 @@ export function useOpWorkEmployerFormSchema(): VbenFormSchema[] {
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.companyName,
       label: $t('resource.OpWorkEmployer.companyName'),
       rules: 'required',
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.industry,
       label: $t('resource.OpWorkEmployer.industry'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.description,
       label: $t('resource.OpWorkEmployer.description'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.mission,
       label: $t('resource.OpWorkEmployer.mission'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.culture,
       label: $t('resource.OpWorkEmployer.culture'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'InputNumber',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.foundedYear,
       label: $t('resource.OpWorkEmployer.foundedYear'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.headquarters,
       label: $t('resource.OpWorkEmployer.headquarters'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.logoUrl,
       label: $t('resource.OpWorkEmployer.logoUrl'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.coverImageUrl,
       label: $t('resource.OpWorkEmployer.coverImageUrl'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.companyEmail,
       label: $t('resource.OpWorkEmployer.companyEmail'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.companyPhone,
       label: $t('resource.OpWorkEmployer.companyPhone'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.companyWebsite,
       label: $t('resource.OpWorkEmployer.companyWebsite'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.linkedinUrl,
       label: $t('resource.OpWorkEmployer.linkedinUrl'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.twitterUrl,
       label: $t('resource.OpWorkEmployer.twitterUrl'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Textarea',
       fieldName: Prisma.OpWorkEmployerScalarFieldEnum.facebookUrl,
       label: $t('resource.OpWorkEmployer.facebookUrl'),
-
+      labelWidth: 200,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
   ];
 }

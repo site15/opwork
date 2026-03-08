@@ -33,7 +33,10 @@ import { OpWorkSkill } from './op-work-skill.entity';
 import { CreateOpWorkSkillDto } from './create-op-work-skill.dto';
 import { UpdateOpWorkSkillDto } from './update-op-work-skill.dto';
 
-export class FindManyOpWorkSkillArgs extends FindManyArgs {}
+export class FindManyOpWorkSkillArgs extends FindManyArgs {
+  @ApiPropertyOptional({ type: 'string' })
+  @IsOptional()
+  profileId?: string;}
 
 export class FindManyOpWorkSkillResponseMeta extends FindManyResponseMeta {}
 
@@ -85,14 +88,21 @@ export class OpWorkSkillController {
             ],
           }
         : {}),
-      
+      AND: [
+        
+          ...(isUUID(otherArgs.profileId)
+            ? [{ profileId: { equals: otherArgs.profileId } }]
+            : []),
+      ],
       
     };
 
     const result = await this.prismaService.$transaction(async (prisma) => {
       return {
         items: await prisma.opWorkSkill.findMany({
-          
+          include:{
+OpWorkProfile: true
+          },
           where: opWorkSkillWhereInput,
           take,
           skip,
@@ -121,7 +131,7 @@ export class OpWorkSkillController {
     return await this.prismaService.opWorkSkill.create({
       data: { 
         ...args,
-        
+        OpWorkProfile:{connect:{id:args.OpWorkProfile?.connect.id}}
       },
     });
   }
@@ -137,7 +147,7 @@ export class OpWorkSkillController {
         ...args,
         
         
-        
+        ...(!args.OpWorkProfile?{OpWorkProfile:undefined}:{OpWorkProfile: { connect: { id: args.OpWorkProfile?.connect.id } }})
       },
       where: {
         id,

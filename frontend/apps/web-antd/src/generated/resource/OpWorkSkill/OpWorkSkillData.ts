@@ -1,6 +1,6 @@
 import type { VbenFormSchema } from '#/adapter/form';
       import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-      import  {  type OpWorkSkill } from '#/generated/client';
+      import  { type OpWorkProfile, opWorkProfileControllerFindMany, type OpWorkSkill } from '#/generated/client';
     import { getComponentProps } from '#/adapter/get-component-props';
     import { Prisma } from '#/generated/prisma/browser';
 
@@ -126,6 +126,25 @@ import type { VbenFormSchema } from '#/adapter/form';
         controlClass: 'w-full',
         labelWidth: 200
       }, 
+
+    {
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkProfile>({
+        findMany: (searchText?: string) => opWorkProfileControllerFindMany({
+          query: {
+            perPage: 100,
+            ...(searchText ? { searchText } : {})
+          }
+        }),
+        getLabel: (item) => item.email || item.id,
+      }),
+      fieldName: Prisma.OpWorkSkillScalarFieldEnum.profileId,
+      label: $t('resource.name.OpWorkProfile'),
+      
+      
+      controlClass: 'w-full',
+      labelWidth: 200
+    }, 
       ];
     }
 
@@ -235,6 +254,19 @@ import type { VbenFormSchema } from '#/adapter/form';
     {
         title: $t('resource.OpWorkSkill.popularity'),
         field: Prisma.OpWorkSkillScalarFieldEnum.popularity ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.name.OpWorkProfile'),
+        field: Prisma.OpWorkSkillScalarFieldEnum.profileId ,
+        cellRender: {
+          name: 'CellRender',
+          props:{
+            render: (row: any, column: any) => {
+              return row.OpWorkProfile?.email || row[column.field] || '';
+            }
+          }
+        },
         sortable: true
       }, 
     {

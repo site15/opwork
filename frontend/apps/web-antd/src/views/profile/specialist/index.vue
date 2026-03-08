@@ -20,6 +20,7 @@ import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/u
 import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardFooter.vue';
 import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
 import { useOpWorkProfileFormSchema } from '../OpWorkProfileData';
+import OpWorkEducationList from './OpWorkEducation/OpWorkEducationList.vue';
 import { useOpWorkJobSeekerFormSchema } from './OpWorkJobSeekerData';
 
 defineOptions({ name: 'SpecialistProfile' });
@@ -73,13 +74,13 @@ const loadProfile = () => {
 };
 
 const [JobSeekerProfileForm, jobSeekerProfileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-2',
+  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
   schema: useOpWorkJobSeekerFormSchema(),
   showDefaultActions: false,
 });
 
 const [ProfileForm, profileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-4 gap-2',
+  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
   schema: useOpWorkProfileFormSchema(),
   showDefaultActions: false,
 });
@@ -178,8 +179,9 @@ onMounted(() => {
           </CardTitle>
         </CardHeader>
         <CardContent class="flex flex-wrap gap-4">
-          <div class="w-full">
+          <div class="flex w-full flex-col gap-4">
             <JobSeekerProfileForm />
+            <OpWorkEducationList />
           </div>
         </CardContent>
         <CardFooter class="flex flex-wrap justify-end gap-2">
