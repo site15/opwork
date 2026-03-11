@@ -21,7 +21,9 @@ import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui
 import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
 import { useOpWorkProfileFormSchema } from '../OpWorkProfileData';
 import OpWorkEducationList from './OpWorkEducation/OpWorkEducationList.vue';
+import OpWorkExperienceList from './OpWorkExperience/OpWorkExperienceList.vue';
 import { useOpWorkJobSeekerFormSchema } from './OpWorkJobSeekerData';
+import OpWorkJobSeekerSkillList from './OpWorkJobSeekerSkill/OpWorkJobSeekerSkillList.vue';
 
 defineOptions({ name: 'SpecialistProfile' });
 
@@ -182,6 +184,8 @@ onMounted(() => {
           <div class="flex w-full flex-col gap-4">
             <JobSeekerProfileForm />
             <OpWorkEducationList />
+            <OpWorkExperienceList />
+            <OpWorkJobSeekerSkillList />
           </div>
         </CardContent>
         <CardFooter class="flex flex-wrap justify-end gap-2">

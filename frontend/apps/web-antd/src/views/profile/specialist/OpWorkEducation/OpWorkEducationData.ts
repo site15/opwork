@@ -196,16 +196,6 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
   ];
 }
 
-export function useOpWorkEducationFilterFormSchema(): VbenFormSchema[] {
-  return [
-    {
-      component: 'Input',
-      fieldName: 'searchText',
-      label: $t('common.searchText'),
-    },
-  ];
-}
-
 export function useOpWorkEducationColumns<T = OpWorkEducation>(
   onActionClick: OnActionClickFn<T>,
 ): VxeTableGridOptions['columns'] {
@@ -213,7 +203,6 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
     {
       title: $t('resource.OpWorkEducation.institution'),
       field: Prisma.OpWorkEducationScalarFieldEnum.institution,
-      sortable: true,
     },
     {
       cellRender: {
@@ -273,24 +262,20 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       },
       title: $t('resource.OpWorkEducation.degree'),
       field: Prisma.OpWorkEducationScalarFieldEnum.degree,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkEducation.fieldOfStudy'),
       field: Prisma.OpWorkEducationScalarFieldEnum.fieldOfStudy,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkEducation.startDate'),
       field: Prisma.OpWorkEducationScalarFieldEnum.startDate,
       formatter: 'formatDateTime',
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkEducation.endDate'),
       field: Prisma.OpWorkEducationScalarFieldEnum.endDate,
       formatter: 'formatDateTime',
-      sortable: true,
     },
     {
       cellRender: {
@@ -298,12 +283,10 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       },
       title: $t('resource.OpWorkEducation.isCurrent'),
       field: Prisma.OpWorkEducationScalarFieldEnum.isCurrent,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkEducation.description'),
       field: Prisma.OpWorkEducationScalarFieldEnum.description,
-      sortable: true,
     },
     {
       cellRender: {
@@ -368,7 +351,6 @@ export function useOpWorkEducationColumns<T = OpWorkEducation>(
       },
       title: $t('resource.OpWorkEducation.grade'),
       field: Prisma.OpWorkEducationScalarFieldEnum.grade,
-      sortable: true,
     },
     {
       align: 'center',

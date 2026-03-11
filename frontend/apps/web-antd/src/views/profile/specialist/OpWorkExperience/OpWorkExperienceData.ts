@@ -142,29 +142,24 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
     {
       title: $t('resource.OpWorkExperience.company'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.company,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkExperience.position'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.position,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkExperience.description'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.description,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkExperience.startDate'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.startDate,
       formatter: 'formatDateTime',
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkExperience.endDate'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.endDate,
       formatter: 'formatDateTime',
-      sortable: true,
     },
     {
       cellRender: {
@@ -172,12 +167,10 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
       },
       title: $t('resource.OpWorkExperience.isCurrent'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.isCurrent,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkExperience.location'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.location,
-      sortable: true,
     },
     {
       cellRender: {
@@ -223,7 +216,6 @@ export function useOpWorkExperienceColumns<T = OpWorkExperience>(
       },
       title: $t('resource.OpWorkExperience.employmentType'),
       field: Prisma.OpWorkExperienceScalarFieldEnum.employmentType,
-      sortable: true,
     },
     {
       align: 'center',

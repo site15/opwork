@@ -1,9 +1,9 @@
 {
   "common": {
-    "findManyFailed": "Ошибка множественного поиска",
-    "updateFailed": "Ошибка обновления",
-    "createFailed": "Ошибка создания",
-    "deleteFailed": "Ошибка удаления",
-    "updateSuccess": "Обновление успешно"
+    "findManyFailed": "Ошибка при поиске",
+    "updateFailed": "Ошибка при обновлении",
+    "createFailed": "Ошибка при создании",
+    "deleteFailed": "Ошибка при удалении",
+    "updateSuccess": "Обновление прошло успешно"
   }
 }

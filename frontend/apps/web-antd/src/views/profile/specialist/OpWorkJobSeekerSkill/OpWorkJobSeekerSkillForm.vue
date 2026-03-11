@@ -8,10 +8,7 @@ import { useVbenDrawer } from '@vben/common-ui';
 import { notification } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import {
-  opWorkJobSeekerSkillControllerCreateOne,
-  opWorkJobSeekerSkillControllerUpdateOne,
-} from '#/generated/client';
+import { jobSeekerSkillControllerSetSkill } from '#/generated/client';
 import { $t } from '#/locales';
 
 import { useOpWorkJobSeekerSkillFormSchema } from './OpWorkJobSeekerSkillData';
@@ -32,31 +29,17 @@ const [Drawer, drawerApi] = useVbenDrawer({
     if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
-    (id.value
-      ? opWorkJobSeekerSkillControllerUpdateOne({
-          path: { id: id.value },
-          body: {
-            level: values.level,
-            yearsOfExp: values.yearsOfExp,
-            isPrimary: values.isPrimary,
-            lastUsed: values.lastUsed,
-            OpWorkProfile: { connect: { id: values.profileId } },
-            OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
-            OpWorkSkill: { connect: { id: values.skillId } },
-          },
-        })
-      : opWorkJobSeekerSkillControllerCreateOne({
-          body: {
-            level: values.level,
-            yearsOfExp: values.yearsOfExp,
-            isPrimary: values.isPrimary,
-            lastUsed: values.lastUsed,
-            OpWorkProfile: { connect: { id: values.profileId } },
-            OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
-            OpWorkSkill: { connect: { id: values.skillId } },
-          },
-        })
-    )
+    jobSeekerSkillControllerSetSkill({
+      body: {
+        id: id.value,
+        level: values.level,
+        yearsOfExp: values.yearsOfExp,
+        isPrimary: values.isPrimary,
+        lastUsed: values.lastUsed,
+        skillId: values.skillId,
+        skillName: values.skillName,
+      },
+    })
       .then((data) => {
         if (data.error) {
           throw new Error((data.error as any)?.message || 'Unknown error');

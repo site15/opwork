@@ -8,10 +8,7 @@ import { useVbenDrawer } from '@vben/common-ui';
 import { notification } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import {
-  opWorkExperienceControllerCreateOne,
-  opWorkExperienceControllerUpdateOne,
-} from '#/generated/client';
+import { jobSeekerExperienceControllerSetExperience } from '#/generated/client';
 import { $t } from '#/locales';
 
 import { useOpWorkExperienceFormSchema } from './OpWorkExperienceData';
@@ -32,37 +29,19 @@ const [Drawer, drawerApi] = useVbenDrawer({
     if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
-    (id.value
-      ? opWorkExperienceControllerUpdateOne({
-          path: { id: id.value },
-          body: {
-            company: values.company,
-            position: values.position,
-            description: values.description,
-            startDate: values.startDate,
-            endDate: values.endDate,
-            isCurrent: values.isCurrent,
-            location: values.location,
-            employmentType: values.employmentType,
-            OpWorkProfile: { connect: { id: values.profileId } },
-            OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
-          },
-        })
-      : opWorkExperienceControllerCreateOne({
-          body: {
-            company: values.company,
-            position: values.position,
-            description: values.description,
-            startDate: values.startDate,
-            endDate: values.endDate,
-            isCurrent: values.isCurrent,
-            location: values.location,
-            employmentType: values.employmentType,
-            OpWorkProfile: { connect: { id: values.profileId } },
-            OpWorkJobSeeker: { connect: { id: values.jobSeekerId } },
-          },
-        })
-    )
+    jobSeekerExperienceControllerSetExperience({
+      body: {
+        id: id.value,
+        company: values.company,
+        position: values.position,
+        description: values.description,
+        startDate: values.startDate,
+        endDate: values.endDate,
+        isCurrent: values.isCurrent,
+        location: values.location,
+        employmentType: values.employmentType,
+      },
+    })
       .then((data) => {
         if (data.error) {
           throw new Error((data.error as any)?.message || 'Unknown error');

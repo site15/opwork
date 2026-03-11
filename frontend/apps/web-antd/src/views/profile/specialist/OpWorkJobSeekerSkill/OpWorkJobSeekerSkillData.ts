@@ -1,14 +1,38 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { OpWorkJobSeekerSkill, OpWorkProfile } from '#/generated/client';
+import type { OpWorkJobSeekerSkill, OpWorkSkill } from '#/generated/client';
 
 import { getComponentProps } from '#/adapter/get-component-props';
-import { opWorkProfileControllerFindMany } from '#/generated/client';
+import { opWorkSkillControllerFindMany } from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 
 export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
   return [
+    {
+      component: 'ApiSelect',
+      ...getComponentProps<OpWorkSkill>({
+        findMany: (searchText?: string) =>
+          opWorkSkillControllerFindMany({
+            query: {
+              perPage: 100,
+              ...(searchText ? { searchText } : {}),
+            },
+          }),
+        getLabel: (item) => item.name || item.id,
+      }),
+      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
+      label: $t('resource.name.OpWorkSkill'),
+      controlClass: 'w-full',
+      labelWidth: 200,
+    },
+    {
+      component: 'Input',
+      fieldName: 'skillName',
+      label: $t('resource.name.NewOpWorkSkill'),
+      controlClass: 'w-full',
+      labelWidth: 200,
+    },
     {
       component: 'InputNumber',
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
@@ -51,26 +75,6 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       controlClass: 'w-full',
       labelWidth: 200,
     },
-
-    {
-      component: 'ApiSelect',
-      ...getComponentProps<OpWorkProfile>({
-        findMany: (searchText?: string) =>
-          opWorkProfileControllerFindMany({
-            query: {
-              perPage: 100,
-              ...(searchText ? { searchText } : {}),
-            },
-          }),
-        getLabel: (item) => item.email || item.id,
-      }),
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.profileId,
-      label: $t('resource.name.OpWorkProfile'),
-      rules: 'required',
-
-      controlClass: 'w-full',
-      labelWidth: 200,
-    },
   ];
 }
 
@@ -91,12 +95,10 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
     {
       title: $t('resource.OpWorkJobSeekerSkill.level'),
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
-      sortable: true,
     },
     {
       cellRender: {
@@ -104,13 +106,11 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
       },
       title: $t('resource.OpWorkJobSeekerSkill.isPrimary'),
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.isPrimary,
-      sortable: true,
     },
     {
       title: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
       field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
       formatter: 'formatDateTime',
-      sortable: true,
     },
     {
       title: $t('resource.name.OpWorkSkill'),
@@ -123,7 +123,6 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
           },
         },
       },
-      sortable: true,
     },
     {
       align: 'center',

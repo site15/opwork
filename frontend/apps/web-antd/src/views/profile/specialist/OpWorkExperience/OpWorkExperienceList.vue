@@ -2,7 +2,7 @@
 import type { OnActionClickParams } from '#/adapter/vxe-table';
 import type { OpWorkExperience } from '#/generated/prisma/browser';
 
-import { Page, useVbenDrawer } from '@vben/common-ui';
+import { useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
 import { Button, message, notification } from 'ant-design-vue';
@@ -10,15 +10,12 @@ import dayjs from 'dayjs';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import {
-  opWorkExperienceControllerDeleteOne,
-  opWorkExperienceControllerFindMany,
+  jobSeekerExperienceControllerDelExperience,
+  jobSeekerExperienceControllerGetExperiences,
 } from '#/generated/client';
 import { $t } from '#/locales';
 
-import {
-  useOpWorkExperienceColumns,
-  useOpWorkExperienceFilterFormSchema,
-} from './OpWorkExperienceData';
+import { useOpWorkExperienceColumns } from './OpWorkExperienceData';
 import OpWorkExperienceForm from './OpWorkExperienceForm.vue';
 
 const [FormDrawer, formDrawerApi] = useVbenDrawer({
@@ -27,38 +24,14 @@ const [FormDrawer, formDrawerApi] = useVbenDrawer({
 });
 
 const [Grid, gridApi] = useVbenVxeGrid({
-  formOptions: {
-    schema: useOpWorkExperienceFilterFormSchema(),
-    submitOnChange: true,
-    showCollapseButton: false,
-  },
   gridOptions: {
+    pagerConfig: { autoHidden: true },
     columns: useOpWorkExperienceColumns(onActionClick),
-    height: 'auto',
     keepSource: true,
     proxyConfig: {
       ajax: {
-        query: async (
-          options: {
-            page: { currentPage: number; pageSize: number; total: number };
-            sort?: {
-              field: string;
-              order: 'asc' | 'desc';
-            };
-          },
-          formValues: { searchText: string },
-        ) => {
-          return await opWorkExperienceControllerFindMany({
-            query: {
-              curPage: options.page.currentPage,
-              perPage: options.page.pageSize,
-              searchText: formValues.searchText,
-              sort:
-                options.sort?.field && options.sort?.order
-                  ? `${options.sort.field}:${options.sort.order}`
-                  : 'company:desc',
-            },
-          })
+        query: async () => {
+          return await jobSeekerExperienceControllerGetExperiences()
             .then(async (result) => {
               if (result?.error) {
                 throw new Error(
@@ -66,7 +39,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
                 );
               }
               return {
-                items: (result.data?.items || []).map((item) => ({
+                items: (result.data || []).map((item) => ({
                   ...item,
                   company: item.company || undefined,
                   position: item.position || undefined,
@@ -77,7 +50,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
                   location: item.location || undefined,
                   employmentType: item.employmentType || undefined,
                 })),
-                total: result.data?.meta.totalResults || 0,
+                total: result.data?.length || 0,
               };
             })
             .catch((error) => {
@@ -92,18 +65,18 @@ const [Grid, gridApi] = useVbenVxeGrid({
       sort: true,
     },
     sortConfig: {
-      defaultSort: { field: 'company', order: 'desc' },
+      defaultSort: { field: 'institution', order: 'desc' },
       remote: true,
     },
     rowConfig: {
       keyField: 'id',
     },
     toolbarConfig: {
-      custom: true,
+      custom: false,
       export: false,
       refresh: true,
-      search: true,
-      zoom: true,
+      search: false,
+      zoom: false,
     },
   },
 });
@@ -131,7 +104,9 @@ function onDelete(row: OpWorkExperience) {
     duration: 0,
     key: 'action_process_msg',
   });
-  opWorkExperienceControllerDeleteOne({ path: { id: row.id } })
+  jobSeekerExperienceControllerDelExperience({
+    path: { experience_id: row.id },
+  })
     .then((data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
@@ -161,17 +136,15 @@ function onCreate() {
 }
 </script>
 <template>
-  <Page auto-content-height>
-    <FormDrawer @success="onRefresh" />
-    <Grid :table-title="$t('resource.name.OpWorkExperience')">
-      <template #toolbar-tools>
-        <Button type="primary" @click="onCreate">
-          <Plus class="size-5" />
-          {{
-            $t('ui.actionTitle.create', [$t('resource.name.OpWorkExperience')])
-          }}
-        </Button>
-      </template>
-    </Grid>
-  </Page>
+  <FormDrawer @success="onRefresh" />
+  <Grid :table-title="$t('resource.name.OpWorkExperience')">
+    <template #toolbar-tools>
+      <Button type="primary" @click="onCreate">
+        <Plus class="size-5" />
+        {{
+          $t('ui.actionTitle.create', [$t('resource.name.OpWorkExperience')])
+        }}
+      </Button>
+    </template>
+  </Grid>
 </template>

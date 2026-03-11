@@ -2,7 +2,7 @@
 import type { OnActionClickParams } from '#/adapter/vxe-table';
 import type { OpWorkEducation } from '#/generated/prisma/browser';
 
-import { Page, useVbenDrawer } from '@vben/common-ui';
+import { useVbenDrawer } from '@vben/common-ui';
 import { Plus } from '@vben/icons';
 
 import { Button, message, notification } from 'ant-design-vue';
@@ -15,10 +15,7 @@ import {
 } from '#/generated/client';
 import { $t } from '#/locales';
 
-import {
-  useOpWorkEducationColumns,
-  useOpWorkEducationFilterFormSchema,
-} from './OpWorkEducationData';
+import { useOpWorkEducationColumns } from './OpWorkEducationData';
 import OpWorkEducationForm from './OpWorkEducationForm.vue';
 
 const [FormDrawer, formDrawerApi] = useVbenDrawer({
@@ -27,14 +24,8 @@ const [FormDrawer, formDrawerApi] = useVbenDrawer({
 });
 
 const [Grid, gridApi] = useVbenVxeGrid({
-  showSearchForm: false,
-  formOptions: {
-    schema: useOpWorkEducationFilterFormSchema(),
-    submitOnChange: true,
-    showCollapseButton: false,
-  },
   gridOptions: {
-    pagerConfig: { enabled: false },
+    pagerConfig: { autoHidden: true },
     columns: useOpWorkEducationColumns(onActionClick),
     keepSource: true,
     proxyConfig: {
@@ -59,6 +50,7 @@ const [Grid, gridApi] = useVbenVxeGrid({
                   description: item.description || undefined,
                   grade: item.grade || undefined,
                 })),
+                total: result.data?.length || 0,
               };
             })
             .catch((error) => {
@@ -71,6 +63,10 @@ const [Grid, gridApi] = useVbenVxeGrid({
         },
       },
       sort: true,
+    },
+    sortConfig: {
+      defaultSort: { field: 'institution', order: 'desc' },
+      remote: true,
     },
     rowConfig: {
       keyField: 'id',
@@ -138,17 +134,13 @@ function onCreate() {
 }
 </script>
 <template>
-  <Page auto-content-height>
-    <FormDrawer @success="onRefresh" />
-    <Grid :table-title="$t('resource.name.OpWorkEducation')">
-      <template #toolbar-tools>
-        <Button type="primary" @click="onCreate">
-          <Plus class="size-5" />
-          {{
-            $t('ui.actionTitle.create', [$t('resource.name.OpWorkEducation')])
-          }}
-        </Button>
-      </template>
-    </Grid>
-  </Page>
+  <FormDrawer @success="onRefresh" />
+  <Grid :table-title="$t('resource.name.OpWorkEducation')">
+    <template #toolbar-tools>
+      <Button type="primary" @click="onCreate">
+        <Plus class="size-5" />
+        {{ $t('ui.actionTitle.create', [$t('resource.name.OpWorkEducation')]) }}
+      </Button>
+    </template>
+  </Grid>
 </template>

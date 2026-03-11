@@ -33,7 +33,8 @@
     "OpWorkSavedSearch": "Saved Search",
     "OpWorkSearchHistory": "Search History",
     "OpWorkSkill": "Skill",
-    "OpWorkSkillSynonym": "Skill Synonym"
+    "OpWorkSkillSynonym": "Skill Synonym",
+    "NewOpWorkSkill": "New Skill"
   },
   "auth": "Auth",
   "AuthApiKey": {

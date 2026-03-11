@@ -33,7 +33,8 @@
     "OpWorkSavedSearch": "Сохранённые поиски",
     "OpWorkSearchHistory": "История поисков",
     "OpWorkSkill": "Навык",
-    "OpWorkSkillSynonym": "Синоним навыка"
+    "OpWorkSkillSynonym": "Синоним навыка",
+    "NewOpWorkSkill": "Новый навык"
   },
   "AuthApiKey": {
     "id": "ID",
