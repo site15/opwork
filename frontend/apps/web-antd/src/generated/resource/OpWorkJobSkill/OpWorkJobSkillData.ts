@@ -27,17 +27,41 @@ import type { VbenFormSchema } from '#/adapter/form';
         labelWidth: 200
       }, 
     {
-        component: 'InputNumber',
-          fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                          { value: 'LOW', label: $t('resource.OpWorkSkillImportance.LOW').split(' - ')[0], },
+          { value: 'BELOW_MEDIUM', label: $t('resource.OpWorkSkillImportance.BELOW_MEDIUM').split(' - ')[0], },
+          { value: 'MEDIUM', label: $t('resource.OpWorkSkillImportance.MEDIUM').split(' - ')[0], },
+          { value: 'HIGH', label: $t('resource.OpWorkSkillImportance.HIGH').split(' - ')[0], },
+          { value: 'CRITICAL', label: $t('resource.OpWorkSkillImportance.CRITICAL').split(' - ')[0], },
+              ],
+                showSearch: true,
+      },
+        fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
         label: $t('resource.OpWorkJobSkill.importance'),
-      rules: 'required',
+      
       
         controlClass: 'w-full',
         labelWidth: 200
       }, 
     {
-        component: 'InputNumber',
-          fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                          { value: 'BEGINNER', label: $t('resource.OpWorkSkillLevel.BEGINNER').split(' - ')[0], },
+          { value: 'ELEMENTARY', label: $t('resource.OpWorkSkillLevel.ELEMENTARY').split(' - ')[0], },
+          { value: 'INTERMEDIATE', label: $t('resource.OpWorkSkillLevel.INTERMEDIATE').split(' - ')[0], },
+          { value: 'ADVANCED', label: $t('resource.OpWorkSkillLevel.ADVANCED').split(' - ')[0], },
+          { value: 'EXPERT', label: $t('resource.OpWorkSkillLevel.EXPERT').split(' - ')[0], },
+              ],
+                showSearch: true,
+      },
+        fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
         label: $t('resource.OpWorkJobSkill.minLevel'),
       
       
@@ -127,11 +151,35 @@ import type { VbenFormSchema } from '#/adapter/form';
         sortable: true
       }, 
     {
+        cellRender: {
+          name: 'CellEnum',
+          props:{
+            options: [
+                        { value: 'LOW', label: $t('resource.OpWorkSkillImportance.LOW').split(' - ')[0], },
+          { value: 'BELOW_MEDIUM', label: $t('resource.OpWorkSkillImportance.BELOW_MEDIUM').split(' - ')[0], },
+          { value: 'MEDIUM', label: $t('resource.OpWorkSkillImportance.MEDIUM').split(' - ')[0], },
+          { value: 'HIGH', label: $t('resource.OpWorkSkillImportance.HIGH').split(' - ')[0], },
+          { value: 'CRITICAL', label: $t('resource.OpWorkSkillImportance.CRITICAL').split(' - ')[0], },
+            ],
+          }
+      },
         title: $t('resource.OpWorkJobSkill.importance'),
         field: Prisma.OpWorkJobSkillScalarFieldEnum.importance ,
         sortable: true
       }, 
     {
+        cellRender: {
+          name: 'CellEnum',
+          props:{
+            options: [
+                        { value: 'BEGINNER', label: $t('resource.OpWorkSkillLevel.BEGINNER').split(' - ')[0], },
+          { value: 'ELEMENTARY', label: $t('resource.OpWorkSkillLevel.ELEMENTARY').split(' - ')[0], },
+          { value: 'INTERMEDIATE', label: $t('resource.OpWorkSkillLevel.INTERMEDIATE').split(' - ')[0], },
+          { value: 'ADVANCED', label: $t('resource.OpWorkSkillLevel.ADVANCED').split(' - ')[0], },
+          { value: 'EXPERT', label: $t('resource.OpWorkSkillLevel.EXPERT').split(' - ')[0], },
+            ],
+          }
+      },
         title: $t('resource.OpWorkJobSkill.minLevel'),
         field: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel ,
         sortable: true

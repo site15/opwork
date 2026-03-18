@@ -724,6 +724,14 @@ export type OpWorkEmployerUncheckedUpdateManyWithoutOpWorkProfileNestedInput = {
   deleteMany?: Prisma.OpWorkEmployerScalarWhereInput | Prisma.OpWorkEmployerScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type OpWorkEmployerCreateNestedOneWithoutOpWorkJobInput = {
   create?: Prisma.XOR<Prisma.OpWorkEmployerCreateWithoutOpWorkJobInput, Prisma.OpWorkEmployerUncheckedCreateWithoutOpWorkJobInput>
   connectOrCreate?: Prisma.OpWorkEmployerCreateOrConnectWithoutOpWorkJobInput

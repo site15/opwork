@@ -364,8 +364,8 @@ export type OpWorkJobWhereInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFilter<"OpWorkJob"> | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFilter<"OpWorkJob"> | $Enums.OpWorkExperienceLevel
   department?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
-  salaryMin?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
-  salaryMax?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
+  salaryMin?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
+  salaryMax?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   location?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   isRemote?: Prisma.BoolNullableFilter<"OpWorkJob"> | boolean | null
@@ -433,8 +433,8 @@ export type OpWorkJobWhereUniqueInput = Prisma.AtLeast<{
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFilter<"OpWorkJob"> | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFilter<"OpWorkJob"> | $Enums.OpWorkExperienceLevel
   department?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
-  salaryMin?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
-  salaryMax?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
+  salaryMin?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
+  salaryMax?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   location?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   isRemote?: Prisma.BoolNullableFilter<"OpWorkJob"> | boolean | null
@@ -500,8 +500,8 @@ export type OpWorkJobScalarWhereWithAggregatesInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeWithAggregatesFilter<"OpWorkJob"> | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelWithAggregatesFilter<"OpWorkJob"> | $Enums.OpWorkExperienceLevel
   department?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJob"> | string | null
-  salaryMin?: Prisma.IntNullableWithAggregatesFilter<"OpWorkJob"> | number | null
-  salaryMax?: Prisma.IntNullableWithAggregatesFilter<"OpWorkJob"> | number | null
+  salaryMin?: Prisma.FloatNullableWithAggregatesFilter<"OpWorkJob"> | number | null
+  salaryMax?: Prisma.FloatNullableWithAggregatesFilter<"OpWorkJob"> | number | null
   salaryCurrency?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJob"> | string | null
   location?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJob"> | string | null
   isRemote?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkJob"> | boolean | null
@@ -586,8 +586,8 @@ export type OpWorkJobUpdateInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -619,8 +619,8 @@ export type OpWorkJobUncheckedUpdateInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -674,8 +674,8 @@ export type OpWorkJobUpdateManyMutationInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -700,8 +700,8 @@ export type OpWorkJobUncheckedUpdateManyInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1098,8 +1098,8 @@ export type OpWorkJobScalarWhereInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFilter<"OpWorkJob"> | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFilter<"OpWorkJob"> | $Enums.OpWorkExperienceLevel
   department?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
-  salaryMin?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
-  salaryMax?: Prisma.IntNullableFilter<"OpWorkJob"> | number | null
+  salaryMin?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
+  salaryMax?: Prisma.FloatNullableFilter<"OpWorkJob"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   location?: Prisma.StringNullableFilter<"OpWorkJob"> | string | null
   isRemote?: Prisma.BoolNullableFilter<"OpWorkJob"> | boolean | null
@@ -1284,8 +1284,8 @@ export type OpWorkJobUpdateWithoutOpWorkApplicationInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1316,8 +1316,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkApplicationInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1420,8 +1420,8 @@ export type OpWorkJobUpdateWithoutOpWorkSavedJobInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1452,8 +1452,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkSavedJobInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1556,8 +1556,8 @@ export type OpWorkJobUpdateWithoutOpWorkJobSkillInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1588,8 +1588,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkJobSkillInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1692,8 +1692,8 @@ export type OpWorkJobUpdateWithoutOpWorkJobViewsInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1724,8 +1724,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkJobViewsInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1828,8 +1828,8 @@ export type OpWorkJobUpdateWithoutOpWorkJobTagsInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1860,8 +1860,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkJobTagsInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1913,8 +1913,8 @@ export type OpWorkJobUpdateWithoutOpWorkProfileInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1944,8 +1944,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkProfileInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1974,8 +1974,8 @@ export type OpWorkJobUncheckedUpdateManyWithoutOpWorkProfileInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -2023,8 +2023,8 @@ export type OpWorkJobUpdateWithoutOpWorkEmployerInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -2054,8 +2054,8 @@ export type OpWorkJobUncheckedUpdateWithoutOpWorkEmployerInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -2084,8 +2084,8 @@ export type OpWorkJobUncheckedUpdateManyWithoutOpWorkEmployerInput = {
   employmentType?: Prisma.EnumOpWorkEmploymentTypeFieldUpdateOperationsInput | $Enums.OpWorkEmploymentType
   experienceLevel?: Prisma.EnumOpWorkExperienceLevelFieldUpdateOperationsInput | $Enums.OpWorkExperienceLevel
   department?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  salaryMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  salaryMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  salaryMin?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  salaryMax?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -2886,8 +2886,8 @@ export interface OpWorkJobFieldRefs {
   readonly employmentType: Prisma.FieldRef<"OpWorkJob", 'OpWorkEmploymentType'>
   readonly experienceLevel: Prisma.FieldRef<"OpWorkJob", 'OpWorkExperienceLevel'>
   readonly department: Prisma.FieldRef<"OpWorkJob", 'String'>
-  readonly salaryMin: Prisma.FieldRef<"OpWorkJob", 'Int'>
-  readonly salaryMax: Prisma.FieldRef<"OpWorkJob", 'Int'>
+  readonly salaryMin: Prisma.FieldRef<"OpWorkJob", 'Float'>
+  readonly salaryMax: Prisma.FieldRef<"OpWorkJob", 'Float'>
   readonly salaryCurrency: Prisma.FieldRef<"OpWorkJob", 'String'>
   readonly location: Prisma.FieldRef<"OpWorkJob", 'String'>
   readonly isRemote: Prisma.FieldRef<"OpWorkJob", 'Boolean'>

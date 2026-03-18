@@ -9,7 +9,7 @@
     "updatedAt": "Обновлено",
     "email": "Email",
     "password": "Пароль",
-    "isEmailVerified": "Is Email Verified"
+    "isEmailVerified": "Email подтвержден"
   },
   "name": {
     "AuthUser": "Пользователь",
@@ -181,7 +181,15 @@
     "createdAt": "Создано",
     "jobId": "ID вакансии",
     "name": "Название метки",
-    "color": "Цвет"
+    "color": "Цвет",
+    "institution": "Учреждение",
+    "degree": "Ученая степень",
+    "fieldOfStudy": "Специальность",
+    "startDate": "Начало учебы",
+    "endDate": "Окончание учебы",
+    "isCurrent": "Продолжается учеба",
+    "description": "Описание",
+    "grade": "Оценка"
   },
   "OpWorkJobView": {
     "id": "ID",
@@ -493,5 +501,29 @@
     "OTHER__IOT": "IoT",
     "OTHER__AR_VR": "AR / VR",
     "OTHER__ROBOTICS": "Робототехника"
+  },
+  "OpWorkJobTagDegree": {
+    "HIGH_SCHOOL": "Старшая школа",
+    "ASSOCIATE": "Соучилище",
+    "BACHELOR": "Бакалавриат",
+    "MASTER": "Магистратура",
+    "DOCTORATE": "Докторантура",
+    "CERTIFICATE": "Сертификат",
+    "DIPLOMA": "Диплом",
+    "POSTGRADUATE": "Аспирантура"
+  },
+  "OpWorkSkillLevel": {
+    "BEGINNER": "Начальный уровень",
+    "ELEMENTARY": "Базовый уровень",
+    "INTERMEDIATE": "Средний уровень",
+    "ADVANCED": "Высокий уровень",
+    "EXPERT": "Эксперт"
+  },
+  "OpWorkSkillImportance": {
+    "LOW": "Низкий",
+    "BELOW_MEDIUM": "Ниже среднего",
+    "MEDIUM": "Средний",
+    "HIGH": "Высокий",
+    "CRITICAL": "Критический"
   }
 }

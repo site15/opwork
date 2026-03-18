@@ -40,14 +40,14 @@ experienceLevel!: OpWorkExperienceLevel ;
 })
 department!: string  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   nullable: true,
 })
 salaryMin!: number  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   nullable: true,
 })
 salaryMax!: number  | null;

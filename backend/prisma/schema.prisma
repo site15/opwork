@@ -145,6 +145,40 @@ enum OpWorkProfileType {
   EMPLOYER
 }
 
+/// Уровень владения навыком
+/// Отражает степень компетенции соискателя по конкретному навыку
+enum OpWorkSkillLevel {
+  /// Начальный уровень — есть базовое понимание, минимальный практический опыт
+  BEGINNER
+  /// Базовый уровень — может выполнять простые задачи с помощью
+  ELEMENTARY
+  /// Средний уровень — уверенно применяет навык в работе
+  INTERMEDIATE
+  /// Продвинутый уровень — решает сложные задачи, глубокое понимание
+  ADVANCED
+  /// Экспертный уровень — является экспертом, может обучать других
+  EXPERT
+}
+
+/// Важность навыка для конкретной позиции
+/// Определяет насколько критичным является данный навык для успешной работы
+enum OpWorkSkillImportance {
+  /// Низкая важность — навык необязателен, будет преимуществом
+  LOW
+
+  /// Ниже среднего — навык желателен, но не критичен
+  BELOW_MEDIUM
+
+  /// Средняя важность — навык регулярно используется в работе
+  MEDIUM
+
+  /// Высокая важность — навык требуется для большинства задач
+  HIGH
+
+  /// Критическая важность — без навыка невозможно выполнять работу
+  CRITICAL
+}
+
 /// Тип навыка или технологии
 /// Расширенная классификация навыков для рынка 2026
 enum OpWorkSkillType {
@@ -823,7 +857,7 @@ model OpWorkJobSeeker {
 
   /// Ожидаемый уровень заработной платы
   /// @Minimum(0)
-  expectedSalary Int?
+  expectedSalary Float?  @db.Real
   /// Валюта зарплаты (по умолчанию USD)
   /// @MaxLength(3)
   salaryCurrency String? @db.VarChar(3)
@@ -1233,10 +1267,10 @@ model OpWorkJob {
 
   /// Минимальный уровень заработной платы
   /// @Minimum(0)
-  salaryMin      Int?
+  salaryMin      Float?  @db.Real
   /// Максимальный уровень заработной платы
   /// @Minimum(0)
-  salaryMax      Int?
+  salaryMax      Float?  @db.Real
   /// Валюта заработной платы (по умолчанию USD)
   /// @MaxLength(3)
   salaryCurrency String? @db.VarChar(3)
@@ -1477,27 +1511,27 @@ model OpWorkSkill {
 /// Хранит уровень владения навыком конкретным кандидатом
 model OpWorkJobSeekerSkill {
   /// Уникальный идентификатор связи (UUID v4)
-  id          String    @id(map: "PK_OPWORK_JOB_SEEKER_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String            @id(map: "PK_OPWORK_JOB_SEEKER_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   /// Связанный основной профиль
-  profileId   String    @db.Uuid
+  profileId   String            @db.Uuid
   /// Идентификатор соискателя
-  jobSeekerId String    @db.Uuid
+  jobSeekerId String            @db.Uuid
   /// Идентификатор навыка
-  skillId     String    @db.Uuid
+  skillId     String            @db.Uuid
   /// Уровень владения навыком (1-5)
   /// @Minimum(1)
   /// @Maximum(5)
   /// @example(5)
-  level       Int       @db.SmallInt
+  level       OpWorkSkillLevel?
   /// Количество лет опыта с этим навыком
   /// @Minimum(0)
-  yearsOfExp  Int?      @db.SmallInt
+  yearsOfExp  Int?              @db.SmallInt
   /// Признак основного/ключевого навыка
   isPrimary   Boolean?
   /// Дата последнего использования навыка
-  lastUsed    DateTime? @db.Timestamp(6)
+  lastUsed    DateTime?         @db.Timestamp(6)
   /// Временная метка создания записи
-  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+  createdAt   DateTime          @default(now()) @db.Timestamp(6)
 
   /// === СВЯЗИ ===
 
@@ -1528,26 +1562,26 @@ model OpWorkJobSeekerSkill {
 /// Определяет какие навыки необходимы для позиции
 model OpWorkJobSkill {
   /// Уникальный идентификатор требования (UUID v4)
-  id         String   @id(map: "PK_OPWORK_JOB_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id         String                 @id(map: "PK_OPWORK_JOB_SKILL") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   /// Связанный основной профиль
-  profileId  String   @db.Uuid
+  profileId  String                 @db.Uuid
   /// Идентификатор вакансии
-  jobId      String   @db.Uuid
+  jobId      String                 @db.Uuid
   /// Идентификатор требуемого навыка
-  skillId    String   @db.Uuid
+  skillId    String                 @db.Uuid
   /// Обязательность навыка для данной позиции
   isRequired Boolean?
   /// Важность навыка (1-5)
   /// @Minimum(1)
   /// @Maximum(5)
   /// @example(3)
-  importance Int      @db.SmallInt
+  importance OpWorkSkillImportance?
   /// Минимальный требуемый уровень владения
   /// @Minimum(1)
   /// @Maximum(5)
-  minLevel   Int?     @db.SmallInt
+  minLevel   OpWorkSkillLevel?
   /// Временная метка создания записи
-  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  createdAt  DateTime               @default(now()) @db.Timestamp(6)
 
   /// === СВЯЗИ ===
 

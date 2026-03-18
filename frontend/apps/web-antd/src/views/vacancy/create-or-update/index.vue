@@ -19,6 +19,8 @@ import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui
 import CardHeader from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardHeader.vue';
 import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
 import { useOpWorkJobFormSchema } from './OpWorkJobData';
+import OpWorkJobSkillList from './OpWorkJobSkill/OpWorkJobSkillList.vue';
+import OpWorkJobTagList from './OpWorkJobTag/OpWorkJobTagList.vue';
 
 defineOptions({ name: 'VacancyCreateOrUpdate' });
 
@@ -142,8 +144,10 @@ onMounted(() => {
           </CardTitle>
         </CardHeader>
         <CardContent class="flex flex-wrap gap-4">
-          <div class="w-full">
+          <div class="flex w-full flex-col gap-4">
             <Form />
+            <OpWorkJobTagList :job-id="currentFilters?.id" />
+            <OpWorkJobSkillList :job-id="currentFilters?.id" />
           </div>
         </CardContent>
         <CardFooter class="flex flex-wrap justify-end gap-2">

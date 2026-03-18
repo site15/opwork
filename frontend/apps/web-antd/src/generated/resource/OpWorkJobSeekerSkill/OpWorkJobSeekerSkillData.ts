@@ -9,10 +9,22 @@ import type { VbenFormSchema } from '#/adapter/form';
     export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       return [
             {
-        component: 'InputNumber',
-          fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                          { value: 'BEGINNER', label: $t('resource.OpWorkSkillLevel.BEGINNER').split(' - ')[0], },
+          { value: 'ELEMENTARY', label: $t('resource.OpWorkSkillLevel.ELEMENTARY').split(' - ')[0], },
+          { value: 'INTERMEDIATE', label: $t('resource.OpWorkSkillLevel.INTERMEDIATE').split(' - ')[0], },
+          { value: 'ADVANCED', label: $t('resource.OpWorkSkillLevel.ADVANCED').split(' - ')[0], },
+          { value: 'EXPERT', label: $t('resource.OpWorkSkillLevel.EXPERT').split(' - ')[0], },
+              ],
+                showSearch: true,
+      },
+        fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
         label: $t('resource.OpWorkJobSeekerSkill.level'),
-      rules: 'required',
+      
       
         controlClass: 'w-full',
         labelWidth: 200
@@ -128,6 +140,18 @@ import type { VbenFormSchema } from '#/adapter/form';
 ): VxeTableGridOptions['columns'] {
   return [
         {
+        cellRender: {
+          name: 'CellEnum',
+          props:{
+            options: [
+                        { value: 'BEGINNER', label: $t('resource.OpWorkSkillLevel.BEGINNER').split(' - ')[0], },
+          { value: 'ELEMENTARY', label: $t('resource.OpWorkSkillLevel.ELEMENTARY').split(' - ')[0], },
+          { value: 'INTERMEDIATE', label: $t('resource.OpWorkSkillLevel.INTERMEDIATE').split(' - ')[0], },
+          { value: 'ADVANCED', label: $t('resource.OpWorkSkillLevel.ADVANCED').split(' - ')[0], },
+          { value: 'EXPERT', label: $t('resource.OpWorkSkillLevel.EXPERT').split(' - ')[0], },
+            ],
+          }
+      },
         title: $t('resource.OpWorkJobSeekerSkill.level'),
         field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level ,
         sortable: true

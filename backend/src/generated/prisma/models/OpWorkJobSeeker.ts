@@ -294,7 +294,7 @@ export type OpWorkJobSeekerWhereInput = {
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
-  expectedSalary?: Prisma.IntNullableFilter<"OpWorkJobSeeker"> | number | null
+  expectedSalary?: Prisma.FloatNullableFilter<"OpWorkJobSeeker"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   isOpenToWork?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
   isOpenToRemote?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
@@ -345,7 +345,7 @@ export type OpWorkJobSeekerWhereUniqueInput = Prisma.AtLeast<{
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
-  expectedSalary?: Prisma.IntNullableFilter<"OpWorkJobSeeker"> | number | null
+  expectedSalary?: Prisma.FloatNullableFilter<"OpWorkJobSeeker"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   isOpenToWork?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
   isOpenToRemote?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
@@ -396,7 +396,7 @@ export type OpWorkJobSeekerScalarWhereWithAggregatesInput = {
   currentPosition?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
-  expectedSalary?: Prisma.IntNullableWithAggregatesFilter<"OpWorkJobSeeker"> | number | null
+  expectedSalary?: Prisma.FloatNullableWithAggregatesFilter<"OpWorkJobSeeker"> | number | null
   salaryCurrency?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
   isOpenToWork?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkJobSeeker"> | boolean | null
   isOpenToRemote?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkJobSeeker"> | boolean | null
@@ -460,7 +460,7 @@ export type OpWorkJobSeekerUpdateInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -484,7 +484,7 @@ export type OpWorkJobSeekerUncheckedUpdateInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -525,7 +525,7 @@ export type OpWorkJobSeekerUpdateManyMutationInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -544,7 +544,7 @@ export type OpWorkJobSeekerUncheckedUpdateManyInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -679,7 +679,7 @@ export type OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput = 
   deleteMany?: Prisma.OpWorkJobSeekerScalarWhereInput | Prisma.OpWorkJobSeekerScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
+export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
   decrement?: number
@@ -822,7 +822,7 @@ export type OpWorkJobSeekerScalarWhereInput = {
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
-  expectedSalary?: Prisma.IntNullableFilter<"OpWorkJobSeeker"> | number | null
+  expectedSalary?: Prisma.FloatNullableFilter<"OpWorkJobSeeker"> | number | null
   salaryCurrency?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   isOpenToWork?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
   isOpenToRemote?: Prisma.BoolNullableFilter<"OpWorkJobSeeker"> | boolean | null
@@ -900,7 +900,7 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkExperienceInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -923,7 +923,7 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkExperienceInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1004,7 +1004,7 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkEducationInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1027,7 +1027,7 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkEducationInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1108,7 +1108,7 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkApplicationsInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1131,7 +1131,7 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkApplicationsInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1212,7 +1212,7 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkJobSeekerSkillInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1235,7 +1235,7 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkJobSeekerSkillInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1274,7 +1274,7 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkProfileInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1296,7 +1296,7 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkProfileInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1318,7 +1318,7 @@ export type OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileInput = {
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  expectedSalary?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   salaryCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpenToWork?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   isOpenToRemote?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -2025,7 +2025,7 @@ export interface OpWorkJobSeekerFieldRefs {
   readonly currentPosition: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly currentCompany: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly summary: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
-  readonly expectedSalary: Prisma.FieldRef<"OpWorkJobSeeker", 'Int'>
+  readonly expectedSalary: Prisma.FieldRef<"OpWorkJobSeeker", 'Float'>
   readonly salaryCurrency: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly isOpenToWork: Prisma.FieldRef<"OpWorkJobSeeker", 'Boolean'>
   readonly isOpenToRemote: Prisma.FieldRef<"OpWorkJobSeeker", 'Boolean'>

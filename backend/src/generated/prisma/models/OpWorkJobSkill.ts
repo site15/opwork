@@ -21,20 +21,8 @@ export type OpWorkJobSkillModel = runtime.Types.Result.DefaultSelection<Prisma.$
 
 export type AggregateOpWorkJobSkill = {
   _count: OpWorkJobSkillCountAggregateOutputType | null
-  _avg: OpWorkJobSkillAvgAggregateOutputType | null
-  _sum: OpWorkJobSkillSumAggregateOutputType | null
   _min: OpWorkJobSkillMinAggregateOutputType | null
   _max: OpWorkJobSkillMaxAggregateOutputType | null
-}
-
-export type OpWorkJobSkillAvgAggregateOutputType = {
-  importance: number | null
-  minLevel: number | null
-}
-
-export type OpWorkJobSkillSumAggregateOutputType = {
-  importance: number | null
-  minLevel: number | null
 }
 
 export type OpWorkJobSkillMinAggregateOutputType = {
@@ -43,8 +31,8 @@ export type OpWorkJobSkillMinAggregateOutputType = {
   jobId: string | null
   skillId: string | null
   isRequired: boolean | null
-  importance: number | null
-  minLevel: number | null
+  importance: $Enums.OpWorkSkillImportance | null
+  minLevel: $Enums.OpWorkSkillLevel | null
   createdAt: Date | null
 }
 
@@ -54,8 +42,8 @@ export type OpWorkJobSkillMaxAggregateOutputType = {
   jobId: string | null
   skillId: string | null
   isRequired: boolean | null
-  importance: number | null
-  minLevel: number | null
+  importance: $Enums.OpWorkSkillImportance | null
+  minLevel: $Enums.OpWorkSkillLevel | null
   createdAt: Date | null
 }
 
@@ -71,16 +59,6 @@ export type OpWorkJobSkillCountAggregateOutputType = {
   _all: number
 }
 
-
-export type OpWorkJobSkillAvgAggregateInputType = {
-  importance?: true
-  minLevel?: true
-}
-
-export type OpWorkJobSkillSumAggregateInputType = {
-  importance?: true
-  minLevel?: true
-}
 
 export type OpWorkJobSkillMinAggregateInputType = {
   id?: true
@@ -154,18 +132,6 @@ export type OpWorkJobSkillAggregateArgs<ExtArgs extends runtime.Types.Extensions
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: OpWorkJobSkillAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: OpWorkJobSkillSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: OpWorkJobSkillMinAggregateInputType
@@ -196,8 +162,6 @@ export type OpWorkJobSkillGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   _count?: OpWorkJobSkillCountAggregateInputType | true
-  _avg?: OpWorkJobSkillAvgAggregateInputType
-  _sum?: OpWorkJobSkillSumAggregateInputType
   _min?: OpWorkJobSkillMinAggregateInputType
   _max?: OpWorkJobSkillMaxAggregateInputType
 }
@@ -208,12 +172,10 @@ export type OpWorkJobSkillGroupByOutputType = {
   jobId: string
   skillId: string
   isRequired: boolean | null
-  importance: number
-  minLevel: number | null
+  importance: $Enums.OpWorkSkillImportance | null
+  minLevel: $Enums.OpWorkSkillLevel | null
   createdAt: Date
   _count: OpWorkJobSkillCountAggregateOutputType | null
-  _avg: OpWorkJobSkillAvgAggregateOutputType | null
-  _sum: OpWorkJobSkillSumAggregateOutputType | null
   _min: OpWorkJobSkillMinAggregateOutputType | null
   _max: OpWorkJobSkillMaxAggregateOutputType | null
 }
@@ -242,8 +204,8 @@ export type OpWorkJobSkillWhereInput = {
   jobId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   skillId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   isRequired?: Prisma.BoolNullableFilter<"OpWorkJobSkill"> | boolean | null
-  importance?: Prisma.IntFilter<"OpWorkJobSkill"> | number
-  minLevel?: Prisma.IntNullableFilter<"OpWorkJobSkill"> | number | null
+  importance?: Prisma.EnumOpWorkSkillImportanceNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.EnumOpWorkSkillLevelNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkJobSkill"> | Date | string
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
@@ -256,7 +218,7 @@ export type OpWorkJobSkillOrderByWithRelationInput = {
   jobId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
   isRequired?: Prisma.SortOrderInput | Prisma.SortOrder
-  importance?: Prisma.SortOrder
+  importance?: Prisma.SortOrderInput | Prisma.SortOrder
   minLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   OpWorkProfile?: Prisma.OpWorkProfileOrderByWithRelationInput
@@ -274,8 +236,8 @@ export type OpWorkJobSkillWhereUniqueInput = Prisma.AtLeast<{
   jobId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   skillId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   isRequired?: Prisma.BoolNullableFilter<"OpWorkJobSkill"> | boolean | null
-  importance?: Prisma.IntFilter<"OpWorkJobSkill"> | number
-  minLevel?: Prisma.IntNullableFilter<"OpWorkJobSkill"> | number | null
+  importance?: Prisma.EnumOpWorkSkillImportanceNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.EnumOpWorkSkillLevelNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkJobSkill"> | Date | string
   OpWorkProfile?: Prisma.XOR<Prisma.OpWorkProfileScalarRelationFilter, Prisma.OpWorkProfileWhereInput>
   OpWorkJob?: Prisma.XOR<Prisma.OpWorkJobScalarRelationFilter, Prisma.OpWorkJobWhereInput>
@@ -288,14 +250,12 @@ export type OpWorkJobSkillOrderByWithAggregationInput = {
   jobId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
   isRequired?: Prisma.SortOrderInput | Prisma.SortOrder
-  importance?: Prisma.SortOrder
+  importance?: Prisma.SortOrderInput | Prisma.SortOrder
   minLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.OpWorkJobSkillCountOrderByAggregateInput
-  _avg?: Prisma.OpWorkJobSkillAvgOrderByAggregateInput
   _max?: Prisma.OpWorkJobSkillMaxOrderByAggregateInput
   _min?: Prisma.OpWorkJobSkillMinOrderByAggregateInput
-  _sum?: Prisma.OpWorkJobSkillSumOrderByAggregateInput
 }
 
 export type OpWorkJobSkillScalarWhereWithAggregatesInput = {
@@ -307,16 +267,16 @@ export type OpWorkJobSkillScalarWhereWithAggregatesInput = {
   jobId?: Prisma.UuidWithAggregatesFilter<"OpWorkJobSkill"> | string
   skillId?: Prisma.UuidWithAggregatesFilter<"OpWorkJobSkill"> | string
   isRequired?: Prisma.BoolNullableWithAggregatesFilter<"OpWorkJobSkill"> | boolean | null
-  importance?: Prisma.IntWithAggregatesFilter<"OpWorkJobSkill"> | number
-  minLevel?: Prisma.IntNullableWithAggregatesFilter<"OpWorkJobSkill"> | number | null
+  importance?: Prisma.EnumOpWorkSkillImportanceNullableWithAggregatesFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.EnumOpWorkSkillLevelNullableWithAggregatesFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OpWorkJobSkill"> | Date | string
 }
 
 export type OpWorkJobSkillCreateInput = {
   id?: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkJobSkillsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobSkillInput
@@ -329,16 +289,16 @@ export type OpWorkJobSkillUncheckedCreateInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
 export type OpWorkJobSkillUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkJobSkillsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkJobSkillNestedInput
@@ -351,8 +311,8 @@ export type OpWorkJobSkillUncheckedUpdateInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -362,16 +322,16 @@ export type OpWorkJobSkillCreateManyInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
 export type OpWorkJobSkillUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -381,8 +341,8 @@ export type OpWorkJobSkillUncheckedUpdateManyInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -413,11 +373,6 @@ export type OpWorkJobSkillCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
-export type OpWorkJobSkillAvgOrderByAggregateInput = {
-  importance?: Prisma.SortOrder
-  minLevel?: Prisma.SortOrder
-}
-
 export type OpWorkJobSkillMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
@@ -438,11 +393,6 @@ export type OpWorkJobSkillMinOrderByAggregateInput = {
   importance?: Prisma.SortOrder
   minLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type OpWorkJobSkillSumOrderByAggregateInput = {
-  importance?: Prisma.SortOrder
-  minLevel?: Prisma.SortOrder
 }
 
 export type OpWorkJobSkillCreateNestedManyWithoutOpWorkProfileInput = {
@@ -571,11 +521,15 @@ export type OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillNestedInput = {
   deleteMany?: Prisma.OpWorkJobSkillScalarWhereInput | Prisma.OpWorkJobSkillScalarWhereInput[]
 }
 
+export type NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput = {
+  set?: $Enums.OpWorkSkillImportance | null
+}
+
 export type OpWorkJobSkillCreateWithoutOpWorkProfileInput = {
   id?: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobSkillInput
   OpWorkSkill: Prisma.OpWorkSkillCreateNestedOneWithoutOpWorkJobSkillInput
@@ -586,8 +540,8 @@ export type OpWorkJobSkillUncheckedCreateWithoutOpWorkProfileInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
@@ -626,16 +580,16 @@ export type OpWorkJobSkillScalarWhereInput = {
   jobId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   skillId?: Prisma.UuidFilter<"OpWorkJobSkill"> | string
   isRequired?: Prisma.BoolNullableFilter<"OpWorkJobSkill"> | boolean | null
-  importance?: Prisma.IntFilter<"OpWorkJobSkill"> | number
-  minLevel?: Prisma.IntNullableFilter<"OpWorkJobSkill"> | number | null
+  importance?: Prisma.EnumOpWorkSkillImportanceNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.EnumOpWorkSkillLevelNullableFilter<"OpWorkJobSkill"> | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFilter<"OpWorkJobSkill"> | Date | string
 }
 
 export type OpWorkJobSkillCreateWithoutOpWorkJobInput = {
   id?: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkJobSkillsInput
   OpWorkSkill: Prisma.OpWorkSkillCreateNestedOneWithoutOpWorkJobSkillInput
@@ -646,8 +600,8 @@ export type OpWorkJobSkillUncheckedCreateWithoutOpWorkJobInput = {
   profileId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
@@ -680,8 +634,8 @@ export type OpWorkJobSkillUpdateManyWithWhereWithoutOpWorkJobInput = {
 export type OpWorkJobSkillCreateWithoutOpWorkSkillInput = {
   id?: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
   OpWorkProfile: Prisma.OpWorkProfileCreateNestedOneWithoutOpWorkJobSkillsInput
   OpWorkJob: Prisma.OpWorkJobCreateNestedOneWithoutOpWorkJobSkillInput
@@ -692,8 +646,8 @@ export type OpWorkJobSkillUncheckedCreateWithoutOpWorkSkillInput = {
   profileId: string
   jobId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
@@ -728,16 +682,16 @@ export type OpWorkJobSkillCreateManyOpWorkProfileInput = {
   jobId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
 export type OpWorkJobSkillUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkJobSkillNestedInput
   OpWorkSkill?: Prisma.OpWorkSkillUpdateOneRequiredWithoutOpWorkJobSkillNestedInput
@@ -748,8 +702,8 @@ export type OpWorkJobSkillUncheckedUpdateWithoutOpWorkProfileInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -758,8 +712,8 @@ export type OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkProfileInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -768,16 +722,16 @@ export type OpWorkJobSkillCreateManyOpWorkJobInput = {
   profileId: string
   skillId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
 export type OpWorkJobSkillUpdateWithoutOpWorkJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkJobSkillsNestedInput
   OpWorkSkill?: Prisma.OpWorkSkillUpdateOneRequiredWithoutOpWorkJobSkillNestedInput
@@ -788,8 +742,8 @@ export type OpWorkJobSkillUncheckedUpdateWithoutOpWorkJobInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -798,8 +752,8 @@ export type OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkJobInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   skillId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -808,16 +762,16 @@ export type OpWorkJobSkillCreateManyOpWorkSkillInput = {
   profileId: string
   jobId: string
   isRequired?: boolean | null
-  importance: number
-  minLevel?: number | null
+  importance?: $Enums.OpWorkSkillImportance | null
+  minLevel?: $Enums.OpWorkSkillLevel | null
   createdAt?: Date | string
 }
 
 export type OpWorkJobSkillUpdateWithoutOpWorkSkillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   OpWorkProfile?: Prisma.OpWorkProfileUpdateOneRequiredWithoutOpWorkJobSkillsNestedInput
   OpWorkJob?: Prisma.OpWorkJobUpdateOneRequiredWithoutOpWorkJobSkillNestedInput
@@ -828,8 +782,8 @@ export type OpWorkJobSkillUncheckedUpdateWithoutOpWorkSkillInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -838,8 +792,8 @@ export type OpWorkJobSkillUncheckedUpdateManyWithoutOpWorkSkillInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   isRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  importance?: Prisma.IntFieldUpdateOperationsInput | number
-  minLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  importance?: Prisma.NullableEnumOpWorkSkillImportanceFieldUpdateOperationsInput | $Enums.OpWorkSkillImportance | null
+  minLevel?: Prisma.NullableEnumOpWorkSkillLevelFieldUpdateOperationsInput | $Enums.OpWorkSkillLevel | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -964,13 +918,13 @@ export type $OpWorkJobSkillPayload<ExtArgs extends runtime.Types.Extensions.Inte
      * @Maximum(5)
      * @example(3)
      */
-    importance: number
+    importance: $Enums.OpWorkSkillImportance | null
     /**
      * Минимальный требуемый уровень владения
      * @Minimum(1)
      * @Maximum(5)
      */
-    minLevel: number | null
+    minLevel: $Enums.OpWorkSkillLevel | null
     /**
      * Временная метка создания записи
      */
@@ -1406,8 +1360,8 @@ export interface OpWorkJobSkillFieldRefs {
   readonly jobId: Prisma.FieldRef<"OpWorkJobSkill", 'String'>
   readonly skillId: Prisma.FieldRef<"OpWorkJobSkill", 'String'>
   readonly isRequired: Prisma.FieldRef<"OpWorkJobSkill", 'Boolean'>
-  readonly importance: Prisma.FieldRef<"OpWorkJobSkill", 'Int'>
-  readonly minLevel: Prisma.FieldRef<"OpWorkJobSkill", 'Int'>
+  readonly importance: Prisma.FieldRef<"OpWorkJobSkill", 'OpWorkSkillImportance'>
+  readonly minLevel: Prisma.FieldRef<"OpWorkJobSkill", 'OpWorkSkillLevel'>
   readonly createdAt: Prisma.FieldRef<"OpWorkJobSkill", 'DateTime'>
 }
     

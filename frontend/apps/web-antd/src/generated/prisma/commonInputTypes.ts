@@ -202,31 +202,31 @@ export type EnumOpWorkUserTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumOpWorkUserTypeFilter<$PrismaModel>
 }
 
-export type IntNullableFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+export type FloatNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
-export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-  _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
 export type StringFilter<$PrismaModel = never> = {
@@ -336,6 +336,33 @@ export type EnumOpWorkGradeNullableWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumOpWorkGradeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumOpWorkGradeNullableFilter<$PrismaModel>
+}
+
+export type IntNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+}
+
+export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
 export type EnumOpWorkProjectStatusNullableFilter<$PrismaModel = never> = {
@@ -509,6 +536,40 @@ export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type EnumOpWorkSkillLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillLevel | Prisma.EnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel> | $Enums.OpWorkSkillLevel | null
+}
+
+export type EnumOpWorkSkillLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillLevel | Prisma.EnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel>
+}
+
+export type EnumOpWorkSkillImportanceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillImportance | Prisma.EnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel> | $Enums.OpWorkSkillImportance | null
+}
+
+export type EnumOpWorkSkillImportanceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillImportance | Prisma.EnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillImportanceNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillImportance | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel>
 }
 
 export type EnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {
@@ -733,22 +794,6 @@ export type NestedEnumOpWorkUserTypeWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumOpWorkUserTypeFilter<$PrismaModel>
 }
 
-export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-  _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
-}
-
 export type NestedFloatNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
@@ -758,6 +803,22 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
+export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -851,6 +912,22 @@ export type NestedEnumOpWorkGradeNullableWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumOpWorkGradeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumOpWorkGradeNullableFilter<$PrismaModel>
+}
+
+export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumOpWorkProjectStatusNullableFilter<$PrismaModel = never> = {
@@ -1022,6 +1099,40 @@ export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedStringNullableFilter<$PrismaModel>
   _max?: Prisma.NestedStringNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillLevel | Prisma.EnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel> | $Enums.OpWorkSkillLevel | null
+}
+
+export type NestedEnumOpWorkSkillLevelNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillLevel | Prisma.EnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillLevel[] | Prisma.ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillLevelNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillLevel | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillLevelNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillImportance | Prisma.EnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel> | $Enums.OpWorkSkillImportance | null
+}
+
+export type NestedEnumOpWorkSkillImportanceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OpWorkSkillImportance | Prisma.EnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.OpWorkSkillImportance[] | Prisma.ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumOpWorkSkillImportanceNullableWithAggregatesFilter<$PrismaModel> | $Enums.OpWorkSkillImportance | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOpWorkSkillImportanceNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumOpWorkNotificationTypeFilter<$PrismaModel = never> = {

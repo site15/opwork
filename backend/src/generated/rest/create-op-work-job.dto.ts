@@ -1,7 +1,7 @@
 
 import {OpWorkEmploymentType,OpWorkExperienceLevel,OpWorkJobStatus} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsEnum,IsInt,IsNotEmpty,IsNumber,IsOptional,IsString,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkEmployerDto} from './connect-op-work-employer.dto'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
@@ -79,22 +79,22 @@ experienceLevel!: OpWorkExperienceLevel ;
 @MaxLength(255)
 department?: string  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   required: false,
   nullable: true,
 })
 @IsOptional()
-@IsInt()
+@IsNumber()
 salaryMin?: number  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   required: false,
   nullable: true,
 })
 @IsOptional()
-@IsInt()
+@IsNumber()
 salaryMax?: number  | null;
 @ApiProperty({
   type: 'string',

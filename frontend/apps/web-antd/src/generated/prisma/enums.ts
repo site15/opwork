@@ -76,6 +76,28 @@ export const OpWorkProfileType = {
 export type OpWorkProfileType = (typeof OpWorkProfileType)[keyof typeof OpWorkProfileType]
 
 
+export const OpWorkSkillLevel = {
+  BEGINNER: 'BEGINNER',
+  ELEMENTARY: 'ELEMENTARY',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED',
+  EXPERT: 'EXPERT'
+} as const
+
+export type OpWorkSkillLevel = (typeof OpWorkSkillLevel)[keyof typeof OpWorkSkillLevel]
+
+
+export const OpWorkSkillImportance = {
+  LOW: 'LOW',
+  BELOW_MEDIUM: 'BELOW_MEDIUM',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+} as const
+
+export type OpWorkSkillImportance = (typeof OpWorkSkillImportance)[keyof typeof OpWorkSkillImportance]
+
+
 export const OpWorkSkillType = {
   CORE_DEVELOPMENT__PROGRAMMING_LANGUAGE: 'CORE_DEVELOPMENT__PROGRAMMING_LANGUAGE',
   CORE_DEVELOPMENT__FRAMEWORK: 'CORE_DEVELOPMENT__FRAMEWORK',

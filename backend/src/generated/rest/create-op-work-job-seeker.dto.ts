@@ -1,6 +1,6 @@
 
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsInt,IsNotEmpty,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsNotEmpty,IsNumber,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -44,13 +44,13 @@ currentCompany?: string  | null;
 @MaxLength(10000)
 summary?: string  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   required: false,
   nullable: true,
 })
 @IsOptional()
-@IsInt()
+@IsNumber()
 expectedSalary?: number  | null;
 @ApiProperty({
   type: 'string',

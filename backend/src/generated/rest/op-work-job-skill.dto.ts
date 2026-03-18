@@ -1,4 +1,5 @@
 
+import {OpWorkSkillImportance,OpWorkSkillLevel} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
 
 
@@ -13,16 +14,17 @@ id!: string ;
 })
 isRequired!: boolean  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
-})
-importance!: number ;
-@ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  enum: OpWorkSkillImportance,
+  enumName: 'OpWorkSkillImportance',
   nullable: true,
 })
-minLevel!: number  | null;
+importance!: OpWorkSkillImportance  | null;
+@ApiProperty({
+  enum: OpWorkSkillLevel,
+  enumName: 'OpWorkSkillLevel',
+  nullable: true,
+})
+minLevel!: OpWorkSkillLevel  | null;
 @ApiProperty({
   type: 'string',
   format: 'date-time',

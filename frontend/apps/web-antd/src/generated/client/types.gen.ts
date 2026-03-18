@@ -4646,27 +4646,6 @@ export type EmployerWorkSkillControllerGetAllJobSkillsResponses = {
 
 export type EmployerWorkSkillControllerGetAllJobSkillsResponse = EmployerWorkSkillControllerGetAllJobSkillsResponses[keyof EmployerWorkSkillControllerGetAllJobSkillsResponses];
 
-export type EmployerWorkSkillControllerDelJobSkillData = {
-    body?: never;
-    path: {
-        job_id: string;
-    };
-    query?: never;
-    url: '/api/employer/job-skill/{job_id}';
-};
-
-export type EmployerWorkSkillControllerDelJobSkillErrors = {
-    default: StatusResponse;
-};
-
-export type EmployerWorkSkillControllerDelJobSkillError = EmployerWorkSkillControllerDelJobSkillErrors[keyof EmployerWorkSkillControllerDelJobSkillErrors];
-
-export type EmployerWorkSkillControllerDelJobSkillResponses = {
-    200: StatusResponse;
-};
-
-export type EmployerWorkSkillControllerDelJobSkillResponse = EmployerWorkSkillControllerDelJobSkillResponses[keyof EmployerWorkSkillControllerDelJobSkillResponses];
-
 export type EmployerWorkSkillControllerGetJobSkillsData = {
     body?: never;
     path: {
@@ -4709,6 +4688,27 @@ export type EmployerWorkSkillControllerSetJobSkillResponses = {
 
 export type EmployerWorkSkillControllerSetJobSkillResponse = EmployerWorkSkillControllerSetJobSkillResponses[keyof EmployerWorkSkillControllerSetJobSkillResponses];
 
+export type EmployerWorkSkillControllerDelJobSkillData = {
+    body?: never;
+    path: {
+        job_skill_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-skill/{job_skill_id}';
+};
+
+export type EmployerWorkSkillControllerDelJobSkillErrors = {
+    default: StatusResponse;
+};
+
+export type EmployerWorkSkillControllerDelJobSkillError = EmployerWorkSkillControllerDelJobSkillErrors[keyof EmployerWorkSkillControllerDelJobSkillErrors];
+
+export type EmployerWorkSkillControllerDelJobSkillResponses = {
+    200: StatusResponse;
+};
+
+export type EmployerWorkSkillControllerDelJobSkillResponse = EmployerWorkSkillControllerDelJobSkillResponses[keyof EmployerWorkSkillControllerDelJobSkillResponses];
+
 export type EmployerJobTagsControllerGetAllTagsData = {
     body?: never;
     path?: never;
@@ -4727,27 +4727,6 @@ export type EmployerJobTagsControllerGetAllTagsResponses = {
 };
 
 export type EmployerJobTagsControllerGetAllTagsResponse = EmployerJobTagsControllerGetAllTagsResponses[keyof EmployerJobTagsControllerGetAllTagsResponses];
-
-export type EmployerJobTagsControllerDelJobTagsData = {
-    body: SetEmployerJobTagsArgs;
-    path: {
-        job_id: string;
-    };
-    query?: never;
-    url: '/api/employer/job-tags/{job_id}';
-};
-
-export type EmployerJobTagsControllerDelJobTagsErrors = {
-    default: StatusResponse;
-};
-
-export type EmployerJobTagsControllerDelJobTagsError = EmployerJobTagsControllerDelJobTagsErrors[keyof EmployerJobTagsControllerDelJobTagsErrors];
-
-export type EmployerJobTagsControllerDelJobTagsResponses = {
-    200: StatusResponse;
-};
-
-export type EmployerJobTagsControllerDelJobTagsResponse = EmployerJobTagsControllerDelJobTagsResponses[keyof EmployerJobTagsControllerDelJobTagsResponses];
 
 export type EmployerJobTagsControllerGetJobTagsData = {
     body?: never;
@@ -4770,7 +4749,7 @@ export type EmployerJobTagsControllerGetJobTagsResponses = {
 
 export type EmployerJobTagsControllerGetJobTagsResponse = EmployerJobTagsControllerGetJobTagsResponses[keyof EmployerJobTagsControllerGetJobTagsResponses];
 
-export type EmployerJobTagsControllerSetJobTagsData = {
+export type EmployerJobTagsControllerSetJobTagData = {
     body: SetEmployerJobTagsArgs;
     path: {
         job_id: string;
@@ -4779,17 +4758,38 @@ export type EmployerJobTagsControllerSetJobTagsData = {
     url: '/api/employer/job-tags/{job_id}';
 };
 
-export type EmployerJobTagsControllerSetJobTagsErrors = {
+export type EmployerJobTagsControllerSetJobTagErrors = {
     default: OpWorkJobTagDto;
 };
 
-export type EmployerJobTagsControllerSetJobTagsError = EmployerJobTagsControllerSetJobTagsErrors[keyof EmployerJobTagsControllerSetJobTagsErrors];
+export type EmployerJobTagsControllerSetJobTagError = EmployerJobTagsControllerSetJobTagErrors[keyof EmployerJobTagsControllerSetJobTagErrors];
 
-export type EmployerJobTagsControllerSetJobTagsResponses = {
+export type EmployerJobTagsControllerSetJobTagResponses = {
     200: OpWorkJobTagDto;
 };
 
-export type EmployerJobTagsControllerSetJobTagsResponse = EmployerJobTagsControllerSetJobTagsResponses[keyof EmployerJobTagsControllerSetJobTagsResponses];
+export type EmployerJobTagsControllerSetJobTagResponse = EmployerJobTagsControllerSetJobTagResponses[keyof EmployerJobTagsControllerSetJobTagResponses];
+
+export type EmployerJobTagsControllerDelJobTagData = {
+    body?: never;
+    path: {
+        job_tag_id: string;
+    };
+    query?: never;
+    url: '/api/employer/job-tags/{job_tag_id}';
+};
+
+export type EmployerJobTagsControllerDelJobTagErrors = {
+    default: StatusResponse;
+};
+
+export type EmployerJobTagsControllerDelJobTagError = EmployerJobTagsControllerDelJobTagErrors[keyof EmployerJobTagsControllerDelJobTagErrors];
+
+export type EmployerJobTagsControllerDelJobTagResponses = {
+    200: StatusResponse;
+};
+
+export type EmployerJobTagsControllerDelJobTagResponse = EmployerJobTagsControllerDelJobTagResponses[keyof EmployerJobTagsControllerDelJobTagResponses];
 
 export type VacanyApplicationControllerApplyData = {
     body: VacanyApplicationApplyArgs;

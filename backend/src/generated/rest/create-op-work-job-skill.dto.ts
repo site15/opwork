@@ -1,6 +1,7 @@
 
+import {OpWorkSkillImportance,OpWorkSkillLevel} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsInt,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
+import {IsBoolean,IsEnum,IsNotEmpty,IsOptional,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 import {ConnectOpWorkJobDto} from './connect-op-work-job.dto'
@@ -45,21 +46,23 @@ export class CreateOpWorkJobSkillDto {
 @IsBoolean()
 isRequired?: boolean  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
-})
-@IsNotEmpty()
-@IsInt()
-importance!: number ;
-@ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  enum: OpWorkSkillImportance,
+  enumName: 'OpWorkSkillImportance',
   required: false,
   nullable: true,
 })
 @IsOptional()
-@IsInt()
-minLevel?: number  | null;
+@IsEnum(OpWorkSkillImportance)
+importance?: OpWorkSkillImportance  | null;
+@ApiProperty({
+  enum: OpWorkSkillLevel,
+  enumName: 'OpWorkSkillLevel',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsEnum(OpWorkSkillLevel)
+minLevel?: OpWorkSkillLevel  | null;
 @ApiProperty({
   type: CreateOpWorkJobSkillOpWorkProfileRelationInputDto,
 })

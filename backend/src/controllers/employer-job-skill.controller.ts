@@ -85,6 +85,7 @@ export class EmployerWorkSkillController {
           importance: args.importance,
           isRequired: args.isRequired,
           minLevel: args.minLevel,
+          OpWorkSkill: { connect: { id: args.skillId } },
         },
       });
     } else {
@@ -102,16 +103,14 @@ export class EmployerWorkSkillController {
     }
   }
 
-  @Delete(':job_id')
+  @Delete(':job_skill_id')
   @ApiOkResponse({ type: StatusResponse })
   async delJobSkill(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_id', new ParseUUIDPipe()) jobId: string,
+    @Param('job_skill_id', new ParseUUIDPipe()) jobSkillId: string,
   ): Promise<StatusResponse> {
-    await this.prismaService.opWorkJobSkill.deleteMany({
-      where: {
-        OpWorkJob: { id: jobId },
-      },
+    await this.prismaService.opWorkJobSkill.delete({
+      where: { id: jobSkillId },
     });
     return { message: 'ok' };
   }

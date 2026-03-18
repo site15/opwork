@@ -23,8 +23,8 @@ currentCompany!: string  | null;
 })
 summary!: string  | null;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  type: 'number',
+  format: 'float',
   nullable: true,
 })
 expectedSalary!: number  | null;

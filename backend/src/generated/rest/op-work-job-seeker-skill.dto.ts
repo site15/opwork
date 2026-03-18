@@ -1,4 +1,5 @@
 
+import {OpWorkSkillLevel} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
 
 
@@ -8,10 +9,11 @@ export class OpWorkJobSeekerSkillDto {
 })
 id!: string ;
 @ApiProperty({
-  type: 'integer',
-  format: 'int32',
+  enum: OpWorkSkillLevel,
+  enumName: 'OpWorkSkillLevel',
+  nullable: true,
 })
-level!: number ;
+level!: OpWorkSkillLevel  | null;
 @ApiProperty({
   type: 'integer',
   format: 'int32',

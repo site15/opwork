@@ -54,7 +54,7 @@ export class EmployerJobTagsController {
 
   @Put(':job_id')
   @ApiOkResponse({ type: OpWorkJobTagDto })
-  async setJobTags(
+  async setJobTag(
     @CurrentAppRequest() req: AppRequest,
     @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @Body() args: SetEmployerJobTagsArgs,
@@ -79,15 +79,14 @@ export class EmployerJobTagsController {
     }
   }
 
-  @Delete(':job_id')
+  @Delete(':job_tag_id')
   @ApiOkResponse({ type: StatusResponse })
-  async delJobTags(
+  async delJobTag(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_id', new ParseUUIDPipe()) jobId: string,
-    @Body() args: SetEmployerJobTagsArgs,
+    @Param('job_tag_id', new ParseUUIDPipe()) jobTagId: string,
   ): Promise<StatusResponse> {
     await this.prismaService.opWorkJobTag.delete({
-      where: { id: args.id },
+      where: { id: jobTagId },
     });
     return { message: 'ok' };
   }

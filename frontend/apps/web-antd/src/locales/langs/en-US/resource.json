@@ -182,7 +182,15 @@
     "createdAt": "Created At",
     "jobId": "Job Id",
     "name": "Name",
-    "color": "Color"
+    "color": "Color",
+    "institution": "Institution",
+    "degree": "Degree",
+    "fieldOfStudy": "Field Of Study",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "isCurrent": "Is Current",
+    "description": "Description",
+    "grade": "Grade"
   },
   "OpWorkJobView": {
     "id": "Id",
@@ -494,5 +502,29 @@
     "OTHER__IOT": "OTHER IOT",
     "OTHER__AR_VR": "OTHER AR VR",
     "OTHER__ROBOTICS": "OTHER ROBOTICS"
+  },
+  "OpWorkJobTagDegree": {
+    "HIGH_SCHOOL": "HIGH SCHOOL",
+    "ASSOCIATE": "ASSOCIATE",
+    "BACHELOR": "BACHELOR",
+    "MASTER": "MASTER",
+    "DOCTORATE": "DOCTORATE",
+    "CERTIFICATE": "CERTIFICATE",
+    "DIPLOMA": "DIPLOMA",
+    "POSTGRADUATE": "POSTGRADUATE"
+  },
+  "OpWorkSkillLevel": {
+    "BEGINNER": "BEGINNER",
+    "ELEMENTARY": "ELEMENTARY",
+    "INTERMEDIATE": "INTERMEDIATE",
+    "ADVANCED": "ADVANCED",
+    "EXPERT": "EXPERT"
+  },
+  "OpWorkSkillImportance": {
+    "LOW": "LOW",
+    "BELOW_MEDIUM": "BELOW MEDIUM",
+    "MEDIUM": "MEDIUM",
+    "HIGH": "HIGH",
+    "CRITICAL": "CRITICAL"
   }
 }

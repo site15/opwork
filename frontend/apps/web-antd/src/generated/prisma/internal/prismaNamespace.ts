@@ -2585,16 +2585,16 @@ export type ListEnumOpWorkUserTypeFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
- * Reference to a field of type 'Int'
+ * Reference to a field of type 'Float'
  */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
 /**
- * Reference to a field of type 'Int[]'
+ * Reference to a field of type 'Float[]'
  */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -2637,6 +2637,20 @@ export type EnumOpWorkGradeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'OpWorkGrade[]'
  */
 export type ListEnumOpWorkGradeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkGrade[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2725,6 +2739,34 @@ export type ListEnumOpWorkSkillTypeFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'OpWorkSkillLevel'
+ */
+export type EnumOpWorkSkillLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkSkillLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'OpWorkSkillLevel[]'
+ */
+export type ListEnumOpWorkSkillLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkSkillLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OpWorkSkillImportance'
+ */
+export type EnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkSkillImportance'>
+    
+
+
+/**
+ * Reference to a field of type 'OpWorkSkillImportance[]'
+ */
+export type ListEnumOpWorkSkillImportanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkSkillImportance[]'>
+    
+
+
+/**
  * Reference to a field of type 'OpWorkNotificationType'
  */
 export type EnumOpWorkNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkNotificationType'>
@@ -2749,20 +2791,6 @@ export type EnumOpWorkFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'OpWorkFrequency[]'
  */
 export type ListEnumOpWorkFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkFrequency[]'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**

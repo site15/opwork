@@ -1,13 +1,13 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { OpWorkJobSeekerSkill, OpWorkSkill } from '#/generated/client';
+import type { OpWorkJobSkill, OpWorkSkill } from '#/generated/client';
 
 import { getComponentProps } from '#/adapter/get-component-props';
 import { opWorkSkillControllerFindMany } from '#/generated/client';
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 
-export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
+export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
   return [
     {
       component: 'Input',
@@ -16,6 +16,7 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       controlClass: 'w-full',
       labelWidth: 200,
     },
+
     {
       component: 'ApiSelect',
       ...getComponentProps<OpWorkSkill>({
@@ -28,9 +29,65 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
           }),
         getLabel: (item) => item.name || item.id,
       }),
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
       label: $t('resource.name.OpWorkSkill'),
       rules: 'required',
+
+      controlClass: 'w-full',
+      labelWidth: 200,
+    },
+    {
+      component: 'RadioGroup',
+      componentProps: {
+        buttonStyle: 'solid',
+        options: [
+          { label: $t('common.yes'), value: true },
+          { label: $t('common.no'), value: false },
+        ],
+        optionType: 'button',
+      },
+      defaultValue: false,
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.isRequired,
+      label: $t('resource.OpWorkJobSkill.isRequired'),
+
+      controlClass: 'w-full',
+      labelWidth: 200,
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        filterOption: true,
+        options: [
+          {
+            value: 'LOW',
+            label: $t('resource.OpWorkSkillImportance.LOW').split(' - ')[0],
+          },
+          {
+            value: 'BELOW_MEDIUM',
+            label: $t('resource.OpWorkSkillImportance.BELOW_MEDIUM').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'MEDIUM',
+            label: $t('resource.OpWorkSkillImportance.MEDIUM').split(' - ')[0],
+          },
+          {
+            value: 'HIGH',
+            label: $t('resource.OpWorkSkillImportance.HIGH').split(' - ')[0],
+          },
+          {
+            value: 'CRITICAL',
+            label: $t('resource.OpWorkSkillImportance.CRITICAL').split(
+              ' - ',
+            )[0],
+          },
+        ],
+        showSearch: true,
+      },
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
+      label: $t('resource.OpWorkJobSkill.importance'),
 
       controlClass: 'w-full',
       labelWidth: 200,
@@ -64,41 +121,8 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
         ],
         showSearch: true,
       },
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
-      label: $t('resource.OpWorkJobSeekerSkill.level'),
-
-      controlClass: 'w-full',
-      labelWidth: 200,
-    },
-    {
-      component: 'InputNumber',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
-      label: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
-
-      controlClass: 'w-full',
-      labelWidth: 200,
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.yes'), value: true },
-          { label: $t('common.no'), value: false },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: false,
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.isPrimary,
-      label: $t('resource.OpWorkJobSeekerSkill.isPrimary'),
-
-      controlClass: 'w-full',
-      labelWidth: 200,
-    },
-    {
-      component: 'DatePicker',
-      fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
-      label: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
+      fieldName: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
+      label: $t('resource.OpWorkJobSkill.minLevel'),
 
       controlClass: 'w-full',
       labelWidth: 200,
@@ -106,10 +130,56 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
   ];
 }
 
-export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
+export function useOpWorkJobSkillColumns<T = OpWorkJobSkill>(
   onActionClick: OnActionClickFn<T>,
 ): VxeTableGridOptions['columns'] {
   return [
+    {
+      cellRender: {
+        name: 'CellTag',
+      },
+      title: $t('resource.OpWorkJobSkill.isRequired'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.isRequired,
+      sortable: true,
+    },
+    {
+      cellRender: {
+        name: 'CellEnum',
+        props: {
+          options: [
+            {
+              value: 'LOW',
+              label: $t('resource.OpWorkSkillImportance.LOW').split(' - ')[0],
+            },
+            {
+              value: 'BELOW_MEDIUM',
+              label: $t('resource.OpWorkSkillImportance.BELOW_MEDIUM').split(
+                ' - ',
+              )[0],
+            },
+            {
+              value: 'MEDIUM',
+              label: $t('resource.OpWorkSkillImportance.MEDIUM').split(
+                ' - ',
+              )[0],
+            },
+            {
+              value: 'HIGH',
+              label: $t('resource.OpWorkSkillImportance.HIGH').split(' - ')[0],
+            },
+            {
+              value: 'CRITICAL',
+              label: $t('resource.OpWorkSkillImportance.CRITICAL').split(
+                ' - ',
+              )[0],
+            },
+          ],
+        },
+      },
+      title: $t('resource.OpWorkJobSkill.importance'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.importance,
+      sortable: true,
+    },
     {
       cellRender: {
         name: 'CellEnum',
@@ -140,32 +210,13 @@ export function useOpWorkJobSeekerSkillColumns<T = OpWorkJobSeekerSkill>(
           ],
         },
       },
-      title: $t('resource.OpWorkJobSeekerSkill.level'),
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.level,
-      sortable: true,
-    },
-    {
-      title: $t('resource.OpWorkJobSeekerSkill.yearsOfExp'),
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.yearsOfExp,
-      sortable: true,
-    },
-    {
-      cellRender: {
-        name: 'CellTag',
-      },
-      title: $t('resource.OpWorkJobSeekerSkill.isPrimary'),
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.isPrimary,
-      sortable: true,
-    },
-    {
-      title: $t('resource.OpWorkJobSeekerSkill.lastUsed'),
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.lastUsed,
-      formatter: 'formatDateTime',
+      title: $t('resource.OpWorkJobSkill.minLevel'),
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.minLevel,
       sortable: true,
     },
     {
       title: $t('resource.name.OpWorkSkill'),
-      field: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
+      field: Prisma.OpWorkJobSkillScalarFieldEnum.skillId,
       cellRender: {
         name: 'CellRender',
         props: {
