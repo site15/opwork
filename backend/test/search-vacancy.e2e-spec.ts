@@ -2,6 +2,8 @@ import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
+  OpWorkSkillImportance,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import {
@@ -66,7 +68,7 @@ describe('Vacancy: search (e2e)', () => {
     const profileControllerSetProfileResult = await employer1Activity.sdk
       .profileControllerSetProfile({
         body: {
-          title: 'Employer1',
+          location: 'Employer1',
           email: employer1Activity.authUser?.email,
         },
       })
@@ -122,9 +124,9 @@ describe('Vacancy: search (e2e)', () => {
           path: { job_id: employeJobControllerSetJobResult?.id || '' },
           body: {
             skillName: employer1SkillName,
-            importance: 1,
+            importance: OpWorkSkillImportance.HIGH,
             isRequired: true,
-            minLevel: 1,
+            minLevel: OpWorkSkillLevel.ADVANCED,
           },
         })
         .then(async ({ data }) => data);
@@ -141,7 +143,7 @@ describe('Vacancy: search (e2e)', () => {
     const profileControllerSetProfileResult = await employer2Activity.sdk
       .profileControllerSetProfile({
         body: {
-          title: 'Employer2',
+          location: 'Employer2',
           email: employer2Activity.authUser?.email,
         },
       })
@@ -197,9 +199,9 @@ describe('Vacancy: search (e2e)', () => {
           path: { job_id: employeJobControllerSetJobResult?.id || '' },
           body: {
             skillName: employer2SkillName,
-            importance: 1,
+            importance: OpWorkSkillImportance.HIGH,
             isRequired: true,
-            minLevel: 1,
+            minLevel: OpWorkSkillLevel.ADVANCED,
           },
         })
         .then(async ({ data }) => data);
@@ -216,7 +218,7 @@ describe('Vacancy: search (e2e)', () => {
     const profileControllerSetProfileResult = await jobSeekerActivity.sdk
       .profileControllerSetProfile({
         body: {
-          title: `Software Engineer ${jobSeekerActivity.randomSha7}`,
+          location: `Software Engineer ${jobSeekerActivity.randomSha7}`,
           email: jobSeekerActivity.authUser?.email,
         },
       })

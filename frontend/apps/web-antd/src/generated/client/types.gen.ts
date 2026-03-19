@@ -67,7 +67,11 @@ export type OpWorkEducation = {
     OpWorkJobSeeker?: OpWorkJobSeeker;
 };
 
+export type OpWorkSkillLevel = 'BEGINNER' | 'ELEMENTARY' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT';
+
 export type OpWorkSkillType = 'CORE_DEVELOPMENT__PROGRAMMING_LANGUAGE' | 'CORE_DEVELOPMENT__FRAMEWORK' | 'CORE_DEVELOPMENT__LIBRARY' | 'CORE_DEVELOPMENT__RUNTIME' | 'CORE_DEVELOPMENT__API_TECHNOLOGY' | 'CORE_DEVELOPMENT__ARCHITECTURE_PATTERN' | 'CORE_DEVELOPMENT__ARCHITECTURE_METHOD' | 'DATA_AI__DATABASE' | 'DATA_AI__DATA_WAREHOUSE' | 'DATA_AI__BIG_DATA' | 'DATA_AI__DATA_ENGINEERING' | 'DATA_AI__MACHINE_LEARNING' | 'DATA_AI__DEEP_LEARNING' | 'DATA_AI__GENERATIVE_AI' | 'DATA_AI__COMPUTER_VISION' | 'DATA_AI__NLP' | 'DATA_AI__MLOPS' | 'DEVOPS_CLOUD__TOOL' | 'DEVOPS_CLOUD__CONTAINERIZATION' | 'DEVOPS_CLOUD__ORCHESTRATION' | 'DEVOPS_CLOUD__CI_CD' | 'DEVOPS_CLOUD__INFRASTRUCTURE_AS_CODE' | 'DEVOPS_CLOUD__CONFIGURATION_MANAGEMENT' | 'DEVOPS_CLOUD__PLATFORM' | 'DEVOPS_CLOUD__SERVERLESS' | 'DEVOPS_CLOUD__OBSERVABILITY' | 'DEVOPS_CLOUD__MONITORING' | 'DEVOPS_CLOUD__NETWORKING' | 'SECURITY__CYBERSECURITY' | 'SECURITY__APPLICATION_SECURITY' | 'SECURITY__CLOUD_SECURITY' | 'SECURITY__CRYPTOGRAPHY' | 'WEB_MOBILE__FRONTEND_TECH' | 'WEB_MOBILE__BACKEND_TECH' | 'WEB_MOBILE__MOBILE_DEVELOPMENT' | 'WEB_MOBILE__GAME_DEVELOPMENT' | 'WEB_MOBILE__WEB3' | 'QA_PROCESS__TESTING' | 'QA_PROCESS__PERFORMANCE_TESTING' | 'QA_PROCESS__TEST_AUTOMATION' | 'QA_PROCESS__DEVELOPMENT_METHODOLOGY' | 'QA_PROCESS__PROJECT_MANAGEMENT' | 'QA_PROCESS__PRODUCT_MANAGEMENT' | 'DESIGN__UI_DESIGN' | 'DESIGN__UX_RESEARCH' | 'DESIGN__GRAPHIC_DESIGN' | 'DESIGN__MOTION_DESIGN' | 'BUSINESS_MANAGEMENT__LEADERSHIP' | 'BUSINESS_MANAGEMENT__PEOPLE_MANAGEMENT' | 'BUSINESS_MANAGEMENT__RECRUITMENT' | 'BUSINESS_MANAGEMENT__TECHNICAL_WRITING' | 'BUSINESS_MANAGEMENT__SOFT_SKILL' | 'LANGUAGES__LANGUAGE' | 'OTHER__EMBEDDED' | 'OTHER__IOT' | 'OTHER__AR_VR' | 'OTHER__ROBOTICS';
+
+export type OpWorkSkillImportance = 'LOW' | 'BELOW_MEDIUM' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
 
 export type OpWorkExperienceLevel = 'INTERNSHIP' | 'ENTRY_LEVEL' | 'JUNIOR' | 'MIDDLE' | 'SENIOR' | 'LEAD' | 'EXPERT';
 
@@ -187,8 +191,8 @@ export type OpWorkJobSkill = {
     jobId: string;
     skillId: string;
     isRequired: boolean | null;
-    importance: number;
-    minLevel: number | null;
+    importance: OpWorkSkillImportance | null;
+    minLevel: OpWorkSkillLevel | null;
     createdAt: string;
     OpWorkProfile?: OpWorkProfile;
     OpWorkJob?: OpWorkJob;
@@ -224,7 +228,7 @@ export type OpWorkJobSeekerSkill = {
     profileId: string;
     jobSeekerId: string;
     skillId: string;
-    level: number;
+    level: OpWorkSkillLevel | null;
     yearsOfExp: number | null;
     isPrimary: boolean | null;
     lastUsed: string | null;
@@ -1311,7 +1315,7 @@ export type CreateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto = {
 };
 
 export type CreateOpWorkJobSeekerSkillDto = {
-    level: number;
+    level?: OpWorkSkillLevel | null;
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
@@ -1322,7 +1326,7 @@ export type CreateOpWorkJobSeekerSkillDto = {
 
 export type OpWorkJobSeekerSkillDto = {
     id: string;
-    level: number;
+    level: OpWorkSkillLevel | null;
     yearsOfExp: number | null;
     isPrimary: boolean | null;
     lastUsed: string | null;
@@ -1342,7 +1346,7 @@ export type UpdateOpWorkJobSeekerSkillOpWorkSkillRelationInputDto = {
 };
 
 export type UpdateOpWorkJobSeekerSkillDto = {
-    level?: number;
+    level?: OpWorkSkillLevel | null;
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
@@ -1376,8 +1380,8 @@ export type CreateOpWorkJobSkillOpWorkSkillRelationInputDto = {
 
 export type CreateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
-    importance: number;
-    minLevel?: number | null;
+    importance?: OpWorkSkillImportance | null;
+    minLevel?: OpWorkSkillLevel | null;
     OpWorkProfile: CreateOpWorkJobSkillOpWorkProfileRelationInputDto;
     OpWorkJob: CreateOpWorkJobSkillOpWorkJobRelationInputDto;
     OpWorkSkill: CreateOpWorkJobSkillOpWorkSkillRelationInputDto;
@@ -1386,8 +1390,8 @@ export type CreateOpWorkJobSkillDto = {
 export type OpWorkJobSkillDto = {
     id: string;
     isRequired: boolean | null;
-    importance: number;
-    minLevel: number | null;
+    importance: OpWorkSkillImportance | null;
+    minLevel: OpWorkSkillLevel | null;
     createdAt: string;
 };
 
@@ -1405,8 +1409,8 @@ export type UpdateOpWorkJobSkillOpWorkSkillRelationInputDto = {
 
 export type UpdateOpWorkJobSkillDto = {
     isRequired?: boolean | null;
-    importance?: number;
-    minLevel?: number | null;
+    importance?: OpWorkSkillImportance | null;
+    minLevel?: OpWorkSkillLevel | null;
     OpWorkProfile?: UpdateOpWorkJobSkillOpWorkProfileRelationInputDto;
     OpWorkJob?: UpdateOpWorkJobSkillOpWorkJobRelationInputDto;
     OpWorkSkill?: UpdateOpWorkJobSkillOpWorkSkillRelationInputDto;
@@ -1817,7 +1821,7 @@ export type SetJobSeekerProfileArgs = {
 };
 
 export type SetJobSeekerSkillArgs = {
-    level: number;
+    level?: OpWorkSkillLevel | null;
     yearsOfExp?: number | null;
     isPrimary?: boolean | null;
     lastUsed?: string | null;
@@ -1899,8 +1903,8 @@ export type SetEmployerJobArgs = {
 
 export type SetEmployerJobSkillArgs = {
     isRequired?: boolean | null;
-    importance: number;
-    minLevel?: number | null;
+    importance?: OpWorkSkillImportance | null;
+    minLevel?: OpWorkSkillLevel | null;
     id?: string;
     skillName?: string;
     skillId?: string;

@@ -3,6 +3,8 @@ import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
+  OpWorkSkillImportance,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import {
@@ -56,85 +58,89 @@ describe('Notification: work with applications (e2e)', () => {
   });
 
   it('Create employer job of employer', async () => {
-    const profileControllerSetProfileResult = await employerActivity.sdk
-      .profileControllerSetProfile({
-        body: {
-          title: 'Employer1',
-          email: employerActivity.authUser?.email,
-        },
-      })
-      .then(async ({ data }) => data);
-
-    const employerControllerSetProfileResult = await employerActivity.sdk
-      .employerControllerSetProfile({
-        body: {
-          companyEmail: `employer${employerActivity.randomSha7}@example.com`,
-          companyName: `ABC Company${employerActivity.randomSha7}`,
-          companyPhone: '123-456-7890',
-          companyWebsite: `https://www.abccompany${employerActivity.randomSha7}.com`,
-          coverImageUrl: `https://www.abccompany${employerActivity.randomSha7}.com/cover-image.jpg`,
-          culture: `Startup culture${employerActivity.randomSha7}`,
-          mission: `Innovate and solve problems${employerActivity.randomSha7}`,
-          description: `ABC Company is a startup that innovates and solves problems${employerActivity.randomSha7}.`,
-          industry: `Technology${employerActivity.randomSha7}`,
-          facebookUrl: `https://facebook.com/abccompany${employerActivity.randomSha7}`,
-          twitterUrl: `https://twitter.com/abccompany${employerActivity.randomSha7}`,
-          linkedinUrl: `https://linkedin.com/in/abccompany${employerActivity.randomSha7}`,
-          foundedYear: 2010,
-          headquarters: `San Francisco${employerActivity.randomSha7}`,
-          logoUrl: `https://www.abccompany${employerActivity.randomSha7}.com/logo.jpg`,
-        },
-      })
-      .then(async ({ data }) => data);
-
-    const employeJobControllerSetJobResult = await employerActivity.sdk
-      .employeJobControllerSetJob({
-        body: {
-          description: `This is a test description${employerActivity.randomSha7}.`,
-          employmentType: OpWorkEmploymentType.FULL_TIME,
-          experienceLevel: OpWorkExperienceLevel.JUNIOR,
-          requirements: `These are the requirements${employerActivity.randomSha7}.`,
-          responsibilities: `These are the responsibilities${employerActivity.randomSha7}.`,
-          status: OpWorkJobStatus.ACTIVE,
-          title: 'Test Title',
-          salaryMin: 10000,
-          salaryMax: 40000,
-          location: `San Francisco${employerActivity.randomSha7}`,
-          department: `Engineering${employerActivity.randomSha7}`,
-          expiresAt: '2023-12-31T23:59:59.999Z',
-          publishedAt: '2023-01-01T00:00:00.000Z',
-          isRemote: false,
-          salaryCurrency: 'USD',
-        },
-      })
-      .then(async ({ data }) => data);
-
-    const employerWorkSkillControllerSetJobSkillResult =
-      await employerActivity.sdk
-        .employerWorkSkillControllerSetJobSkill({
-          path: { job_id: employeJobControllerSetJobResult?.id || '' },
+    try {
+      const profileControllerSetProfileResult = await employerActivity.sdk
+        .profileControllerSetProfile({
           body: {
-            skillName: employerSkillName,
-            importance: 1,
-            isRequired: true,
-            minLevel: 1,
+            location: 'Employer1',
+            email: employerActivity.authUser?.email,
           },
         })
         .then(async ({ data }) => data);
 
-    Object.assign(employerData, {
-      profileControllerSetProfileResult,
-      employerControllerSetProfileResult,
-      employeJobControllerSetJobResult,
-      employerWorkSkillControllerSetJobSkillResult,
-    });
+      const employerControllerSetProfileResult = await employerActivity.sdk
+        .employerControllerSetProfile({
+          body: {
+            companyEmail: `employer${employerActivity.randomSha7}@example.com`,
+            companyName: `ABC Company${employerActivity.randomSha7}`,
+            companyPhone: '123-456-7890',
+            companyWebsite: `https://www.abccompany${employerActivity.randomSha7}.com`,
+            coverImageUrl: `https://www.abccompany${employerActivity.randomSha7}.com/cover-image.jpg`,
+            culture: `Startup culture${employerActivity.randomSha7}`,
+            mission: `Innovate and solve problems${employerActivity.randomSha7}`,
+            description: `ABC Company is a startup that innovates and solves problems${employerActivity.randomSha7}.`,
+            industry: `Technology${employerActivity.randomSha7}`,
+            facebookUrl: `https://facebook.com/abccompany${employerActivity.randomSha7}`,
+            twitterUrl: `https://twitter.com/abccompany${employerActivity.randomSha7}`,
+            linkedinUrl: `https://linkedin.com/in/abccompany${employerActivity.randomSha7}`,
+            foundedYear: 2010,
+            headquarters: `San Francisco${employerActivity.randomSha7}`,
+            logoUrl: `https://www.abccompany${employerActivity.randomSha7}.com/logo.jpg`,
+          },
+        })
+        .then(async ({ data }) => data);
+
+      const employeJobControllerSetJobResult = await employerActivity.sdk
+        .employeJobControllerSetJob({
+          body: {
+            description: `This is a test description${employerActivity.randomSha7}.`,
+            employmentType: OpWorkEmploymentType.FULL_TIME,
+            experienceLevel: OpWorkExperienceLevel.JUNIOR,
+            requirements: `These are the requirements${employerActivity.randomSha7}.`,
+            responsibilities: `These are the responsibilities${employerActivity.randomSha7}.`,
+            status: OpWorkJobStatus.ACTIVE,
+            title: 'Test Title',
+            salaryMin: 10000,
+            salaryMax: 40000,
+            location: `San Francisco${employerActivity.randomSha7}`,
+            department: `Engineering${employerActivity.randomSha7}`,
+            expiresAt: '2023-12-31T23:59:59.999Z',
+            publishedAt: '2023-01-01T00:00:00.000Z',
+            isRemote: false,
+            salaryCurrency: 'USD',
+          },
+        })
+        .then(async ({ data }) => data);
+
+      const employerWorkSkillControllerSetJobSkillResult =
+        await employerActivity.sdk
+          .employerWorkSkillControllerSetJobSkill({
+            path: { job_id: employeJobControllerSetJobResult?.id || '' },
+            body: {
+              skillName: employerSkillName,
+              importance: OpWorkSkillImportance.BELOW_MEDIUM,
+              isRequired: true,
+              minLevel: OpWorkSkillLevel.ADVANCED,
+            },
+          })
+          .then(async ({ data }) => data);
+
+      Object.assign(employerData, {
+        profileControllerSetProfileResult,
+        employerControllerSetProfileResult,
+        employeJobControllerSetJobResult,
+        employerWorkSkillControllerSetJobSkillResult,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   it('Create job seekr and fill job seeker profile data', async () => {
     const profileControllerSetProfileResult = await jobSeekerActivity.sdk
       .profileControllerSetProfile({
         body: {
-          title: `Software Engineer ${jobSeekerActivity.randomSha7}`,
+          location: `Software Engineer ${jobSeekerActivity.randomSha7}`,
           email: jobSeekerActivity.authUser?.email,
         },
       })

@@ -30,13 +30,13 @@ describe('OPWork: Read and update profile (e2e)', () => {
     const profileControllerUpdateProfileResult =
       await jobSeekerActivity.sdk.profileControllerSetProfile({
         body: {
-          title: 'Software Engineer',
+          location: 'Software Engineer',
         },
       });
-    expect(profileControllerGetProfileResult?.data?.title || '').not.toContain(
-      'Software Engineer',
-    );
-    expect(profileControllerUpdateProfileResult?.data?.title).toContain(
+    expect(
+      profileControllerGetProfileResult?.data?.location || '',
+    ).not.toContain('Software Engineer');
+    expect(profileControllerUpdateProfileResult?.data?.location).toContain(
       'Software Engineer',
     );
   });

@@ -2,6 +2,8 @@ import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
+  OpWorkSkillImportance,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import { ActivityHelper } from './utils/activity-helper';
@@ -30,14 +32,14 @@ describe('OPWork: update employer profile (e2e)', () => {
     const profileControllerUpdateProfileResult =
       await employerActivity.sdk.profileControllerSetProfile({
         body: {
-          title: 'Employer',
+          location: 'Employer',
           email: employerActivity.authUser?.email,
         },
       });
-    expect(profileControllerGetProfileResult?.data?.title || '').not.toContain(
-      'Employer',
-    );
-    expect(profileControllerUpdateProfileResult?.data?.title).toContain(
+    expect(
+      profileControllerGetProfileResult?.data?.location || '',
+    ).not.toContain('Employer');
+    expect(profileControllerUpdateProfileResult?.data?.location).toContain(
       'Employer',
     );
   });
@@ -140,23 +142,23 @@ describe('OPWork: update employer profile (e2e)', () => {
         path: { job_id: jobId || '' },
         body: {
           skillId,
-          importance: 1,
+          importance: OpWorkSkillImportance.BELOW_MEDIUM,
           isRequired: true,
-          minLevel: 1,
+          minLevel: OpWorkSkillLevel.ADVANCED,
         },
       });
 
     expect(employerWorkSkillControllerSetJobSkillResult.data).toMatchObject({
       skillId,
-      importance: 1,
+      importance: OpWorkSkillImportance.BELOW_MEDIUM,
       isRequired: true,
-      minLevel: 1,
+      minLevel: OpWorkSkillLevel.ADVANCED,
     });
   });
 
   it('Create employer job tags', async () => {
     const employerJobTagsControllerSetJobTagsResult =
-      await employerActivity.sdk.employerJobTagsControllerSetJobTags({
+      await employerActivity.sdk.employerJobTagsControllerSetJobTag({
         path: { job_id: jobId || '' },
         body: {
           name: 'MVP',
@@ -193,9 +195,9 @@ describe('OPWork: update employer profile (e2e)', () => {
           OpWorkJobSkill: [
             {
               skillId,
-              importance: 1,
+              importance: OpWorkSkillImportance.BELOW_MEDIUM,
               isRequired: true,
-              minLevel: 1,
+              minLevel: OpWorkSkillLevel.ADVANCED,
             },
           ],
           description: 'This is a test description.',

@@ -2,6 +2,8 @@ import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
+  OpWorkSkillImportance,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import {
@@ -62,7 +64,7 @@ describe('Resume: search (e2e)', () => {
     const profileControllerSetProfileResult = await employerActivity.sdk
       .profileControllerSetProfile({
         body: {
-          title: 'Employer1',
+          location: 'Employer1',
           email: employerActivity.authUser?.email,
         },
       })
@@ -118,9 +120,9 @@ describe('Resume: search (e2e)', () => {
           path: { job_id: employeJobControllerSetJobResult?.id || '' },
           body: {
             skillName: employer1SkillName,
-            importance: 1,
+            importance: OpWorkSkillImportance.HIGH,
             isRequired: true,
-            minLevel: 1,
+            minLevel: OpWorkSkillLevel.ADVANCED,
           },
         })
         .then(async ({ data }) => data);
@@ -137,7 +139,7 @@ describe('Resume: search (e2e)', () => {
     const profileControllerSetProfileResult = await jobSeeker1Activity.sdk
       .profileControllerSetProfile({
         body: {
-          title: `Software Engineer ${jobSeeker1Activity.randomSha7}`,
+          location: `Software Engineer ${jobSeeker1Activity.randomSha7}`,
           email: jobSeeker1Activity.authUser?.email,
         },
       })
@@ -172,7 +174,7 @@ describe('Resume: search (e2e)', () => {
     const profileControllerSetProfileResult = await jobSeeker2Activity.sdk
       .profileControllerSetProfile({
         body: {
-          title: `Software Engineer ${jobSeeker2Activity.randomSha7}`,
+          location: `Software Engineer ${jobSeeker2Activity.randomSha7}`,
           email: jobSeeker2Activity.authUser?.email,
         },
       })

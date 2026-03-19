@@ -2,6 +2,7 @@ import {
   OpWorkEducationDegree,
   OpWorkEmploymentType,
   OpWorkGrade,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import { ActivityHelper } from './utils/activity-helper';
@@ -31,14 +32,14 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     const profileControllerUpdateProfileResult =
       await jobSeekerActivity.sdk.profileControllerSetProfile({
         body: {
-          title: 'Software Engineer',
+          location: 'Software Engineer',
           email: jobSeekerActivity.authUser?.email,
         },
       });
-    expect(profileControllerGetProfileResult?.data?.title || '').not.toContain(
-      'Software Engineer',
-    );
-    expect(profileControllerUpdateProfileResult?.data?.title).toContain(
+    expect(
+      profileControllerGetProfileResult?.data?.location || '',
+    ).not.toContain('Software Engineer');
+    expect(profileControllerUpdateProfileResult?.data?.location).toContain(
       'Software Engineer',
     );
   });
@@ -144,7 +145,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     const jobSeekerControllerSetSkillResult =
       await jobSeekerActivity.sdk.jobSeekerSkillControllerSetSkill({
         body: {
-          level: 5,
+          level: OpWorkSkillLevel.ADVANCED,
           isPrimary: true,
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
@@ -153,7 +154,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
         },
       });
     expect(jobSeekerControllerSetSkillResult.data).toMatchObject({
-      level: 5,
+      level: OpWorkSkillLevel.ADVANCED,
       isPrimary: true,
       lastUsed: new Date('2020-09-01').toISOString(),
       yearsOfExp: 2,
@@ -167,7 +168,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
     const jobSeekerSkillControllerSetSkillResult =
       await jobSeekerActivity.sdk.jobSeekerSkillControllerSetSkill({
         body: {
-          level: 5,
+          level: OpWorkSkillLevel.ADVANCED,
           isPrimary: true,
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
@@ -180,7 +181,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       jobSeekerControllerSetSkillResultId,
     );
     expect(jobSeekerSkillControllerSetSkillResult.data).toMatchObject({
-      level: 5,
+      level: OpWorkSkillLevel.ADVANCED,
       isPrimary: true,
       lastUsed: new Date('2020-09-01').toISOString(),
       yearsOfExp: 2,
@@ -195,7 +196,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       await jobSeekerActivity.sdk.jobSeekerSkillControllerSetSkill({
         body: {
           id: jobSeekerControllerSetSkillResultId,
-          level: 6,
+          level: OpWorkSkillLevel.EXPERT,
           isPrimary: true,
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
@@ -205,7 +206,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       });
     expect(jobSeekerSkillControllerSetSkillResult.data).toMatchObject({
       id: jobSeekerControllerSetSkillResultId,
-      level: 6,
+      level: OpWorkSkillLevel.EXPERT,
       isPrimary: true,
       lastUsed: new Date('2020-09-01').toISOString(),
       yearsOfExp: 2,
@@ -252,7 +253,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
       ],
       OpWorkJobSeekerSkill: [
         {
-          level: 5,
+          level: OpWorkSkillLevel.ADVANCED,
           isPrimary: true,
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,
@@ -260,7 +261,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
           OpWorkSkill: { name: 'JavaScript' },
         },
         {
-          level: 6,
+          level: OpWorkSkillLevel.EXPERT,
           isPrimary: true,
           lastUsed: new Date('2020-09-01').toISOString(),
           yearsOfExp: 2,

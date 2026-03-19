@@ -3,6 +3,8 @@ import {
   OpWorkEmploymentType,
   OpWorkExperienceLevel,
   OpWorkJobStatus,
+  OpWorkSkillImportance,
+  OpWorkSkillLevel,
 } from '../src/generated/prisma/enums';
 import { UserType } from '../src/types/auth-types';
 import {
@@ -55,7 +57,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const profileControllerSetProfileResult = await employerActivity.sdk
       .profileControllerSetProfile({
         body: {
-          title: 'Employer1',
+          location: 'Employer1',
           email: employerActivity.authUser?.email,
         },
       })
@@ -111,9 +113,9 @@ describe('Vacancy: work with applications (e2e)', () => {
           path: { job_id: employeJobControllerSetJobResult?.id || '' },
           body: {
             skillName: employerSkillName,
-            importance: 1,
+            importance: OpWorkSkillImportance.HIGH,
             isRequired: true,
-            minLevel: 1,
+            minLevel: OpWorkSkillLevel.ADVANCED,
           },
         })
         .then(async ({ data }) => data);
@@ -130,7 +132,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const profileControllerSetProfileResult = await jobSeekerActivity.sdk
       .profileControllerSetProfile({
         body: {
-          title: `Software Engineer ${jobSeekerActivity.randomSha7}`,
+          location: `Software Engineer ${jobSeekerActivity.randomSha7}`,
           email: jobSeekerActivity.authUser?.email,
         },
       })
