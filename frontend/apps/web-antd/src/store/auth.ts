@@ -11,13 +11,15 @@ import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
 import { $t } from '#/locales';
-import { authService } from '#/services/AuthService';
-import { opWorkProfileService } from '#/services/ProfileService';
+import { useAppAuthStore } from '#/services/AuthService';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
   const userStore = useUserStore();
   const router = useRouter();
+  const appAuthStore = useAppAuthStore();
+  const appOpWorkProfileStore = useAppOpWorkProfileStore();
 
   const loginLoading = ref(false);
 
@@ -29,12 +31,12 @@ export const useAuthStore = defineStore('auth', () => {
     let authUser: AuthUser | null = null;
     try {
       loginLoading.value = true;
-      authUser = await authService.login(params);
+      authUser = await appAuthStore.login(params);
 
       userStore.setUserInfo({
         avatar: '',
         realName: '',
-        userId: authUser?.id,
+        userId: authUser?.id || '',
         username: '',
       });
       accessStore.setAccessToken(params.email || '');
@@ -67,8 +69,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout(redirect: boolean = true) {
     try {
-      await authService.clean();
-      await opWorkProfileService.clean();
+      appAuthStore.clean();
+      appOpWorkProfileStore.clean();
     } catch {
       // 不做任何处理
     }
@@ -88,11 +90,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function fetchUserInfo() {
     let authUser: AuthUser | null = null;
-    authUser = await authService.getProfile();
+    authUser = await appAuthStore.getProfile();
     const userInfo = {
       avatar: '',
       realName: '',
-      userId: authUser?.id,
+      userId: authUser?.id || '',
       username: '',
     };
     userStore.setUserInfo(userInfo);

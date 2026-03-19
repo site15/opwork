@@ -1,105 +1,111 @@
-import type { SetProfileArgs } from '#/generated/client';
+import type { OpWorkProfileDto, SetProfileArgs } from '#/generated/client';
+
+import { ref, watch } from 'vue';
+
+import { defineStore } from 'pinia';
 
 import {
   profileControllerGetAllProfiles,
   profileControllerGetProfile,
   profileControllerSetProfile,
 } from '#/generated/client';
+import { unwrap } from '#/utils/unwrap';
 
 import { client } from '../generated/client/client.gen';
 
 export const X_PROFILE_ID = 'x-profile-id';
 
-export class OpWorkProfileService {
-  async checkAccess() {
-    return localStorage.getItem('profileId') !== null;
-  }
+export const useAppOpWorkProfileStore = defineStore(
+  'opWorkProfileStore',
+  () => {
+    const profile = ref<null | OpWorkProfileDto>(null);
+    const profileId = ref<null | string>(null);
 
-  async clean() {
-    this.setProfileId(null);
-  }
+    function syncHeader(id: null | string) {
+      const config = client.getConfig();
 
-  async getProfile() {
-    try {
-      const result = await profileControllerGetProfile();
-
-      if (result?.error) {
-        throw Object.assign(
-          new Error((result.error as any).error || 'Failed to get profile'),
-          result.error,
-        );
-      }
-      this.setProfileId(result.data.id);
-      return result.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
-
-  getProfileId() {
-    return localStorage.getItem('profileId');
-  }
-
-  async getProfiles() {
-    try {
-      const result = await profileControllerGetAllProfiles();
-
-      if (result?.error) {
-        throw Object.assign(
-          new Error((result.error as any).error || 'Failed to get profiles'),
-          result.error,
-        );
-      }
-      return result.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
-
-  init() {
-    const profileId = this.getProfileId();
-    if (profileId) {
       client.setConfig({
+        ...config,
         headers: {
-          [X_PROFILE_ID]: profileId,
+          ...config.headers,
+          [X_PROFILE_ID]: id,
         },
       });
     }
-  }
 
-  async setProfile(profile: SetProfileArgs) {
-    try {
-      const result = await profileControllerSetProfile({ body: profile });
+    watch(profileId, syncHeader, { immediate: true });
 
-      if (result?.error) {
-        throw Object.assign(
-          new Error((result.error as any).error || 'Failed to get profile'),
-          result.error,
-        );
-      }
-      return result.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
+    function checkAccess() {
+      return profileId.value !== null;
     }
-  }
 
-  setProfileId(profileId: null | string) {
-    const config = client.getConfig();
-    client.setConfig({
-      ...config,
-      headers: {
-        ...config.headers,
-        [X_PROFILE_ID]: profileId,
-      },
-    });
-    if (profileId) {
-      return localStorage.setItem('profileId', profileId);
+    function clean() {
+      profile.value = null;
+      profileId.value = null;
     }
-    return localStorage.removeItem('profileId');
-  }
-}
 
-export const opWorkProfileService = new OpWorkProfileService();
+    function setProfileId(id: null | string) {
+      profileId.value = id;
+    }
+
+    async function getProfile() {
+      const result = unwrap(
+        await profileControllerGetProfile(),
+        'Failed to get profile',
+      );
+
+      profile.value = result;
+      setProfileId(result.id);
+
+      return result;
+    }
+
+    async function getProfiles() {
+      const result = unwrap(
+        await profileControllerGetAllProfiles(),
+        'Failed to get profiles',
+      );
+
+      return result;
+    }
+
+    async function setProfile(payload: SetProfileArgs) {
+      const result = unwrap(
+        await profileControllerSetProfile({
+          body: payload,
+        }),
+        'Failed to set profile',
+      );
+
+      profile.value = result;
+      setProfileId(result.id);
+
+      return result;
+    }
+
+    function $reset() {
+      clean();
+    }
+
+    return {
+      profile,
+      profileId,
+      clean,
+      checkAccess,
+      getProfile,
+      getProfiles,
+      setProfile,
+      setProfileId,
+      $reset,
+    };
+  },
+  {
+    persist: {
+      key: 'op-work-profile',
+      storage: localStorage,
+
+      // 💡 важно: сохраняем только нужное
+      pick: ['profileId'],
+    },
+  },
+);

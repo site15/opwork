@@ -5,7 +5,7 @@ import { useVbenModal } from '@vben/common-ui';
 import { createIconifyIcon } from '@vben/icons';
 import { $t } from '@vben/locales';
 
-import { opWorkProfileService } from '#/services/ProfileService';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import { VbenIconButton } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/components';
 import RadioGroup from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/radio-group/RadioGroup.vue';
@@ -13,6 +13,7 @@ import RadioGroupItem from '../../../../../../packages/@core/ui-kit/shadcn-ui/sr
 
 const ProfileIcon = createIconifyIcon('fluent-mdl2:account-management');
 
+const appOpWorkProfileStore = useAppOpWorkProfileStore();
 const currentProfileIdRef = ref<string | undefined>();
 
 const availableProfilesRef = ref<
@@ -28,7 +29,7 @@ const [Modal, modalApi] = useVbenModal({
     try {
       modalApi.setState({ confirmLoading: true });
       const currentProfileId = unref(currentProfileIdRef);
-      opWorkProfileService.setProfileId(currentProfileId || null);
+      appOpWorkProfileStore.setProfileId(currentProfileId || null);
       modalApi.close();
     } finally {
       modalApi.setState({ confirmLoading: false });
@@ -36,14 +37,14 @@ const [Modal, modalApi] = useVbenModal({
   },
   async onOpenChange(isOpen) {
     if (isOpen) {
-      const profileId = opWorkProfileService.getProfileId();
+      const profileId = appOpWorkProfileStore.profileId;
       if (profileId) {
         currentProfileIdRef.value = profileId;
       } else {
-        const opWorkProfile = await opWorkProfileService.getProfile();
+        const opWorkProfile = await appOpWorkProfileStore.getProfile();
         currentProfileIdRef.value = opWorkProfile.id;
       }
-      availableProfilesRef.value = await opWorkProfileService
+      availableProfilesRef.value = await appOpWorkProfileStore
         .getProfiles()
         .then((items) =>
           items.map((item) => ({

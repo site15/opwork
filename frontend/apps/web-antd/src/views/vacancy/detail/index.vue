@@ -11,6 +11,7 @@ import {
   vacancyControllerFindOne,
 } from '#/generated/client';
 import { $t } from '#/locales';
+import { authService } from '#/services/AuthService';
 
 defineOptions({ name: 'VacancyDetail' });
 
@@ -60,6 +61,9 @@ onMounted(() => {
   // Load initial data with empty filters
   currentFilters.value = { id: route.params.id as string };
   loadVacany();
+  authService.onAuthStateChanged(() => {
+    loadVacany();
+  });
 });
 </script>
 
