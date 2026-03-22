@@ -10,8 +10,6 @@ import dayjs from 'dayjs';
 import {
   jobSeekerControllerGetProfile,
   jobSeekerControllerSetProfile,
-  profileControllerGetProfile,
-  profileControllerSetProfile,
 } from '#/generated/client';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
@@ -19,7 +17,6 @@ import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
 import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardFooter.vue';
 import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
-import { useOpWorkProfileFormSchema } from '../OpWorkProfileData';
 import OpWorkEducationList from './OpWorkEducation/OpWorkEducationList.vue';
 import OpWorkExperienceList from './OpWorkExperience/OpWorkExperienceList.vue';
 import { useOpWorkJobSeekerFormSchema } from './OpWorkJobSeekerData';
@@ -31,8 +28,8 @@ const loading = ref(false);
 
 const loadProfile = () => {
   loading.value = true;
-  Promise.all([
-    profileControllerGetProfile().then(async (response) => {
+  jobSeekerControllerGetProfile({ path: { job_seeker_id: '' } })
+    .then(async (response) => {
       if (response.error) {
         throw new Error((response.error as any)?.message || 'Unknown error');
       }
@@ -45,30 +42,11 @@ const loadProfile = () => {
           ? dayjs(response.data.updatedAt)
           : undefined,
       };
-      profileFormApi.setValues(values);
-    }),
-    jobSeekerControllerGetProfile({ path: { job_seeker_id: '' } }).then(
-      async (response) => {
-        if (response.error) {
-          throw new Error((response.error as any)?.message || 'Unknown error');
-        }
-        const values = {
-          ...response.data,
-          createdAt: response.data?.createdAt
-            ? dayjs(response.data.createdAt)
-            : undefined,
-          updatedAt: response.data?.updatedAt
-            ? dayjs(response.data.updatedAt)
-            : undefined,
-        };
-        jobSeekerProfileFormApi.setValues(values);
-      },
-    ),
-  ])
+      jobSeekerProfileFormApi.setValues(values);
+    })
     .catch((error) => {
       console.error('Error fetching profile:', error);
       jobSeekerProfileFormApi.setValues({});
-      profileFormApi.setValues({});
     })
     .finally(() => {
       loading.value = false;
@@ -81,61 +59,34 @@ const [JobSeekerProfileForm, jobSeekerProfileFormApi] = useVbenForm({
   showDefaultActions: false,
 });
 
-const [ProfileForm, profileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
-  schema: useOpWorkProfileFormSchema(),
-  showDefaultActions: false,
-});
-
 const submit = async () => {
   //
   const { valid: jobSeekerValid } = await jobSeekerProfileFormApi.validate();
   if (!jobSeekerValid) return;
   const jobSeekerProfileValues = await jobSeekerProfileFormApi.getValues();
 
-  //
-  const { valid: profileValid } = await profileFormApi.validate();
-  if (!profileValid) return;
-  const profileValues = await profileFormApi.getValues();
-
-  Promise.all([
-    jobSeekerControllerSetProfile({
-      body: {
-        currentPosition: jobSeekerProfileValues.currentPosition,
-        currentCompany: jobSeekerProfileValues.currentCompany,
-        summary: jobSeekerProfileValues.summary,
-        expectedSalary: jobSeekerProfileValues.expectedSalary,
-        salaryCurrency: jobSeekerProfileValues.salaryCurrency,
-        isOpenToWork: jobSeekerProfileValues.isOpenToWork,
-        isOpenToRemote: jobSeekerProfileValues.isOpenToRemote,
-        isOpenToRelocation: jobSeekerProfileValues.isOpenToRelocation,
-        preferredLocations: jobSeekerProfileValues.preferredLocations,
-        linkedinUrl: jobSeekerProfileValues.linkedinUrl,
-        githubUrl: jobSeekerProfileValues.githubUrl,
-        portfolioUrl: jobSeekerProfileValues.portfolioUrl,
-      },
-    }).then((data) => {
+  jobSeekerControllerSetProfile({
+    body: {
+      currentPosition: jobSeekerProfileValues.currentPosition,
+      currentCompany: jobSeekerProfileValues.currentCompany,
+      summary: jobSeekerProfileValues.summary,
+      expectedSalary: jobSeekerProfileValues.expectedSalary,
+      salaryCurrency: jobSeekerProfileValues.salaryCurrency,
+      isOpenToWork: jobSeekerProfileValues.isOpenToWork,
+      isOpenToRemote: jobSeekerProfileValues.isOpenToRemote,
+      isOpenToRelocation: jobSeekerProfileValues.isOpenToRelocation,
+      preferredLocations: jobSeekerProfileValues.preferredLocations,
+      linkedinUrl: jobSeekerProfileValues.linkedinUrl,
+      githubUrl: jobSeekerProfileValues.githubUrl,
+      portfolioUrl: jobSeekerProfileValues.portfolioUrl,
+    },
+  })
+    .then((data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
       }
       return data;
-    }),
-    profileControllerSetProfile({
-      body: {
-        avatarUrl: profileValues.avatarUrl,
-        coverImage: profileValues.coverImage,
-        email: profileValues.email,
-        location: profileValues.location,
-        phone: profileValues.phone,
-        website: profileValues.website,
-      },
-    }).then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
-      return data;
-    }),
-  ])
+    })
     .then(() => {
       notification.success({
         message: $t('actions.common.updateSuccess'),
@@ -165,16 +116,6 @@ onMounted(() => {
     </div>
     <div v-else class="space-y-6">
       <Card>
-        <CardHeader class="py-4">
-          <CardTitle class="text-lg">
-            {{ $t('profile.update.title') }}
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-wrap gap-4">
-          <div class="w-full">
-            <ProfileForm />
-          </div>
-        </CardContent>
         <CardHeader class="py-4">
           <CardTitle class="text-lg">
             {{ $t('resume.update.title') }}

@@ -10,8 +10,6 @@ import dayjs from 'dayjs';
 import {
   employerControllerGetProfile,
   employerControllerSetProfile,
-  profileControllerGetProfile,
-  profileControllerSetProfile,
 } from '#/generated/client';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
@@ -19,7 +17,6 @@ import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
 import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardFooter.vue';
 import CardTitle from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardTitle.vue';
-import { useOpWorkProfileFormSchema } from '../OpWorkProfileData';
 import { useOpWorkEmployerFormSchema } from './OpWorkEmployerData';
 
 defineOptions({ name: 'EmployerProfile' });
@@ -28,8 +25,8 @@ const loading = ref(false);
 
 const loadProfile = () => {
   loading.value = true;
-  Promise.all([
-    profileControllerGetProfile().then(async (response) => {
+  employerControllerGetProfile({ path: { employer_id: '' } })
+    .then(async (response) => {
       if (response.error) {
         throw new Error((response.error as any)?.message || 'Unknown error');
       }
@@ -42,30 +39,11 @@ const loadProfile = () => {
           ? dayjs(response.data.updatedAt)
           : undefined,
       };
-      profileFormApi.setValues(values);
-    }),
-    employerControllerGetProfile({ path: { employer_id: '' } }).then(
-      async (response) => {
-        if (response.error) {
-          throw new Error((response.error as any)?.message || 'Unknown error');
-        }
-        const values = {
-          ...response.data,
-          createdAt: response.data?.createdAt
-            ? dayjs(response.data.createdAt)
-            : undefined,
-          updatedAt: response.data?.updatedAt
-            ? dayjs(response.data.updatedAt)
-            : undefined,
-        };
-        employerProfileFormApi.setValues(values);
-      },
-    ),
-  ])
+      employerProfileFormApi.setValues(values);
+    })
     .catch((error) => {
       console.error('Error fetching profile:', error);
       employerProfileFormApi.setValues({});
-      profileFormApi.setValues({});
     })
     .finally(() => {
       loading.value = false;
@@ -78,64 +56,43 @@ const [EmployerProfileForm, employerProfileFormApi] = useVbenForm({
   showDefaultActions: false,
 });
 
-const [ProfileForm, profileFormApi] = useVbenForm({
-  wrapperClass: 'grid grid-cols-1 md:grid-cols-3 gap-2',
-  schema: useOpWorkProfileFormSchema(),
-  showDefaultActions: false,
-});
-
 const submit = async () => {
   //
   const { valid: employerValid } = await employerProfileFormApi.validate();
   if (!employerValid) return;
   const employerProfileValues = await employerProfileFormApi.getValues();
 
-  //
-  const { valid: profileValid } = await profileFormApi.validate();
-  if (!profileValid) return;
-  const profileValues = await profileFormApi.getValues();
-
-  Promise.all([
-    employerControllerSetProfile({
-      body: {
-        companyName: employerProfileValues.companyName,
-        industry: employerProfileValues.industry,
-        description: employerProfileValues.description,
-        mission: employerProfileValues.mission,
-        culture: employerProfileValues.culture,
-        foundedYear: employerProfileValues.foundedYear,
-        headquarters: employerProfileValues.headquarters,
-        logoUrl: employerProfileValues.logoUrl,
-        coverImageUrl: employerProfileValues.coverImageUrl,
-        companyEmail: employerProfileValues.companyEmail,
-        companyPhone: employerProfileValues.companyPhone,
-        companyWebsite: employerProfileValues.companyWebsite,
-        linkedinUrl: employerProfileValues.linkedinUrl,
-        twitterUrl: employerProfileValues.twitterUrl,
-        facebookUrl: employerProfileValues.facebookUrl,
-      },
-    }).then((data) => {
+  employerControllerSetProfile({
+    body: {
+      companyName: employerProfileValues.companyName,
+      industry: employerProfileValues.industry,
+      description: employerProfileValues.description,
+      mission: employerProfileValues.mission,
+      culture: employerProfileValues.culture,
+      foundedYear: employerProfileValues.foundedYear,
+      headquarters: employerProfileValues.headquarters,
+      logoUrl: employerProfileValues.logoUrl,
+      coverImageUrl: employerProfileValues.coverImageUrl,
+      companyEmail: employerProfileValues.companyEmail,
+      companyPhone: employerProfileValues.companyPhone,
+      companyWebsite: employerProfileValues.companyWebsite,
+      linkedinUrl: employerProfileValues.linkedinUrl,
+      twitterUrl: employerProfileValues.twitterUrl,
+      facebookUrl: employerProfileValues.facebookUrl,
+    },
+  })
+    .then((data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
       }
       return data;
-    }),
-    profileControllerSetProfile({
-      body: {
-        avatarUrl: profileValues.avatarUrl,
-        coverImage: profileValues.coverImage,
-        email: profileValues.email,
-        location: profileValues.location,
-        phone: profileValues.phone,
-        website: profileValues.website,
-      },
-    }).then((data) => {
+    })
+    .then((data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
       }
       return data;
-    }),
-  ])
+    })
     .then(() => {
       notification.success({
         message: $t('actions.common.updateSuccess'),
@@ -165,16 +122,6 @@ onMounted(() => {
     </div>
     <div v-else class="space-y-6">
       <Card>
-        <CardHeader class="py-4">
-          <CardTitle class="text-lg">
-            {{ $t('profile.update.title') }}
-          </CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-wrap gap-4">
-          <div class="w-full">
-            <ProfileForm />
-          </div>
-        </CardContent>
         <CardHeader class="py-4">
           <CardTitle class="text-lg">
             {{ $t('employer.update.title') }}
