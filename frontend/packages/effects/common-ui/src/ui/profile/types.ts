@@ -1,8 +1,6 @@
-import type { BasicUserInfo } from '@vben/types';
-
 export interface Props {
   title?: string;
-  userInfo: BasicUserInfo | null;
+  userInfo?: null | { avatar: string; email: string };
   tabs: {
     label: string;
     value: string;

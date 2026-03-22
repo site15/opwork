@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import { Profile } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { preferences } from '@vben/preferences';
 import { useUserStore } from '@vben/stores';
+
+import { $t } from '#/locales';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import ProfileBase from './base-setting.vue';
 
 const userStore = useUserStore();
+const appOpWorkProfileStore = useAppOpWorkProfileStore();
 
 const tabsValue = ref<string>('basic');
+
+// 🔥 используем аватар из OpWork профиля, иначе из userStore
+const userInfo = computed(() => ({
+  email:
+    appOpWorkProfileStore.profile?.email ?? userStore.userInfo?.email ?? '',
+  avatar:
+    appOpWorkProfileStore.profile?.avatarUrl ??
+    userStore.userInfo?.avatar ??
+    preferences.app.defaultAvatar,
+}));
 
 const tabs = ref([
   {
@@ -34,7 +48,7 @@ const tabs = ref([
   <Profile
     v-model:model-value="tabsValue"
     :title="$t('Personal Center')"
-    :user-info="userStore.userInfo"
+    :user-info="userInfo"
     :tabs="tabs"
   >
     <template #content>

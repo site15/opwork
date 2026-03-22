@@ -7,13 +7,12 @@ import { $t } from '@vben/locales';
 import { notification } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
-import {
-  profileControllerGetProfile,
-  profileControllerSetProfile,
-} from '#/generated/client';
+import { profileControllerSetProfile } from '#/generated/client';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import { useOpWorkProfileFormSchema } from './OpWorkProfileData';
 
+const appOpWorkProfileStore = useAppOpWorkProfileStore();
 const profileBaseSettingRef = ref();
 
 const submit = async () => {
@@ -36,10 +35,12 @@ const submit = async () => {
       website: profileValues.website,
     },
   })
-    .then((data) => {
+    .then(async (data) => {
       if (data.error) {
         throw new Error((data.error as any)?.message || 'Unknown error');
       }
+      // 🔥 важно: обновляем данные в сторе после успешного обновления
+      await appOpWorkProfileStore.getProfile();
       return data;
     })
     .then(() => {
@@ -59,26 +60,43 @@ const submit = async () => {
 };
 
 const loadProfile = () => {
-  profileControllerGetProfile()
-    .then(async (response) => {
-      if (response.error) {
-        throw new Error((response.error as any)?.message || 'Unknown error');
-      }
-      const values = {
-        ...response.data,
-        createdAt: response.data?.createdAt
-          ? dayjs(response.data.createdAt)
-          : undefined,
-        updatedAt: response.data?.updatedAt
-          ? dayjs(response.data.updatedAt)
-          : undefined,
-      };
-      profileBaseSettingRef.value.getFormApi().setValues(values);
-    })
-    .catch((error) => {
-      console.error('Error fetching profile:', error);
-      profileBaseSettingRef.value.getFormApi().setValues({});
-    });
+  // 🔥 используем данные из useAppOpWorkProfileStore
+  const profileData = appOpWorkProfileStore.profile;
+
+  if (!profileData) {
+    console.warn('No profile data in store, attempting to fetch from server');
+    // Если данных нет в сторе, пробуем загрузить с сервера
+    appOpWorkProfileStore
+      .getProfile()
+      .then((fetchedProfile) => {
+        const values = {
+          ...fetchedProfile,
+          createdAt: fetchedProfile?.createdAt
+            ? dayjs(fetchedProfile.createdAt)
+            : undefined,
+          updatedAt: fetchedProfile?.updatedAt
+            ? dayjs(fetchedProfile.updatedAt)
+            : undefined,
+        };
+        profileBaseSettingRef.value.getFormApi().setValues(values);
+      })
+      .catch((error) => {
+        console.error('Error fetching profile:', error);
+        profileBaseSettingRef.value.getFormApi().setValues({});
+      });
+    return;
+  }
+
+  const values = {
+    ...profileData,
+    createdAt: profileData?.createdAt
+      ? dayjs(profileData.createdAt)
+      : undefined,
+    updatedAt: profileData?.updatedAt
+      ? dayjs(profileData.updatedAt)
+      : undefined,
+  };
+  profileBaseSettingRef.value.getFormApi().setValues(values);
 };
 
 onMounted(async () => {

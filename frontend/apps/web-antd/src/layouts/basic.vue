@@ -19,6 +19,8 @@ import { useAccessStore, useUserStore } from '@vben/stores';
 import { openWindow } from '@vben/utils';
 
 import { $t } from '#/locales';
+import { useAppAuthStore } from '#/services/AuthService';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 import { useAuthStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
 
@@ -79,7 +81,9 @@ const notifications = ref<NotificationItem[]>([
 
 const router = useRouter();
 const userStore = useUserStore();
+const appAuthStore = useAppAuthStore();
 const authStore = useAuthStore();
+const opWorkProfileStore = useAppOpWorkProfileStore();
 const accessStore = useAccessStore();
 const { destroyWatermark, updateWatermark } = useWatermark();
 const showDot = computed(() =>
@@ -106,7 +110,27 @@ const menus = computed(() => [
 ]);
 
 const avatar = computed(() => {
-  return userStore.userInfo?.avatar ?? preferences.app.defaultAvatar;
+  // 🔥 используем аватар из профиля OpWork, если есть, иначе из userStore
+  return (
+    opWorkProfileStore.profile?.avatarUrl ??
+    userStore.userInfo?.avatar ??
+    preferences.app.defaultAvatar
+  );
+});
+
+const userEmail = computed(() => {
+  // 🔥 используем email из авторизационного профиля (auth store)
+  return appAuthStore.profile?.email ?? '';
+});
+
+const isAdmin = computed(() => {
+  // 🔥 используем email из авторизационного профиля (auth store)
+  return opWorkProfileStore.profile?.userType === 'ADMIN';
+});
+
+const userName = computed(() => {
+  // 🔥 используем имя из userStore или email из auth профиля
+  return userStore.userInfo?.realName || appAuthStore.profile?.email || '';
 });
 
 async function handleLogout() {
@@ -140,8 +164,7 @@ watch(
     if (enable) {
       await updateWatermark({
         content:
-          content ||
-          `${userStore.userInfo?.username} - ${userStore.userInfo?.realName}`,
+          content || `${userStore.userInfo?.username} - ${userName.value}`,
       });
     } else {
       destroyWatermark();
@@ -159,9 +182,9 @@ watch(
       <UserDropdown
         :avatar
         :menus
-        :text="userStore.userInfo?.realName"
-        description="ann.vben@gmail.com"
-        tag-text="Pro"
+        :text="userName"
+        :description="userEmail"
+        :tag-text="isAdmin ? 'Admin' : ''"
         @logout="handleLogout"
       />
     </template>
