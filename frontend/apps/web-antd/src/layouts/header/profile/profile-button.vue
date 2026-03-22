@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { useVbenModal } from '@vben/common-ui';
 import { createIconifyIcon } from '@vben/icons';
@@ -14,6 +15,7 @@ import RadioGroupItem from '../../../../../../packages/@core/ui-kit/shadcn-ui/sr
 const ProfileIcon = createIconifyIcon('fluent-mdl2:account-management');
 
 const appOpWorkProfileStore = useAppOpWorkProfileStore();
+const router = useRouter();
 const currentProfileIdRef = ref<string | undefined>();
 
 const availableProfilesRef = ref<
@@ -29,8 +31,18 @@ const [Modal, modalApi] = useVbenModal({
     try {
       modalApi.setState({ confirmLoading: true });
       const currentProfileId = unref(currentProfileIdRef);
-      appOpWorkProfileStore.setProfileId(currentProfileId || null);
+
+      // 🔥 важно: обновляем профиль и хедер СРАЗУ
+      // updateProfileHeader синхронно установит x-profile-id в хедере
+      appOpWorkProfileStore.updateProfileHeader(currentProfileId || null);
+
+      // Загружаем актуальный профиль с сервера (уже с новым profile-id в хедере)
+      await appOpWorkProfileStore.getProfile();
+
       modalApi.close();
+
+      // Переходим на домашнюю страницу
+      await router.push('/');
     } finally {
       modalApi.setState({ confirmLoading: false });
     }
@@ -48,7 +60,7 @@ const [Modal, modalApi] = useVbenModal({
         .getProfiles()
         .then((items) =>
           items.map((item) => ({
-            label: `${item.description || item.title || item.email} (${$t(`resource.OpWorkProfileType.${item.type}`)})`,
+            label: `${item.email} (${$t(`resource.OpWorkProfileType.${item.type}`)})`,
             value: item.id,
           })),
         );

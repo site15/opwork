@@ -1,47 +1,47 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+import type { TPermissions } from '#/router/guard';
+
 import { $t } from '#/locales';
 
 const routes: RouteRecordRaw[] = [
   {
+    name: 'VacancySearch',
+    path: '/vacancy/search',
+    component: () => import('#/views/vacancy/search/index.vue'),
     meta: {
-      icon: 'lucide:file-user',
-      order: -1,
-      title: $t('page.resume.title'),
+      icon: 'lucide:search',
+      title: $t('page.vacancy.search'),
+      permissions: {
+        type: ['SPECIALIST'],
+      } satisfies TPermissions,
     },
-    name: 'Resume',
-    path: '/resume',
-    children: [
-      {
-        name: 'VacancySearch',
-        path: '/vacancy/search',
-        component: () => import('#/views/vacancy/search/index.vue'),
-        meta: {
-          icon: 'lucide:search',
-          title: $t('page.vacancy.search'),
-        },
-      },
-      {
-        name: 'SpecialistProfile',
-        path: '/profile/specialist',
-        component: () => import('#/views/profile/specialist/index.vue'),
-        meta: {
-          affixTab: true,
-          icon: 'lucide:square-user-round',
-          title: $t('page.profile.specialist'),
-        },
-      },
-      {
-        name: 'ResumeDetail',
-        path: '/resume/:id',
-        component: () => import('#/views/resume/detail/index.vue'),
-        meta: {
-          hideInMenu: true,
-          icon: 'lucide:briefcase-business',
-          title: $t('page.resume.detail'),
-        },
-      },
-    ],
+  },
+  {
+    name: 'SpecialistProfile',
+    path: '/profile/specialist',
+    component: () => import('#/views/profile/specialist/index.vue'),
+    meta: {
+      affixTab: true,
+      icon: 'lucide:square-user-round',
+      title: $t('page.profile.specialist'),
+      permissions: {
+        type: ['SPECIALIST'],
+      } satisfies TPermissions,
+    },
+  },
+  {
+    name: 'ResumeDetail',
+    path: '/resume/:id',
+    component: () => import('#/views/resume/detail/index.vue'),
+    meta: {
+      hideInMenu: true,
+      icon: 'lucide:briefcase-business',
+      title: $t('page.resume.detail'),
+      permissions: {
+        type: ['SPECIALIST'],
+      } satisfies TPermissions,
+    },
   },
 ];
 

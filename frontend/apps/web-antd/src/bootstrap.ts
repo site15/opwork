@@ -10,11 +10,14 @@ import '@vben/styles/antd';
 import { useTitle } from '@vueuse/core';
 
 import { $t, setupI18n } from '#/locales';
+import { useAppAuthStore } from '#/services/AuthService';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import { initComponentAdapter } from './adapter/component';
 import { initSetupVbenForm } from './adapter/form';
 import App from './app.vue';
 import { router } from './router';
+import { setupProfileWatcher } from './router/guard';
 
 async function bootstrap(namespace: string) {
   // 初始化组件适配器
@@ -46,6 +49,12 @@ async function bootstrap(namespace: string) {
   // 配置 pinia-tore
   await initStores(app, { namespace });
 
+  // 🔥 важно: инициализируем хедеры сессии ДО установки роутера
+  const appAuthStore = useAppAuthStore();
+  const appOpWorkProfileStore = useAppOpWorkProfileStore();
+  appAuthStore.init();
+  appOpWorkProfileStore.init();
+
   // 安装权限指令
   registerAccessDirective(app);
 
@@ -71,6 +80,8 @@ async function bootstrap(namespace: string) {
   });
 
   app.mount('#app');
+
+  setupProfileWatcher(router);
 }
 
 export { bootstrap };

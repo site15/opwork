@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { OpWorkJob } from '#/generated/client';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { confirm } from '@vben/common-ui';
@@ -11,14 +11,23 @@ import {
   vacancyControllerFindOne,
 } from '#/generated/client';
 import { $t } from '#/locales';
-import { authService } from '#/services/AuthService';
+import { useAppAuthStore } from '#/services/AuthService';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 defineOptions({ name: 'VacancyDetail' });
 
 const route = useRoute();
+const appAuthStore = useAppAuthStore();
+const appOpWorkProfileStore = useAppOpWorkProfileStore();
 
 const vacancy = ref<null | OpWorkJob>(null);
 const loading = ref(false);
+
+// Проверка прав на редактирование/удаление
+const canEditOrDelete = computed(() => {
+  const profile = appOpWorkProfileStore.profile;
+  return profile && profile.type === 'EMPLOYER';
+});
 
 const handleDeleteClick = () => {
   confirm(
@@ -61,7 +70,7 @@ onMounted(() => {
   // Load initial data with empty filters
   currentFilters.value = { id: route.params.id as string };
   loadVacany();
-  authService.onAuthStateChanged(() => {
+  appAuthStore.$subscribe(() => {
     loadVacany();
   });
 });
@@ -130,21 +139,23 @@ onMounted(() => {
             </div>
           </div>
           <div class="flex items-center space-x-3">
-            <!--кнопки-->
-            <button
-              type="button"
-              class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-              @click="$router.push(`/vacancy/${vacancy.id}/edit`)"
-            >
-              {{ $t('common.edit') }}
-            </button>
-            <button
-              type="button"
-              class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
-              @click="handleDeleteClick()"
-            >
-              {{ $t('common.delete') }}
-            </button>
+            <!--кнопки - только для SPECIALIST и EMPLOYER-->
+            <template v-if="canEditOrDelete">
+              <button
+                type="button"
+                class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+                @click="$router.push(`/vacancy/${vacancy.id}/edit`)"
+              >
+                {{ $t('common.edit') }}
+              </button>
+              <button
+                type="button"
+                class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
+                @click="handleDeleteClick()"
+              >
+                {{ $t('common.delete') }}
+              </button>
+            </template>
           </div>
         </div>
       </div>

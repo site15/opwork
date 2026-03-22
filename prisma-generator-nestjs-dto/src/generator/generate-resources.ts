@@ -92,6 +92,7 @@ export const generateResourcesIndex = ({
   return `import type { RouteRecordRaw } from 'vue-router';
 
 import { $t } from '#/locales';
+import type { TPermissions } from '#/router/guard';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -103,6 +104,9 @@ const routes: RouteRecordRaw[] = [
     },
     name: '${pascal(namespace)}',
     path: '/${namespace}',
+    permissions: {
+      userTypes: ['ADMIN'],
+    } satisfies TPermissions,
     children: [
       ${resourceEntries}
     ],

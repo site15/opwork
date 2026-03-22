@@ -35,6 +35,16 @@ export const useAppOpWorkProfileStore = defineStore(
 
     watch(profileId, syncHeader, { immediate: true });
 
+    function init() {
+      syncHeader(profileId.value);
+    }
+
+    // 🔥 явно вызываем для синхронного обновления хедера
+    function updateProfileHeader(id: null | string) {
+      profileId.value = id;
+      syncHeader(id);
+    }
+
     function checkAccess() {
       return profileId.value !== null;
     }
@@ -88,6 +98,7 @@ export const useAppOpWorkProfileStore = defineStore(
     }
 
     return {
+      init,
       profile,
       profileId,
       clean,
@@ -96,6 +107,7 @@ export const useAppOpWorkProfileStore = defineStore(
       getProfiles,
       setProfile,
       setProfileId,
+      updateProfileHeader,
       $reset,
     };
   },

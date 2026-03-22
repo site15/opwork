@@ -89,8 +89,10 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
+    console.log('fetchUserInfo');
     let authUser: AuthUser | null = null;
     authUser = await appAuthStore.getProfile();
+    await appOpWorkProfileStore.getProfile();
     const userInfo = {
       avatar: '',
       realName: '',

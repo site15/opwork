@@ -77,6 +77,7 @@ export const useAccessStore = defineStore('core-access', {
       this.accessCodes = codes;
     },
     setAccessMenus(menus: MenuRecordRaw[]) {
+      console.log('setAccessMenus', menus, Date.now());
       this.accessMenus = menus;
     },
     setAccessRoutes(routes: RouteRecordRaw[]) {

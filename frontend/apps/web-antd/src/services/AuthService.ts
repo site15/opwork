@@ -32,6 +32,10 @@ export const useAppAuthStore = defineStore(
     // 🔥 реактивная магия вместо init()
     watch(sessionId, syncHeader, { immediate: true });
 
+    function init() {
+      syncHeader(sessionId.value);
+    }
+
     // ================= ACTIONS =================
 
     function checkAccess() {
@@ -96,6 +100,8 @@ export const useAppAuthStore = defineStore(
     }
 
     return {
+      init,
+
       // state
       sessionId,
       profile,
