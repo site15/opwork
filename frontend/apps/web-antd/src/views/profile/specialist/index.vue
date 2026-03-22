@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 
-import { useVbenForm } from '@vben/common-ui';
+import { useVbenForm, VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { Button, notification } from 'ant-design-vue';
+import { notification } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
 import {
@@ -129,10 +129,10 @@ onMounted(() => {
             <OpWorkJobSeekerSkillList />
           </div>
         </CardContent>
-        <CardFooter class="flex flex-wrap justify-end gap-2">
-          <Button type="primary" @click="submit">
+        <CardFooter class="gap-2">
+          <VbenButton type="primary" class="mt-4" @click="submit">
             {{ $t('common.update') }}
-          </Button>
+          </VbenButton>
         </CardFooter>
       </Card>
     </div>

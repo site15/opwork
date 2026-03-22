@@ -3,45 +3,37 @@ import { computed, ref } from 'vue';
 
 import { Profile } from '@vben/common-ui';
 import { preferences } from '@vben/preferences';
-import { useUserStore } from '@vben/stores';
 
 import { $t } from '#/locales';
+import { useAppAuthStore } from '#/services/AuthService';
 import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import ProfileBase from './base-setting.vue';
+import ProfileEmailSetting from './email-setting.vue';
+import ProfilePasswordSetting from './password-setting.vue';
 
-const userStore = useUserStore();
 const appOpWorkProfileStore = useAppOpWorkProfileStore();
+const appAuthStore = useAppAuthStore();
 
 const tabsValue = ref<string>('basic');
 
 // 🔥 используем аватар из OpWork профиля, иначе из userStore
 const userInfo = computed(() => ({
   email:
-    appOpWorkProfileStore.profile?.email ?? userStore.userInfo?.email ?? '',
+    appAuthStore.profile?.email ?? appOpWorkProfileStore.profile?.email ?? '',
   avatar:
-    appOpWorkProfileStore.profile?.avatarUrl ??
-    userStore.userInfo?.avatar ??
-    preferences.app.defaultAvatar,
+    appOpWorkProfileStore.profile?.avatarUrl ?? preferences.app.defaultAvatar,
 }));
 
 const tabs = ref([
   {
-    label: $t('Basic Settings'),
+    label: $t('profile.basicSettings'),
     value: 'basic',
-  } /* ,
-  {
-    label: $t('Security Settings'),
-    value: 'security',
   },
   {
-    label: $t('Password Modification'),
-    value: 'password',
+    label: $t('profile.emailAndPasswordSettings'),
+    value: 'email-password',
   },
-  {
-    label: $t('New Message Reminder'),
-    value: 'notice',
-  },*/,
 ]);
 </script>
 <template>
@@ -53,11 +45,10 @@ const tabs = ref([
   >
     <template #content>
       <ProfileBase v-if="tabsValue === 'basic'" />
-      <!--
-      <ProfileSecuritySetting v-if="tabsValue === 'security'" />
-      <ProfilePasswordSetting v-if="tabsValue === 'password'" />
-      <ProfileNotificationSetting v-if="tabsValue === 'notice'" />
-      -->
+      <div v-if="tabsValue === 'email-password'" class="flex flex-col gap-4">
+        <ProfileEmailSetting />
+        <ProfilePasswordSetting />
+      </div>
     </template>
   </Profile>
 </template>

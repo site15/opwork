@@ -1,5 +1,31 @@
 {
   "update": {
     "title": "Мой профиль"
-  }
+  },
+  "contactInfo": "Контактная информация",
+  "media": "Медиа",
+  "updateBasicProfile": "Изменить",
+  "updatePassword": "Обновить пароль",
+  "emailSettings": "Настройки Email",
+  "passwordSettings": "Настройки Пароля",
+  "currentPassword": "Текущий пароль",
+  "currentPasswordTip": "Введите текущий пароль",
+  "newPassword": "Новый пароль",
+  "newPasswordTip": "Введите новый пароль",
+  "confirmPassword": "Подтвердить пароль",
+  "confirmPasswordTip": "Повторите новый пароль",
+  "newEmail": "Новый Email",
+  "newEmailTip": "Введите новый адрес электронной почты",
+  "passwordRequired": "Пароль обязателен",
+  "passwordMinLength": "Пароль должен содержать не менее 6 символов",
+  "confirmPasswordRequired": "Подтверждение пароля обязательно",
+  "passwordMismatch": "Пароли не совпадают",
+  "emailRequired": "Email обязателен",
+  "emailInvalidFormat": "Неверный формат Email",
+  "passwordChangeSuccess": "Пароль успешно изменен",
+  "passwordChangeFailed": "Не удалось изменить пароль",
+  "emailChangeSuccess": "Email успешно изменен",
+  "emailChangeFailed": "Не удалось изменить Email",
+  "basicSettings": "Основная информация",
+  "emailAndPasswordSettings": "Настройки Email и Пароля"
 }

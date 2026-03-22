@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { VbenButton } from '@vben/common-ui';
+
 import { useVbenForm } from '#/adapter/form';
 
-import Button from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/components/button/button.vue';
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
 import CardFooter from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardFooter.vue';
@@ -49,10 +50,12 @@ const handleReset = async () => {
       </div>
     </CardContent>
     <CardFooter class="flex flex-wrap gap-2">
-      <Button type="primary" @click="handleSearch">
+      <VbenButton class="mt-4" type="primary" @click="handleSearch">
         {{ $t('common.filter.search') }}
-      </Button>
-      <Button @click="handleReset">{{ $t('common.filter.reset') }}</Button>
+      </VbenButton>
+      <VbenButton class="mt-4" @click="handleReset">
+        {{ $t('common.filter.reset') }}
+      </VbenButton>
     </CardFooter>
   </Card>
 </template>

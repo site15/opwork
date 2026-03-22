@@ -5,6 +5,8 @@ import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 
 import {
+  authControllerChangeEmail,
+  authControllerChangePassword,
   authControllerInfo,
   authControllerSignIn,
   authControllerSignUp,
@@ -132,6 +134,52 @@ export const useAppAuthStore = defineStore(
       }
     }
 
+    async function changePassword({
+      currentPassword,
+      newPassword,
+    }: {
+      currentPassword: string;
+      newPassword: string;
+    }) {
+      try {
+        const data = unwrap(
+          await authControllerChangePassword({
+            body: { currentPassword, newPassword },
+          }),
+          'Failed to change password',
+        );
+
+        return data;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
+
+    async function changeEmail({ newEmail }: { newEmail: string }) {
+      try {
+        const data = unwrap(
+          await authControllerChangeEmail({
+            body: { newEmail },
+          }),
+          'Failed to change email',
+        );
+
+        // Update profile in store if available
+        if (profile.value) {
+          profile.value = {
+            ...profile.value,
+            email: newEmail,
+          };
+        }
+
+        return data;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
+
     function $reset() {
       clean();
     }
@@ -144,6 +192,8 @@ export const useAppAuthStore = defineStore(
       profile,
 
       // actions
+      changeEmail,
+      changePassword,
       register,
       checkAccess,
       clean,

@@ -1793,6 +1793,24 @@ export type SignInResponse = {
     profile: AuthUser;
 };
 
+export type ChangePasswordArgs = {
+    /**
+     * Current password for verification
+     */
+    currentPassword: string;
+    /**
+     * New password to set
+     */
+    newPassword: string;
+};
+
+export type ChangeEmailArgs = {
+    /**
+     * New email address
+     */
+    newEmail: string;
+};
+
 export type SetProfileArgs = {
     email?: string | null;
     phone?: string | null;
@@ -4213,6 +4231,44 @@ export type AuthControllerSignInResponses = {
 };
 
 export type AuthControllerSignInResponse = AuthControllerSignInResponses[keyof AuthControllerSignInResponses];
+
+export type AuthControllerChangePasswordData = {
+    body: ChangePasswordArgs;
+    path?: never;
+    query?: never;
+    url: '/api/auth/change-password';
+};
+
+export type AuthControllerChangePasswordErrors = {
+    default: StatusResponse;
+};
+
+export type AuthControllerChangePasswordError = AuthControllerChangePasswordErrors[keyof AuthControllerChangePasswordErrors];
+
+export type AuthControllerChangePasswordResponses = {
+    200: StatusResponse;
+};
+
+export type AuthControllerChangePasswordResponse = AuthControllerChangePasswordResponses[keyof AuthControllerChangePasswordResponses];
+
+export type AuthControllerChangeEmailData = {
+    body: ChangeEmailArgs;
+    path?: never;
+    query?: never;
+    url: '/api/auth/change-email';
+};
+
+export type AuthControllerChangeEmailErrors = {
+    default: StatusResponse;
+};
+
+export type AuthControllerChangeEmailError = AuthControllerChangeEmailErrors[keyof AuthControllerChangeEmailErrors];
+
+export type AuthControllerChangeEmailResponses = {
+    200: StatusResponse;
+};
+
+export type AuthControllerChangeEmailResponse = AuthControllerChangeEmailResponses[keyof AuthControllerChangeEmailResponses];
 
 export type ProfileControllerGetProfileData = {
     body?: never;

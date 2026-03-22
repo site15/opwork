@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Post,
+  Put,
+} from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -12,6 +20,8 @@ import { OpWorkProfileType } from '../generated/prisma/enums';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import {
+  ChangeEmailArgs,
+  ChangePasswordArgs,
   SignInArgs,
   SignInResponse,
   SignUpArgs,
@@ -20,7 +30,7 @@ import {
 } from '../types/auth-types';
 import { AppRequest } from '../types/request';
 import { StatusResponse } from '../types/status-response';
-import { verifyPassword } from '../utils/hashPassword';
+import { hashPassword, verifyPassword } from '../utils/hashPassword';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -94,6 +104,67 @@ export class AuthController {
     }
 
     return { sessionId: session.id, profile: user };
+  }
+
+  @HttpCode(200)
+  @ApiOkResponse({ type: StatusResponse })
+  @Post('change-password')
+  async changePassword(
+    @CurrentAppRequest() req: AppRequest,
+    @Body() body: ChangePasswordArgs,
+  ): Promise<StatusResponse> {
+    const user = await this.prismaService.authUser.findUnique({
+      where: { id: req.authUserId },
+      select: { password: true },
+    });
+
+    if (!user || !user.password) {
+      throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
+    }
+
+    // Verify current password
+    const isCurrentPasswordValid = verifyPassword(
+      body.currentPassword,
+      user.password,
+    );
+    if (!isCurrentPasswordValid) {
+      throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);
+    }
+
+    // Hash and update new password
+    await this.prismaService.authUser.update({
+      where: { id: req.authUserId },
+      data: { password: body.newPassword },
+    });
+
+    return { message: 'ok' };
+  }
+
+  @HttpCode(200)
+  @ApiOkResponse({ type: StatusResponse })
+  @Post('change-email')
+  async changeEmail(
+    @CurrentAppRequest() req: AppRequest,
+    @Body() body: ChangeEmailArgs,
+  ): Promise<StatusResponse> {
+    // Check if email already exists
+    const existingUser = await this.prismaService.authUser.findFirst({
+      where: {
+        email: { equals: body.newEmail || null, mode: 'insensitive' },
+      },
+    });
+
+    if (existingUser && existingUser.id !== req.authUserId) {
+      throw new AuthError(AuthErrorEnum.ALREADY_EXISTS);
+    }
+
+    // Update email
+    await this.prismaService.authUser.update({
+      where: { id: req.authUserId },
+      data: { email: body.newEmail },
+    });
+
+    return { message: 'ok' };
   }
 
   private async getOrCreateOpWorkProfile({

@@ -2,10 +2,10 @@
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useVbenForm } from '@vben/common-ui';
+import { useVbenForm, VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { Button, notification } from 'ant-design-vue';
+import { notification } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
 import {
@@ -150,10 +150,10 @@ onMounted(() => {
             <OpWorkJobSkillList :job-id="currentFilters?.id" />
           </div>
         </CardContent>
-        <CardFooter class="flex flex-wrap justify-end gap-2">
-          <Button type="primary" @click="submit">
+        <CardFooter class="gap-2">
+          <VbenButton type="primary" class="mt-4" @click="submit">
             {{ currentFilters?.id ? $t('common.update') : $t('common.create') }}
-          </Button>
+          </VbenButton>
         </CardFooter>
       </Card>
     </div>

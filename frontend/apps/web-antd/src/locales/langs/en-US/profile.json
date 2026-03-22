@@ -1,5 +1,31 @@
 {
   "update": {
     "title": "Title"
-  }
+  },
+  "contactInfo": "Contact Info",
+  "media": "Media",
+  "updateBasicProfile": "Update Basic Profile",
+  "updatePassword": "Update Password",
+  "emailSettings": "Email Settings",
+  "newEmail": "New Email",
+  "newEmailTip": "New Email Tip",
+  "emailRequired": "Email Required",
+  "emailInvalidFormat": "Email Invalid Format",
+  "emailChangeSuccess": "Email Change Success",
+  "emailChangeFailed": "Email Change Failed",
+  "basicSettings": "Basic Settings",
+  "emailAndPasswordSettings": "Email And Password Settings",
+  "passwordSettings": "Password Settings",
+  "currentPassword": "Current Password",
+  "currentPasswordTip": "Current Password Tip",
+  "passwordRequired": "Password Required",
+  "newPassword": "New Password",
+  "newPasswordTip": "New Password Tip",
+  "passwordMinLength": "Password Min Length",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordTip": "Confirm Password Tip",
+  "confirmPasswordRequired": "Confirm Password Required",
+  "passwordMismatch": "Password Mismatch",
+  "passwordChangeSuccess": "Password Change Success",
+  "passwordChangeFailed": "Password Change Failed"
 }

@@ -1,6 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  MinLength,
+} from 'class-validator';
 import { AuthUser } from '../generated/rest/auth-user.entity';
 
 // Enums
@@ -81,4 +88,39 @@ export class SignUpArgs {
   })
   @IsNotEmpty()
   userType!: UserType;
+}
+
+// Change password DTOs
+export class ChangePasswordArgs {
+  @ApiProperty({
+    type: 'string',
+    description: 'Current password for verification',
+  })
+  @Transform((p) => (p.value ? p.value.trim() : p.value))
+  @IsNotEmpty()
+  @IsString()
+  currentPassword!: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'New password to set',
+    minLength: 6,
+  })
+  @Transform((p) => (p.value ? p.value.trim() : p.value))
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(6, { message: 'Password must be at least 6 characters long' })
+  newPassword!: string;
+}
+
+// Change email DTOs
+export class ChangeEmailArgs {
+  @ApiProperty({
+    type: 'string',
+    description: 'New email address',
+  })
+  @Transform((p) => (p.value ? p.value.trim() : p.value))
+  @IsNotEmpty()
+  @IsEmail({}, { message: 'Invalid email format' })
+  newEmail!: string;
 }

@@ -1,47 +1,74 @@
 <script setup lang="ts">
 import type { VbenFormSchema } from '#/adapter/form';
 
-import { computed } from 'vue';
+import { computed, h, ref } from 'vue';
 
 import { ProfilePasswordSetting, z } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message } from 'ant-design-vue';
 
+import { useAppAuthStore } from '#/services/AuthService';
+
+const authStore = useAppAuthStore();
+const loading = ref(false);
+
 const formSchema = computed((): VbenFormSchema[] => {
   return [
+    // Разделитель секций
+    {
+      component: 'Divider',
+      fieldName: '_contact_info_divider',
+      hideLabel: true,
+      formItemClass: 'col-span-full items-baseline',
+      renderComponentContent: () => ({
+        default: () => h('div', $t('profile.passwordSettings')),
+      }),
+    },
     {
       fieldName: 'oldPassword',
-      label: '旧密码',
+      label: $t('profile.currentPassword'),
       component: 'VbenInputPassword',
       componentProps: {
-        placeholder: '请输入旧密码',
+        placeholder: $t('profile.currentPasswordTip'),
       },
+      labelWidth: 200,
+      controlClass: 'w-full',
+      labelClass: 'text-right',
+      rules: z.string().min(1, { message: $t('profile.passwordRequired') }),
     },
     {
       fieldName: 'newPassword',
-      label: '新密码',
+      label: $t('profile.newPassword'),
       component: 'VbenInputPassword',
       componentProps: {
         passwordStrength: true,
-        placeholder: '请输入新密码',
+        placeholder: $t('profile.newPasswordTip'),
       },
+      labelWidth: 200,
+      controlClass: 'w-full',
+      labelClass: 'text-right',
+      rules: z.string().min(6, { message: $t('profile.passwordMinLength') }),
     },
     {
       fieldName: 'confirmPassword',
-      label: '确认密码',
+      label: $t('profile.confirmPassword'),
       component: 'VbenInputPassword',
       componentProps: {
         passwordStrength: true,
-        placeholder: '请再次输入新密码',
+        placeholder: $t('profile.confirmPasswordTip'),
       },
+      labelWidth: 200,
+      controlClass: 'w-full',
+      labelClass: 'text-right',
       dependencies: {
         rules(values) {
           const { newPassword } = values;
           return z
-            .string({ required_error: '请再次输入新密码' })
-            .min(1, { message: '请再次输入新密码' })
+            .string({ required_error: $t('profile.confirmPasswordRequired') })
+            .min(1, { message: $t('profile.confirmPasswordRequired') })
             .refine((value) => value === newPassword, {
-              message: '两次输入的密码不一致',
+              message: $t('profile.passwordMismatch'),
             });
         },
         triggerFields: ['newPassword'],
@@ -50,14 +77,31 @@ const formSchema = computed((): VbenFormSchema[] => {
   ];
 });
 
-function handleSubmit() {
-  message.success('密码修改成功');
+async function handleSubmit(values: Record<string, any>) {
+  try {
+    loading.value = true;
+    await authStore.changePassword({
+      currentPassword: values.oldPassword,
+      newPassword: values.newPassword,
+    });
+    message.success($t('profile.passwordChangeSuccess'));
+  } catch (error) {
+    console.error('Password change error:', error);
+    message.error(
+      error instanceof Error
+        ? error.message
+        : $t('profile.passwordChangeFailed'),
+    );
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 <template>
   <ProfilePasswordSetting
     class="w-1/3"
     :form-schema="formSchema"
+    :loading="loading"
     @submit="handleSubmit"
   />
 </template>
