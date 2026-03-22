@@ -5,7 +5,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useVbenForm } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { notification } from 'ant-design-vue';
+import { Button, notification } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
 import {
@@ -151,12 +151,9 @@ onMounted(() => {
           </div>
         </CardContent>
         <CardFooter class="flex flex-wrap justify-end gap-2">
-          <button
-            class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-            @click="submit"
-          >
+          <Button type="primary" @click="submit">
             {{ currentFilters?.id ? $t('common.update') : $t('common.create') }}
-          </button>
+          </Button>
         </CardFooter>
       </Card>
     </div>

@@ -4,6 +4,8 @@ import type { OpWorkJobSeeker } from '#/generated/client';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { Button } from 'ant-design-vue';
+
 import { $t } from '#/locales';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -217,29 +219,34 @@ const handleItemClick = (item: OpWorkJobSeeker) => {
           }}
         </div>
         <div class="flex flex-wrap items-center justify-center gap-2">
-          <button
+          <Button
+            type="default"
             @click="handlePageChange(1)"
             :disabled="pagination.currentPage <= 1"
-            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.first') }}
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="default"
             @click="handlePageChange(Math.max(1, pagination.currentPage - 1))"
             :disabled="pagination.currentPage <= 1"
-            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.prev') }}
-          </button>
+          </Button>
 
-          <span
-            class="relative inline-flex min-w-[40px] items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700"
+          <Button
+            type="default"
+            class="relative inline-flex min-w-[40px] items-center"
+            :disabled="true"
           >
             {{ pagination.currentPage }}
-          </span>
+          </Button>
 
-          <button
+          <Button
+            type="default"
             @click="
               handlePageChange(
                 Math.min(
@@ -252,12 +259,13 @@ const handleItemClick = (item: OpWorkJobSeeker) => {
               pagination.currentPage >=
               Math.ceil(pagination.total / pagination.pageSize)
             "
-            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.next') }}
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="default"
             @click="
               handlePageChange(
                 Math.ceil(pagination.total / pagination.pageSize),
@@ -267,10 +275,10 @@ const handleItemClick = (item: OpWorkJobSeeker) => {
               pagination.currentPage >=
               Math.ceil(pagination.total / pagination.pageSize)
             "
-            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.last') }}
-          </button>
+          </Button>
         </div>
       </div>
     </CardContent>

@@ -6,6 +6,8 @@ import { useRoute } from 'vue-router';
 
 import { confirm } from '@vben/common-ui';
 
+import { Button } from 'ant-design-vue';
+
 import {
   employeJobControllerDelJob,
   vacancyControllerFindOne,
@@ -141,20 +143,15 @@ onMounted(() => {
           <div class="flex items-center space-x-3">
             <!--кнопки - только для SPECIALIST и EMPLOYER-->
             <template v-if="canEditOrDelete">
-              <button
-                type="button"
-                class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+              <Button
+                type="primary"
                 @click="$router.push(`/vacancy/${vacancy.id}/edit`)"
               >
                 {{ $t('common.edit') }}
-              </button>
-              <button
-                type="button"
-                class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
-                @click="handleDeleteClick()"
-              >
+              </Button>
+              <Button type="default" @click="handleDeleteClick()">
                 {{ $t('common.delete') }}
-              </button>
+              </Button>
             </template>
           </div>
         </div>

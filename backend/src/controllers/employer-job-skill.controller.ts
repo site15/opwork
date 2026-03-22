@@ -19,7 +19,9 @@ import { StatusResponse } from '../types/status-response';
 import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { OpWorkUserType } from '../generated/prisma/enums';
 
-@CheckOpWorkUserTypes([{ userTypes: [OpWorkUserType.EMPLOYER] }])
+@CheckOpWorkUserTypes([
+  { userTypes: [OpWorkUserType.EMPLOYER, OpWorkUserType.ADMIN] },
+])
 @ApiTags('employer')
 @Controller('employer/job-skill')
 export class EmployerWorkSkillController {
