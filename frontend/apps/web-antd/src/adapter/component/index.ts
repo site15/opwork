@@ -320,7 +320,7 @@ const withPreviewUpload = () => {
                     {
                       class: `${aspectRatio ? '' : 'hidden'} ml-2 text-sm text-gray-400 font-normal`,
                     },
-                    $t('ui.crop.titleTip', [aspectRatio]),
+                    $t('ui.crop.title', [aspectRatio]),
                   ),
                 ]),
                 centered: true,
@@ -342,7 +342,7 @@ const withPreviewUpload = () => {
                     const dataUrl = await cropper.getCropImage();
                     resolve(dataUrl);
                   } catch {
-                    reject(new Error($t('ui.crop.errorTip')));
+                    reject(new Error($t('ui.crop.error')));
                   } finally {
                     closeModal();
                   }
@@ -410,7 +410,7 @@ const withPreviewUpload = () => {
           const blob = await cropImage(originFileList[0], aspectRatio.value);
           return new Promise((resolve, reject) => {
             if (!blob) {
-              return reject(new Error($t('ui.crop.errorTip')));
+              return reject(new Error($t('ui.crop.error')));
             }
             resolve(blob);
           });

@@ -7,8 +7,12 @@ import { computed, h, ref } from 'vue';
 import { AuthenticationRegister, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
+import { OpWorkUserType } from '#/generated/prisma/enums';
+import { useAuthStore } from '#/store';
+
 defineOptions({ name: 'Register' });
 
+const authStore = useAuthStore();
 const loading = ref(false);
 
 const formSchema = computed((): VbenFormSchema[] => {
@@ -16,11 +20,11 @@ const formSchema = computed((): VbenFormSchema[] => {
     {
       component: 'VbenInput',
       componentProps: {
-        placeholder: $t('authentication.usernameTip'),
+        placeholder: $t('authentication.email'),
       },
-      fieldName: 'username',
-      label: $t('authentication.username'),
-      rules: z.string().min(1, { message: $t('authentication.usernameTip') }),
+      fieldName: 'email',
+      label: $t('authentication.email'),
+      rules: z.string().min(1, { message: $t('authentication.email') }),
     },
     {
       component: 'VbenInputPassword',
@@ -35,7 +39,7 @@ const formSchema = computed((): VbenFormSchema[] => {
           strengthText: () => $t('authentication.passwordStrength'),
         };
       },
-      rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
+      rules: z.string().min(1, { message: $t('authentication.password') }),
     },
     {
       component: 'VbenInputPassword',
@@ -46,16 +50,34 @@ const formSchema = computed((): VbenFormSchema[] => {
         rules(values) {
           const { password } = values;
           return z
-            .string({ required_error: $t('authentication.passwordTip') })
-            .min(1, { message: $t('authentication.passwordTip') })
+            .string({ required_error: $t('authentication.password') })
+            .min(1, { message: $t('authentication.password') })
             .refine((value) => value === password, {
-              message: $t('authentication.confirmPasswordTip'),
+              message: $t('authentication.confirmPassword'),
             });
         },
         triggerFields: ['password'],
       },
       fieldName: 'confirmPassword',
       label: $t('authentication.confirmPassword'),
+    },
+    {
+      component: 'VbenSelect',
+      componentProps: {
+        placeholder: $t('authentication.selectUserType'),
+        options: [
+          {
+            label: $t('authentication.userTypeJobSeeker'),
+            value: OpWorkUserType.JOB_SEEKER,
+          },
+          {
+            label: $t('authentication.userTypeEmployer'),
+            value: OpWorkUserType.EMPLOYER,
+          },
+        ],
+      },
+      fieldName: 'userType',
+      label: $t('authentication.userType'),
     },
     {
       component: 'VbenCheckbox',
@@ -75,14 +97,26 @@ const formSchema = computed((): VbenFormSchema[] => {
           ]),
       }),
       rules: z.boolean().refine((value) => !!value, {
-        message: $t('authentication.agreeTip'),
+        message: $t('authentication.agree'),
       }),
     },
   ];
 });
 
-function handleSubmit(value: Recordable<any>) {
-  console.log('register submit:', value);
+async function handleSubmit(value: Recordable<any>) {
+  try {
+    loading.value = true;
+
+    await authStore.authRegister({
+      email: value.email,
+      password: value.password,
+      userType: value.userType,
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

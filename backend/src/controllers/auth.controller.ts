@@ -62,6 +62,18 @@ export class AuthController {
     if (args.userType) {
       await this.getOrCreateOpWorkProfile({ userType: args.userType, user });
     }
+    if (args.userType === UserType.JOB_SEEKER) {
+      await this.getOrCreateOpWorkProfile({
+        userType: UserType.EMPLOYER,
+        user,
+      });
+    }
+    if (args.userType === UserType.EMPLOYER) {
+      await this.getOrCreateOpWorkProfile({
+        userType: UserType.JOB_SEEKER,
+        user,
+      });
+    }
 
     return { sessionId: session.id, profile: user };
   }

@@ -173,7 +173,7 @@ defineExpose({
 
     <slot name="to-register">
       <div v-if="showRegister" class="mt-3 text-center text-sm">
-        {{ $t('authentication.accountTip') }}
+        {{ $t('authentication.account') }}
         <span
           class="vben-link text-sm font-normal"
           @click="handleGo(registerPath)"

@@ -36,7 +36,7 @@ const stylesItems: SelectOption[] = [
   >
     {{ $t('preferences.navigationMenu.split') }}
     <template #tip>
-      {{ $t('preferences.navigationMenu.splitTip') }}
+      {{ $t('preferences.navigationMenu.split') }}
     </template>
   </SwitchItem>
   <SwitchItem v-model="navigationAccordion" :disabled="disabled">

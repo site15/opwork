@@ -51,7 +51,7 @@ const [Form, { form, validate, getFieldComponentRef }] = useVbenForm(
         },
         fieldName: 'password',
         label: $t('authentication.password'),
-        rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
+        rules: z.string().min(1, { message: $t('authentication.password') }),
       },
     ]),
     showDefaultActions: false,
@@ -68,7 +68,7 @@ async function handleSubmit() {
     if (validPass.value) {
       accessStore.unlockScreen();
     } else {
-      form.setFieldError('password', $t('authentication.passwordErrorTip'));
+      form.setFieldError('password', $t('authentication.passwordError'));
     }
   }
 }

@@ -6,10 +6,9 @@
     "selectRequired": "Выбор обязателен"
   },
   "crop": {
-    "title": "Заголовок",
-    "titleTip": "Совет по заголовку",
+    "title": "Совет по заголовку",
     "confirm": "Подтвердить",
-    "errorTip": "Ошибка"
+    "error": "Ошибка"
   },
   "placeholder": {
     "upload": "Загрузить",

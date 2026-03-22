@@ -44,12 +44,14 @@ export class EmployerWorkSkillController {
   @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJobSkillDto, isArray: true })
   async getJobSkills(
+    @CurrentAppRequest() req: AppRequest,
     @Param('job_id', new ParseUUIDPipe()) jobId: string,
   ): Promise<OpWorkJobSkillDto[]> {
     return await this.prismaService.opWorkJobSkill.findMany({
       include: { OpWorkSkill: true },
       where: {
         OpWorkJob: { id: jobId },
+        profileId: req.opWorkProfileId,
       },
     });
   }
@@ -65,7 +67,10 @@ export class EmployerWorkSkillController {
       args.skillId = (
         (await this.prismaService.opWorkSkill.findFirst({
           include: { OpWorkProfile: true },
-          where: { name: args.skillName },
+          where: {
+            name: args.skillName,
+            profileId: req.opWorkProfileId,
+          },
         })) ||
         (await this.prismaService.opWorkSkill.create({
           include: { OpWorkProfile: true },
@@ -110,7 +115,10 @@ export class EmployerWorkSkillController {
     @Param('job_skill_id', new ParseUUIDPipe()) jobSkillId: string,
   ): Promise<StatusResponse> {
     await this.prismaService.opWorkJobSkill.delete({
-      where: { id: jobSkillId },
+      where: {
+        id: jobSkillId,
+        profileId: req.opWorkProfileId,
+      },
     });
     return { message: 'ok' };
   }

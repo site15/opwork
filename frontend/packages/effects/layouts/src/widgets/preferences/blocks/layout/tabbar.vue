@@ -62,7 +62,7 @@ const styleItems = computed((): SelectOption[] => [
     :max="30"
     :min="0"
     :step="5"
-    :tip="$t('preferences.tabbar.maxCountTip')"
+    :tip="$t('preferences.tabbar.maxCount')"
   >
     {{ $t('preferences.tabbar.maxCount') }}
   </NumberFieldItem>
@@ -72,7 +72,7 @@ const styleItems = computed((): SelectOption[] => [
   <SwitchItem
     v-model="tabbarWheelable"
     :disabled="!tabbarEnable"
-    :tip="$t('preferences.tabbar.wheelableTip')"
+    :tip="$t('preferences.tabbar.wheelable')"
   >
     {{ $t('preferences.tabbar.wheelable') }}
   </SwitchItem>

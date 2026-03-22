@@ -54,7 +54,7 @@ const handleCheckboxChange = () => {
   <SwitchItem
     v-model="sidebarExpandOnHover"
     :disabled="!sidebarEnable || disabled || !sidebarCollapsed"
-    :tip="$t('preferences.sidebar.expandOnHoverTip')"
+    :tip="$t('preferences.sidebar.expandOnHover')"
   >
     {{ $t('preferences.sidebar.expandOnHover') }}
   </SwitchItem>
@@ -73,7 +73,7 @@ const handleCheckboxChange = () => {
       ) ||
       disabled
     "
-    :tip="$t('preferences.sidebar.autoActivateChildTip')"
+    :tip="$t('preferences.sidebar.autoActivateChild')"
   >
     {{ $t('preferences.sidebar.autoActivateChild') }}
   </SwitchItem>

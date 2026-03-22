@@ -66,6 +66,7 @@ export class JobSeekerController {
       (await this.prismaService.opWorkJobSeeker.findFirst({
         where: {
           id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+          profileId: req.opWorkProfileId,
         },
       })) || null;
     if (opWorkJobSeeker) {
@@ -77,6 +78,7 @@ export class JobSeekerController {
         },
         where: {
           id: opWorkJobSeeker.id,
+          profileId: req.opWorkProfileId,
         },
         data: {
           currentCompany: args.currentCompany,

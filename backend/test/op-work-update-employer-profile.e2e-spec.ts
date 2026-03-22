@@ -183,6 +183,15 @@ describe('OPWork: update employer profile (e2e)', () => {
       await employerActivity.sdk.employerControllerGetProfile({
         path: { employer_id: employerControllerSetProfileResultId || '' },
       });
+
+    expect(employerControllerGetProfileResult.data?.OpWorkJob).toHaveLength(1);
+    expect(
+      employerControllerGetProfileResult.data?.OpWorkJob?.[0].OpWorkJobSkill,
+    ).toHaveLength(1);
+    expect(
+      employerControllerGetProfileResult.data?.OpWorkJob?.[0].opWorkJobTags,
+    ).toHaveLength(1);
+
     expect(employerControllerGetProfileResult.data).toMatchObject({
       OpWorkJob: [
         {

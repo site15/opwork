@@ -152,10 +152,10 @@ const imgCls = computed(() => {
 
 const verifyTip = computed(() => {
   return state.isPassing
-    ? $t('ui.captcha.sliderRotateSuccessTip', [
+    ? $t('ui.captcha.sliderRotateSuccess', [
         ((state.endTime - state.startTime) / 1000).toFixed(1),
       ])
-    : $t('ui.captcha.sliderRotateFailTip');
+    : $t('ui.captcha.sliderRotateFail');
 });
 
 defineExpose({
@@ -182,7 +182,7 @@ defineExpose({
         class="absolute bottom-3 left-0 z-10 block h-7 w-full text-center text-xs leading-[30px] text-white"
       >
         <div
-          v-if="state.showTip"
+          v-if="state.show"
           :class="{
             'bg-success/80': state.isPassing,
             'bg-destructive/80': !state.isPassing,
@@ -191,7 +191,7 @@ defineExpose({
           {{ verifyTip }}
         </div>
         <div v-if="!state.dragging" class="bg-black/30">
-          {{ defaultTip || $t('ui.captcha.sliderRotateDefaultTip') }}
+          {{ defaultTip || $t('ui.captcha.sliderRotateDefault') }}
         </div>
       </div>
     </div>

@@ -43,11 +43,13 @@ export class EmployerJobTagsController {
   @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJobTagDto, isArray: true })
   async getJobTags(
+    @CurrentAppRequest() req: AppRequest,
     @Param('job_id', new ParseUUIDPipe()) jobId: string,
   ): Promise<OpWorkJobTagDto[]> {
     return await this.prismaService.opWorkJobTag.findMany({
       where: {
         OpWorkJob: { id: jobId },
+        profileId: req.opWorkProfileId,
       },
     });
   }
@@ -61,7 +63,10 @@ export class EmployerJobTagsController {
   ): Promise<OpWorkJobTagDto> {
     if (args.id) {
       return await this.prismaService.opWorkJobTag.update({
-        where: { id: args.id },
+        where: {
+          id: args.id,
+          profileId: req.opWorkProfileId,
+        },
         data: {
           color: args.color,
           name: args.name,
@@ -86,7 +91,10 @@ export class EmployerJobTagsController {
     @Param('job_tag_id', new ParseUUIDPipe()) jobTagId: string,
   ): Promise<StatusResponse> {
     await this.prismaService.opWorkJobTag.delete({
-      where: { id: jobTagId },
+      where: {
+        id: jobTagId,
+        profileId: req.opWorkProfileId,
+      },
     });
     return { message: 'ok' };
   }

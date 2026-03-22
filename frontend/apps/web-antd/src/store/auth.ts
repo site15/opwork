@@ -1,4 +1,4 @@
-import type { AuthUser } from '#/generated/client';
+import type { AuthUser, UserType } from '#/generated/client';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -67,6 +67,50 @@ export const useAuthStore = defineStore('auth', () => {
     };
   }
 
+  async function authRegister(
+    params: { email: string; password: string; userType: UserType },
+    onSuccess?: () => Promise<void> | void,
+  ) {
+    // 异步处理用户登录操作并获取 accessToken
+    let authUser: AuthUser | null = null;
+    try {
+      loginLoading.value = true;
+      authUser = await appAuthStore.register(params);
+
+      userStore.setUserInfo({
+        avatar: '',
+        realName: '',
+        userId: authUser?.id || '',
+        username: '',
+      });
+      accessStore.setAccessToken(params.email || '');
+
+      onSuccess
+        ? await onSuccess?.()
+        : await router.push(preferences.app.defaultHomePath);
+
+      if (authUser?.id) {
+        notification.success({
+          message: $t('authentication.registerSuccess'),
+          description: `${$t('authentication.registerSuccessDesc')}:${authUser?.id}`,
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: error instanceof Error ? error.message : '',
+        description: $t('authentication.registerFailedDesc'),
+        duration: 3000,
+      });
+    } finally {
+      loginLoading.value = false;
+    }
+
+    return {
+      authUser,
+    };
+  }
+
   async function logout(redirect: boolean = true) {
     try {
       appAuthStore.clean();
@@ -110,6 +154,7 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     $reset,
     authLogin,
+    authRegister,
     fetchUserInfo,
     loginLoading,
     logout,

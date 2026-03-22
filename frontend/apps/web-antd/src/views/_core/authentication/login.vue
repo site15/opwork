@@ -17,20 +17,20 @@ const formSchema = computed((): VbenFormSchema[] => {
     {
       component: 'VbenInput',
       componentProps: {
-        placeholder: $t('authentication.emailTip'),
+        placeholder: $t('authentication.email'),
       },
       fieldName: 'email',
       label: $t('authentication.email'),
-      rules: z.string().min(1, { message: $t('authentication.emailTip') }),
+      rules: z.string().min(1, { message: $t('authentication.email') }),
     },
     {
       component: 'VbenInputPassword',
       componentProps: {
-        placeholder: $t('authentication.passwordTip'),
+        placeholder: $t('authentication.password'),
       },
       fieldName: 'password',
       label: $t('authentication.password'),
-      rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
+      rules: z.string().min(1, { message: $t('authentication.password') }),
     },
   ];
 });

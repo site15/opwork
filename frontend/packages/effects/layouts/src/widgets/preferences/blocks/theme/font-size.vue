@@ -56,7 +56,7 @@ watch(
       <span class="text-muted-foreground whitespace-nowrap text-xs">px</span>
     </div>
     <div class="text-muted-foreground text-xs">
-      {{ $t('preferences.theme.fontSizeTip') }}
+      {{ $t('preferences.theme.fontSize') }}
     </div>
   </div>
 </template>

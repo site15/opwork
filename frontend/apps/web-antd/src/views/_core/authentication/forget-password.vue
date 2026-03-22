@@ -22,8 +22,8 @@ const formSchema = computed((): VbenFormSchema[] => {
       label: $t('authentication.email'),
       rules: z
         .string()
-        .min(1, { message: $t('authentication.emailTip') })
-        .email($t('authentication.emailValidErrorTip')),
+        .min(1, { message: $t('authentication.email') })
+        .email($t('authentication.emailValidError')),
     },
   ];
 });

@@ -36,6 +36,7 @@ export class JobSeekerSkillController {
       include: { OpWorkSkill: true },
       where: {
         jobSeekerId: req.firstOpWorkJobSeeker?.id,
+        profileId: req.opWorkProfileId,
       },
     });
   }
@@ -53,6 +54,7 @@ export class JobSeekerSkillController {
             include: { OpWorkProfile: true },
             where: {
               name: args.skillName,
+              profileId: req.opWorkProfileId,
             },
           })
         )?.id || undefined;
@@ -75,6 +77,7 @@ export class JobSeekerSkillController {
         where: {
           id: args.id,
           OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+          profileId: req.opWorkProfileId,
         },
         data: {
           isPrimary: args.isPrimary,
@@ -89,6 +92,7 @@ export class JobSeekerSkillController {
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
             id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+            profileId: req.opWorkProfileId,
           },
         });
 
@@ -121,6 +125,7 @@ export class JobSeekerSkillController {
       where: {
         id: jobSeekerSkillId,
         OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+        profileId: req.opWorkProfileId,
       },
     });
     return { message: 'ok' };

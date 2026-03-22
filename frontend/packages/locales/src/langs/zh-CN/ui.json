@@ -33,12 +33,12 @@
     "title": "请完成安全验证",
     "sliderSuccessText": "验证通过",
     "sliderDefaultText": "请按住滑块拖动",
-    "sliderRotateDefaultTip": "点击图片可刷新",
-    "sliderTranslateDefaultTip": "点击图片可刷新",
-    "sliderRotateFailTip": "验证失败",
-    "sliderRotateSuccessTip": "验证成功，耗时{0}秒",
-    "sliderTranslateFailTip": "验证失败",
-    "sliderTranslateSuccessTip": "验证成功，耗时{0}秒",
+    "sliderRotateDefault": "点击图片可刷新",
+    "sliderTranslateDefault": "点击图片可刷新",
+    "sliderRotateFail": "验证失败",
+    "sliderRotateSuccess": "验证成功，耗时{0}秒",
+    "sliderTranslateFail": "验证失败",
+    "sliderTranslateSuccess": "验证成功，耗时{0}秒",
     "alt": "支持img标签src属性值",
     "refreshAriaLabel": "刷新验证码",
     "confirmAriaLabel": "确认选择",
@@ -56,10 +56,9 @@
   },
   "crop": {
     "title": "图片裁剪",
-    "titleTip": "裁剪比例 {0}",
     "confirm": "裁剪",
     "cancel": "取消裁剪",
-    "errorTip": "裁剪错误"
+    "error": "裁剪错误"
   },
   "fallback": {
     "pageNotFound": "哎呀！未找到页面",
@@ -86,7 +85,7 @@
     "document": "文档",
     "qa": "问题 & 帮助",
     "setting": "设置",
-    "logoutTip": "是否退出登录？",
+    "logout": "是否退出登录？",
     "viewAll": "查看所有消息",
     "notifications": "通知",
     "markAllAsRead": "全部标记为已读",
@@ -109,7 +108,7 @@
       "password": "密码",
       "placeholder": "请输入锁屏密码",
       "unlock": "点击解锁",
-      "errorPasswordTip": "密码错误，请重新输入",
+      "errorPassword": "密码错误，请重新输入",
       "backToLogin": "返回登录",
       "entry": "进入系统"
     },

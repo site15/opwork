@@ -41,7 +41,6 @@ export class SignInArgs {
   @ApiPropertyOptional({
     enum: UserType,
     enumName: 'UserType',
-    nullable: true,
   })
   @IsOptional()
   userType?: UserType;
@@ -75,11 +74,11 @@ export class SignUpArgs {
   @IsNotEmpty()
   password!: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     enum: UserType,
     enumName: 'UserType',
-    nullable: true,
+    required: true,
   })
-  @IsOptional()
-  userType?: UserType;
+  @IsNotEmpty()
+  userType!: UserType;
 }

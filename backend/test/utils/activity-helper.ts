@@ -43,9 +43,12 @@ export class ActivityHelper {
   }
 
   async register(args: SignInArgs) {
+    if (!args.userType) {
+      throw new Error('User type is required');
+    }
     try {
       const result = await this.sdk.authControllerSignUp({
-        body: args,
+        body: { ...args, userType: args.userType! },
       });
       this.authSessionId = result.data?.sessionId || null;
       this.authUser = result.data?.profile || null;

@@ -68,6 +68,7 @@ export class EmployerController {
     let opWorkEmployer = await this.prismaService.opWorkEmployer.findFirst({
       where: {
         id: args.id || req.firstOpWorkEmployer?.id,
+        profileId: req.opWorkProfileId,
       },
     });
     if (opWorkEmployer) {
@@ -82,6 +83,7 @@ export class EmployerController {
         },
         where: {
           id: opWorkEmployer.id,
+          profileId: req.opWorkProfileId,
         },
         data: {
           companyEmail: args.companyEmail,

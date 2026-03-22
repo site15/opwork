@@ -35,6 +35,7 @@ export class JobSeekerEducationController {
     return await this.prismaService.opWorkEducation.findMany({
       where: {
         jobSeekerId: req.firstOpWorkJobSeeker?.id,
+        profileId: req.opWorkProfileId,
       },
     });
   }
@@ -50,6 +51,7 @@ export class JobSeekerEducationController {
         where: {
           id: args.id,
           OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+          profileId: req.opWorkProfileId,
         },
         data: {
           degree: args.degree,
@@ -67,6 +69,7 @@ export class JobSeekerEducationController {
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
             id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+            profileId: req.opWorkProfileId,
           },
         });
       return await this.prismaService.opWorkEducation.create({
@@ -100,6 +103,7 @@ export class JobSeekerEducationController {
       where: {
         id: educationId,
         OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+        profileId: req.opWorkProfileId,
       },
     });
     return { message: 'ok' };

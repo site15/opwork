@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+import type { TPermissions } from '#/router/guard';
+
 import { $t } from '#/locales';
 
 const routes: RouteRecordRaw[] = [
@@ -9,6 +11,9 @@ const routes: RouteRecordRaw[] = [
       keepAlive: true,
       order: 1001,
       title: $t('page.resource.op-work'),
+      permissions: {
+        userTypes: ['ADMIN'],
+      } satisfies TPermissions,
     },
     name: 'OpWork',
     path: '/op-work',

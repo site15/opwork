@@ -60,7 +60,9 @@ const [Modal, modalApi] = useVbenModal({
         .getProfiles()
         .then((items) =>
           items.map((item) => ({
-            label: `${item.email} (${$t(`resource.OpWorkProfileType.${item.type}`)})`,
+            label: item.email
+              ? `${item.email} (${$t(`resource.OpWorkProfileType.${item.type}`)})`
+              : $t(`resource.OpWorkProfileType.${item.type}`),
             value: item.id,
           })),
         );

@@ -1,8 +1,14 @@
+import type { UserType } from '#/generated/client';
+
 import { ref, watch } from 'vue';
 
 import { defineStore } from 'pinia';
 
-import { authControllerInfo, authControllerSignIn } from '#/generated/client';
+import {
+  authControllerInfo,
+  authControllerSignIn,
+  authControllerSignUp,
+} from '#/generated/client';
 import { unwrap } from '#/utils/unwrap';
 
 import { client } from '../generated/client/client.gen';
@@ -95,6 +101,37 @@ export const useAppAuthStore = defineStore(
       }
     }
 
+    async function register({
+      email,
+      password,
+      userType,
+    }: {
+      email: string;
+      password: string;
+      userType: UserType;
+    }) {
+      try {
+        const data = unwrap(
+          await authControllerSignUp({
+            body: { email, password, userType },
+          }),
+          'Registration failed, please try again',
+        );
+
+        sessionId.value = data.sessionId;
+        profile.value = data.profile;
+
+        return data.profile;
+      } catch (error) {
+        // важно: сбрасываем состояние при ошибке
+        sessionId.value = null;
+        profile.value = null;
+
+        console.error(error);
+        throw error;
+      }
+    }
+
     function $reset() {
       clean();
     }
@@ -107,6 +144,7 @@ export const useAppAuthStore = defineStore(
       profile,
 
       // actions
+      register,
       checkAccess,
       clean,
       getProfile,

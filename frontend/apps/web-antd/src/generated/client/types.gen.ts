@@ -1774,7 +1774,7 @@ export type UserType = 'JOB_SEEKER' | 'EMPLOYER';
 export type SignUpArgs = {
     email: string;
     password: string;
-    userType?: UserType | null;
+    userType: UserType;
 };
 
 export type SignUpResponse = {
@@ -1785,7 +1785,7 @@ export type SignUpResponse = {
 export type SignInArgs = {
     email: string;
     password: string;
-    userType?: UserType | null;
+    userType?: UserType;
 };
 
 export type SignInResponse = {

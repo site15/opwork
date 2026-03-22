@@ -39,17 +39,22 @@ export class EmployeJobController {
       },
       where: {
         employerId: employerId || req.firstOpWorkEmployer?.id,
+        profileId: req.opWorkProfileId,
       },
     });
   }
 
   @Delete()
   @ApiOkResponse({ type: StatusResponse })
-  async delJob(@Body() args: DelEmployerJobArgs): Promise<StatusResponse> {
+  async delJob(
+    @CurrentAppRequest() req: AppRequest,
+    @Body() args: DelEmployerJobArgs,
+  ): Promise<StatusResponse> {
     if (args.id) {
       await this.prismaService.opWorkJob.delete({
         where: {
           id: args.id,
+          profileId: req.opWorkProfileId,
         },
       });
     }
@@ -70,6 +75,7 @@ export class EmployeJobController {
         },
         where: {
           id: args.id,
+          profileId: req.opWorkProfileId,
         },
         data: {
           title: args.title,
@@ -94,6 +100,7 @@ export class EmployeJobController {
         await this.prismaService.opWorkEmployer.findFirstOrThrow({
           where: {
             id: args.employerId || req.firstOpWorkEmployer?.id,
+            profileId: req.opWorkProfileId,
           },
         });
       return await this.prismaService.opWorkJob.create({

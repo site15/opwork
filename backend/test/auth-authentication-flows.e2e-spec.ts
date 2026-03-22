@@ -1,5 +1,5 @@
 import { AuthErrorEnum } from '../src/errors/auth.errors';
-import { AuthUser } from './generated/client';
+import { AuthUser, SignInArgs } from './generated/client';
 import { ActivityHelper } from './utils/activity-helper';
 import { getRandomSha7 } from './utils/utils';
 
@@ -7,9 +7,10 @@ describe('Auth: Authentication flows (e2e)', () => {
   const activity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
-  const credentials = {
+  const credentials: SignInArgs = {
     email: `test_${getRandomSha7()}@example.com`,
     password: 'validPassword123',
+    userType: 'JOB_SEEKER',
   };
   let regProfile: AuthUser | null;
   let loginProfile: AuthUser | null;
@@ -26,6 +27,7 @@ describe('Auth: Authentication flows (e2e)', () => {
       activity.register({
         email: credentials.email,
         password: 'wrongPassword',
+        userType: 'JOB_SEEKER',
       }),
     ).rejects.toHaveProperty('code', AuthErrorEnum.ALREADY_EXISTS);
   });

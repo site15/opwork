@@ -73,10 +73,10 @@ function setLeft(val: string) {
 
 const verifyTip = computed(() => {
   return state.isPassing
-    ? $t('ui.captcha.sliderTranslateSuccessTip', [
+    ? $t('ui.captcha.sliderTranslateSuccess', [
         ((state.endTime - state.startTime) / 1000).toFixed(1),
       ])
-    : $t('ui.captcha.sliderTranslateFailTip');
+    : $t('ui.captcha.sliderTranslateFail');
 });
 function handleStart() {
   state.startTime = Date.now();
@@ -281,7 +281,7 @@ onMounted(() => {
         class="h-15 absolute bottom-3 left-0 z-10 block w-full text-center text-xs leading-[30px] text-white"
       >
         <div
-          v-if="state.showTip"
+          v-if="state.show"
           :class="{
             'bg-success/80': state.isPassing,
             'bg-destructive/80': !state.isPassing,
@@ -290,7 +290,7 @@ onMounted(() => {
           {{ verifyTip }}
         </div>
         <div v-if="!state.dragging" class="bg-black/30">
-          {{ defaultTip || $t('ui.captcha.sliderTranslateDefaultTip') }}
+          {{ defaultTip || $t('ui.captcha.sliderTranslateDefault') }}
         </div>
       </div>
     </div>

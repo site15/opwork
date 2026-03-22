@@ -39,7 +39,7 @@ const routes: RouteRecordRaw[] = [
       icon: 'lucide:briefcase-business',
       title: $t('page.resume.detail'),
       permissions: {
-        type: ['SPECIALIST'],
+        type: ['SPECIALIST', 'EMPLOYER'],
       } satisfies TPermissions,
     },
   },

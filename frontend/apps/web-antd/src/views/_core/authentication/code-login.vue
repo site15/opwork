@@ -23,7 +23,7 @@ const formSchema = computed((): VbenFormSchema[] => {
       label: $t('authentication.mobile'),
       rules: z
         .string()
-        .min(1, { message: $t('authentication.mobileTip') })
+        .min(1, { message: $t('authentication.mobile') })
         .refine((v) => /^\d{11}$/.test(v), {
           message: $t('authentication.mobileErrortip'),
         }),
@@ -44,7 +44,7 @@ const formSchema = computed((): VbenFormSchema[] => {
       fieldName: 'code',
       label: $t('authentication.code'),
       rules: z.string().length(CODE_LENGTH, {
-        message: $t('authentication.codeTip', [CODE_LENGTH]),
+        message: $t('authentication.code', [CODE_LENGTH]),
       }),
     },
   ];

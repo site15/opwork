@@ -185,7 +185,7 @@ if (enableShortcutKey.value) {
     footer-class="border-none mb-3 mr-3"
     header-class="border-none"
   >
-    {{ $t('ui.widgets.logoutTip') }}
+    {{ $t('ui.widgets.logout') }}
   </LogoutModal>
 
   <DropdownMenu v-model:open="openPopover">

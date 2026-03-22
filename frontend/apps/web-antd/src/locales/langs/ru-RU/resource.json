@@ -23,7 +23,7 @@
     "OpWorkJobSeeker": "Соискатель",
     "OpWorkJobSeekerSkill": "Навыки соискателя",
     "OpWorkJobSkill": "Требуемые навыки",
-    "OpWorkJobTag": "Маркер вакансии",
+    "OpWorkJobTag": "Тэги вакансии",
     "OpWorkJobView": "Просмотры вакансии",
     "OpWorkNotification": "Уведомление",
     "OpWorkNotificationSettings": "Настройки уведомлений",
@@ -136,7 +136,7 @@
     "experienceLevel": "Уровень опыта",
     "status": "Статус",
     "skills": "Навыки",
-    "tags": "Метки"
+    "tags": "Тэги"
   },
   "OpWorkJobSeeker": {
     "id": "ID",
@@ -180,7 +180,7 @@
     "id": "ID",
     "createdAt": "Создано",
     "jobId": "ID вакансии",
-    "name": "Название метки",
+    "name": "Название тэга",
     "color": "Цвет",
     "institution": "Учреждение",
     "degree": "Ученая степень",

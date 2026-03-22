@@ -7,9 +7,8 @@
   },
   "crop": {
     "title": "Title",
-    "titleTip": "Title Tip",
     "confirm": "Confirm",
-    "errorTip": "Error Tip"
+    "error": "Error"
   },
   "placeholder": {
     "upload": "Upload",

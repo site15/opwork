@@ -101,12 +101,12 @@ const routes: RouteRecordRaw[] = [
       keepAlive: true,
       order: 1001,
       title: $t('page.resource.${namespace}'),
+      permissions: {
+        userTypes: ['ADMIN'],
+      } satisfies TPermissions,
     },
     name: '${pascal(namespace)}',
     path: '/${namespace}',
-    permissions: {
-      userTypes: ['ADMIN'],
-    } satisfies TPermissions,
     children: [
       ${resourceEntries}
     ],
