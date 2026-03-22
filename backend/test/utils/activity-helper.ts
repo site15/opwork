@@ -1,6 +1,17 @@
 import { finalize, from, map, mergeMap } from 'rxjs';
-import { X_API_KEY, X_SESSION_ID } from '../../src/guards/auth.guard';
-import { AuthUser, Sdk, SignInArgs, UserType } from '../generated/client';
+import {
+  X_API_KEY,
+  X_PROFILE_ID,
+  X_SESSION_ID,
+} from '../../src/guards/auth.guard';
+import {
+  AuthUser,
+  OpWorkProfile,
+  OpWorkProfileDto,
+  Sdk,
+  SignInArgs,
+  UserType,
+} from '../generated/client';
 import { Client, Config, createClient } from '../generated/client/client';
 import { client } from '../generated/client/client.gen';
 import { getRandomSha7 } from './utils';
@@ -12,6 +23,7 @@ export class ActivityHelper {
 
   randomSha7 = getRandomSha7();
   authUser: AuthUser | null = null;
+  opWorkProfile: OpWorkProfileDto | null = null;
   sdk: Sdk;
 
   constructor(config: Config = {}) {
@@ -36,10 +48,21 @@ export class ActivityHelper {
     );
   }
 
-  async getProfile() {
+  async getAuthProfile() {
     const result = await this.sdk.authControllerInfo();
     this.authUser = result.data || null;
     return result.data;
+  }
+
+  async getProfile() {
+    const result = await this.sdk.profileControllerGetProfile();
+    this.opWorkProfile = result.data || null;
+    return this.opWorkProfile;
+  }
+
+  private async getAllProfiles() {
+    const result = await this.sdk.profileControllerGetAllProfiles();
+    return result.data || [];
   }
 
   async register(args: SignInArgs) {
@@ -53,6 +76,7 @@ export class ActivityHelper {
       this.authSessionId = result.data?.sessionId || null;
       this.authUser = result.data?.profile || null;
       this.updateClientConfig();
+      await this.updateOpWorkProfile(args);
       return result.data;
     } catch (error) {
       this.authSessionId = null;
@@ -60,6 +84,13 @@ export class ActivityHelper {
       this.updateClientConfig();
       throw error;
     }
+  }
+
+  private async updateOpWorkProfile(args: SignInArgs) {
+    const profiles = await this.getAllProfiles();
+    this.opWorkProfile =
+      profiles.find((p) => p.userType === args.userType) || null;
+    this.updateClientConfig();
   }
 
   async login(args: SignInArgs) {
@@ -70,6 +101,7 @@ export class ActivityHelper {
       this.authSessionId = result.data?.sessionId || null;
       this.authUser = result.data?.profile || null;
       this.updateClientConfig();
+      await this.updateOpWorkProfile(args);
       return result.data;
     } catch (error) {
       this.authSessionId = null;
@@ -121,10 +153,11 @@ export class ActivityHelper {
 
   private updateClientConfig() {
     this.client.setConfig({
-      headers: { [X_SESSION_ID]: this.authSessionId || null },
-    });
-    this.client.setConfig({
-      headers: { [X_API_KEY]: this.apiKey || null },
+      headers: {
+        [X_SESSION_ID]: this.authSessionId || null,
+        [X_API_KEY]: this.apiKey || null,
+        [X_PROFILE_ID]: this.opWorkProfile?.id || null,
+      },
     });
   }
 }

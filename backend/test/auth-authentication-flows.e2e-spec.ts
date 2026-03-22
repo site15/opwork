@@ -7,6 +7,12 @@ describe('Auth: Authentication flows (e2e)', () => {
   const activity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
   });
+  const activity2 = new ActivityHelper({
+    baseUrl: process.env.VITE_GLOB_API_URL,
+  });
+  const activity3 = new ActivityHelper({
+    baseUrl: process.env.VITE_GLOB_API_URL,
+  });
   const credentials: SignInArgs = {
     email: `test_${getRandomSha7()}@example.com`,
     password: 'validPassword123',
@@ -24,7 +30,7 @@ describe('Auth: Authentication flows (e2e)', () => {
 
   it('Error on registration flow with duplicate credentials', async () => {
     await expect(
-      activity.register({
+      activity2.register({
         email: credentials.email,
         password: 'wrongPassword',
         userType: 'JOB_SEEKER',
@@ -34,7 +40,7 @@ describe('Auth: Authentication flows (e2e)', () => {
 
   it('Error on login flow with wrong credentials', async () => {
     await expect(
-      activity.login({
+      activity3.login({
         email: credentials.email,
         password: 'wrongPassword',
       }),
@@ -50,7 +56,7 @@ describe('Auth: Authentication flows (e2e)', () => {
   });
 
   it('Get profile flow', async () => {
-    const result = await activity.getProfile();
+    const result = await activity.getAuthProfile();
     expect(result).toMatchObject(loginProfile || {});
   });
 
@@ -60,7 +66,7 @@ describe('Auth: Authentication flows (e2e)', () => {
   });
 
   it('Error on get profile flow after logout', async () => {
-    await expect(activity.getProfile()).rejects.toHaveProperty(
+    await expect(activity.getAuthProfile()).rejects.toHaveProperty(
       'code',
       AuthErrorEnum.UNAUTHORIZED,
     );

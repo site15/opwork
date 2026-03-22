@@ -18,7 +18,7 @@ import { ProfileController } from './controllers/profile.controller';
 import { ResumeController } from './controllers/resume.controller';
 import { VacanyApplicationController } from './controllers/vacancy-application.controller';
 import { VacancyController } from './controllers/vacancy.controller';
-import { CheckOpWorkUserType } from './decorators/check-op-work-user-type';
+import { CheckOpWorkUserTypes } from './decorators/check-op-work-user-type';
 import { AppExceptionsFilter } from './filters/app.filter';
 import { OpWorkUserType } from './generated/prisma/enums';
 import { CONTROLLERS } from './generated/rest/controllers';
@@ -56,7 +56,7 @@ for (const controller of controllers) {
 }
 
 for (const controller of generatedControllers) {
-  CheckOpWorkUserType([
+  CheckOpWorkUserTypes([
     { method: 'POST', userTypes: [OpWorkUserType.ADMIN] },
     { method: 'PUT', userTypes: [OpWorkUserType.ADMIN] },
     { method: 'DELETE', userTypes: [OpWorkUserType.ADMIN] },

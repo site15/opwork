@@ -6,7 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { CheckOpWorkUserType } from '../decorators/check-op-work-user-type';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { SkipCheckAuth } from '../decorators/skip-check-auth';
 import { AuthError, AuthErrorEnum } from '../errors/auth.errors';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
@@ -21,6 +21,8 @@ export const DEFAULT_ALLOWED_IPS = ['127.0.0.1', '192.168.168.1', '::1'];
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  private readonly logger = new Logger(AuthGuard.name);
+
   constructor(
     @Inject(PRISMA_SERVICE)
     private readonly prismaService: PrismaService,
@@ -35,7 +37,7 @@ export class AuthGuard implements CanActivate {
       context.getClass(),
     ]);
     const checkOpWorkUserType = this.reflector.getAllAndOverride(
-      CheckOpWorkUserType,
+      CheckOpWorkUserTypes,
       [context.getHandler(), context.getClass()],
     );
 
@@ -173,12 +175,22 @@ export class AuthGuard implements CanActivate {
     if (
       checkOpWorkUserType?.some(
         (type) =>
-          type.method === req.method &&
+          (!type.method || type.method === req.method) &&
           !(
             Array.isArray(type.userTypes) ? type.userTypes : [type.userTypes]
           ).find((userType) => req.opWorkProfile?.userType === userType),
       )
     ) {
+      this.logger.log('Method not allowed', {
+        handler: context.getHandler().name,
+        class: context.getClass().name,
+        method: req.method,
+        profile: {
+          type: req.opWorkProfile?.type,
+          userTypes: req.opWorkProfile?.userType,
+        },
+        handlerMetadata: checkOpWorkUserType,
+      });
       throw new AuthError(AuthErrorEnum.METHOD_NOT_ALLOWED);
     }
 

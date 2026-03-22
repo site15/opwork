@@ -5,6 +5,8 @@ import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerProfileArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
+import { OpWorkUserType } from '../generated/prisma/enums';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker')
@@ -14,6 +16,11 @@ export class JobSeekerController {
     private readonly prismaService: PrismaService,
   ) {}
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: [OpWorkUserType.JOB_SEEKER],
+    },
+  ])
   @Get('all')
   @ApiOkResponse({ type: OpWorkJobSeeker, isArray: true })
   async getProfiles(
@@ -56,6 +63,11 @@ export class JobSeekerController {
     });
   }
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: [OpWorkUserType.JOB_SEEKER],
+    },
+  ])
   @Put()
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async setProfile(

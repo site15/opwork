@@ -3,8 +3,8 @@ import { OpWorkUserType } from '../generated/prisma/enums';
 
 type CheckOpWorkUserTypeOptions = {
   userTypes: OpWorkUserType[] | OpWorkUserType;
-  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+  method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
 };
 
-export const CheckOpWorkUserType =
+export const CheckOpWorkUserTypes =
   Reflector.createDecorator<CheckOpWorkUserTypeOptions[]>();

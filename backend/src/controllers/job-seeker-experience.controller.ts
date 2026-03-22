@@ -15,7 +15,14 @@ import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerExperienceArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
 import { StatusResponse } from '../types/status-response';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
+import { OpWorkUserType } from '../generated/prisma/enums';
 
+@CheckOpWorkUserTypes([
+  {
+    userTypes: [OpWorkUserType.JOB_SEEKER],
+  },
+])
 @ApiTags('job-seeker')
 @Controller('job-seeker/experience')
 export class JobSeekerExperienceController {

@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
+import { OpWorkUserType } from '../generated/prisma/enums';
 import { OpWorkEmployer } from '../generated/rest/op-work-employer.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetEmployerProfileArgs } from '../types/employer-types';
@@ -14,6 +16,11 @@ export class EmployerController {
     private readonly prismaService: PrismaService,
   ) {}
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: [OpWorkUserType.EMPLOYER],
+    },
+  ])
   @Get('all')
   @ApiOkResponse({ type: OpWorkEmployer, isArray: true })
   async getProfiles(
@@ -59,6 +66,11 @@ export class EmployerController {
     });
   }
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: [OpWorkUserType.EMPLOYER],
+    },
+  ])
   @Put()
   @ApiOkResponse({ type: OpWorkEmployer })
   async setProfile(
