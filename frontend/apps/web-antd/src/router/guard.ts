@@ -33,15 +33,11 @@ export function setupProfileWatcher(router: Router) {
       return true;
     }
 
-    if (profile.type === 'EMPLOYER') {
-      return !!menuItem.permissions.type?.includes(profile.type);
-    }
-    if (profile.type === 'SPECIALIST') {
-      return !!menuItem.permissions.type?.includes(profile.type);
-    }
-
-    if (['ADMIN', 'EMPLOYER', 'JOB_SEEKER'].includes(profile.userType)) {
-      return !!menuItem.permissions.userTypes?.includes(profile.userType);
+    if (profile.type === 'EMPLOYER' || profile.type === 'SPECIALIST') {
+      return (
+        !!menuItem.permissions.type?.includes(profile.type) ||
+        !!menuItem.permissions.userTypes?.includes(profile.userType)
+      );
     }
 
     return false;
