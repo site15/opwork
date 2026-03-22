@@ -20,7 +20,7 @@ import { OpWorkUserType } from '../generated/prisma/enums';
 
 @CheckOpWorkUserTypes([
   {
-    userTypes: [OpWorkUserType.JOB_SEEKER],
+    userTypes: [OpWorkUserType.JOB_SEEKER, OpWorkUserType.ADMIN],
   },
 ])
 @ApiTags('job-seeker')

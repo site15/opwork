@@ -18,7 +18,7 @@ export class JobSeekerController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: [OpWorkUserType.JOB_SEEKER],
+      userTypes: [OpWorkUserType.JOB_SEEKER, OpWorkUserType.ADMIN],
     },
   ])
   @Get('all')
@@ -65,7 +65,7 @@ export class JobSeekerController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: [OpWorkUserType.JOB_SEEKER],
+      userTypes: [OpWorkUserType.JOB_SEEKER, OpWorkUserType.ADMIN],
     },
   ])
   @Put()

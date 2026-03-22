@@ -18,7 +18,7 @@ export class EmployerController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: [OpWorkUserType.EMPLOYER],
+      userTypes: [OpWorkUserType.EMPLOYER, OpWorkUserType.ADMIN],
     },
   ])
   @Get('all')
@@ -68,7 +68,7 @@ export class EmployerController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: [OpWorkUserType.EMPLOYER],
+      userTypes: [OpWorkUserType.EMPLOYER, OpWorkUserType.ADMIN],
     },
   ])
   @Put()

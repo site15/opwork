@@ -21,7 +21,7 @@ import { OpWorkUserType } from '../generated/prisma/enums';
 
 @CheckOpWorkUserTypes([
   {
-    userTypes: [OpWorkUserType.EMPLOYER],
+    userTypes: [OpWorkUserType.EMPLOYER, OpWorkUserType.ADMIN],
   },
 ])
 @ApiTags('employer')
