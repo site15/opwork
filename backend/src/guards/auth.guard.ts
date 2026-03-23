@@ -30,6 +30,17 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    try {
+      return await this.internalCanActivate(context);
+    } catch (error) {
+      this.logger.debug(
+        `Error in "${context.getClass().name}.${context.getHandler().name}"`,
+      );
+      throw error;
+    }
+  }
+
+  async internalCanActivate(context: ExecutionContext): Promise<boolean> {
     const req = getRequestFromExecutionContext(context) as AppRequest;
 
     const skipCheckAuth = !!this.reflector.getAllAndOverride(SkipCheckAuth, [
@@ -133,16 +144,18 @@ export class AuthGuard implements CanActivate {
       const opWorkProfile =
         req.authUser?.OpWorkProfile.find((p) => p.id === req.opWorkProfileId) ||
         req.authUser?.OpWorkProfile[0];
-      if (!opWorkProfile) {
-        throw new AuthError(AuthErrorEnum.PROFILE_NOT_FOUND);
+      if (!skipCheckAuth) {
+        if (!opWorkProfile) {
+          throw new AuthError(AuthErrorEnum.PROFILE_NOT_FOUND);
+        }
+        req.opWorkProfileId = opWorkProfile.id;
+        req.opWorkProfile = opWorkProfile;
       }
-      req.opWorkProfileId = opWorkProfile.id;
-      req.opWorkProfile = opWorkProfile;
     }
 
     if (
       req.opWorkProfileId &&
-      req.opWorkProfile.type === 'EMPLOYER' &&
+      req.opWorkProfile?.type === 'EMPLOYER' &&
       !req.opWorkProfile.opWorkEmployer?.length
     ) {
       req.opWorkProfile.opWorkEmployer = [
@@ -157,7 +170,7 @@ export class AuthGuard implements CanActivate {
 
     if (
       req.opWorkProfileId &&
-      req.opWorkProfile.type === 'SPECIALIST' &&
+      req.opWorkProfile?.type === 'SPECIALIST' &&
       !req.opWorkProfile.opWorkJobSeeker?.length
     ) {
       req.opWorkProfile.opWorkJobSeeker = [

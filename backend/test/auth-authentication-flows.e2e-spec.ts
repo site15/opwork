@@ -18,6 +18,8 @@ describe('Auth: Authentication flows (e2e)', () => {
     password: 'validPassword123',
     userType: 'JOB_SEEKER',
   };
+
+  const newEmail = `test_${getRandomSha7()}_new@example.com`;
   let regProfile: AuthUser | null;
   let loginProfile: AuthUser | null;
 
@@ -58,6 +60,71 @@ describe('Auth: Authentication flows (e2e)', () => {
   it('Get profile flow', async () => {
     const result = await activity.getAuthProfile();
     expect(result).toMatchObject(loginProfile || {});
+  });
+
+  it('Change password flow', async () => {
+    const newPassword = 'newValidPassword456';
+    const result = await activity.changePassword({
+      currentPassword: credentials.password,
+      newPassword,
+    });
+    expect(result).toMatchObject({ message: 'ok' });
+
+    // Verify can login with new password
+    await activity.logout();
+    const loginResult = await activity.login({
+      email: credentials.email,
+      password: newPassword,
+    });
+    expect(loginResult?.profile).not.toBeUndefined();
+  });
+
+  it('Error on change password with wrong current password', async () => {
+    await expect(
+      activity.changePassword({
+        currentPassword: 'wrongCurrentPassword',
+        newPassword: 'anotherNewPassword789',
+      }),
+    ).rejects.toHaveProperty('code', AuthErrorEnum.INVALID_CREDENTIALS);
+  });
+
+  it('Change email flow', async () => {
+    const result = await activity.changeEmail({ newEmail });
+    expect(result).toMatchObject({ message: 'ok' });
+
+    // Verify profile has updated email
+    const profile = await activity.getAuthProfile();
+    expect(profile?.email).toBe(newEmail);
+
+    // Verify can login with new email
+    await activity.logout();
+    const loginResult = await activity.login({
+      email: newEmail,
+      password: 'newValidPassword456',
+    });
+    expect(loginResult?.profile).not.toBeUndefined();
+  });
+
+  it('Error on change email with duplicate email', async () => {
+    const duplicateEmail = `test_${getRandomSha7()}@example.com`;
+
+    // Register another user
+    await activity2.registerAndLogin({
+      email: duplicateEmail,
+      password: 'validPassword123',
+      userType: 'JOB_SEEKER',
+    });
+
+    // Try to change first user's email to the duplicate
+    await activity.logout();
+    await activity.login({
+      email: newEmail,
+      password: 'newValidPassword456',
+    });
+
+    await expect(
+      activity.changeEmail({ newEmail: duplicateEmail }),
+    ).rejects.toHaveProperty('code', AuthErrorEnum.ALREADY_EXISTS);
   });
 
   it('Logout flow', async () => {

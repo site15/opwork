@@ -113,10 +113,13 @@ export class AuthController {
     @CurrentAppRequest() req: AppRequest,
     @Body() body: ChangePasswordArgs,
   ): Promise<StatusResponse> {
-    const user = await this.prismaService.authUser.findUnique({
-      where: { id: req.authUserId },
-      select: { password: true },
-    });
+    const user =
+      await this.prismaService.$withoutUniversalPasswordHashing.authUser.findUnique(
+        {
+          where: { id: req.authUserId },
+          select: { password: true },
+        },
+      );
 
     if (!user || !user.password) {
       throw new AuthError(AuthErrorEnum.INVALID_CREDENTIALS);

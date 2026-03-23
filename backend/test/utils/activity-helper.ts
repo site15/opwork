@@ -151,6 +151,30 @@ export class ActivityHelper {
     return result.data;
   }
 
+  async changePassword({
+    currentPassword,
+    newPassword,
+  }: {
+    currentPassword: string;
+    newPassword: string;
+  }) {
+    const result = await this.sdk.authControllerChangePassword({
+      body: { currentPassword, newPassword },
+    });
+    return result.data;
+  }
+
+  async changeEmail({ newEmail }: { newEmail: string }) {
+    const result = await this.sdk.authControllerChangeEmail({
+      body: { newEmail },
+    });
+    if (this.authUser) {
+      this.authUser.email = newEmail;
+      this.updateClientConfig();
+    }
+    return result.data;
+  }
+
   private updateClientConfig() {
     this.client.setConfig({
       headers: {

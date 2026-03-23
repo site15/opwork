@@ -27,7 +27,6 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
       );
     } else {
       if (exception instanceof AuthError) {
-        this.logger.error(exception, exception.stack);
         super.catch(
           new HttpException(
             {
@@ -43,7 +42,6 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
       if (exception instanceof HttpException) {
         super.catch(exception, host);
       } else {
-        this.logger.error(exception, exception.stack);
         super.catch(
           new HttpException(
             {
