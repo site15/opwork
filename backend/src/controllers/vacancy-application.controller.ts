@@ -37,6 +37,7 @@ import {
 } from '../types/prisma-types';
 import { AppRequest, getAppRequestData } from '../types/request';
 import { StatusResponse } from '../types/status-response';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 
 //
 export class FindManyVacanyApplicationArgs extends FindManyArgs {
@@ -118,6 +119,11 @@ export class VacanyApplicationController {
     private readonly notificationService: NotificationService,
   ) {}
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: ['JOB_SEEKER'],
+    },
+  ])
   @HttpCode(200)
   @Post(':vacancy_id/apply')
   @ApiOkResponse({ type: StatusResponse })
@@ -160,12 +166,18 @@ export class VacanyApplicationController {
     return { message: 'ok' };
   }
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: ['EMPLOYER'],
+    },
+  ])
   @Put(':vacancy_id/applications/:id/change-status')
   @ApiOkResponse({ type: StatusResponse })
   async changeStatus(
     @Param('vacancy_id', new ParseUUIDPipe()) vacancyId: string,
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: VacanyApplicationChangeStatusArgs,
+    @CurrentAppRequest() req: AppRequest,
   ) {
     await this.prismaService.opWorkApplication.update({
       data: {
@@ -175,11 +187,17 @@ export class VacanyApplicationController {
       },
       where: {
         id,
+        OpWorkJob: { profileId: req.opWorkProfileId },
       },
     });
     return { message: 'ok' };
   }
 
+  @CheckOpWorkUserTypes([
+    {
+      userTypes: ['EMPLOYER'],
+    },
+  ])
   @Get(':vacancy_id/applications')
   @ApiOkResponse({ type: FindManyVacanyApplicationResponse })
   async findMany(
@@ -230,7 +248,7 @@ export class VacanyApplicationController {
             ]
           : []),
       ],
-      OpWorkJob: { id: vacancyId },
+      OpWorkJob: { id: vacancyId, profileId: req.opWorkProfileId },
     };
 
     const result = {
