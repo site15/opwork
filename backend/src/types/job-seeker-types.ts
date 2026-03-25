@@ -12,7 +12,7 @@ export class DelJobSeekerProfileArgs {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 }
 
@@ -23,7 +23,7 @@ export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -32,7 +32,7 @@ export class SetJobSeekerProfileArgs extends UpdateOpWorkJobSeekerDto {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   jobSeekerId?: string;
 }
 
@@ -46,7 +46,7 @@ export class SetJobSeekerSkillArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -55,7 +55,7 @@ export class SetJobSeekerSkillArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   jobSeekerId?: string;
 
   @ApiProperty({
@@ -73,7 +73,7 @@ export class SetJobSeekerSkillArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   skillId?: string;
 }
 
@@ -87,7 +87,7 @@ export class SetJobSeekerEducationArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -96,7 +96,7 @@ export class SetJobSeekerEducationArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   jobSeekerId?: string;
 }
 
@@ -110,7 +110,7 @@ export class SetJobSeekerExperienceArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -119,6 +119,6 @@ export class SetJobSeekerExperienceArgs extends OmitType(
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   jobSeekerId?: string;
 }

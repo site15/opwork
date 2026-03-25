@@ -1935,7 +1935,7 @@ export type SetEmployerJobTagsArgs = {
 };
 
 export type VacanyApplicationApplyArgs = {
-    jobSeekerId: string;
+    jobSeekerId?: string;
     coverLetter?: string;
 };
 
@@ -4854,10 +4854,10 @@ export type EmployerJobTagsControllerDelJobTagResponse = EmployerJobTagsControll
 export type VacanyApplicationControllerApplyData = {
     body: VacanyApplicationApplyArgs;
     path: {
-        vacancy_id: string;
+        job_id: string;
     };
     query?: never;
-    url: '/api/vacancy/{vacancy_id}/apply';
+    url: '/api/vacancy/{job_id}/apply';
 };
 
 export type VacanyApplicationControllerApplyErrors = {
@@ -4873,11 +4873,11 @@ export type VacanyApplicationControllerApplyResponse = VacanyApplicationControll
 export type VacanyApplicationControllerChangeStatusData = {
     body: VacanyApplicationChangeStatusArgs;
     path: {
-        vacancy_id: string;
+        job_id: string;
         id: string;
     };
     query?: never;
-    url: '/api/vacancy/{vacancy_id}/applications/{id}/change-status';
+    url: '/api/vacancy/{job_id}/applications/{id}/change-status';
 };
 
 export type VacanyApplicationControllerChangeStatusErrors = {
@@ -4893,7 +4893,7 @@ export type VacanyApplicationControllerChangeStatusResponse = VacanyApplicationC
 export type VacanyApplicationControllerFindManyData = {
     body?: never;
     path: {
-        vacancy_id: string;
+        job_id: string;
     };
     query?: {
         curPage?: number;
@@ -4902,7 +4902,7 @@ export type VacanyApplicationControllerFindManyData = {
         sort?: string;
         opWorkApplicationStatuses?: Array<OpWorkApplicationStatus>;
     };
-    url: '/api/vacancy/{vacancy_id}/applications';
+    url: '/api/vacancy/{job_id}/applications';
 };
 
 export type VacanyApplicationControllerFindManyErrors = {
@@ -4918,10 +4918,10 @@ export type VacanyApplicationControllerFindManyResponse = VacanyApplicationContr
 export type VacancyControllerFindOneData = {
     body?: never;
     path: {
-        vacancy_id: string;
+        job_id: string;
     };
     query?: never;
-    url: '/api/vacancy/{vacancy_id}';
+    url: '/api/vacancy/{job_id}';
 };
 
 export type VacancyControllerFindOneErrors = {

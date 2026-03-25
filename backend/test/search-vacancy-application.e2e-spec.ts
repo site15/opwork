@@ -190,7 +190,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const applyResult = await jobSeekerActivity.sdk
       .vacanyApplicationControllerApply({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
         body: {
           jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
@@ -222,7 +222,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const vacancyControllerFindOneResult = await jobSeekerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);
@@ -243,7 +243,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const vacancyControllerFindOneResult = await employerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);
@@ -266,7 +266,7 @@ describe('Vacancy: work with applications (e2e)', () => {
   it('As employer change status of aplication', async () => {
     await employerActivity.sdk.vacanyApplicationControllerChangeStatus({
       path: {
-        vacancy_id: globalVacancyControllerFindOneResult?.id!,
+        job_id: globalVacancyControllerFindOneResult?.id!,
         id:
           globalVacancyControllerFindOneResult?.OpWorkApplication?.[0].id || '',
       },
@@ -278,7 +278,7 @@ describe('Vacancy: work with applications (e2e)', () => {
     const vacancyControllerFindManyResult = await employerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: globalVacancyControllerFindOneResult?.id!,
+          job_id: globalVacancyControllerFindOneResult?.id!,
         },
       })
       .then(async ({ data }) => data);

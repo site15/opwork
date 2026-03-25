@@ -54,6 +54,10 @@ export class JobSeekerSkillController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerSkillArgs,
   ): Promise<OpWorkJobSeekerSkill> {
+    const jobSeekerId = args.jobSeekerId || req.firstOpWorkJobSeeker?.id;
+    if (!jobSeekerId) {
+      throw new Error('Job seeker not found');
+    }
     if (args.skillName) {
       args.skillId =
         (
@@ -83,7 +87,7 @@ export class JobSeekerSkillController {
         include: { OpWorkSkill: true },
         where: {
           id: args.id,
-          OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+          OpWorkJobSeeker: { id: jobSeekerId },
           profileId: req.opWorkProfileId,
         },
         data: {
@@ -98,7 +102,7 @@ export class JobSeekerSkillController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+            id: jobSeekerId,
             profileId: req.opWorkProfileId,
           },
         });

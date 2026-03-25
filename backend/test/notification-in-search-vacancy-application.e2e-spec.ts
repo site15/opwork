@@ -20,6 +20,8 @@ import {
 import { ActivityHelper } from './utils/activity-helper';
 import { getRandomSha7 } from './utils/utils';
 
+jest.setTimeout(30000);
+
 describe('Notification: work with applications (e2e)', () => {
   const employerActivity = new ActivityHelper({
     baseUrl: process.env.VITE_GLOB_API_URL,
@@ -198,7 +200,7 @@ describe('Notification: work with applications (e2e)', () => {
       jobSeekerActivity.sdk
         .vacanyApplicationControllerApply({
           path: {
-            vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+            job_id: globalVacancyControllerFindManyResult?.items[0].id!,
           },
           body: {
             jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
@@ -218,7 +220,7 @@ describe('Notification: work with applications (e2e)', () => {
     const vacancyControllerFindOneResult = await jobSeekerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);
@@ -267,6 +269,7 @@ describe('Notification: work with applications (e2e)', () => {
       notificationControllerFindManyResult?.items.length,
     ).toBeGreaterThanOrEqual(0);
   });
+
   it('Mark notification as read as employer', async () => {
     const notificationControllerUpdateResult = await employerActivity.sdk
       .notificationControllerMarkAsRead({

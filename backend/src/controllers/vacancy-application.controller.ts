@@ -10,7 +10,12 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOkResponse,
+  ApiProperty,
+  ApiPropertyOptional,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import {
   IsEnum,
@@ -68,13 +73,13 @@ export class FindManyVacanyApplicationResponse {
 //
 
 export class VacanyApplicationApplyArgs {
-  @ApiProperty({
+  @ApiPropertyOptional({
     type: 'string',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
-  jobSeekerId!: string;
+  @IsUUID('4')
+  jobSeekerId?: string;
 
   @ApiProperty({
     type: 'string',
@@ -125,26 +130,30 @@ export class VacanyApplicationController {
     },
   ])
   @HttpCode(200)
-  @Post(':vacancy_id/apply')
+  @Post(':job_id/apply')
   @ApiOkResponse({ type: StatusResponse })
   async apply(
-    @Param('vacancy_id', new ParseUUIDPipe()) vacancyId: string,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @Body() args: VacanyApplicationApplyArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
+    const jobSeekerId = args.jobSeekerId || req.firstOpWorkJobSeeker?.id;
+    if (!jobSeekerId) {
+      throw new Error('Job seeker not found');
+    }
     const createdApplication =
       await this.prismaService.opWorkApplication.create({
         data: {
-          jobSeekerId: args.jobSeekerId,
+          jobSeekerId,
           profileId: req.opWorkProfileId,
           coverLetter: args.coverLetter,
-          jobId: vacancyId,
+          jobId: jobId,
           status: OpWorkApplicationStatus.PENDING,
           appliedAt: new Date(),
         },
       });
     const updatedJob = await this.prismaService.opWorkJob.update({
-      where: { id: vacancyId },
+      where: { id: jobId },
       data: { applicationsCount: { increment: 1 } },
     });
     await this.notificationService.create({
@@ -156,7 +165,7 @@ export class VacanyApplicationController {
         class: 'VacanyApplicationController',
         method: 'apply',
         options: {
-          params: { vacancyId },
+          params: { jobId },
           body: args,
           request: getAppRequestData(req),
         },
@@ -171,10 +180,10 @@ export class VacanyApplicationController {
       userTypes: ['EMPLOYER'],
     },
   ])
-  @Put(':vacancy_id/applications/:id/change-status')
+  @Put(':job_id/applications/:id/change-status')
   @ApiOkResponse({ type: StatusResponse })
   async changeStatus(
-    @Param('vacancy_id', new ParseUUIDPipe()) vacancyId: string,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() args: VacanyApplicationChangeStatusArgs,
     @CurrentAppRequest() req: AppRequest,
@@ -187,7 +196,7 @@ export class VacanyApplicationController {
       },
       where: {
         id,
-        OpWorkJob: { profileId: req.opWorkProfileId },
+        OpWorkJob: { id: jobId, profileId: req.opWorkProfileId },
       },
     });
     return { message: 'ok' };
@@ -198,10 +207,10 @@ export class VacanyApplicationController {
       userTypes: ['EMPLOYER'],
     },
   ])
-  @Get(':vacancy_id/applications')
+  @Get(':job_id/applications')
   @ApiOkResponse({ type: FindManyVacanyApplicationResponse })
   async findMany(
-    @Param('vacancy_id', new ParseUUIDPipe()) vacancyId: string,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @Query() args: FindManyVacanyApplicationArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
@@ -248,7 +257,7 @@ export class VacanyApplicationController {
             ]
           : []),
       ],
-      OpWorkJob: { id: vacancyId, profileId: req.opWorkProfileId },
+      OpWorkJob: { id: jobId, profileId: req.opWorkProfileId },
     };
 
     const result = {

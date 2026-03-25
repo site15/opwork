@@ -53,11 +53,15 @@ export class JobSeekerExperienceController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerExperienceArgs,
   ): Promise<OpWorkExperienceDto> {
+    const jobSeekerId = args.jobSeekerId || req.firstOpWorkJobSeeker?.id;
+    if (!jobSeekerId) {
+      throw new Error('Job seeker not found');
+    }
     if (args.id) {
       return await this.prismaService.opWorkExperience.update({
         where: {
           id: args.id,
-          OpWorkJobSeeker: { id: req.firstOpWorkJobSeeker?.id },
+          OpWorkJobSeeker: { id: jobSeekerId },
           profileId: req.opWorkProfileId,
         },
         data: {
@@ -75,7 +79,7 @@ export class JobSeekerExperienceController {
       const opWorkJobSeeker =
         await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
           where: {
-            id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+            id: jobSeekerId,
             profileId: req.opWorkProfileId,
           },
         });

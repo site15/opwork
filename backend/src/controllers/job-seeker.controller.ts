@@ -45,8 +45,7 @@ export class JobSeekerController {
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async getProfile(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id')
-    jobSeekerId: string,
+    @Param('job_seeker_id') jobSeekerId: string,
   ): Promise<OpWorkJobSeeker | null> {
     return await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
       include: {
@@ -74,10 +73,14 @@ export class JobSeekerController {
     @CurrentAppRequest() req: AppRequest,
     @Body() args: SetJobSeekerProfileArgs,
   ): Promise<OpWorkJobSeeker> {
+    const jobSeekerId = args.jobSeekerId || req.firstOpWorkJobSeeker?.id;
+    if (!jobSeekerId) {
+      throw new Error('Job seeker not found');
+    }
     let opWorkJobSeeker =
       (await this.prismaService.opWorkJobSeeker.findFirst({
         where: {
-          id: args.jobSeekerId || req.firstOpWorkJobSeeker?.id,
+          id: jobSeekerId,
           profileId: req.opWorkProfileId,
         },
       })) || null;

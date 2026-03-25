@@ -66,5 +66,9 @@
     "loadingData": "Ошибка загрузки данных",
     "creating": "Ошибка создания",
     "updating": "Ошибка обновления"
-  }
+  },
+  "applyConfirm": "Подтверждение отклика",
+  "apply": "Откликнуться",
+  "writeACoverLetter": "Напишите сопроводительное письмо",
+  "youHaveAlreadyResponded": "Вы уже откликнулись"
 }

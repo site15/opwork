@@ -35,7 +35,7 @@ const loadVacany = () => {
     loading.value = true;
     vacancyControllerFindOne({
       path: {
-        vacancy_id: currentFilters.value.id,
+        job_id: currentFilters.value.id,
       },
     })
       .then((response) => {

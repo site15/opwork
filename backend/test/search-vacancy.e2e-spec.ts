@@ -370,7 +370,7 @@ describe('Vacancy: search (e2e)', () => {
     const applyResult = await jobSeekerActivity.sdk
       .vacanyApplicationControllerApply({
         path: {
-          vacancy_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
+          job_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
         },
         body: {
           jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
@@ -402,7 +402,7 @@ describe('Vacancy: search (e2e)', () => {
     const vacancyControllerFindManyResult = await jobSeekerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
+          job_id: vacancyData.vacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);

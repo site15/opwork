@@ -1,20 +1,23 @@
 <script lang="ts" setup>
-import type { OpWorkJob } from '#/generated/client';
+import type { OpWorkApplication, OpWorkJob } from '#/generated/client';
 
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { confirm } from '@vben/common-ui';
+import { confirm, prompt } from '@vben/common-ui';
 
 import { Button } from 'ant-design-vue';
 
 import {
   employeJobControllerDelJob,
   vacancyControllerFindOne,
+  vacanyApplicationControllerApply,
 } from '#/generated/client';
 import { $t } from '#/locales';
 import { useAppAuthStore } from '#/services/AuthService';
 import { useAppOpWorkProfileStore } from '#/services/ProfileService';
+
+import Textarea from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/textarea/Textarea.vue';
 
 defineOptions({ name: 'VacancyDetail' });
 
@@ -31,6 +34,11 @@ const canEditOrDelete = computed(() => {
   return profile && profile.type === 'EMPLOYER';
 });
 
+const canApply = computed(() => {
+  const profile = appOpWorkProfileStore.profile;
+  return profile && profile.type === 'SPECIALIST';
+});
+
 const handleDeleteClick = () => {
   confirm(
     $t('common.confirm'),
@@ -38,6 +46,33 @@ const handleDeleteClick = () => {
   )
     .then(async () => {
       await employeJobControllerDelJob({ body: { id: vacancy.value?.id } });
+    })
+    .then();
+};
+
+const handleApplyClick = () => {
+  const jobId = vacancy.value?.id;
+
+  if (!jobId) {
+    return;
+  }
+
+  prompt({
+    confirmText: $t('common.apply'),
+    title: $t('common.applyConfirm', { name: vacancy.value?.title }),
+    content: $t('common.writeACoverLetter'),
+    component: Textarea,
+  })
+    .then(async (result) => {
+      await vacanyApplicationControllerApply({
+        path: { job_id: jobId },
+        body: { coverLetter: result },
+      });
+      if (vacancy.value) {
+        vacancy.value!.OpWorkApplication = [
+          null as unknown as OpWorkApplication,
+        ];
+      }
     })
     .then();
 };
@@ -53,7 +88,7 @@ const loadVacany = () => {
 
   vacancyControllerFindOne({
     path: {
-      vacancy_id: currentFilters.value.id,
+      job_id: currentFilters.value.id,
     },
   })
     .then((response) => {
@@ -141,6 +176,18 @@ onMounted(() => {
             </div>
           </div>
           <div class="flex items-center space-x-3">
+            <template v-if="canApply">
+              <Button
+                type="primary"
+                @click="handleApplyClick()"
+                v-if="!vacancy.OpWorkApplication?.length"
+              >
+                {{ $t('common.apply') }}
+              </Button>
+              <Button type="default" :disabled="true" v-else>
+                {{ $t('common.youHaveAlreadyResponded') }}
+              </Button>
+            </template>
             <!--кнопки - только для SPECIALIST и EMPLOYER-->
             <template v-if="canEditOrDelete">
               <Button

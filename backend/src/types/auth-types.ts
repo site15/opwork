@@ -23,7 +23,7 @@ export class SignInResponse {
   @ApiProperty({
     type: 'string',
   })
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   sessionId!: string;
 
   @ApiProperty({ type: () => AuthUser })
@@ -59,7 +59,7 @@ export class SignUpResponse {
   @ApiProperty({
     type: 'string',
   })
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   sessionId!: string;
 
   @ApiProperty({ type: () => AuthUser })

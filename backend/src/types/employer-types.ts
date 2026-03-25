@@ -12,7 +12,7 @@ export class DetEmployerProfileArgs {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 }
 
@@ -23,7 +23,7 @@ export class SetEmployerProfileArgs extends UpdateOpWorkEmployerDto {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 }
 
@@ -40,7 +40,7 @@ export class SetEmployerJobArgs extends OmitType(CreateOpWorkJobDto, [
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -49,7 +49,7 @@ export class SetEmployerJobArgs extends OmitType(CreateOpWorkJobDto, [
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   employerId?: string;
 }
 
@@ -60,7 +60,7 @@ export class DelEmployerJobArgs {
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 }
 
@@ -75,7 +75,7 @@ export class SetEmployerJobSkillArgs extends OmitType(CreateOpWorkJobSkillDto, [
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 
   @ApiProperty({
@@ -93,7 +93,7 @@ export class SetEmployerJobSkillArgs extends OmitType(CreateOpWorkJobSkillDto, [
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   skillId?: string;
 }
 
@@ -107,6 +107,6 @@ export class SetEmployerJobTagsArgs extends OmitType(CreateOpWorkJobTagDto, [
   })
   @IsOptional()
   @IsString()
-  @IsUUID('4', { each: true })
+  @IsUUID('4')
   id?: string;
 }

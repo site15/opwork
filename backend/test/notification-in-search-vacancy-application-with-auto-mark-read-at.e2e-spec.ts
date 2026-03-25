@@ -194,7 +194,7 @@ describe('Notification: work with auto mark read at applications (e2e)', () => {
       jobSeekerActivity.sdk
         .vacanyApplicationControllerApply({
           path: {
-            vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+            job_id: globalVacancyControllerFindManyResult?.items[0].id!,
           },
           body: {
             jobSeekerId: jobSeekerData.jobSeekerControllerSetProfileResult?.id!,
@@ -214,7 +214,7 @@ describe('Notification: work with auto mark read at applications (e2e)', () => {
     const vacancyControllerFindOneResult = await jobSeekerActivity.sdk
       .vacancyControllerFindOne({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);
@@ -252,7 +252,7 @@ describe('Notification: work with auto mark read at applications (e2e)', () => {
     const vacanyApplicationControllerFindManyResult = await employerActivity.sdk
       .vacanyApplicationControllerFindMany({
         path: {
-          vacancy_id: globalVacancyControllerFindManyResult?.items[0].id!,
+          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
         },
       })
       .then(async ({ data }) => data);

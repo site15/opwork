@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { OpWorkJob } from '#/generated/client';
 
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { Button } from 'ant-design-vue';
+
 import { $t } from '#/locales';
+import { useAppOpWorkProfileStore } from '#/services/ProfileService';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
@@ -48,6 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits<Emits>();
 const router = useRouter();
+const appOpWorkProfileStore = useAppOpWorkProfileStore();
 
 // Reactive form for sorting
 const sortForm = reactive({
@@ -68,6 +72,11 @@ const handlePageChange = (page: number) => {
 const handleItemClick = (item: OpWorkJob) => {
   router.push(`/vacancy/${item.id}`);
 };
+
+const canApply = computed(() => {
+  const profile = appOpWorkProfileStore.profile;
+  return profile && profile.type === 'SPECIALIST';
+});
 </script>
 
 <template>
@@ -236,6 +245,17 @@ const handleItemClick = (item: OpWorkJob) => {
                 </span>
               </div>
             </div>
+          </div>
+          <div class="flex shrink-0 items-center gap-x-4">
+            <template v-if="canApply">
+              <Button
+                type="default"
+                :disabled="true"
+                v-if="item.OpWorkApplication?.length"
+              >
+                {{ $t('common.youHaveAlreadyResponded') }}
+              </Button>
+            </template>
           </div>
         </li>
       </ul>

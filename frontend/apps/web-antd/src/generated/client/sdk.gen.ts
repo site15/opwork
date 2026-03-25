@@ -1122,7 +1122,7 @@ export const employerJobTagsControllerDelJobTag = <ThrowOnError extends boolean 
 
 export const vacanyApplicationControllerApply = <ThrowOnError extends boolean = false>(options: Options<VacanyApplicationControllerApplyData, ThrowOnError>) => (options.client ?? client).post<VacanyApplicationControllerApplyResponses, VacanyApplicationControllerApplyErrors, ThrowOnError>({
     security: [{ name: 'x-api-key', type: 'apiKey' }, { name: 'x-session-id', type: 'apiKey' }],
-    url: '/api/vacancy/{vacancy_id}/apply',
+    url: '/api/vacancy/{job_id}/apply',
     ...options,
     headers: {
         'Content-Type': 'application/json',
@@ -1132,7 +1132,7 @@ export const vacanyApplicationControllerApply = <ThrowOnError extends boolean = 
 
 export const vacanyApplicationControllerChangeStatus = <ThrowOnError extends boolean = false>(options: Options<VacanyApplicationControllerChangeStatusData, ThrowOnError>) => (options.client ?? client).put<VacanyApplicationControllerChangeStatusResponses, VacanyApplicationControllerChangeStatusErrors, ThrowOnError>({
     security: [{ name: 'x-api-key', type: 'apiKey' }, { name: 'x-session-id', type: 'apiKey' }],
-    url: '/api/vacancy/{vacancy_id}/applications/{id}/change-status',
+    url: '/api/vacancy/{job_id}/applications/{id}/change-status',
     ...options,
     headers: {
         'Content-Type': 'application/json',
@@ -1142,13 +1142,13 @@ export const vacanyApplicationControllerChangeStatus = <ThrowOnError extends boo
 
 export const vacanyApplicationControllerFindMany = <ThrowOnError extends boolean = false>(options: Options<VacanyApplicationControllerFindManyData, ThrowOnError>) => (options.client ?? client).get<VacanyApplicationControllerFindManyResponses, VacanyApplicationControllerFindManyErrors, ThrowOnError>({
     security: [{ name: 'x-api-key', type: 'apiKey' }, { name: 'x-session-id', type: 'apiKey' }],
-    url: '/api/vacancy/{vacancy_id}/applications',
+    url: '/api/vacancy/{job_id}/applications',
     ...options
 });
 
 export const vacancyControllerFindOne = <ThrowOnError extends boolean = false>(options: Options<VacancyControllerFindOneData, ThrowOnError>) => (options.client ?? client).get<VacancyControllerFindOneResponses, VacancyControllerFindOneErrors, ThrowOnError>({
     security: [{ name: 'x-api-key', type: 'apiKey' }, { name: 'x-session-id', type: 'apiKey' }],
-    url: '/api/vacancy/{vacancy_id}',
+    url: '/api/vacancy/{job_id}',
     ...options
 });
 

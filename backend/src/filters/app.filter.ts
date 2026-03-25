@@ -1,6 +1,7 @@
 import {
   ArgumentsHost,
   Catch,
+  ExecutionContext,
   HttpException,
   HttpStatus,
   Logger,
@@ -17,17 +18,26 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
   }
 
   override catch(exception: HttpException | Error, host: ArgumentsHost) {
-    this.logger.error(exception, exception.stack);
+    const ctx = host.switchToHttp();
+    const request = ctx.getRequest();
+
+    const route = `${request.method} ${request.url}`;
+
+    this.logger.error(
+      `[${route} -> ${exception instanceof Error ? exception.message : exception}`,
+      exception instanceof Error ? exception.stack : undefined,
+    );
+
     const parsedException =
       this.prismaToolsService.convertPrismaErrorToDbError(exception);
     if (parsedException) {
-      super.catch(
+      return super.catch(
         new HttpException(parsedException, HttpStatus.BAD_REQUEST),
         host,
       );
     } else {
       if (exception instanceof AuthError) {
-        super.catch(
+        return super.catch(
           new HttpException(
             {
               code: exception.code,
@@ -40,9 +50,9 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
         );
       }
       if (exception instanceof HttpException) {
-        super.catch(exception, host);
+        return super.catch(exception, host);
       } else {
-        super.catch(
+        return super.catch(
           new HttpException(
             {
               code: 'ERROR',

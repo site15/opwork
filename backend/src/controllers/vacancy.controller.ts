@@ -115,10 +115,10 @@ export class VacancyController {
     private readonly notificationService: NotificationService,
   ) {}
 
-  @Get(':vacancy_id')
+  @Get(':job_id')
   @ApiOkResponse({ type: OpWorkJob })
   async findOne(
-    @Param('vacancy_id', new ParseUUIDPipe()) jobId: string,
+    @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @CurrentAppRequest() req: AppRequest,
   ) {
     const result = await this.prismaService.opWorkJob.findFirstOrThrow({
@@ -131,6 +131,14 @@ export class VacancyController {
         OpWorkJobSkill: { include: { OpWorkSkill: true } },
         ...(req.opWorkProfile.type === 'EMPLOYER'
           ? { opWorkJobTags: true }
+          : {}),
+        ...(req.firstOpWorkJobSeeker && req.opWorkProfile.type === 'SPECIALIST'
+          ? {
+              OpWorkApplication: {
+                include: { OpWorkJobSeeker: true },
+                where: { jobSeekerId: req.firstOpWorkJobSeeker.id },
+              },
+            }
           : {}),
       },
       where: {
@@ -247,6 +255,15 @@ export class VacancyController {
           OpWorkJobSkill: { include: { OpWorkSkill: true } },
           ...(req.opWorkProfile.type === 'EMPLOYER'
             ? { opWorkJobTags: true }
+            : {}),
+          ...(req.firstOpWorkJobSeeker &&
+          req.opWorkProfile.type === 'SPECIALIST'
+            ? {
+                OpWorkApplication: {
+                  include: { OpWorkJobSeeker: true },
+                  where: { jobSeekerId: req.firstOpWorkJobSeeker.id },
+                },
+              }
             : {}),
         },
         where: opWorkJobWhereInput,
