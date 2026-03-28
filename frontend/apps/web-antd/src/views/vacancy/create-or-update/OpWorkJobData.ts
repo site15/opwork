@@ -12,6 +12,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -21,6 +22,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -30,6 +32,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -39,6 +42,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -87,6 +91,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -135,6 +140,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -143,6 +149,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.department'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -151,6 +158,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.salaryMin'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -159,6 +167,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.salaryMax'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -167,6 +176,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.salaryCurrency'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -175,6 +185,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.location'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -192,6 +203,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.isRemote'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -228,6 +240,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -236,6 +249,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.publishedAt'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -244,6 +258,7 @@ export function useOpWorkJobFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.expiresAt'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
   ];

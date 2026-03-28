@@ -10,12 +10,14 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'searchText',
       label: $t('common.filter.searchText'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
       fieldName: 'locations',
       label: $t('resource.OpWorkJobSeeker.preferredLocations'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
       help: $t('resume.search.locationsHelp'),
     },
     {
@@ -23,12 +25,14 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'salaryMin',
       label: `${$t('common.filter.salary')} (min)`,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'InputNumber',
       fieldName: 'salaryMax',
       label: `${$t('common.filter.salary')} (max)`,
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'RadioGroup',
@@ -45,6 +49,7 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'isOpenToWork',
       label: $t('resource.OpWorkJobSeeker.isOpenToWork'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -62,6 +67,7 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'isOpenToRemote',
       label: $t('resource.OpWorkJobSeeker.isOpenToRemote'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -79,6 +85,7 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'isOpenToRelocation',
       label: $t('resource.OpWorkJobSeeker.isOpenToRelocation'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -94,6 +101,7 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       fieldName: 'experienceLevels',
       label: $t('resource.OpWorkJobSeekerSkill.experienceLevel'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
   ];
 }

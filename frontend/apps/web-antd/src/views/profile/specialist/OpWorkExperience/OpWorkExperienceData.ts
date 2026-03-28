@@ -14,6 +14,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -23,6 +24,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -31,6 +33,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.description'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -40,6 +43,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -48,6 +52,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.endDate'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -65,6 +70,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.isCurrent'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -73,6 +79,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.location'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -120,6 +127,7 @@ export function useOpWorkExperienceFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkExperience.employmentType'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
   ];

@@ -14,6 +14,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       fieldName: 'skillName',
       label: $t('resource.name.NewOpWorkSkill'),
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
 
@@ -34,6 +35,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -51,6 +53,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJobSkill.isRequired'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -90,6 +93,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJobSkill.importance'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -125,6 +129,7 @@ export function useOpWorkJobSkillFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJobSkill.minLevel'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
   ];

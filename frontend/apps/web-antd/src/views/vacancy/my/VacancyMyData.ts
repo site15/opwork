@@ -18,6 +18,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       label: $t('common.searchText'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
@@ -29,6 +30,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'InputNumber',
@@ -40,6 +42,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Select',
@@ -87,6 +90,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Select',
@@ -134,6 +138,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
 
     {
@@ -154,6 +159,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.skills'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
 
     {
@@ -169,6 +175,7 @@ export function useVacancyMyFilterFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJob.tags'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
   ];
 }

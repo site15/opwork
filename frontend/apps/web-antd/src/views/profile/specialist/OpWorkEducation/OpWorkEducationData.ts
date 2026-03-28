@@ -14,6 +14,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -73,6 +74,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.degree'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -81,6 +83,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.fieldOfStudy'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -90,6 +93,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -98,6 +102,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.endDate'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -115,6 +120,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.isCurrent'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -123,6 +129,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.description'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -191,6 +198,7 @@ export function useOpWorkEducationFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkEducation.grade'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
   ];

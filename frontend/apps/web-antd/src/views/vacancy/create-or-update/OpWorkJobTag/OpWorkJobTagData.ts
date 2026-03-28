@@ -14,6 +14,7 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
       rules: 'required',
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
     {
@@ -22,6 +23,7 @@ export function useOpWorkJobTagFormSchema(): VbenFormSchema[] {
       label: $t('resource.OpWorkJobTag.color'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
       labelWidth: 200,
     },
   ];

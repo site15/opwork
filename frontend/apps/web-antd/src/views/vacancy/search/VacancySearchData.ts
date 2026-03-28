@@ -13,6 +13,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       label: $t('common.searchText'),
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
@@ -24,6 +25,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'InputNumber',
@@ -35,6 +37,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Select',
@@ -82,6 +85,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Select',
@@ -129,6 +133,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
     {
       component: 'Input',
@@ -140,6 +145,7 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       },
 
       controlClass: 'w-full',
+      labelClass: 'text-right',
     },
   ];
 }
