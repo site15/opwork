@@ -34,7 +34,8 @@ const loadingPermissions = ref(false);
 const id = ref();
 const [Drawer, drawerApi] = useVbenDrawer({
   async onConfirm() {
-    const { valid } = await formApi.validate();
+    // const { valid } =
+    await formApi.validate();
     if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();

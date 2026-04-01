@@ -114,10 +114,7 @@ function onDelete(row: OpWorkSavedSearch) {
     key: 'action_process_msg',
   });
   opWorkSavedSearchControllerDeleteOne({ path: { id: row.id } })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error')
-      }
+    .then(() => {
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',

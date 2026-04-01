@@ -11,6 +11,7 @@ import {
   jobSeekerControllerGetProfile,
   jobSeekerControllerSetProfile,
 } from '#/generated/client';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -60,9 +61,9 @@ const [JobSeekerProfileForm, jobSeekerProfileFormApi] = useVbenForm({
 });
 
 const submit = async () => {
-  //
-  const { valid: jobSeekerValid } = await jobSeekerProfileFormApi.validate();
-  if (!jobSeekerValid) return;
+  // const { valid: jobSeekerValid } =
+  await jobSeekerProfileFormApi.validate();
+  // if (!jobSeekerValid) return;
   const jobSeekerProfileValues = await jobSeekerProfileFormApi.getValues();
 
   jobSeekerControllerSetProfile({
@@ -81,23 +82,28 @@ const submit = async () => {
       portfolioUrl: jobSeekerProfileValues.portfolioUrl,
     },
   })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
+    .catch((error) => {
+      const hasValidationErrors = applyBackendValidationErrors(
+        jobSeekerProfileFormApi,
+        error,
+      );
+      if (!hasValidationErrors) {
+        notification.error({
+          message: $t('actions.common.updateFailed'),
+          description:
+            hasValidationErrors && (error as { message?: string })?.message
+              ? (error as { message?: string }).message
+              : error instanceof Error
+                ? error.message
+                : '',
+          duration: 3000,
+        });
       }
-      return data;
     })
     .then(() => {
       notification.success({
         message: $t('actions.common.updateSuccess'),
         description: $t('resume.detail.updateSuccessDescription'),
-        duration: 3000,
-      });
-    })
-    .catch((error) => {
-      notification.error({
-        message: $t('actions.common.updateFailed'),
-        description: error instanceof Error ? error.message : '',
         duration: 3000,
       });
     });

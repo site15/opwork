@@ -101,10 +101,7 @@ function onDelete(row: OpWorkJobSeekerSkill) {
     key: 'action_process_msg',
   });
   jobSeekerSkillControllerDelJobSkill({ path: { job_seeker_skill_id: row.id } })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
+    .then(() => {
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',

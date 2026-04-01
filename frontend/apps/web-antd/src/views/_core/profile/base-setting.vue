@@ -36,9 +36,6 @@ const submit = async () => {
     },
   })
     .then(async (data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
       // 🔥 важно: обновляем данные в сторе после успешного обновления
       await appOpWorkProfileStore.getProfile();
       return data;

@@ -59,10 +59,7 @@ export const useAppOpWorkProfileStore = defineStore(
     }
 
     async function getProfile() {
-      const result = unwrap(
-        await profileControllerGetProfile(),
-        'Failed to get profile',
-      );
+      const result = unwrap(await profileControllerGetProfile());
 
       profile.value = result;
       setProfileId(result.id);
@@ -71,10 +68,7 @@ export const useAppOpWorkProfileStore = defineStore(
     }
 
     async function getProfiles() {
-      const result = unwrap(
-        await profileControllerGetAllProfiles(),
-        'Failed to get profiles',
-      );
+      const result = unwrap(await profileControllerGetAllProfiles());
 
       return result;
     }
@@ -84,7 +78,6 @@ export const useAppOpWorkProfileStore = defineStore(
         await profileControllerSetProfile({
           body: payload,
         }),
-        'Failed to set profile',
       );
 
       profile.value = result;

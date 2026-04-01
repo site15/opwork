@@ -12,6 +12,7 @@ import {
   employeJobControllerSetJob,
   vacancyControllerFindOne,
 } from '#/generated/client';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
@@ -75,8 +76,9 @@ const [Form, formApi] = useVbenForm({
 });
 
 const submit = async () => {
-  const { valid } = await formApi.validate();
-  if (!valid) return;
+  // const { valid } =
+  await formApi.validate();
+  // if (!valid) return;
   const values = await formApi.getValues();
 
   employeJobControllerSetJob({
@@ -100,19 +102,19 @@ const submit = async () => {
     },
   })
     .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
-      router.push({ path: `/vacancy/${data.data.id}` });
+      router.push({ path: `/vacancy/${data.data?.id}` });
     })
     .catch((error) => {
-      notification.error({
-        message: currentFilters.value?.id
-          ? $t('actions.common.updateFailed')
-          : $t('actions.common.createFailed'),
-        description: error instanceof Error ? error.message : '',
-        duration: 3000,
-      });
+      const hasValidationErrors = applyBackendValidationErrors(formApi, error);
+      if (!hasValidationErrors) {
+        notification.error({
+          message: currentFilters.value?.id
+            ? $t('actions.common.updateFailed')
+            : $t('actions.common.createFailed'),
+          description: error instanceof Error ? error.message : '',
+          duration: 3000,
+        });
+      }
     });
 };
 onMounted(() => {
@@ -146,8 +148,14 @@ onMounted(() => {
         <CardContent class="flex flex-wrap gap-4">
           <div class="flex w-full flex-col gap-4">
             <Form />
-            <OpWorkJobTagList :job-id="currentFilters?.id" />
-            <OpWorkJobSkillList :job-id="currentFilters?.id" />
+            <OpWorkJobTagList
+              v-if="currentFilters?.id"
+              :job-id="currentFilters?.id"
+            />
+            <OpWorkJobSkillList
+              v-if="currentFilters?.id"
+              :job-id="currentFilters?.id"
+            />
           </div>
         </CardContent>
         <CardFooter class="gap-2">

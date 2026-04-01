@@ -10,6 +10,7 @@ import { notification } from 'ant-design-vue';
 import { useVbenForm } from '#/adapter/form';
 import { jobSeekerSkillControllerSetSkill } from '#/generated/client';
 import { $t } from '#/locales';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 import { useOpWorkJobSeekerSkillFormSchema } from './OpWorkJobSeekerSkillData';
 
@@ -25,8 +26,9 @@ const [Form, formApi] = useVbenForm({
 const id = ref();
 const [Drawer, drawerApi] = useVbenDrawer({
   async onConfirm() {
-    const { valid } = await formApi.validate();
-    if (!valid) return;
+    // const { valid } =
+    await formApi.validate();
+    // if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
     jobSeekerSkillControllerSetSkill({
@@ -40,22 +42,25 @@ const [Drawer, drawerApi] = useVbenDrawer({
         skillName: values.skillName,
       },
     })
-      .then((data) => {
-        if (data.error) {
-          throw new Error((data.error as any)?.message || 'Unknown error');
-        }
+      .then(() => {
         emits('success');
         drawerApi.close();
       })
       .catch((error) => {
         drawerApi.unlock();
-        notification.error({
-          message: id.value
-            ? $t('actions.common.updateFailed')
-            : $t('actions.common.createFailed'),
-          description: error instanceof Error ? error.message : '',
-          duration: 3000,
-        });
+        const hasValidationErrors = applyBackendValidationErrors(
+          formApi,
+          error,
+        );
+        if (!hasValidationErrors) {
+          notification.error({
+            message: id.value
+              ? $t('actions.common.updateFailed')
+              : $t('actions.common.createFailed'),
+            description: error instanceof Error ? error.message : '',
+            duration: 3000,
+          });
+        }
       });
   },
 

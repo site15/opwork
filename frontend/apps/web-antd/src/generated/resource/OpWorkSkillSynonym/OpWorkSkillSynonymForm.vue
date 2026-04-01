@@ -9,6 +9,7 @@ import { opWorkSkillSynonymControllerCreateOne, opWorkSkillSynonymControllerUpda
 import type { OpWorkSkillSynonym } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { useOpWorkSkillSynonymFormSchema } from './OpWorkSkillSynonymData';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 const emits = defineEmits(['success']);
 
@@ -22,8 +23,9 @@ const [Form, formApi] = useVbenForm({
 const id = ref();
 const [Drawer, drawerApi] = useVbenDrawer({
   async onConfirm() {
-    const { valid } = await formApi.validate();
-    if (!valid) return;
+    /// const { valid } = 
+    await formApi.validate();
+    // if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
     (id.value ? opWorkSkillSynonymControllerUpdateOne({
@@ -38,20 +40,20 @@ const [Drawer, drawerApi] = useVbenDrawer({
         OpWorkSkill: { connect: { id: values.skillId } },
       }
     }))
-      .then((data) => {
-        if (data.error) {
-          throw new Error((data.error as any)?.message || 'Unknown error')
-        }
+      .then(() => {
         emits('success');
         drawerApi.close();
       })
       .catch((err) => {
         drawerApi.unlock();
-        notification.error({
-          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
-          description: err instanceof Error ? err.message : '',
-          duration: 3000,
-        });
+        const hasValidationErrors = applyBackendValidationErrors(formApi, err);
+        if (!hasValidationErrors) {
+          notification.error({
+            message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
+            description: err instanceof Error ? err.message : '',
+            duration: 3000,
+          });
+        }
       });
   },
 

@@ -11,6 +11,7 @@ import {
   employerControllerGetProfile,
   employerControllerSetProfile,
 } from '#/generated/client';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -57,9 +58,10 @@ const [EmployerProfileForm, employerProfileFormApi] = useVbenForm({
 });
 
 const submit = async () => {
-  //
-  const { valid: employerValid } = await employerProfileFormApi.validate();
-  if (!employerValid) return;
+  // const { valid: employerValid } =
+  await employerProfileFormApi.validate();
+  // if (!employerValid) return;
+  await employerProfileFormApi.resetValidate();
   const employerProfileValues = await employerProfileFormApi.getValues();
 
   employerControllerSetProfile({
@@ -81,29 +83,28 @@ const submit = async () => {
       facebookUrl: employerProfileValues.facebookUrl,
     },
   })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
+    .catch((error) => {
+      const hasValidationErrors = applyBackendValidationErrors(
+        employerProfileFormApi,
+        error,
+      );
+      if (!hasValidationErrors) {
+        notification.error({
+          message: $t('actions.common.updateFailed'),
+          description:
+            hasValidationErrors && (error as { message?: string })?.message
+              ? (error as { message?: string }).message
+              : error instanceof Error
+                ? error.message
+                : '',
+          duration: 3000,
+        });
       }
-      return data;
-    })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
-      return data;
     })
     .then(() => {
       notification.success({
         message: $t('actions.common.updateSuccess'),
         description: $t('employer.detail.updateSuccessDescription'),
-        duration: 3000,
-      });
-    })
-    .catch((error) => {
-      notification.error({
-        message: $t('actions.common.updateFailed'),
-        description: error instanceof Error ? error.message : '',
         duration: 3000,
       });
     });

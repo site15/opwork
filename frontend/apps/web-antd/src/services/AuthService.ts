@@ -61,16 +61,13 @@ export const useAppAuthStore = defineStore(
 
     async function getProfile() {
       try {
-        const data = unwrap(
-          await authControllerInfo(),
-          'Failed to get profile',
-        );
+        const data = unwrap(await authControllerInfo());
 
         profile.value = data;
         return data;
       } catch (error) {
         console.error(error);
-        throw error;
+        throw new Error('Failed to get profile');
       }
     }
 
@@ -86,7 +83,6 @@ export const useAppAuthStore = defineStore(
           await authControllerSignIn({
             body: { email, password },
           }),
-          'Invalid credentials, please try again',
         );
 
         sessionId.value = data.sessionId;
@@ -99,7 +95,7 @@ export const useAppAuthStore = defineStore(
         profile.value = null;
 
         console.error(error);
-        throw error;
+        throw new Error('Invalid credentials, please try again');
       }
     }
 
@@ -117,7 +113,6 @@ export const useAppAuthStore = defineStore(
           await authControllerSignUp({
             body: { email, password, userType },
           }),
-          'Registration failed, please try again',
         );
 
         sessionId.value = data.sessionId;
@@ -130,7 +125,7 @@ export const useAppAuthStore = defineStore(
         profile.value = null;
 
         console.error(error);
-        throw error;
+        throw new Error('Registration failed, please try again');
       }
     }
 
@@ -146,13 +141,12 @@ export const useAppAuthStore = defineStore(
           await authControllerChangePassword({
             body: { currentPassword, newPassword },
           }),
-          'Failed to change password',
         );
 
         return data;
       } catch (error) {
         console.error(error);
-        throw error;
+        throw new Error('Failed to change password');
       }
     }
 
@@ -162,7 +156,6 @@ export const useAppAuthStore = defineStore(
           await authControllerChangeEmail({
             body: { newEmail },
           }),
-          'Failed to change email',
         );
 
         // Update profile in store if available
@@ -176,7 +169,7 @@ export const useAppAuthStore = defineStore(
         return data;
       } catch (error) {
         console.error(error);
-        throw error;
+        throw new Error('Failed to change email');
       }
     }
 

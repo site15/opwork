@@ -9,6 +9,7 @@ import { opWorkJobControllerCreateOne, opWorkJobControllerUpdateOne } from '#/ge
 import type { OpWorkJob } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { useOpWorkJobFormSchema } from './OpWorkJobData';
+import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 const emits = defineEmits(['success']);
 
@@ -22,8 +23,9 @@ const [Form, formApi] = useVbenForm({
 const id = ref();
 const [Drawer, drawerApi] = useVbenDrawer({
   async onConfirm() {
-    const { valid } = await formApi.validate();
-    if (!valid) return;
+    /// const { valid } = 
+    await formApi.validate();
+    // if (!valid) return;
     const values = await formApi.getValues();
     drawerApi.lock();
     (id.value ? opWorkJobControllerUpdateOne({
@@ -74,20 +76,20 @@ const [Drawer, drawerApi] = useVbenDrawer({
         OpWorkProfile: { connect: { id: values.profileId } },
       }
     }))
-      .then((data) => {
-        if (data.error) {
-          throw new Error((data.error as any)?.message || 'Unknown error')
-        }
+      .then(() => {
         emits('success');
         drawerApi.close();
       })
       .catch((err) => {
         drawerApi.unlock();
-        notification.error({
-          message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
-          description: err instanceof Error ? err.message : '',
-          duration: 3000,
-        });
+        const hasValidationErrors = applyBackendValidationErrors(formApi, err);
+        if (!hasValidationErrors) {
+          notification.error({
+            message: id.value ? $t('actions.common.updateFailed') : $t('actions.common.createFailed'),
+            description: err instanceof Error ? err.message : '',
+            duration: 3000,
+          });
+        }
       });
   },
 

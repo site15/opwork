@@ -113,10 +113,7 @@ function onDelete(row: OpWorkJobTag) {
     key: 'action_process_msg',
   });
   employerJobTagsControllerDelJobTag({ path: { job_tag_id: row.id } })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error');
-      }
+    .then(() => {
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',

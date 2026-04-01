@@ -14,6 +14,7 @@ import { WsAdapter } from '@nestjs/platform-ws';
 import 'dotenv/config';
 import { AuthError } from './errors/auth.errors';
 import { X_API_KEY, X_SESSION_ID } from './guards/auth.guard';
+import { ValidationError } from './utils/validation.errors';
 
 Mustache.escape = function (text) {
   return text;
@@ -43,6 +44,11 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
+      validationError: {
+        target: false,
+        value: false,
+      },
+      exceptionFactory: (errors) => new ValidationError(errors),
     }),
   );
 

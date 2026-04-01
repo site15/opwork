@@ -9,6 +9,7 @@ import {
 import { BaseExceptionFilter } from '@nestjs/core';
 import { PrismaToolsService } from '../services/prisma-tools.service';
 import { AuthError } from '../errors/auth.errors';
+import { ValidationError } from '../utils/validation.errors';
 
 @Catch()
 export class AppExceptionsFilter extends BaseExceptionFilter {
@@ -36,6 +37,19 @@ export class AppExceptionsFilter extends BaseExceptionFilter {
         host,
       );
     } else {
+      if (exception instanceof ValidationError) {
+        this.logger.error(exception, exception.stack);
+        super.catch(
+          new HttpException(
+            {
+              code: 'VALIDATION_ERROR',
+              errors: exception.errors,
+            },
+            HttpStatus.BAD_REQUEST,
+          ),
+          host,
+        );
+      }
       if (exception instanceof AuthError) {
         return super.catch(
           new HttpException(

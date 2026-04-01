@@ -10,6 +10,9 @@ async function initApplication() {
   client.setConfig({
     baseUrl: import.meta.env.VITE_GLOB_API_URL,
   });
+  client.interceptors.error.use(async (error) => {
+    throw error;
+  });
   // name用于指定项目唯一标识
   // 用于区分不同项目的偏好设置以及存储数据的key前缀以及其他一些需要隔离的数据
   const env = import.meta.env.PROD ? 'prod' : 'dev';

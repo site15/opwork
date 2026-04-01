@@ -109,10 +109,7 @@ function onDelete(row: AuthSession) {
     key: 'action_process_msg',
   });
   authSessionControllerDeleteOne({ path: { id: row.id } })
-    .then((data) => {
-      if (data.error) {
-        throw new Error((data.error as any)?.message || 'Unknown error')
-      }
+    .then(() => {
       message.success({
         content: $t('ui.actionMessage.deleteSuccess', [row.id]),
         key: 'action_process_msg',
