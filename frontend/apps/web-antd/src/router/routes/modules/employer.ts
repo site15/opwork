@@ -7,11 +7,11 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     name: 'ResumeSearch',
-    path: '/resume/search',
-    component: () => import('#/views/resume/search/index.vue'),
+    path: '/vacancy/resume-search',
+    component: () => import('#/views/vacancy/resume-search/index.vue'),
     meta: {
       icon: 'lucide:search',
-      title: $t('page.resume.search'),
+      title: $t('page.vacancy.resume-search'),
       permissions: {
         type: ['EMPLOYER'],
       } satisfies TPermissions,
@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     name: 'VacancyMy',
-    path: '/vacancy/my',
+    path: '/vacancy/list',
     component: () => import('#/views/vacancy/my/index.vue'),
     meta: {
       affixTab: true,
@@ -38,6 +38,19 @@ const routes: RouteRecordRaw[] = [
       affixTab: true,
       icon: 'lucide:square-user-round',
       title: $t('page.profile.employer'),
+      permissions: {
+        type: ['EMPLOYER'],
+      } satisfies TPermissions,
+    },
+  },
+  {
+    name: 'VacancyApplications',
+    path: '/vacancy/applications',
+    component: () => import('#/views/vacancy/applications/index.vue'),
+    meta: {
+      affixTab: true,
+      icon: 'lucide:circle-dot',
+      title: $t('page.vacancy.applications'),
       permissions: {
         type: ['EMPLOYER'],
       } satisfies TPermissions,

@@ -45,7 +45,8 @@
     "my": "My resumes",
     "create": "Create",
     "edit": "Edit",
-    "detail": "Detail"
+    "detail": "Detail",
+    "applications": "Applications"
   },
   "vacancy": {
     "title": "Vacancies",
@@ -54,7 +55,9 @@
     "detail": "Detail",
     "my": "My vacancies",
     "create": "Create",
-    "edit": "Edit"
+    "edit": "Edit",
+    "resume-search": "Resume search",
+    "applications": "Applications"
   },
   "profile": {
     "employer": "My company",

@@ -7,8 +7,8 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     name: 'VacancySearch',
-    path: '/vacancy/search',
-    component: () => import('#/views/vacancy/search/index.vue'),
+    path: '/resume/vacancy-search',
+    component: () => import('#/views/resume/vacancy-search/index.vue'),
     meta: {
       icon: 'lucide:search',
       title: $t('page.vacancy.search'),
@@ -25,6 +25,19 @@ const routes: RouteRecordRaw[] = [
       affixTab: true,
       icon: 'lucide:square-user-round',
       title: $t('page.profile.specialist'),
+      permissions: {
+        type: ['SPECIALIST'],
+      } satisfies TPermissions,
+    },
+  },
+  {
+    name: 'ResumeApplications',
+    path: '/resume/applications',
+    component: () => import('#/views/resume/applications/index.vue'),
+    meta: {
+      affixTab: true,
+      icon: 'lucide:circle-dot',
+      title: $t('page.resume.applications'),
       permissions: {
         type: ['SPECIALIST'],
       } satisfies TPermissions,
