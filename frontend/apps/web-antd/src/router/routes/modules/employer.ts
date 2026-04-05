@@ -57,6 +57,19 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    name: 'VacancyApplicationDetail',
+    path: '/vacancy/applications/:id',
+    component: () => import('#/views/vacancy/applications/detail/index.vue'),
+    meta: {
+      hideInMenu: true,
+      icon: 'lucide:file-user',
+      title: $t('page.resume.detail'),
+      permissions: {
+        type: ['EMPLOYER'],
+      } satisfies TPermissions,
+    },
+  },
+  {
     name: 'VacancyCreate',
     path: '/vacancy/create',
     component: () => import('#/views/vacancy/create-or-update/index.vue'),

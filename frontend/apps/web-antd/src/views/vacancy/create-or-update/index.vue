@@ -12,7 +12,10 @@ import {
   employeJobControllerSetJob,
   vacancyControllerFindOne,
 } from '#/generated/client';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import {
+  applyBackendValidationErrors,
+  clearBackendValidationErrors,
+} from '#/utils/apply-backend-validation-errors';
 
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
 import CardContent from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/CardContent.vue';
@@ -102,6 +105,7 @@ const submit = async () => {
     },
   })
     .then((data) => {
+      clearBackendValidationErrors(formApi);
       router.push({ path: `/vacancy/${data.data?.id}` });
     })
     .catch((error) => {
@@ -115,6 +119,7 @@ const submit = async () => {
           duration: 3000,
         });
       }
+      throw error;
     });
 };
 onMounted(() => {

@@ -9,7 +9,7 @@ import { opWorkApplicationControllerCreateOne, opWorkApplicationControllerUpdate
 import type { OpWorkApplication } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { useOpWorkApplicationFormSchema } from './OpWorkApplicationData';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import { applyBackendValidationErrors, clearBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 const emits = defineEmits(['success']);
 
@@ -57,6 +57,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }))
       .then(() => {
+        clearBackendValidationErrors(formApi);
         emits('success');
         drawerApi.close();
       })
@@ -70,6 +71,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
             duration: 3000,
           });
         }
+        throw err;
       });
   },
 

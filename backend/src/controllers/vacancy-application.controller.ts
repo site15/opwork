@@ -180,11 +180,10 @@ export class VacanyApplicationController {
       types: ['EMPLOYER'],
     },
   ])
-  @Put(':job_id/applications/:id/change-status')
+  @Put('applications/:application_id/change-status')
   @ApiOkResponse({ type: StatusResponse })
   async changeStatus(
-    @Param('job_id', new ParseUUIDPipe()) jobId: string,
-    @Param('id', new ParseUUIDPipe()) id: string,
+    @Param('application_id', new ParseUUIDPipe()) applicationId: string,
     @Body() args: VacanyApplicationChangeStatusArgs,
     @CurrentAppRequest() req: AppRequest,
   ) {
@@ -195,8 +194,8 @@ export class VacanyApplicationController {
         statusUpdatedAt: new Date(),
       },
       where: {
-        id,
-        OpWorkJob: { id: jobId, profileId: req.opWorkProfileId },
+        id: applicationId,
+        OpWorkJob: { profileId: req.opWorkProfileId },
       },
     });
     return { message: 'ok' };
@@ -280,6 +279,29 @@ export class VacanyApplicationController {
     };
     await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
       result.items.map((item) => item.id),
+      req.opWorkProfileId,
+    );
+    return result;
+  }
+
+  @Get('applications/:application_id')
+  @ApiOkResponse({ type: OpWorkApplication })
+  async findOne(
+    @Param('application_id', new ParseUUIDPipe()) applicationId: string,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
+    const result = await this.prismaService.opWorkApplication.findFirstOrThrow({
+      include: {
+        OpWorkJobSeeker: { include: { OpWorkProfile: true } },
+        OpWorkJob: true,
+      },
+      where: {
+        id: applicationId,
+        OpWorkJob: { profileId: req.opWorkProfileId },
+      },
+    });
+    await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
+      [result.id],
       req.opWorkProfileId,
     );
     return result;

@@ -2,7 +2,7 @@
 import type { VacancySearchFilterFormType } from './VacancySearchData';
 
 import type {
-  OpWorkJob,
+  OpWorkApplication,
   ResumeApplicationControllerFindManyData,
 } from '#/generated/client';
 
@@ -11,11 +11,11 @@ import { onMounted, ref } from 'vue';
 import { resumeApplicationControllerFindMany } from '#/generated/client';
 
 import VacancySearchFilterForm from './VacancySearchFilterForm.vue';
-import VacancySearchList from './VacancySearchList.vue';
+import VacancyApplicationList from './VacancySearchList.vue';
 
 defineOptions({ name: 'VacancyApplications' });
 
-const vacancies = ref<OpWorkJob[]>([]);
+const applications = ref<OpWorkApplication[]>([]);
 const loading = ref(false);
 const pagination = ref({
   currentPage: 1,
@@ -46,16 +46,13 @@ const performSearch = () => {
 
   resumeApplicationControllerFindMany({ query: currentFilters.value })
     .then((response) => {
-      vacancies.value =
-        response.data?.items.flatMap((item) =>
-          item.OpWorkJob ? [item.OpWorkJob] : [],
-        ) || [];
+      applications.value = response.data?.items || [];
       pagination.value.total = response.data?.meta?.totalResults || 0;
       pagination.value.currentPage = response.data?.meta?.curPage || 1;
     })
     .catch((error) => {
       console.error('Error fetching vacancies:', error);
-      vacancies.value = [];
+      applications.value = [];
     })
     .finally(() => {
       loading.value = false;
@@ -98,22 +95,26 @@ onMounted(() => {
 
 <template>
   <div class="p-5">
-    <div class="flex flex-col lg:flex-row">
-      <div class="mb-4 mr-4 w-full lg:mb-0 lg:w-1/5">
-        <VacancySearchFilterForm
-          :title="$t('common.filter.title')"
-          @search="handleSearch"
-        />
-      </div>
-      <div class="w-full lg:w-4/5">
-        <VacancySearchList
-          :items="vacancies"
-          :loading="loading"
-          :pagination="pagination"
-          @page-change="handlePageChange"
-          @sort-change="handleSortChange"
-          :title="$t('resume.application.title')"
-        />
+    <div class="mx-auto max-w-[1600px]">
+      <div
+        class="flex flex-col gap-4 xl:grid xl:grid-cols-[300px_minmax(0,1fr)] xl:items-start"
+      >
+        <div class="w-full">
+          <VacancySearchFilterForm
+            :title="$t('common.filter.title')"
+            @search="handleSearch"
+          />
+        </div>
+        <div class="min-w-0">
+          <VacancyApplicationList
+            :items="applications"
+            :loading="loading"
+            :pagination="pagination"
+            @page-change="handlePageChange"
+            @sort-change="handleSortChange"
+            :title="$t('resume.application.title')"
+          />
+        </div>
       </div>
     </div>
   </div>

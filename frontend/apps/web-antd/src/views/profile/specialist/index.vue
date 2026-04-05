@@ -11,7 +11,10 @@ import {
   jobSeekerControllerGetProfile,
   jobSeekerControllerSetProfile,
 } from '#/generated/client';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import {
+  applyBackendValidationErrors,
+  clearBackendValidationErrors,
+} from '#/utils/apply-backend-validation-errors';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -29,11 +32,8 @@ const loading = ref(false);
 
 const loadProfile = () => {
   loading.value = true;
-  jobSeekerControllerGetProfile({ path: { job_seeker_id: '' } })
+  jobSeekerControllerGetProfile({ query: { jobSeekerId: '' } })
     .then(async (response) => {
-      if (response.error) {
-        throw new Error((response.error as any)?.message || 'Unknown error');
-      }
       const values = {
         ...response.data,
         createdAt: response.data?.createdAt
@@ -43,6 +43,7 @@ const loadProfile = () => {
           ? dayjs(response.data.updatedAt)
           : undefined,
       };
+      console.log(values);
       jobSeekerProfileFormApi.setValues(values);
     })
     .catch((error) => {
@@ -99,8 +100,10 @@ const submit = async () => {
           duration: 3000,
         });
       }
+      throw error;
     })
     .then(() => {
+      clearBackendValidationErrors(jobSeekerProfileFormApi);
       notification.success({
         message: $t('actions.common.updateSuccess'),
         description: $t('resume.detail.updateSuccessDescription'),

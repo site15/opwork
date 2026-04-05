@@ -52,3 +52,9 @@ export const applyBackendValidationErrors = (
 
   return true;
 };
+
+export function clearBackendValidationErrors(formApi: ExtendedFormApi) {
+  for (const field of formApi.store.state.schema ?? []) {
+    formApi.form.setFieldError(field.fieldName, undefined);
+  }
+}

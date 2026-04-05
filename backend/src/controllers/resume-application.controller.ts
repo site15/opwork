@@ -1,4 +1,11 @@
-import { Controller, Get, Inject, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Query,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsEnum, IsOptional, isUUID } from 'class-validator';
@@ -135,6 +142,29 @@ export class ResumeApplicationController {
     };
     await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
       result.items.map((item) => item.id),
+      req.opWorkProfileId,
+    );
+    return result;
+  }
+
+  @Get('applications/:application_id')
+  @ApiOkResponse({ type: OpWorkApplication })
+  async findOne(
+    @Param('application_id', new ParseUUIDPipe()) applicationId: string,
+    @CurrentAppRequest() req: AppRequest,
+  ) {
+    const result = await this.prismaService.opWorkApplication.findFirstOrThrow({
+      include: {
+        OpWorkJobSeeker: { include: { OpWorkProfile: true } },
+        OpWorkJob: true,
+      },
+      where: {
+        id: applicationId,
+        profileId: req.opWorkProfileId,
+      },
+    });
+    await this.notificationService.markAsReadAllWithAutoMarkReadAtIds(
+      [result.id],
       req.opWorkProfileId,
     );
     return result;

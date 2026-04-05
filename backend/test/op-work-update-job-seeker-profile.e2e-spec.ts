@@ -223,7 +223,7 @@ describe('OPWork: update job seeker profile (e2e)', () => {
 
     const jobSeekerControllerGetProfileResult =
       await jobSeekerActivity.sdk.jobSeekerControllerGetProfile({
-        path: { job_seeker_id: jobSeekerId || '' },
+        query: { jobSeekerId: jobSeekerId || '' },
       });
 
     expect(jobSeekerControllerGetProfileResult.data).toMatchObject({

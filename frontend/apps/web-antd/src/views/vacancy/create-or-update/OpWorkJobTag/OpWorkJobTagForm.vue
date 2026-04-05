@@ -10,7 +10,10 @@ import { notification } from 'ant-design-vue';
 import { useVbenForm } from '#/adapter/form';
 import { employerJobTagsControllerSetJobTag } from '#/generated/client';
 import { $t } from '#/locales';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import {
+  applyBackendValidationErrors,
+  clearBackendValidationErrors,
+} from '#/utils/apply-backend-validation-errors';
 
 import { useOpWorkJobTagFormSchema } from './OpWorkJobTagData';
 
@@ -54,6 +57,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
       },
     })
       .then(() => {
+        clearBackendValidationErrors(formApi);
         emits('success');
         drawerApi.close();
       })
@@ -72,6 +76,7 @@ const [Drawer, drawerApi] = useVbenDrawer({
             duration: 3000,
           });
         }
+        throw error;
       });
   },
 

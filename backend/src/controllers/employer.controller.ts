@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Put, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
@@ -45,11 +45,11 @@ export class EmployerController {
     return result;
   }
 
-  @Get(':employer_id')
+  @Get()
   @ApiOkResponse({ type: OpWorkEmployer })
   async getProfile(
     @CurrentAppRequest() req: AppRequest,
-    @Param('employer_id') employerId: string,
+    @Query('employerId') employerId?: string,
   ): Promise<OpWorkEmployer | null> {
     return await this.prismaService.opWorkEmployer.findFirstOrThrow({
       include: {

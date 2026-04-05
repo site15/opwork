@@ -2,7 +2,7 @@
 import type { ResumeSearchFilterFormType } from './ResumeSearchData';
 
 import type {
-  OpWorkJobSeeker,
+  OpWorkApplication,
   ResumeApplicationControllerFindManyData,
 } from '#/generated/client';
 
@@ -15,7 +15,7 @@ import ResumeSearchList from './ResumeSearchList.vue';
 
 defineOptions({ name: 'ResumeApplications' });
 
-const resumes = ref<OpWorkJobSeeker[]>([]);
+const resumes = ref<OpWorkApplication[]>([]);
 const loading = ref(false);
 const pagination = ref({
   currentPage: 1,
@@ -46,10 +46,7 @@ const performSearch = () => {
 
   vacanyApplicationControllerFindMany({ query: currentFilters.value })
     .then((response) => {
-      resumes.value =
-        response.data?.items.flatMap((item) =>
-          item.OpWorkJobSeeker ? [item.OpWorkJobSeeker] : [],
-        ) || [];
+      resumes.value = response.data?.items || [];
       pagination.value.total = response.data?.meta?.totalResults || 0;
       pagination.value.currentPage = response.data?.meta?.curPage || 1;
     })

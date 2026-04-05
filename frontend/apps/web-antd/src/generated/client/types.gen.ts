@@ -4361,11 +4361,11 @@ export type JobSeekerControllerGetProfilesResponse = JobSeekerControllerGetProfi
 
 export type JobSeekerControllerGetProfileData = {
     body?: never;
-    path: {
-        job_seeker_id: string;
+    path?: never;
+    query: {
+        jobSeekerId: string;
     };
-    query?: never;
-    url: '/api/job-seeker/{job_seeker_id}';
+    url: '/api/job-seeker';
 };
 
 export type JobSeekerControllerGetProfileErrors = {
@@ -4599,11 +4599,11 @@ export type EmployerControllerGetProfilesResponse = EmployerControllerGetProfile
 
 export type EmployerControllerGetProfileData = {
     body?: never;
-    path: {
-        employer_id: string;
+    path?: never;
+    query: {
+        employerId: string;
     };
-    query?: never;
-    url: '/api/employer/{employer_id}';
+    url: '/api/employer';
 };
 
 export type EmployerControllerGetProfileErrors = {
@@ -4884,11 +4884,10 @@ export type VacanyApplicationControllerApplyResponse = VacanyApplicationControll
 export type VacanyApplicationControllerChangeStatusData = {
     body: VacanyApplicationChangeStatusArgs;
     path: {
-        job_id: string;
-        id: string;
+        application_id: string;
     };
     query?: never;
-    url: '/api/vacancy/{job_id}/applications/{id}/change-status';
+    url: '/api/vacancy/applications/{application_id}/change-status';
 };
 
 export type VacanyApplicationControllerChangeStatusErrors = {
@@ -4926,6 +4925,29 @@ export type VacanyApplicationControllerFindManyResponses = {
 
 export type VacanyApplicationControllerFindManyResponse = VacanyApplicationControllerFindManyResponses[keyof VacanyApplicationControllerFindManyResponses];
 
+export type VacanyApplicationControllerFindOneData = {
+    body?: never;
+    path: {
+        application_id: string;
+    };
+    query?: never;
+    url: '/api/vacancy/applications/{application_id}';
+};
+
+export type VacanyApplicationControllerFindOneErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type VacanyApplicationControllerFindOneError = VacanyApplicationControllerFindOneErrors[keyof VacanyApplicationControllerFindOneErrors];
+
+export type VacanyApplicationControllerFindOneResponses = {
+    200: OpWorkApplication;
+};
+
+export type VacanyApplicationControllerFindOneResponse = VacanyApplicationControllerFindOneResponses[keyof VacanyApplicationControllerFindOneResponses];
+
 export type ResumeApplicationControllerFindManyData = {
     body?: never;
     path?: never;
@@ -4950,6 +4972,29 @@ export type ResumeApplicationControllerFindManyResponses = {
 };
 
 export type ResumeApplicationControllerFindManyResponse = ResumeApplicationControllerFindManyResponses[keyof ResumeApplicationControllerFindManyResponses];
+
+export type ResumeApplicationControllerFindOneData = {
+    body?: never;
+    path: {
+        application_id: string;
+    };
+    query?: never;
+    url: '/api/resume/applications/{application_id}';
+};
+
+export type ResumeApplicationControllerFindOneErrors = {
+    default: {
+        [key: string]: unknown;
+    };
+};
+
+export type ResumeApplicationControllerFindOneError = ResumeApplicationControllerFindOneErrors[keyof ResumeApplicationControllerFindOneErrors];
+
+export type ResumeApplicationControllerFindOneResponses = {
+    200: OpWorkApplication;
+};
+
+export type ResumeApplicationControllerFindOneResponse = ResumeApplicationControllerFindOneResponses[keyof ResumeApplicationControllerFindOneResponses];
 
 export type VacancyControllerFindOneData = {
     body?: never;

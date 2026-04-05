@@ -11,7 +11,10 @@ import {
   employerControllerGetProfile,
   employerControllerSetProfile,
 } from '#/generated/client';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import {
+  applyBackendValidationErrors,
+  clearBackendValidationErrors,
+} from '#/utils/apply-backend-validation-errors';
 
 import { CardHeader } from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui';
 import Card from '../../../../../../packages/@core/ui-kit/shadcn-ui/src/ui/card/Card.vue';
@@ -26,11 +29,8 @@ const loading = ref(false);
 
 const loadProfile = () => {
   loading.value = true;
-  employerControllerGetProfile({ path: { employer_id: '' } })
+  employerControllerGetProfile({ query: { employerId: '' } })
     .then(async (response) => {
-      if (response.error) {
-        throw new Error((response.error as any)?.message || 'Unknown error');
-      }
       const values = {
         ...response.data,
         createdAt: response.data?.createdAt
@@ -100,8 +100,10 @@ const submit = async () => {
           duration: 3000,
         });
       }
+      throw error;
     })
     .then(() => {
+      clearBackendValidationErrors(employerProfileFormApi);
       notification.success({
         message: $t('actions.common.updateSuccess'),
         description: $t('employer.detail.updateSuccessDescription'),

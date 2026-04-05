@@ -22,7 +22,7 @@ const loadResume = () => {
 
   loading.value = true;
 
-  jobSeekerControllerGetProfile({ path: { job_seeker_id: id } })
+  jobSeekerControllerGetProfile({ query: { jobSeekerId: id } })
     .then((response) => {
       resume.value = response.data || null;
     })

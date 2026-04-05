@@ -44,6 +44,19 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    name: 'ResumeApplicationDetail',
+    path: '/resume/applications/:id',
+    component: () => import('#/views/resume/applications/detail/index.vue'),
+    meta: {
+      hideInMenu: true,
+      icon: 'lucide:file-text',
+      title: $t('page.resume.applications'),
+      permissions: {
+        type: ['SPECIALIST'],
+      } satisfies TPermissions,
+    },
+  },
+  {
     name: 'ResumeDetail',
     path: '/resume/:id',
     component: () => import('#/views/resume/detail/index.vue'),

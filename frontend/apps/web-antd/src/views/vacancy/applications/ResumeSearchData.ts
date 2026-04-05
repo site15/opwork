@@ -69,7 +69,6 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       },
       fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
       label: $t('resource.OpWorkApplication.status'),
-      rules: 'required',
 
       controlClass: 'w-full',
       labelWidth: 200,

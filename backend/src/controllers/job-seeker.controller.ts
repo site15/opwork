@@ -1,12 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Put, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
+import { OpWorkUserType } from '../generated/prisma/enums';
 import { OpWorkJobSeeker } from '../generated/rest/op-work-job-seeker.entity';
 import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { SetJobSeekerProfileArgs } from '../types/job-seeker-types';
 import { AppRequest } from '../types/request';
-import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
-import { OpWorkUserType } from '../generated/prisma/enums';
 
 @ApiTags('job-seeker')
 @Controller('job-seeker')
@@ -41,11 +41,11 @@ export class JobSeekerController {
     });
   }
 
-  @Get(':job_seeker_id')
+  @Get()
   @ApiOkResponse({ type: OpWorkJobSeeker })
   async getProfile(
     @CurrentAppRequest() req: AppRequest,
-    @Param('job_seeker_id') jobSeekerId: string,
+    @Query('jobSeekerId') jobSeekerId?: string,
   ): Promise<OpWorkJobSeeker | null> {
     return await this.prismaService.opWorkJobSeeker.findFirstOrThrow({
       include: {

@@ -74,7 +74,7 @@ import { ${camelModelName}ControllerCreateOne, ${camelModelName}ControllerUpdate
 import type { ${entityClassName} } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
 import { use${entityClassName}FormSchema } from './${entityClassName}Data';
-import { applyBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
+import { applyBackendValidationErrors, clearBackendValidationErrors } from '#/utils/apply-backend-validation-errors';
 
 const emits = defineEmits(['success']);
 
@@ -104,6 +104,7 @@ ${createMethodFields}
       }
     }))
       .then(() => {
+        clearBackendValidationErrors(formApi);
         emits('success');
         drawerApi.close();
       })
@@ -117,6 +118,7 @@ ${createMethodFields}
             duration: 3000,
           });
         }
+        throw err;
       });
   },
 
