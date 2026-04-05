@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { VacancySearchFilterFormType } from './VacancySearchData';
+
 import { VbenButton } from '@vben/common-ui';
 
 import { useVbenForm } from '#/adapter/form';
@@ -16,7 +18,9 @@ defineOptions({
 
 withDefaults(defineProps<Props>(), {});
 
-const emit = defineEmits(['search']);
+const emit = defineEmits<{
+  search: [VacancySearchFilterFormType];
+}>();
 
 const [Form, formApi] = useVbenForm({
   schema: useVacancySearchFilterFormSchema(),
@@ -29,13 +33,13 @@ interface Props {
 }
 
 const handleSearch = async () => {
-  const values = await formApi.getValues();
+  const values = await formApi.getValues<VacancySearchFilterFormType>();
   emit('search', values);
 };
 
 const handleReset = async () => {
   await formApi.resetForm();
-  const values = await formApi.getValues();
+  const values = await formApi.getValues<VacancySearchFilterFormType>();
   emit('search', values);
 };
 </script>

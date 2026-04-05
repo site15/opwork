@@ -1,10 +1,15 @@
 import { Reflector } from '@nestjs/core';
-import { OpWorkUserType } from '../generated/prisma/enums';
+import { OpWorkProfileType, OpWorkUserType } from '../generated/prisma/enums';
 
-type CheckOpWorkUserTypeOptions = {
-  userTypes: OpWorkUserType[] | OpWorkUserType;
-  method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
-};
+type CheckOpWorkUserTypeOptions =
+  | {
+      userTypes: OpWorkUserType[] | OpWorkUserType;
+      method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
+    }
+  | {
+      types: OpWorkProfileType[] | OpWorkProfileType;
+      method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
+    };
 
 export const CheckOpWorkUserTypes =
   Reflector.createDecorator<CheckOpWorkUserTypeOptions[]>();

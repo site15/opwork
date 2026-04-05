@@ -1,7 +1,13 @@
 import type { VbenFormSchema } from '#/adapter/form';
+import type { OpWorkApplicationStatus } from '#/generated/client';
 
-import { OpWorkExperienceLevel } from '#/generated/prisma/browser';
+import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
+
+export type ResumeSearchFilterFormType = {
+  searchText: string;
+  status: OpWorkApplicationStatus;
+};
 
 export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
   return [
@@ -13,95 +19,60 @@ export function useResumeSearchFilterFormSchema(): VbenFormSchema[] {
       labelClass: 'text-right',
     },
     {
-      component: 'Input',
-      fieldName: 'locations',
-      label: $t('resource.OpWorkJobSeeker.preferredLocations'),
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-      help: $t('resume.search.locationsHelp'),
-    },
-    {
-      component: 'InputNumber',
-      fieldName: 'salaryMin',
-      label: `${$t('common.filter.salary')} (min)`,
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
-      component: 'InputNumber',
-      fieldName: 'salaryMax',
-      label: `${$t('common.filter.salary')} (max)`,
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.yes'), value: true },
-          { label: $t('common.no'), value: false },
-          { label: $t('common.filter.sort.none'), value: undefined },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: undefined,
-      fieldName: 'isOpenToWork',
-      label: $t('resource.OpWorkJobSeeker.isOpenToWork'),
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-      labelWidth: 200,
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.yes'), value: true },
-          { label: $t('common.no'), value: false },
-          { label: $t('common.filter.sort.none'), value: undefined },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: undefined,
-      fieldName: 'isOpenToRemote',
-      label: $t('resource.OpWorkJobSeeker.isOpenToRemote'),
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-      labelWidth: 200,
-    },
-    {
-      component: 'RadioGroup',
-      componentProps: {
-        buttonStyle: 'solid',
-        options: [
-          { label: $t('common.yes'), value: true },
-          { label: $t('common.no'), value: false },
-          { label: $t('common.filter.sort.none'), value: undefined },
-        ],
-        optionType: 'button',
-      },
-      defaultValue: undefined,
-      fieldName: 'isOpenToRelocation',
-      label: $t('resource.OpWorkJobSeeker.isOpenToRelocation'),
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-      labelWidth: 200,
-    },
-    {
       component: 'Select',
       componentProps: {
-        mode: 'multiple',
-        options: Object.values(OpWorkExperienceLevel).map((level) => ({
-          label: $t(`resource.OpWorkExperienceLevel.${level}`),
-          value: level,
-        })),
-        placeholder: $t('resume.search.selectExperienceLevels'),
+        allowClear: true,
+        filterOption: true,
+        options: [
+          {
+            value: 'PENDING',
+            label: $t('resource.OpWorkApplicationStatus.PENDING').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'REVIEWED',
+            label: $t('resource.OpWorkApplicationStatus.REVIEWED').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'SHORTLISTED',
+            label: $t('resource.OpWorkApplicationStatus.SHORTLISTED').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'INTERVIEW',
+            label: $t('resource.OpWorkApplicationStatus.INTERVIEW').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'OFFER',
+            label: $t('resource.OpWorkApplicationStatus.OFFER').split(' - ')[0],
+          },
+          {
+            value: 'REJECTED',
+            label: $t('resource.OpWorkApplicationStatus.REJECTED').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'WITHDRAWN',
+            label: $t('resource.OpWorkApplicationStatus.WITHDRAWN').split(
+              ' - ',
+            )[0],
+          },
+        ],
+        showSearch: true,
       },
-      fieldName: 'experienceLevels',
-      label: $t('resource.OpWorkJobSeekerSkill.experienceLevel'),
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
+      label: $t('resource.OpWorkApplication.status'),
+      rules: 'required',
+
       controlClass: 'w-full',
-      labelClass: 'text-right',
+      labelWidth: 200,
     },
   ];
 }

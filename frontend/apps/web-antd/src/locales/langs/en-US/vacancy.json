@@ -1,7 +1,7 @@
 {
   "search": {
     "list": {
-      "title": "Vacancies"
+      "title": "Jobs"
     }
   },
   "remoteWork": "Remote Work",
@@ -11,27 +11,30 @@
     "description": "Description",
     "responsibilities": "Responsibilities",
     "requirements": "Requirements",
-    "statusAndStats": "Status And Stats",
+    "statusAndStats": "Status and Statistics",
     "skills": "Skills",
-    "noSkills": "No Skills",
+    "noSkills": "No skills",
     "tags": "Tags",
-    "noTags": "No Tags",
-    "employerInfo": "Employer Info",
+    "noTags": "No tags",
+    "employerInfo": "Employer Information",
     "employerNotFound": "Employer Not Found"
   },
   "inOffice": "In Office",
   "my": {
     "list": {
-      "title": "My vacancies"
+      "title": "My Jobs"
     }
   },
-  "createBtn": "Create Vacancy",
+  "createBtn": "Create a vacancy",
   "tags": "Tags",
   "skills": "Skills",
   "update": {
-    "title": "Title"
+    "title": "Update"
   },
   "create": {
-    "title": "Title"
+    "title": "Creation"
+  },
+  "application": {
+    "title": "My applications"
   }
 }

@@ -1951,8 +1951,19 @@ export type FindManyVacanyApplicationResponseMeta = {
 };
 
 export type FindManyVacanyApplicationResponse = {
-    items: Array<OpWorkJob>;
+    items: Array<OpWorkApplication>;
     meta: FindManyVacanyApplicationResponseMeta;
+};
+
+export type FindManyResumeApplicationResponseMeta = {
+    curPage?: number;
+    perPage?: number;
+    totalResults: number;
+};
+
+export type FindManyResumeApplicationResponse = {
+    items: Array<OpWorkApplication>;
+    meta: FindManyResumeApplicationResponseMeta;
 };
 
 export type FindManyVacancyResponseMeta = {
@@ -4892,9 +4903,7 @@ export type VacanyApplicationControllerChangeStatusResponse = VacanyApplicationC
 
 export type VacanyApplicationControllerFindManyData = {
     body?: never;
-    path: {
-        job_id: string;
-    };
+    path?: never;
     query?: {
         curPage?: number;
         perPage?: number;
@@ -4902,18 +4911,45 @@ export type VacanyApplicationControllerFindManyData = {
         sort?: string;
         opWorkApplicationStatuses?: Array<OpWorkApplicationStatus>;
     };
-    url: '/api/vacancy/{job_id}/applications';
+    url: '/api/vacancy/applications';
 };
 
 export type VacanyApplicationControllerFindManyErrors = {
-    default: unknown;
+    default: FindManyVacanyApplicationResponse;
 };
+
+export type VacanyApplicationControllerFindManyError = VacanyApplicationControllerFindManyErrors[keyof VacanyApplicationControllerFindManyErrors];
 
 export type VacanyApplicationControllerFindManyResponses = {
     200: FindManyVacanyApplicationResponse;
 };
 
 export type VacanyApplicationControllerFindManyResponse = VacanyApplicationControllerFindManyResponses[keyof VacanyApplicationControllerFindManyResponses];
+
+export type ResumeApplicationControllerFindManyData = {
+    body?: never;
+    path?: never;
+    query?: {
+        curPage?: number;
+        perPage?: number;
+        searchText?: string;
+        sort?: string;
+        opWorkApplicationStatuses?: Array<OpWorkApplicationStatus>;
+    };
+    url: '/api/resume/applications';
+};
+
+export type ResumeApplicationControllerFindManyErrors = {
+    default: FindManyResumeApplicationResponse;
+};
+
+export type ResumeApplicationControllerFindManyError = ResumeApplicationControllerFindManyErrors[keyof ResumeApplicationControllerFindManyErrors];
+
+export type ResumeApplicationControllerFindManyResponses = {
+    200: FindManyResumeApplicationResponse;
+};
+
+export type ResumeApplicationControllerFindManyResponse = ResumeApplicationControllerFindManyResponses[keyof ResumeApplicationControllerFindManyResponses];
 
 export type VacancyControllerFindOneData = {
     body?: never;

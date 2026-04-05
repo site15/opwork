@@ -35,5 +35,8 @@
     },
     "locationsHelp": "Разделяйте несколько мест запятыми",
     "selectExperienceLevels": "Выберите уровни опыта"
+  },
+  "application": {
+    "title": "Мои заявки"
   }
 }

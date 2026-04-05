@@ -19,13 +19,13 @@ import {
 import { Transform } from 'class-transformer';
 import {
   IsEnum,
-  IsNotEmpty,
   IsOptional,
   IsString,
   IsUUID,
   isUUID,
   MaxLength,
 } from 'class-validator';
+import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
 import { CurrentAppRequest } from '../decorators/current-app-request.decorator';
 import { OpWorkApplicationStatus, Prisma } from '../generated/prisma/client';
 import { OpWorkJob } from '../generated/rest/op-work-job.entity';
@@ -42,7 +42,7 @@ import {
 } from '../types/prisma-types';
 import { AppRequest, getAppRequestData } from '../types/request';
 import { StatusResponse } from '../types/status-response';
-import { CheckOpWorkUserTypes } from '../decorators/check-op-work-user-type';
+import { OpWorkApplication } from '../generated/rest/op-work-application.entity';
 
 //
 export class FindManyVacanyApplicationArgs extends FindManyArgs {
@@ -63,8 +63,8 @@ export class FindManyVacanyApplicationArgs extends FindManyArgs {
 
 export class FindManyVacanyApplicationResponseMeta extends FindManyResponseMeta {}
 export class FindManyVacanyApplicationResponse {
-  @ApiProperty({ type: () => [OpWorkJob] })
-  items!: OpWorkJob[];
+  @ApiProperty({ type: () => [OpWorkApplication] })
+  items!: OpWorkApplication[];
 
   @ApiProperty({ type: () => FindManyVacanyApplicationResponseMeta })
   meta!: FindManyVacanyApplicationResponseMeta;
@@ -126,7 +126,7 @@ export class VacanyApplicationController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: ['JOB_SEEKER'],
+      types: ['SPECIALIST'],
     },
   ])
   @HttpCode(200)
@@ -177,7 +177,7 @@ export class VacanyApplicationController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: ['EMPLOYER'],
+      types: ['EMPLOYER'],
     },
   ])
   @Put(':job_id/applications/:id/change-status')
@@ -204,16 +204,15 @@ export class VacanyApplicationController {
 
   @CheckOpWorkUserTypes([
     {
-      userTypes: ['EMPLOYER'],
+      types: ['EMPLOYER'],
     },
   ])
-  @Get(':job_id/applications')
+  @Get('applications')
   @ApiOkResponse({ type: FindManyVacanyApplicationResponse })
   async findMany(
-    @Param('job_id', new ParseUUIDPipe()) jobId: string,
     @Query() args: FindManyVacanyApplicationArgs,
     @CurrentAppRequest() req: AppRequest,
-  ) {
+  ): Promise<FindManyVacanyApplicationResponse> {
     const { skip, take, curPage, perPage } = getFirstSkipFromCurPerPage(args);
     const { searchText, ...otherArgs } = args;
 
@@ -257,7 +256,7 @@ export class VacanyApplicationController {
             ]
           : []),
       ],
-      OpWorkJob: { id: jobId, profileId: req.opWorkProfileId },
+      OpWorkJob: { profileId: req.opWorkProfileId },
     };
 
     const result = {

@@ -28,6 +28,7 @@ import { NotificationService } from './services/notification.service';
 import { PrismaToolsService } from './services/prisma-tools.service';
 import { providePrismaService } from './services/prisma.service';
 import { TimeController } from './controllers/time.controller';
+import { ResumeApplicationController } from './controllers/resume-application.controller';
 
 const generatedControllers = CONTROLLERS;
 const appControllers = [
@@ -42,6 +43,7 @@ const appControllers = [
   EmployerWorkSkillController,
   EmployerJobTagsController,
   VacanyApplicationController,
+  ResumeApplicationController,
   VacancyController,
   ResumeController,
   NotificationController,

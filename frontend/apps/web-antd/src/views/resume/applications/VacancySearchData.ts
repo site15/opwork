@@ -1,9 +1,14 @@
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeTableGridOptions } from '#/adapter/vxe-table';
-import type { OpWorkJob } from '#/generated/client';
+import type { OpWorkApplicationStatus, OpWorkJob } from '#/generated/client';
 
 import { Prisma } from '#/generated/prisma/browser';
 import { $t } from '#/locales';
+
+export type VacancySearchFilterFormType = {
+  searchText: string;
+  status: OpWorkApplicationStatus;
+};
 
 export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
   return [
@@ -16,136 +21,60 @@ export function useVacancySearchFilterFormSchema(): VbenFormSchema[] {
       labelClass: 'text-right',
     },
     {
-      component: 'Input',
-      fieldName: 'locations',
-      label: $t('resource.OpWorkJob.location'),
-      componentProps: {
-        placeholder: $t('resource.OpWorkJob.location'),
-        mode: 'tags',
-      },
-
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
-      component: 'InputNumber',
-      fieldName: 'salaryMin',
-      label: $t('resource.OpWorkJob.salaryMin'),
-      componentProps: {
-        placeholder: $t('resource.OpWorkJob.salaryMin'),
-        min: 0,
-      },
-
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
       component: 'Select',
-      fieldName: 'employmentTypes',
-      label: $t('resource.OpWorkJob.employmentType'),
       componentProps: {
-        mode: 'multiple',
         allowClear: true,
         filterOption: true,
         options: [
           {
-            value: 'FULL_TIME',
-            label: $t('resource.OpWorkEmploymentType.FULL_TIME').split(
+            value: 'PENDING',
+            label: $t('resource.OpWorkApplicationStatus.PENDING').split(
               ' - ',
             )[0],
           },
           {
-            value: 'PART_TIME',
-            label: $t('resource.OpWorkEmploymentType.PART_TIME').split(
+            value: 'REVIEWED',
+            label: $t('resource.OpWorkApplicationStatus.REVIEWED').split(
               ' - ',
             )[0],
           },
           {
-            value: 'CONTRACT',
-            label: $t('resource.OpWorkEmploymentType.CONTRACT').split(' - ')[0],
-          },
-          {
-            value: 'INTERNSHIP',
-            label: $t('resource.OpWorkEmploymentType.INTERNSHIP').split(
+            value: 'SHORTLISTED',
+            label: $t('resource.OpWorkApplicationStatus.SHORTLISTED').split(
               ' - ',
             )[0],
           },
           {
-            value: 'REMOTE',
-            label: $t('resource.OpWorkEmploymentType.REMOTE').split(' - ')[0],
+            value: 'INTERVIEW',
+            label: $t('resource.OpWorkApplicationStatus.INTERVIEW').split(
+              ' - ',
+            )[0],
           },
           {
-            value: 'FREELANCE',
-            label: $t('resource.OpWorkEmploymentType.FREELANCE').split(
+            value: 'OFFER',
+            label: $t('resource.OpWorkApplicationStatus.OFFER').split(' - ')[0],
+          },
+          {
+            value: 'REJECTED',
+            label: $t('resource.OpWorkApplicationStatus.REJECTED').split(
+              ' - ',
+            )[0],
+          },
+          {
+            value: 'WITHDRAWN',
+            label: $t('resource.OpWorkApplicationStatus.WITHDRAWN').split(
               ' - ',
             )[0],
           },
         ],
         showSearch: true,
       },
+      fieldName: Prisma.OpWorkApplicationScalarFieldEnum.status,
+      label: $t('resource.OpWorkApplication.status'),
+      rules: 'required',
 
       controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
-      component: 'Select',
-      fieldName: 'experienceLevels',
-      label: $t('resource.OpWorkJob.experienceLevel'),
-      componentProps: {
-        mode: 'multiple',
-        allowClear: true,
-        filterOption: true,
-        options: [
-          {
-            value: 'INTERNSHIP',
-            label: $t('resource.OpWorkExperienceLevel.INTERNSHIP').split(
-              ' - ',
-            )[0],
-          },
-          {
-            value: 'ENTRY_LEVEL',
-            label: $t('resource.OpWorkExperienceLevel.ENTRY_LEVEL').split(
-              ' - ',
-            )[0],
-          },
-          {
-            value: 'JUNIOR',
-            label: $t('resource.OpWorkExperienceLevel.JUNIOR').split(' - ')[0],
-          },
-          {
-            value: 'MIDDLE',
-            label: $t('resource.OpWorkExperienceLevel.MIDDLE').split(' - ')[0],
-          },
-          {
-            value: 'SENIOR',
-            label: $t('resource.OpWorkExperienceLevel.SENIOR').split(' - ')[0],
-          },
-          {
-            value: 'LEAD',
-            label: $t('resource.OpWorkExperienceLevel.LEAD').split(' - ')[0],
-          },
-          {
-            value: 'EXPERT',
-            label: $t('resource.OpWorkExperienceLevel.EXPERT').split(' - ')[0],
-          },
-        ],
-        showSearch: true,
-      },
-
-      controlClass: 'w-full',
-      labelClass: 'text-right',
-    },
-    {
-      component: 'Input',
-      fieldName: 'skills',
-      label: $t('resource.OpWorkSkill.name'),
-      componentProps: {
-        placeholder: $t('resource.OpWorkSkill.name'),
-        mode: 'tags',
-      },
-
-      controlClass: 'w-full',
-      labelClass: 'text-right',
+      labelWidth: 200,
     },
   ];
 }

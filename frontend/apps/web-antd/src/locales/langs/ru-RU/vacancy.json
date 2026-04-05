@@ -33,5 +33,8 @@
   },
   "create": {
     "title": "Создание"
+  },
+  "application": {
+    "title": "Мои заявки"
   }
 }

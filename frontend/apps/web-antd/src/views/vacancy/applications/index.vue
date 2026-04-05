@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+import type { ResumeSearchFilterFormType } from './ResumeSearchData';
+
 import type {
   OpWorkJobSeeker,
-  ResumeControllerFindManyData,
+  ResumeApplicationControllerFindManyData,
 } from '#/generated/client';
 
 import { onMounted, ref } from 'vue';
 
-import { resumeControllerFindMany } from '#/generated/client';
+import { vacanyApplicationControllerFindMany } from '#/generated/client';
 
 import ResumeSearchFilterForm from './ResumeSearchFilterForm.vue';
 import ResumeSearchList from './ResumeSearchList.vue';
@@ -21,15 +23,17 @@ const pagination = ref({
   total: 0,
 });
 
-const currentFilters = ref<ResumeControllerFindManyData['query']>({
+const currentFilters = ref<ResumeApplicationControllerFindManyData['query']>({
   curPage: 1,
   perPage: 5,
   sort: '',
 });
 
-const handleSearch = (filters: ResumeControllerFindManyData['query']) => {
+const handleSearch = (filters: ResumeSearchFilterFormType) => {
+  console.log('handleSearch', filters);
   currentFilters.value = {
-    ...filters,
+    searchText: filters.searchText,
+    opWorkApplicationStatuses: [filters.status],
     curPage: 1, // Reset to first page when applying new filters
     perPage: pagination.value.pageSize,
   };
@@ -40,9 +44,12 @@ const handleSearch = (filters: ResumeControllerFindManyData['query']) => {
 const performSearch = () => {
   loading.value = true;
 
-  resumeControllerFindMany({ query: currentFilters.value })
+  vacanyApplicationControllerFindMany({ query: currentFilters.value })
     .then((response) => {
-      resumes.value = response.data?.items || [];
+      resumes.value =
+        response.data?.items.flatMap((item) =>
+          item.OpWorkJobSeeker ? [item.OpWorkJobSeeker] : [],
+        ) || [];
       pagination.value.total = response.data?.meta?.totalResults || 0;
       pagination.value.currentPage = response.data?.meta?.curPage || 1;
     })
@@ -104,7 +111,7 @@ onMounted(() => {
           :pagination="pagination"
           @page-change="handlePageChange"
           @sort-change="handleSortChange"
-          :title="$t('resume.search.list.title')"
+          :title="$t('resume.application.title')"
         />
       </div>
     </div>

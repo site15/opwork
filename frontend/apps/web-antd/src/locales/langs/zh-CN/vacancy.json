@@ -1,37 +1,40 @@
 {
   "search": {
     "list": {
-      "title": "职位空缺"
+      "title": "Jobs"
     }
   },
-  "remoteWork": "远程工作",
+  "remoteWork": "Remote Work",
   "detail": {
-    "notFound": "未找到",
-    "compensation": "薪酬",
-    "description": "描述",
-    "responsibilities": "职责",
-    "requirements": "要求",
-    "statusAndStats": "状态和统计",
-    "skills": "技能",
-    "noSkills": "无技能",
-    "tags": "标签",
-    "noTags": "无标签",
-    "employerInfo": "雇主信息",
-    "employerNotFound": "未找到雇主"
+    "notFound": "Not Found",
+    "compensation": "Compensation",
+    "description": "Description",
+    "responsibilities": "Responsibilities",
+    "requirements": "Requirements",
+    "statusAndStats": "Status and Statistics",
+    "skills": "Skills",
+    "noSkills": "No skills",
+    "tags": "Tags",
+    "noTags": "No tags",
+    "employerInfo": "Employer Information",
+    "employerNotFound": "Employer Not Found"
   },
-  "inOffice": "办公室",
+  "inOffice": "In Office",
   "my": {
     "list": {
-      "title": "我的职位空缺"
+      "title": "My Jobs"
     }
   },
-  "createBtn": "创建职位空缺",
-  "tags": "标签",
-  "skills": "技能",
+  "createBtn": "Create a vacancy",
+  "tags": "Tags",
+  "skills": "Skills",
   "update": {
-    "title": "Title"
+    "title": "Update"
   },
   "create": {
-    "title": "Title"
+    "title": "Creation"
+  },
+  "application": {
+    "title": "My applications"
   }
 }

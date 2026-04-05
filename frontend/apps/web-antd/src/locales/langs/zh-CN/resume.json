@@ -1,39 +1,42 @@
 {
-  "noPosition": "No position specified",
-  "noCompany": "No company specified",
-  "remoteWork": "Remote work",
+  "noPosition": "Job Title Not Specified",
+  "noCompany": "Company Not Specified",
+  "remoteWork": "Remote Work",
   "relocation": "Relocation",
-  "openToWork": "Open to work",
+  "openToWork": "Open to Offers",
   "basicInfo": "Basic Information",
-  "positionPlaceholder": "e.g. Senior Developer",
-  "companyPlaceholder": "e.g. Tech Corp",
-  "summaryPlaceholder": "Brief description of your professional background...",
+  "positionPlaceholder": "e.g., Senior Developer",
+  "companyPlaceholder": "e.g., TechnoCorp",
+  "summaryPlaceholder": "A brief description of your professional experience...",
   "salaryExpectations": "Salary Expectations",
   "workPreferences": "Work Preferences",
-  "locationsPlaceholder": "e.g. New York, Remote",
-  "socialLinks": "Social Links",
+  "locationsPlaceholder": "e.g., Moscow, Remote",
+  "socialLinks": "Social Networks",
   "portfolio": "Portfolio",
   "detail": {
-    "notFound": "Resume not found",
-    "summary": "Summary",
-    "experience": "Experience",
+    "notFound": "Resume Not Found",
+    "summary": "Resume",
+    "experience": "Work Experience",
     "education": "Education",
     "preferences": "Preferences",
     "skills": "Skills",
-    "socialLinks": "Social Links",
-    "contactInfo": "Contact Info",
-    "noSocialLinks": "No social links provided",
+    "socialLinks": "Social Networks",
+    "contactInfo": "Contact Information",
+    "noSocialLinks": "No social networks specified",
     "updateSuccessDescription": "Your resume has been successfully updated"
   },
   "update": {
-    "title": "Update Resume"
+    "title": "My Resume"
   },
-  "my": "My",
+  "my": "My Resume",
   "search": {
     "list": {
-      "title": "Search Resumes"
+      "title": "Resume Search"
     },
     "locationsHelp": "Separate multiple locations with commas",
     "selectExperienceLevels": "Select experience levels"
+  },
+  "application": {
+    "title": "My Applications"
   }
 }

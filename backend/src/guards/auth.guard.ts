@@ -13,6 +13,7 @@ import { PRISMA_SERVICE, PrismaService } from '../services/prisma.service';
 import { AppRequest } from '../types/request';
 import { getRequestFromExecutionContext } from '../utils/get-request-fromExecution-context';
 import { getClientIp } from '../utils/request-ip';
+import { userInfo } from 'os';
 
 export const X_API_KEY = 'x-api-key';
 export const X_SESSION_ID = 'x-session-id';
@@ -188,6 +189,7 @@ export class AuthGuard implements CanActivate {
     if (
       checkOpWorkUserType?.some(
         (type) =>
+          'userTypes' in type &&
           (!type.method || type.method === req.method) &&
           !(
             Array.isArray(type.userTypes) ? type.userTypes : [type.userTypes]
@@ -199,8 +201,29 @@ export class AuthGuard implements CanActivate {
         class: context.getClass().name,
         method: req.method,
         profile: {
-          type: req.opWorkProfile?.type,
           userTypes: req.opWorkProfile?.userType,
+        },
+        handlerMetadata: checkOpWorkUserType,
+      });
+      throw new AuthError(AuthErrorEnum.METHOD_NOT_ALLOWED);
+    }
+
+    if (
+      checkOpWorkUserType?.some(
+        (type) =>
+          'types' in type &&
+          (!type.method || type.method === req.method) &&
+          !(Array.isArray(type.types) ? type.types : [type.types]).find(
+            (type) => req.opWorkProfile?.type === type,
+          ),
+      )
+    ) {
+      this.logger.log('Method not allowed', {
+        handler: context.getHandler().name,
+        class: context.getClass().name,
+        method: req.method,
+        profile: {
+          type: req.opWorkProfile?.type,
         },
         handlerMetadata: checkOpWorkUserType,
       });
