@@ -94,22 +94,26 @@ onMounted(() => {
 
 <template>
   <div class="p-5">
-    <div class="flex flex-col lg:flex-row">
-      <div class="mb-4 mr-4 w-full lg:mb-0 lg:w-1/5">
-        <ResumeSearchFilterForm
-          :title="$t('common.filter.title')"
-          @search="handleSearch"
-        />
-      </div>
-      <div class="w-full lg:w-4/5">
-        <ResumeSearchList
-          :items="resumes"
-          :loading="loading"
-          :pagination="pagination"
-          @page-change="handlePageChange"
-          @sort-change="handleSortChange"
-          :title="$t('resume.application.title')"
-        />
+    <div class="mx-auto max-w-[1600px]">
+      <div
+        class="flex flex-col gap-4 xl:grid xl:grid-cols-[300px_minmax(0,1fr)] xl:items-start"
+      >
+        <div class="w-full">
+          <ResumeSearchFilterForm
+            :title="$t('common.filter.title')"
+            @search="handleSearch"
+          />
+        </div>
+        <div class="min-w-0">
+          <ResumeSearchList
+            :items="resumes"
+            :loading="loading"
+            :pagination="pagination"
+            @page-change="handlePageChange"
+            @sort-change="handleSortChange"
+            :title="$t('resume.application.title')"
+          />
+        </div>
       </div>
     </div>
   </div>

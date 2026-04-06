@@ -38,6 +38,7 @@ interface Emits {
 defineOptions({
   name: 'ResumeSearchList',
 });
+
 const props = withDefaults(defineProps<Props>(), {
   items: () => [],
   loading: false,
@@ -47,17 +48,16 @@ const props = withDefaults(defineProps<Props>(), {
     total: 0,
   }),
 });
+
 const emit = defineEmits<Emits>();
 const router = useRouter();
 
-// Reactive form for sorting
 const sortForm = reactive({
   expectedSalary: '',
   isOpenToWork: '',
 });
 
 const handleSortChange = () => {
-  // Emit all sort fields together
   emit('sortChange', { ...sortForm });
 };
 
@@ -106,29 +106,45 @@ const getApplicationStatusClass = (status?: string) => {
     case 'WITHDRAWN': {
       return 'bg-gray-200 text-gray-700';
     }
+    default: {
+      return 'bg-amber-100 text-amber-800';
+    }
   }
-  return 'bg-amber-100 text-amber-800';
+};
+
+const formatExpectedSalary = (item: OpWorkApplication) => {
+  const seeker = item.OpWorkJobSeeker;
+
+  if (!seeker?.expectedSalary) {
+    return '';
+  }
+
+  return `$${seeker.expectedSalary.toLocaleString()} ${seeker.salaryCurrency || ''}`.trim();
 };
 </script>
 
 <template>
-  <Card>
+  <Card class="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
     <CardHeader
-      class="flex flex-col items-start justify-between gap-4 py-4 sm:flex-row sm:items-center"
+      class="flex flex-col items-start justify-between gap-4 border-b border-slate-200 bg-gradient-to-r from-white via-slate-50 to-sky-50 py-5 sm:flex-row sm:items-center"
     >
       <div>
-        <CardTitle class="text-lg">
+        <CardTitle class="text-lg text-slate-900">
           {{ title }} ({{ pagination.total }})
         </CardTitle>
+        <p class="mt-1 text-sm text-slate-500">
+          {{ $t('resume.application.title') }}
+        </p>
       </div>
-      <div class="flex flex-wrap gap-2">
-        <div class="flex items-center gap-1">
-          <label class="text-sm font-medium text-gray-700">{{
+
+      <div class="flex flex-wrap gap-3">
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-medium text-slate-600">{{
             $t('common.filter.salary')
           }}</label>
           <select
-            class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
             v-model="sortForm.expectedSalary"
+            class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700"
             @change="handleSortChange"
           >
             <option value="">
@@ -143,13 +159,13 @@ const getApplicationStatusClass = (status?: string) => {
           </select>
         </div>
 
-        <div class="flex items-center gap-1">
-          <label class="text-sm font-medium text-gray-700">{{
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-medium text-slate-600">{{
             $t('resource.OpWorkJobSeeker.isOpenToWork')
           }}</label>
           <select
-            class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm"
             v-model="sortForm.isOpenToWork"
+            class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700"
             @change="handleSortChange"
           >
             <option value="">
@@ -161,224 +177,257 @@ const getApplicationStatusClass = (status?: string) => {
         </div>
       </div>
     </CardHeader>
-    <CardContent class="flex flex-wrap p-5 pt-0">
+
+    <CardContent class="flex flex-wrap p-5">
       <div v-if="loading" class="w-full py-10 text-center">
         <div
           class="inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-blue-500"
         ></div>
         <p class="mt-2 text-sm text-gray-500">{{ $t('common.loading') }}</p>
       </div>
+
       <div v-else-if="items.length === 0" class="w-full py-10 text-center">
         <p class="text-sm text-gray-500">{{ $t('common.noResults') }}</p>
       </div>
-      <ul v-else class="w-full divide-y divide-border" role="list">
+
+      <ul v-else class="w-full space-y-4" role="list">
         <li
           v-for="item in items"
           :key="item.id"
-          class="flex cursor-pointer justify-between gap-x-6 py-5 pl-5 pr-5 transition-colors hover:bg-gray-50"
+          class="cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-sky-200 hover:shadow-md"
           @click="handleItemClick(item)"
         >
-          <div class="flex min-w-0 flex-1 items-center gap-x-4">
-            <div class="min-w-0 flex-auto">
-              <div class="flex flex-wrap items-center gap-2">
-                <p class="text-base font-semibold leading-6 text-foreground">
-                  {{ $t('resource.name.OpWorkJobSeeker') }}:
-                  {{
-                    item.OpWorkJobSeeker?.currentPosition ||
-                    $t('resume.noPosition')
-                  }}
-                </p>
+          <div class="min-w-0 p-5 md:p-6">
+            <div
+              class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
+            >
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <p class="text-lg font-semibold leading-7 text-slate-900">
+                    {{
+                      item.OpWorkJobSeeker?.currentPosition ||
+                      $t('resume.noPosition')
+                    }}
+                  </p>
+                  <span
+                    v-if="item.OpWorkJob?.title"
+                    class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600"
+                  >
+                    {{ item.OpWorkJob?.title }}
+                  </span>
+                </div>
+
+                <div
+                  class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600"
+                >
+                  <span v-if="item.OpWorkJobSeeker?.currentCompany">
+                    {{ item.OpWorkJobSeeker?.currentCompany }}
+                  </span>
+                  <span
+                    v-if="item.OpWorkJobSeeker?.preferredLocations"
+                    class="text-slate-400"
+                  >
+                    •
+                  </span>
+                  <span v-if="item.OpWorkJobSeeker?.preferredLocations">
+                    {{ item.OpWorkJobSeeker?.preferredLocations }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2 lg:justify-end">
                 <span
-                  class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                  class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
                   :class="getApplicationStatusClass(item.status)"
                 >
-                  {{ $t('resource.OpWorkApplication.status') }}:
                   {{ getApplicationStatusLabel(item.status) }}
                 </span>
+                <span
+                  v-if="formatExpectedSalary(item)"
+                  class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700"
+                >
+                  {{ formatExpectedSalary(item) }}
+                </span>
               </div>
-              <div
-                class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500"
+            </div>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                v-if="
+                  item.OpWorkJobSeeker?.isOpenToWork !== null &&
+                  item.OpWorkJobSeeker?.isOpenToWork !== undefined
+                "
+                class="inline-flex items-center rounded-full bg-sky-50 px-3 py-1 text-xs font-medium text-sky-700"
               >
-                <span
-                  v-if="item.OpWorkJobSeeker?.currentCompany"
-                  class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
-                >
-                  {{ $t('resource.OpWorkJobSeeker.currentCompany') }}:
-                  {{ item.OpWorkJobSeeker?.currentCompany }}
-                </span>
-                <span
-                  v-if="
-                    item.OpWorkJobSeeker?.expectedSalary ||
-                    item.OpWorkJobSeeker?.salaryCurrency
-                  "
-                  class="inline-flex items-center rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800"
-                >
-                  {{ $t('resource.OpWorkJobSeeker.expectedSalary') }}:
-                  <template
-                    v-if="
-                      item.OpWorkJobSeeker?.expectedSalary &&
-                      item.OpWorkJobSeeker?.salaryCurrency
-                    "
-                  >
-                    ${{ item.OpWorkJobSeeker?.expectedSalary.toLocaleString() }}
-                    {{ item.OpWorkJobSeeker?.salaryCurrency }}
-                  </template>
-                  <template v-else-if="item.OpWorkJobSeeker?.expectedSalary">
-                    ${{ item.OpWorkJobSeeker?.expectedSalary.toLocaleString() }}
-                  </template>
-                </span>
-                <span
-                  v-if="item.OpWorkJobSeeker?.preferredLocations"
-                  class="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800"
-                >
-                  {{ $t('resource.OpWorkJobSeeker.preferredLocations') }}:
-                  {{ item.OpWorkJobSeeker?.preferredLocations }}
-                </span>
-                <span
-                  v-if="item.OpWorkJobSeeker?.isOpenToRemote"
-                  class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-800"
-                >
-                  {{ $t('resource.OpWorkJobSeeker.isOpenToRemote') }}:
-                  {{ $t('resume.remoteWork') }}
-                </span>
-                <span
-                  v-if="item.OpWorkJobSeeker?.isOpenToRelocation"
-                  class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
-                >
-                  {{ $t('resource.OpWorkJobSeeker.isOpenToRelocation') }}:
-                  {{ $t('resume.relocation') }}
-                </span>
-              </div>
-              <div class="mt-3 grid gap-3 md:grid-cols-2">
-                <div class="rounded-md border border-gray-200 bg-gray-50 p-3">
+                {{
+                  item.OpWorkJobSeeker?.isOpenToWork
+                    ? `${$t('resource.OpWorkJobSeeker.isOpenToWork')}: ${$t('common.yes')}`
+                    : `${$t('resource.OpWorkJobSeeker.isOpenToWork')}: ${$t('common.no')}`
+                }}
+              </span>
+              <span
+                v-if="item.OpWorkJobSeeker?.isOpenToRemote"
+                class="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700"
+              >
+                {{ $t('resume.remoteWork') }}
+              </span>
+              <span
+                v-if="item.OpWorkJobSeeker?.isOpenToRelocation"
+                class="inline-flex items-center rounded-full bg-cyan-50 px-3 py-1 text-xs font-medium text-cyan-700"
+              >
+                {{ $t('resume.relocation') }}
+              </span>
+              <span
+                v-if="item.appliedAt"
+                class="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700"
+              >
+                {{ $t('resource.OpWorkApplication.appliedAt') }}:
+                {{ formatDate(item.appliedAt) }}
+              </span>
+            </div>
+
+            <div
+              class="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+            >
+              <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                <div class="flex items-center justify-between gap-3">
                   <p
-                    class="text-xs font-semibold uppercase tracking-wide text-gray-600"
+                    class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500"
                   >
                     {{ $t('resource.name.OpWorkJobSeeker') }}
                   </p>
-                  <div class="mt-2 space-y-1 text-xs text-gray-600">
-                    <p
-                      v-if="
-                        item.OpWorkJobSeeker?.isOpenToWork !== null &&
-                        item.OpWorkJobSeeker?.isOpenToWork !== undefined
-                      "
-                    >
-                      {{ $t('resource.OpWorkJobSeeker.isOpenToWork') }}:
-                      {{
-                        item.OpWorkJobSeeker?.isOpenToWork
-                          ? $t('common.yes')
-                          : $t('common.no')
-                      }}
-                    </p>
-                    <p v-if="item.OpWorkJobSeeker?.linkedinUrl">
-                      LinkedIn:
-                      <a
-                        :href="item.OpWorkJobSeeker?.linkedinUrl"
-                        class="text-sky-700 underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click.stop
-                      >
-                        {{ item.OpWorkJobSeeker?.linkedinUrl }}
-                      </a>
-                    </p>
-                    <p v-if="item.OpWorkJobSeeker?.githubUrl">
-                      GitHub:
-                      <a
-                        :href="item.OpWorkJobSeeker?.githubUrl"
-                        class="text-sky-700 underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click.stop
-                      >
-                        {{ item.OpWorkJobSeeker?.githubUrl }}
-                      </a>
-                    </p>
-                    <p v-if="item.OpWorkJobSeeker?.portfolioUrl">
-                      {{ $t('resource.OpWorkJobSeeker.portfolioUrl') }}:
-                      <a
-                        :href="item.OpWorkJobSeeker?.portfolioUrl"
-                        class="text-sky-700 underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click.stop
-                      >
-                        {{ item.OpWorkJobSeeker?.portfolioUrl }}
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                <div class="rounded-md border border-sky-200 bg-sky-50/60 p-3">
-                  <p
-                    class="text-xs font-semibold uppercase tracking-wide text-sky-700"
+                  <span
+                    v-if="item.statusUpdatedAt"
+                    class="text-xs text-slate-500"
                   >
-                    {{ $t('resource.name.OpWorkApplication') }}
-                  </p>
-                  <div class="mt-2 space-y-1 text-xs text-gray-600">
+                    {{ formatDate(item.statusUpdatedAt) }}
+                  </span>
+                </div>
+
+                <!-- eslint-disable vue/no-v-html -->
+                <p
+                  class="mt-3 line-clamp-3 text-sm leading-6 text-slate-700 *:text-primary"
+                  v-html="item.OpWorkJobSeeker?.summary || ''"
+                ></p>
+
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <a
+                    v-if="item.OpWorkJobSeeker?.linkedinUrl"
+                    :href="item.OpWorkJobSeeker?.linkedinUrl"
+                    class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-sky-700 ring-1 ring-slate-200 transition-colors hover:bg-sky-50"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.stop
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    v-if="item.OpWorkJobSeeker?.githubUrl"
+                    :href="item.OpWorkJobSeeker?.githubUrl"
+                    class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-sky-700 ring-1 ring-slate-200 transition-colors hover:bg-sky-50"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.stop
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    v-if="item.OpWorkJobSeeker?.portfolioUrl"
+                    :href="item.OpWorkJobSeeker?.portfolioUrl"
+                    class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-sky-700 ring-1 ring-slate-200 transition-colors hover:bg-sky-50"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click.stop
+                  >
+                    {{ $t('resource.OpWorkJobSeeker.portfolioUrl') }}
+                  </a>
+                </div>
+              </div>
+
+              <div class="rounded-2xl bg-sky-50/70 p-4 ring-1 ring-sky-200">
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.12em] text-sky-700"
+                >
+                  {{ $t('resource.name.OpWorkApplication') }}
+                </p>
+
+                <div class="mt-3 grid gap-3 text-sm text-slate-700">
+                  <div class="grid gap-1 sm:grid-cols-2">
                     <p v-if="item.appliedAt">
                       {{ $t('resource.OpWorkApplication.appliedAt') }}:
-                      {{ formatDate(item.appliedAt) }}
+                      <span class="font-medium text-slate-900">
+                        {{ formatDate(item.appliedAt) }}
+                      </span>
                     </p>
                     <p v-if="item.statusUpdatedAt">
                       {{ $t('resource.OpWorkApplication.statusUpdatedAt') }}:
-                      {{ formatDate(item.statusUpdatedAt) }}
+                      <span class="font-medium text-slate-900">
+                        {{ formatDate(item.statusUpdatedAt) }}
+                      </span>
                     </p>
-                    <p v-if="item.resumeUrl">
-                      {{ $t('resource.OpWorkApplication.resumeUrl') }}:
-                      <a
-                        :href="item.resumeUrl"
-                        class="text-sky-700 underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click.stop
-                      >
-                        {{ item.resumeUrl }}
-                      </a>
-                    </p>
-                    <p v-if="item.portfolioUrl">
-                      {{ $t('resource.OpWorkApplication.portfolioUrl') }}:
-                      <a
-                        :href="item.portfolioUrl"
-                        class="text-sky-700 underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click.stop
-                      >
-                        {{ item.portfolioUrl }}
-                      </a>
-                    </p>
-                    <p v-if="item.statusNotes" class="line-clamp-2">
-                      {{ $t('resource.OpWorkApplication.statusNotes') }}:
-                      {{ item.statusNotes }}
-                    </p>
-                    <p v-if="item.coverLetter" class="line-clamp-2">
-                      {{ $t('resource.OpWorkApplication.coverLetter') }}:
-                      {{ item.coverLetter }}
-                    </p>
+                  </div>
+
+                  <p
+                    v-if="item.coverLetter"
+                    class="line-clamp-2 rounded-xl bg-white/80 px-3 py-2 text-sm ring-1 ring-sky-100"
+                  >
+                    {{ $t('resource.OpWorkApplication.coverLetter') }}:
+                    {{ item.coverLetter }}
+                  </p>
+
+                  <p
+                    v-if="item.statusNotes"
+                    class="line-clamp-2 rounded-xl bg-amber-50 px-3 py-2 text-sm text-amber-900 ring-1 ring-amber-100"
+                  >
+                    {{ $t('resource.OpWorkApplication.statusNotes') }}:
+                    {{ item.statusNotes }}
+                  </p>
+
+                  <div class="flex flex-wrap gap-2">
+                    <a
+                      v-if="item.resumeUrl"
+                      :href="item.resumeUrl"
+                      class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-100 transition-colors hover:bg-sky-50"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      @click.stop
+                    >
+                      {{ $t('resource.OpWorkApplication.resumeUrl') }}
+                    </a>
+                    <a
+                      v-if="item.portfolioUrl"
+                      :href="item.portfolioUrl"
+                      class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-sky-700 ring-1 ring-sky-100 transition-colors hover:bg-sky-50"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      @click.stop
+                    >
+                      {{ $t('resource.OpWorkApplication.portfolioUrl') }}
+                    </a>
                   </div>
                 </div>
               </div>
-              <p
-                class="mt-3 text-xs font-semibold uppercase tracking-wide text-gray-600"
-              >
-                {{ $t('resource.OpWorkJobSeeker.summary') }}
-              </p>
-              <!-- eslint-disable vue/no-v-html -->
-              <p
-                class="mt-1 line-clamp-2 text-sm leading-5 text-foreground/80 *:text-primary"
-                v-html="item.OpWorkJobSeeker?.summary"
-              ></p>
+            </div>
+
+            <div
+              class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-slate-200 pt-4 text-xs text-slate-500"
+            >
+              <span v-if="item.OpWorkJob?.title">
+                {{ $t('resource.name.OpWorkJob') }}: {{ item.OpWorkJob?.title }}
+              </span>
+              <span v-if="item.OpWorkJob?.location">
+                {{ $t('common.location') }}: {{ item.OpWorkJob?.location }}
+              </span>
             </div>
           </div>
         </li>
       </ul>
 
-      <!-- Pagination -->
       <div
         v-if="pagination.total > 0"
-        class="mt-6 flex w-full flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row"
+        class="mt-6 flex w-full flex-col items-center justify-between gap-4 border-t border-slate-200 pt-6 sm:flex-row"
       >
-        <div class="text-sm text-gray-700">
+        <div class="text-sm text-slate-600">
           {{
             $t('common.pagination.showingFromToOfTotalResults', {
               showingFrom:
@@ -391,21 +440,22 @@ const getApplicationStatusClass = (status?: string) => {
             })
           }}
         </div>
+
         <div class="flex flex-wrap items-center justify-center gap-2">
           <Button
             type="default"
-            @click="handlePageChange(1)"
-            :disabled="pagination.currentPage <= 1"
             class="relative inline-flex items-center"
+            :disabled="pagination.currentPage <= 1"
+            @click="handlePageChange(1)"
           >
             {{ $t('common.pagination.first') }}
           </Button>
 
           <Button
             type="default"
-            @click="handlePageChange(Math.max(1, pagination.currentPage - 1))"
-            :disabled="pagination.currentPage <= 1"
             class="relative inline-flex items-center"
+            :disabled="pagination.currentPage <= 1"
+            @click="handlePageChange(Math.max(1, pagination.currentPage - 1))"
           >
             {{ $t('common.pagination.prev') }}
           </Button>
@@ -420,6 +470,11 @@ const getApplicationStatusClass = (status?: string) => {
 
           <Button
             type="default"
+            class="relative inline-flex items-center"
+            :disabled="
+              pagination.currentPage >=
+              Math.ceil(pagination.total / pagination.pageSize)
+            "
             @click="
               handlePageChange(
                 Math.min(
@@ -428,27 +483,22 @@ const getApplicationStatusClass = (status?: string) => {
                 ),
               )
             "
-            :disabled="
-              pagination.currentPage >=
-              Math.ceil(pagination.total / pagination.pageSize)
-            "
-            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.next') }}
           </Button>
 
           <Button
             type="default"
+            class="relative inline-flex items-center"
+            :disabled="
+              pagination.currentPage >=
+              Math.ceil(pagination.total / pagination.pageSize)
+            "
             @click="
               handlePageChange(
                 Math.ceil(pagination.total / pagination.pageSize),
               )
             "
-            :disabled="
-              pagination.currentPage >=
-              Math.ceil(pagination.total / pagination.pageSize)
-            "
-            class="relative inline-flex items-center"
           >
             {{ $t('common.pagination.last') }}
           </Button>
