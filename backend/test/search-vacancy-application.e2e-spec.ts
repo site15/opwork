@@ -266,8 +266,7 @@ describe('Vacancy: work with applications (e2e)', () => {
   it('As employer change status of aplication', async () => {
     await employerActivity.sdk.vacanyApplicationControllerChangeStatus({
       path: {
-        job_id: globalVacancyControllerFindOneResult?.id!,
-        id:
+        application_id:
           globalVacancyControllerFindOneResult?.OpWorkApplication?.[0].id || '',
       },
       body: {

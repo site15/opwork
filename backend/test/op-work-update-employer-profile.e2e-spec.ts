@@ -181,7 +181,7 @@ describe('OPWork: update employer profile (e2e)', () => {
 
     const employerControllerGetProfileResult =
       await employerActivity.sdk.employerControllerGetProfile({
-        path: { employer_id: employerControllerSetProfileResultId || '' },
+        query: { employerId: employerControllerSetProfileResultId || '' },
       });
 
     expect(employerControllerGetProfileResult.data?.OpWorkJob).toHaveLength(1);

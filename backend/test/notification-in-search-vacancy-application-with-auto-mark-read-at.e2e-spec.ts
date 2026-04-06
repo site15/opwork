@@ -250,11 +250,7 @@ describe('Notification: work with auto mark read at applications (e2e)', () => {
 
   it('Read application as employer with auto mark read', async () => {
     const vacanyApplicationControllerFindManyResult = await employerActivity.sdk
-      .vacanyApplicationControllerFindMany({
-        path: {
-          job_id: globalVacancyControllerFindManyResult?.items[0].id!,
-        },
-      })
+      .vacanyApplicationControllerFindMany()
       .then(async ({ data }) => data);
     expect(vacanyApplicationControllerFindManyResult?.items.length).toEqual(1);
 
