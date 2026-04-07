@@ -200,7 +200,7 @@ export class NotificationController {
         : {}),
       profileId: req.opWorkProfileId || null,
     };
-
+    console.log('opWorkNotificationWhereInput', opWorkNotificationWhereInput);
     return {
       items: await this.prismaService.opWorkNotification.findMany({
         where: opWorkNotificationWhereInput,

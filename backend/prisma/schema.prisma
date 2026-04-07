@@ -1637,9 +1637,9 @@ model OpWorkNotification {
   /// === СТАТУС ===
 
   /// Признак прочтения уведомления
-  isRead     Boolean?
+  isRead     Boolean? @default(false)
   /// Признак архивирования уведомления
-  isArchived Boolean?
+  isArchived Boolean? @default(false)
 
   /// === ДАТЫ ===
 

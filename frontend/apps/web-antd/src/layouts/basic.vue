@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { NotificationItem } from '@vben/layouts';
 
-import { computed, ref, watch } from 'vue';
+import type { OpWorkNotification } from '#/generated/client';
+
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { AuthenticationLoginExpiredModal } from '@vben/common-ui';
@@ -18,6 +20,15 @@ import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { openWindow } from '@vben/utils';
 
+import { message } from 'ant-design-vue';
+import dayjs from 'dayjs';
+
+import {
+  notificationControllerFindMany,
+  notificationControllerMarkAsArchived,
+  notificationControllerMarkAsRead,
+} from '#/generated/client';
+import { client } from '#/generated/client/client.gen';
 import { $t } from '#/locales';
 import { useAppAuthStore } from '#/services/AuthService';
 import { useAppOpWorkProfileStore } from '#/services/ProfileService';
@@ -26,58 +37,8 @@ import LoginForm from '#/views/_core/authentication/login.vue';
 
 import ProfileButton from './header/profile/profile-button.vue';
 
-const notifications = ref<NotificationItem[]>([
-  {
-    id: 1,
-    avatar: 'https://avatar.vercel.sh/vercel.svg?text=VB',
-    date: '3小时前',
-    isRead: true,
-    message: '描述信息描述信息描述信息',
-    title: '收到了 14 份新周报',
-  },
-  {
-    id: 2,
-    avatar: 'https://avatar.vercel.sh/1',
-    date: '刚刚',
-    isRead: false,
-    message: '描述信息描述信息描述信息',
-    title: '朱偏右 回复了你',
-  },
-  {
-    id: 3,
-    avatar: 'https://avatar.vercel.sh/1',
-    date: '2024-01-01',
-    isRead: false,
-    message: '描述信息描述信息描述信息',
-    title: '曲丽丽 评论了你',
-  },
-  {
-    id: 4,
-    avatar: 'https://avatar.vercel.sh/satori',
-    date: '1天前',
-    isRead: false,
-    message: '描述信息描述信息描述信息',
-    title: '代办提醒',
-  },
-  {
-    id: 5,
-    avatar: 'https://avatar.vercel.sh/satori',
-    date: '1天前',
-    isRead: false,
-    message: '描述信息描述信息描述信息',
-    title: '跳转Workspace示例',
-    link: '/workspace',
-  },
-  {
-    id: 6,
-    avatar: 'https://avatar.vercel.sh/satori',
-    date: '1天前',
-    isRead: false,
-    message: '描述信息描述信息描述信息',
-    title: '跳转外部链接示例',
-    link: 'https://doc.vben.pro',
-  },
-]);
+const notifications = ref<NotificationItem[]>([]);
+const streamAbortController = ref<AbortController | null>(null);
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -133,28 +94,284 @@ const userName = computed(() => {
   return userStore.userInfo?.realName || appAuthStore.profile?.email || '';
 });
 
-async function handleLogout() {
-  await authStore.logout(false);
+function formatNotificationDate(isoDate?: null | string) {
+  if (!isoDate) {
+    return '-';
+  }
+  return dayjs(isoDate).format('YYYY-MM-DD HH:mm');
 }
 
-function handleNoticeClear() {
-  notifications.value = [];
+function extractLinkData(data: unknown) {
+  if (!data || typeof data !== 'object') {
+    return { link: undefined, query: undefined, state: undefined };
+  }
+
+  const record = data as Record<string, unknown>;
+  const link = typeof record.link === 'string' ? record.link : undefined;
+  const query =
+    record.query && typeof record.query === 'object'
+      ? (record.query as Record<string, any>)
+      : undefined;
+  const state =
+    record.state && typeof record.state === 'object'
+      ? (record.state as Record<string, any>)
+      : undefined;
+
+  return { link, query, state };
 }
 
-function markRead(id: number | string) {
-  const item = notifications.value.find((item) => item.id === id);
-  if (item) {
-    item.isRead = true;
+function mapNotificationItem(item: OpWorkNotification): NotificationItem {
+  const avatarUrl =
+    opWorkProfileStore.profile?.avatarUrl ??
+    userStore.userInfo?.avatar ??
+    preferences.app.defaultAvatar;
+  const { link, query, state } = extractLinkData(item.data);
+
+  return {
+    id: item.id,
+    avatar: avatarUrl,
+    date: formatNotificationDate(item.createdAt),
+    isRead: !!item.isRead,
+    message: item.message,
+    title: item.title,
+    link,
+    query,
+    state,
+  };
+}
+
+function toErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return $t('common.operationFailed');
+}
+
+async function fetchNotifications() {
+  const result = await notificationControllerFindMany({
+    query: {
+      isArchived: false,
+      sort: 'createdAt:desc',
+      perPage: 20,
+    },
+  });
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  notifications.value = (result.data?.items || []).map((item) =>
+    mapNotificationItem(item),
+  );
+}
+
+function isOpWorkNotification(value: unknown): value is OpWorkNotification {
+  return !!(
+    value &&
+    typeof value === 'object' &&
+    'id' in value &&
+    'title' in value &&
+    'message' in value
+  );
+}
+
+function upsertNotification(item: OpWorkNotification) {
+  if (item.isArchived) {
+    notifications.value = notifications.value.filter(
+      (notification) => notification.id !== item.id,
+    );
+    return;
+  }
+
+  const nextItem = mapNotificationItem(item);
+  const index = notifications.value.findIndex(
+    (notification) => notification.id === item.id,
+  );
+
+  if (index === -1) {
+    notifications.value.unshift(nextItem);
+    return;
+  }
+
+  notifications.value[index] = nextItem;
+}
+
+async function startNotificationStream() {
+  if (streamAbortController.value) {
+    streamAbortController.value.abort();
+  }
+
+  const abortController = new AbortController();
+  streamAbortController.value = abortController;
+
+  try {
+    const sseClient = await client.sse.get({
+      security: [
+        { name: 'x-api-key', type: 'apiKey' },
+        { name: 'x-session-id', type: 'apiKey' },
+      ],
+      signal: abortController.signal,
+      url: '/api/notification/stream',
+    });
+
+    for await (const event of sseClient.stream) {
+      if (abortController.signal.aborted) {
+        break;
+      }
+
+      const payload =
+        isOpWorkNotification(event) && event
+          ? event
+          : isOpWorkNotification((event as { data?: unknown })?.data)
+            ? ((event as { data: OpWorkNotification }).data ?? null)
+            : null;
+
+      if (!payload) {
+        continue;
+      }
+
+      upsertNotification(payload);
+    }
+  } catch (error) {
+    if (abortController.signal.aborted) {
+      return;
+    }
+    console.error('Notification stream error:', error);
   }
 }
 
-function remove(id: number | string) {
-  notifications.value = notifications.value.filter((item) => item.id !== id);
+async function refreshNotificationsForActiveProfile() {
+  notifications.value = [];
+
+  if (streamAbortController.value) {
+    streamAbortController.value.abort();
+    streamAbortController.value = null;
+  }
+
+  if (!opWorkProfileStore.profileId) {
+    return;
+  }
+
+  await fetchNotifications();
+  await startNotificationStream();
 }
 
-function handleMakeAll() {
-  notifications.value.forEach((item) => (item.isRead = true));
+async function handleLogout() {
+  if (streamAbortController.value) {
+    streamAbortController.value.abort();
+    streamAbortController.value = null;
+  }
+  await authStore.logout(false);
 }
+
+async function handleNoticeClear() {
+  const ids = notifications.value
+    .map((item) => `${item.id}`)
+    .filter((id) => id.length > 0);
+
+  if (ids.length === 0) {
+    return;
+  }
+
+  try {
+    const result = await notificationControllerMarkAsArchived({
+      body: { ids },
+    });
+    if (result.error) {
+      throw result.error;
+    }
+    notifications.value = [];
+  } catch (error) {
+    message.error(toErrorMessage(error));
+  }
+}
+
+async function markRead(id: number | string) {
+  try {
+    const result = await notificationControllerMarkAsRead({
+      body: { ids: [`${id}`] },
+    });
+    if (result.error) {
+      throw result.error;
+    }
+    notifications.value = notifications.value.map((item) =>
+      item.id === id ? { ...item, isRead: true } : item,
+    );
+  } catch (error) {
+    message.error(toErrorMessage(error));
+  }
+}
+
+async function remove(id: number | string) {
+  try {
+    const result = await notificationControllerMarkAsArchived({
+      body: { ids: [`${id}`] },
+    });
+    if (result.error) {
+      throw result.error;
+    }
+    notifications.value = notifications.value.filter((item) => item.id !== id);
+  } catch (error) {
+    message.error(toErrorMessage(error));
+  }
+}
+
+async function handleMakeAll() {
+  const ids = notifications.value
+    .filter((item) => !item.isRead)
+    .map((item) => `${item.id}`);
+
+  if (ids.length === 0) {
+    return;
+  }
+
+  try {
+    const result = await notificationControllerMarkAsRead({
+      body: { ids },
+    });
+    if (result.error) {
+      throw result.error;
+    }
+    notifications.value = notifications.value.map((item) => ({
+      ...item,
+      isRead: true,
+    }));
+  } catch (error) {
+    message.error(toErrorMessage(error));
+  }
+}
+
+onMounted(async () => {
+  try {
+    await refreshNotificationsForActiveProfile();
+  } catch (error) {
+    message.error(toErrorMessage(error));
+  }
+});
+
+onUnmounted(() => {
+  if (streamAbortController.value) {
+    streamAbortController.value.abort();
+    streamAbortController.value = null;
+  }
+});
+watch(
+  () => opWorkProfileStore.profileId,
+  async (profileId, previousProfileId) => {
+    if (profileId === previousProfileId) {
+      return;
+    }
+
+    try {
+      await refreshNotificationsForActiveProfile();
+    } catch (error) {
+      message.error(toErrorMessage(error));
+    }
+  },
+);
 watch(
   () => ({
     enable: preferences.app.watermark,
@@ -193,6 +410,7 @@ watch(
     </template>
     <template #notification>
       <Notification
+        :key="opWorkProfileStore.profileId ?? 'no-profile'"
         :dot="showDot"
         :notifications="notifications"
         @clear="handleNoticeClear"
