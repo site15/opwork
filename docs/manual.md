@@ -319,7 +319,7 @@ URL редактирования: `http://localhost:24001/vacancy/:id/edit`.
 Поиск вакансий выполняется в отдельном разделе.
 Пример URL: `http://localhost:24001/resume/vacancy-search`.
 
-![поиск вакансии](resume-vacancy-search.phg)
+![поиск вакансии](resume-vacancy-search.png)
 
 Слева находится панель фильтров:
 
