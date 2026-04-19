@@ -1,4 +1,5 @@
 
+import {OpWorkJobSeekerGender} from '../prisma/client'
 import {ApiProperty} from '@nestjs/swagger'
 import {OpWorkExperience} from './op-work-experience.entity'
 import {OpWorkEducation} from './op-work-education.entity'
@@ -17,6 +18,33 @@ id!: string ;
   nullable: true,
 })
 profileId!: string  | null;
+@ApiProperty({
+  type: 'string',
+  nullable: true,
+})
+firstName!: string  | null;
+@ApiProperty({
+  type: 'string',
+  nullable: true,
+})
+lastName!: string  | null;
+@ApiProperty({
+  type: 'string',
+  nullable: true,
+})
+middleName!: string  | null;
+@ApiProperty({
+  type: 'string',
+  format: 'date-time',
+  nullable: true,
+})
+birthDate!: Date  | null;
+@ApiProperty({
+  enum: OpWorkJobSeekerGender,
+  enumName: 'OpWorkJobSeekerGender',
+  nullable: true,
+})
+gender!: OpWorkJobSeekerGender  | null;
 @ApiProperty({
   type: 'string',
   nullable: true,

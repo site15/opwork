@@ -27,6 +27,8 @@ export type OpWorkProfileType = 'PROJECT' | 'SPECIALIST' | 'EMPLOYER';
 
 export type OpWorkUserType = 'JOB_SEEKER' | 'EMPLOYER' | 'ADMIN';
 
+export type OpWorkJobSeekerGender = 'MALE' | 'FEMALE' | 'OTHER';
+
 export type OpWorkEmploymentType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERNSHIP' | 'REMOTE' | 'FREELANCE';
 
 export type OpWorkExperience = {
@@ -241,6 +243,11 @@ export type OpWorkJobSeekerSkill = {
 export type OpWorkJobSeeker = {
     id: string;
     profileId: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    middleName: string | null;
+    birthDate: string | null;
+    gender: OpWorkJobSeekerGender | null;
     currentPosition: string | null;
     currentCompany: string | null;
     summary: string | null;
@@ -632,6 +639,11 @@ export type CreateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
 };
 
 export type CreateOpWorkJobSeekerDto = {
+    firstName?: string | null;
+    lastName?: string | null;
+    middleName?: string | null;
+    birthDate?: string | null;
+    gender?: OpWorkJobSeekerGender | null;
     currentPosition?: string | null;
     currentCompany?: string | null;
     summary?: string | null;
@@ -649,6 +661,11 @@ export type CreateOpWorkJobSeekerDto = {
 
 export type OpWorkJobSeekerDto = {
     id: string;
+    firstName: string | null;
+    lastName: string | null;
+    middleName: string | null;
+    birthDate: string | null;
+    gender: OpWorkJobSeekerGender | null;
     currentPosition: string | null;
     currentCompany: string | null;
     summary: string | null;
@@ -670,6 +687,11 @@ export type UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto = {
 };
 
 export type UpdateOpWorkJobSeekerDto = {
+    firstName?: string | null;
+    lastName?: string | null;
+    middleName?: string | null;
+    birthDate?: string | null;
+    gender?: OpWorkJobSeekerGender | null;
     currentPosition?: string | null;
     currentCompany?: string | null;
     summary?: string | null;
@@ -1821,6 +1843,11 @@ export type SetProfileArgs = {
 };
 
 export type SetJobSeekerProfileArgs = {
+    firstName?: string | null;
+    lastName?: string | null;
+    middleName?: string | null;
+    birthDate?: string | null;
+    gender?: OpWorkJobSeekerGender | null;
     currentPosition?: string | null;
     currentCompany?: string | null;
     summary?: string | null;

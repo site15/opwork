@@ -10,6 +10,61 @@ import type { VbenFormSchema } from '#/adapter/form';
       return [
             {
         component: 'Input',
+          fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.firstName,
+        label: $t('resource.OpWorkJobSeeker.firstName'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
+        component: 'Input',
+          fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.lastName,
+        label: $t('resource.OpWorkJobSeeker.lastName'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
+        component: 'Input',
+          fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.middleName,
+        label: $t('resource.OpWorkJobSeeker.middleName'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
+        component: 'DatePicker',
+          fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.birthDate,
+        label: $t('resource.OpWorkJobSeeker.birthDate'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
+        component: 'Select',
+          componentProps: {
+          allowClear: true,
+            filterOption: true,
+              options: [
+                          { value: 'MALE', label: $t('resource.OpWorkJobSeekerGender.MALE').split(' - ')[0], },
+          { value: 'FEMALE', label: $t('resource.OpWorkJobSeekerGender.FEMALE').split(' - ')[0], },
+          { value: 'OTHER', label: $t('resource.OpWorkJobSeekerGender.OTHER').split(' - ')[0], },
+              ],
+                showSearch: true,
+      },
+        fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.gender,
+        label: $t('resource.OpWorkJobSeeker.gender'),
+      
+      
+        controlClass: 'w-full',
+        labelWidth: 200
+      }, 
+    {
+        component: 'Input',
           fieldName: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition,
         label: $t('resource.OpWorkJobSeeker.currentPosition'),
       
@@ -180,6 +235,42 @@ import type { VbenFormSchema } from '#/adapter/form';
 ): VxeTableGridOptions['columns'] {
   return [
         {
+        title: $t('resource.OpWorkJobSeeker.firstName'),
+        field: Prisma.OpWorkJobSeekerScalarFieldEnum.firstName ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.OpWorkJobSeeker.lastName'),
+        field: Prisma.OpWorkJobSeekerScalarFieldEnum.lastName ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.OpWorkJobSeeker.middleName'),
+        field: Prisma.OpWorkJobSeekerScalarFieldEnum.middleName ,
+        sortable: true
+      }, 
+    {
+        title: $t('resource.OpWorkJobSeeker.birthDate'),
+        field: Prisma.OpWorkJobSeekerScalarFieldEnum.birthDate ,
+        formatter: 'formatDateTime',
+          sortable: true
+      }, 
+    {
+        cellRender: {
+          name: 'CellEnum',
+          props:{
+            options: [
+                        { value: 'MALE', label: $t('resource.OpWorkJobSeekerGender.MALE').split(' - ')[0], },
+          { value: 'FEMALE', label: $t('resource.OpWorkJobSeekerGender.FEMALE').split(' - ')[0], },
+          { value: 'OTHER', label: $t('resource.OpWorkJobSeekerGender.OTHER').split(' - ')[0], },
+            ],
+          }
+      },
+        title: $t('resource.OpWorkJobSeeker.gender'),
+        field: Prisma.OpWorkJobSeekerScalarFieldEnum.gender ,
+        sortable: true
+      }, 
+    {
         title: $t('resource.OpWorkJobSeeker.currentPosition'),
         field: Prisma.OpWorkJobSeekerScalarFieldEnum.currentPosition ,
         sortable: true

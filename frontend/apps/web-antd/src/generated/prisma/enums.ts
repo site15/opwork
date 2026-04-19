@@ -18,6 +18,15 @@ export const OpWorkUserType = {
 export type OpWorkUserType = (typeof OpWorkUserType)[keyof typeof OpWorkUserType]
 
 
+export const OpWorkJobSeekerGender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+} as const
+
+export type OpWorkJobSeekerGender = (typeof OpWorkJobSeekerGender)[keyof typeof OpWorkJobSeekerGender]
+
+
 export const OpWorkJobStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',

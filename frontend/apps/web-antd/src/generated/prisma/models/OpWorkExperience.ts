@@ -558,10 +558,6 @@ export type OpWorkExperienceUncheckedUpdateManyWithoutOpWorkJobSeekerNestedInput
   deleteMany?: Prisma.OpWorkExperienceScalarWhereInput | Prisma.OpWorkExperienceScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type NullableEnumOpWorkEmploymentTypeFieldUpdateOperationsInput = {
   set?: $Enums.OpWorkEmploymentType | null
 }

@@ -151,6 +151,11 @@ export type OpWorkProfileScalarFieldEnum = (typeof OpWorkProfileScalarFieldEnum)
 export const OpWorkJobSeekerScalarFieldEnum = {
   id: 'id',
   profileId: 'profileId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  middleName: 'middleName',
+  birthDate: 'birthDate',
+  gender: 'gender',
   currentPosition: 'currentPosition',
   currentCompany: 'currentCompany',
   summary: 'summary',

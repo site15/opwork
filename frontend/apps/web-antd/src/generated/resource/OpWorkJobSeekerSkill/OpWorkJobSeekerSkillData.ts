@@ -94,7 +94,7 @@ import type { VbenFormSchema } from '#/adapter/form';
             ...(searchText ? { searchText } : {})
           }
         }),
-        getLabel: (item) => item.currentPosition || item.id,
+        getLabel: (item) => item.firstName || item.id,
       }),
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.jobSeekerId,
       label: $t('resource.name.OpWorkJobSeeker'),
@@ -195,7 +195,7 @@ import type { VbenFormSchema } from '#/adapter/form';
           name: 'CellRender',
           props:{
             render: (row: any, column: any) => {
-              return row.OpWorkJobSeeker?.currentPosition || row[column.field] || '';
+              return row.OpWorkJobSeeker?.firstName || row[column.field] || '';
             }
           }
         },

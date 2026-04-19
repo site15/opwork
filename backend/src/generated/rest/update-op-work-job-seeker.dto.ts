@@ -1,6 +1,7 @@
 
+import {OpWorkJobSeekerGender} from '../prisma/client'
 import {ApiExtraModels,ApiProperty} from '@nestjs/swagger'
-import {IsBoolean,IsNotEmpty,IsNumber,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
+import {IsBoolean,IsDateString,IsEnum,IsNotEmpty,IsNumber,IsOptional,IsString,IsUrl,MaxLength,ValidateNested} from 'class-validator'
 import {Type} from 'class-transformer'
 import {ConnectOpWorkProfileDto} from './connect-op-work-profile.dto'
 
@@ -17,6 +18,52 @@ connect!: ConnectOpWorkProfileDto ;
 @ApiExtraModels(ConnectOpWorkProfileDto,UpdateOpWorkJobSeekerOpWorkProfileRelationInputDto)
 export class UpdateOpWorkJobSeekerDto {
   @ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
+@MaxLength(100)
+firstName?: string  | null;
+@ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
+@MaxLength(100)
+lastName?: string  | null;
+@ApiProperty({
+  type: 'string',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsString()
+@MaxLength(100)
+middleName?: string  | null;
+@ApiProperty({
+  type: 'string',
+  format: 'date-time',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsDateString()
+birthDate?: Date  | null;
+@ApiProperty({
+  enum: OpWorkJobSeekerGender,
+  enumName: 'OpWorkJobSeekerGender',
+  required: false,
+  nullable: true,
+})
+@IsOptional()
+@IsEnum(OpWorkJobSeekerGender)
+@MaxLength(50)
+gender?: OpWorkJobSeekerGender  | null;
+@ApiProperty({
   type: 'string',
   required: false,
   nullable: true,

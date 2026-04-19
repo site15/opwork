@@ -154,7 +154,13 @@
     "preferredLocations": "Предпочтительные локации для работы",
     "linkedinUrl": "Ссылка LinkedIn",
     "githubUrl": "GitHub профиль",
-    "portfolioUrl": "Портфолио"
+    "portfolioUrl": "Портфолио",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "middleName": "Отчество",
+    "fullName": "ФИО",
+    "birthDate": "Дата рождения",
+    "gender": "Пол"
   },
   "OpWorkJobSeekerSkill": {
     "id": "ID",
@@ -525,5 +531,10 @@
     "MEDIUM": "Средний",
     "HIGH": "Высокий",
     "CRITICAL": "Критический"
+  },
+  "OpWorkJobSeekerGender": {
+    "MALE": "Мужской",
+    "FEMALE": "Женский",
+    "OTHER": "Другой"
   }
 }

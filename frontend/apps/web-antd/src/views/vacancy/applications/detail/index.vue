@@ -52,6 +52,24 @@ const formatDate = (value?: Date | null | string) => {
   return new Date(value).toLocaleDateString();
 };
 
+const getFullName = (seeker?: null | OpWorkJobSeeker) => {
+  if (!seeker) {
+    return '';
+  }
+
+  return [seeker.lastName, seeker.firstName, seeker.middleName]
+    .filter(Boolean)
+    .join(' ');
+};
+
+const getGenderLabel = (gender?: null | string) => {
+  if (!gender) {
+    return '';
+  }
+
+  return $t(`resource.OpWorkJobSeekerGender.${gender}`);
+};
+
 const getApplicationStatusLabel = (status?: string) => {
   if (!status) {
     return '';
@@ -334,6 +352,24 @@ watch(
               </div>
 
               <div class="mt-4 space-y-3 text-sm text-slate-700">
+                <p v-if="getFullName(resume)">
+                  {{ $t('resource.OpWorkJobSeeker.fullName') }}:
+                  <span class="font-medium text-slate-900">
+                    {{ getFullName(resume) }}
+                  </span>
+                </p>
+                <p v-if="resume?.birthDate">
+                  {{ $t('resource.OpWorkJobSeeker.birthDate') }}:
+                  <span class="font-medium text-slate-900">
+                    {{ formatDate(resume.birthDate) }}
+                  </span>
+                </p>
+                <p v-if="resume?.gender">
+                  {{ $t('resource.OpWorkJobSeeker.gender') }}:
+                  <span class="font-medium text-slate-900">
+                    {{ getGenderLabel(resume.gender) }}
+                  </span>
+                </p>
                 <p v-if="resume?.currentCompany">
                   {{ $t('resource.OpWorkJobSeeker.currentCompany') }}:
                   <span class="font-medium text-slate-900">

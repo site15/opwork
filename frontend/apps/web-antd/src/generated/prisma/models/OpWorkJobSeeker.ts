@@ -38,6 +38,11 @@ export type OpWorkJobSeekerSumAggregateOutputType = {
 export type OpWorkJobSeekerMinAggregateOutputType = {
   id: string | null
   profileId: string | null
+  firstName: string | null
+  lastName: string | null
+  middleName: string | null
+  birthDate: Date | null
+  gender: $Enums.OpWorkJobSeekerGender | null
   currentPosition: string | null
   currentCompany: string | null
   summary: string | null
@@ -57,6 +62,11 @@ export type OpWorkJobSeekerMinAggregateOutputType = {
 export type OpWorkJobSeekerMaxAggregateOutputType = {
   id: string | null
   profileId: string | null
+  firstName: string | null
+  lastName: string | null
+  middleName: string | null
+  birthDate: Date | null
+  gender: $Enums.OpWorkJobSeekerGender | null
   currentPosition: string | null
   currentCompany: string | null
   summary: string | null
@@ -76,6 +86,11 @@ export type OpWorkJobSeekerMaxAggregateOutputType = {
 export type OpWorkJobSeekerCountAggregateOutputType = {
   id: number
   profileId: number
+  firstName: number
+  lastName: number
+  middleName: number
+  birthDate: number
+  gender: number
   currentPosition: number
   currentCompany: number
   summary: number
@@ -105,6 +120,11 @@ export type OpWorkJobSeekerSumAggregateInputType = {
 export type OpWorkJobSeekerMinAggregateInputType = {
   id?: true
   profileId?: true
+  firstName?: true
+  lastName?: true
+  middleName?: true
+  birthDate?: true
+  gender?: true
   currentPosition?: true
   currentCompany?: true
   summary?: true
@@ -124,6 +144,11 @@ export type OpWorkJobSeekerMinAggregateInputType = {
 export type OpWorkJobSeekerMaxAggregateInputType = {
   id?: true
   profileId?: true
+  firstName?: true
+  lastName?: true
+  middleName?: true
+  birthDate?: true
+  gender?: true
   currentPosition?: true
   currentCompany?: true
   summary?: true
@@ -143,6 +168,11 @@ export type OpWorkJobSeekerMaxAggregateInputType = {
 export type OpWorkJobSeekerCountAggregateInputType = {
   id?: true
   profileId?: true
+  firstName?: true
+  lastName?: true
+  middleName?: true
+  birthDate?: true
+  gender?: true
   currentPosition?: true
   currentCompany?: true
   summary?: true
@@ -249,6 +279,11 @@ export type OpWorkJobSeekerGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type OpWorkJobSeekerGroupByOutputType = {
   id: string
   profileId: string
+  firstName: string | null
+  lastName: string | null
+  middleName: string | null
+  birthDate: Date | null
+  gender: $Enums.OpWorkJobSeekerGender | null
   currentPosition: string | null
   currentCompany: string | null
   summary: string | null
@@ -291,6 +326,11 @@ export type OpWorkJobSeekerWhereInput = {
   NOT?: Prisma.OpWorkJobSeekerWhereInput | Prisma.OpWorkJobSeekerWhereInput[]
   id?: Prisma.UuidFilter<"OpWorkJobSeeker"> | string
   profileId?: Prisma.UuidFilter<"OpWorkJobSeeker"> | string
+  firstName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  lastName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  middleName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"OpWorkJobSeeker"> | Date | string | null
+  gender?: Prisma.EnumOpWorkJobSeekerGenderNullableFilter<"OpWorkJobSeeker"> | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
@@ -315,6 +355,11 @@ export type OpWorkJobSeekerWhereInput = {
 export type OpWorkJobSeekerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  middleName?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
   currentPosition?: Prisma.SortOrderInput | Prisma.SortOrder
   currentCompany?: Prisma.SortOrderInput | Prisma.SortOrder
   summary?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -342,6 +387,11 @@ export type OpWorkJobSeekerWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OpWorkJobSeekerWhereInput[]
   NOT?: Prisma.OpWorkJobSeekerWhereInput | Prisma.OpWorkJobSeekerWhereInput[]
   profileId?: Prisma.UuidFilter<"OpWorkJobSeeker"> | string
+  firstName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  lastName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  middleName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"OpWorkJobSeeker"> | Date | string | null
+  gender?: Prisma.EnumOpWorkJobSeekerGenderNullableFilter<"OpWorkJobSeeker"> | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
@@ -366,6 +416,11 @@ export type OpWorkJobSeekerWhereUniqueInput = Prisma.AtLeast<{
 export type OpWorkJobSeekerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  middleName?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
   currentPosition?: Prisma.SortOrderInput | Prisma.SortOrder
   currentCompany?: Prisma.SortOrderInput | Prisma.SortOrder
   summary?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -393,6 +448,11 @@ export type OpWorkJobSeekerScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OpWorkJobSeekerScalarWhereWithAggregatesInput | Prisma.OpWorkJobSeekerScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"OpWorkJobSeeker"> | string
   profileId?: Prisma.UuidWithAggregatesFilter<"OpWorkJobSeeker"> | string
+  firstName?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
+  lastName?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
+  middleName?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
+  birthDate?: Prisma.DateTimeNullableWithAggregatesFilter<"OpWorkJobSeeker"> | Date | string | null
+  gender?: Prisma.EnumOpWorkJobSeekerGenderNullableWithAggregatesFilter<"OpWorkJobSeeker"> | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableWithAggregatesFilter<"OpWorkJobSeeker"> | string | null
@@ -411,6 +471,11 @@ export type OpWorkJobSeekerScalarWhereWithAggregatesInput = {
 
 export type OpWorkJobSeekerCreateInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -435,6 +500,11 @@ export type OpWorkJobSeekerCreateInput = {
 export type OpWorkJobSeekerUncheckedCreateInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -457,6 +527,11 @@ export type OpWorkJobSeekerUncheckedCreateInput = {
 
 export type OpWorkJobSeekerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -481,6 +556,11 @@ export type OpWorkJobSeekerUpdateInput = {
 export type OpWorkJobSeekerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -504,6 +584,11 @@ export type OpWorkJobSeekerUncheckedUpdateInput = {
 export type OpWorkJobSeekerCreateManyInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -522,6 +607,11 @@ export type OpWorkJobSeekerCreateManyInput = {
 
 export type OpWorkJobSeekerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -541,6 +631,11 @@ export type OpWorkJobSeekerUpdateManyMutationInput = {
 export type OpWorkJobSeekerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -570,6 +665,11 @@ export type OpWorkJobSeekerOrderByRelationAggregateInput = {
 export type OpWorkJobSeekerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   currentPosition?: Prisma.SortOrder
   currentCompany?: Prisma.SortOrder
   summary?: Prisma.SortOrder
@@ -593,6 +693,11 @@ export type OpWorkJobSeekerAvgOrderByAggregateInput = {
 export type OpWorkJobSeekerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   currentPosition?: Prisma.SortOrder
   currentCompany?: Prisma.SortOrder
   summary?: Prisma.SortOrder
@@ -612,6 +717,11 @@ export type OpWorkJobSeekerMaxOrderByAggregateInput = {
 export type OpWorkJobSeekerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   profileId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  middleName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   currentPosition?: Prisma.SortOrder
   currentCompany?: Prisma.SortOrder
   summary?: Prisma.SortOrder
@@ -677,6 +787,14 @@ export type OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileNestedInput = 
   update?: Prisma.OpWorkJobSeekerUpdateWithWhereUniqueWithoutOpWorkProfileInput | Prisma.OpWorkJobSeekerUpdateWithWhereUniqueWithoutOpWorkProfileInput[]
   updateMany?: Prisma.OpWorkJobSeekerUpdateManyWithWhereWithoutOpWorkProfileInput | Prisma.OpWorkJobSeekerUpdateManyWithWhereWithoutOpWorkProfileInput[]
   deleteMany?: Prisma.OpWorkJobSeekerScalarWhereInput | Prisma.OpWorkJobSeekerScalarWhereInput[]
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput = {
+  set?: $Enums.OpWorkJobSeekerGender | null
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -745,6 +863,11 @@ export type OpWorkJobSeekerUpdateOneRequiredWithoutOpWorkJobSeekerSkillNestedInp
 
 export type OpWorkJobSeekerCreateWithoutOpWorkProfileInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -767,6 +890,11 @@ export type OpWorkJobSeekerCreateWithoutOpWorkProfileInput = {
 
 export type OpWorkJobSeekerUncheckedCreateWithoutOpWorkProfileInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -819,6 +947,11 @@ export type OpWorkJobSeekerScalarWhereInput = {
   NOT?: Prisma.OpWorkJobSeekerScalarWhereInput | Prisma.OpWorkJobSeekerScalarWhereInput[]
   id?: Prisma.UuidFilter<"OpWorkJobSeeker"> | string
   profileId?: Prisma.UuidFilter<"OpWorkJobSeeker"> | string
+  firstName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  lastName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  middleName?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"OpWorkJobSeeker"> | Date | string | null
+  gender?: Prisma.EnumOpWorkJobSeekerGenderNullableFilter<"OpWorkJobSeeker"> | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   currentCompany?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
   summary?: Prisma.StringNullableFilter<"OpWorkJobSeeker"> | string | null
@@ -837,6 +970,11 @@ export type OpWorkJobSeekerScalarWhereInput = {
 
 export type OpWorkJobSeekerCreateWithoutOpWorkExperienceInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -860,6 +998,11 @@ export type OpWorkJobSeekerCreateWithoutOpWorkExperienceInput = {
 export type OpWorkJobSeekerUncheckedCreateWithoutOpWorkExperienceInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -897,6 +1040,11 @@ export type OpWorkJobSeekerUpdateToOneWithWhereWithoutOpWorkExperienceInput = {
 
 export type OpWorkJobSeekerUpdateWithoutOpWorkExperienceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -920,6 +1068,11 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkExperienceInput = {
 export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkExperienceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -941,6 +1094,11 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkExperienceInput = {
 
 export type OpWorkJobSeekerCreateWithoutOpWorkEducationInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -964,6 +1122,11 @@ export type OpWorkJobSeekerCreateWithoutOpWorkEducationInput = {
 export type OpWorkJobSeekerUncheckedCreateWithoutOpWorkEducationInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1001,6 +1164,11 @@ export type OpWorkJobSeekerUpdateToOneWithWhereWithoutOpWorkEducationInput = {
 
 export type OpWorkJobSeekerUpdateWithoutOpWorkEducationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1024,6 +1192,11 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkEducationInput = {
 export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkEducationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1045,6 +1218,11 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkEducationInput = {
 
 export type OpWorkJobSeekerCreateWithoutOpWorkApplicationsInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1068,6 +1246,11 @@ export type OpWorkJobSeekerCreateWithoutOpWorkApplicationsInput = {
 export type OpWorkJobSeekerUncheckedCreateWithoutOpWorkApplicationsInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1105,6 +1288,11 @@ export type OpWorkJobSeekerUpdateToOneWithWhereWithoutOpWorkApplicationsInput = 
 
 export type OpWorkJobSeekerUpdateWithoutOpWorkApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1128,6 +1316,11 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkApplicationsInput = {
 export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1149,6 +1342,11 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkApplicationsInput = {
 
 export type OpWorkJobSeekerCreateWithoutOpWorkJobSeekerSkillInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1172,6 +1370,11 @@ export type OpWorkJobSeekerCreateWithoutOpWorkJobSeekerSkillInput = {
 export type OpWorkJobSeekerUncheckedCreateWithoutOpWorkJobSeekerSkillInput = {
   id?: string
   profileId: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1209,6 +1412,11 @@ export type OpWorkJobSeekerUpdateToOneWithWhereWithoutOpWorkJobSeekerSkillInput 
 
 export type OpWorkJobSeekerUpdateWithoutOpWorkJobSeekerSkillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1232,6 +1440,11 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkJobSeekerSkillInput = {
 export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkJobSeekerSkillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1253,6 +1466,11 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkJobSeekerSkillInput = {
 
 export type OpWorkJobSeekerCreateManyOpWorkProfileInput = {
   id?: string
+  firstName?: string | null
+  lastName?: string | null
+  middleName?: string | null
+  birthDate?: Date | string | null
+  gender?: $Enums.OpWorkJobSeekerGender | null
   currentPosition?: string | null
   currentCompany?: string | null
   summary?: string | null
@@ -1271,6 +1489,11 @@ export type OpWorkJobSeekerCreateManyOpWorkProfileInput = {
 
 export type OpWorkJobSeekerUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1293,6 +1516,11 @@ export type OpWorkJobSeekerUpdateWithoutOpWorkProfileInput = {
 
 export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1315,6 +1543,11 @@ export type OpWorkJobSeekerUncheckedUpdateWithoutOpWorkProfileInput = {
 
 export type OpWorkJobSeekerUncheckedUpdateManyWithoutOpWorkProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  middleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumOpWorkJobSeekerGenderFieldUpdateOperationsInput | $Enums.OpWorkJobSeekerGender | null
   currentPosition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentCompany?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1392,6 +1625,11 @@ export type OpWorkJobSeekerCountOutputTypeCountOpWorkApplicationsArgs<ExtArgs ex
 export type OpWorkJobSeekerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   profileId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleName?: boolean
+  birthDate?: boolean
+  gender?: boolean
   currentPosition?: boolean
   currentCompany?: boolean
   summary?: boolean
@@ -1417,6 +1655,11 @@ export type OpWorkJobSeekerSelect<ExtArgs extends runtime.Types.Extensions.Inter
 export type OpWorkJobSeekerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   profileId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleName?: boolean
+  birthDate?: boolean
+  gender?: boolean
   currentPosition?: boolean
   currentCompany?: boolean
   summary?: boolean
@@ -1437,6 +1680,11 @@ export type OpWorkJobSeekerSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 export type OpWorkJobSeekerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   profileId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleName?: boolean
+  birthDate?: boolean
+  gender?: boolean
   currentPosition?: boolean
   currentCompany?: boolean
   summary?: boolean
@@ -1457,6 +1705,11 @@ export type OpWorkJobSeekerSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type OpWorkJobSeekerSelectScalar = {
   id?: boolean
   profileId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  middleName?: boolean
+  birthDate?: boolean
+  gender?: boolean
   currentPosition?: boolean
   currentCompany?: boolean
   summary?: boolean
@@ -1473,7 +1726,7 @@ export type OpWorkJobSeekerSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OpWorkJobSeekerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "currentPosition" | "currentCompany" | "summary" | "expectedSalary" | "salaryCurrency" | "isOpenToWork" | "isOpenToRemote" | "isOpenToRelocation" | "preferredLocations" | "linkedinUrl" | "githubUrl" | "portfolioUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkJobSeeker"]>
+export type OpWorkJobSeekerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "firstName" | "lastName" | "middleName" | "birthDate" | "gender" | "currentPosition" | "currentCompany" | "summary" | "expectedSalary" | "salaryCurrency" | "isOpenToWork" | "isOpenToRemote" | "isOpenToRelocation" | "preferredLocations" | "linkedinUrl" | "githubUrl" | "portfolioUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["opWorkJobSeeker"]>
 export type OpWorkJobSeekerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   OpWorkExperience?: boolean | Prisma.OpWorkJobSeeker$OpWorkExperienceArgs<ExtArgs>
   OpWorkEducation?: boolean | Prisma.OpWorkJobSeeker$OpWorkEducationArgs<ExtArgs>
@@ -1524,6 +1777,30 @@ export type $OpWorkJobSeekerPayload<ExtArgs extends runtime.Types.Extensions.Int
      * Связанный основной профиль
      */
     profileId: string
+    /**
+     * Имя
+     * @MaxLength(100)
+     */
+    firstName: string | null
+    /**
+     * Фамилия
+     * @MaxLength(100)
+     */
+    lastName: string | null
+    /**
+     * Отчество
+     * @MaxLength(100)
+     */
+    middleName: string | null
+    /**
+     * Дата рождения
+     */
+    birthDate: Date | null
+    /**
+     * Пол
+     * @MaxLength(50)
+     */
+    gender: $Enums.OpWorkJobSeekerGender | null
     /**
      * Текущая должность
      * @MaxLength(255)
@@ -2022,6 +2299,11 @@ export interface Prisma__OpWorkJobSeekerClient<T, Null = never, ExtArgs extends 
 export interface OpWorkJobSeekerFieldRefs {
   readonly id: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly profileId: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
+  readonly firstName: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
+  readonly lastName: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
+  readonly middleName: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
+  readonly birthDate: Prisma.FieldRef<"OpWorkJobSeeker", 'DateTime'>
+  readonly gender: Prisma.FieldRef<"OpWorkJobSeeker", 'OpWorkJobSeekerGender'>
   readonly currentPosition: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly currentCompany: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>
   readonly summary: Prisma.FieldRef<"OpWorkJobSeeker", 'String'>

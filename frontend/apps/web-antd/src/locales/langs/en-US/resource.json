@@ -155,7 +155,13 @@
     "preferredLocations": "Preferred Locations",
     "linkedinUrl": "Linkedin Url",
     "githubUrl": "Github Url",
-    "portfolioUrl": "Portfolio Url"
+    "portfolioUrl": "Portfolio Url",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "middleName": "Middle Name",
+    "fullName": "Full Name",
+    "birthDate": "Birth Date",
+    "gender": "Gender"
   },
   "OpWorkJobSeekerSkill": {
     "id": "Id",
@@ -526,5 +532,10 @@
     "MEDIUM": "MEDIUM",
     "HIGH": "HIGH",
     "CRITICAL": "CRITICAL"
+  },
+  "OpWorkJobSeekerGender": {
+    "MALE": "MALE",
+    "FEMALE": "FEMALE",
+    "OTHER": "OTHER"
   }
 }

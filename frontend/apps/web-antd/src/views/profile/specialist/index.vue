@@ -42,6 +42,9 @@ const loadProfile = () => {
         updatedAt: response.data?.updatedAt
           ? dayjs(response.data.updatedAt)
           : undefined,
+        birthDate: response.data?.birthDate
+          ? dayjs(response.data.birthDate)
+          : undefined,
       };
       console.log(values);
       jobSeekerProfileFormApi.setValues(values);
@@ -81,6 +84,11 @@ const submit = async () => {
       linkedinUrl: jobSeekerProfileValues.linkedinUrl,
       githubUrl: jobSeekerProfileValues.githubUrl,
       portfolioUrl: jobSeekerProfileValues.portfolioUrl,
+      birthDate: jobSeekerProfileValues.birthDate,
+      gender: jobSeekerProfileValues.gender,
+      firstName: jobSeekerProfileValues.firstName,
+      lastName: jobSeekerProfileValues.lastName,
+      middleName: jobSeekerProfileValues.middleName,
     },
   })
     .catch((error) => {

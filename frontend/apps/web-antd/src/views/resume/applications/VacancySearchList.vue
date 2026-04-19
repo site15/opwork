@@ -149,7 +149,7 @@ const formatSalary = (item: OpWorkApplication) => {
           {{ title }} ({{ pagination.total }})
         </CardTitle>
         <p class="mt-1 text-sm text-slate-500">
-          {{ $t('resume.application.title') }}
+          {{ $t('vacancy.application.title') }}
         </p>
       </div>
 

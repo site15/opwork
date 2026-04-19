@@ -68,6 +68,26 @@ const handlePageChange = (page: number) => {
 const handleItemClick = (item: OpWorkJobSeeker) => {
   router.push(`/resume/${item.id}`);
 };
+
+const getFullName = (item: OpWorkJobSeeker) => {
+  return [item.lastName, item.firstName, item.middleName]
+    .filter(Boolean)
+    .join(' ');
+};
+
+const formatDate = (value?: Date | null | string) => {
+  if (!value) {
+    return '';
+  }
+  return new Date(value).toLocaleDateString();
+};
+
+const getGenderLabel = (item: OpWorkJobSeeker) => {
+  if (!item.gender) {
+    return '';
+  }
+  return $t(`resource.OpWorkJobSeekerGender.${item.gender}`);
+};
 </script>
 
 <template>
@@ -142,9 +162,29 @@ const handleItemClick = (item: OpWorkJobSeeker) => {
               <p class="text-base font-semibold leading-6 text-foreground">
                 {{ item.currentPosition || $t('resume.noPosition') }}
               </p>
+              <p
+                v-if="getFullName(item)"
+                class="mt-1 text-sm font-medium leading-5 text-slate-700"
+              >
+                {{ getFullName(item) }}
+              </p>
               <div
                 class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500"
               >
+                <span
+                  v-if="item.birthDate"
+                  class="inline-flex items-center rounded-full bg-rose-100 px-2.5 py-0.5 text-xs font-medium text-rose-800"
+                >
+                  {{ $t('resource.OpWorkJobSeeker.birthDate') }}:
+                  {{ formatDate(item.birthDate) }}
+                </span>
+                <span
+                  v-if="getGenderLabel(item)"
+                  class="inline-flex items-center rounded-full bg-fuchsia-100 px-2.5 py-0.5 text-xs font-medium text-fuchsia-800"
+                >
+                  {{ $t('resource.OpWorkJobSeeker.gender') }}:
+                  {{ getGenderLabel(item) }}
+                </span>
                 <span
                   v-if="item.currentCompany"
                   class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"

@@ -2152,6 +2152,11 @@ export type OpWorkProfileScalarFieldEnum = (typeof OpWorkProfileScalarFieldEnum)
 export const OpWorkJobSeekerScalarFieldEnum = {
   id: 'id',
   profileId: 'profileId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  middleName: 'middleName',
+  birthDate: 'birthDate',
+  gender: 'gender',
   currentPosition: 'currentPosition',
   currentCompany: 'currentCompany',
   summary: 'summary',
@@ -2581,6 +2586,20 @@ export type EnumOpWorkUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'OpWorkUserType[]'
  */
 export type ListEnumOpWorkUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkUserType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OpWorkJobSeekerGender'
+ */
+export type EnumOpWorkJobSeekerGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkJobSeekerGender'>
+    
+
+
+/**
+ * Reference to a field of type 'OpWorkJobSeekerGender[]'
+ */
+export type ListEnumOpWorkJobSeekerGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OpWorkJobSeekerGender[]'>
     
 
 

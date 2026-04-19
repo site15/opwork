@@ -64,6 +64,16 @@ enum OpWorkUserType {
   ADMIN
 }
 
+/// Пол
+enum OpWorkJobSeekerGender {
+  /// Мужской пол
+  MALE
+  /// Женский пол
+  FEMALE
+  /// Не указанный пол
+  OTHER
+}
+
 /// Статус вакансии в системе рекрутинга
 /// Отражает текущее состояние вакансии от черновика до архива
 enum OpWorkJobStatus {
@@ -840,6 +850,23 @@ model OpWorkJobSeeker {
 
   /// Связанный основной профиль
   profileId String @db.Uuid
+
+  /// === ЛИЧНАЯ ИНФОРМАЦИЯ ===
+
+  /// Имя
+  /// @MaxLength(100)
+  firstName  String?                @db.VarChar(100)
+  /// Фамилия
+  /// @MaxLength(100)
+  lastName   String?                @db.VarChar(100)
+  /// Отчество
+  /// @MaxLength(100)
+  middleName String?                @db.VarChar(100)
+  /// Дата рождения
+  birthDate  DateTime?              @db.Date
+  /// Пол
+  /// @MaxLength(50)
+  gender     OpWorkJobSeekerGender?
 
   /// === ПРОФЕССИОНАЛЬНАЯ ИНФОРМАЦИЯ ===
 

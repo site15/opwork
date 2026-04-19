@@ -112,7 +112,7 @@ onMounted(() => {
             :pagination="pagination"
             @page-change="handlePageChange"
             @sort-change="handleSortChange"
-            :title="$t('resume.application.title')"
+            :title="$t('resume.applications.title')"
           />
         </div>
       </div>

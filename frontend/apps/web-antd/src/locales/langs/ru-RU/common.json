@@ -70,5 +70,6 @@
   "applyConfirm": "Подтверждение отклика",
   "apply": "Откликнуться",
   "writeACoverLetter": "Напишите сопроводительное письмо",
-  "youHaveAlreadyResponded": "Вы уже откликнулись"
+  "youHaveAlreadyResponded": "Вы уже откликнулись",
+  "operationFailed": "Operation Failed"
 }

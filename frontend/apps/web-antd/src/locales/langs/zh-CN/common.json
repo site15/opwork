@@ -70,5 +70,6 @@
   "applyConfirm": "Apply Confirm",
   "apply": "Apply",
   "writeACoverLetter": "Write a cover letter",
-  "youHaveAlreadyResponded": "You Have Already Responded"
+  "youHaveAlreadyResponded": "You Have Already Responded",
+  "operationFailed": "Operation Failed"
 }

@@ -31,6 +31,11 @@ const [Drawer, drawerApi] = useVbenDrawer({
     (id.value ? opWorkJobSeekerControllerUpdateOne({
       path: { id: id.value },
       body: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        middleName: values.middleName,
+        birthDate: values.birthDate,
+        gender: values.gender,
         currentPosition: values.currentPosition,
         currentCompany: values.currentCompany,
         summary: values.summary,
@@ -47,6 +52,11 @@ const [Drawer, drawerApi] = useVbenDrawer({
       }
     }) : opWorkJobSeekerControllerCreateOne({
       body: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        middleName: values.middleName,
+        birthDate: values.birthDate,
+        gender: values.gender,
         currentPosition: values.currentPosition,
         currentCompany: values.currentCompany,
         summary: values.summary,

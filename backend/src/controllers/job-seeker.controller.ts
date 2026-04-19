@@ -108,6 +108,11 @@ export class JobSeekerController {
           isOpenToRemote: args.isOpenToRemote,
           isOpenToWork: args.isOpenToWork,
           summary: args.summary,
+          firstName: args.firstName,
+          lastName: args.lastName,
+          middleName: args.middleName,
+          birthDate: args.birthDate,
+          gender: args.gender,
         },
       });
     } else {
@@ -131,6 +136,11 @@ export class JobSeekerController {
           isOpenToRemote: args.isOpenToRemote,
           isOpenToWork: args.isOpenToWork,
           summary: args.summary,
+          firstName: args.firstName,
+          lastName: args.lastName,
+          middleName: args.middleName,
+          birthDate: args.birthDate,
+          gender: args.gender,
         },
       });
     }

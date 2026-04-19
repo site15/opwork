@@ -81,7 +81,10 @@ export class OpWorkJobSeekerController {
         ? {
             OR: [
               ...(isUUID(searchText) ? [{ id: { equals: searchText } }] : []),
-              { currentPosition: { contains: searchText, mode: 'insensitive' } },
+              { firstName: { contains: searchText, mode: 'insensitive' } },
+{ lastName: { contains: searchText, mode: 'insensitive' } },
+{ middleName: { contains: searchText, mode: 'insensitive' } },
+{ currentPosition: { contains: searchText, mode: 'insensitive' } },
 { currentCompany: { contains: searchText, mode: 'insensitive' } },
 { summary: { contains: searchText, mode: 'insensitive' } },
 { salaryCurrency: { contains: searchText, mode: 'insensitive' } },

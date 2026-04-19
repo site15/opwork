@@ -31,7 +31,6 @@ export function useOpWorkJobSeekerSkillFormSchema(): VbenFormSchema[] {
       }),
       fieldName: Prisma.OpWorkJobSeekerSkillScalarFieldEnum.skillId,
       label: $t('resource.name.OpWorkSkill'),
-      rules: 'required',
 
       controlClass: 'w-full',
       labelClass: 'text-right',

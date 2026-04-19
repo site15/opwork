@@ -79,6 +79,26 @@ const formatDate = (value?: Date | null | string) => {
   return new Date(value).toLocaleDateString();
 };
 
+const getFullName = (item: OpWorkApplication) => {
+  const seeker = item.OpWorkJobSeeker;
+  if (!seeker) {
+    return '';
+  }
+
+  return [seeker.lastName, seeker.firstName, seeker.middleName]
+    .filter(Boolean)
+    .join(' ');
+};
+
+const getGenderLabel = (item: OpWorkApplication) => {
+  const gender = item.OpWorkJobSeeker?.gender;
+  if (!gender) {
+    return '';
+  }
+
+  return $t(`resource.OpWorkJobSeekerGender.${gender}`);
+};
+
 const getApplicationStatusLabel = (status?: string) => {
   if (!status) {
     return '';
@@ -133,7 +153,7 @@ const formatExpectedSalary = (item: OpWorkApplication) => {
           {{ title }} ({{ pagination.total }})
         </CardTitle>
         <p class="mt-1 text-sm text-slate-500">
-          {{ $t('resume.application.title') }}
+          {{ $t('vacancy.application.title') }}
         </p>
       </div>
 
@@ -220,6 +240,20 @@ const formatExpectedSalary = (item: OpWorkApplication) => {
                 <div
                   class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600"
                 >
+                  <span
+                    v-if="getFullName(item)"
+                    class="font-medium text-slate-700"
+                  >
+                    {{ getFullName(item) }}
+                  </span>
+                  <span
+                    v-if="
+                      getFullName(item) && item.OpWorkJobSeeker?.currentCompany
+                    "
+                    class="text-slate-400"
+                  >
+                    •
+                  </span>
                   <span v-if="item.OpWorkJobSeeker?.currentCompany">
                     {{ item.OpWorkJobSeeker?.currentCompany }}
                   </span>
@@ -311,6 +345,20 @@ const formatExpectedSalary = (item: OpWorkApplication) => {
                 ></p>
 
                 <div class="mt-4 flex flex-wrap gap-2">
+                  <span
+                    v-if="item.OpWorkJobSeeker?.birthDate"
+                    class="inline-flex items-center rounded-full bg-rose-50 px-3 py-1 text-xs font-medium text-rose-700"
+                  >
+                    {{ $t('resource.OpWorkJobSeeker.birthDate') }}:
+                    {{ formatDate(item.OpWorkJobSeeker?.birthDate) }}
+                  </span>
+                  <span
+                    v-if="getGenderLabel(item)"
+                    class="inline-flex items-center rounded-full bg-fuchsia-50 px-3 py-1 text-xs font-medium text-fuchsia-700"
+                  >
+                    {{ $t('resource.OpWorkJobSeeker.gender') }}:
+                    {{ getGenderLabel(item) }}
+                  </span>
                   <a
                     v-if="item.OpWorkJobSeeker?.linkedinUrl"
                     :href="item.OpWorkJobSeeker?.linkedinUrl"
